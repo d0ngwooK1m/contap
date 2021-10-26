@@ -6,6 +6,7 @@ const Grid = (props) => {
   const {
     is_flex,
     width,
+    height,
     padding,
     margin,
     bg,
@@ -13,6 +14,8 @@ const Grid = (props) => {
     center,
     maxheight,
     _onClick,
+    borderRadius,
+    border,
   } = props;
 
   const styles = {
@@ -23,6 +26,9 @@ const Grid = (props) => {
     bg,
     center,
     maxheight,
+    height,
+    borderRadius,
+    border,
   };
 
   return (
@@ -43,12 +49,14 @@ Grid.defaultProps = {
   bg: false,
   center: false,
   maxheight: false,
+  borderRadius: false,
+  border: false,
   _onClick: () => {},
 };
 
 const GridBox = styled.div`
   width: ${(props) => props.width};
-  height: 100%;
+  height: ${(props) => props.height};
   box-sizing: border-box;
   /* max-width: 600px; */
   ${(props) => (props.padding ? `padding : ${props.padding};` : '')}
@@ -60,6 +68,9 @@ const GridBox = styled.div`
       : ''};
   ${(props) => (props.center ? 'text-align : center;' : '')}
   ${(props) => (props.maxheight ? `max-height : ${props.maxheight};` : '')}
+  ${(props) =>
+    props.borderRadius ? `border-radius: ${props.borderRadius};` : ''}
+    ${(props) => (props.border ? `border: ${props.border};` : '')};
 `;
 
 export default Grid;

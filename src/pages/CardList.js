@@ -1,10 +1,12 @@
 import React from 'react';
+import CardBundle from '../components/CardBundle';
+import { Grid } from '../elements';
 
 const CardList = () => {
   return (
-    <div>
-      <div>수정을 또 함다</div>
-    </div>
+    <Grid>
+      <CardBundle />
+    </Grid>
   );
 };
 
