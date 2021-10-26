@@ -1,0 +1,66 @@
+{
+    "cardBundle": [
+      {
+        "id": 1,
+        "userId": 1,
+        "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
+        "userName": "이아롱",
+        "interest": "여행",
+        "stack": "React",
+        "cards": [
+          {
+            "id": 1,
+            "content": "제 포트폴리오1 입니다.",
+            "image": "https://blog.hmgjournal.com/images_n/contents/171024_season01.png",
+            "interest": ["여행", "사진"],
+            "stack": ["React", "JavaScript"] 
+          },
+          {
+            "id": 2,
+            "content": "제 포트폴리오2 입니다.",
+            "image": "https://blog.hmgjournal.com/images_n/contents/171024_season01.png",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"] 
+          },
+          {
+            "id": 3,
+            "content": "제 포트폴리오3 입니다.",
+            "image": "https://blog.hmgjournal.com/images_n/contents/171024_season01.png",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"] 
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+        "userName": "김아롱",
+        "interest": "그림",
+        "stack": "Spring",
+        "cards": [
+          {
+            "id": 4,
+            "content": "제 포트폴리오1 입니다.",
+            "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
+            "interest": ["여행", "그림"],
+            "stack": ["React", "JavaScript"] 
+          },
+          {
+            "id": 5,
+            "content": "제 포트폴리오2 입니다.",
+            "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"] 
+          },
+          {
+            "id": 6,
+            "content": "제 포트폴리오3 입니다.",
+            "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"] 
+          }
+        ]
+      }
+    ]
+  }
