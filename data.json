@@ -1,4 +1,4 @@
-{
+{   
   "cardBundle": [
     {
       "id": 1,
@@ -34,7 +34,7 @@
     {
       "id": 2,
       "userId": 2,
-      "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+      "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
       "userName": "김아롱",
       "interest": "그림",
       "stack": "Spring",
@@ -96,7 +96,7 @@
     {
       "id": 4,
       "userId": 4,
-      "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+      "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
       "userName": "한우석",
       "interest": "등산",
       "stack": "CSS",

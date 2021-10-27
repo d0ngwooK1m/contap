@@ -14,13 +14,15 @@ export const apis = {
   // user
   login: () => api.post('', {}),
   signup: () => api.post('', {}),
+  // tap
+  getTaps: () => api.get('/taps'),
   // cards
   // 카드 불러오기
-  getCard: () => api.get('/taps'),
+  getCard: () => api.get('/cardBundle'),
   // 카드 작성하기
-  createWork: () => api.post('../features/cards/actions'),
+  createCard: () => api.post('../features/cards/actions'),
   // 카드 수정하기
-  editWork: () => api.put(''),
+  editCard: () => api.put(''),
   // 카드 삭제하기
-  delWork: () => api.delete(''),
+  delCard: () => api.delete(''),
 };
