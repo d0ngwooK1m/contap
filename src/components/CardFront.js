@@ -1,38 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { Grid, Image, Text } from '../elements';
 
-const CardFront = ({ profile, userName, interest, stack }) => {
+const CardFront = ({ id = '' }) => {
+  const front = useSelector((state) => state.cards.byId);
   return (
-    <Grid>
-      <Grid
-        width="350px"
-        height="200px"
-        borderRadius="16px"
-        border="1px solid black"
-      >
-        <Image shape="circle" src={profile} />
-        <Text>이름: {userName}</Text>
-        <Text>스택: {stack}</Text>
-        <Text>관심사: {interest}</Text>
-      </Grid>
+    <Grid
+      width="350px"
+      height="200px"
+      borderRadius="16px"
+      border="1px solid black"
+    >
+      <Div is_flex>
+        <Image shape="circle" src={front[id].profile} />
+        <Grid width="30%" margin="0px 20px">
+          <Text>{front[id].userName}</Text>
+          <Text>{front[id].stack}</Text>
+          <Text>{front[id].interest}</Text>
+        </Grid>
+      </Div>
     </Grid>
   );
 };
 
 CardFront.propTypes = {
-  userName: PropTypes.string,
-  profile: PropTypes.string,
-  interest: PropTypes.string,
-  stack: PropTypes.string,
+  id: PropTypes.number.isRequired,
 };
 
-CardFront.defaultProps = {
-  userName: '이아롱',
-  profile:
-    'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg',
-  interest: '여행',
-  stack: 'React',
-};
+// CardFront.defaultProps = {
+//   userName: '이아롱',
+//   profile:
+//     'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg',
+//   interest: '여행',
+//   stack: 'React',
+// };
 
 export default CardFront;
+
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10% 0px;
+`;

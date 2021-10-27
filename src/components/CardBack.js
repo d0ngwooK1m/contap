@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Image, Text } from '../elements';
+import { Grid, Text } from '../elements';
 
-const CardBack = ({ content, image, interest, stack }) => {
+const CardBack = ({ content, interest, stack }) => {
   return (
-    <Grid>
+    <Grid
+      width="960px"
+      height="510px"
+      borderRadius="16px"
+      border="1px solid black"
+    >
       <Grid>
-        <Image scr={image} shape="rectangle" />
+        {/* <Image scr={image} shape="rectangle" /> */}
         <Text>{content}</Text>
         <Text>{stack}</Text>
         <Text>{interest}</Text>
@@ -17,15 +22,15 @@ const CardBack = ({ content, image, interest, stack }) => {
 
 CardBack.propTypes = {
   content: PropTypes.string,
-  image: PropTypes.string,
+  // image: PropTypes.string,
   interest: PropTypes.string,
   stack: PropTypes.string,
 };
 
 CardBack.defaultProps = {
   content: '제 포트폴리오를 소개합니다.',
-  image:
-    'https://mblogthumb-phinf.pstatic.net/MjAxNzA5MjdfODkg/MDAxNTA2NTIyOTMwOTA4.YSIpeIFX6GAna9UvWS_IarVWxfHYA4vHlC6Yn49YAQYg.f18IO5v8tMvIvbcv7bcdGRdoyW3QPK0gFbAAuhdCl4Mg.PNG.june6505/y1.png?type=w2',
+  // image:
+  //   'https://mblogthumb-phinf.pstatic.net/MjAxNzA5MjdfODkg/MDAxNTA2NTIyOTMwOTA4.YSIpeIFX6GAna9UvWS_IarVWxfHYA4vHlC6Yn49YAQYg.f18IO5v8tMvIvbcv7bcdGRdoyW3QPK0gFbAAuhdCl4Mg.PNG.june6505/y1.png?type=w2',
   interest: '여행',
   stack: 'React',
 };
