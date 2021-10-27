@@ -1,7 +1,6 @@
-/* eslint-disable */
 import { produce } from 'immer';
 import { handleActions } from 'redux-actions';
-import { LOAD_GRAB, LOAD_SAND_TAP, LOAD_RECEVE_TAP } from './types';
+import { LOAD_GRAB, LOAD_SAND_TAP, LOAD_RECEIVE_TAP } from './types';
 
 const initialState = {
   byId: {},
@@ -10,9 +9,48 @@ const initialState = {
 
 export default handleActions(
   {
-    [LOAD_GRAB]: (state, action) => produce(state, (draft) => {}),
-    [LOAD_SAND_TAP]: (state, action) => produce(state, (draft) => {}),
-    [LOAD_RECEVE_TAP]: (state, action) => produce(state, (draft) => {}),
+    [LOAD_GRAB]: (state, action) =>
+      produce(state, (draft) => {
+        draft.byId = {};
+        draft.allIds = [];
+
+        const {
+          cardBundles: { grabList },
+        } = action.payload;
+
+        grabList.forEach((doc) => {
+          draft.byId[doc.id] = doc;
+          draft.allIds.push(doc.id);
+        });
+      }),
+    [LOAD_SAND_TAP]: (state, action) =>
+      produce(state, (draft) => {
+        draft.byId = {};
+        draft.allIds = [];
+
+        const {
+          cardBundles: { sendTap },
+        } = action.payload;
+
+        sendTap.forEach((doc) => {
+          draft.byId[doc.id] = doc;
+          draft.allIds.push(doc.id);
+        });
+      }),
+    [LOAD_RECEIVE_TAP]: (state, action) =>
+      produce(state, (draft) => {
+        draft.byId = {};
+        draft.allIds = [];
+
+        const {
+          cardBundles: { receiveTap },
+        } = action.payload;
+
+        receiveTap.forEach((doc) => {
+          draft.byId[doc.id] = doc;
+          draft.allIds.push(doc.id);
+        });
+      }),
   },
   initialState,
 );

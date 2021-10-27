@@ -19,12 +19,12 @@ const TapForm = ({ id }) => {
 
   const sendTap = () => {
     console.log({
-      token: 'token',
+      token: 'token 헤더로 보냄',
       id,
       messege,
       state : 'ready'
     });
-    dispatch(loadSendTapToAxios())
+    // dispatch(loadSendTapToAxios())
   };
 
   return (

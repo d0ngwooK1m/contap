@@ -10,22 +10,22 @@
       "cards": [
         {
           "id": 1,
+          "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
-          "image": "https://blog.hmgjournal.com/images_n/contents/171024_season01.png",
           "interest": ["여행", "사진"],
           "stack": ["React", "JavaScript"]
         },
         {
           "id": 2,
+          "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
-          "image": "https://blog.hmgjournal.com/images_n/contents/171024_season01.png",
           "interest": ["영화", "음악"],
           "stack": ["CSS", "HTML", "Spring"]
         },
         {
           "id": 3,
+          "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
-          "image": "https://blog.hmgjournal.com/images_n/contents/171024_season01.png",
           "interest": ["운동"],
           "stack": ["JavaScript", "CSS", "HTML"]
         }
@@ -41,22 +41,22 @@
       "cards": [
         {
           "id": 4,
+          "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["여행", "그림"],
           "stack": ["React", "JavaScript"]
         },
         {
           "id": 5,
+          "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["영화", "음악"],
           "stack": ["CSS", "HTML", "Spring"]
         },
         {
           "id": 6,
+          "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["운동"],
           "stack": ["JavaScript", "CSS", "HTML"]
         }
@@ -66,28 +66,28 @@
       "id": 3,
       "userId": 3,
       "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
-      "userName": "하누석",
+      "userName": "김민지",
       "interest": "사진",
       "stack": "HTML",
       "cards": [
         {
           "id": 7,
+          "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["여행", "그림"],
           "stack": ["React", "JavaScript"]
         },
         {
           "id": 8,
+          "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["영화", "음악"],
           "stack": ["CSS", "HTML", "Spring"]
         },
         {
           "id": 9,
+          "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["운동"],
           "stack": ["JavaScript", "CSS", "HTML"]
         }
@@ -103,22 +103,22 @@
       "cards": [
         {
           "id": 10,
+          "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["여행", "그림"],
           "stack": ["React", "JavaScript"]
         },
         {
           "id": 11,
+          "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["영화", "음악"],
           "stack": ["CSS", "HTML", "Spring"]
         },
         {
           "id": 12,
+          "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["운동"],
           "stack": ["JavaScript", "CSS", "HTML"]
         }
@@ -128,28 +128,28 @@
       "id": 5,
       "userId": 5,
       "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
-      "userName": "아롱김",
+      "userName": "김동우",
       "interest": "먹방",
       "stack": "Spring",
       "cards": [
         {
           "id": 13,
+          "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["여행", "그림"],
           "stack": ["React", "JavaScript"]
         },
         {
           "id": 14,
+          "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["영화", "음악"],
           "stack": ["CSS", "HTML", "Spring"]
         },
         {
           "id": 15,
+          "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
-          "image": "https://www.readersnews.com/news/photo/201912/96670_61911_3434.jpg",
           "interest": ["운동"],
           "stack": ["JavaScript", "CSS", "HTML"]
         }

@@ -31,5 +31,6 @@ module.exports = {
       },
     ],
     'no-console': 'off',
+    'no-param-reassign': 'off',
   },
 };
