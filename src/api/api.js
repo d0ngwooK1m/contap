@@ -16,7 +16,7 @@ export const apis = {
   signup: () => api.post('', {}),
   // cards
   // 카드 불러오기
-  getWork: () => api.get('../features/cards/actions'),
+  getCard: () => api.get('/taps'),
   // 카드 작성하기
   createWork: () => api.post('../features/cards/actions'),
   // 카드 수정하기

@@ -5,14 +5,16 @@ import CardList from '../pages/CardList';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Settings from '../pages/Settings';
+import Contap from '../pages/Contap';
 
 function App() {
   return (
     <div>
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
-      <Route path="/settings" exact component={Settings} />
       <Route path="/" exact component={CardList} />
+      <Route path="/settings" exact component={Settings} />
+      <Route path="/contap" exact component={Contap} />
     </div>
   );
 }
