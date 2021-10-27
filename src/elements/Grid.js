@@ -71,6 +71,7 @@ const GridBox = styled.div`
   ${(props) =>
     props.borderRadius ? `border-radius: ${props.borderRadius};` : ''}
     ${(props) => (props.border ? `border: ${props.border};` : '')};
+  flex-shrink: 0;
 `;
 
 export default Grid;
