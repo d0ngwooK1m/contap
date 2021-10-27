@@ -1,7 +1,10 @@
 import React from 'react';
-import { Input, Button } from '../elements';
+import { useDispatch } from 'react-redux';
+import { loginToServer } from '../features/user/actions';
+import { Grid, Input, Button } from '../elements';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = React.useState('');
   const [pw, setPw] = React.useState('');
 
@@ -11,10 +14,11 @@ const Login = () => {
       pw,
     };
     console.log(loginInfo);
+    dispatch(loginToServer(loginInfo));
   };
 
   return (
-    <div>
+    <Grid>
       <p>로그인</p>
       <Input
         type="email"
@@ -33,7 +37,7 @@ const Login = () => {
         }}
       />
       <Button _onClick={login}>로그인</Button>
-    </div>
+    </Grid>
   );
 };
 
