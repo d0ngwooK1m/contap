@@ -22,7 +22,7 @@ const Login = () => {
       <p>로그인</p>
       <Input
         type="email"
-        placeholder="이메일을 입력해주세요"
+        place="이메일을 입력해주세요"
         _onChange={(e) => {
           // console.log(e.target.value);
           setEmail(e.target.value);
@@ -30,7 +30,7 @@ const Login = () => {
       />
       <Input
         type="password"
-        placeholder="비밀번호를 입력해주세요"
+        place="비밀번호를 입력해주세요"
         _onChange={(e) => {
           // console.log(e.target.value);
           setPw(e.target.value);

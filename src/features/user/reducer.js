@@ -5,6 +5,7 @@ import { LOG_IN, LOG_OUT } from './types';
 const initialState = {
   email: '',
   nickName: '',
+  emailChecked: false,
   isAuthorized: false,
 };
 
@@ -14,7 +15,7 @@ export default function userReducer(state = initialState, action) {
       case LOG_IN: {
         draft.email = action.payload.email;
         draft.nickName = action.payload.nickName;
-        draft.isAuthorized = true;
+        // draft.isAuthorized = true;
         break;
       }
       // case AUTHORIZED: {
