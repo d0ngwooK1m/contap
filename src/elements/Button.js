@@ -80,6 +80,7 @@ const ShortBtn = styled.button`
   border: 0px;
   margin: 8px;
   padding: 0px;
+  cursor: pointer;
 
   height: ${(props) => props.height};
 `;
@@ -90,6 +91,7 @@ const Btn = styled.button`
   color: #fff;
   border: 0px;
   margin-top: 28px;
+  cursor: pointer;
 
   height: ${(props) => props.height};
 `;
@@ -102,6 +104,7 @@ const MyBtn = styled.button`
   color: #fff;
   height: ${(props) => props.height};
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 const FloatBtn = styled.button`
@@ -118,6 +121,7 @@ const FloatBtn = styled.button`
   position: fixed;
   bottom: 50px;
   right: 16px;
+  cursor: pointer;
 `;
 
 export default Button;
