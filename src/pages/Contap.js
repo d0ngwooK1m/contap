@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import PropTyps from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   loadGrabToAxios,
   loadSendTapToAxios,
@@ -10,18 +10,43 @@ import {
 } from '../features/taps/actions';
 
 import { Grid } from '../elements/index'
+import TabMenu from '../components/TabMenu';
+import SendTap from '../components/SendTap'
+import ReceiveTap from '../components/ReceiveTap'
+import GrabList from '../components/GrabList'
 
 const Contap = ({ sendTap, reciveTap, grabList }) => {
   const dispatch = useDispatch();
-  console.log(sendTap, reciveTap, grabList);
-
+  
   React.useEffect(() => {
-
+    dispatch(loadReceiveTapToAxios());
   }, []);
+
+  const content = [
+    {
+      id: 'ReceiveTap',
+      tab: '받은 탭',
+      content: <ReceiveTap id={reciveTap}/>,
+    },
+    {
+      id: 'SendTap',
+      tab: '보낸 탭',
+      content: <SendTap id={sendTap} />,
+    },
+    {
+      id: 'GrabList',
+      tab: '나의 그랩',
+      content: <GrabList id={grabList} />,
+    },
+  ];
+  
+
+ 
 
   return (
     <Grid>
       <div>컨탭 페이지</div>
+      <TabMenu content={content} />
     </Grid>
   );
 };

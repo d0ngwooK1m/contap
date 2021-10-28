@@ -1,11 +1,18 @@
+// /*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Grid, Image, Text } from '../elements';
 
-const CardFront = ({ id = '' }) => {
-  const front = useSelector((state) => state.cards.byId);
+const CardFront = ({ id = '', contap }) => {
+  const front = useSelector((state) =>
+    contap ? state.taps.byId : state.cards.byId,
+  );
+
+  console.log(contap);
+  console.log(front);
+  console.log(id);
   return (
     <Grid
       width="350px"
@@ -14,11 +21,11 @@ const CardFront = ({ id = '' }) => {
       border="1px solid black"
     >
       <Div is_flex>
-        <Image shape="circle" src={front[id].profile} />
+        <Image shape="circle" src={front[id]?.profile} />
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[id].userName}</Text>
-          <Text>{front[id].stack}</Text>
-          <Text>{front[id].interest}</Text>
+          <Text>{front[id]?.userName}</Text>
+          <Text>{front[id]?.stack}</Text>
+          <Text>{front[id]?.interest}</Text>
         </Grid>
       </Div>
     </Grid>
@@ -27,15 +34,12 @@ const CardFront = ({ id = '' }) => {
 
 CardFront.propTypes = {
   id: PropTypes.number.isRequired,
+  contap: PropTypes.bool,
 };
 
-// CardFront.defaultProps = {
-//   userName: '이아롱',
-//   profile:
-//     'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg',
-//   interest: '여행',
-//   stack: 'React',
-// };
+CardFront.defaultProps = {
+  contap: false,
+};
 
 export default CardFront;
 

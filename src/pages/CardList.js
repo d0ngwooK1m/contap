@@ -7,6 +7,7 @@ import CardFront from '../components/CardFront';
 import { Grid } from '../elements';
 
 import { loadCardDB } from '../features/cards/actions';
+import TapForm from '../components/TapForm';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const CardList = () => {
           return <CardFront key={id} id={id} />;
         })}
       </Div>
+      <TapForm />
     </Grid>
   );
 };

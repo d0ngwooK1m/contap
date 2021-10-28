@@ -1,4 +1,4 @@
-{   
+{
   "cardBundle": [
     {
       "id": 1,
@@ -155,5 +155,168 @@
         }
       ]
     }
-  ]
+  ],
+  "taps": {
+    "sendTap": [
+      {
+        "id": 1,
+        "userId": 1,
+        "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
+        "userName": "이아롱",
+        "interest": "여행",
+        "stack": "React",
+        "cards": [
+          {
+            "id": 1,
+            "title": "제목입니다",
+            "content": "제 포트폴리오1 입니다.",
+            "interest": ["여행", "사진"],
+            "stack": ["React", "JavaScript"]
+          },
+          {
+            "id": 2,
+            "title": "제목입니다",
+            "content": "제 포트폴리오2 입니다.",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"]
+          },
+          {
+            "id": 3,
+            "title": "제목입니다",
+            "content": "제 포트폴리오3 입니다.",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+        "userName": "김아롱",
+        "interest": "그림",
+        "stack": "Spring",
+        "cards": [
+          {
+            "id": 4,
+            "title": "제목입니다",
+            "content": "제 포트폴리오1 입니다.",
+            "interest": ["여행", "그림"],
+            "stack": ["React", "JavaScript"]
+          },
+          {
+            "id": 5,
+            "title": "제목입니다",
+            "content": "제 포트폴리오2 입니다.",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"]
+          },
+          {
+            "id": 6,
+            "title": "제목입니다",
+            "content": "제 포트폴리오3 입니다.",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"]
+          }
+        ]
+      }
+    ],
+    "receiveTap": [
+      {
+        "id": 3,
+        "userId": 3,
+        "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+        "userName": "김민지",
+        "interest": "사진",
+        "stack": "HTML",
+        "cards": [
+          {
+            "id": 7,
+            "title": "제목입니다",
+            "content": "제 포트폴리오1 입니다.",
+            "interest": ["여행", "그림"],
+            "stack": ["React", "JavaScript"]
+          },
+          {
+            "id": 8,
+            "title": "제목입니다",
+            "content": "제 포트폴리오2 입니다.",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"]
+          },
+          {
+            "id": 9,
+            "title": "제목입니다",
+            "content": "제 포트폴리오3 입니다.",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "userId": 4,
+        "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+        "userName": "한우석",
+        "interest": "등산",
+        "stack": "CSS",
+        "cards": [
+          {
+            "id": 10,
+            "title": "제목입니다",
+            "content": "제 포트폴리오1 입니다.",
+            "interest": ["여행", "그림"],
+            "stack": ["React", "JavaScript"]
+          },
+          {
+            "id": 11,
+            "title": "제목입니다",
+            "content": "제 포트폴리오2 입니다.",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"]
+          },
+          {
+            "id": 12,
+            "title": "제목입니다",
+            "content": "제 포트폴리오3 입니다.",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"]
+          }
+        ]
+      }
+    ],
+    "grabList": [
+      {
+        "id": 5,
+        "userId": 5,
+        "profile": "http://www.city.kr/files/attach/images/164/317/333/022/f10f68187fc57c148616fcca1536ea0f.jpg",
+        "userName": "김동우",
+        "interest": "먹방",
+        "stack": "Spring",
+        "cards": [
+          {
+            "id": 13,
+            "title": "제목입니다",
+            "content": "제 포트폴리오1 입니다.",
+            "interest": ["여행", "그림"],
+            "stack": ["React", "JavaScript"]
+          },
+          {
+            "id": 14,
+            "title": "제목입니다",
+            "content": "제 포트폴리오2 입니다.",
+            "interest": ["영화", "음악"],
+            "stack": ["CSS", "HTML", "Spring"]
+          },
+          {
+            "id": 15,
+            "title": "제목입니다",
+            "content": "제 포트폴리오3 입니다.",
+            "interest": ["운동"],
+            "stack": ["JavaScript", "CSS", "HTML"]
+          }
+        ]
+      }
+    ]
+  }
 }
