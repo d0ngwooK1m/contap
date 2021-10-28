@@ -7,10 +7,11 @@ import TapForm from './TapForm';
 
 const CardBundle = () => {
   return (
-    // 대체 왜 Grid로 각각해주는건 안되는것인가....
     <Grid>
       <CardFront />
-      <CardBack />
+      <Grid>
+        <CardBack />
+      </Grid>
       <TapForm />
     </Grid>
   );
