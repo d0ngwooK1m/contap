@@ -13,6 +13,7 @@
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -21,3 +22,19 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+..idea
+**/node_modules/*
+**/.firebaserc
+
+.runtimeconfig.json
+.firebase/
+database.rules.json
+firebase.json
+firebase.indexes.json
+firestore.rules
+### Firebase ### 
+.idea **/node_modules/* **/.firebaserc 
+### Firebase Patch ### 
+.runtimeconfig.json 
+.firebase/
