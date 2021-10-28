@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import {
   loadGrab,
   loadReceveTap,
@@ -10,6 +11,7 @@ import {
 
 const TapForm = ({ id }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [messege, setMessege] = React.useState('');
   console.log(id);
 
@@ -22,7 +24,7 @@ const TapForm = ({ id }) => {
       token: 'token 헤더로 보냄',
       id,
       messege,
-      state : 'ready'
+      state: 'ready',
     });
     // dispatch(loadSendTapToAxios())
   };
@@ -34,6 +36,14 @@ const TapForm = ({ id }) => {
         TAP
       </button>
       <button type="button">CLOSE</button>
+      <button
+        type="button"
+        onClick={() => {
+          history.push('/contap');
+        }}
+      >
+        컨탭페이지 이동
+      </button>
     </div>
   );
 };

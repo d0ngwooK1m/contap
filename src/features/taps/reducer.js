@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 import { handleActions } from 'redux-actions';
-import { LOAD_GRAB, LOAD_SAND_TAP, LOAD_RECEIVE_TAP } from './types';
+import { LOAD_GRAB, LOAD_SEND_TAP, LOAD_RECEIVE_TAP } from './types';
 
 const initialState = {
   byId: {},
@@ -23,7 +23,7 @@ export default handleActions(
           draft.allIds.push(doc.id);
         });
       }),
-    [LOAD_SAND_TAP]: (state, action) =>
+    [LOAD_SEND_TAP]: (state, action) =>
       produce(state, (draft) => {
         draft.byId = {};
         draft.allIds = [];

@@ -40,7 +40,7 @@ const TabMenu = ({ content }) => {
 };
 
 TabMenu.propTypes = {
-  content: PropTypes.arrayOf.isRequired,
+  content: PropTypes.array.isRequired,
 };
 
 const Wrapper = styled.div`
