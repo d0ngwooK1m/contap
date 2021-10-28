@@ -1,32 +1,34 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-// import CardBundle from '../components/CardBundle';
-import CardFront from '../components/CardFront';
-import { Grid } from '../elements';
 
-import { loadCardDB } from '../features/cards/actions';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { loadCardFrontDB } from '../features/cards/actions';
+import CardFront from '../components/CardFront';
 import TapForm from '../components/TapForm';
+import { Grid } from '../elements';
 
 const CardList = () => {
   const dispatch = useDispatch();
-  // const history = useHistory();
+
   const cardList = useSelector((state) => state.cards);
 
   React.useEffect(() => {
     if (cardList.allIds.length !== 0) {
       return;
     }
-
-    dispatch(loadCardDB(String(0)));
+    dispatch(loadCardFrontDB(String(0)));
   }, []);
 
   return (
     <Grid>
       <Div>
         {cardList.allIds.map((id) => {
-          return <CardFront key={id} id={id} />;
+          return (
+            <Grid>
+              <CardFront key={id} id={id} />
+            </Grid>
+          );
         })}
       </Div>
       <TapForm />

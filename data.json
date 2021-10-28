@@ -2,7 +2,7 @@
   "cardFront": [
     {
       "id": 1,
-      "email": 1,
+      "userId": 1,
       "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
       "userName": "이아롱",
       "interest": "여행",
@@ -10,7 +10,7 @@
     },
 {
   "id": 2,
-  "email": 2,
+  "userId": 2,
   "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
   "userName": "김아롱",
   "interest": "그림",
@@ -18,7 +18,7 @@
 },
 {
   "id": 3,
-      "email": 3,
+      "userId": 3,
       "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
       "userName": "김민지",
       "interest": "사진",
@@ -26,7 +26,7 @@
 },
 {
   "id": 4,
-      "email": 4,
+      "userId": 4,
       "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
       "userName": "한우석",
       "interest": "등산",
@@ -34,7 +34,7 @@
 },
 {
   "id": 5,
-  "email": 5,
+  "userId": 5,
   "profile": "http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg",
   "userName": "김동우",
   "interest": "먹방",
@@ -45,6 +45,7 @@
   "cardBack": [
         {
           "id": 1,
+          "userId": 1,
           "cardId": 1,
           "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
@@ -53,7 +54,8 @@
         },
         {
           "id": 2,
-          "cardId": 1,
+          "userId": 1,
+          "cardId": 2,
           "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
           "interest": ["영화", "음악"],
@@ -61,7 +63,8 @@
         },
         {
           "id": 3,
-          "cardId": 1,
+          "userId": 1,
+          "cardId": 3,
           "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
           "interest": ["운동"],
@@ -69,7 +72,8 @@
         },
         {
           "id": 4,
-          "cardId": 2,
+          "userId": 2,
+          "cardId": 4,
           "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
           "interest": ["여행", "그림"],
@@ -77,7 +81,8 @@
         },
         {
           "id": 5,
-          "cardId": 2,
+          "userId": 2,
+          "cardId": 5,
           "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
           "interest": ["영화", "음악"],
@@ -85,7 +90,8 @@
         },
         {
           "id": 6,
-          "cardId": 2,
+          "userId": 2,
+          "cardId": 6,
           "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
           "interest": ["운동"],
@@ -93,7 +99,8 @@
         },
         {
           "id": 7,
-          "cardId": 3,
+          "userId": 3,
+          "cardId": 7,
           "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
           "interest": ["여행", "그림"],
@@ -101,7 +108,8 @@
         },
         {
           "id": 8,
-          "cardId": 3,
+          "userId": 3,
+          "cardId": 8,
           "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
           "interest": ["영화", "음악"],
@@ -109,7 +117,8 @@
         },
         {
           "id": 9,
-          "cardId": 3,
+          "userId": 3,
+          "cardId": 9,
           "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
           "interest": ["운동"],
@@ -117,7 +126,8 @@
         },
         {
           "id": 10,
-          "cardId": 4,
+          "userId": 4,
+          "cardId": 10,
           "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
           "interest": ["여행", "그림"],
@@ -125,7 +135,8 @@
         },
         {
           "id": 11,
-          "cardId": 4,
+          "userId": 4,
+          "cardId": 11,
           "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
           "interest": ["영화", "음악"],
@@ -133,7 +144,8 @@
         },
         {
           "id": 12,
-          "cardId": 4,
+          "userId": 4,
+          "cardId": 12,
           "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
           "interest": ["운동"],
@@ -141,7 +153,8 @@
         },
         {
           "id": 13,
-          "cardId": 5,
+          "userId": 5,
+          "cardId": 13,
           "title": "제목입니다",
           "content": "제 포트폴리오1 입니다.",
           "interest": ["여행", "그림"],
@@ -149,7 +162,8 @@
         },
         {
           "id": 14,
-          "cardId": 5,
+          "userId": 5,
+          "cardId": 14,
           "title": "제목입니다",
           "content": "제 포트폴리오2 입니다.",
           "interest": ["영화", "음악"],
@@ -157,7 +171,8 @@
         },
         {
           "id": 15,
-          "cardId": 5,
+          "userId": 5,
+          "cardId": 15,
           "title": "제목입니다",
           "content": "제 포트폴리오3 입니다.",
           "interest": ["운동"],
