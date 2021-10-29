@@ -21,14 +21,23 @@ const CardFront = ({ id, contap }) => {
     .split('@')
     .slice(1, 4);
 
-  const [shwoModal, setShowMadal] = React.useState(false);
+  const [showModal, setShowMadal] = React.useState(false);
 
   const behind = async () => {
-    await dispatch(loadCurrentCardDB(id));
-    setShowMadal(!shwoModal);
+    if (!showModal) {
+      await dispatch(loadCurrentCardDB(id));
+    }
+    setShowMadal(true);
   };
 
-  const currentCard = useSelector((state) => state.cards.current);
+  const closeModal = () => {
+    setShowMadal(false);
+  };
+
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <Grid
       width="350px"
@@ -38,11 +47,9 @@ const CardFront = ({ id, contap }) => {
       margin="16px"
       _onClick={behind}
     >
-      <CardModal
-        show={shwoModal}
-        onHide={() => setShowMadal(false)}
-        card={currentCard}
-      />
+      <Grid _onClick={stopPropagation}>
+        <CardModal show={showModal} onHide={closeModal} />
+      </Grid>
       <Div is_flex>
         <Image shape="circle" src={front[id]?.profile} />
         <Grid width="30%" margin="0px 20px">
