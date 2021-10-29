@@ -26,15 +26,15 @@ export default handleActions(
         // draft.allIds = [];
         console.log(action.payload);
         action.payload.cardList.forEach((doc) => {
-          draft.byId[doc.id] = doc;
-          draft.allIds.push(doc.id);
+          draft.byId[doc.userId] = doc;
+          draft.allIds.push(doc.userId);
         });
       }),
     [LOAD_CURRENT_CARD]: (state, action) =>
       produce(state, (draft) => {
         const { userId, data } = action.payload;
         draft.current = data;
-        draft.current.id = userId;
+        // draft.current.id = userId;
       }),
     [CREATE_CARD]: (state, action) => produce(state, (draft) => {}),
     [ON_POPUP]: (state, action) =>

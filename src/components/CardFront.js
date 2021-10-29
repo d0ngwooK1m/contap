@@ -5,12 +5,12 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { loadCurrentCardDB, onPopup } from '../features/cards/actions';
+import { loadCurrentCardDB } from '../features/cards/actions';
 import CardModal from './CardModal';
 import { Grid, Image, Text } from '../elements';
 import HashTag from './HashTag';
 
-const CardFront = ({ id = '', contap }) => {
+const CardFront = ({ id, contap }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
@@ -19,11 +19,8 @@ const CardFront = ({ id = '', contap }) => {
   const handlePopup = useSelector((state) => state.cards.isPopup);
   const back = useSelector((state) => state.cards.byId);
 
-  const behind = () => {
-    dispatch(loadCurrentCardDB(back[id].userId));
-    if (!handlePopup) {
-      dispatch(onPopup(true));
-    }
+  const behind = async () => {
+    await dispatch(loadCurrentCardDB(back[id].userId));
   };
 
   const stackHashTags = front[id].hashTags.split('_')[0].split('@').slice(1, 2);

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { getToken } from '../utils/auth';
 
-const baseURL = process.env.REACT_APP_REMOTE_SERVER_URI;
+const baseURL = process.env.REACT_APP_SERVER_URI;
 
 const instance = axios.create({ baseURL });
 
