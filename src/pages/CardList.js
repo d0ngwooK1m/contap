@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { loadCardFrontDB } from '../features/cards/actions';
 import CardFront from '../components/CardFront';
-import TapForm from '../components/TapForm';
 import { Grid } from '../elements';
 
 const CardList = () => {
@@ -17,7 +16,7 @@ const CardList = () => {
     if (cardList.allIds.length !== 0) {
       return;
     }
-    dispatch(loadCardFrontDB(String(0)));
+    dispatch(loadCardFrontDB());
   }, []);
 
   return (
@@ -31,7 +30,6 @@ const CardList = () => {
           );
         })}
       </Div>
-      <TapForm />
     </Grid>
   );
 };

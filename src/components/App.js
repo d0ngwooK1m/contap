@@ -6,10 +6,12 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Settings from '../pages/Settings';
 import Contap from '../pages/Contap';
+import Header from './Header';
 
 function App() {
   return (
     <div>
+      <Header />
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/" exact component={CardList} />

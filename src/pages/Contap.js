@@ -15,7 +15,7 @@ import SendTap from '../components/SendTap'
 import ReceiveTap from '../components/ReceiveTap'
 import GrabList from '../components/GrabList'
 
-const Contap = ({ sendTap, reciveTap, grabList }) => {
+const Contap = () => {
   const dispatch = useDispatch();
   
   React.useEffect(() => {
@@ -26,17 +26,17 @@ const Contap = ({ sendTap, reciveTap, grabList }) => {
     {
       id: 'ReceiveTap',
       tab: '받은 탭',
-      content: <ReceiveTap id={reciveTap}/>,
+      content: <ReceiveTap/>,
     },
     {
       id: 'SendTap',
       tab: '보낸 탭',
-      content: <SendTap id={sendTap} />,
+      content: <SendTap />,
     },
     {
       id: 'GrabList',
       tab: '나의 그랩',
-      content: <GrabList id={grabList} />,
+      content: <GrabList  />,
     },
   ];
   
@@ -57,10 +57,10 @@ const Contap = ({ sendTap, reciveTap, grabList }) => {
 //   grabList: PropTyps.arrayOf,
 // };
 
-Contap.defaultProps = {
-  sendTap: ['1', '2'],
-  reciveTap: ['3', '4'],
-  grabList: ['5'],
-};
+// Contap.defaultProps = {
+//   sendTap: ['1', '2'],
+//   reciveTap: ['3', '4'],
+//   grabList: ['5'],
+// };
 
 export default Contap;
