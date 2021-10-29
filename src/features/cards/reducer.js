@@ -7,14 +7,12 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   LOAD_CURRENT_CARD,
-  ON_POPUP,
 } from './types';
 
 const initialState = {
   byId: {},
   allIds: [],
   current: {},
-  isPopup: false,
 };
 
 export default handleActions(
@@ -38,10 +36,6 @@ export default handleActions(
         // draft.current.id = userId;
       }),
     [CREATE_CARD]: (state, action) => produce(state, (draft) => {}),
-    [ON_POPUP]: (state, action) =>
-      produce(state, (draft) => {
-        draft.isPopup = action.payload.isPopup;
-      }),
   },
   initialState,
 );

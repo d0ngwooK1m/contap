@@ -48,7 +48,7 @@ const CardModal = ({ show, onHide, card }) => {
 
 CardModal.propTypes = {
   show: PropTypes.bool.isRequired,
-  onHide: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
   card: PropTypes.array.isRequired,
 };
 
