@@ -1,4 +1,4 @@
-// /*eslint-disable*/
+/*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -7,20 +7,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { loadCurrentCardDB, onPopup } from '../features/cards/actions';
 import CardModal from './CardModal';
-import { Grid, Image, Text, Button } from '../elements';
+import { Grid, Image, Text } from '../elements';
+import HashTag from './HashTag';
 
 const CardFront = ({ id = '', contap }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
-  // console.log(contap);
-  // console.log(front);
-  // console.log(id);
 
   const handlePopup = useSelector((state) => state.cards.isPopup);
   const back = useSelector((state) => state.cards.byId);
-  // console.log('back 확인===>', back);
 
   const behind = () => {
     dispatch(loadCurrentCardDB(back[id].userId));
@@ -29,23 +26,36 @@ const CardFront = ({ id = '', contap }) => {
     }
   };
 
+  const stackHashTags = front[id].hashTags.split('_')[0].split('@').slice(1, 2);
+  const interestHashTags = front[id].hashTags
+    .split('_')[1]
+    .split('@')
+    .slice(1, 4);
+
   return (
     <Grid
       width="350px"
       height="200px"
       borderRadius="16px"
       border="1px solid black"
+      margin="16px"
+      _onClick={behind}
     >
       {handlePopup && <CardModal />}
       <Div is_flex>
         <Image shape="circle" src={front[id]?.profile} />
         <Grid width="30%" margin="0px 20px">
           <Text>{front[id]?.userName}</Text>
-          <Text>{front[id]?.stack}</Text>
-          <Text>{front[id]?.interest}</Text>
+          <Text color="#7F7C82" bold>
+            # {stackHashTags}
+          </Text>
         </Grid>
       </Div>
-      <Button _onClick={behind}>뒷면</Button>
+      <Hash>
+        {interestHashTags.map((stack, idx) => {
+          return stack && <HashTag key={idx} tag={stack} />;
+        })}
+      </Hash>
     </Grid>
   );
 };
@@ -66,4 +76,9 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10% 0px;
+`;
+
+const Hash = styled.div`
+  display: flex;
+  margin: -10px 10px;
 `;
