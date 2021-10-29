@@ -20,7 +20,7 @@ export const apis = {
   // 카드 불러오기 (앞면)
   getCardFront: () => api.get('/main'),
   // 카드 불러오기 (뒷면)
-  getCardBack: (userId) => api.get(`/main1/${userId}`),
+  getCardBack: (userId) => api.get(`/main${userId}`),
   // 카드 작성하기
   createCard: () => api.post('../features/cards/actions'),
   // 카드 수정하기

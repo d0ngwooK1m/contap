@@ -22,8 +22,8 @@ export default handleActions(
     // immer를 이용한 불변성 유지! - produce 사용
     [LOAD_CARD]: (state, action) =>
       produce(state, (draft) => {
-        // draft.byId = {};
-        // draft.allIds = [];
+        draft.byId = {};
+        draft.allIds = [];
         console.log(action.payload);
         action.payload.cardList.forEach((doc) => {
           draft.byId[doc.userId] = doc;
@@ -32,7 +32,8 @@ export default handleActions(
       }),
     [LOAD_CURRENT_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const { userId, data } = action.payload;
+        const {data } = action.payload;
+        console.log(action.payload)
         draft.current = data;
         // draft.current.id = userId;
       }),
