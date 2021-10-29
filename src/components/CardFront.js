@@ -5,11 +5,11 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { loadCurrentCardDB, onPopup } from '../features/cards/actions';
+import { loadCurrentCardDB } from '../features/cards/actions';
 import CardModal from './CardModal';
 import { Grid, Image, Text, Button } from '../elements';
 
-const CardFront = ({ id = '', contap }) => {
+const CardFront = ({ id, contap }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
@@ -17,16 +17,14 @@ const CardFront = ({ id = '', contap }) => {
   // console.log(contap);
   // console.log(front);
   // console.log(id);
+  // console.log('front 확인===>', front);
 
   const handlePopup = useSelector((state) => state.cards.isPopup);
   const back = useSelector((state) => state.cards.byId);
   // console.log('back 확인===>', back);
 
-  const behind = () => {
-    dispatch(loadCurrentCardDB(back[id].userId));
-    if (!handlePopup) {
-      dispatch(onPopup(true));
-    }
+  const behind = async () => {
+    await dispatch(loadCurrentCardDB(back[id].userId));
   };
 
   return (
@@ -41,8 +39,8 @@ const CardFront = ({ id = '', contap }) => {
         <Image shape="circle" src={front[id]?.profile} />
         <Grid width="30%" margin="0px 20px">
           <Text>{front[id]?.userName}</Text>
-          <Text>{front[id]?.stack}</Text>
-          <Text>{front[id]?.interest}</Text>
+          <Text>{front[id]?.hashTags}</Text>
+          <Text>{front[id]?.hashTags}</Text>
         </Grid>
       </Div>
       <Button _onClick={behind}>뒷면</Button>
