@@ -18,9 +18,9 @@ export const apis = {
   getTaps: (endPoint) => api.get(`${endPoint}`),
   // cards
   // 카드 불러오기 (앞면)
-  getCardFront: () => api.get('/cardFront'),
+  getCardFront: () => api.get('/main'),
   // 카드 불러오기 (뒷면)
-  getCardBack: (cardId) => api.get(`/cardBack/${cardId}`),
+  getCardBack: (userId) => api.get(`/main1/${userId}`),
   // 카드 작성하기
   createCard: () => api.post('../features/cards/actions'),
   // 카드 수정하기

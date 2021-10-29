@@ -17,7 +17,7 @@ const CardList = () => {
     if (cardList.allIds.length !== 0) {
       return;
     }
-    dispatch(loadCardFrontDB(String(0)));
+    dispatch(loadCardFrontDB());
   }, []);
 
   return (

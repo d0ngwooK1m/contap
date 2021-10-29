@@ -43,16 +43,24 @@ const CardModal = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {back.title}
-          </Typography>
-          <Typography id="unstyled-modal-description">
-            {back.content}
-          </Typography>
-          <Typography id="unstyled-modal-description">{back.stack} </Typography>
-          <Typography id="unstyled-modal-description">
-            {back.interest}
-          </Typography>
+          {back.map(() => {
+            return (
+              <Grid>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  {back.title}
+                </Typography>
+                <Typography id="unstyled-modal-description">
+                  {back.content}
+                </Typography>
+                <Typography id="unstyled-modal-description">
+                  {back.hashTagsString}
+                </Typography>
+                <Typography id="unstyled-modal-description">
+                  {back.hashTagsString}
+                </Typography>
+              </Grid>
+            );
+          })}
         </Box>
       </Modal>
     </Grid>
