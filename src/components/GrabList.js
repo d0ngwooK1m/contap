@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadGrabToAxios } from '../features/taps/actions';
 import CardFront from './CardFront';
 
-const GrabList = ({ id }) => {
+const GrabList = () => {
   const dispatch = useDispatch();
+  const conTap = useSelector((state) => state.taps);
 
   React.useEffect(() => {
     dispatch(loadGrabToAxios());
@@ -13,15 +13,11 @@ const GrabList = ({ id }) => {
 
   return (
     <div>
-      {id.map((idList) => {
-        return <CardFront key={idList} id={idList} contap />;
+      {conTap.allIds.map((id) => {
+        return <CardFront key={id} id={id} contap />;
       })}
     </div>
   );
-};
-
-GrabList.propTypes = {
-  id: PropTypes.array.isRequired,
 };
 
 export default GrabList;

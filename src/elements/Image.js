@@ -35,7 +35,7 @@ const Image = (props) => {
 
 Image.defaultProps = {
   shape: 'circle',
-  src: 'https://media.vlpt.us/images/wswj9608/profile/4d70b800-84e2-4ced-ad7d-f71413a6f5a7/KakaoTalk_20210918_153459873.jpg?w=240',
+  src: 'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg',
   size: 40,
   _onClick: () => {},
 };
@@ -72,7 +72,7 @@ const ImageCircle = styled.div`
   height: var(--size);
   border-radius: var(--size);
 
-  background-image: url('${(props) => props.src}');
+  background-image: url('${(props) => props.src ? props.src : 'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg' }');
   background-size: cover;
   margin: 4px;
 `;
