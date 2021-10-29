@@ -14,18 +14,17 @@ export const loadGrab = createAction(LOAD_GRAB, (cardBundles) => ({
   cardBundles,
 }));
 
-export const loadSendTapToAxios = (id) => async (dispatch) => {
-  console.log(id);
-  const { data } = await apis.getTaps();
+export const loadSendTapToAxios = () => async (dispatch) => {
+  const { data } = await apis.getTaps('/sendTap');
   dispatch(loadSendTap(data));
 };
 
 export const loadReceiveTapToAxios = () => async (dispatch) => {
-  const { data } = await apis.getTaps();
+  const { data } = await apis.getTaps('/receiveTap');
   dispatch(loadReceiveTap(data));
 };
 
 export const loadGrabToAxios = () => async (dispatch) => {
-  const { data } = await apis.getTaps();
+  const { data } = await apis.getTaps('grabList');
   dispatch(loadGrab(data));
 };

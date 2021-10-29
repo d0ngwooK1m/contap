@@ -15,7 +15,7 @@ export const apis = {
   login: () => api.post('', {}),
   signup: () => api.post('', {}),
   // tap
-  getTaps: () => api.get('/taps'),
+  getTaps: (endPoint) => api.get(`${endPoint}`),
   // cards
   // 카드 불러오기 (앞면)
   getCardFront: () => api.get('/cardFront'),

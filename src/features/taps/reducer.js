@@ -13,14 +13,13 @@ export default handleActions(
       produce(state, (draft) => {
         draft.byId = {};
         draft.allIds = [];
+        console.log(action.payload);
 
-        const {
-          cardBundles: { grabList },
-        } = action.payload;
+        const { cardBundles } = action.payload;
 
-        grabList.forEach((doc) => {
-          draft.byId[doc.id] = doc;
-          draft.allIds.push(doc.id);
+        cardBundles.forEach((doc) => {
+          draft.byId[doc.userId] = doc;
+          draft.allIds.push(doc.userId);
         });
       }),
     [LOAD_SEND_TAP]: (state, action) =>
@@ -28,13 +27,12 @@ export default handleActions(
         draft.byId = {};
         draft.allIds = [];
 
-        const {
-          cardBundles: { sendTap },
-        } = action.payload;
+        console.log(action.payload);
+        const { cardBundles } = action.payload;
 
-        sendTap.forEach((doc) => {
-          draft.byId[doc.id] = doc;
-          draft.allIds.push(doc.id);
+        cardBundles.forEach((doc) => {
+          draft.byId[doc.userId] = doc;
+          draft.allIds.push(doc.userId);
         });
       }),
     [LOAD_RECEIVE_TAP]: (state, action) =>
@@ -42,13 +40,12 @@ export default handleActions(
         draft.byId = {};
         draft.allIds = [];
 
-        const {
-          cardBundles: { receiveTap },
-        } = action.payload;
+        console.log(action.payload);
+        const { cardBundles } = action.payload;
 
-        receiveTap.forEach((doc) => {
-          draft.byId[doc.id] = doc;
-          draft.allIds.push(doc.id);
+        cardBundles.forEach((doc) => {
+          draft.byId[doc.userId] = doc;
+          draft.allIds.push(doc.userId);
         });
       }),
   },
