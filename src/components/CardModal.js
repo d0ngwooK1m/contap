@@ -1,25 +1,13 @@
-import * as React from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import { useSelector, useDispatch } from 'react-redux';
-
-import { onPopup } from '../features/cards/actions';
+import TapForm from './TapForm';
 import { Grid } from '../elements';
 
-const CardModal = () => {
-  const dispatch = useDispatch();
-  const back = useSelector((state) => state.cards.current);
-  console.log('제목 값 확인====>', back);
-
-  const handlePopup = useSelector((state) => state.cards.isPopup);
-
-  const close = () => {
-    dispatch(onPopup(false));
-  };
-
+const CardModal = ({ show, onHide, card }) => {
   const style = {
     position: 'absolute',
     top: '50%',
@@ -29,42 +17,39 @@ const CardModal = () => {
     height: '510px',
     borderRadius: '16px',
     bgcolor: 'background.paper',
-    border: '1px solid #000',
     boxShadow: 24,
     p: 4,
+    outline: 0,
   };
 
   return (
     <Grid>
       <Modal
-        open={handlePopup}
-        onClose={close}
+        open={show}
+        onClose={onHide}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {back.map(() => {
-            return (
-              <Grid>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  {back.title}
-                </Typography>
-                <Typography id="unstyled-modal-description">
-                  {back.content}
-                </Typography>
-                <Typography id="unstyled-modal-description">
-                  {back.hashTagsString}
-                </Typography>
-                <Typography id="unstyled-modal-description">
-                  {back.hashTagsString}
-                </Typography>
-              </Grid>
-            );
-          })}
+          <Grid>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {card[0]?.title}
+            </Typography>
+            <Typography id="unstyled-modal-description">
+              {card[0]?.content}
+            </Typography>
+          </Grid>
+          <TapForm />
         </Box>
       </Modal>
     </Grid>
   );
+};
+
+CardModal.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.bool.isRequired,
+  card: PropTypes.array.isRequired,
 };
 
 export default CardModal;
