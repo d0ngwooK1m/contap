@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { loadCurrentCardDB } from '../features/cards/actions';
+import { loadCurrentCardDB, onPopup } from '../features/cards/actions';
 import CardModal from './CardModal';
 import { Grid, Image, Text } from '../elements';
 import HashTag from './HashTag';
@@ -21,6 +21,9 @@ const CardFront = ({ id, contap }) => {
 
   const behind = async () => {
     await dispatch(loadCurrentCardDB(back[id].userId));
+    if (!handlePopup) {
+      dispatch(onPopup(true));
+    }
   };
 
   const stackHashTags = front[id].hashTags.split('_')[0].split('@').slice(1, 2);
