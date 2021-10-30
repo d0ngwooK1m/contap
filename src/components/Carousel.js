@@ -31,9 +31,9 @@ const Carousel = () => {
 
 const Wrap = styled.div`
   width: 1000px;
-  position: relative;
-  top: 25%;
-  left: 0px;
+  position: absolute;
+  top: 20%;
+  left: 23%;
   margin: auto;
 `;
 

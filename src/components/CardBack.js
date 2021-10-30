@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
 import HashTag from './HashTag';
+import TapForm from './TapForm'
 
 const CardBack = ({ card }) => {
   const stackHashTags = card.hashTagsString.split('_')[0].split('@');
@@ -30,6 +31,7 @@ const CardBack = ({ card }) => {
               return stack && <HashTag key={idx} tag={stack} />;
             })}
           </Hash>
+          <TapForm/>
         </div>
       </Card>
     </Wrap>
