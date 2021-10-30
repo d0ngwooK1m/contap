@@ -1,13 +1,8 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import {
-  WITHDRAWAL,
-  LOG_IN,
-  LOG_OUT,
-  PASSWORD_CHANGE,
-  AUTHORIZED,
-} from './types';
+import { WITHDRAWAL, LOG_IN, LOG_OUT, AUTHORIZED } from './types';
 import { saveToken } from '../../utils/auth';
+import tokenAxios from '../../api/tokenInstance';
 import { history } from '../configureStore';
 
 // 나중에 백엔드 URL로 바꿀 것
@@ -19,18 +14,13 @@ const withdrawal = (withdrawalInfo) => ({
   withdrawalInfo,
 });
 
-const login = (userInfo) => ({
+const login = (payload) => ({
   type: LOG_IN,
-  userInfo,
+  payload,
 });
 
 // 로그아웃 미들웨어 없음
 const logout = () => ({ type: LOG_OUT });
-
-const passwordChange = (changedPassword) => ({
-  type: PASSWORD_CHANGE,
-  changedPassword,
-});
 
 const authorize = (email, username) => ({
   type: AUTHORIZED,
@@ -38,10 +28,9 @@ const authorize = (email, username) => ({
 });
 
 // 기존 프로젝트의 미들웨어
-const emailCheckToServer = (emailInfo) => async (dispatch) => {
+const emailCheckToServer = (emailInfo) => async () => {
   try {
-    const res = await axios.post(`${baseURL}/signup/emailcheck`, emailInfo);
-    // const res = await axios.post(`${baseURL}/user/emailcheck`, emailInfo);
+    const res = await axios.post(`${baseURL}/user/emailcheck`, emailInfo);
     const { data } = res;
     console.log(data);
 
@@ -56,9 +45,28 @@ const emailCheckToServer = (emailInfo) => async (dispatch) => {
   }
 };
 
+const userNameCheckToServer = (userNameInfo) => async () => {
+  try {
+    // const res = await axios.post(`${baseURL}/user/namecheck`, userNameInfo);
+    const res = await axios.post(`${baseURL}/signup/namecheck`, userNameInfo);
+
+    const { data } = res;
+    console.log(data);
+
+    if (data.result === 'success') {
+      console.log(userNameInfo);
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const signupToServer = (signupInfo) => async () => {
   try {
     console.log(baseURL);
+    console.log(signupInfo);
     const res = await axios.post(`${baseURL}/user/signup`, signupInfo);
 
     const { data } = res;
@@ -81,13 +89,14 @@ const loginToServer = (loginInfo) => async (dispatch) => {
       return data;
     }
 
+    // console.log(data);
     const userInfo = {
       email: data.email,
-      nickName: data.nickName,
+      nickname: data.nickname,
     };
 
     dispatch(login(userInfo));
-    console.log(data);
+    // console.log(data);
     saveToken(data?.token);
     history.push('/');
     return data;
@@ -97,11 +106,18 @@ const loginToServer = (loginInfo) => async (dispatch) => {
   }
 };
 
+// passwordChangeToServer = (passwordInfo) => (dispatch) => {
+//   try {
+//     const res = tokenAxios.POST(baseURL, 'settings/password')
+//   }
+// }
+
 export {
   withdrawal,
   login,
   logout,
   emailCheckToServer,
+  userNameCheckToServer,
   signupToServer,
   loginToServer,
   authorize,
