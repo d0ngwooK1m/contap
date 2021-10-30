@@ -72,7 +72,10 @@ const ImageCircle = styled.div`
   height: var(--size);
   border-radius: var(--size);
 
-  background-image: url('${(props) => props.src ? props.src : 'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg' }');
+  background-image: url('${(props) =>
+    props.src
+      ? props.src
+      : 'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg'}');
   background-size: cover;
   margin: 4px;
 `;

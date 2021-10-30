@@ -14,6 +14,7 @@ const CardFront = ({ id, contap }) => {
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
+  console.log(front);
 
   const stackHashTags = front[id].hashTags.split('_')[0].split('@').slice(1, 2);
   const interestHashTags = front[id].hashTags
