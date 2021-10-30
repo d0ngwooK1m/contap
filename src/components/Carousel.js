@@ -32,7 +32,7 @@ const Carousel = () => {
 const Wrap = styled.div`
   width: 1000px;
   position: relative;
-  top: 25%;
+  top: 25vh;
   left: 0px;
   margin: auto;
 `;

@@ -106,19 +106,42 @@ const loginToServer = (loginInfo) => async (dispatch) => {
   }
 };
 
-// passwordChangeToServer = (passwordInfo) => (dispatch) => {
-//   try {
-//     const res = tokenAxios.POST(baseURL, 'settings/password')
-//   }
-// }
+const passwordChangeToServer = (passwordInfo) => async () => {
+  try {
+    const res = await tokenAxios.POST(
+      `${baseURL}/setting/password`,
+      passwordInfo,
+    );
+
+    const { data } = res;
+    console.log(data);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const withdrawalToServer = (passwordInfo) => async (dispatch) => {
+  try {
+    const res = await tokenAxios.POST(
+      `${baseURL}/setting/withdrawal`,
+      passwordInfo,
+    );
+
+    const { data } = res;
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 export {
-  withdrawal,
-  login,
   logout,
   emailCheckToServer,
   userNameCheckToServer,
   signupToServer,
   loginToServer,
+  passwordChangeToServer,
+  withdrawalToServer,
   authorize,
 };
