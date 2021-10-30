@@ -7,6 +7,7 @@ import Signup from '../pages/Signup';
 import Settings from '../pages/Settings';
 import Contap from '../pages/Contap';
 import Header from './Header';
+import Mypage from '../pages/Mypage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" exact component={CardList} />
       <Route path="/settings" exact component={Settings} />
       <Route path="/contap" exact component={Contap} />
+      <Route path="/mypage" exact component={Mypage} />
     </div>
   );
 }

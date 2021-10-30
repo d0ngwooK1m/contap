@@ -9,7 +9,7 @@ import CardBack from './CardBack';
 
 const Carousel = () => {
   const currentCard = useSelector((state) => state.cards.current);
-
+  console.log(currentCard);
   const settings = {
     dots: true,
     infinite: true,
@@ -22,7 +22,7 @@ const Carousel = () => {
     <Wrap>
       <Slider {...settings}>
         {currentCard.map((card) => {
-          return <CardBack key={card.id} card={card} />;
+          return <CardBack key={card.cardId} card={card} />;
         })}
       </Slider>
     </Wrap>
