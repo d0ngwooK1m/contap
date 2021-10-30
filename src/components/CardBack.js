@@ -1,40 +1,61 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useSelector } from 'react-redux';
-import { Grid, Text } from '../elements';
+import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
+import HashTag from './HashTag';
 
-const CardBack = ({ id }) => {
-  const back = useSelector((state) => state.cards.byId);
+const CardBack = ({ card }) => {
+  const stackHashTags = card.hashTagsString.split('_')[0].split('@');
+  const interestHashTags = card.hashTagsString.split('_')[1].split('@');
 
   return (
-    <Grid
-      width="960px"
-      height="510px"
-      borderRadius="16px"
-      border="1px solid black"
-    >
-      <Grid>
-        {/* <Image scr={image} shape="rectangle" /> */}
-        <Text>{back[id].title}</Text>
-        <Text>{back[id].content}</Text>
-        <Text>{back[id].stack}</Text>
-        <Text>{back[id].interest}</Text>
-      </Grid>
-    </Grid>
+    <Wrap>
+      <Card>
+        <Typography sx={{fontSize:'40px', fontWeight:'bold'}}>{card?.title}</Typography>
+        <Typography>{card?.content}</Typography>
+        <div>
+        <Typography>기술스택</Typography>
+          <Hash>
+            {stackHashTags?.map((stack, idx) => {
+              return stack && <HashTag key={idx} tag={stack} />;
+            })}
+          </Hash>
+        </div>
+        <div>
+        <Typography>관심사</Typography>
+          <Hash>
+            {interestHashTags?.map((stack, idx) => {
+              return stack && <HashTag key={idx} tag={stack} />;
+            })}
+          </Hash>
+        </div>
+      </Card>
+    </Wrap>
   );
 };
 
 CardBack.propTypes = {
-  id: PropTypes.number.isRequired,
+  card: PropTypes.object.isRequired,
 };
 
-// CardBack.defaultProps = {
-//   content: '제 포트폴리오를 소개합니다.',
-//   // image:
-//   //   'https://mblogthumb-phinf.pstatic.net/MjAxNzA5MjdfODkg/MDAxNTA2NTIyOTMwOTA4.YSIpeIFX6GAna9UvWS_IarVWxfHYA4vHlC6Yn49YAQYg.f18IO5v8tMvIvbcv7bcdGRdoyW3QPK0gFbAAuhdCl4Mg.PNG.june6505/y1.png?type=w2',
-//   interest: '여행',
-//   stack: 'React',
-// };
+const Wrap = styled.div`
+  width: 100%;
+`;
+
+const Card = styled.div`
+  background-color: #fff;
+  width: 820px;
+  height: 450px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 16px;
+`;
+
+const Hash = styled.div`
+  display: flex;
+  margin: -10px 10px;
+`;
 
 export default CardBack;
