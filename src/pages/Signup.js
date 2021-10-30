@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { emailCheckToServer, signupToServer } from '../features/user/actions';
+import {
+  emailCheckToServer,
+  userNameCheckToServer,
+  signupToServer,
+} from '../features/user/actions';
 import { Grid, Input, Button } from '../elements';
 
 const Signup = () => {
@@ -46,11 +50,22 @@ const Signup = () => {
       </Button>
       <Input
         type="string"
-        place="이름을 입력해주세요"
+        place="닉네임을 입력해주세요"
         _onChange={(e) => {
           setUserName(e.target.value);
         }}
       />
+      <Button
+        _onClick={() => {
+          const userNameInfo = {
+            userName,
+          };
+          console.log(userNameInfo);
+          dispatch(userNameCheckToServer(userNameInfo));
+        }}
+      >
+        닉네임 중복체크
+      </Button>
       <Input
         type="password"
         place="비밀번호를 입력해주세요"

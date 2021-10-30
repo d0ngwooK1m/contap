@@ -7,6 +7,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
+import { logout } from '../features/user/actions';
+import { getToken, removeToken } from '../utils/auth';
 import { Grid, Image } from '../elements';
 
 const Header = () => {
@@ -69,6 +71,9 @@ const Header = () => {
             </MenuItem>
             <MenuItem
               onClick={() => {
+                const token = getToken();
+                removeToken(token);
+                logout();
                 handleClose();
               }}
             >
