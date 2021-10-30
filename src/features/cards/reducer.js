@@ -7,12 +7,14 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   LOAD_CURRENT_CARD,
+  SET_PREVIEW,
 } from './types';
 
 const initialState = {
   byId: {},
   allIds: [],
   current: {},
+  preview: null,
 };
 
 export default handleActions(
@@ -30,12 +32,20 @@ export default handleActions(
       }),
     [LOAD_CURRENT_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const {data } = action.payload;
-        console.log(action.payload)
+        const { data } = action.payload;
+        console.log(action.payload);
         draft.current = data;
-        // draft.current.id = userId;
       }),
-    [CREATE_CARD]: (state, action) => produce(state, (draft) => {}),
+    [CREATE_CARD]: (state, action) =>
+      produce(state, (draft) => {
+        const { id } = action.payload;
+        draft.byId[id] = action.payload;
+        draft.allIds.unshift(id);
+      }),
+    [SET_PREVIEW]: (state, action) =>
+      produce(state, (draft) => {
+        draft.preview = action.payload.preview;
+      }),
   },
   initialState,
 );

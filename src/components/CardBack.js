@@ -7,16 +7,18 @@ import Typography from '@mui/material/Typography';
 import HashTag from './HashTag';
 
 const CardBack = ({ card }) => {
-  const stackHashTags = card.hashTagsString.split('_')[0].split('@');
-  const interestHashTags = card.hashTagsString.split('_')[1].split('@');
-
+  const stackHashTags = card.hashTags?.split('_')[0].split('@');
+  const interestHashTags = card.hashTags?.split('_')[1].split('@');
+  console.log('카드확인 ===>', card);
   return (
     <Wrap>
       <Card>
-        <Typography sx={{fontSize:'40px', fontWeight:'bold'}}>{card?.title}</Typography>
+        <Typography sx={{ fontSize: '40px', fontWeight: 'bold' }}>
+          {card?.title}
+        </Typography>
         <Typography>{card?.content}</Typography>
         <div>
-        <Typography>기술스택</Typography>
+          <Typography>기술스택</Typography>
           <Hash>
             {stackHashTags?.map((stack, idx) => {
               return stack && <HashTag key={idx} tag={stack} />;
@@ -24,7 +26,7 @@ const CardBack = ({ card }) => {
           </Hash>
         </div>
         <div>
-        <Typography>관심사</Typography>
+          <Typography>관심사</Typography>
           <Hash>
             {interestHashTags?.map((stack, idx) => {
               return stack && <HashTag key={idx} tag={stack} />;
