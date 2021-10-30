@@ -19,14 +19,14 @@ const CardList = () => {
     dispatch(loadCardFrontDB());
   }, []);
 
-  console.log();
+  console.log(cardList);
   return (
     <Grid>
       <Div>
-        {cardList.allIds.map((id) => {
+        {cardList.allIds.map((userId) => {
           return (
-            <Grid key={id}>
-              <CardFront id={id} />
+            <Grid key={userId}>
+              <CardFront userId={userId} />
             </Grid>
           );
         })}

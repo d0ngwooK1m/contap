@@ -78,7 +78,6 @@ const CardFrontWrite = (id) => {
             ref={fileInput}
             id="fileUpload"
             onChange={filePreview}
-            readOnly="true"
           />
         </Grid>
         <TextDiv>

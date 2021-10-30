@@ -2,7 +2,7 @@
 import { createAction } from 'redux-actions';
 import { LOAD_RECEIVE_TAP, LOAD_SEND_TAP, LOAD_GRAB } from './types';
 import T from '../../api/tokenInstance';
-// import { apis } from '../../api/api';
+// import { apis } from '. ./../api/api';
 
 export const loadSendTap = createAction(LOAD_SEND_TAP, (cardBundles) => ({
   cardBundles,

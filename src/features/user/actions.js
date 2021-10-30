@@ -30,7 +30,7 @@ const authorize = (email, username) => ({
 // 기존 프로젝트의 미들웨어
 const emailCheckToServer = (emailInfo) => async () => {
   try {
-    const res = await axios.post(`${baseURL}/user/emailcheck`, emailInfo);
+    const res = await axios.post(`${baseURL}/signup/emailcheck`, emailInfo);
     const { data } = res;
     console.log(data);
 

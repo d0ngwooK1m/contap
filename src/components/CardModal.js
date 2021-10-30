@@ -5,12 +5,12 @@ import Modal from '@mui/material/Modal';
 import { Grid } from '../elements';
 import Carousel from './Carousel';
 
-const CardModal = ({ show, onHide }) => {
+const CardModal = ({ show, onHide, userId }) => {
   return (
     <Grid>
       <Modal open={show} onClose={onHide}>
         <>
-          <Carousel />
+          <Carousel userId={userId} />
         </>
       </Modal>
     </Grid>
@@ -20,6 +20,7 @@ const CardModal = ({ show, onHide }) => {
 CardModal.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default CardModal;

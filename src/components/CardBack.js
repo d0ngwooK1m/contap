@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
 import HashTag from './HashTag';
-import TapForm from './TapForm'
+import TapForm from './TapForm';
 
-const CardBack = ({ card }) => {
+const CardBack = ({ card, userId }) => {
   const stackHashTags = card.hashTags?.split('_')[0].split('@');
   const interestHashTags = card.hashTags?.split('_')[1].split('@');
-  console.log('카드확인 ===>', card);
+
   return (
     <Wrap>
       <Card>
@@ -33,7 +33,7 @@ const CardBack = ({ card }) => {
               return stack && <HashTag key={idx} tag={stack} />;
             })}
           </Hash>
-          <TapForm/>
+          <TapForm userId={userId} />
         </div>
       </Card>
     </Wrap>
@@ -42,6 +42,7 @@ const CardBack = ({ card }) => {
 
 CardBack.propTypes = {
   card: PropTypes.object.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 const Wrap = styled.div`
