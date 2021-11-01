@@ -1,6 +1,11 @@
 // import axios from 'axios';
 import { createAction } from 'redux-actions';
-import { LOAD_RECEIVE_TAP, LOAD_SEND_TAP, LOAD_GRAB } from './types';
+import {
+  LOAD_RECEIVE_TAP,
+  LOAD_SEND_TAP,
+  LOAD_GRAB,
+  SHOW_MODAL,
+} from './types';
 import T from '../../api/tokenInstance';
 // import { apis } from '. ./../api/api';
 
@@ -12,6 +17,10 @@ export const loadReceiveTap = createAction(LOAD_RECEIVE_TAP, (cardBundles) => ({
 }));
 export const loadGrab = createAction(LOAD_GRAB, (cardBundles) => ({
   cardBundles,
+}));
+
+export const modalSwitch = createAction(SHOW_MODAL, (bool) => ({
+  bool,
 }));
 
 export const loadSendTapToAxios = () => async (dispatch) => {

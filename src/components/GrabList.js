@@ -16,7 +16,14 @@ const GrabList = ({ select }) => {
   return (
     <div>
       {conTap.allIds.map((grabUserId) => {
-        return <CardFront key={grabUserId} userId={grabUserId} contap />;
+        return (
+          <CardFront
+            key={grabUserId}
+            userId={grabUserId}
+            select={select}
+            contap
+          />
+        );
       })}
     </div>
   );

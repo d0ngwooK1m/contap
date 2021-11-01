@@ -1,10 +1,16 @@
 import { produce } from 'immer';
 import { handleActions } from 'redux-actions';
-import { LOAD_GRAB, LOAD_SEND_TAP, LOAD_RECEIVE_TAP } from './types';
+import {
+  LOAD_GRAB,
+  LOAD_SEND_TAP,
+  LOAD_RECEIVE_TAP,
+  SHOW_MODAL,
+} from './types';
 
 const initialState = {
   byId: {},
   allIds: [],
+  showModal: false,
 };
 
 export default handleActions(
@@ -47,6 +53,11 @@ export default handleActions(
           draft.byId[doc.userId] = doc;
           draft.allIds.push(doc.userId);
         });
+      }),
+    [SHOW_MODAL]: (state, action) =>
+      produce(state, (draft) => {
+        console.log('페이로드 ====> ', action);
+        draft.showModal = action.payload.bool;
       }),
   },
   initialState,

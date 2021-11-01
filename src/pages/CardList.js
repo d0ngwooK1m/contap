@@ -24,11 +24,7 @@ const CardList = () => {
     <Grid>
       <Div>
         {cardList.allIds.map((userId) => {
-          return (
-            <Grid key={userId}>
-              <CardFront userId={userId} />
-            </Grid>
-          );
+          return <CardFront key={userId} userId={userId} />;
         })}
       </Div>
     </Grid>

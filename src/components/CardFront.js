@@ -4,18 +4,23 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCurrentCardDB } from '../features/cards/actions';
+import CardFrontContap from './CardFrontContap';
+import HashTag from './HashTag';
 
 import CardModal from './CardModal';
+import ContapModal from './ContapModal';
 import { Grid, Image, Text } from '../elements';
-import HashTag from './HashTag';
 import T from '../api/tokenInstance';
 
-const CardFront = ({ userId, contap }) => {
+const CardFront = ({ userId, contap, select }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
+  const [showModal, setShowMadal] = React.useState(false);
+  const [sideModal, setSideModal] = React.useState(false);
 
+  console.log(front);
   console.log(front[userId]);
 
   const stackHashTags = front[userId].hashTags
@@ -28,12 +33,10 @@ const CardFront = ({ userId, contap }) => {
     .slice(1, 4);
   console.log(stackHashTags, interestHashTags);
 
-  const [showModal, setShowMadal] = React.useState(false);
-
   console.log(userId);
-  const behind = async () => {
+  const showCardBackModal = () => {
     if (!showModal) {
-      await dispatch(loadCurrentCardDB(userId));
+      dispatch(loadCurrentCardDB(userId));
     }
     setShowMadal(true);
   };
@@ -48,13 +51,25 @@ const CardFront = ({ userId, contap }) => {
 
   const rejectTap = async () => {
     await T.POST('/contap/reject', { tagId: front[userId].tapId });
-    console.log('거절')
+    console.log('거절');
   };
 
   const acceptTap = async () => {
-    const { data} = await T.POST('/contap/accept', { tagId: front[userId].tapId });
-    console.log('수락')
-    console.log(data)
+    const { data } = await T.POST('/contap/accept', {
+      tagId: front[userId].tapId,
+    });
+    console.log('수락');
+    console.log(data);
+  };
+
+  const handleSideModal = () => {
+    setShowMadal(false);
+    setSideModal(true);
+  };
+
+  const closeSideModal = () => {
+    setSideModal(false);
+    setShowMadal(true);
   };
 
   return (
@@ -64,18 +79,35 @@ const CardFront = ({ userId, contap }) => {
       borderRadius="16px"
       border="1px solid black"
       margin="16px"
-      _onClick={behind}
+      _onClick={showCardBackModal}
     >
       <Grid _onClick={stopPropagation}>
-        <CardModal show={showModal} onHide={closeModal} userId={userId} />
+        {!contap && (
+          <CardModal show={showModal} onHide={closeModal} userId={userId} />
+        )}
+        {contap && (
+          <ContapModal
+            className="contapModal"
+            show={showModal}
+            onHide={closeModal}
+            userId={userId}
+          >
+            <CardFrontContap onModal={handleSideModal} userId={userId} />
+          </ContapModal>
+        )}
+        {sideModal && (
+          <CardModal show={sideModal} onHide={closeSideModal} userId={userId} />
+        )}
       </Grid>
       <Div is_flex>
-        <Image shape="circle" src={front[userId]?.profile} />
+        <Image
+          shape="circle"
+          src={front[userId] ? front[userId].profile : null}
+        />
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[userId]?.userName}</Text>
-          <Text color="#7F7C82" bold>
-            # {stackHashTags}
-          </Text>
+          <Text>{front[userId] ? front[userId].userName : null}</Text># #{' '}
+          {stackHashTags}
+          <Text color="#7F7C82" bold />
         </Grid>
       </Div>
       <Hash>
@@ -84,12 +116,12 @@ const CardFront = ({ userId, contap }) => {
         })}
       </Hash>
       <Grid _onClick={stopPropagation}>
-        {contap && (
+        {contap && select === 'ReceiveTap' && (
           <button type="button" onClick={acceptTap}>
             수락
           </button>
         )}
-        {contap && (
+        {contap && select === 'ReceiveTap' && (
           <button type="button" onClick={rejectTap}>
             거절
           </button>
@@ -101,10 +133,12 @@ const CardFront = ({ userId, contap }) => {
 
 CardFront.propTypes = {
   userId: PropTypes.number.isRequired,
+  select: PropTypes.string,
   contap: PropTypes.bool,
 };
 
 CardFront.defaultProps = {
+  select: null,
   contap: false,
 };
 

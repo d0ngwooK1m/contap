@@ -16,7 +16,14 @@ const SendTap = ({ select }) => {
   return (
     <div>
       {conTap.allIds.map((sendTapUserId) => {
-        return <CardFront key={sendTapUserId} userId={sendTapUserId} contap />;
+        return (
+          <CardFront
+            key={sendTapUserId}
+            userId={sendTapUserId}
+            select={select}
+            contap
+          />
+        );
       })}
     </div>
   );

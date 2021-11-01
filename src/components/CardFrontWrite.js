@@ -17,20 +17,30 @@ const CardFrontWrite = (id) => {
 
   const hashTags = [
     {
-      hashTagId: 1,
+      id: 1,
       name: '지오캐싱',
       type: 1,
-    },
-  ];
+    }
 
-  const fileInput = React.useRef();
-  // console.log(fileInput);
+  ]
+
+ 
+  const fileInput = React.useRef('');
+  console.log(fileInput);
+  const [newFile, setNewFile] = React.useState('')
+
+  console.log(newFile)
+
+  const handle = (e) => {
+    setNewFile(e.target.file)
+  }
+
 
   // 파일 미리보기
   const filePreview = () => {
     const reader = new FileReader();
-    const file = fileInput.current.files[0];
-    reader.readAsDataURL(file);
+    const file = fileInput.current.files[0]
+    file ? reader.readAsDataURL(file) : null;
     reader.onloadend = () => {
       //  console.log(reader.result);
       dispatch(setPreview(reader.result));
@@ -38,14 +48,26 @@ const CardFrontWrite = (id) => {
   };
 
   const fileUploadHandler = () => {
-    const file = fileInput.current.files[0];
+    const file = fileInput.current.files[0] ? fileInput.current.files[0] : null;
     // console.log('file', file);
     const formData = new FormData();
-    formData.append('profile', file);
+    file ? formData.append('profile', file) : null;
     formData.append('userName', '이아롱');
-    formData.append('hashTags', hashTags);
+    formData.append('hashTags', JSON.stringify(hashTags));
 
     console.log('formData', formData);
+
+    for (var key of formData.keys()) {
+
+      console.log(key);
+    
+    }
+    
+    for (var value of formData.values()) {
+    
+      console.log(value);
+    
+    }
 
     // const token = localStorage.getItem("token");
     // console.log(token);
@@ -75,6 +97,12 @@ const CardFrontWrite = (id) => {
             ref={fileInput}
             id="fileUpload"
             onChange={filePreview}
+          />
+          <input
+            type="file"
+            file={newFile}
+            id="fileUpload"
+            onChange={handle}
           />
         </Grid>
         <TextDiv>
