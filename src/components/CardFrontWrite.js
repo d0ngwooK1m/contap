@@ -1,25 +1,24 @@
 /*eslint-disable*/
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setPreview, createCardDB } from '../features/cards/actions';
 
-import SettingsIcon from '@mui/icons-material/Settings';
 import { Grid, Button, Text, Input, Image } from '../elements';
 
-const CardFrontWrite = (id) => {
+const CardFrontWrite = () => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.cards.preview);
   // const front = useSelector((state) => state.cards.byId);
   // console.log(front);
+  const userInfo = useSelector((state) => state.cards.current);
+  console.log(userInfo);
+  console.log(userInfo.userName);
 
-  const hashTags = [
+  const hashTagIds = [
     {
-      hashTagId: 1,
-      name: '지오캐싱',
-      type: 1,
+      hashTagIds: 1,
     },
   ];
 
@@ -30,11 +29,16 @@ const CardFrontWrite = (id) => {
   const filePreview = () => {
     const reader = new FileReader();
     const file = fileInput.current.files[0];
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      //  console.log(reader.result);
-      dispatch(setPreview(reader.result));
-    };
+    console.log(file);
+    if (file === undefined) {
+      dispatch(setPreview(null));
+    } else {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        //  console.log(reader.result);
+        dispatch(setPreview(reader.result));
+      };
+    }
   };
 
   const fileUploadHandler = () => {
@@ -43,7 +47,8 @@ const CardFrontWrite = (id) => {
     const formData = new FormData();
     formData.append('profile', file);
     formData.append('userName', '이아롱');
-    formData.append('hashTags', hashTags);
+    formData.append('hashTagIds', hashTagIds);
+    formData.append('hashTagsStr', '@spring@');
 
     console.log('formData', formData);
 
@@ -52,23 +57,19 @@ const CardFrontWrite = (id) => {
     dispatch(createCardDB(formData));
   };
 
-  // const edit = false;
-  // if (edit) {
   return (
     <Grid
-      width="960px"
-      height="250px"
+      width="966px"
+      height="230px"
       borderRadius="16px"
       border="1px solid #dcdcdc"
       bgcolor="background.paper"
       margin="25px auto"
     >
       <Div>
-        <Grid width="150px" margin="20px">
+        <Grid margin="20px" width="125px">
           <label htmlFor="fileUpload">
-            <Img
-              src={preview ? preview : 'http://via.placeholder.com/400x300'}
-            />
+            <Img src={preview ? preview : userInfo.profile} />
           </label>
           <input
             type="file"
@@ -78,44 +79,12 @@ const CardFrontWrite = (id) => {
           />
         </Grid>
         <TextDiv>
-          <Text>이아롱</Text>
+          <Input value={userInfo.userName} is_submit />
         </TextDiv>
       </Div>
-      <IconDiv>
-        <SettingsIcon fontSize="small" cursor="pointer" />
-      </IconDiv>
-      <Btn onClick={fileUploadHandler}>설정완료</Btn>
+      <Btn onClick={fileUploadHandler}>작성완료</Btn>
     </Grid>
   );
-  // }
-  // return (
-  //   <Grid
-  //     width="960px"
-  //     height="250px"
-  //     borderRadius="16px"
-  //     border="1px solid #dcdcdc"
-  //     bgcolor="background.paper"
-  //     margin="25px auto"
-  //   >
-  //     <Div>
-  //       <Grid width="150px" margin="20px">
-  //         <Img src={'http://via.placeholder.com/400x300'} />
-  //       </Grid>
-  //       <TextDiv>
-  //         <Text>이아롱</Text>
-  //       </TextDiv>
-  //     </Div>
-  //     <IconDiv
-  //       onclick={() => {
-  //         edit = true;
-  //       }}
-  //       cursor="pointer"
-  //     >
-  //       <SettingsIcon fontSize="small" />
-  //     </IconDiv>
-  //     <Btn onClick={fileUploadHandler}>설정완료</Btn>
-  //   </Grid>
-  // );
 };
 
 export default CardFrontWrite;
@@ -131,24 +100,19 @@ const Img = styled.img`
   justify-content: center;
   align-items: center;
   margin: 5px 0px;
-  width: 200px;
+  width: 256px;
+  height: 180px;
 `;
 
 const TextDiv = styled.div`
   position: absolute;
   top: 15vh;
-  left: 35vw;
-`;
-
-const IconDiv = styled.div`
-  position: absolute;
-  top: 16vh;
-  left: 39vw;
+  left: 43vw;
 `;
 
 const Btn = styled.button`
   width: 80px;
   position: absolute;
   top: 16vh;
-  left: 41vw;
+  left: 70vw;
 `;
