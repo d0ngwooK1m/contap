@@ -1,32 +1,20 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import {
-  loadGrab,
-  loadReceveTap,
-  loadSendTapToAxios,
-} from '../features/taps/actions';
+import T from '../api/tokenInstance';
 
-const TapForm = ({ id }) => {
-  const dispatch = useDispatch();
+const TapForm = ({ userId }) => {
   const history = useHistory();
   const [messege, setMessege] = React.useState('');
-  console.log(id);
+  console.log(userId);
 
   const handleChange = (e) => {
     setMessege(e.target.value);
   };
 
-  const sendTap = () => {
-    console.log({
-      token: 'token 헤더로 보냄',
-      id,
-      messege,
-      state: 'ready',
-    });
-    // dispatch(loadSendTapToAxios())
+  const sendTap = async () => {
+    await T.POST('/main/posttap', { userId });
+    window.alert('Tap을 보냈어요!');
   };
 
   return (
@@ -49,11 +37,7 @@ const TapForm = ({ id }) => {
 };
 
 TapForm.propTypes = {
-  id: PropTypes.number,
-};
-
-TapForm.defaultProps = {
-  id: 1,
+  userId: PropTypes.number.isRequired,
 };
 
 export default TapForm;

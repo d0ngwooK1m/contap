@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import CardBack from './CardBack';
 
-const Carousel = () => {
+const Carousel = ({ userId }) => {
   const currentCard = useSelector((state) => state.cards.current);
   console.log(currentCard);
   const settings = {
@@ -22,18 +23,22 @@ const Carousel = () => {
     <Wrap>
       <Slider {...settings}>
         {currentCard.map((card) => {
-          return <CardBack key={card.cardId} card={card} />;
+          return <CardBack key={card.cardId} card={card} userId={userId} />;
         })}
       </Slider>
     </Wrap>
   );
 };
 
+Carousel.propTypes = {
+  userId: PropTypes.number.isRequired,
+};
+
 const Wrap = styled.div`
   width: 1000px;
-  position: relative;
-  top: 25vh;
-  left: 0px;
+  position: absolute;
+  top: 20%;
+  left: 23%;
   margin: auto;
 `;
 

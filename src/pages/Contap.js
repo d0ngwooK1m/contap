@@ -18,25 +18,25 @@ import GrabList from '../components/GrabList'
 const Contap = () => {
   const dispatch = useDispatch();
   
-  React.useEffect(() => {
-    dispatch(loadReceiveTapToAxios());
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(loadReceiveTapToAxios());
+  // }, []);
 
   const content = [
     {
       id: 'ReceiveTap',
       tab: '받은 탭',
-      content: <ReceiveTap/>,
+      content: <ReceiveTap select='ReceiveTap'/>,
     },
     {
       id: 'SendTap',
       tab: '보낸 탭',
-      content: <SendTap />,
+      content: <SendTap select='SendTap'/>,
     },
     {
       id: 'GrabList',
       tab: '나의 그랩',
-      content: <GrabList  />,
+      content: <GrabList  select='GrabList'/>,
     },
   ];
   
