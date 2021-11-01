@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
 import T from '../../api/tokenInstance';
+import { getToken } from '../../utils/auth';
 // import { apis } from '../../api/api';
 import {
   LOAD_CARD,
@@ -51,21 +52,21 @@ export const loadCurrentCardDB = (userId) => async (dispatch) => {
   }
 };
 
-// export const createCardDB = (contents, formData) => async () => {
-//   try {
-//     // const res = await apis.createCard(contents);
-//     // const token = localStorage.getItem('token');
-//     // console.log(token);
-//     const res = await axios.create({
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       })
-//       .post(`${baseURL}/mypage/frontCard`, formData, {})
-//         dispatch(setPreview(null));
-//   console.log('작성값 확인===>', res);
-
-//   }catch (err) {
-//     console.log(err);
-//   }
-// };
+export const createCardDB = (formData) => async (dispatch) => {
+  try {
+    // const res = await apis.createCard(contents);
+    // const token = localStorage.getItem('token');
+    // console.log(token);
+    const res = await axios.post(`${baseURL}/mypage/frontCard`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'X-AUTH-TOKEN': `${getToken()}`,
+      },
+    });
+    console.log('작성값 확인===>', res);
+    dispatch(setPreview(null));
+    dispatch(createCard(res.data));
+  } catch (err) {
+    console.log(err);
+  }
+};

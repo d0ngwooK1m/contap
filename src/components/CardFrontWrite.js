@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setPreview } from '../features/cards/actions';
+import { setPreview, createCardDB } from '../features/cards/actions';
 
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Grid, Button, Text, Input, Image } from '../elements';
@@ -14,6 +14,14 @@ const CardFrontWrite = (id) => {
   const preview = useSelector((state) => state.cards.preview);
   // const front = useSelector((state) => state.cards.byId);
   // console.log(front);
+
+  const hashTags = [
+    {
+      hashTagId: 1,
+      name: '지오캐싱',
+      type: 1,
+    },
+  ];
 
   const fileInput = React.useRef();
   // console.log(fileInput);
@@ -31,32 +39,21 @@ const CardFrontWrite = (id) => {
 
   const fileUploadHandler = () => {
     const file = fileInput.current.files[0];
-    console.log('file', file);
+    // console.log('file', file);
     const formData = new FormData();
-    formData.append('img', file);
+    formData.append('profile', file);
+    formData.append('userName', '이아롱');
+    formData.append('hashTags', hashTags);
+
     console.log('formData', formData);
 
     // const token = localStorage.getItem("token");
     // console.log(token);
-    const baseURL = process.env.REACT_APP_SERVER_URI;
-
-    axios
-      .create({
-        baseURL: `${baseURL}`,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .post('/mypage/frontCard', formData, {})
-      .then((res) => {
-        console.log(res);
-        dispatch(setPreview(null));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(createCardDB(formData));
   };
 
+  // const edit = false;
+  // if (edit) {
   return (
     <Grid
       width="960px"
@@ -85,11 +82,40 @@ const CardFrontWrite = (id) => {
         </TextDiv>
       </Div>
       <IconDiv>
-        <SettingsIcon fontSize="small" />
+        <SettingsIcon fontSize="small" cursor="pointer" />
       </IconDiv>
       <Btn onClick={fileUploadHandler}>설정완료</Btn>
     </Grid>
   );
+  // }
+  // return (
+  //   <Grid
+  //     width="960px"
+  //     height="250px"
+  //     borderRadius="16px"
+  //     border="1px solid #dcdcdc"
+  //     bgcolor="background.paper"
+  //     margin="25px auto"
+  //   >
+  //     <Div>
+  //       <Grid width="150px" margin="20px">
+  //         <Img src={'http://via.placeholder.com/400x300'} />
+  //       </Grid>
+  //       <TextDiv>
+  //         <Text>이아롱</Text>
+  //       </TextDiv>
+  //     </Div>
+  //     <IconDiv
+  //       onclick={() => {
+  //         edit = true;
+  //       }}
+  //       cursor="pointer"
+  //     >
+  //       <SettingsIcon fontSize="small" />
+  //     </IconDiv>
+  //     <Btn onClick={fileUploadHandler}>설정완료</Btn>
+  //   </Grid>
+  // );
 };
 
 export default CardFrontWrite;

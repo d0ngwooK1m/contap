@@ -38,9 +38,10 @@ export default handleActions(
       }),
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const { id } = action.payload;
-        draft.byId[id] = action.payload;
-        draft.allIds.unshift(id);
+        const { userId } = action.payload;
+        console.log(action.payload);
+        draft.byId[userId] = action.payload;
+        draft.allIds.unshift(userId);
       }),
     [SET_PREVIEW]: (state, action) =>
       produce(state, (draft) => {
