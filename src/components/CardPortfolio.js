@@ -1,45 +1,34 @@
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { useSelector } from 'react-redux';
-import { history } from '../features/configureStore';
 
-import { Grid } from '../elements';
+import { Grid, Text } from '../elements';
 
-const CardPortfolio = () => {
-  const cardList = useSelector((state) => state.cards.cardList);
+const CardPortfolio = ({ cardId }) => {
+  const cardList = useSelector((state) => state.cards.byId);
   console.log(cardList);
-  if (cardList.length === 0) {
-    return (
-      <Grid>
-        <Btn
-          onClick={() => {
-            history.push('/write');
-          }}
-        >
-          프로젝트 추가하기
-        </Btn>
-        <Grid
-          width="960px"
-          height="510px"
-          borderRadius="16px"
-          border="1px solid #dcdcdc"
-          bgcolor="background.paper"
-          margin="auto"
-        >
-          +
-        </Grid>
+  return (
+    <Grid>
+      <Grid
+        width="960px"
+        height="510px"
+        borderRadius="16px"
+        border="1px solid #dcdcdc"
+        bgcolor="background.paper"
+        margin="auto"
+      >
+        <Text>{cardList[cardId].title}</Text>
+        <Text>{cardList[cardId].content}</Text>
+        <Text>{cardList[cardId].tagsStr}</Text>
+        <Text>{cardList[cardId].link}</Text>
       </Grid>
-    );
-  }
-  return <Grid>리스트 있음</Grid>;
+    </Grid>
+  );
+};
+
+CardPortfolio.propTypes = {
+  cardId: PropTypes.number.isRequired,
 };
 
 export default CardPortfolio;
-
-const Btn = styled.button`
-  width: 80px;
-  // position: fixed;
-  // top: 16vh;
-  // left: 47vw;
-`;

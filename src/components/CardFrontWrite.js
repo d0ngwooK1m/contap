@@ -55,6 +55,13 @@ const CardFrontWrite = () => {
   };
 
   const fileUploadHandler = () => {
+    // const file = fileInput.current.files[0] ? fileInput.current.files[0] : null;
+    // // console.log('file', file);
+    // const formData = new FormData();
+    // file ? formData.append('profile', file) : null;
+    // formData.append('userName', '이아롱');
+    // formData.append('hashTagIds', hashTagIds);
+
     const file = fileInput.current.files[0];
     const formData = new FormData();
     formData.append('profile', file);

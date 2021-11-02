@@ -58,13 +58,17 @@ export default handleActions(
         console.log(cardList);
         draft.current = card;
         draft.cardList = cardList;
+        action.payload.card.cardDtoList.forEach((doc) => {
+          draft.byId[doc.cardId] = doc;
+          draft.allIds.push(doc.cardId);
+        });
       }),
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const { id } = action.payload;
-        // console.log(action.payload);
-        draft.byId[id] = action.payload;
-        draft.allIds.unshift(id);
+        const { cardId } = action.payload;
+        console.log(action.payload);
+        draft.byId[cardId] = action.payload;
+        draft.allIds.unshift(cardId);
       }),
   },
   initialState,

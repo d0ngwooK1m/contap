@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { loadMyCardDB } from '../features/cards/actions';
 
 import CardProfile from '../components/CardProfile';
-import CardPortfolio from '../components/CardPortfolio';
-import CardBackWrite from '../components/CardBackWrite';
+import CardAdd from '../components/CardAdd';
+// import CardBackWrite from '../components/CardBackWrite';
 
 import { Grid } from '../elements';
 
@@ -22,11 +22,11 @@ const Mypage = () => {
         <CardProfile />
       </Grid>
       <Grid>
-        <CardPortfolio />
+        <CardAdd />
       </Grid>
-      <Grid>
+      {/* <Grid>
         <CardBackWrite />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

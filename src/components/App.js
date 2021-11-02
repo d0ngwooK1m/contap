@@ -9,6 +9,8 @@ import Contap from '../pages/Contap';
 import Header from './Header';
 import Mypage from '../pages/Mypage';
 import Permit from './Permit';
+import CardEdit from '../pages/CardEdit';
+import CardBackWrite from './CardBackWrite';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/" exact component={CardList} />
+
       <Route path="/settings" exact>
         <Permit>
           <Settings />
@@ -32,6 +35,11 @@ function App() {
           <Mypage />
         </Permit>
       </Route>
+      <Route path="/settings" exact component={Settings} />
+      <Route path="/contap" exact component={Contap} />
+      <Route path="/mypage" exact component={Mypage} />
+      <Route path="/edit" exact component={CardEdit} />
+      <Route path="/write" exact component={CardBackWrite} />
     </div>
   );
 }
