@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
 import T from '../../api/tokenInstance';
-// import { getToken } from '../../utils/auth';
+
+import { getToken } from '../../utils/auth';
+import { history } from '../configureStore';
 // import { apis } from '../../api/api';
-/* eslint-disable */
+
 import {
   LOAD_CARD,
   LOAD_CURRENT_CARD,
@@ -76,9 +78,10 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
         'X-AUTH-TOKEN': `${getToken()}`,
       },
     });
-    console.log('작성값 확인===>', res);
-    // dispatch(setPreview(null));
+    console.log('앞면카드 response 확인===>', res);
+    dispatch(setPreview(null));
     dispatch(editCardProfile(res.data));
+    history.push('/mypage');
   } catch (err) {
     console.log(err);
   }
@@ -88,7 +91,7 @@ export const loadMyCardDB = () => async (dispatch) => {
   try {
     const res = await T.GET('/mypage/myinfo');
     // const res = await apis.getCardFront();
-    console.log(res.data);
+    console.log('내카드조회 response 확인===>', res.data);
 
     // const { data } = res;
     // dispatch(loadCard(res.data.users));
@@ -104,7 +107,7 @@ export const createCardDB = (content) => async (dispatch) => {
     // const token = localStorage.getItem('token');
     // console.log(token);
     const res = await T.POST('/mypage/backCard', content);
-    console.log('작성값 확인===>', res);
+    console.log('뒷면카드 response 확인===>', res);
 
     dispatch(createCard(res.data));
   } catch (err) {

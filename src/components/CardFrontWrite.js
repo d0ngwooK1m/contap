@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setPreview, createCardDB } from '../features/cards/actions';
+import { setPreview, editCardProfileDB } from '../features/cards/actions';
 
 import { Grid, Button, Text, Input, Image } from '../elements';
 
@@ -13,59 +13,75 @@ const CardFrontWrite = () => {
   // const front = useSelector((state) => state.cards.byId);
   // console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
-  console.log(userInfo);
-  console.log(userInfo.userName);
+  // console.log(userInfo);
+  const [userName, setUserName] = React.useState('');
+  // const [userName, setUserName] = React.useState({
+  //   userName: userInfo.userName,
+  // });
 
-  const hashTagIds = [
-    {
-      hashTagIds: 1,
-    },
-  ];
+  // console.log(userInfo.userName);
 
+  // const hashTagIds = [
+  //   {
+  //     hashTagIds: 1,
+  //   },
+  // ];
 
-  // 파일 미리보기
+  // 파일 미리보기 (오류 해결 코드)
+  // const filePreview = () => {
+  //   const reader = new FileReader();
+  //   const file = fileInput.current.files[0];
+  //   console.log(file);
+  //   if (file === undefined) {
+  //     dispatch(setPreview(null));
+  //   } else {
+  //     reader.readAsDataURL(file);
+  //     reader.onloadend = () => {
+  //       //  console.log(reader.result);
+  //       dispatch(setPreview(reader.result));
+  //     };
+  //   }
+  // };
+
   const filePreview = () => {
     const reader = new FileReader();
 
     const file = fileInput.current.files[0];
-    console.log(file);
-    if (file === undefined) {
-      dispatch(setPreview(null));
-    } else {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        //  console.log(reader.result);
-        dispatch(setPreview(reader.result));
-      };
-    }
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      //  console.log(reader.result);
+      dispatch(setPreview(reader.result));
+    };
   };
 
   const fileUploadHandler = () => {
-    const file = fileInput.current.files[0] ? fileInput.current.files[0] : null;
-    // console.log('file', file);
+    // const file = fileInput.current.files[0] ? fileInput.current.files[0] : null;
+    // // console.log('file', file);
+    // const formData = new FormData();
+    // file ? formData.append('profile', file) : null;
+    // formData.append('userName', '이아롱');
+    // formData.append('hashTagIds', hashTagIds);
+
+    const file = fileInput.current.files[0];
     const formData = new FormData();
-    file ? formData.append('profile', file) : null;
-    formData.append('userName', '이아롱');
-    formData.append('hashTagIds', hashTagIds);
+    formData.append('profile', file);
+    formData.append('userName', userName);
+    //formData.append('hashTagIds', hashTagIds);
     formData.append('hashTagsStr', '@spring@');
 
     console.log('formData', formData);
 
     for (var key of formData.keys()) {
-
       console.log(key);
-    
     }
-    
+
     for (var value of formData.values()) {
-    
       console.log(value);
-    
     }
 
     // const token = localStorage.getItem("token");
     // console.log(token);
-    dispatch(createCardDB(formData));
+    dispatch(editCardProfileDB(formData));
   };
 
   return (
@@ -88,15 +104,17 @@ const CardFrontWrite = () => {
             id="fileUpload"
             onChange={filePreview}
           />
-          <input
-            type="file"
-            file={newFile}
-            id="fileUpload"
-            onChange={handle}
-          />
+          <input type="file" file={newFile} id="fileUpload" onChange={handle} />
         </Grid>
         <TextDiv>
-          <Input value={userInfo.userName} is_submit />
+          <Input
+            place={userInfo.userName}
+            // value={userName.userName}
+            is_submit
+            _onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
         </TextDiv>
       </Div>
       <Btn onClick={fileUploadHandler}>작성완료</Btn>
