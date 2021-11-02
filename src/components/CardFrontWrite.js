@@ -18,53 +18,15 @@ const CardFrontWrite = () => {
 
   const hashTagIds = [
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      id: 1,
-      name: '지오캐싱',
-      type: 1,
-    }
-
-  ]
-
- 
-  const fileInput = React.useRef('');
-  console.log(fileInput);
-  const [newFile, setNewFile] = React.useState('')
-
-  console.log(newFile)
-
-  const handle = (e) => {
-    setNewFile(e.target.file)
-  }
-=======
       hashTagIds: 1,
     },
   ];
->>>>>>> master
-=======
-
-      hashTagIds: 1,
-    },
-  ];
->>>>>>> master
 
 
   // 파일 미리보기
   const filePreview = () => {
     const reader = new FileReader();
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const file = fileInput.current.files[0]
-    file ? reader.readAsDataURL(file) : null;
-    reader.onloadend = () => {
-      //  console.log(reader.result);
-      dispatch(setPreview(reader.result));
-    };
-=======
-=======
 
->>>>>>> master
     const file = fileInput.current.files[0];
     console.log(file);
     if (file === undefined) {
@@ -76,10 +38,6 @@ const CardFrontWrite = () => {
         dispatch(setPreview(reader.result));
       };
     }
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
   };
 
   const fileUploadHandler = () => {
@@ -88,17 +46,8 @@ const CardFrontWrite = () => {
     const formData = new FormData();
     file ? formData.append('profile', file) : null;
     formData.append('userName', '이아롱');
-<<<<<<< HEAD
-<<<<<<< HEAD
-    formData.append('hashTags', JSON.stringify(hashTags));
-=======
     formData.append('hashTagIds', hashTagIds);
     formData.append('hashTagsStr', '@spring@');
->>>>>>> master
-=======
-    formData.append('hashTagIds', hashTagIds);
-    formData.append('hashTagsStr', '@spring@');
->>>>>>> master
 
     console.log('formData', formData);
 
