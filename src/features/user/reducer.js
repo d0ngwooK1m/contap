@@ -1,32 +1,26 @@
 /* eslint-disable no-param-reassign */
 import { produce } from 'immer';
-import { LOG_IN, LOG_OUT } from './types';
+import { LOG_IN, LOG_OUT, AUTHORIZED } from './types';
 
 const initialState = {
   email: '',
-  nickname: '',
+  userName: '',
   isAuthorized: false,
 };
 
 export default function userReducer(state = initialState, action) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case LOG_IN: {
-        console.log(action.payload);
+      case LOG_IN:
+      case AUTHORIZED: {
         draft.email = action.payload.email;
-        draft.nickname = action.payload.nickName;
-        // draft.isAuthorized = true;
+        draft.nickName = action.payload.nickName;
+        draft.isAuthorized = true;
         break;
       }
-      // case AUTHORIZED: {
-      //   draft.email = action.payload.email;
-      //   draft.nickName = action.payload.nickName;
-      //   draft.isAuthorized = true;
-      //   break;
-      // }
       case LOG_OUT: {
         draft.email = '';
-        draft.nickName = '';
+        draft.userName = '';
         draft.isAuthorized = false;
         break;
       }

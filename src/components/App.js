@@ -8,6 +8,7 @@ import Settings from '../pages/Settings';
 import Contap from '../pages/Contap';
 import Header from './Header';
 import Mypage from '../pages/Mypage';
+import Permit from './Permit';
 
 function App() {
   return (
@@ -16,9 +17,21 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/" exact component={CardList} />
-      <Route path="/settings" exact component={Settings} />
-      <Route path="/contap" exact component={Contap} />
-      <Route path="/mypage" exact component={Mypage} />
+      <Route path="/settings" exact>
+        <Permit>
+          <Settings />
+        </Permit>
+      </Route>
+      <Route path="/contap" exact>
+        <Permit>
+          <Contap />
+        </Permit>
+      </Route>
+      <Route path="/mypage" exact>
+        <Permit>
+          <Mypage />
+        </Permit>
+      </Route>
     </div>
   );
 }
