@@ -7,12 +7,17 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
+import { useSelector } from 'react-redux';
+// import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
-import { Grid, Image } from '../elements';
+import { Grid, Image, Button } from '../elements';
+import userAuthCheck from '../hooks/userAuthCheck';
 
 const Header = () => {
   // const classes = useStyles();
+  userAuthCheck();
+  const isUserLogin = useSelector((state) => state.user.email);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -34,62 +39,74 @@ const Header = () => {
       >
         <div style={{ cursor: 'pointer' }}>Theme</div>
       </Grid>
-      <MenuWrapper>
-        <Grid
-          width="fit-content"
-          _onClick={() => {
-            history.push('/contap');
-          }}
-        >
-          <div style={{ cursor: 'pointer' }}>🤝</div>
-        </Grid>
-        <div>
-          <IconButton
-            aria-label="delete"
-            size="small"
-            sx={{ padding: '0px' }}
-            onClick={handleClick}
-          >
-            <SettingsIcon fontSize="small" />
-          </IconButton>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
+      {isUserLogin !== '' ? (
+        <MenuWrapper>
+          <Grid
+            width="fit-content"
+            _onClick={() => {
+              history.push('/contap');
             }}
           >
-            <MenuItem
-              onClick={() => {
-                history.push('/settings');
-                handleClose();
+            <div style={{ cursor: 'pointer' }}>🤝</div>
+          </Grid>
+          <div>
+            <IconButton
+              aria-label="delete"
+              size="small"
+              sx={{ padding: '0px' }}
+              onClick={handleClick}
+            >
+              <SettingsIcon fontSize="small" />
+            </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
               }}
             >
-              설정
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                const token = getToken();
-                removeToken(token);
-                logout();
-                handleClose();
-              }}
-            >
-              로그아웃
-            </MenuItem>
-          </Menu>
-        </div>
-        <Grid
-          width="fit-content"
+              <MenuItem
+                onClick={() => {
+                  history.push('/settings');
+                  handleClose();
+                }}
+              >
+                설정
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  const token = getToken();
+                  removeToken(token);
+                  logout();
+                  handleClose();
+                  window.location.href = '/';
+                }}
+              >
+                로그아웃
+              </MenuItem>
+            </Menu>
+          </div>
+          <Grid
+            width="fit-content"
+            _onClick={() => {
+              history.push('/mypage');
+            }}
+          >
+            <Image shape="circle" />
+          </Grid>
+        </MenuWrapper>
+      ) : (
+        <Button
+          width="100px"
           _onClick={() => {
-            history.push('/mypage');
+            history.push('/login');
           }}
         >
-          <Image shape="circle" />
-        </Grid>
-      </MenuWrapper>
+          Login
+        </Button>
+      )}
     </HeaderWrapper>
   );
 };
