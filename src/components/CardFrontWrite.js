@@ -18,16 +18,16 @@ const CardFrontWrite = () => {
 
   const hashTagIds = [
     {
+
       hashTagIds: 1,
     },
   ];
 
-  const fileInput = React.useRef();
-  // console.log(fileInput);
 
   // 파일 미리보기
   const filePreview = () => {
     const reader = new FileReader();
+
     const file = fileInput.current.files[0];
     console.log(file);
     if (file === undefined) {
@@ -42,15 +42,27 @@ const CardFrontWrite = () => {
   };
 
   const fileUploadHandler = () => {
-    const file = fileInput.current.files[0];
+    const file = fileInput.current.files[0] ? fileInput.current.files[0] : null;
     // console.log('file', file);
     const formData = new FormData();
-    formData.append('profile', file);
+    file ? formData.append('profile', file) : null;
     formData.append('userName', '이아롱');
     formData.append('hashTagIds', hashTagIds);
     formData.append('hashTagsStr', '@spring@');
 
     console.log('formData', formData);
+
+    for (var key of formData.keys()) {
+
+      console.log(key);
+    
+    }
+    
+    for (var value of formData.values()) {
+    
+      console.log(value);
+    
+    }
 
     // const token = localStorage.getItem("token");
     // console.log(token);
@@ -76,6 +88,12 @@ const CardFrontWrite = () => {
             ref={fileInput}
             id="fileUpload"
             onChange={filePreview}
+          />
+          <input
+            type="file"
+            file={newFile}
+            id="fileUpload"
+            onChange={handle}
           />
         </Grid>
         <TextDiv>

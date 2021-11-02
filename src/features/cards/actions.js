@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
 import T from '../../api/tokenInstance';
-import { getToken } from '../../utils/auth';
+// import { getToken } from '../../utils/auth';
 // import { apis } from '../../api/api';
+/* eslint-disable */
 import {
   LOAD_CARD,
   LOAD_CURRENT_CARD,
@@ -51,6 +52,7 @@ export const loadCardFrontDB = () => async (dispatch) => {
 
 export const loadCurrentCardDB = (userId) => async (dispatch) => {
   try {
+    console.log(userId);
     const res = await T.GET(`/main/${userId}`);
     // const res = await apis.getCardBack(userId);
     console.log('뒷면 값 확인===>', res.data);
@@ -62,8 +64,10 @@ export const loadCurrentCardDB = (userId) => async (dispatch) => {
   }
 };
 
+
 export const editCardProfileDB = (formData) => async (dispatch) => {
   try {
+    console.log('Request ===>', formData);
     // const res = await apis.createCard(contents);
     // const token = localStorage.getItem('token');
     // console.log(token);

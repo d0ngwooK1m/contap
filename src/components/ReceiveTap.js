@@ -17,7 +17,12 @@ const ReceiveTap = ({ select }) => {
     <div>
       {conTap.allIds.map((ReceiveTapUserId) => {
         return (
-          <CardFront key={ReceiveTapUserId} userId={ReceiveTapUserId} contap />
+          <CardFront
+            key={ReceiveTapUserId}
+            userId={ReceiveTapUserId}
+            select={select}
+            contap
+          />
         );
       })}
     </div>

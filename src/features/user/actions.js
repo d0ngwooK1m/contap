@@ -83,6 +83,7 @@ const loginToServer = (loginInfo) => async (dispatch) => {
   try {
     const res = await axios.post(`${baseURL}/user/login`, loginInfo);
     const { data } = res;
+    console.log(data);
 
     if (data.result === 'fail') {
       console.log(data);
