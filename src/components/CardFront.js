@@ -35,6 +35,7 @@ const CardFront = ({ userId, contap, select }) => {
 
   console.log(userId);
   const showCardBackModal = () => {
+
     if (!showModal) {
       dispatch(loadCurrentCardDB(userId));
     }
