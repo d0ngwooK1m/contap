@@ -1,14 +1,28 @@
 import React from 'react';
+
+import { useDispatch } from 'react-redux';
+import { loadMyCardDB } from '../features/cards/actions';
+
+import CardProfile from '../components/CardProfile';
+import CardPortfolio from '../components/CardPortfolio';
 import CardBackWrite from '../components/CardBackWrite';
-import CardFrontWrite from '../components/CardFrontWrite';
 
 import { Grid } from '../elements';
 
 const Mypage = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(loadMyCardDB());
+  }, []);
+
   return (
     <Grid>
       <Grid>
-        <CardFrontWrite />
+        <CardProfile />
+      </Grid>
+      <Grid>
+        <CardPortfolio />
       </Grid>
       <Grid>
         <CardBackWrite />
