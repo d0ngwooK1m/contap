@@ -8,6 +8,7 @@ import { Grid, Input } from '../elements';
 
 const CardBackWrite = () => {
   const dispatch = useDispatch();
+
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
   const [desc, setDesc] = React.useState('');

@@ -7,8 +7,8 @@ import tokenAxios from '../../api/tokenInstance';
 import { history } from '../configureStore';
 
 // 나중에 백엔드 URL로 바꿀 것
-// const baseURL = process.env.REACT_APP_SERVER_URI;
-const baseURL = process.env.REACT_APP_TEST_SERVER_URI;
+const baseURL = process.env.REACT_APP_SERVER_URI;
+// const baseURL = process.env.REACT_APP_TEST_SERVER_URI;
 console.log(baseURL);
 
 // 회원 탈퇴 미정

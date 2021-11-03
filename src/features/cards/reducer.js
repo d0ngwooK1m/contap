@@ -52,13 +52,15 @@ export default handleActions(
       }),
     [LOAD_MY_CARD]: (state, action) =>
       produce(state, (draft) => {
+        draft.byId = {};
+        draft.allIds = [];
         console.log(action.payload);
         const { card } = action.payload;
         const cardList = action.payload.card.cardDtoList;
         console.log(cardList);
         draft.current = card;
         draft.cardList = cardList;
-        action.payload.card.cardDtoList.forEach((doc) => {
+        cardList.forEach((doc) => {
           draft.byId[doc.cardId] = doc;
           draft.allIds.push(doc.cardId);
         });
@@ -69,6 +71,19 @@ export default handleActions(
         console.log(action.payload);
         draft.byId[cardId] = action.payload;
         draft.allIds.unshift(cardId);
+      }),
+    [UPDATE_CARD]: (state, action) =>
+      produce(state, (draft) => {
+        draft.current = action.payload;
+        console.log(action.payload);
+        draft.byId[action.payload.id] = action.payload;
+      }),
+    [DELETE_CARD]: (state, action) =>
+      produce(state, (draft) => {
+        delete draft.byId[action.payload];
+        draft.allIds = draft.allIds.filter(
+          (id) => id !== Number(action.payload),
+        );
       }),
   },
   initialState,

@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,7 +14,16 @@ const CardFrontWrite = () => {
   // console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
   // console.log(userInfo);
-  const [userName, setUserName] = React.useState('');
+  const [userName, setUserName] = React.useState(userInfo.userName);
+  const [category, setCategory] = React.useState('0');
+
+  const handleRadioChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  // const onChange = useCallback((e) => {
+  //   setUserName(e.target.value);
+  // }, []);
   // const [userName, setUserName] = React.useState({
   //   userName: userInfo.userName,
   // });
@@ -42,6 +51,7 @@ const CardFrontWrite = () => {
   //     };
   //   }
   // };
+  const fileInput = React.useRef();
 
   const filePreview = () => {
     const reader = new FileReader();
@@ -68,16 +78,17 @@ const CardFrontWrite = () => {
     formData.append('userName', userName);
     //formData.append('hashTagIds', hashTagIds);
     formData.append('hashTagsStr', '@spring@');
+    formData.append('field', category);
 
     console.log('formData', formData);
 
-    for (var key of formData.keys()) {
-      console.log(key);
-    }
+    // for (var key of formData.keys()) {
+    //   console.log(key);
+    // }
 
-    for (var value of formData.values()) {
-      console.log(value);
-    }
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
 
     // const token = localStorage.getItem("token");
     // console.log(token);
@@ -104,18 +115,53 @@ const CardFrontWrite = () => {
             id="fileUpload"
             onChange={filePreview}
           />
-          <input type="file" file={newFile} id="fileUpload" onChange={handle} />
+          {/* <input type="file" file={newFile} id="fileUpload" onChange={handle} /> */}
         </Grid>
         <TextDiv>
           <Input
-            place={userInfo.userName}
-            // value={userName.userName}
+            // place={userInfo.userName}
+            value={userName}
             is_submit
             _onChange={(e) => {
               setUserName(e.target.value);
             }}
           />
         </TextDiv>
+        <Category>
+          <label htmlFor="category">
+            <input
+              type="radio"
+              id="0"
+              name="0"
+              value="0"
+              checked={category === '0'}
+              onChange={handleRadioChange}
+            />
+            백엔드
+          </label>
+          <label htmlFor="category">
+            <input
+              type="radio"
+              id="1"
+              name="1"
+              value="1"
+              checked={category === '1'}
+              onChange={handleRadioChange}
+            />
+            프론트엔드
+          </label>
+          <label htmlFor="category">
+            <input
+              type="radio"
+              id="2"
+              name="2"
+              value="2"
+              checked={category === '2'}
+              onChange={handleRadioChange}
+            />
+            디자인
+          </label>
+        </Category>
       </Div>
       <Btn onClick={fileUploadHandler}>작성완료</Btn>
     </Grid>
@@ -142,6 +188,12 @@ const Img = styled.img`
 const TextDiv = styled.div`
   position: absolute;
   top: 15vh;
+  left: 43vw;
+`;
+
+const Category = styled.div`
+  position: absolute;
+  top: 23vh;
   left: 43vw;
 `;
 

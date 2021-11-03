@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getToken } from '../utils/auth';
 
-// const baseURL = process.env.REACT_APP_SERVER_URI;
-const baseURL = process.env.REACT_APP_TEST_SERVER_URI;
+const baseURL = process.env.REACT_APP_SERVER_URI;
+// const baseURL = process.env.REACT_APP_TEST_SERVER_URI;
 console.log(baseURL);
 
 const instance = axios.create({ baseURL });
