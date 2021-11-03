@@ -35,9 +35,6 @@ function App() {
           <Mypage />
         </Permit>
       </Route>
-      <Route path="/settings" exact component={Settings} />
-      <Route path="/contap" exact component={Contap} />
-      <Route path="/mypage" exact component={Mypage} />
       <Route path="/edit" exact component={CardEdit} />
       <Route path="/write" exact component={CardBackWrite} />
     </div>

@@ -13,6 +13,8 @@ import {
   SET_PREVIEW,
   LOAD_MY_CARD,
   CREATE_CARD,
+  UPDATE_CARD,
+  DELETE_CARD,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
@@ -31,6 +33,12 @@ export const loadMyCard = createAction(LOAD_MY_CARD, (card) => ({
 }));
 export const createCard = createAction(CREATE_CARD, (card) => ({
   card,
+}));
+export const updateCard = createAction(UPDATE_CARD, (card) => ({
+  card,
+}));
+export const deleteCard = createAction(DELETE_CARD, (cardId) => ({
+  cardId,
 }));
 
 // 미들웨어
@@ -68,10 +76,7 @@ export const loadCurrentCardDB = (userId) => async (dispatch) => {
 
 export const editCardProfileDB = (formData) => async (dispatch) => {
   try {
-    console.log('Request ===>', formData);
-    // const res = await apis.createCard(contents);
-    // const token = localStorage.getItem('token');
-    // console.log(token);
+    // console.log('Request ===>', formData);
     const res = await axios.post(`${baseURL}/mypage/frontCard`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -107,9 +112,34 @@ export const createCardDB = (content) => async (dispatch) => {
     // const token = localStorage.getItem('token');
     // console.log(token);
     const res = await T.POST('/mypage/backCard', content);
-    console.log('뒷면카드 response 확인===>', res);
+    console.log('뒷면카드추가 response 확인===>', res);
 
     dispatch(createCard(res.data));
+    history.push('/mypage');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
+  try {
+    const res = await T.POST(`/mypage/backCard/${cardId}`, updateContent);
+    console.log('뒷면카드수정 response 확인===>', res);
+
+    dispatch(updateCard(res.data));
+    window.location.replace('/mypage');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteCardDB = (cardId) => async (dispatch) => {
+  try {
+    const res = await T.DELETE('/mypage/backCard', cardId);
+    console.log('뒷면카드수정 response 확인===>', res);
+
+    dispatch(deleteCard(cardId));
+    window.location.replace('/mypage');
   } catch (err) {
     console.log(err);
   }

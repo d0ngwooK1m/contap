@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -10,6 +11,8 @@ import CardPortfolio from './CardPortfolio';
 const CardAdd = () => {
   const cardListCheck = useSelector((state) => state.cards.cardList);
   const cardList = useSelector((state) => state.cards);
+  // const [click, setClick] = React.state('');
+
   console.log(cardList);
   if (cardListCheck.length === 0) {
     return (
@@ -33,25 +36,26 @@ const CardAdd = () => {
         </Grid>
       </Grid>
     );
+  } else {
+    return (
+      <Grid>
+        <Btn
+          onClick={() => {
+            history.push('/write');
+          }}
+        >
+          프로젝트 추가하기
+        </Btn>
+        {cardList.allIds.map((cardId) => {
+          return (
+            <Grid key={cardId}>
+              <CardPortfolio cardId={cardId} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    );
   }
-  return (
-    <Grid>
-      <Btn
-        onClick={() => {
-          history.push('/write');
-        }}
-      >
-        프로젝트 추가하기
-      </Btn>
-      {cardList.allIds.map((cardId) => {
-        return (
-          <Grid key={cardId}>
-            <CardPortfolio cardId={cardId} />
-          </Grid>
-        );
-      })}
-    </Grid>
-  );
 };
 
 export default CardAdd;
