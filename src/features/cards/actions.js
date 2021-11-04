@@ -8,6 +8,7 @@ import { history } from '../configureStore';
 
 import {
   LOAD_CARD,
+  SEARCH_CARD,
   LOAD_CURRENT_CARD,
   EDIT_CARD_PROFILE,
   SET_PREVIEW,
@@ -15,12 +16,23 @@ import {
   CREATE_CARD,
   UPDATE_CARD,
   DELETE_CARD,
+  SEARCH_ARR,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
 export const loadCard = createAction(LOAD_CARD, (cardList) => ({
   cardList,
 }));
+
+export const searchCard = createAction(SEARCH_CARD, (searchInfo, cardList) => ({
+  searchInfo,
+  cardList,
+}));
+
+export const searchArrList = createAction(SEARCH_ARR, (searchList) => ({
+  searchList,
+}));
+
 export const loadCurrentCard = createAction(LOAD_CURRENT_CARD, (data) => ({
   data,
 }));
@@ -58,6 +70,23 @@ export const loadCardFrontDB = () => async (dispatch) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const searchInfoDB = (searchInfo) => async (dispatch) => {
+  console.log(searchInfo);
+  try {
+    const res = await axios.post(`${baseURL}/main/search`, searchInfo);
+    // const { resultData } = res;
+    // console.log(resultData);
+    console.log(res.data);
+    if (res.data === []) {
+      return null;
+    }
+    dispatch(searchCard(searchInfo, res.data));
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 };
 
 export const loadCurrentCardDB = (userId) => async (dispatch) => {

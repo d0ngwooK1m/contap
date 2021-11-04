@@ -1,6 +1,246 @@
 import React from 'react';
+// import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchInfoDB, searchArrList } from '../features/cards/actions';
+
+const searchData = ['지오캐싱', '종이접기', '피겨스케이팅'];
+
+// const baseURL = process.env.REACT_APP_SERVER_URI;
 
 const SearchBar = () => {
-  return <div />;
+  const dispatch = useDispatch();
+  const [data, setData] = React.useState('');
+  const searchArr = [];
+  const searchList = useSelector((state) => state.cards.searchArr);
+
+  React.useEffect(() => {
+    console.log(searchData);
+    searchData.filter((val) => {
+      console.log(val.indexOf(data));
+      if (val === data) {
+        return null;
+      }
+      if (val.indexOf(data) !== -1) {
+        searchArr.push(val);
+      }
+      // console.log(val);
+      // console.log(searchArr);
+
+      return searchArr;
+    });
+    console.log(searchArr);
+    if (searchArr !== []) {
+      dispatch(searchArrList(searchArr));
+    }
+  }, [data]);
+
+  const page = useSelector((state) => state.cards.searchInfo?.page);
+  const field = useSelector((state) => state.cards.searchInfo?.field);
+  const [fetching, setFetching] = React.useState(false);
+  const isSearching = useSelector((state) => state.cards.isSearching);
+
+  const fetchMoreData = () => {
+    setFetching(true);
+    let searchInfo;
+
+    console.log(page);
+    if (data === '') {
+      searchInfo = {
+        searchTags: [],
+        type: 0,
+        page: page + 1,
+        field,
+      };
+    } else {
+      searchInfo = {
+        searchTags: [data],
+        type: 0,
+        page: page + 1,
+        field,
+      };
+    }
+
+    console.log(searchInfo);
+
+    dispatch(searchInfoDB(searchInfo));
+
+    setFetching(false);
+  };
+
+  const handleScroll = () => {
+    console.log(isSearching);
+    const { scrollHeight } = document.documentElement;
+    const { scrollTop } = document.documentElement;
+    const { clientHeight } = document.documentElement;
+
+    if (!isSearching) {
+      return;
+    }
+
+    if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
+      console.log('test');
+      fetchMoreData();
+    }
+  };
+
+  React.useEffect(() => {
+    console.log(isSearching);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
+
+  const [tag, setTag] = React.useState(false);
+
+  const ArrayData = searchList.map((val) => {
+    return (
+      <li>
+        <button
+          type="button"
+          onClick={() => {
+            setData(val);
+            setTag(true);
+          }}
+        >
+          <span>{val}</span>
+        </button>
+      </li>
+    );
+  });
+
+  console.log(ArrayData);
+
+  return (
+    <div>
+      {!tag ? (
+        <input
+          onChange={(e) => {
+            console.log(e.target.value);
+            setData(e.target.value);
+          }}
+        />
+      ) : (
+        <input value={data} />
+      )}
+      <button
+        type="button"
+        onClick={() => {
+          const searchInfo = {
+            searchTags: [data],
+            type: 0,
+            page: 1,
+            field: field === undefined ? 3 : field,
+          };
+          console.log(searchInfo);
+          dispatch(searchInfoDB(searchInfo));
+        }}
+      >
+        검색
+      </button>
+      {data !== '' && tag === false && <ul>{ArrayData}</ul>}
+      <br />
+      <div>
+        <button
+          type="button"
+          onClick={() => {
+            let searchInfo;
+            if (data === '') {
+              searchInfo = {
+                searchTags: [],
+                type: 0,
+                page: 1,
+                field: 0,
+              };
+            } else {
+              searchInfo = {
+                searchTags: [data],
+                type: 0,
+                page: 1,
+                field: 0,
+              };
+            }
+            console.log(searchInfo);
+            dispatch(searchInfoDB(searchInfo));
+          }}
+        >
+          백엔드
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            let searchInfo;
+            if (data === '') {
+              searchInfo = {
+                searchTags: [],
+                type: 0,
+                page: 1,
+                field: 1,
+              };
+            } else {
+              searchInfo = {
+                searchTags: [data],
+                type: 0,
+                page: 1,
+                field: 1,
+              };
+            }
+            console.log(searchInfo);
+            dispatch(searchInfoDB(searchInfo));
+          }}
+        >
+          프론트엔드
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            let searchInfo;
+            if (data === '') {
+              searchInfo = {
+                searchTags: [],
+                type: 0,
+                page: 1,
+                field: 2,
+              };
+            } else {
+              searchInfo = {
+                searchTags: [data],
+                type: 0,
+                page: 1,
+                field: 2,
+              };
+            }
+            console.log(searchInfo);
+            dispatch(searchInfoDB(searchInfo));
+          }}
+        >
+          디자이너
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            let searchInfo;
+            if (data === '') {
+              searchInfo = {
+                searchTags: [],
+                type: 0,
+                page: 1,
+                field: 3,
+              };
+            } else {
+              searchInfo = {
+                searchTags: [data],
+                type: 0,
+                page: 1,
+                field: 3,
+              };
+            }
+            console.log(searchInfo);
+            dispatch(searchInfoDB(searchInfo));
+          }}
+        >
+          전체
+        </button>
+      </div>
+    </div>
+  );
 };
 export default SearchBar;

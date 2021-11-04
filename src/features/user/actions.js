@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { WITHDRAWAL, LOG_IN, LOG_OUT, AUTHORIZED } from './types';
+import { SettingsInputAntennaSharp } from '@mui/icons-material';
+import { WITHDRAWAL, LOG_IN, LOG_OUT, AUTHORIZED, EMAIL_AUTH } from './types';
 import { saveToken, removeToken } from '../../utils/auth';
 import tokenAxios from '../../api/tokenInstance';
 import { history } from '../configureStore';
@@ -15,6 +16,10 @@ console.log(baseURL);
 const withdrawal = (withdrawalInfo) => ({
   type: WITHDRAWAL,
   withdrawalInfo,
+});
+
+const emailAuth = () => ({
+  type: EMAIL_AUTH,
 });
 
 const login = (payload) => ({
@@ -65,6 +70,34 @@ const authorize = (email, userName) => ({
 //     throw new Error(error.message);
 //   }
 // };
+
+const sendEmailAuth = (emailInfo) => async () => {
+  try {
+    console.log(emailInfo);
+    const res = await axios.post(`${baseURL}/email/send`, emailInfo);
+    const { data } = res;
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+const sendAuthInfo = (authInfo) => async (dispatch) => {
+  try {
+    console.log(authInfo);
+    const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
+    const { data } = res;
+    console.log(data);
+    dispatch(emailAuth());
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
 
 const signupToServer = (signupInfo) => async () => {
   try {
@@ -207,7 +240,10 @@ const withdrawalToServer = (passwordInfo) => async (dispatch) => {
 };
 
 export {
+  login,
   logout,
+  sendEmailAuth,
+  sendAuthInfo,
   signupToServer,
   loginToServer,
   passwordChangeToServer,

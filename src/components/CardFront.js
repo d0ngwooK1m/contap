@@ -32,7 +32,6 @@ const CardFront = ({ userId, contap, select, grab }) => {
     ?.split('_')[1]
     .split('@')
     .slice(1, 4);
-  // console.log(stackHashTags, interestHashTags);
 
   const showCardBackModal = async () => {
     console.log('showCardBackModal');

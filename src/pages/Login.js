@@ -77,6 +77,14 @@ const Login = () => {
       <span onClick={() => {
         history.push('/signup');
       }}>혹시 회원이 아니신가요?</span>
+      <button
+        onClick={() => {
+          console.log(process.env.REACT_APP_KAKAO_PATH);
+          window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
+        }}
+      >
+        카카오 로그인
+      </button>
     </div>
   );
 
