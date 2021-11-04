@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ const CardFrontWrite = () => {
   // const front = useSelector((state) => state.cards.byId);
   // console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
-  // console.log(userInfo);
+  console.log(userInfo);
   const [userName, setUserName] = React.useState(userInfo.userName);
   const [category, setCategory] = React.useState('0');
 
@@ -21,14 +21,11 @@ const CardFrontWrite = () => {
     setCategory(e.target.value);
   };
 
-  // const onChange = useCallback((e) => {
-  //   setUserName(e.target.value);
+  // React.useEffect(() => {
+  //   dispatch(setPreview(userInfo.profile));
   // }, []);
-  // const [userName, setUserName] = React.useState({
-  //   userName: userInfo.userName,
-  // });
 
-  // console.log(userInfo.userName);
+  // const nickNameCheck = () => {};
 
   // const hashTagIds = [
   //   {
@@ -53,7 +50,10 @@ const CardFrontWrite = () => {
   // };
   const fileInput = React.useRef();
 
-  const filePreview = () => {
+  const [fileData, setFileData] = React.useState(null);
+  console.log(fileData);
+
+  const filePreview = (e) => {
     const reader = new FileReader();
 
     const file = fileInput.current.files[0];
@@ -62,36 +62,30 @@ const CardFrontWrite = () => {
       //  console.log(reader.result);
       dispatch(setPreview(reader.result));
     };
+
+    setFileData(e.target.files[0]);
+    // e.target.value = '';
   };
 
   const fileUploadHandler = () => {
-    // const file = fileInput.current.files[0] ? fileInput.current.files[0] : null;
-    // // console.log('file', file);
-    // const formData = new FormData();
-    // file ? formData.append('profile', file) : null;
-    // formData.append('userName', '이아롱');
-    // formData.append('hashTagIds', hashTagIds);
-
     const file = fileInput.current.files[0];
+    console.log(file);
     const formData = new FormData();
-    formData.append('profile', file);
+    // if (file === undefined) {
+    //   formData.append('profile', userInfo.profile);
+    // } else {
+    //   formData.append('profile', file);
+    // }
     formData.append('userName', userName);
     //formData.append('hashTagIds', hashTagIds);
     formData.append('hashTagsStr', '@spring@');
     formData.append('field', category);
+    if (fileData) {
+      formData.append('profile', fileData);
+    }
 
     console.log('formData', formData);
 
-    // for (var key of formData.keys()) {
-    //   console.log(key);
-    // }
-
-    // for (var value of formData.values()) {
-    //   console.log(value);
-    // }
-
-    // const token = localStorage.getItem("token");
-    // console.log(token);
     dispatch(editCardProfileDB(formData));
   };
 
@@ -163,7 +157,8 @@ const CardFrontWrite = () => {
           </label>
         </Category>
       </Div>
-      <Btn onClick={fileUploadHandler}>작성완료</Btn>
+      <AddBtn onClick={fileUploadHandler}>작성완료</AddBtn>
+      {/* <Btn onClick={nickNameCheck}>중복체크</Btn> */}
     </Grid>
   );
 };
@@ -197,9 +192,16 @@ const Category = styled.div`
   left: 43vw;
 `;
 
-const Btn = styled.button`
+const AddBtn = styled.button`
   width: 80px;
   position: absolute;
   top: 16vh;
   left: 70vw;
 `;
+
+// const Btn = styled.button`
+//   width: 80px;
+//   position: absolute;
+//   top: 16vh;
+//   left: 58vw;
+// `;
