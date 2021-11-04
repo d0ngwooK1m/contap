@@ -25,6 +25,17 @@ const CardPortfolio = ({ cardId }) => {
     link,
   };
 
+  const [display, setDisplay] = React.useState({ display: 'none' });
+  const showButton = (e) => {
+    e.preventDefault();
+    setDisplay({ dispaly: 'block' });
+  };
+
+  const hideButton = (e) => {
+    e.preventDefault();
+    setDisplay({ display: 'none' });
+  };
+
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
 
@@ -40,7 +51,7 @@ const CardPortfolio = ({ cardId }) => {
   if (click) {
     return (
       <Grid>
-        <Btn onClick={edit}>수정완료</Btn>
+        <Btn onClick={edit}>작성완료</Btn>
         <Grid
           width="960px"
           height="510px"
@@ -83,8 +94,8 @@ const CardPortfolio = ({ cardId }) => {
   }
   return (
     <Grid>
-      <EditIcon onClick={editCardBack} />
-      <DeleteOutlineIcon onClick={deleteCardBack} />
+      <EditIcon style={display} onClick={editCardBack} />
+      <DeleteOutlineIcon style={display} onClick={deleteCardBack} />
       <Grid
         width="960px"
         height="510px"
@@ -92,6 +103,8 @@ const CardPortfolio = ({ cardId }) => {
         border="1px solid #dcdcdc"
         bgcolor="background.paper"
         margin="40px auto"
+        onMouseEnter={(e) => showButton(e)}
+        onMouseLeave={(e) => hideButton(e)}
       >
         <Text>{cardList[cardId].title}</Text>
         <Text>{cardList[cardId].content}</Text>

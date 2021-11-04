@@ -8,7 +8,6 @@ import Settings from '../pages/Settings';
 import Contap from '../pages/Contap';
 import Header from './Header';
 import Mypage from '../pages/Mypage';
-import CardBackWrite from './CardBackWrite';
 import CardEdit from '../pages/CardEdit';
 import Permit from './Permit';
 
@@ -37,11 +36,6 @@ function App() {
       <Route path="/edit" exact>
         <Permit>
           <CardEdit />
-        </Permit>
-      </Route>
-      <Route path="/write" exact>
-        <Permit>
-          <CardBackWrite />
         </Permit>
       </Route>
     </div>

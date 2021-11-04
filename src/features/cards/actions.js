@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { createAction } from 'redux-actions';
 import T from '../../api/tokenInstance';
 
@@ -60,12 +61,9 @@ const baseURL = process.env.REACT_APP_SERVER_URI;
 export const loadCardFrontDB = () => async (dispatch) => {
   try {
     const res = await axios.get(`${baseURL}/main`);
-    // const res = await apis.getCardFront();
-    // console.log(res.data.users);
-    console.log(res.data);
 
-    // const { data } = res;
-    // dispatch(loadCard(res.data.users));
+    console.log('앞면카드 조회값 확인===>', res.data);
+
     dispatch(loadCard(res.data.users));
   } catch (err) {
     console.log(err);
@@ -93,10 +91,9 @@ export const loadCurrentCardDB = (userId) => async (dispatch) => {
   try {
     console.log(userId);
     const res = await T.GET(`/main/${userId}`);
-    // const res = await apis.getCardBack(userId);
-    console.log('뒷면 값 확인===>', res.data);
 
-    // dispatch(loadCurrentCard(Number(userId), res.data));
+    console.log('뒷면카드 조회값 확인===>', res.data);
+
     dispatch(loadCurrentCard(res.data));
   } catch (err) {
     console.log(err);
@@ -113,22 +110,32 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
       },
     });
     console.log('앞면카드 response 확인===>', res);
-    dispatch(setPreview(null));
+    // dispatch(setPreview(null));
     dispatch(editCardProfile(res.data));
+    if (res.data.result === 'fail') {
+      console.log(res.data.result);
+      Swal.fire({
+        icon: 'error',
+        title: '수정 실패',
+        text: `${res.data.errorMessage}`,
+      });
+    }
     history.push('/mypage');
   } catch (err) {
     console.log(err);
   }
 };
 
+// export const nickNameCheckDB = () => async (dispatch) => {
+//   try {
+//     const res = await T.POST('/mypage/');
+
 export const loadMyCardDB = () => async (dispatch) => {
   try {
     const res = await T.GET('/mypage/myinfo');
-    // const res = await apis.getCardFront();
+
     console.log('내카드조회 response 확인===>', res.data);
 
-    // const { data } = res;
-    // dispatch(loadCard(res.data.users));
     dispatch(loadMyCard(res.data));
   } catch (err) {
     console.log(err);
@@ -137,14 +144,11 @@ export const loadMyCardDB = () => async (dispatch) => {
 
 export const createCardDB = (content) => async (dispatch) => {
   try {
-    // const res = await apis.createCard(contents);
-    // const token = localStorage.getItem('token');
-    // console.log(token);
     const res = await T.POST('/mypage/backCard', content);
     console.log('뒷면카드추가 response 확인===>', res);
 
     dispatch(createCard(res.data));
-    history.push('/mypage');
+    window.location.replace('/mypage');
   } catch (err) {
     console.log(err);
   }

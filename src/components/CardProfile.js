@@ -11,30 +11,34 @@ const CardProfile = () => {
   console.log(cardList);
 
   return (
-    <Grid
-      width="350px"
-      height="200px"
-      borderRadius="16px"
-      border="1px solid #dcdcdc"
-      bgcolor="background.paper"
-      margin="25px auto"
-    >
-      <Div>
-        <Grid margin="20px" width="125px">
-          <Img src={cardList.profile} />
-        </Grid>
-        <TextDiv>
-          <Text>{cardList.userName}</Text>
-        </TextDiv>
-      </Div>
-      <TDiv>관심사</TDiv>
-      <Btn
-        onClick={() => {
-          history.push('/edit');
-        }}
+    <Grid>
+      <TitleText>{cardList.userName}님의 프로필</TitleText>
+      <Grid
+        width="540px"
+        height="308px"
+        borderRadius="16px"
+        border="1px solid #dcdcdc"
+        bgcolor="background.paper"
+        margin="25px auto"
+        // bg="linear-gradient(45deg, #94D1B5, #29BD87, #7E22CE)"
       >
-        수정하기
-      </Btn>
+        <Div>
+          <Grid margin="20px" width="125px">
+            <Img src={cardList.profile} />
+          </Grid>
+          <TextDiv>
+            <Text>{cardList.userName}</Text>
+          </TextDiv>
+        </Div>
+        <TDiv>관심사</TDiv>
+        <Btn
+          onClick={() => {
+            history.push('/edit');
+          }}
+        >
+          수정하기
+        </Btn>
+      </Grid>
     </Grid>
   );
 };
@@ -52,6 +56,11 @@ const Div = styled.div`
   align-items: center;
 `;
 
+const TitleText = styled.p`
+  font-size: 20px;
+  text-align: center;
+`;
+
 const Img = styled.img`
   display: flex;
   justify-content: center;
@@ -62,19 +71,19 @@ const Img = styled.img`
 
 const TextDiv = styled.div`
   position: absolute;
-  top: 15vh;
-  left: 49vw;
+  top: 20vh;
+  left: 42vw;
 `;
 
 const TDiv = styled.div`
   position: absolute;
-  top: 30vh;
+  top: 35vh;
   left: 33vw;
 `;
 
 const Btn = styled.button`
   width: 80px;
   position: absolute;
-  top: 16vh;
+  top: 21vh;
   left: 53vw;
 `;
