@@ -2,14 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadGrabToAxios } from '../features/taps/actions';
-import CardFront from './CardFront';
+import { MemoizedCardFront } from './CardFront';
 
 const GrabList = ({ select }) => {
   const dispatch = useDispatch();
   const conTap = useSelector((state) => state.taps);
-  console.log(select);
+  console.log(conTap);
 
   React.useEffect(() => {
+    console.log('디스패치');
     dispatch(loadGrabToAxios());
   }, []);
 
@@ -17,12 +18,14 @@ const GrabList = ({ select }) => {
     <div>
       {conTap.allIds.map((grabUserId) => {
         return (
-          <CardFront
-            key={grabUserId}
-            userId={grabUserId}
-            select={select}
-            contap
-          />
+          <div key={grabUserId}>
+            <MemoizedCardFront
+              userId={grabUserId}
+              select={select}
+              contap
+              grab
+            />
+          </div>
         );
       })}
     </div>

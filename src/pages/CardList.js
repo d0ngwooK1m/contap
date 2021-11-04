@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadCardFrontDB } from '../features/cards/actions';
-import CardFront from '../components/CardFront';
+// import CardFront from '../components/CardFront';
+import { MemoizedCardFront } from '../components/CardFront';
 import { Grid } from '../elements';
 
 const CardList = () => {
   const dispatch = useDispatch();
-
   const cardList = useSelector((state) => state.cards);
 
   React.useEffect(() => {
@@ -24,7 +24,7 @@ const CardList = () => {
     <Grid>
       <Div>
         {cardList.allIds.map((userId) => {
-          return <CardFront key={userId} userId={userId} />;
+          return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </Div>
     </Grid>

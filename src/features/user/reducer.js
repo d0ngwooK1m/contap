@@ -14,7 +14,7 @@ export default function userReducer(state = initialState, action) {
       case LOG_IN:
       case AUTHORIZED: {
         draft.email = action.payload.email;
-        draft.nickName = action.payload.nickName;
+        draft.userName = action.payload.userName;
         draft.isAuthorized = true;
         break;
       }

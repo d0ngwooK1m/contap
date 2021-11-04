@@ -8,6 +8,7 @@ import logger from 'redux-logger';
 import user from './user/reducer';
 import cards from './cards/reducer';
 import taps from './taps/reducer';
+import chat from './chat/reducer';
 
 export const history = createBrowserHistory();
 const middlewares = [thunk.withExtraArgument({ history })];
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   user,
   cards,
   taps,
+  chat,
   router: connectRouter(history),
 });
 

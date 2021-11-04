@@ -11,8 +11,9 @@ import CardModal from './CardModal';
 import ContapModal from './ContapModal';
 import { Grid, Image, Text } from '../elements';
 import T from '../api/tokenInstance';
+import Chat from './Chat/Chat';
 
-const CardFront = ({ userId, contap, select }) => {
+const CardFront = ({ userId, contap, select, grab }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
@@ -20,8 +21,8 @@ const CardFront = ({ userId, contap, select }) => {
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-  console.log(front);
-  console.log(front[userId]);
+  // console.log(front);
+  // console.log(front[userId]);
 
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
@@ -31,16 +32,18 @@ const CardFront = ({ userId, contap, select }) => {
     ?.split('_')[1]
     .split('@')
     .slice(1, 4);
-  console.log(stackHashTags, interestHashTags);
+  // console.log(stackHashTags, interestHashTags);
 
-  console.log(userId);
-  const showCardBackModal = () => {
-
+  const showCardBackModal = async () => {
+    console.log('showCardBackModal');
     if (!showModal) {
-      dispatch(loadCurrentCardDB(userId));
+      console.log('loadCurrentCardDB');
+      await dispatch(loadCurrentCardDB(userId));
     }
     setShowMadal(true);
   };
+
+  // console.log(userId);
 
   const closeModal = () => {
     setShowMadal(false);
@@ -86,7 +89,7 @@ const CardFront = ({ userId, contap, select }) => {
         {!contap && (
           <CardModal show={showModal} onHide={closeModal} userId={userId} />
         )}
-        {contap && (
+        {contap && showModal && (
           <ContapModal
             className="contapModal"
             show={showModal}
@@ -94,6 +97,7 @@ const CardFront = ({ userId, contap, select }) => {
             userId={userId}
           >
             <CardFrontContap onModal={handleSideModal} userId={userId} />
+            {grab && <Chat userId={userId} />}
           </ContapModal>
         )}
         {sideModal && (
@@ -143,7 +147,8 @@ CardFront.defaultProps = {
   contap: false,
 };
 
-export default CardFront;
+export const MemoizedCardFront = React.memo(CardFront);
+// export default CardFront;
 
 const Div = styled.div`
   display: flex;

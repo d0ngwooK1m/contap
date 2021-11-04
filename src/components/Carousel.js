@@ -22,7 +22,7 @@ const Carousel = ({ userId }) => {
   return (
     <Wrap>
       <Slider {...settings}>
-        {currentCard.map((card) => {
+        {currentCard?.map((card) => {
           return <CardBack key={card.cardId} card={card} userId={userId} />;
         })}
       </Slider>
