@@ -3,6 +3,8 @@ import { handleActions } from 'redux-actions';
 import { produce } from 'immer'; // reducer 불변성 유지
 import {
   LOAD_CARD,
+  SEARCH_CARD,
+  SEARCH_ARR,
   EDIT_CARD_PROFILE,
   CREATE_CARD,
   UPDATE_CARD,
@@ -18,6 +20,9 @@ const initialState = {
   current: {},
   preview: null,
   cardList: {},
+  searchInfo: {},
+  searchArr: [],
+  isSearching: false,
 };
 
 export default handleActions(
@@ -33,6 +38,31 @@ export default handleActions(
           draft.allIds.push(doc.userId);
         });
       }),
+    [SEARCH_CARD]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isSearching = true;
+        console.log(draft.isSearching);
+        draft.searchInfo = action.payload.searchInfo;
+        console.log(draft.searchInfo);
+        if (action.payload.searchInfo.page === 1) {
+          draft.byId = {};
+          draft.allIds = [];
+
+          action.payload.cardList.forEach((doc) => {
+            draft.byId[doc.userId] = doc;
+            draft.allIds.push(doc.userId);
+          });
+        } else {
+          action.payload.cardList.forEach((doc) => {
+            draft.byId[doc.userId] = doc;
+            draft.allIds.push(doc.userId);
+          });
+        }
+
+      }),
+    [SEARCH_ARR]: (state, action) => produce(state, (draft) => {
+      draft.searchArr = action.payload.searchList;
+    }),
     [LOAD_CURRENT_CARD]: (state, action) =>
       produce(state, (draft) => {
         const { data } = action.payload;

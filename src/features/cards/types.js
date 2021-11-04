@@ -1,5 +1,9 @@
 // 메인페이지 전체 카드리스트
 export const LOAD_CARD = 'cards/LOAD_CARD';
+// 검색 시 카드 리스트
+export const SEARCH_CARD = 'cards/SEARCH_CARD';
+// 검색 시 자동완성 리스트
+export const SEARCH_ARR = 'cards/SEARCH_ARR';
 // 메인페이지 뒷면 포트폴리오 카드
 export const LOAD_CURRENT_CARD = 'cards/LOAD_CURRENT_CARD';
 // 마이페이지 프로필/포트폴리오 카드리스트
