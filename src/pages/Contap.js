@@ -17,6 +17,7 @@ import GrabList from '../components/GrabList'
 
 const Contap = () => {
   const dispatch = useDispatch();
+  console.log('컨탭 페이지')
   
   // React.useEffect(() => {
   //   dispatch(loadReceiveTapToAxios());

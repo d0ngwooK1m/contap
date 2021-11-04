@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadSendTapToAxios } from '../features/taps/actions';
-import CardFront from './CardFront';
+// import CardFront from './CardFront';
+import { MemoizedCardFront } from './CardFront';
 
 const SendTap = ({ select }) => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const SendTap = ({ select }) => {
     <div>
       {conTap.allIds.map((sendTapUserId) => {
         return (
-          <CardFront
+          <MemoizedCardFront
             key={sendTapUserId}
             userId={sendTapUserId}
             select={select}

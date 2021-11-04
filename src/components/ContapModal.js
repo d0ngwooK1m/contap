@@ -51,7 +51,7 @@ ContapModal.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
-  children: PropTypes.element,
+  children: PropTypes.any,
 };
 
 ContapModal.defaultProps = {
