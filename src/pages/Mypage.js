@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { loadMyCardDB } from '../features/cards/actions';
 // import { history } from '../features/configureStore';
+import MypageSearch from '../components/MypageSearch';
 
 import CardProfile from '../components/CardProfile';
 import CardAdd from '../components/CardAdd';
@@ -48,6 +49,7 @@ const Mypage = () => {
 
   return (
     <Grid>
+      <MypageSearch />
       <Grid>
         <CardProfile />
       </Grid>

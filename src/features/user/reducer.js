@@ -12,7 +12,12 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
   return produce(state, (draft) => {
     switch (action.type) {
-      case LOG_IN:
+      case LOG_IN: {
+        draft.email = action.payload.email;
+        draft.userName = action.payload.userName;
+        draft.isAuthorized = true;
+        break;
+      }
       case EMAIL_AUTH: {
         draft.isEmailAuth = true;
         break;
