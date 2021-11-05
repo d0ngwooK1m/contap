@@ -32,7 +32,9 @@ const CardFront = ({ userId, contap, select, grab }) => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
+  console.log(stackHashTags, interestHashTags);
 
+  console.log(userId);
   const showCardBackModal = async () => {
     if (!showModal) {
       await dispatch(loadCurrentCardDB(userId));

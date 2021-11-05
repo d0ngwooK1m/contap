@@ -2,6 +2,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import {
+  loadMessagesToAxios,
+  writeMessage,
+  loading,
+  getMessage,
+} from '../../features/chat/actions';
+
 // 소켓
 import StompJs from 'stompjs';
 // import * as StompJs from "@stomp/stompjs";
@@ -22,7 +30,9 @@ const Chat = ({ userId }) => {
 
   const grapList = useSelector((state) => state.taps.byId);
   const userInfo = useSelector((state) => state.user);
+
   const { roomId } = grapList[userId];
+
   console.log(userInfo);
   console.log(grapList[userId]);
   // http://52.79.248.107:8080
@@ -34,10 +44,12 @@ const Chat = ({ userId }) => {
 
   const wsConnectSubscribe = React.useCallback(() => {
     const data = {
+
       roomId,
       message: '',
       writer: userInfo.email,
       userEmail: userInfo.email,
+
     };
 
     try {
@@ -49,7 +61,9 @@ const Chat = ({ userId }) => {
             console.log(data.body);
             dispatch(getMessage(newMessage));
           },
+
           { token, userEmail: userInfo.email },
+
         );
       });
     } catch (error) {

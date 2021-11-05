@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
+
 // import Button from '@mui/material/Button';
 import { IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -8,6 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
 import { useSelector } from 'react-redux';
+import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
@@ -18,7 +20,7 @@ const Header = () => {
   // const classes = useStyles();
   userAuthCheck();
   const isUserLogin = useSelector((state) => state.user.email);
-  const history = useHistory();
+  // const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -34,7 +36,8 @@ const Header = () => {
         width="100px"
         height="32px"
         _onClick={() => {
-          history.push('/');
+          // history.push('/');
+          window.location.href = '/';
         }}
       >
         <div style={{ cursor: 'pointer' }}>Theme</div>
