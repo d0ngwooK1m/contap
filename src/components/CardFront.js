@@ -22,21 +22,19 @@ const CardFront = ({ userId, contap, select, grab }) => {
   const [sideModal, setSideModal] = React.useState(false);
 
   // console.log(front);
-  // console.log(front[userId]);
+  console.log(front[userId].hashTags);
 
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
-    .split('@')
+    ?.split('@')
     .slice(1, 2);
   const interestHashTags = front[userId].hashTags
     ?.split('_')[1]
-    .split('@')
+    ?.split('@')
     .slice(1, 4);
 
   const showCardBackModal = async () => {
-    console.log('showCardBackModal');
     if (!showModal) {
-      console.log('loadCurrentCardDB');
       await dispatch(loadCurrentCardDB(userId));
     }
     setShowMadal(true);
@@ -109,7 +107,7 @@ const CardFront = ({ userId, contap, select, grab }) => {
           src={front[userId] ? front[userId].profile : null}
         />
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[userId] ? front[userId].userName : null}</Text># #{' '}
+          <Text>{front[userId] ? front[userId].userName : null}</Text># 
           {stackHashTags}
           <Text color="#7F7C82" bold />
         </Grid>

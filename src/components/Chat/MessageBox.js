@@ -10,7 +10,7 @@ const MessageBox = () => {
   return (
     <div>
       <div>채팅내용</div>
-      {messageList.map((msg, i) => {
+      {messageList?.map((msg, i) => {
         return <div key={i}>
           <p>{msg.writer} : {msg.message}</p>
         </div>
