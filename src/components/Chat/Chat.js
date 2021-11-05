@@ -2,17 +2,25 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import {
   loadMessagesToAxios,
   writeMessage,
   loading,
   getMessage,
 } from '../../features/chat/actions';
+
 // 소켓
 import StompJs from 'stompjs';
 // import * as StompJs from "@stomp/stompjs";
 // import { Client, Message } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+import {
+  loadMessagesToAxios,
+  writeMessage,
+  loading,
+  getMessage,
+} from '../../features/chat/actions';
 import { getToken } from '../../utils/auth';
 import MessageWrite from './MessageWrite';
 import MessageBox from './MessageBox';
@@ -22,8 +30,11 @@ const Chat = ({ userId }) => {
 
   const grapList = useSelector((state) => state.taps.byId);
   const userInfo = useSelector((state) => state.user);
-  const roomId = grapList[userId].roomId;
+
+  const { roomId } = grapList[userId];
+
   console.log(userInfo);
+  console.log(grapList[userId]);
   // http://52.79.248.107:8080
   const dispatch = useDispatch();
   const sock = new SockJS(`${baseURL}/ws-stomp`);
@@ -33,10 +44,14 @@ const Chat = ({ userId }) => {
 
   const wsConnectSubscribe = React.useCallback(() => {
     const data = {
-      roomId: roomId,
+
+      roomId,
       message: '',
-      writer: userId,
+      writer: userInfo.email,
+      userEmail: userInfo.email,
+
     };
+
     try {
       ws.connect({}, () => {
         ws.subscribe(
@@ -46,7 +61,9 @@ const Chat = ({ userId }) => {
             console.log(data.body);
             dispatch(getMessage(newMessage));
           },
-          {},
+
+          { token, userEmail: userInfo.email },
+
         );
       });
     } catch (error) {
@@ -73,7 +90,7 @@ const Chat = ({ userId }) => {
     wsConnectSubscribe();
     console.log(ws);
 
-    // dispatch(chatActions.getMessagesDB(id));
+    dispatch(loadMessagesToAxios(roomId));
     return () => {
       wsDisConnectUnsubscribe();
     };
@@ -111,15 +128,16 @@ const Chat = ({ userId }) => {
       // send할 데이터
 
       const data = {
-        roomId: roomId,
+        roomId,
         // message: chatInfo.messageText,
-        message: message,
-        writer: userId,
+        message,
+        writer: userInfo.email,
+        reciever: grapList[userId].email,
       };
 
       //   빈문자열이면 리턴
       //   로딩 중
-      // dispatch(loading(false));
+      dispatch(loading(false));
       waitForConnection(ws, function () {
         ws.send('/pub/chat/message', {}, JSON.stringify(data));
         dispatch(writeMessage(''));
@@ -134,7 +152,7 @@ const Chat = ({ userId }) => {
   //   wsDisConnectUnsubscribe();
   // };
 
-  //웹소켓 연결, 구독
+  // 웹소켓 연결, 구독
 
   // 연결해제, 구독해제;
 

@@ -15,11 +15,15 @@ export default handleActions(
       produce(state, (draft) => {
         console.log('LOAD_MESSAGES');
         console.log(action.payload);
-        console.log(draft);
+        draft.messages = action.payload.messageList;
       }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
         console.log('GET_MESSAGE');
+        console.log('액션 ======>', action.payload);
+        console.log('드래프트 ======>', draft.messages);
+        console.log('스테이트 ======>', state.messages);
+
         draft.messages.unshift(action.payload.message);
         draft.isLoading = true;
       }),

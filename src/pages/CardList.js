@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -24,7 +25,7 @@ const CardList = () => {
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
 
-  React.useEffect(() => {
+  React.useEffect( () => {
     if (cardList.allIds.length !== 0) {
       return;
     }
@@ -33,6 +34,7 @@ const CardList = () => {
     }
   }, [isSearching]);
 
+  console.log('로케이션 ====> ',location.search)
   React.useEffect(() => {
     if (!location.search) {
       return null;
@@ -57,6 +59,8 @@ const CardList = () => {
     }
     return handleKakaoLogin();
   }, []);
+
+
 
   console.log(cardList);
   return (

@@ -4,6 +4,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { loginToServer } from '../features/user/actions';
+import axios from 'axios';
+import { saveToken } from '../utils/auth';
+import { login as loginAction } from '../features/user/actions';
 // import { Grid, Input, Button } from '../elements';
 
 const Login = () => {
@@ -11,7 +14,8 @@ const Login = () => {
   //   email: "",
   //   pw: "",
   // })
-  const history = useHistory();
+const baseURL = process.env.REACT_APP_SERVER_URI;
+const history = useHistory();
 
   const {
     register,
@@ -33,6 +37,31 @@ const Login = () => {
   //   console.log(loginInfo);
   //   dispatch(loginToServer(loginInfo));
   // };
+
+  console.log('로케이션 ====> ',location.search)
+  React.useEffect(() => {
+    if (!location.search) {
+      return null;
+    }
+    const query = location.search;
+    const code = query.split('=')[1];
+    // console.log(code);
+    // let code = new URL(window.location.href).searchParams.get("code");
+    console.log(code);
+
+    async function handleKakaoLogin() {
+      try {
+        const { data } = await axios.get(`${baseURL}/user/github?code=${code}`);
+        console.log(data);
+        saveToken(data.token);
+        dispatch(loginAction({ email: data.email, userName: data.userName }));
+        history.replace('/');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    return handleKakaoLogin();
+  }, []);
 
   return (
     <div>
@@ -84,6 +113,14 @@ const Login = () => {
         }}
       >
         카카오 로그인
+      </button>
+      <button
+        onClick={() => {
+          console.log(process.env.REACT_APP_GITHUB_PATH);
+          window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
+        }}
+      >
+        깃허브 로그인
       </button>
     </div>
   );

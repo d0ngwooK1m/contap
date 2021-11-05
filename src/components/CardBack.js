@@ -8,8 +8,8 @@ import HashTag from './HashTag';
 import TapForm from './TapForm';
 
 const CardBack = ({ card, userId }) => {
-  const stackHashTags = card.hashTags?.split('_')[0].split('@');
-  const interestHashTags = card.hashTags?.split('_')[1].split('@');
+  const stackHashTags = card.hashTags?.split('_')[0]?.split('@');
+  const interestHashTags = card.hashTags?.split('_')[1]?.split('@');
 
   return (
     <Wrap>

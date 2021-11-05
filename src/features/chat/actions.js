@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+// import axios from 'axios';
 import { LOAD_MESSAGES, GET_MESSAGE, LOADING, WRITE_MESSAGE } from './types';
 import T from '../../api/tokenInstance';
 
@@ -16,7 +17,7 @@ export const loading = createAction(LOADING, (isLoading) => ({ isLoading }));
 export const loadMessagesToAxios = (roomId) => async (dispatch) => {
   try {
     const { data } = await T.GET('/chat/getmsg', roomId);
-    console.log(data);
+    console.log('리스폰스 ============> ', data);
     dispatch(loadMessages(data));
   } catch (error) {
     console.error(error);
