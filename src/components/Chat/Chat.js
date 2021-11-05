@@ -15,12 +15,7 @@ import StompJs from 'stompjs';
 // import * as StompJs from "@stomp/stompjs";
 // import { Client, Message } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-import {
-  loadMessagesToAxios,
-  writeMessage,
-  loading,
-  getMessage,
-} from '../../features/chat/actions';
+
 import { getToken } from '../../utils/auth';
 import MessageWrite from './MessageWrite';
 import MessageBox from './MessageBox';
