@@ -67,6 +67,18 @@ const CardFrontWrite = () => {
       formData.append('profile', fileData);
     }
     console.log('formData', formData);
+    for (var key of formData.keys()) {
+
+      console.log(key);
+    
+    }
+    
+    for (var value of formData.values()) {
+    
+      console.log(value);
+    
+    }
+
 
     dispatch(editCardProfileDB(formData));
   };

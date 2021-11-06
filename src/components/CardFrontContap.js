@@ -12,11 +12,11 @@ const CardFrontContap = ({ userId, onModal }) => {
 
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
-    .split('@')
+    ?.split('@')
     .slice(1, 2);
   const interestHashTags = front[userId].hashTags
     ?.split('_')[1]
-    .split('@')
+    ?.split('@')
     .slice(1, 4);
   console.log(stackHashTags, interestHashTags);
 

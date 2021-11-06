@@ -14,9 +14,7 @@ const SearchBar = () => {
   const searchList = useSelector((state) => state.cards.searchArr);
 
   React.useEffect(() => {
-    console.log(searchData);
     searchData.filter((val) => {
-      console.log(val.indexOf(data));
       if (val === data) {
         return null;
       }
@@ -28,7 +26,6 @@ const SearchBar = () => {
 
       return searchArr;
     });
-    console.log(searchArr);
     if (searchArr !== []) {
       dispatch(searchArrList(searchArr));
     }
@@ -43,7 +40,6 @@ const SearchBar = () => {
     setFetching(true);
     let searchInfo;
 
-    console.log(page);
     if (data === '') {
       searchInfo = {
         searchTags: [],
@@ -60,15 +56,12 @@ const SearchBar = () => {
       };
     }
 
-    console.log(searchInfo);
-
     dispatch(searchInfoDB(searchInfo));
 
     setFetching(false);
   };
 
   const handleScroll = () => {
-    console.log(isSearching);
     const { scrollHeight } = document.documentElement;
     const { scrollTop } = document.documentElement;
     const { clientHeight } = document.documentElement;
@@ -78,13 +71,11 @@ const SearchBar = () => {
     }
 
     if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
-      console.log('test');
       fetchMoreData();
     }
   };
 
   React.useEffect(() => {
-    console.log(isSearching);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   });
@@ -107,8 +98,6 @@ const SearchBar = () => {
     );
   });
 
-  console.log(ArrayData);
-
   return (
     <div>
       {!tag ? (
@@ -130,7 +119,6 @@ const SearchBar = () => {
             page: 1,
             field: field === undefined ? 3 : field,
           };
-          console.log(searchInfo);
           dispatch(searchInfoDB(searchInfo));
         }}
       >
@@ -158,7 +146,6 @@ const SearchBar = () => {
                 field: 0,
               };
             }
-            console.log(searchInfo);
             dispatch(searchInfoDB(searchInfo));
           }}
         >
@@ -183,7 +170,6 @@ const SearchBar = () => {
                 field: 1,
               };
             }
-            console.log(searchInfo);
             dispatch(searchInfoDB(searchInfo));
           }}
         >
@@ -208,7 +194,6 @@ const SearchBar = () => {
                 field: 2,
               };
             }
-            console.log(searchInfo);
             dispatch(searchInfoDB(searchInfo));
           }}
         >
@@ -233,7 +218,6 @@ const SearchBar = () => {
                 field: 3,
               };
             }
-            console.log(searchInfo);
             dispatch(searchInfoDB(searchInfo));
           }}
         >

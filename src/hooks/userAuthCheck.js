@@ -9,7 +9,6 @@ const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
 const userAuthCheck = () => {
   const isUserAuthorized = useSelector((state) => state.user.isAuthorized);
-  console.log(isUserAuthorized);
 
   const dispatch = useDispatch();
   const token = getToken();

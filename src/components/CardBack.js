@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
 import HashTag from './HashTag';
 import TapForm from './TapForm';
+import { useSelector } from 'react-redux';
 
 const CardBack = ({ card, userId }) => {
+  const contapCheck = useSelector(state=>state.taps.allIds)
   const stackHashTags = card.hashTags?.split('_')[0]?.split('@');
   const interestHashTags = card.hashTags?.split('_')[1]?.split('@');
 

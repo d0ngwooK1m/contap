@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
-import TapForm from './TapForm';
 
 import { Grid } from '../elements';
 
@@ -24,7 +23,6 @@ const ContapModal = ({ show, onHide, userId, children }) => {
             </div>
             <div>
               <Typography>관심사</Typography>
-              <TapForm userId={userId} />
             </div>
           </Card>
         </Wrap>
