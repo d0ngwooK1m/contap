@@ -112,7 +112,7 @@ const CardFrontWrite = () => {
           <label htmlFor="category">
             <input
               type="radio"
-              id="0"
+              id="categoryId"
               name="0"
               value="0"
               checked={category === '0'}
@@ -123,7 +123,7 @@ const CardFrontWrite = () => {
           <label htmlFor="category">
             <input
               type="radio"
-              id="1"
+              id="categoryId"
               name="1"
               value="1"
               checked={category === '1'}
@@ -134,7 +134,7 @@ const CardFrontWrite = () => {
           <label htmlFor="category">
             <input
               type="radio"
-              id="2"
+              id="categoryId"
               name="2"
               value="2"
               checked={category === '2'}
