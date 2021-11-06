@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+// import EditIcon from '@mui/icons-material/Edit';
+// import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
 import { Grid, Text, Input } from '../elements';
+import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
+import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
 
 const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
@@ -103,8 +105,8 @@ const CardPortfolio = ({ cardId }) => {
         }}
       >
         <IconDiv>
-          <EditIcon style={display} onClick={editCardBack} />
-          <DeleteOutlineIcon style={display} onClick={deleteCardBack} />
+          <EditBtn style={display} onClick={editCardBack} />
+          <DeleteBtn style={display} onClick={deleteCardBack} />
         </IconDiv>
         <Grid
           width="1110px"

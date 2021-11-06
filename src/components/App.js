@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
+import { Reset } from 'styled-reset';
 import CardList from '../pages/CardList';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
@@ -14,6 +15,7 @@ import Permit from './Permit';
 function App() {
   return (
     <div>
+      <Reset />
       {/* <Header /> */}
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
