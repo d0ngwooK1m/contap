@@ -1,0 +1,73 @@
+html {
+  scroll-behavior: smooth;
+  font-family: 'Pretendard';
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-family: 'Pretendard';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'Pretendard';
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 400;
+  src: url('../fonts/Pretendard-Regular.subset.woff2') format('woff2'),
+    url('../fonts/Pretendard-Regular.subset.woff') format('woff'),
+    url('../fonts/Pretendard-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
+  src: url('../fonts/Pretendard-Regular.subset.woff2') format('woff2'),
+    url('../fonts/Pretendard-Regular.subset.woff') format('woff'),
+    url('../fonts/Pretendard-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 400;
+  src: url('../fonts/Pretendard-Regular.subset.woff2') format('woff2'),
+    url('../fonts/Pretendard-Regular.subset.woff') format('woff'),
+    url('../fonts/Pretendard-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 700;
+  src: url('../fonts/Pretendard-Bold.subset.woff2') format('woff2'),
+    url('../fonts/Pretendard-Bold.subset.woff') format('woff'),
+    url('../fonts/Pretendard-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 700;
+  src: url('../fonts/Pretendard-Bold.subset.woff2') format('woff2'),
+    url('../fonts/Pretendard-Bold.subset.woff') format('woff'),
+    url('../fonts/Pretendard-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 32px;
+  font-weight: 700;
+  src: url('../fonts/Pretendard-Bold.subset.woff2') format('woff2'),
+    url('../fonts/Pretendard-Bold.subset.woff') format('woff'),
+    url('../fonts/Pretendard-Bold.ttf') format('truetype');
+}

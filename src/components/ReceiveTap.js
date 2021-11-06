@@ -14,6 +14,7 @@ const ReceiveTap = ({ select }) => {
 
   return (
     <div>
+      <p />
       {conTap.allIds.map((ReceiveTapUserId) => {
         return (
           <MemoizedCardFront

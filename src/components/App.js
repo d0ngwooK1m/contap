@@ -29,16 +29,19 @@ function App() {
       </Route>
       <Route path="/contap" exact>
         <Permit>
+          <Header />
           <Contap />
         </Permit>
       </Route>
       <Route path="/mypage" exact>
         <Permit>
+          <Header />
           <Mypage />
         </Permit>
       </Route>
       <Route path="/edit" exact>
         <Permit>
+          <Header />
           <CardEdit />
         </Permit>
       </Route>

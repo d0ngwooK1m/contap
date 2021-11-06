@@ -100,7 +100,12 @@ const CardFront = ({ userId, contap, select, grab }) => {
           </ContapModal>
         )}
         {sideModal && (
-          <CardModal show={sideModal} onHide={closeSideModal} userId={userId} contap/>
+          <CardModal
+            show={sideModal}
+            onHide={closeSideModal}
+            userId={userId}
+            contap
+          />
         )}
       </Grid>
       <Div is_flex>
@@ -109,7 +114,7 @@ const CardFront = ({ userId, contap, select, grab }) => {
           src={front[userId] ? front[userId].profile : null}
         />
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[userId] ? front[userId].userName : null}</Text># 
+          <Text>{front[userId] ? front[userId].userName : null}</Text>#
           {stackHashTags}
           <Text color="#7F7C82" bold />
         </Grid>
