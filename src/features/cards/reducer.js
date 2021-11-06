@@ -58,11 +58,11 @@ export default handleActions(
             draft.allIds.push(doc.userId);
           });
         }
-
       }),
-    [SEARCH_ARR]: (state, action) => produce(state, (draft) => {
-      draft.searchArr = action.payload.searchList;
-    }),
+    [SEARCH_ARR]: (state, action) =>
+      produce(state, (draft) => {
+        draft.searchArr = action.payload.searchList;
+      }),
     [LOAD_CURRENT_CARD]: (state, action) =>
       produce(state, (draft) => {
         const { data } = action.payload;
