@@ -12,8 +12,6 @@ import {
 
 // 소켓
 import StompJs from 'stompjs';
-// import * as StompJs from "@stomp/stompjs";
-// import { Client, Message } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 import { getToken } from '../../utils/auth';
@@ -81,11 +79,12 @@ const Chat = ({ userId }) => {
   }, [ws]);
 
   //  렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
-  React.useEffect(() => {
+  React.useEffect( () => {
     wsConnectSubscribe();
+     dispatch(loadMessagesToAxios(roomId));
     console.log(ws);
+    console.log(roomId);
 
-    dispatch(loadMessagesToAxios(roomId));
     return () => {
       wsDisConnectUnsubscribe();
     };

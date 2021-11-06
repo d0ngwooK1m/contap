@@ -14,7 +14,6 @@ const TabMenu = ({ content }) => {
       <Wrapper>
         <Grid width="390px">
           {content.map((val, idx) => {
-            console.log('탭메뉴');
             return (
               <BtnWrapper key={val.id}>
                 <Button

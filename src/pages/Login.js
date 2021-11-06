@@ -47,8 +47,12 @@ const Login = () => {
     console.log(code);
 
     async function handleKakaoLogin() {
+      
       try {
-        const { data } = await axios.get(`${baseURL}/user/github?code=${code}`);
+        const {data} = await axios({
+          method: 'GET',
+          url: `${baseURL}/user/kakao?code=${code}`,
+        });
         console.log(data);
         saveToken(data.token);
         dispatch(loginAction({ email: data.email, userName: data.userName }));

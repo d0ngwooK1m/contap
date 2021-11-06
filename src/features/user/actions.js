@@ -137,7 +137,8 @@ const loginToServer = (loginInfo) => async (dispatch) => {
   try {
     const res = await axios.post(`${baseURL}/user/login`, loginInfo);
     const { data } = res;
-    console.log(data);
+    console.log('로그인 res =====>', res);
+    console.log('로그인 data =====>', data);
 
     if (data.result === 'fail') {
       console.log(data);

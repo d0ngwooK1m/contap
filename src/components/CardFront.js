@@ -22,7 +22,7 @@ const CardFront = ({ userId, contap, select, grab }) => {
   const [sideModal, setSideModal] = React.useState(false);
 
   // console.log(front);
-  console.log(front[userId].hashTags);
+  // console.log(front[userId].hashTags);
 
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
@@ -32,9 +32,9 @@ const CardFront = ({ userId, contap, select, grab }) => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
-  console.log(stackHashTags, interestHashTags);
+  // console.log(stackHashTags, interestHashTags);
 
-  console.log(userId);
+  // console.log(userId);
   const showCardBackModal = async () => {
     if (!showModal) {
       await dispatch(loadCurrentCardDB(userId));
@@ -100,7 +100,7 @@ const CardFront = ({ userId, contap, select, grab }) => {
           </ContapModal>
         )}
         {sideModal && (
-          <CardModal show={sideModal} onHide={closeSideModal} userId={userId} />
+          <CardModal show={sideModal} onHide={closeSideModal} userId={userId} contap/>
         )}
       </Grid>
       <Div is_flex>

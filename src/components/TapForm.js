@@ -6,7 +6,6 @@ import T from '../api/tokenInstance';
 const TapForm = ({ userId }) => {
   const history = useHistory();
   const [messege, setMessege] = React.useState('');
-  console.log(userId);
 
   const handleChange = (e) => {
     setMessege(e.target.value);
