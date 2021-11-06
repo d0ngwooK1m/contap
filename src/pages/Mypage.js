@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadMyCardDB } from '../features/cards/actions';
 // import { history } from '../features/configureStore';
-import MypageSearch from '../components/MypageSearch';
 
 import CardProfile from '../components/CardProfile';
 import CardAdd from '../components/CardAdd';
@@ -14,6 +13,9 @@ import { Grid, Text } from '../elements';
 
 const Mypage = () => {
   const dispatch = useDispatch();
+
+  const cardCount = useSelector((state) => state.cards.allIds);
+  console.log(cardCount.length);
 
   React.useEffect(() => {
     dispatch(loadMyCardDB());
@@ -28,7 +30,7 @@ const Mypage = () => {
           <CardProfile />
         </Grid>
         <Div>
-          <Text>나의 프로젝트</Text>
+          <Text>나의 프로젝트 {cardCount.length}</Text>
           <Btn
             onClick={() => {
               setClick(!click);
@@ -49,12 +51,11 @@ const Mypage = () => {
 
   return (
     <Grid>
-      <MypageSearch />
       <Grid>
         <CardProfile />
       </Grid>
       <Div>
-        <Text>나의 프로젝트</Text>
+        <Text>나의 프로젝트 {cardCount.length}</Text>
         <Btn
           onClick={() => {
             setClick(!click);
@@ -74,11 +75,12 @@ const Mypage = () => {
 export default Mypage;
 
 const Div = styled.div`
-  width: '1110px';
-  margin: '0px 165px';
+  width: 1110px;
+  margin: 0px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 90px;
 `;
 
 const Btn = styled.button`

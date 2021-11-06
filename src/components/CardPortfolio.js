@@ -26,15 +26,15 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const [display, setDisplay] = React.useState({ display: 'none' });
-  const showButton = (e) => {
-    e.preventDefault();
-    setDisplay({ dispaly: 'block' });
-  };
+  // const showButton = () => {
+  //   // e.preventDefault();
+  //   setDisplay({ dispaly: 'block' });
+  // };
 
-  const hideButton = (e) => {
-    e.preventDefault();
-    setDisplay({ display: 'none' });
-  };
+  // const hideButton = () => {
+  //   // e.preventDefault();
+  //   setDisplay({ display: 'none' });
+  // };
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
@@ -53,8 +53,8 @@ const CardPortfolio = ({ cardId }) => {
       <Grid>
         <Btn onClick={edit}>작성완료</Btn>
         <Grid
-          width="960px"
-          height="510px"
+          width="1110px"
+          height="450px"
           borderRadius="16px"
           border="1px solid #dcdcdc"
           bgcolor="background.paper"
@@ -94,23 +94,32 @@ const CardPortfolio = ({ cardId }) => {
   }
   return (
     <Grid>
-      <EditIcon style={display} onClick={editCardBack} />
-      <DeleteOutlineIcon style={display} onClick={deleteCardBack} />
-      <Grid
-        width="960px"
-        height="510px"
-        borderRadius="16px"
-        border="1px solid #dcdcdc"
-        bgcolor="background.paper"
-        margin="40px auto"
-        onMouseEnter={(e) => showButton(e)}
-        onMouseLeave={(e) => hideButton(e)}
+      <Div
+        onMouseEnter={() => {
+          setDisplay({ display: 'block' });
+        }}
+        onMouseLeave={() => {
+          setDisplay({ display: 'none' });
+        }}
       >
-        <Text>{cardList[cardId].title}</Text>
-        <Text>{cardList[cardId].content}</Text>
-        <Text>{cardList[cardId].tagsStr}</Text>
-        <Text>{cardList[cardId].link}</Text>
-      </Grid>
+        <IconDiv>
+          <EditIcon style={display} onClick={editCardBack} />
+          <DeleteOutlineIcon style={display} onClick={deleteCardBack} />
+        </IconDiv>
+        <Grid
+          width="1110px"
+          height="450px"
+          borderRadius="16px"
+          border="1px solid #dcdcdc"
+          bgcolor="background.paper"
+          margin="0px auto 40px auto"
+        >
+          <Text>{cardList[cardId].title}</Text>
+          <Text>{cardList[cardId].content}</Text>
+          <Text>{cardList[cardId].tagsStr}</Text>
+          <Text>{cardList[cardId].link}</Text>
+        </Grid>
+      </Div>
     </Grid>
   );
 
@@ -151,6 +160,20 @@ CardPortfolio.propTypes = {
 };
 
 export default CardPortfolio;
+
+const Div = styled.div`
+  width: 1110px;
+  height: 490px;
+  // border-radius: 16px;
+  // border: 1px solid #dcdcdc;
+  // bgcolor: background.paper;
+  margin: 0px auto;
+`;
+
+const IconDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const Btn = styled.button`
   width: 80px;

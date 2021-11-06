@@ -1,8 +1,23 @@
+/* eslint-disable */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchArrList } from '../features/cards/actions';
 
-const searchData = ['지오캐싱', '종이접기', '피겨스케이팅'];
+// const searchData = {
+//   stacks: [
+//     { id: 1, stack: '지오캐싱' },
+//     {
+//       id: 2,
+//       stack: 'React',
+//     },
+//     {
+//       id: 3,
+//       stack: 'ReactNative',
+//     },
+//   ],
+// };
+
+const searchData = ['ReactNative', 'React', 'Spring', 'Java', 'JavaScript'];
 
 const MypageSearch = () => {
   const dispatch = useDispatch();
@@ -51,23 +66,24 @@ const MypageSearch = () => {
 
   return (
     <div>
-      {!tag ? (
-        <input
-          onChange={(e) => {
-            console.log(e.target.value);
-            setData(e.target.value);
-          }}
-        />
-      ) : (
-        <input
-          value={data}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setData(e.target.value);
-          }}
-        />
-      )}
-      {/* <button
+      <div>
+        {!tag ? (
+          <input
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+          />
+        ) : (
+          <input
+            value={data}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+          />
+        )}
+        {/* <button
         type="button"
         onClick={() => {
           const searchInfo = {
@@ -82,8 +98,9 @@ const MypageSearch = () => {
       >
         검색
       </button> */}
-      {data !== '' && tag === false && <ul>{ArrayData}</ul>}
-      <br />
+        {data !== '' && tag === false && <ul>{ArrayData}</ul>}
+        <br />
+      </div>
     </div>
   );
 };

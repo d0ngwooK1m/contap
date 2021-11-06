@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPreview, editCardProfileDB } from '../features/cards/actions';
 
-import { Grid, Button, Text, Input, Image } from '../elements';
+import { Grid, Text, Input, Image } from '../elements';
 
 const CardFrontWrite = () => {
   const dispatch = useDispatch();
@@ -21,69 +21,51 @@ const CardFrontWrite = () => {
     setCategory(e.target.value);
   };
 
-  // React.useEffect(() => {
-  //   dispatch(setPreview(userInfo.profile));
-  // }, []);
-
-  // const nickNameCheck = () => {};
-
-  // const hashTagIds = [
-  //   {
-  //     hashTagIds: 1,
-  //   },
-  // ];
-
-  // 파일 미리보기 (오류 해결 코드)
-  // const filePreview = () => {
-  //   const reader = new FileReader();
-  //   const file = fileInput.current.files[0];
-  //   console.log(file);
-  //   if (file === undefined) {
-  //     dispatch(setPreview(null));
-  //   } else {
-  //     reader.readAsDataURL(file);
-  //     reader.onloadend = () => {
-  //       //  console.log(reader.result);
-  //       dispatch(setPreview(reader.result));
-  //     };
-  //   }
-  // };
   const fileInput = React.useRef();
 
   const [fileData, setFileData] = React.useState(null);
   console.log(fileData);
 
+  // 파일 미리보기 (오류 해결 코드)
   const filePreview = (e) => {
     const reader = new FileReader();
-
     const file = fileInput.current.files[0];
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      //  console.log(reader.result);
-      dispatch(setPreview(reader.result));
-    };
-
-    setFileData(e.target.files[0]);
-    // e.target.value = '';
+    console.log(file);
+    if (file === undefined) {
+      dispatch(setPreview(null));
+    } else {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        //  console.log(reader.result);
+        dispatch(setPreview(reader.result));
+      };
+      setFileData(e.target.files[0]);
+    }
   };
+
+  // 기존 파일 미리보기
+  // const filePreview = (e) => {
+  //   const reader = new FileReader();
+  //   const file = fileInput.current.files[0];
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     //  console.log(reader.result);
+  //     dispatch(setPreview(reader.result));
+  //   };
+  //   setFileData(e.target.files[0]);
+  //   // e.target.value = '';
+  // };
 
   const fileUploadHandler = () => {
     const file = fileInput.current.files[0];
     console.log(file);
     const formData = new FormData();
-    // if (file === undefined) {
-    //   formData.append('profile', userInfo.profile);
-    // } else {
-    //   formData.append('profile', file);
-    // }
     formData.append('userName', userName);
-    //formData.append('hashTagIds', hashTagIds);
-    formData.append('hashTagsStr', '@spring@');
+    formData.append('hashTagsStr', 'spring');
     formData.append('field', category);
     if (fileData) {
       formData.append('profile', fileData);
     }
-
     console.log('formData', formData);
 
     dispatch(editCardProfileDB(formData));
@@ -91,15 +73,20 @@ const CardFrontWrite = () => {
 
   return (
     <Grid
-      width="966px"
-      height="230px"
+      height="590px"
       borderRadius="16px"
       border="1px solid #dcdcdc"
       bgcolor="background.paper"
       margin="25px auto"
     >
+      <Grid is_flex width="1110px" margin="75px auto">
+        <Text>
+          {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
+        </Text>
+        <AddBtn onClick={fileUploadHandler}>작성완료</AddBtn>
+      </Grid>
       <Div>
-        <Grid margin="20px" width="125px">
+        <Grid margin="78px 0px 165px 0px" width="125px">
           <label htmlFor="fileUpload">
             <Img src={preview ? preview : userInfo.profile} />
           </label>
@@ -109,7 +96,6 @@ const CardFrontWrite = () => {
             id="fileUpload"
             onChange={filePreview}
           />
-          {/* <input type="file" file={newFile} id="fileUpload" onChange={handle} /> */}
         </Grid>
         <TextDiv>
           <Input
@@ -122,6 +108,7 @@ const CardFrontWrite = () => {
           />
         </TextDiv>
         <Category>
+          <p>직무</p>
           <label htmlFor="category">
             <input
               type="radio"
@@ -157,8 +144,10 @@ const CardFrontWrite = () => {
           </label>
         </Category>
       </Div>
-      <AddBtn onClick={fileUploadHandler}>작성완료</AddBtn>
-      {/* <Btn onClick={nickNameCheck}>중복체크</Btn> */}
+      <Grid is_flex width="1110px" margin="20px auto">
+        <Text>스택/툴</Text>
+        <Text>관심사</Text>
+      </Grid>
     </Grid>
   );
 };
@@ -169,6 +158,9 @@ const Div = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  width: 1110px;
+  height: 150px;
+  margin: 0px auto;
 `;
 
 const Img = styled.img`
@@ -176,27 +168,28 @@ const Img = styled.img`
   justify-content: center;
   align-items: center;
   margin: 5px 0px;
-  width: 256px;
-  height: 180px;
+  width: 182px;
+  height: 164px;
+  border-radius: 16px;
 `;
 
 const TextDiv = styled.div`
   position: absolute;
-  top: 15vh;
+  top: 30vh;
   left: 43vw;
 `;
 
 const Category = styled.div`
   position: absolute;
-  top: 23vh;
+  top: 37vh;
   left: 43vw;
 `;
 
 const AddBtn = styled.button`
   width: 80px;
-  position: absolute;
-  top: 16vh;
-  left: 70vw;
+  // position: absolute;
+  // top: 16vh;
+  // left: 70vw;
 `;
 
 // const Btn = styled.button`

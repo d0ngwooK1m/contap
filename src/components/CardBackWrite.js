@@ -28,12 +28,12 @@ const CardBackWrite = () => {
 
   return (
     <Grid
-      width="960px"
-      height="510px"
+      width="1110px"
+      height="490px"
       borderRadius="16px"
       border="1px solid #dcdcdc"
       bgcolor="background.paper"
-      margin="auto"
+      margin="40px auto"
     >
       <Input
         place="프로젝트 제목"
