@@ -5,6 +5,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import store, { history } from './features/configureStore';
+import './style/scss/fonts.css';
 
 ReactDOM.render(
   <React.StrictMode>

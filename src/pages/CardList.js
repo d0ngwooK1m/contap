@@ -72,9 +72,6 @@ const CardList = () => {
     }
     wsConnectSubscribe();
 
-    return () => {
-      wsDisConnectUnsubscribe();
-    };
   }, []);
 
   return (

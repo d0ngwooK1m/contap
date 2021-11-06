@@ -1,7 +1,9 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Grid, Button } from '../elements';
+import { Grid } from '../elements';
+import TabButton from '../elements/TabButton';
 
 import useTabs from '../hooks/useTabs';
 
@@ -9,29 +11,25 @@ const TabMenu = ({ content }) => {
   const { contentItem, contentChange } = useTabs(0, content);
 
   return (
-    <Grid>
-      <p>사이드 탭</p>
-      <Wrapper>
-        <Grid width="390px">
-          {content.map((val, idx) => {
-            return (
-              <BtnWrapper key={val.id}>
-                <Button
-                  _onClick={() => {
-                    contentChange(idx);
-                  }}
-                >
-                  {val.tab}
-                </Button>
-              </BtnWrapper>
-            );
-          })}
-        </Grid>
-        <Grid width="1050px" padding="0px 210px">
-          {contentItem.content}
-        </Grid>
-      </Wrapper>
-    </Grid>
+    <Wrapper>
+      <div>
+        {content.map((val, idx) => {
+          return (
+              <TabButton
+                id={val.id}
+                val={val}
+                check={contentItem.id}
+                click={() => {
+                  contentChange(idx);
+                }}
+              />
+          );
+        })}
+      </div>
+      <div>
+        {contentItem.content}
+      </div>
+    </Wrapper>
   );
 };
 
@@ -41,12 +39,13 @@ TabMenu.propTypes = {
 
 const Wrapper = styled.div`
   display: flex;
-  width: 100vw;
-  justify-content: space-evenly;
+  width: 255px;
+  height: 100vh;
+  margin: 0px 0px 0px 165px;
+  border-right: solid 1px #A09BAC4D;
+  background-color: #0F0A1A;
 `;
 
-const BtnWrapper = styled.div`
-  width: 180px;
-`;
-
-export default TabMenu;
+// export default TabMenu;
+const MemoizedTabMenu = React.memo(TabMenu);
+export default MemoizedTabMenu;

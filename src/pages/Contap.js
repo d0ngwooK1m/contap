@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '../elements/index';
+import styled from 'styled-components';
 import TabMenu from '../components/TabMenu';
 import SendTap from '../components/SendTap';
 import ReceiveTap from '../components/ReceiveTap';
@@ -25,11 +25,16 @@ const Contap = () => {
   ];
 
   return (
-    <Grid>
-      <div>컨탭 페이지</div>
+    <Wrap>
       <TabMenu content={content} />
-    </Grid>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #0f0a1a;
+`;
 
 export default Contap;
