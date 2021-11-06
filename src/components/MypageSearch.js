@@ -2,6 +2,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchArrList } from '../features/cards/actions';
+import TagList from './TagList';
 
 // const searchData = {
 //   stacks: [
@@ -64,6 +65,27 @@ const MypageSearch = () => {
     }
   }, [data]);
 
+  // const rgba2hex = (rgba) =>
+  //   `#${rgba
+  //     .match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/)
+  //     .slice(1)
+  //     .map((n, i) =>
+  //       (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n))
+  //         .toString(16)
+  //         .padStart(2, '0')
+  //         .replace('NaN', ''),
+  //     )
+  //     .join('')}`;
+
+  // function addStack(id) {
+  //   const element = document.getElementById(id);
+  //   const stack = element.textContent;
+  //   const color = rgba2hex(window.getComputedStyle(element).backgroundColor);
+  //   console.log(color);
+  //   document.getElementById(id).style.backgroundColor = '#8C4DFF'; //'#8C4DFF
+  //   document.getElementById('stack').value = stack;
+  // }
+
   return (
     <div>
       <div>
@@ -101,6 +123,56 @@ const MypageSearch = () => {
         {data !== '' && tag === false && <ul>{ArrayData}</ul>}
         <br />
       </div>
+      {/* <div>
+        <input type="button" id="stack" value="스택" />
+        <br />
+        <button
+          id="1"
+          type="button"
+          onClick={(e) => {
+            addStack(e.target.id);
+          }}
+        >
+          ReactNative
+        </button>
+        <button
+          id="2"
+          type="button"
+          onClick={(e) => {
+            addStack(e.target.id);
+          }}
+        >
+          React
+        </button>
+        <button
+          id="3"
+          type="button"
+          onClick={(e) => {
+            addStack(e.target.id);
+          }}
+        >
+          Spring
+        </button>
+        <button
+          id="4"
+          type="button"
+          onClick={(e) => {
+            addStack(e.target.id);
+          }}
+        >
+          Java
+        </button>
+        <button
+          id="5"
+          type="button"
+          onClick={(e) => {
+            addStack(e.target.id);
+          }}
+        >
+          JavaScript
+        </button>
+      </div> */}
+      <TagList />
     </div>
   );
 };
