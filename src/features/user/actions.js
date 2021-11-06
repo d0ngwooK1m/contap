@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { SettingsInputAntennaSharp } from '@mui/icons-material';
 import { WITHDRAWAL, LOG_IN, LOG_OUT, AUTHORIZED, EMAIL_AUTH } from './types';
 import { saveToken, removeToken } from '../../utils/auth';
 import tokenAxios from '../../api/tokenInstance';

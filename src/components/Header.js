@@ -13,8 +13,10 @@ import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
-import { Grid, Image, Button } from '../elements';
+import { Grid, Image } from '../elements';
 import userAuthCheck from '../hooks/userAuthCheck';
+import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
+import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
 
 const Header = () => {
   // const classes = useStyles();
@@ -32,15 +34,16 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Grid
-        bg="blue"
-        width="100px"
-        height="32px"
+        width="fit-content"
+        height="fit-content"
         _onClick={() => {
           // history.push('/');
           window.location.href = '/';
         }}
       >
-        <div style={{ cursor: 'pointer' }}>Theme</div>
+        <div style={{ cursor: 'pointer' }}>
+          <LogoSvg />
+        </div>
       </Grid>
       {isUserLogin !== '' ? (
         <MenuWrapper>
@@ -50,7 +53,13 @@ const Header = () => {
               history.push('/contap');
             }}
           >
-            <div style={{ cursor: 'pointer' }}>🤝</div>
+            <div
+              style={{
+                cursor: 'pointer',
+              }}
+            >
+              <ContapIconSvg />
+            </div>
           </Grid>
           <div>
             <IconButton
@@ -101,14 +110,15 @@ const Header = () => {
           </Grid>
         </MenuWrapper>
       ) : (
-        <Button
+        <LoginButton
+          type="button"
           width="100px"
-          _onClick={() => {
+          onClick={() => {
             history.push('/login');
           }}
         >
-          Login
-        </Button>
+          Log In
+        </LoginButton>
       )}
     </HeaderWrapper>
   );
@@ -116,11 +126,12 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
   width: auto;
-  height: 94px;
-  padding: 0px 165px;
+  height: 88px;
+  padding: 0px 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #0f0a1a;
 `;
 
 const MenuWrapper = styled.div`
@@ -129,6 +140,17 @@ const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+const LoginButton = styled.button`
+  width: 125px;
+  height: 50px;
+  background-color: #8c4dff;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 export default Header;

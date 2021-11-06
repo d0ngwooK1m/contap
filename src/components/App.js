@@ -14,12 +14,16 @@ import Permit from './Permit';
 function App() {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
-      <Route path="/" exact component={CardList} />
+      <Route path="/" exact>
+        <Header />
+        <CardList />
+      </Route>
       <Route path="/settings" exact>
         <Permit>
+          <Header />
           <Settings />
         </Permit>
       </Route>

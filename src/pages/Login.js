@@ -1,21 +1,31 @@
 /* eslint-disable */
 import React from 'react';
+// import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { loginToServer } from '../features/user/actions';
 import axios from 'axios';
+import { loginToServer, login as loginAction } from '../features/user/actions';
 import { saveToken } from '../utils/auth';
-import { login as loginAction } from '../features/user/actions';
-// import { Grid, Input, Button } from '../elements';
+import {
+  LoginWrapper,
+  LeftWrapper,
+  RightWrapper,
+  Title,
+  StyledInput,
+  SubmitInput,
+  DivideWrapper,
+  DivideLine,
+  DivideContent,
+  KakaoButton,
+  WarningText,
+} from '../utils/styledLoginSign';
+import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
+import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
 
 const Login = () => {
-  // const [state, setState] = React.useState({
-  //   email: "",
-  //   pw: "",
-  // })
-const baseURL = process.env.REACT_APP_SERVER_URI;
-const history = useHistory();
+  const baseURL = process.env.REACT_APP_SERVER_URI;
+  const history = useHistory();
 
   const {
     register,
@@ -23,22 +33,9 @@ const history = useHistory();
     formState: { errors },
   } = useForm();
 
-  // console.log(watch());
-
   const dispatch = useDispatch();
-  // const [email, setEmail] = React.useState('');
-  // const [pw, setPw] = React.useState('');
 
-  // const login = () => {
-  //   const loginInfo = {
-  //     email,
-  //     pw,
-  //   };
-  //   console.log(loginInfo);
-  //   dispatch(loginToServer(loginInfo));
-  // };
-
-  console.log('로케이션 ====> ',location.search)
+  console.log('로케이션 ====> ', location.search);
   React.useEffect(() => {
     if (!location.search) {
       return null;
@@ -64,97 +61,117 @@ const history = useHistory();
   }, []);
 
   return (
-    <div>
+    <LoginWrapper>
+      <LeftWrapper>
+        <Onboard1Svg />
+      </LeftWrapper>
+      <RightWrapper>
+        <div>
+          <Title>로그인</Title>
           <form
-      onSubmit={handleSubmit((loginInfo) => {
-        console.log(loginInfo);
-        dispatch(loginToServer(loginInfo));
-      })}
-    >
-      <input
-        type="text"
-        placeholder="이메일을 입력해주세요"
-        {...register('email', {
-          required: '이메일을 입력해주세요',
-          pattern: {
-            value: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
-            message: '이메일 양식에 맞지 않습니다',
-          },
-        })}
-      />
-      {errors.email && <p>{errors.email.message}</p>}
-      <br />
-      <input
-        type="password"
-        placeholder="비밀번호를 입력해주세요"
-        {...register('pw', {
-          required: '비밀번호를 입력해주세요',
-          maxLength: {
-            value: 20,
-            message: '비밀번호는 최대 20자입니다',
-          },
-          minLength: {
-            value: 6,
-            message: '비밀번호는 최소 6자 이상입니다',
-          },
-        })}
-      />
-      {errors.pw && <p>{errors.pw.message}</p>}
-      <br />
-      <input type="submit" />
-      </form>
-      <span onClick={() => {
-        history.push('/signup');
-      }}>혹시 회원이 아니신가요?</span>
-      <button
-        onClick={() => {
-          console.log(process.env.REACT_APP_KAKAO_PATH);
-          window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
-        }}
-      >
-        카카오 로그인
-      </button>
-      <button
-        onClick={() => {
-          console.log(process.env.REACT_APP_GITHUB_PATH);
-          window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
-        }}
-      >
-        깃허브 로그인
-      </button>
-    </div>
+            onSubmit={handleSubmit((loginInfo) => {
+              console.log(loginInfo);
+              dispatch(loginToServer(loginInfo));
+            })}
+          >
+            <label
+              style={{
+                color: '#4D4759',
+              }}
+            >
+              이메일
+              <br />
+              <StyledInput
+                type="text"
+                // placeholder="이메일을 입력해주세요"
+                {...register('email', {
+                  required: '이메일을 입력해주세요',
+                  pattern: {
+                    value: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+                    message: '이메일 양식에 맞지 않습니다',
+                  },
+                })}
+                style={{
+                  margin: '0px 0px 28px 0px',
+                }}
+              />
+            </label>
+            {errors.email && <WarningText>{errors.email.message}</WarningText>}
+            <br />
+            <label
+              style={{
+                color: '#4D4759',
+              }}
+            >
+              비밀번호
+              <br />
+              <StyledInput
+                type="password"
+                // placeholder="비밀번호를 입력해주세요"
+                {...register('pw', {
+                  required: '비밀번호를 입력해주세요',
+                  maxLength: {
+                    value: 20,
+                    message: '비밀번호는 최대 20자입니다',
+                  },
+                  minLength: {
+                    value: 6,
+                    message: '비밀번호는 최소 6자 이상입니다',
+                  },
+                })}
+                style={{
+                  margin: '0px 0px 40px 0px',
+                }}
+              />
+            </label>
+            {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
+            <br />
+            <div
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              혹시 회원이 아니신가요?{'   '}
+              <span
+                onClick={() => {
+                  history.push('/signup');
+                }}
+                style={{
+                  cursor: 'pointer',
+                  color: '#8C4DFF',
+                }}
+              >
+                회원가입하기
+              </span>
+            </div>
+            <SubmitInput type="submit" value="로그인" />
+          </form>
+          <DivideWrapper>
+            <DivideLine />
+            <DivideContent>또는</DivideContent>
+            <DivideLine />
+          </DivideWrapper>
+          <KakaoButton
+            onClick={() => {
+              console.log(process.env.REACT_APP_KAKAO_PATH);
+              window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
+            }}
+          >
+            <KakaoLogoSvg />
+            카카오 로그인
+          </KakaoButton>
+          {/* <button
+            onClick={() => {
+              console.log(process.env.REACT_APP_GITHUB_PATH);
+              window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
+            }}
+          >
+            깃허브 로그인
+          </button> */}
+        </div>
+      </RightWrapper>
+    </LoginWrapper>
   );
-
-  // return (
-  //   <Grid>
-  //     <p>로그인</p>
-  //     <form onClick={handleSubmit(onSubmit)}>
-  //       <Input
-  //         type="email"
-  //         place="이메일을 입력해주세요"
-  //         // _onChange={(e) => {
-  //         //   // console.log(e.target.value);
-  //         //   setEmail(e.target.value);
-  //         // }}
-  //         {...register('email', { pattern: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/i})}
-  //       />
-  //       {/* {errors.password && <span>{errors.password.message}</span>} */}
-  //       <Input
-  //         type="password"
-  //         place="비밀번호를 입력해주세요"
-  //         // _onChange={(e) => {
-  //         //   // console.log(e.target.value);
-  //         //   setPw(e.target.value);
-  //         // }}
-  //         {...register({
-  //           required: "You must specify a password",
-  //         })}
-  //       />
-  //       {/* <Button _onClick={login}>로그인</Button> */}
-  //       <input type="submit" />
-  //     </form>
-  //   </Grid>
-  // );
 };
 
 export default Login;
