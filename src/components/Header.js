@@ -8,7 +8,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setNoti } from '../features/notice/actions';
 import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
@@ -19,9 +20,12 @@ import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
 
 const Header = () => {
+  const dispatch = useDispatch();
   // const classes = useStyles();
   userAuthCheck();
   const isUserLogin = useSelector((state) => state.user.email);
+  const isNoti = useSelector((state) => state.notice.isGlobalNoti);
+  console.log(window.location.href.split('/'));
   // const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -31,6 +35,7 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  console.log(isNoti);
   return (
     <HeaderWrapper>
       <Grid
@@ -50,6 +55,9 @@ const Header = () => {
           <Grid
             width="fit-content"
             _onClick={() => {
+              if (isNoti) {
+                dispatch(setNoti(false));
+              }
               history.push('/contap');
             }}
           >
@@ -58,7 +66,7 @@ const Header = () => {
                 cursor: 'pointer',
               }}
             >
-              <ContapIconSvg />
+              {isNoti ? <p>👌</p> : <ContapIconSvg />}
             </div>
           </Grid>
           <div>

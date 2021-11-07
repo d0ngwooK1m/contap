@@ -1,24 +1,21 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
-import StompJs from 'stompjs';
-import SockJS from 'sockjs-client';
-import { getToken } from '../utils/auth';
 
 import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Grid } from '../elements';
-
-const baseURL = process.env.REACT_APP_SERVER_URI;
+import useSocketNotiRoom from '../hooks/useSocketNotiRoom';
 
 const CardList = () => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
-
+  const [wsConnectSubscribe, wsDisConnectUnsubscribe, token] =
+    useSocketNotiRoom();
   React.useEffect(() => {
     if (cardList.allIds.length !== 0) {
       return;
@@ -28,50 +25,15 @@ const CardList = () => {
     }
   }, [isSearching]);
 
-  const userInfo = useSelector((state) => state.user);
-
-  const sock = new SockJS(`${baseURL}/ws-stomp`);
-  const ws = StompJs.over(sock);
-  const token = getToken();
-
-  const wsConnectSubscribe = React.useCallback(() => {
-    if (!token) {
-      return null;
-    }
-    try {
-      ws.connect({}, () => {
-        ws.subscribe(
-          `/user/sub/user`,
-          {},
-          { token, userEmail: userInfo.email },
-        );
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  // token이 있으면 소켓 연결
-
-  const wsDisConnectUnsubscribe = React.useCallback(() => {
-    try {
-      ws.disconnect(
-        () => {
-          ws.unsubscribe('sub-0');
-        },
-        // { token }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   React.useEffect(() => {
     if (!token) {
       return null;
     }
     wsConnectSubscribe();
 
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
   }, []);
 
   return (

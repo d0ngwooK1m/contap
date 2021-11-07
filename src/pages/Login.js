@@ -47,15 +47,16 @@ const Login = () => {
     console.log(code);
 
     async function handleKakaoLogin() {
-      
       try {
-        const {data} = await axios({
+        const a = await axios({
           method: 'GET',
-          url: `${baseURL}/user/kakao?code=${code}`,
+          url: `${baseURL}/user/github?code=${code}`,
         });
-        console.log(data);
+        console.log(a);
         saveToken(data.token);
-        dispatch(loginAction({ email: data.email, userName: data.userName }));
+        await dispatch(
+          loginAction({ email: data.email, userName: data.userName }),
+        );
         history.replace('/');
       } catch (error) {
         console.error(error);
@@ -164,14 +165,14 @@ const Login = () => {
             <KakaoLogoSvg />
             카카오 로그인
           </KakaoButton>
-          {/* <button
+          <button
             onClick={() => {
               console.log(process.env.REACT_APP_GITHUB_PATH);
               window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
             }}
           >
             깃허브 로그인
-          </button> */}
+          </button>
         </div>
       </RightWrapper>
     </LoginWrapper>

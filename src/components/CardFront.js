@@ -114,9 +114,8 @@ const CardFront = ({ userId, contap, select, grab }) => {
           src={front[userId] ? front[userId].profile : null}
         />
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[userId] ? front[userId].userName : null}</Text>#
-          {stackHashTags}
-          <Text color="#7F7C82" bold />
+          <Text regular20>{front[userId] ? front[userId].userName : null}</Text>
+          # {stackHashTags}
         </Grid>
       </Div>
       <Hash>
