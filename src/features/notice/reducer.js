@@ -1,27 +1,42 @@
 import { produce } from 'immer';
 import { handleActions } from 'redux-actions';
-import { GLOBAL_NOTI, CHAT_NOTI, TAP_NOTI } from './types';
+import {
+  BEFORE_NOTI,
+  CHAT_NOTI,
+  TAP_NOTI,
+  GRAB_NOTI,
+  CONTAP_NOTI,
+} from './types';
 
 const initialState = {
-  isGlobalNoti: false,
+  isBeforeNoti: false,
+  isContapNoti: false,
+  isChatNoti: false,
+  isTapNoti: false,
+  isGrabNoti: false,
 };
 
 export default handleActions(
   {
-    [GLOBAL_NOTI]: (state, action) =>
+    [BEFORE_NOTI]: (state, action) =>
       produce(state, (draft) => {
-        console.log('페이로드 ===> ', action.payload);
-        draft.isGlobalNoti = action.payload.isNoti;
+        draft.isBeforeNoti = action.payload.isNoti;
+      }),
+    [CONTAP_NOTI]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isContapNoti = action.payload.isNoti;
       }),
     [CHAT_NOTI]: (state, action) =>
       produce(state, (draft) => {
-        console.log('페이로드 ===> ', action.payload);
-        console.log(draft);
+        draft.isChatNoti = action.payload.isNoti;
       }),
     [TAP_NOTI]: (state, action) =>
       produce(state, (draft) => {
-        console.log('페이로드 ===> ', action.payload);
-        console.log(draft);
+        draft.isTapNoti = action.payload.isNoti;
+      }),
+    [GRAB_NOTI]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isGrabNoti = action.payload.isNoti;
       }),
   },
   initialState,

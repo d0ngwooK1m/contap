@@ -1,6 +1,16 @@
 import { createAction } from 'redux-actions';
-import { GLOBAL_NOTI, CHAT_NOTI, TAP_NOTI } from './types';
+import {
+  BEFORE_NOTI,
+  CHAT_NOTI,
+  TAP_NOTI,
+  GRAB_NOTI,
+  CONTAP_NOTI,
+} from './types';
 
-export const setNoti = createAction(GLOBAL_NOTI, (isNoti) => ({ isNoti }));
+export const setNoti = createAction(BEFORE_NOTI, (isNoti) => ({ isNoti }));
 export const setChatNoti = createAction(CHAT_NOTI, (isNoti) => ({ isNoti }));
+export const setContapNoti = createAction(CONTAP_NOTI, (isNoti) => ({
+  isNoti,
+}));
 export const setTapNoti = createAction(TAP_NOTI, (isNoti) => ({ isNoti }));
+export const setGrabNoti = createAction(GRAB_NOTI, (isNoti) => ({ isNoti }));

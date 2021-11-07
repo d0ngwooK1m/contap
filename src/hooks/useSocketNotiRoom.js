@@ -4,7 +4,7 @@ import StompJs from 'stompjs';
 import SockJS from 'sockjs-client';
 import { getToken } from '../utils/auth';
 import T from '../api/tokenInstance';
-import { setNoti } from '../features/notice/actions';
+import { setChatNoti } from '../features/notice/actions';
 
 const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -22,13 +22,12 @@ export default function useSocketNotiRoom() {
     }
     try {
       const { data } = await T.GET('/auth');
-      console.log(data);
       ws.connect({}, () => {
         ws.subscribe(
           `/user/sub/user`,
           () => {
             if (!isNoti) {
-              dispatch(setNoti(true));
+              dispatch(setChatNoti(true));
             }
           },
           { token, userEmail: data.email },
@@ -50,5 +49,5 @@ export default function useSocketNotiRoom() {
     }
   }, []);
 
-  return [wsConnectSubscribe, wsDisConnectUnsubscribe, token];
+  return [wsConnectSubscribe, wsDisConnectUnsubscribe, token, isNoti];
 }
