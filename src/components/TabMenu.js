@@ -15,7 +15,8 @@ const TabMenu = ({ content }) => {
       <div>
         {content.map((val, idx) => {
           return (
-              <TabButton
+            <TabButton
+              key={val.id}
                 id={val.id}
                 val={val}
                 check={contentItem.id}
@@ -43,7 +44,6 @@ const Wrapper = styled.div`
   height: 100vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #A09BAC4D;
-  background-color: #0F0A1A;
 `;
 
 // export default TabMenu;

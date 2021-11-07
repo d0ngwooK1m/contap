@@ -8,7 +8,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
@@ -19,9 +20,12 @@ import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
 
 const Header = () => {
+  const dispatch = useDispatch();
   // const classes = useStyles();
   userAuthCheck();
   const isUserLogin = useSelector((state) => state.user.email);
+  const isChatNoti = useSelector((state) => state.notice.isChatNoti);
+  console.log(window.location.href.split('/'));
   // const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -31,6 +35,7 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  console.log(isChatNoti);
   return (
     <HeaderWrapper>
       <Grid
@@ -50,6 +55,9 @@ const Header = () => {
           <Grid
             width="fit-content"
             _onClick={() => {
+              if (isChatNoti) {
+                dispatch(setContapNoti(false));
+              }
               history.push('/contap');
             }}
           >
@@ -59,6 +67,23 @@ const Header = () => {
               }}
             >
               <ContapIconSvg />
+            </div>
+          </Grid>
+          <Grid
+            width="fit-content"
+            _onClick={() => {
+              if (isChatNoti) {
+                dispatch(setChatNoti(false));
+              }
+              history.push('/contap');
+            }}
+          >
+            <div
+              style={{
+                cursor: 'pointer',
+              }}
+            >
+              {isChatNoti ? <div>📭</div> : <div>📧</div>}
             </div>
           </Grid>
           <div>

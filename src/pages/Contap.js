@@ -4,8 +4,23 @@ import TabMenu from '../components/TabMenu';
 import SendTap from '../components/SendTap';
 import ReceiveTap from '../components/ReceiveTap';
 import GrabList from '../components/GrabList';
+import useSocketNotiRoom from '../hooks/useSocketNotiRoom';
 
 const Contap = () => {
+  const [wsConnectSubscribe, wsDisConnectUnsubscribe, token] =
+    useSocketNotiRoom();
+
+  React.useEffect(() => {
+    if (!token) {
+      return null;
+    }
+    wsConnectSubscribe();
+
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
+  }, []);
+
   const content = [
     {
       id: 'ReceiveTap',

@@ -8,11 +8,25 @@ import { loadMyCardDB } from '../features/cards/actions';
 import CardProfile from '../components/CardProfile';
 import CardAdd from '../components/CardAdd';
 import CardBackWrite from '../components/CardBackWrite';
+import useSocketNotiRoom from '../hooks/useSocketNotiRoom';
 
 import { Grid, Text } from '../elements';
 
 const Mypage = () => {
   const dispatch = useDispatch();
+  const [wsConnectSubscribe, wsDisConnectUnsubscribe, token] =
+    useSocketNotiRoom();
+
+  React.useEffect(() => {
+    if (!token) {
+      return null;
+    }
+    wsConnectSubscribe();
+
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
+  }, []);
 
   const cardCount = useSelector((state) => state.cards.allIds);
   console.log(cardCount.length);

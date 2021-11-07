@@ -3,6 +3,7 @@ import { Grid } from '../elements';
 import TabMenu from '../components/TabMenu';
 import PwSettingForm from '../components/PwSettingForm';
 import WithdrawalForm from '../components/WithdrawalForm';
+import useSocketNotiRoom from '../hooks/useSocketNotiRoom';
 
 const content = [
   {
@@ -18,6 +19,19 @@ const content = [
 ];
 
 const Settings = () => {
+  const [wsConnectSubscribe, wsDisConnectUnsubscribe, token] =
+    useSocketNotiRoom();
+
+  React.useEffect(() => {
+    if (!token) {
+      return null;
+    }
+    wsConnectSubscribe();
+
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
+  }, []);
   return (
     <Grid>
       <p>설정 페이지</p>

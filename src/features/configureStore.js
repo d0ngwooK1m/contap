@@ -9,6 +9,7 @@ import user from './user/reducer';
 import cards from './cards/reducer';
 import taps from './taps/reducer';
 import chat from './chat/reducer';
+import notice from './notice/reducer';
 
 export const history = createBrowserHistory();
 const middlewares = [thunk.withExtraArgument({ history })];
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   cards,
   taps,
   chat,
+  notice,
   router: connectRouter(history),
 });
 
