@@ -31,11 +31,15 @@ const Mypage = () => {
   const cardCount = useSelector((state) => state.cards.allIds);
   console.log(cardCount.length);
 
+  const [click, setClick] = React.useState(false);
+
+  const getClick = (c) => {
+    setClick(c);
+  };
+
   React.useEffect(() => {
     dispatch(loadMyCardDB());
   }, []);
-
-  const [click, setClick] = React.useState(false);
 
   if (click) {
     return (
@@ -54,7 +58,7 @@ const Mypage = () => {
           </Btn>
         </Div>
         <Grid>
-          <CardBackWrite />
+          <CardBackWrite getClick={getClick} />
         </Grid>
         <Grid>
           <CardAdd />
