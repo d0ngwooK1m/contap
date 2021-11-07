@@ -8,6 +8,7 @@ import { Grid, Input } from '../elements';
 
 const CardBackWrite = () => {
   const dispatch = useDispatch();
+  // console.log(getClick);
 
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
@@ -22,8 +23,11 @@ const CardBackWrite = () => {
     link,
   };
 
+  // const [click, setClick] = React.useState(propsClick.false);
+
   const addCardBack = () => {
     dispatch(createCardDB(content));
+    // getClick(true);
   };
 
   return (

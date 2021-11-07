@@ -97,23 +97,28 @@ export default handleActions(
       }),
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const { cardId } = action.payload;
+        const { cardId } = action.payload.card;
+        console.log(cardId);
+        draft.byId[cardId] = action.payload.card;
         console.log(action.payload);
-        draft.byId[cardId] = action.payload;
         draft.allIds.unshift(cardId);
+        console.log(draft.allIds.unshift(cardId));
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         draft.current = action.payload;
         console.log(action.payload);
-        draft.byId[action.payload.id] = action.payload;
+        draft.byId[action.payload.card.cardId] = action.payload.card;
+        console.log(action.payload.card.cardId);
       }),
     [DELETE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        delete draft.byId[action.payload];
+        delete draft.byId[action.payload.cardId];
+        console.log(action.payload.cardId);
         draft.allIds = draft.allIds.filter(
-          (id) => id !== Number(action.payload),
+          (id) => id !== Number(action.payload.cardId),
         );
+        console.log(draft.allIds);
       }),
   },
   initialState,

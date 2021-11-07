@@ -28,15 +28,6 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const [display, setDisplay] = React.useState({ display: 'none' });
-  // const showButton = () => {
-  //   // e.preventDefault();
-  //   setDisplay({ dispaly: 'block' });
-  // };
-
-  // const hideButton = () => {
-  //   // e.preventDefault();
-  //   setDisplay({ display: 'none' });
-  // };
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
@@ -47,7 +38,7 @@ const CardPortfolio = ({ cardId }) => {
 
   const edit = () => {
     dispatch(updateCardDB(cardId, content));
-    // setClick(!click);
+    setClick(!click);
   };
 
   if (click) {
@@ -124,37 +115,6 @@ const CardPortfolio = ({ cardId }) => {
       </Div>
     </Grid>
   );
-
-  // div에 마우스오버시 버튼나오게 하는거..!
-  // const [hide, setHide] = React.useState(false);
-  // return (
-  //   <Grid>
-  //     {/* <div
-  //       onMouseEnter={() => {
-  //         setHide(false);
-  //       }}
-  //       onMouseLeave={() => {
-  //         setHide(true);
-  //       }}
-  //     > */}
-  //     <EditIcon  />
-  //     <DeleteOutlineIcon />
-  //     <Grid
-  //       width="960px"
-  //       height="510px"
-  //       borderRadius="16px"
-  //       border="1px solid #dcdcdc"
-  //       bgcolor="background.paper"
-  //       margin="40px auto"
-  //     >
-  //       <Text>{cardList[cardId].title}</Text>
-  //       <Text>{cardList[cardId].content}</Text>
-  //       <Text>{cardList[cardId].tagsStr}</Text>
-  //       <Text>{cardList[cardId].link}</Text>
-  //     </Grid>
-  //     {/* </div> */}
-  //   </Grid>
-  // );
 };
 
 CardPortfolio.propTypes = {
