@@ -37,7 +37,7 @@ const Text = ({
 };
 
 Text.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
   regular14: PropTypes.bool,
   regular16: PropTypes.bool,
   regular20: PropTypes.bool,
@@ -60,42 +60,42 @@ Text.defaultProps = {
 const Regular14 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 14pt;
+  font-size: 14px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
 const Regular16 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 16pt;
+  font-size: 16px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
 const Regular20 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 20pt;
+  font-size: 20px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
 const Bold20 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 20pt;
+  font-size: 20px;
   font-weight: 700;
   color: ${({color}) => color};
 `;
 const Bold24 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 24pt;
+  font-size: 24px;
   font-weight: 700;
   color: ${({color}) => color};
 `;
 const Bold32 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 32pt;
+  font-size: 32px;
   font-weight: 700;
   color: ${({color}) => color};
 `;

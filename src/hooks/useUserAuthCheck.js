@@ -7,7 +7,7 @@ import tokenAxios from '../api/tokenInstance';
 
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
-const userAuthCheck = () => {
+const useUserAuthCheck = () => {
   const isUserAuthorized = useSelector((state) => state.user.isAuthorized);
 
   const dispatch = useDispatch();
@@ -42,4 +42,4 @@ const userAuthCheck = () => {
   return [isUserAuthorized, token];
 };
 
-export default userAuthCheck;
+export default useUserAuthCheck;

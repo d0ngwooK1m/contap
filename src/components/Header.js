@@ -4,38 +4,78 @@ import styled from 'styled-components';
 
 // import Button from '@mui/material/Button';
 import { IconButton } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { setChatNoti, setContapNoti } from '../features/notice/actions';
+// import { setChatNoti, setContapNoti } from '../features/notice/actions';
+import { setChatNoti } from '../features/notice/actions';
 import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
-import { Grid, Image } from '../elements';
-import userAuthCheck from '../hooks/userAuthCheck';
+import { Grid } from '../elements';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
+import { ReactComponent as SettingIconSvg } from '../svgs/Setting.svg';
+import { ReactComponent as ChatIconSvg } from '../svgs/ChatIcon.svg';
+import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
+import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
 const Header = () => {
+  // 로그인 체크
   const dispatch = useDispatch();
-  // const classes = useStyles();
-  userAuthCheck();
   const isUserLogin = useSelector((state) => state.user.email);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
-  console.log(window.location.href.split('/'));
-  // const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+
+  const [isContap, setIsContap] = React.useState(false);
+  const [isChat, setIsChat] = React.useState(false);
+  const [isSetting, setIsSetting] = React.useState(false);
+
+  const handleisContap = () => {
+    if (isContap) {
+      return;
+    }
+    setIsContap(true);
+    setIsSetting(false);
+    setIsChat(false);
+    history.push('/contap');
+  };
+
+  const handleisChat = () => {
+    if (isChatNoti) {
+      dispatch(setChatNoti(false));
+    }
+
+    setIsChat(true);
+    setIsSetting(false);
+    setIsContap(false);
+
+    history.push('/contap');
+  };
+
+  const handleisSetting = (event) => {
+    setIsSetting(true);
+    setIsChat(false);
+    setIsContap(false);
     setAnchorEl(event.currentTarget);
   };
+
+  const moveToMyPage = () => {
+    setIsSetting(false);
+    setIsChat(false);
+    setIsContap(false);
+    history.push('/mypage');
+  };
+  const open = Boolean(anchorEl);
+
   const handleClose = () => {
+    setIsSetting(false);
     setAnchorEl(null);
   };
-  console.log(isChatNoti);
+  useUserAuthCheck();
+
   return (
     <HeaderWrapper>
       <Grid
@@ -52,87 +92,77 @@ const Header = () => {
       </Grid>
       {isUserLogin !== '' ? (
         <MenuWrapper>
-          <Grid
-            width="fit-content"
-            _onClick={() => {
-              if (isChatNoti) {
-                dispatch(setContapNoti(false));
-              }
-              history.push('/contap');
+          <Icon
+            style={{
+              cursor: 'pointer',
             }}
+            onClick={handleisContap}
           >
-            <div
-              style={{
-                cursor: 'pointer',
-              }}
-            >
-              <ContapIconSvg />
-            </div>
-          </Grid>
-          <Grid
-            width="fit-content"
-            _onClick={() => {
-              if (isChatNoti) {
-                dispatch(setChatNoti(false));
-              }
-              history.push('/contap');
+            {isContap ? (
+              <ContapIconSvg fill="#8C4DFF" />
+            ) : (
+              <ContapIconSvg fill="#F5F3F8" />
+            )}
+          </Icon>
+
+          <Icon
+            style={{
+              cursor: 'pointer',
             }}
+            onClick={handleisChat}
           >
-            <div
-              style={{
-                cursor: 'pointer',
-              }}
-            >
-              {isChatNoti ? <div>📭</div> : <div>📧</div>}
-            </div>
-          </Grid>
-          <div>
+            {isChat ? (
+              <ChatIconSvg fill="#8C4DFF" />
+            ) : (
+              <ChatIconSvg fill="#F5F3F8" />
+            )}
+          </Icon>
+          <Icon>
             <IconButton
               aria-label="delete"
               size="small"
               sx={{ padding: '0px' }}
-              onClick={handleClick}
+              onClick={handleisSetting}
             >
-              <SettingsIcon fontSize="small" />
+              {isSetting ? (
+                <SettingIconSvg stroke="#8C4DFF" />
+              ) : (
+                <SettingIconSvg stroke="#F5F3F8" />
+              )}
             </IconButton>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-              <MenuItem
-                onClick={() => {
-                  history.push('/settings');
-                  handleClose();
-                }}
-              >
-                설정
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  const token = getToken();
-                  removeToken(token);
-                  logout();
-                  handleClose();
-                  window.location.href = '/';
-                }}
-              >
-                로그아웃
-              </MenuItem>
-            </Menu>
-          </div>
-          <Grid
-            width="fit-content"
-            _onClick={() => {
-              history.push('/mypage');
+          </Icon>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
             }}
           >
-            <Image shape="circle" />
-          </Grid>
+            <MenuItem
+              onClick={() => {
+                history.push('/settings');
+                handleClose();
+              }}
+            >
+              설정
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                const token = getToken();
+                removeToken(token);
+                logout();
+                handleClose();
+                window.location.href = '/';
+              }}
+            >
+              로그아웃
+            </MenuItem>
+          </Menu>
+          <IconButton style={{ margin: '0px 12px' }} onClick={moveToMyPage}>
+            <BasicProfileSvg />
+          </IconButton>
         </MenuWrapper>
       ) : (
         <LoginButton
@@ -160,11 +190,13 @@ const HeaderWrapper = styled.div`
 `;
 
 const MenuWrapper = styled.div`
-  width: 134px;
-  height: 48px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+const Icon = styled.div`
+  margin: 0px 12px;
 `;
 
 const LoginButton = styled.button`

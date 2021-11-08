@@ -2,13 +2,13 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { PropTypes } from 'prop-types';
-import userAuthCheck from '../hooks/userAuthCheck';
+import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
 const Permit = ({ children }) => {
-  const [isUserAuthorized, token] = userAuthCheck();
+  const [isUserAuthorized, token] = useUserAuthCheck();
 
   if (!(token || isUserAuthorized)) {
-    return <Redirect to="/signup" />;
+    return <Redirect to="/login" />;
   }
 
   return children;

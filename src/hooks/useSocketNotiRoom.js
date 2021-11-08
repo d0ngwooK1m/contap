@@ -10,7 +10,7 @@ const baseURL = process.env.REACT_APP_SERVER_URI;
 
 export default function useSocketNotiRoom() {
   const dispatch = useDispatch();
-  const isNoti = useSelector((state) => state.notice.isGlobalNoti);
+  const isChatNoti = useSelector((state) => state.notice.isChatNoti);
 
   const sock = new SockJS(`${baseURL}/ws-stomp`);
   const ws = StompJs.over(sock);
@@ -26,7 +26,7 @@ export default function useSocketNotiRoom() {
         ws.subscribe(
           `/user/sub/user`,
           () => {
-            if (!isNoti) {
+            if (!isChatNoti) {
               dispatch(setChatNoti(true));
             }
           },
@@ -49,5 +49,5 @@ export default function useSocketNotiRoom() {
     }
   }, []);
 
-  return [wsConnectSubscribe, wsDisConnectUnsubscribe, token, isNoti];
+  return [wsConnectSubscribe, wsDisConnectUnsubscribe, token, isChatNoti];
 }

@@ -39,8 +39,8 @@ const CardFrontContap = ({ userId, onModal }) => {
           src={front[userId] ? front[userId].profile : null}
         />
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[userId] ? front[userId].userName : null}</Text>#{' '}
-          {stackHashTags}
+          <Text>{front[userId] ? front[userId].userName : null}</Text>
+          # {stackHashTags}
           <Text color="#7F7C82" bold />
         </Grid>
       </Div>
