@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-
 import { Reset } from 'styled-reset';
+import styled from 'styled-components';
+import PrivatecRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 import CardList from '../pages/CardList';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
@@ -11,44 +12,40 @@ import Header from './Header';
 import Mypage from '../pages/Mypage';
 import CardEdit from '../pages/CardEdit';
 import Permit from './Permit';
+import WsNotiRoom from './WsNotiRoom';
 
 function App() {
   return (
-    <div>
-      <Reset />
-      {/* <Header /> */}
-      <Route path="/login" exact component={Login} />
-      <Route path="/signup" exact component={Signup} />
-      <Route path="/" exact>
-        <Header />
-        <CardList />
-      </Route>
-      <Route path="/settings" exact>
-        <Permit>
-          <Header />
-          <Settings />
-        </Permit>
-      </Route>
-      <Route path="/contap" exact>
-        <Permit>
-          <Header />
-          <Contap />
-        </Permit>
-      </Route>
-      <Route path="/mypage" exact>
-        <Permit>
-          <Header />
-          <Mypage />
-        </Permit>
-      </Route>
-      <Route path="/edit" exact>
-        <Permit>
-          <Header />
-          <CardEdit />
-        </Permit>
-      </Route>
-    </div>
+    <FullWrap>
+      <Wrap>
+        <Reset />
+        <PublicRoute restricted path="/login" component={Login} exact />
+        <PublicRoute restricted path="/signup" component={Signup} exact />
+        <>
+          <WsNotiRoom>
+            <Header />
+            <Permit>
+              <PublicRoute path="/" component={CardList} exact />
+              <PrivatecRoute path="/settings" component={Settings} exact />
+              <PrivatecRoute path="/contap" component={Contap} exact />
+              <PrivatecRoute path="/mypage" component={Mypage} exact />
+              <PrivatecRoute path="/edit" component={CardEdit} exact />
+            </Permit>
+          </WsNotiRoom>
+        </>
+      </Wrap>
+    </FullWrap>
   );
 }
+const FullWrap = styled.div`
+  width: 100%;
+  height: 100vh;
+  background-color: #0f0a1a;
+`;
+
+const Wrap = styled.div`
+  max-width: 1440px;
+  margin: auto;
+`;
 
 export default App;
