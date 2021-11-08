@@ -8,14 +8,12 @@ import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Grid } from '../elements';
-import useSocketNotiRoom from '../hooks/useSocketNotiRoom';
 
 const CardList = () => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
-  const [wsConnectSubscribe, wsDisConnectUnsubscribe, token] =
-    useSocketNotiRoom();
+
   React.useEffect(() => {
     if (cardList.allIds.length !== 0) {
       return;
@@ -24,17 +22,6 @@ const CardList = () => {
       dispatch(loadCardFrontDB());
     }
   }, [isSearching]);
-
-  React.useEffect(() => {
-    if (!token) {
-      return null;
-    }
-    wsConnectSubscribe();
-
-    return () => {
-      wsDisConnectUnsubscribe();
-    };
-  }, []);
 
   return (
     <Grid>

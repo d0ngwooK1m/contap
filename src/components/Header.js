@@ -13,19 +13,20 @@ import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
-import { getToken, removeToken } from '../utils/auth';
+import { removeToken } from '../utils/auth';
 import { Grid, Image } from '../elements';
 import userAuthCheck from '../hooks/userAuthCheck';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
+import useSocketNotiRoom from '../hooks/useSocketNotiRoom';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const [wsConnectSubscribe, wsDisConnectUnsubscribe, token, isChatNoti] =
+    useSocketNotiRoom();
   // const classes = useStyles();
   userAuthCheck();
   const isUserLogin = useSelector((state) => state.user.email);
-  const isChatNoti = useSelector((state) => state.notice.isChatNoti);
-  console.log(window.location.href.split('/'));
   // const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -35,6 +36,20 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  /*eslint-disable */
+  React.useEffect(() => {
+    if (!token) {
+      return null;
+    }
+
+    wsConnectSubscribe();
+
+    return () => {
+      wsDisConnectUnsubscribe();
+    };
+  }, []);
+
   console.log(isChatNoti);
   return (
     <HeaderWrapper>
@@ -114,7 +129,6 @@ const Header = () => {
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  const token = getToken();
                   removeToken(token);
                   logout();
                   handleClose();
