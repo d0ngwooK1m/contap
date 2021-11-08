@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { history } from '../features/configureStore';
 
-import { Grid, Text } from '../elements';
+import { Grid } from '../elements';
+import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
+import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
+import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
 const CardProfile = () => {
   const cardList = useSelector((state) => state.cards.current);
@@ -13,32 +16,28 @@ const CardProfile = () => {
   return (
     <Grid>
       <TitleText>{cardList.userName}님의 프로필</TitleText>
-      <Grid
-        width="540px"
-        height="308px"
-        borderRadius="16px"
-        border="1px solid #dcdcdc"
-        bgcolor="background.paper"
-        margin="25px auto"
-        // bg="linear-gradient(45deg, #94D1B5, #29BD87, #7E22CE)"
-      >
+      <DotDiv>
+        <DoodleDots />
+      </DotDiv>
+      <ProfileDiv>
         <Div>
-          <Grid margin="20px" width="125px">
+          <Grid margin="32px" width="125px" height="112px">
             <Img src={cardList.profile} />
           </Grid>
-          <TextDiv>
-            <Text>{cardList.userName}</Text>
-          </TextDiv>
+          <Grid width="40%" margin="56px 0px 0px 0px">
+            <NameText>{cardList.userName}</NameText>
+            <InterestText>#자바스크립트</InterestText>
+          </Grid>
+          <BtnDiv
+            onClick={() => {
+              history.push('/edit');
+            }}
+          >
+            <UpdateBtn />
+          </BtnDiv>
         </Div>
-        <TDiv>관심사</TDiv>
-        <Btn
-          onClick={() => {
-            history.push('/edit');
-          }}
-        >
-          수정하기
-        </Btn>
-      </Grid>
+        <StackText>관심사</StackText>
+      </ProfileDiv>
     </Grid>
   );
 };
@@ -50,40 +49,86 @@ CardProfile.defaultProps = {
 
 export default CardProfile;
 
+const DotDiv = styled.div`
+  position: absolute;
+  left: 450px;
+  top: 30%;
+`;
+const ProfileDiv = styled.div`
+  width: 540px;
+  height: 308px;
+  border-radius: 16px;
+  border: 1px solid #dcdcdc;
+  margin: 62px auto 114px auto;
+  background-color: #94d1b5;
+  // position: absolute;
+  // z-index: 1;
+`;
+
 const Div = styled.div`
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
 `;
 
 const TitleText = styled.p`
-  font-size: 20px;
+  font-size: ${FontScale.Header_32};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
   text-align: center;
+  margin-top: 66px;
+  font-weight: 700;
+`;
+
+const NameText = styled.p`
+  font-size: ${FontScale.Header_32};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  margin-bottom: 22px;
+  font-weight: 700;
+`;
+
+const InterestText = styled.p`
+  font-size: ${FontScale.Header_24};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  // margin: 160px 0px 64px 0px;
+  font-weight: 700;
 `;
 
 const Img = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px 0px;
-  width: 123px;
+  width: 125px;
+  height: 112px;
 `;
 
-const TextDiv = styled.div`
-  position: absolute;
-  top: 20vh;
-  left: 42vw;
+// const TextDiv = styled.div`
+//   position: absolute;
+//   top: 20vh;
+//   left: 42vw;
+// `;
+
+const StackText = styled.div`
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  margin: 0px 0px 12px 32px;
+  font-weight: 700;
 `;
 
-const TDiv = styled.div`
-  position: absolute;
-  top: 35vh;
-  left: 33vw;
+const BtnDiv = styled.div`
+  width: 20%;
+  cursor: pointer;
+  margin: 22px 26px 0px 0px;
 `;
 
-const Btn = styled.button`
-  width: 80px;
-  position: absolute;
-  top: 21vh;
-  left: 53vw;
-`;
+// const Btn = styled.button`
+//   width: 80px;
+//   position: absolute;
+//   top: 21vh;
+//   left: 53vw;
+// `;

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -7,9 +8,12 @@ import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
-import { Grid, Text, Input } from '../elements';
+import { Grid, Input } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
 import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
+import { ReactComponent as Link } from '../svgs/Link.svg';
+
+import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
 const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
@@ -85,6 +89,7 @@ const CardPortfolio = ({ cardId }) => {
       </Grid>
     );
   }
+  console.log(cardList[cardId]);
   return (
     <Grid>
       <Div
@@ -103,14 +108,19 @@ const CardPortfolio = ({ cardId }) => {
           width="1110px"
           height="450px"
           borderRadius="16px"
-          border="1px solid #dcdcdc"
-          bgcolor="background.paper"
+          border="1px solid #a09bac"
+          bg="#141422"
           margin="0px auto 40px auto"
         >
-          <Text>{cardList[cardId].title}</Text>
-          <Text>{cardList[cardId].content}</Text>
-          <Text>{cardList[cardId].tagsStr}</Text>
-          <Text>{cardList[cardId].link}</Text>
+          <TitleText>{cardList[cardId].title}</TitleText>
+          <MainText>{cardList[cardId].content}</MainText>
+          <TagText>{cardList[cardId].tagsStr}</TagText>
+          <LinkText>
+            <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>
+              <Link />
+            </span>
+            {cardList[cardId].link}
+          </LinkText>
         </Grid>
       </Div>
     </Grid>
@@ -130,6 +140,55 @@ const Div = styled.div`
   // border: 1px solid #dcdcdc;
   // bgcolor: background.paper;
   margin: 0px auto;
+`;
+
+// const TitleInput = styled.input`
+//   width: 445px;
+//   height: 30px;
+//   color: ${ColorStyle.Gray500};
+//   background-color: ${ColorStyle.BackGround100};
+//   border-bottom: 1px solid ${ColorStyle.Gray100};
+//   border-right: none;
+//   &:focus {
+//     outline: none;
+//   }
+// `;
+
+const TitleText = styled.p`
+  font-size: ${FontScale.Header_24};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  border-bottom: 1px solid ${ColorStyle.Gray100};
+  padding: 14px 0px;
+  width: 587px;
+  margin: 64px 0px 40px 48px;
+  font-weight: 700;
+`;
+
+const MainText = styled.p`
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  margin: 0px 0px 61px 48px;
+`;
+
+const TagText = styled.p`
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  margin: 0px 0px 28px 48px;
+  width: 10%;
+  border: 1px solid #8c4dff;
+  border-radius: 8px;
+  background-color: #8c4dff;
+  text-align: center;
+`;
+
+const LinkText = styled.p`
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.PrimaryPurple};
+  margin: 0px 0px 64px 48px;
 `;
 
 const IconDiv = styled.div`

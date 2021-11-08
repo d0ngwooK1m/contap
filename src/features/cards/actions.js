@@ -18,6 +18,7 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   SEARCH_ARR,
+  IS_SUCCESS,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
@@ -53,6 +54,7 @@ export const updateCard = createAction(UPDATE_CARD, (card) => ({
 export const deleteCard = createAction(DELETE_CARD, (cardId) => ({
   cardId,
 }));
+export const isSuccess = createAction(IS_SUCCESS, (success) => ({ success }));
 
 // 미들웨어
 

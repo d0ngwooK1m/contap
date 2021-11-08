@@ -39,7 +39,7 @@ function App() {
 }
 const FullWrap = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #0f0a1a;
 `;
 

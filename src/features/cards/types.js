@@ -18,3 +18,5 @@ export const CREATE_CARD = 'cards/CREATE_CARD';
 export const UPDATE_CARD = 'cards/UPDATE_CARD';
 // 마이페이지 포트폴리오 카드 삭제
 export const DELETE_CARD = 'cards/DELETE_CARD';
+// 카드 추가하기 클릭 확인
+export const IS_SUCCESS = 'cards/IS_SUCCESS';

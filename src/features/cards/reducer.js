@@ -12,6 +12,7 @@ import {
   LOAD_CURRENT_CARD,
   SET_PREVIEW,
   LOAD_MY_CARD,
+  IS_SUCCESS,
 } from './types';
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   searchInfo: {},
   searchArr: [],
   isSearching: false,
+  isSuccess: false,
 };
 
 export default handleActions(
@@ -72,7 +74,7 @@ export default handleActions(
     [EDIT_CARD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         const { userId } = action.payload;
-        // console.log(action.payload);
+        console.log(action.payload);
         draft.byId[userId] = action.payload;
         draft.allIds.unshift(userId);
       }),
@@ -102,7 +104,8 @@ export default handleActions(
         draft.byId[cardId] = action.payload.card;
         console.log(action.payload);
         draft.allIds.unshift(cardId);
-        console.log(draft.allIds.unshift(cardId));
+        // 설마.... 콘솔이 실행될줄이야.....
+        // console.log(draft.allIds.unshift(cardId));
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
@@ -113,12 +116,20 @@ export default handleActions(
       }),
     [DELETE_CARD]: (state, action) =>
       produce(state, (draft) => {
+        // draft.cardList = {};
+        // draft.current = {};
         delete draft.byId[action.payload.cardId];
-        console.log(action.payload.cardId);
+        // delete draft.cardList[draft.cardList.findIndex(action.payload.cardId)];
+        console.log(action.payload);
         draft.allIds = draft.allIds.filter(
           (id) => id !== Number(action.payload.cardId),
         );
         console.log(draft.allIds);
+      }),
+    [IS_SUCCESS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isSuccess = action.payload.success;
+        console.log(action.payload);
       }),
   },
   initialState,
