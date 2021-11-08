@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadReceiveTapToAxios } from '../features/taps/actions';
@@ -11,31 +12,17 @@ const ReceiveTap = ({ select }) => {
     dispatch(loadReceiveTapToAxios());
   }, []);
 
+  const userName = useSelector((state) => state.user.userName);
   const conTap = useSelector((state) => state.taps);
 
   return (
-    <div>
-      <p style={{ color: 'white' }}>zzz</p>
-      <Text color="red" regular14>
-        zzz
-      </Text>
-      <Text color="blue" regular16>
-        zzz
-      </Text>
-      <Text color="white" regular20>
-        zzz
-      </Text>
-      <Text color="white" bold20>
-        zzz
-      </Text>
-      <Text color="white" bold24>
-        zzz
-      </Text>
-      <Text color="white" bold32>
-        zzz
+    <Wrap>
+      <Text color="#FFF" bold32>
+        똑똑,
+        <br />
+        누군가 {userName}님을 탭!했어요
       </Text>
 
-      <p />
       {conTap.allIds.map((ReceiveTapUserId) => {
         return (
           <MemoizedCardFront
@@ -46,12 +33,19 @@ const ReceiveTap = ({ select }) => {
           />
         );
       })}
-    </div>
+    </Wrap>
   );
 };
 
 ReceiveTap.propTypes = {
   select: PropTypes.string.isRequired,
 };
+
+const Wrap = styled.div`
+  position: relative;
+  top: 75px;
+  left: 125px;
+  width: 100%;
+`;
 
 export default ReceiveTap;

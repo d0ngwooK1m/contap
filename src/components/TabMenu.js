@@ -12,7 +12,7 @@ const TabMenu = ({ content }) => {
 
   return (
     <Wrapper>
-      <div>
+      <Menu>
         {content.map((val, idx) => {
           return (
             <TabButton
@@ -26,7 +26,7 @@ const TabMenu = ({ content }) => {
               />
           );
         })}
-      </div>
+      </Menu>
       <div>
         {contentItem.content}
       </div>
@@ -40,12 +40,21 @@ TabMenu.propTypes = {
 
 const Wrapper = styled.div`
   display: flex;
+  width: 100%;
+  height: 100vh;
+`;
+
+const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 255px;
   height: 100vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #A09BAC4D;
 `;
 
+
+
+
 // export default TabMenu;
-const MemoizedTabMenu = React.memo(TabMenu);
-export default MemoizedTabMenu;
+export default TabMenu;

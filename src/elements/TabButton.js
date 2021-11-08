@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const TabButton = ({ val, id, check, click }) => {
+  console.log(val)
   return (
-    <BtnWrapper>
       <Button
         style={
           check === id
@@ -15,11 +15,8 @@ const TabButton = ({ val, id, check, click }) => {
         type="button"
         onClick={click}
       >
-        <p style={check === id ? { color: '#50FFB8' } : { color: '#a09bac' }}>
-          {val.tab}
-        </p>
+      {check === id ? val.clickTab : val.noneClickTab}
       </Button>
-    </BtnWrapper>
   );
 };
 
@@ -30,13 +27,20 @@ TabButton.propTypes = {
   click: PropTypes.func.isRequired,
 };
 
-const BtnWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 255px;
 
-  p {
+const Button = styled.button`
+
+  position: relative;
+  height: 45px;
+  width: 179px;
+  left: 0px;
+  top: 63px;
+  border-radius: 50px;
+  border: 0px;
+  margin: 8px 0px;
+  padding: 8px, 12px, 8px, 12px;
+
+  /* p {
     color: #a09bac;
     position: static;
     height: 29px;
@@ -52,19 +56,7 @@ const BtnWrapper = styled.div`
     order: 1;
     flex-grow: 0;
     margin: 0px 16px;
-  }
-`;
-
-const Button = styled.button`
-  position: relative;
-  height: 45px;
-  width: 179px;
-  left: 0px;
-  top: 63px;
-  border-radius: 50px;
-  border: 0px;
-  margin: 8px 0px;
-  padding: 8px, 12px, 8px, 12px;
+  } */
 `;
 
 export default TabButton;
