@@ -69,7 +69,7 @@ const content = [
         </div>
         <div style={{ position: 'relative', left: '16px' }}>
           <Text color="#50FFB8" regular20>
-            받은 탭
+            비밀번호 변경
           </Text>
         </div>
       </div>
@@ -89,7 +89,7 @@ const content = [
         </div>
         <div style={{ position: 'relative', left: '16px' }}>
           <Text color="#a09bac" regular20>
-            받은 탭
+            비밀번호 변경
           </Text>
         </div>
       </div>
@@ -113,7 +113,7 @@ const content = [
         </div>
         <div style={{ position: 'relative', left: '16px' }}>
           <Text color="#50FFB8" regular20>
-            보낸 탭
+            회원 탈퇴
           </Text>
         </div>
       </div>
@@ -133,7 +133,7 @@ const content = [
         </div>
         <div style={{ position: 'relative', left: '16px' }}>
           <Text color="#a09bac" regular20>
-            보낸 탭
+            회원 탈퇴
           </Text>
         </div>
       </div>
