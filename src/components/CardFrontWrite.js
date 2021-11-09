@@ -10,6 +10,8 @@ import {
   deleteHobby,
 } from '../features/cards/actions';
 
+import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
+import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 import { Grid, Text, Input, Image } from '../elements';
 
 const CardFrontWrite = () => {
@@ -92,18 +94,21 @@ const CardFrontWrite = () => {
     <Grid
       height="590px"
       borderRadius="16px"
-      border="1px solid #dcdcdc"
-      bgcolor="background.paper"
+      border="1px solid #4D4759"
+      bg="#1d1d22"
       margin="25px auto"
     >
-      <Grid is_flex width="1110px" margin="75px auto">
-        <Text>
+      <Grid is_flex width="1110px" margin="72px auto">
+        <Text bold32 color="#f5f3f8">
           {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
         </Text>
-        <AddBtn onClick={fileUploadHandler}>작성완료</AddBtn>
+        {/* <AddBtn onClick={fileUploadHandler}>작성완료</AddBtn> */}
+        <Grid width="10%">
+          <AddBtn cursor="pointer" onClick={fileUploadHandler} />
+        </Grid>
       </Grid>
       <Div>
-        <Grid margin="78px 0px 165px 0px" width="125px">
+        <Grid margin="190px 103px 165px 0px" width="182px">
           <label htmlFor="fileUpload">
             <Img src={preview || userInfo.profile} />
           </label>
@@ -112,92 +117,131 @@ const CardFrontWrite = () => {
             ref={fileInput}
             id="fileUpload"
             onChange={filePreview}
+            hidden
           />
         </Grid>
-        <TextDiv>
-          <Input
+        <Grid width="345px">
+          <TitleBox
             // place={userInfo.userName}
+            type="text"
             value={userName}
-            is_submit
-            _onChange={(e) => {
+            onChange={(e) => {
               setUserName(e.target.value);
             }}
           />
-        </TextDiv>
-        <Category>
-          <p>직무</p>
-          <label htmlFor="category">
-            <input
-              type="radio"
-              id="categoryId"
-              name="field"
-              value="0"
-              checked={category === 0}
-              onChange={handleRadioChange}
-            />
-            백엔드
-          </label>
-          <label htmlFor="category">
-            <input
-              type="radio"
-              id="categoryId"
-              name="field"
-              value="1"
-              checked={category === 1}
-              onChange={handleRadioChange}
-            />
-            프론트엔드
-          </label>
-          <label htmlFor="category">
-            <input
-              type="radio"
-              id="categoryId"
-              name="field"
-              value="2"
-              checked={category === 2}
-              onChange={handleRadioChange}
-            />
-            디자인
-          </label>
-        </Category>
+          <Grid margin="54px 0px 18px 0px">
+            <Text bold20 color="#f5f3f8">
+              직무
+            </Text>
+          </Grid>
+          <Grid width="501px">
+            <label
+              htmlFor="category"
+              style={{
+                color: ColorStyle.Gray500,
+                fontSize: FontScale.Body1_20,
+                fontFamily: FontFamily,
+                fontWeight: 400,
+                marginRight: '32px',
+              }}
+            >
+              <input
+                type="radio"
+                id="categoryId"
+                name="field"
+                value="0"
+                checked={category === 0 ? true : false}
+                onChange={handleRadioChange}
+                style={{ marginRight: '16px' }}
+              />
+              백엔드
+            </label>
+            <label
+              htmlFor="category"
+              style={{
+                color: ColorStyle.Gray500,
+                fontSize: FontScale.Body1_20,
+                fontFamily: FontFamily,
+                fontWeight: 400,
+                marginRight: '32px',
+              }}
+            >
+              <input
+                type="radio"
+                id="categoryId"
+                name="field"
+                value="1"
+                checked={category === 1 ? true : false}
+                onChange={handleRadioChange}
+                style={{
+                  marginRight: '16px',
+                  backgroundColor: ColorStyle.PrimaryPurple,
+                }}
+              />
+              프론트엔드
+            </label>
+            <label
+              htmlFor="category"
+              style={{
+                color: ColorStyle.Gray500,
+                fontSize: FontScale.Body1_20,
+                fontFamily: FontFamily,
+                fontWeight: 400,
+              }}
+            >
+              <input
+                type="radio"
+                id="categoryId"
+                name="field"
+                value="2"
+                checked={category === 2 ? true : false}
+                onChange={handleRadioChange}
+                style={{ marginRight: '16px' }}
+              />
+              디자인
+            </label>
+          </Grid>
+        </Grid>
       </Div>
-      <Grid is_flex width="100%" margin="20px auto">
-        <div>
-          <Text>스택/툴</Text>
+      <TagDiv>
+        <Grid margin="0px 130px 0px 0px" width="60px">
+          <Text bold20 color="#f5f3f8">
+            스택/툴
+          </Text>
           <br />
-        </div>
-        {stack.length !== 0 ? (
-          <button
-            type="button"
-            onClick={() => {
-              dispatch(deleteStack(stack));
-            }}
-          >
-            {stack}
-          </button>
-        ) : null}
-        <div>
-          <Text>관심사</Text>
-          <br />
-          {hobby.length !== 0
-            ? hobby.map((val) => {
-                {
-                  console.log(val);
-                }
-                return (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      dispatch(deleteHobby(val));
-                    }}
-                  >
-                    {val}
-                  </button>
-                );
-              })
-            : null}
-        </div>
-      </Grid>
+          {stack.length !== 0 ? (
+            <button
+              type="button"
+              onClick={() => {
+                dispatch(deleteStack(stack));
+              }}
+            >
+              {stack}
+            </button>
+          ) : null}
+        </Grid>
+        <Text bold20 color="#f5f3f8">
+          관심사
+        </Text>
+        <br />
+        {hobby.length !== 0
+          ? hobby.map((val) => {
+              {
+                console.log(val);
+              }
+              return (
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(deleteHobby(val));
+                  }}
+                >
+                  {val}
+                </button>
+              );
+            })
+          : null}
+      </TagDiv>
     </Grid>
   );
 };
@@ -208,6 +252,8 @@ const Div = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
   width: 1110px;
   height: 150px;
   margin: 0px auto;
@@ -220,27 +266,59 @@ const Img = styled.img`
   margin: 5px 0px;
   width: 182px;
   height: 164px;
-  border-radius: 16px;
+  border-radius: 8px;
 `;
 
-const TextDiv = styled.div`
-  position: absolute;
-  top: 30vh;
-  left: 43vw;
+const TitleBox = styled.input`
+  width: 345px;
+  height: 38px;
+  font-size: ${FontScale.Header_24};
+  font-family: ${FontFamily};
+  font-weight: 700;
+  color: ${ColorStyle.Gray500};
+  background-color: ${ColorStyle.BackGround300};
+  border-bottom: 1px solid ${ColorStyle.Gray300};
+  border-right: none;
+  &:focus {
+    outline: none;
+  }
 `;
 
-const Category = styled.div`
-  position: absolute;
-  top: 37vh;
-  left: 43vw;
+const TagDiv = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 1110px;
+  margin: 20px auto;
+  padding: 78px 0px 0px 0px;
 `;
 
-const AddBtn = styled.button`
-  width: 80px;
-  // position: absolute;
-  // top: 16vh;
-  // left: 70vw;
-`;
+// const TextDiv = styled.div`
+//   position: absolute;
+//   top: 30vh;
+//   left: 43vw;
+// `;
+
+// const Category = styled.div`
+//   position: absolute;
+//   top: 37vh;
+//   left: 43vw;
+// `;
+
+// const AddBtn = styled.button`
+//   width: 80px;
+//   // position: absolute;
+//   // top: 16vh;
+//   // left: 70vw;
+// `;
+
+// const FieldInput = styled.input`
+//   font-size: ${FontScale.Body1_20};
+//   font-family: ${FontFamily};
+//   font-weight: 400;
+//   color: ${ColorStyle.Gray500};
+//   // margin: 0px 0px 61px 48px;
+// `;
 
 // const Btn = styled.button`
 //   width: 80px;
