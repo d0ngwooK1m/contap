@@ -150,10 +150,6 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
   }
 };
 
-// export const nickNameCheckDB = () => async (dispatch) => {
-//   try {
-//     const res = await T.POST('/mypage/');
-
 export const loadMyCardDB = () => async (dispatch) => {
   try {
     const res = await T.GET('/mypage/myinfo');
@@ -172,7 +168,7 @@ export const createCardDB = (content) => async (dispatch) => {
     console.log('뒷면카드추가 response 확인===>', res);
 
     dispatch(createCard(res.data));
-    window.location.replace('/mypage');
+    history.push('/mypage');
   } catch (err) {
     console.log(err);
   }
@@ -184,7 +180,7 @@ export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
     console.log('뒷면카드수정 response 확인===>', res);
 
     dispatch(updateCard(res.data));
-    window.location.replace('/mypage');
+    history.push('/mypage');
   } catch (err) {
     console.log(err);
   }
@@ -193,10 +189,10 @@ export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
 export const deleteCardDB = (cardId) => async (dispatch) => {
   try {
     const res = await T.DELETE('/mypage/backCard', cardId);
-    console.log('뒷면카드수정 response 확인===>', res);
+    console.log('뒷면카드삭제 response 확인===>', res);
 
-    dispatch(deleteCard(cardId));
-    window.location.replace('/mypage');
+    dispatch(deleteCard(res.data.cardId));
+    history.push('/mypage');
   } catch (err) {
     console.log(err);
   }

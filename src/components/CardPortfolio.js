@@ -7,13 +7,24 @@ import styled from 'styled-components';
 // import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCardDB, deleteCardDB } from '../features/cards/actions';
+import {
+  updateCardDB,
+  deleteCardDB,
+  loadMyCardDB,
+} from '../features/cards/actions';
+
 import { Grid, Input } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
 import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
 import { ReactComponent as Link } from '../svgs/Link.svg';
-
-import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
+import { ReactComponent as Flag } from '../svgs/Flag.svg';
+import {
+  FontFamily,
+  FontScale,
+  ColorStyle,
+  Opacity,
+} from '../utils/systemDesign';
 
 const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
@@ -45,19 +56,22 @@ const CardPortfolio = ({ cardId }) => {
     setClick(!click);
   };
 
+  React.useEffect(() => {
+    dispatch(loadMyCardDB());
+  }, []);
+
   if (click) {
     return (
-      <Grid>
-        <Btn onClick={edit}>작성완료</Btn>
-        <Grid
-          width="1110px"
-          height="537px"
-          borderRadius="16px"
-          border="1px solid #8c4dff"
-          margin="40px auto"
-          padding="60px 48px 0px 48px"
-          bg="#1d1d22"
-        >
+      <Grid
+        width="1110px"
+        height="537px"
+        borderRadius="16px"
+        border="1px solid #8c4dff"
+        margin="40px auto"
+        padding="60px 48px 0px 48px"
+        bg="#1d1d22"
+      >
+        <EditDiv>
           <TitleBox
             type="text"
             value={title}
@@ -65,32 +79,36 @@ const CardPortfolio = ({ cardId }) => {
               setTitle(e.target.value);
             }}
           />
-          <Input
-            value={desc}
-            textarea
-            _onChange={(e) => {
-              setDesc(e.target.value);
-            }}
-          />
-          <Input
-            is_submit
-            value={tagsStr}
-            _onChange={(e) => {
-              setTagsStr(e.target.value);
-            }}
-          />
-          <Input
-            is_submit
-            value={link}
-            _onChange={(e) => {
-              setLink(e.target.value);
-            }}
-          />
-        </Grid>
+          <Grid width="10%">
+            <AddBtn cursor="pointer" onClick={edit} />
+          </Grid>
+        </EditDiv>
+        <MainBox
+          value={desc}
+          textarea
+          onChange={(e) => {
+            setDesc(e.target.value);
+          }}
+        />
+        <TagBox
+          value={tagsStr}
+          onChange={(e) => {
+            setTagsStr(e.target.value);
+          }}
+        />
+        <span style={{ position: 'absolute', top: '127%', left: '24%' }}>
+          <Flag />
+        </span>
+        <LinkBox
+          value={link}
+          onChange={(e) => {
+            setLink(e.target.value);
+          }}
+        />
       </Grid>
     );
   }
-  console.log(cardList[cardId]);
+
   return (
     <Grid>
       <Div
@@ -109,14 +127,7 @@ const CardPortfolio = ({ cardId }) => {
             cursor="pointer"
           />
         </IconDiv>
-        <Grid
-          width="1110px"
-          height="450px"
-          borderRadius="16px"
-          border="1px solid #4D4759"
-          bg="#141422"
-          margin="0px auto 40px auto"
-        >
+        <ProjectDiv>
           <TitleText>{cardList[cardId].title}</TitleText>
           <MainText>{cardList[cardId].content}</MainText>
           <TagText>{cardList[cardId].tagsStr}</TagText>
@@ -126,7 +137,7 @@ const CardPortfolio = ({ cardId }) => {
             </span>
             {cardList[cardId].link}
           </LinkText>
-        </Grid>
+        </ProjectDiv>
       </Div>
     </Grid>
   );
@@ -138,26 +149,92 @@ CardPortfolio.propTypes = {
 
 export default CardPortfolio;
 
-const Div = styled.div`
-  width: 1110px;
-  height: 490px;
-  // border-radius: 16px;
-  // border: 1px solid #dcdcdc;
-  // bgcolor: background.paper;
+const EditDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 1007px 
   margin: 0px auto;
 `;
 
-// const TitleInput = styled.input`
-//   width: 445px;
-//   height: 30px;
-//   color: ${ColorStyle.Gray500};
-//   background-color: ${ColorStyle.BackGround100};
-//   border-bottom: 1px solid ${ColorStyle.Gray100};
-//   border-right: none;
-//   &:focus {
-//     outline: none;
-//   }
-// `;
+const Div = styled.div`
+  width: 1110px;
+  height: 490px;
+  margin: 0px auto;
+`;
+
+const ProjectDiv = styled.div`
+  width: 1110px;
+  height: 450px;
+  border-radius: 16px;
+  border: 1px solid ${'#4d4759' + Opacity[50]};
+  background-color: ${ColorStyle.BackGround100};
+  margin: 0px auto 40px auto;
+`;
+
+const TitleBox = styled.input`
+  width: 587px;
+  height: 41px;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 700;
+  color: ${ColorStyle.Gray500};
+  background-color: ${ColorStyle.BackGround300};
+  border-bottom: 1px solid ${ColorStyle.Gray300};
+  border-right: none;
+  &:focus {
+    outline: none;
+  }
+  margin-bottom: 40px;
+`;
+
+const MainBox = styled.textarea`
+  width: 960px;
+  height: 100px;
+  padding: 24px;
+  background-color: ${ColorStyle.Gray300};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 400;
+  color: ${ColorStyle.Gray500};
+  border: none;
+  border-radius: 12px;
+  &:focus {
+    outline: none;
+`;
+
+const TagBox = styled.input`
+  margin-bottom: 24px;
+  padding-left: 60px;
+  margin-top: 56px;
+  background-color: ${ColorStyle.Gray300};
+  width: 947px;
+  height: 50px;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 400;
+  color: ${ColorStyle.Gray500};
+  border: none;
+  border-radius: 12px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const LinkBox = styled.input`
+  width: 1007px;
+  height: 50px;
+  background-color: ${ColorStyle.Gray300};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 400;
+  color: ${ColorStyle.PrimaryPurple};
+  border: none;
+  border-radius: 12px;
+  &:focus {
+    outline: none;
+  }
+`;
 
 const TitleText = styled.p`
   font-size: ${FontScale.Header_24};
@@ -185,9 +262,9 @@ const TagText = styled.p`
   color: ${ColorStyle.Gray500};
   margin: 0px 0px 28px 48px;
   width: 10%;
-  border: 1px solid #8c4dff;
+  border: 1px solid ${'#8c4dff' + Opacity[70]};
   border-radius: 8px;
-  background-color: #8c4dff;
+  background-color: ${'#8c4dff' + Opacity[70]};
   text-align: center;
 `;
 
