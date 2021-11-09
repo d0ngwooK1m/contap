@@ -3,7 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setPreview, editCardProfileDB } from '../features/cards/actions';
+import {
+  setPreview,
+  editCardProfileDB,
+  deleteStack,
+  deleteHobby,
+} from '../features/cards/actions';
 
 import { Grid, Text, Input, Image } from '../elements';
 
@@ -16,6 +21,9 @@ const CardFrontWrite = () => {
   console.log(userInfo);
   const [userName, setUserName] = React.useState(userInfo.userName);
   const [category, setCategory] = React.useState(userInfo.field);
+  const stack = useSelector((state) => state.cards.stack);
+  const hobby = useSelector((state) => state.cards.hobby);
+  console.log(stack, hobby);
 
   const handleRadioChange = (e) => {
     e.target.checked;
@@ -97,7 +105,7 @@ const CardFrontWrite = () => {
       <Div>
         <Grid margin="78px 0px 165px 0px" width="125px">
           <label htmlFor="fileUpload">
-            <Img src={preview ? preview : userInfo.profile} />
+            <Img src={preview || userInfo.profile} />
           </label>
           <input
             type="file"
@@ -124,7 +132,7 @@ const CardFrontWrite = () => {
               id="categoryId"
               name="field"
               value="0"
-              checked={category === 0 ? true : false}
+              checked={category === 0}
               onChange={handleRadioChange}
             />
             백엔드
@@ -135,7 +143,7 @@ const CardFrontWrite = () => {
               id="categoryId"
               name="field"
               value="1"
-              checked={category === 1 ? true : false}
+              checked={category === 1}
               onChange={handleRadioChange}
             />
             프론트엔드
@@ -146,16 +154,49 @@ const CardFrontWrite = () => {
               id="categoryId"
               name="field"
               value="2"
-              checked={category === 2 ? true : false}
+              checked={category === 2}
               onChange={handleRadioChange}
             />
             디자인
           </label>
         </Category>
       </Div>
-      <Grid is_flex width="1110px" margin="20px auto">
-        <Text>스택/툴</Text>
-        <Text>관심사</Text>
+      <Grid is_flex width="100%" margin="20px auto">
+        <div>
+          <Text>스택/툴</Text>
+          <br />
+        </div>
+        {stack.length !== 0 ? (
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(deleteStack(stack));
+            }}
+          >
+            {stack}
+          </button>
+        ) : null}
+        <div>
+          <Text>관심사</Text>
+          <br />
+          {hobby.length !== 0
+            ? hobby.map((val) => {
+                {
+                  console.log(val);
+                }
+                return (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      dispatch(deleteHobby(val));
+                    }}
+                  >
+                    {val}
+                  </button>
+                );
+              })
+            : null}
+        </div>
       </Grid>
     </Grid>
   );

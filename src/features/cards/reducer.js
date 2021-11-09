@@ -5,6 +5,8 @@ import {
   LOAD_CARD,
   SEARCH_CARD,
   SEARCH_ARR,
+  SEARCH_STACK,
+  SEARCH_HOBBY,
   EDIT_CARD_PROFILE,
   CREATE_CARD,
   UPDATE_CARD,
@@ -12,6 +14,10 @@ import {
   LOAD_CURRENT_CARD,
   SET_PREVIEW,
   LOAD_MY_CARD,
+  SET_STACK,
+  DELETE_STACK,
+  SET_HOBBY,
+  DELETE_HOBBY,
   IS_SUCCESS,
 } from './types';
 
@@ -23,8 +29,11 @@ const initialState = {
   cardList: {},
   searchInfo: {},
   searchArr: [],
+  stackArr: [],
+  hobbyArr: [],
   isSearching: false,
-  isSuccess: false,
+  stack: [],
+  hobby: [],
 };
 
 export default handleActions(
@@ -65,6 +74,14 @@ export default handleActions(
       produce(state, (draft) => {
         draft.searchArr = action.payload.searchList;
       }),
+    [SEARCH_STACK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.stackArr = action.payload.stackList;
+      }),
+    [SEARCH_HOBBY]: (state, action) =>
+      produce(state, (draft) => {
+        draft.hobbyArr = action.payload.hobbyList;
+      }),
     [LOAD_CURRENT_CARD]: (state, action) =>
       produce(state, (draft) => {
         const { data } = action.payload;
@@ -74,7 +91,7 @@ export default handleActions(
     [EDIT_CARD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         const { userId } = action.payload;
-        console.log(action.payload);
+        // console.log(action.payload);
         draft.byId[userId] = action.payload;
         draft.allIds.unshift(userId);
       }),
@@ -99,32 +116,55 @@ export default handleActions(
       }),
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const { cardId } = action.payload.card;
-        console.log(cardId);
-        draft.byId[cardId] = action.payload.card;
+        const { cardId } = action.payload;
         console.log(action.payload);
+        draft.byId[cardId] = action.payload;
         draft.allIds.unshift(cardId);
-        // 설마.... 콘솔이 실행될줄이야.....
-        // console.log(draft.allIds.unshift(cardId));
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         draft.current = action.payload;
         console.log(action.payload);
-        draft.byId[action.payload.card.cardId] = action.payload.card;
-        console.log(action.payload.card.cardId);
+        draft.byId[action.payload.id] = action.payload;
       }),
     [DELETE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        // draft.cardList = {};
-        // draft.current = {};
-        delete draft.byId[action.payload.cardId];
-        // delete draft.cardList[draft.cardList.findIndex(action.payload.cardId)];
-        console.log(action.payload);
+        delete draft.byId[action.payload];
         draft.allIds = draft.allIds.filter(
-          (id) => id !== Number(action.payload.cardId),
+          (id) => id !== Number(action.payload),
         );
-        console.log(draft.allIds);
+      }),
+    [SET_STACK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.stack.push(action.payload.stack);
+      }),
+    [DELETE_STACK]: (state, action) =>
+      produce(state, (draft) => {
+        if (draft.stack.length !== 0) {
+          draft.stack = [];
+        }
+      }),
+    [SET_HOBBY]: (state, action) =>
+      produce(state, (draft) => {
+        if (draft.hobby.length === 3) {
+          draft.hobby.shift();
+          draft.hobby.push(action.payload.hobby);
+        }
+        else {
+          draft.hobby.push(action.payload.hobby);
+        }
+      }),
+    [DELETE_HOBBY]: (state, action) =>
+      produce(state, (draft) => {
+        if (draft.hobby.length >= 1) {
+          const deletedArr = [];
+          draft.hobby.filter((val) => {
+            if (val !== action.payload.hobby) {
+              deletedArr.push(val);
+            }
+          });
+          draft.hobby = deletedArr;
+        }
       }),
     [IS_SUCCESS]: (state, action) =>
       produce(state, (draft) => {

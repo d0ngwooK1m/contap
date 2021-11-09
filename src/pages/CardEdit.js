@@ -1,7 +1,8 @@
 import React from 'react';
 
 import CardFrontWrite from '../components/CardFrontWrite';
-import MypageSearch from '../components/MypageSearch';
+import StackSearch from '../components/StackSearch';
+import HobbySearch from '../components/HobbySearch';
 import { Grid } from '../elements';
 
 const CardEdit = () => {
@@ -11,7 +12,8 @@ const CardEdit = () => {
         <CardFrontWrite />
       </Grid>
       <Grid>
-        <MypageSearch />
+        <StackSearch />
+        <HobbySearch />
       </Grid>
     </Grid>
   );
