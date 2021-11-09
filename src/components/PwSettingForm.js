@@ -119,58 +119,11 @@ const PwSettingForm = () => {
       </form>
     </Wrapper>
   );
-
-  // return (
-  //   <Grid>
-  //     <p>비밀번호 변경</p>
-  //     <Input
-  //       type="password"
-  //       place="지금 비밀번호를 입력해주세요"
-  //       margin="60px 0px"
-  //       _onChange={(e) => {
-  //         // console.log(e.target.value);
-  //         setPw(e.target.value);
-  //       }}
-  //     />
-  //     <Input
-  //       type="password"
-  //       place="새 비밀번호를 입력해주세요"
-  //       margin="60px 0px"
-  //       _onChange={(e) => {
-  //         setNewPw(e.target.value);
-  //       }}
-  //     />
-  //     <Input
-  //       type="password"
-  //       place="새 비밀번호를 확인해주세요"
-  //       margin="60px 0px"
-  //       _onChange={(e) => {
-  //         setCheckNewPw(e.target.value);
-  //       }}
-  //     />
-  //     <BtnWrapper>
-  //       <Button
-  //         _onClick={() => {
-  //           console.log(pw, newPw, checkNewPw);
-  //           const passwordInfo = {
-  //             currentPw: pw,
-  //             newPw,
-  //             newPwCheck: checkNewPw,
-  //           };
-
-  //           dispatch(passwordChangeToServer(passwordInfo));
-  //         }}
-  //       >
-  //         비밀번호 변경하기
-  //       </Button>
-  //     </BtnWrapper>
-  //   </Grid>
-  // );
 };
 
 const Wrapper = styled.div`
   width: 635px;
-  margin: 0px 0px 0px 125px;
+  margin: 64px 0px 0px 125px;
   position: relative;
 `;
 
