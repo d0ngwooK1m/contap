@@ -20,15 +20,17 @@ const CardFrontWrite = () => {
   // const front = useSelector((state) => state.cards.byId);
   // console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
-  console.log(userInfo);
+  console.log('카테고리 확인===>', userInfo.field);
+
   const [userName, setUserName] = React.useState(userInfo.userName);
-  const [category, setCategory] = React.useState(userInfo.field);
+  const [category, setCategory] = React.useState('0');
   const stack = useSelector((state) => state.cards.stack);
   const hobby = useSelector((state) => state.cards.hobby);
-  console.log(stack, hobby);
+  // console.log(stack, hobby);
+  console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
   const handleRadioChange = (e) => {
-    e.target.checked;
+    //e.target.checked;
     setCategory(e.target.value);
     console.log(e.target.value);
   };
@@ -73,7 +75,7 @@ const CardFrontWrite = () => {
     console.log(file);
     const formData = new FormData();
     formData.append('userName', userName);
-    formData.append('hashTagsStr', 'spring,여행');
+    formData.append('hashTagsStr', stack + ',' + hobby);
     formData.append('field', category);
     if (fileData) {
       formData.append('profile', fileData);
@@ -102,7 +104,6 @@ const CardFrontWrite = () => {
         <Text bold32 color="#f5f3f8">
           {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
         </Text>
-        {/* <AddBtn onClick={fileUploadHandler}>작성완료</AddBtn> */}
         <Grid width="10%">
           <AddBtn cursor="pointer" onClick={fileUploadHandler} />
         </Grid>
@@ -122,7 +123,6 @@ const CardFrontWrite = () => {
         </Grid>
         <Grid width="345px">
           <TitleBox
-            // place={userInfo.userName}
             type="text"
             value={userName}
             onChange={(e) => {
@@ -150,7 +150,7 @@ const CardFrontWrite = () => {
                 id="categoryId"
                 name="field"
                 value="0"
-                checked={category === 0 ? true : false}
+                //checked={category === 0 ? true : false}
                 onChange={handleRadioChange}
                 style={{ marginRight: '16px' }}
               />
@@ -171,7 +171,7 @@ const CardFrontWrite = () => {
                 id="categoryId"
                 name="field"
                 value="1"
-                checked={category === 1 ? true : false}
+                // checked={category === 1 ? true : false}
                 onChange={handleRadioChange}
                 style={{
                   marginRight: '16px',
@@ -194,7 +194,7 @@ const CardFrontWrite = () => {
                 id="categoryId"
                 name="field"
                 value="2"
-                checked={category === 2 ? true : false}
+                // checked={category === 2 ? true : false}
                 onChange={handleRadioChange}
                 style={{ marginRight: '16px' }}
               />

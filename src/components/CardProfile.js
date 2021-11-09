@@ -5,9 +5,14 @@ import { useSelector } from 'react-redux';
 import { history } from '../features/configureStore';
 
 import { Grid } from '../elements';
-// import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
+import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
 import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
-import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+import {
+  FontFamily,
+  FontScale,
+  ColorStyle,
+  Opacity,
+} from '../utils/systemDesign';
 
 const CardProfile = () => {
   const cardList = useSelector((state) => state.cards.current);
@@ -16,17 +21,17 @@ const CardProfile = () => {
   return (
     <Grid>
       <TitleText>{cardList.userName}님의 프로필</TitleText>
-      {/* <DotDiv>
-        <DoodleDots />
-      </DotDiv> */}
       <ProfileDiv>
         <Div>
+          <DotDiv>
+            <DoodleDots />
+          </DotDiv>
           <Grid margin="32px" width="125px" height="112px">
             <Img src={cardList.profile} />
           </Grid>
           <Grid width="40%" margin="56px 0px 0px 0px">
             <NameText>{cardList.userName}</NameText>
-            <InterestText>#자바스크립트</InterestText>
+            <StackText>#자바스크립트</StackText>
           </Grid>
           <BtnDiv>
             <UpdateBtn
@@ -37,7 +42,12 @@ const CardProfile = () => {
             />
           </BtnDiv>
         </Div>
-        <StackText>관심사</StackText>
+        <HobbyText>관심사</HobbyText>
+        <Div>
+          <HobbyDiv>업무태그1</HobbyDiv>
+          <TagDiv>업무태그2</TagDiv>
+          <TagDiv>업무태그3</TagDiv>
+        </Div>
       </ProfileDiv>
     </Grid>
   );
@@ -50,11 +60,12 @@ CardProfile.defaultProps = {
 
 export default CardProfile;
 
-// const DotDiv = styled.div`
-//   position: absolute;
-//   left: 450px;
-//   top: 30%;
-// `;
+const DotDiv = styled.div`
+  position: absolute;
+  right: -47%;
+  top: 17%;
+  z-index: 3;
+`;
 const ProfileDiv = styled.div`
   width: 540px;
   height: 308px;
@@ -74,7 +85,10 @@ const ProfileDiv = styled.div`
     #73cba7,
     #94d1b5
   );
+  z-index: 1;
   // position: absolute;
+  // left: 450px;
+  // top: 256px;
   // z-index: 1;
 `;
 
@@ -84,6 +98,8 @@ const Div = styled.div`
   align-items: flex-start;
   flex-direction: row;
   flex-wrap: nowrap;
+  position: relative;
+  z-index: 2;
 `;
 
 const TitleText = styled.p`
@@ -103,7 +119,7 @@ const NameText = styled.p`
   font-weight: 700;
 `;
 
-const InterestText = styled.p`
+const StackText = styled.p`
   font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
@@ -126,12 +142,40 @@ const Img = styled.img`
 //   left: 42vw;
 // `;
 
-const StackText = styled.div`
+const HobbyText = styled.div`
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
   margin: 0px 0px 12px 32px;
   font-weight: 700;
+`;
+
+const HobbyDiv = styled.p`
+  width: 146px;
+  height: 54px;
+  line-height: 54px;
+  margin-left: 32px;
+  border-radius: 50px;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+  background-color: ${ColorStyle.BackGround300 + Opacity[15]};
+`;
+
+const TagDiv = styled.div`
+  width: 146px;
+  height: 54px;
+  line-height: 54px;
+  margin-left: 16px;
+  border-radius: 50px;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+  background-color: ${ColorStyle.BackGround300 + Opacity[15]};
 `;
 
 const BtnDiv = styled.div`
