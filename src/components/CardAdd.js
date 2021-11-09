@@ -1,17 +1,28 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadMyCardDB } from '../features/cards/actions';
 
 import { Grid } from '../elements';
 import CardPortfolio from './CardPortfolio';
 import { ReactComponent as AddRound } from '../svgs/AddRound.svg';
-import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+import {
+  FontFamily,
+  FontScale,
+  ColorStyle,
+  Opacity,
+} from '../utils/systemDesign';
 
 const CardAdd = () => {
+  const dispatch = useDispatch();
   const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
   // const [click, setClick] = React.state('');
+
+  React.useEffect(() => {
+    dispatch(loadMyCardDB());
+  }, []);
 
   console.log(cardList);
   if (cardListCheck.length === 0) {
@@ -43,7 +54,7 @@ const Div = styled.div`
   width: 1110px;
   height: 136px;
   border-radius: 16px;
-  border: 1px solid #4d4759;
+  border: 1px solid ${'#4d4759' + Opacity[50]};
   margin: auto;
   background-color: ${ColorStyle.BackGround100};
   text-align: center;

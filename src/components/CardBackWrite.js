@@ -32,7 +32,6 @@ const CardBackWrite = () => {
   console.log(handleClick);
   const addCardBack = () => {
     dispatch(createCardDB(content));
-
     dispatch(isSuccess(!handleClick));
   };
 

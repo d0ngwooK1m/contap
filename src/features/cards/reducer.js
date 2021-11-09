@@ -91,7 +91,7 @@ export default handleActions(
     [EDIT_CARD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         const { userId } = action.payload;
-        // console.log(action.payload);
+        console.log(action.payload);
         draft.byId[userId] = action.payload;
         draft.allIds.unshift(userId);
       }),
@@ -116,23 +116,26 @@ export default handleActions(
       }),
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        const { cardId } = action.payload;
-        console.log(action.payload);
-        draft.byId[cardId] = action.payload;
+        const { cardId } = action.payload.card;
+        console.log(cardId);
+        draft.byId[cardId] = action.payload.card;
         draft.allIds.unshift(cardId);
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         draft.current = action.payload;
         console.log(action.payload);
-        draft.byId[action.payload.id] = action.payload;
+        draft.byId[action.payload.card.cardId] = action.payload.card;
+        console.log(action.payload.card.cardId);
       }),
     [DELETE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        delete draft.byId[action.payload];
+        delete draft.byId[action.payload.cardId];
+        console.log(action.payload.cardId);
         draft.allIds = draft.allIds.filter(
-          (id) => id !== Number(action.payload),
+          (id) => id !== Number(action.payload.cardId),
         );
+        console.log(draft.allIds);
       }),
     [SET_STACK]: (state, action) =>
       produce(state, (draft) => {
@@ -149,8 +152,7 @@ export default handleActions(
         if (draft.hobby.length === 3) {
           draft.hobby.shift();
           draft.hobby.push(action.payload.hobby);
-        }
-        else {
+        } else {
           draft.hobby.push(action.payload.hobby);
         }
       }),
