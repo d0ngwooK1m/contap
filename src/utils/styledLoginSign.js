@@ -35,6 +35,9 @@ const StyledInput = styled.input`
   background-color: ${ColorStyle.BackGround300};
   border-bottom: 1px solid ${ColorStyle.Gray100};
   border-right: none;
+  border-right: none;
+  border-top: none;
+  border-left: none;
   &:focus {
     outline: none;
   }
