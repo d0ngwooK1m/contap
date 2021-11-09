@@ -1,32 +1,8 @@
-/*eslint-disable */
-import { getToken, removeToken } from './auth';
-import tokenAxios from '../api/tokenInstance';
+import { getToken } from './auth';
 
-const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
+// falsy한 값들을 체크하기 위해 not연산자를 두 번 사용했다.
+// 만약 토큰이 없다면 getToken()이 null을 반환할텐데, 이를 false라는 boolean값으로 바꿔준다.
 
-const isLogin = () => {
-  const token = getToken();
-  if (!token) {
-    return false;
-  }
-
-  async function authCheck() {
-    try {
-      const { data } = await tokenAxios.GET('/auth');
-      if (data.result === 'fail') {
-        removeToken(TOKEN_KEY);
-        return null;
-      }
-    } catch (error) {
-      console.log(error);
-      console.log(error.message);
-    }
-    return null;
-  }
-
-  authCheck();
-
-  return true
-};
+const isLogin = () => !!getToken();
 
 export default isLogin;
