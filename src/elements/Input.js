@@ -18,6 +18,7 @@ const Input = (props) => {
     value,
     is_submit,
     onSubmit,
+    bg,
   } = props;
 
   const styles = {
@@ -25,6 +26,7 @@ const Input = (props) => {
     height,
     margin,
     padding,
+    bg,
   };
 
   if (textarea === true) {
@@ -94,12 +96,16 @@ Input.defaultProps = {
   _onChange: () => {},
   is_submit: false,
   onSubmit: false,
+  bg: false,
 };
 
 const AreaBox = styled.textarea`
   width: ${(props) => props.width};
-  height: 30vh;
+  height: ${(props) => props.height};
   box-sizing: border-box;
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  ${(props) => (props.bg ? `background-color : ${props.bg};` : '')}
 `;
 
 const Box = styled.input`
@@ -108,6 +114,7 @@ const Box = styled.input`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   box-sizing: border-box;
+  ${(props) => (props.bg ? `background-color : ${props.bg};` : '')}
 `;
 
 export default Input;
