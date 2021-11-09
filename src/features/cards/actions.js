@@ -95,12 +95,12 @@ export const loadCardFrontDB = () => async (dispatch) => {
 };
 
 export const searchInfoDB = (searchInfo) => async (dispatch) => {
-  console.log(searchInfo);
+  console.log('requset ======>', searchInfo);
   try {
     const res = await axios.post(`${baseURL}/main/search`, searchInfo);
     // const { resultData } = res;
     // console.log(resultData);
-    console.log(res.data);
+    console.log('response ======>', res.data);
     if (res.data === []) {
       return null;
     }

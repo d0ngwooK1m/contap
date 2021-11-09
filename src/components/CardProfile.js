@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { history } from '../features/configureStore';
 
 import { Grid } from '../elements';
-import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
+// import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
 import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
@@ -16,9 +16,9 @@ const CardProfile = () => {
   return (
     <Grid>
       <TitleText>{cardList.userName}님의 프로필</TitleText>
-      <DotDiv>
+      {/* <DotDiv>
         <DoodleDots />
-      </DotDiv>
+      </DotDiv> */}
       <ProfileDiv>
         <Div>
           <Grid margin="32px" width="125px" height="112px">
@@ -50,11 +50,11 @@ CardProfile.defaultProps = {
 
 export default CardProfile;
 
-const DotDiv = styled.div`
-  position: absolute;
-  left: 450px;
-  top: 30%;
-`;
+// const DotDiv = styled.div`
+//   position: absolute;
+//   left: 450px;
+//   top: 30%;
+// `;
 const ProfileDiv = styled.div`
   width: 540px;
   height: 308px;

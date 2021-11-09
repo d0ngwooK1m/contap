@@ -9,6 +9,7 @@ const Text = ({
   bold20,
   bold24,
   bold32,
+  bold48,
   color,
   children,
 }) => {
@@ -33,6 +34,9 @@ const Text = ({
   if (bold32) {
     return <Bold32 {...styles}>{children}</Bold32>;
   }
+  if (bold48) {
+    return <Bold48 {...styles}>{children}</Bold48>;
+  }
   return null;
 };
 
@@ -44,6 +48,7 @@ Text.propTypes = {
   bold20: PropTypes.bool,
   bold24: PropTypes.bool,
   bold32: PropTypes.bool,
+  bold48: PropTypes.bool,
   color: PropTypes.string,
 };
 
@@ -54,7 +59,8 @@ Text.defaultProps = {
   bold20: false,
   bold24: false,
   bold32: false,
-  color: '#000',
+  bold48: false,
+  color: '#F5F3F8',
 };
 
 const Regular14 = styled.p`
@@ -96,6 +102,13 @@ const Bold32 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 32px;
+  font-weight: 700;
+  color: ${({color}) => color};
+`;
+const Bold48 = styled.p`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 48px;
   font-weight: 700;
   color: ${({color}) => color};
 `;

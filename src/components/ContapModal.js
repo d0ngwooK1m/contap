@@ -2,32 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
-import Typography from '@mui/material/Typography';
-
-import { Grid } from '../elements';
+import { ColorStyle } from '../utils/systemDesign';
+import { Text } from '../elements';
 
 const ContapModal = ({ show, onHide, userId, children }) => {
   console.log(userId);
   return (
-    <Grid>
+    <div>
       <Modal open={show} onClose={onHide}>
         <Wrap>
           <Card>
             {children}
-            <Typography sx={{ fontSize: '40px', fontWeight: 'bold' }}>
-              zz
-            </Typography>
-            <Typography>zz</Typography>
+            <Text regular16>zz</Text>
+            <Text regular16>zz</Text>
             <div>
-              <Typography>기술스택</Typography>
+              <Text regular16>기술스택</Text>
             </div>
             <div>
-              <Typography>관심사</Typography>
+              <Text regular16>관심사</Text>
             </div>
           </Card>
         </Wrap>
       </Modal>
-    </Grid>
+    </div>
   );
 };
 
@@ -39,7 +36,7 @@ const Wrap = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: #fff;
+  background-color: ${ColorStyle.BackGround100};
   width: 100%;
   height: 100vh;
   padding: 20px;

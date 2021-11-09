@@ -8,6 +8,7 @@ import { ReactComponent as GrabListIconSvg } from '../svgs/GrabListIcon.svg';
 import { Text } from '../elements';
 import { ReactComponent as RecieveTapIconSvg } from '../svgs/RecieveTapIcon.svg';
 import { ReactComponent as SendTapIconSvg } from '../svgs/SendTapIcon.svg';
+import { ColorStyle } from '../utils/systemDesign';
 
 const Contap = () => {
   const content = [
@@ -24,10 +25,10 @@ const Contap = () => {
           }}
         >
           <div>
-            <RecieveTapIconSvg fill="#50FFB8" />
+            <RecieveTapIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color="#50FFB8" regular20>
+            <Text color={ColorStyle.PrimaryMint} regular20>
               받은 탭
             </Text>
           </div>
@@ -44,10 +45,10 @@ const Contap = () => {
           }}
         >
           <div>
-            <RecieveTapIconSvg fill="#A09BAC" />
+            <RecieveTapIconSvg fill={ColorStyle.Gray300} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color="#a09bac" regular20>
+            <Text color={ColorStyle.Gray300} regular20>
               받은 탭
             </Text>
           </div>
@@ -68,10 +69,10 @@ const Contap = () => {
           }}
         >
           <div>
-            <SendTapIconSvg fill="#50FFB8" />
+            <SendTapIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color="#50FFB8" regular20>
+            <Text color={ColorStyle.PrimaryMint} regular20>
               보낸 탭
             </Text>
           </div>
@@ -88,10 +89,10 @@ const Contap = () => {
           }}
         >
           <div>
-            <SendTapIconSvg fill="#A09BAC" />
+            <SendTapIconSvg fill={ColorStyle.Gray300} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color="#a09bac" regular20>
+            <Text color={ColorStyle.Gray300} regular20>
               보낸 탭
             </Text>
           </div>
@@ -112,10 +113,10 @@ const Contap = () => {
           }}
         >
           <div>
-            <GrabListIconSvg fill="#50FFB8" />
+            <GrabListIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color="#50FFB8" regular20>
+            <Text color={ColorStyle.PrimaryMint} regular20>
               나의 그랩
             </Text>
           </div>
@@ -132,7 +133,7 @@ const Contap = () => {
           }}
         >
           <div>
-            <GrabListIconSvg fill="#A09BAC" />
+            <GrabListIconSvg fill={ColorStyle.Gray300} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
             <Text color="#a09bac" regular20>
@@ -141,7 +142,7 @@ const Contap = () => {
           </div>
         </div>
       ),
-      content: <GrabList select="GrabList" />,
+      content: <GrabList select={ColorStyle.Gray300} />,
     },
   ];
 
