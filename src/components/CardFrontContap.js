@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
 
 import { Grid, Image, Text } from '../elements';
 import HashTag from './HashTag';
@@ -34,12 +35,12 @@ const CardFrontContap = ({ userId, onModal }) => {
       _onClick={onModal}
     >
       <Div is_flex>
-        <Image
+        {front[userId] ? <Image
           shape="circle"
-          src={front[userId] ? front[userId].profile : null}
-        />
+          src={front[userId].profile}
+        /> : <BasicProfileSvg/> }
         <Grid width="30%" margin="0px 20px">
-          <Text>{front[userId] ? front[userId].userName : null}</Text>
+          <Text>{front[userId].userName ? front[userId].userName : null}</Text>
           # {stackHashTags}
           <Text color="#7F7C82" bold />
         </Grid>

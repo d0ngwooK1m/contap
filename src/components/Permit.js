@@ -8,7 +8,7 @@ const Permit = ({ children }) => {
   const [isUserAuthorized, token] = useUserAuthCheck();
 
   if (!(token || isUserAuthorized)) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
 
   return children;

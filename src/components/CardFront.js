@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
+import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
 
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
@@ -74,17 +75,11 @@ const CardFront = ({ userId, contap, select, grab }) => {
     setSideModal(false);
     setShowMadal(true);
   };
+  console.log(front[userId].profile);
 
   return (
-    <Grid
-      width="350px"
-      height="200px"
-      borderRadius="16px"
-      border="1px solid black"
-      margin="16px"
-      _onClick={showCardBackModal}
-    >
-      <Grid _onClick={stopPropagation}>
+    <CardForm onClick={showCardBackModal}>
+      <div onClick={stopPropagation}>
         {!contap && (
           <CardModal show={showModal} onHide={closeModal} userId={userId} />
         )}
@@ -107,23 +102,32 @@ const CardFront = ({ userId, contap, select, grab }) => {
             contap
           />
         )}
-      </Grid>
-      <Div is_flex>
-        <Image
-          shape="circle"
-          src={front[userId] ? front[userId].profile : null}
-        />
-        <Grid width="30%" margin="0px 20px">
-          <Text regular20>{front[userId] ? front[userId].userName : null}</Text>
-          # {stackHashTags}
-        </Grid>
-      </Div>
+      </div>
+      <div>
+        {front[userId].profile ? (
+          <AspectOutter src={front[userId].profile} />
+        ) : (
+          <BasicProfileSvg />
+        )}
+        <div>
+          <Text color="#F5F3F8" regular20>
+            {front[userId] ? front[userId].userName : null}
+          </Text>
+          <Text color="#8c4dff" regular20>
+            {/* # {stackHashTags} */}
+            # React
+          </Text>
+        </div>
+      </div>
       <Hash>
-        {interestHashTags?.map((stack, idx) => {
+        {/* {interestHashTags?.map((stack, idx) => {
           return stack && <HashTag key={idx} tag={stack} />;
-        })}
+        })} */}
+        <HashTag tag={'유튜브'} />;
+        <HashTag tag={'등산'} />;
+        <HashTag tag={'게임'} />;
       </Hash>
-      <Grid _onClick={stopPropagation}>
+      <div onClick={stopPropagation}>
         {contap && select === 'ReceiveTap' && (
           <button type="button" onClick={acceptTap}>
             수락
@@ -134,8 +138,8 @@ const CardFront = ({ userId, contap, select, grab }) => {
             거절
           </button>
         )}
-      </Grid>
-    </Grid>
+      </div>
+    </CardForm>
   );
 };
 
@@ -152,6 +156,23 @@ CardFront.defaultProps = {
 
 export const MemoizedCardFront = React.memo(CardFront);
 // export default CardFront;
+
+const CardForm = styled.div`
+  width: 350px;
+  height: 200px;
+  border-radius: 16px;
+  border: 1px solid #4d475980;
+  margin: 16px;
+  background-color: #141422;
+`;
+
+const AspectOutter = styled.div`
+height: 72px;
+width: 80px;
+border-radius: 8px;
+
+  background-image: url('${(props) => props.src}');
+`;
 
 const Div = styled.div`
   display: flex;

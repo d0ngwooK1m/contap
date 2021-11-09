@@ -1,7 +1,8 @@
 import { produce } from 'immer';
 import { handleActions } from 'redux-actions';
 import {
-  BEFORE_NOTI,
+  BEFORE_CHAT_NOTI,
+  BEFORE_CONTAP_NOTI,
   CHAT_NOTI,
   TAP_NOTI,
   GRAB_NOTI,
@@ -9,7 +10,8 @@ import {
 } from './types';
 
 const initialState = {
-  isBeforeNoti: false,
+  isBeforeChatNoti: false,
+  isBeforeContapNoti: false,
   isContapNoti: false,
   isChatNoti: false,
   isTapNoti: false,
@@ -18,9 +20,13 @@ const initialState = {
 
 export default handleActions(
   {
-    [BEFORE_NOTI]: (state, action) =>
+    [BEFORE_CHAT_NOTI]: (state, action) =>
       produce(state, (draft) => {
         draft.isBeforeNoti = action.payload.isNoti;
+      }),
+    [BEFORE_CONTAP_NOTI]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isBeforeContapNoti = action.payload.isNoti;
       }),
     [CONTAP_NOTI]: (state, action) =>
       produce(state, (draft) => {
