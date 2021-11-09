@@ -18,7 +18,12 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   SEARCH_ARR,
-  IS_SUCCESS,
+  SEARCH_STACK,
+  SEARCH_HOBBY,
+  SET_STACK,
+  DELETE_STACK,
+  SET_HOBBY,
+  DELETE_HOBBY,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
@@ -33,6 +38,12 @@ export const searchCard = createAction(SEARCH_CARD, (searchInfo, cardList) => ({
 
 export const searchArrList = createAction(SEARCH_ARR, (searchList) => ({
   searchList,
+}));
+export const searchStackList = createAction(SEARCH_STACK, (stackList) => ({
+  stackList,
+}));
+export const searchHobbyList = createAction(SEARCH_HOBBY, (hobbyList) => ({
+  hobbyList,
 }));
 
 export const loadCurrentCard = createAction(LOAD_CURRENT_CARD, (data) => ({
@@ -54,7 +65,16 @@ export const updateCard = createAction(UPDATE_CARD, (card) => ({
 export const deleteCard = createAction(DELETE_CARD, (cardId) => ({
   cardId,
 }));
-export const isSuccess = createAction(IS_SUCCESS, (success) => ({ success }));
+export const updateStack = createAction(SET_STACK, (stack) => ({
+  stack,
+}));
+export const deleteStack = createAction(DELETE_STACK, () => ({}));
+export const updateHobby = createAction(SET_HOBBY, (hobby) => ({
+  hobby,
+}));
+export const deleteHobby = createAction(DELETE_HOBBY, (hobby) => ({
+  hobby,
+}));
 
 // 미들웨어
 
@@ -150,8 +170,7 @@ export const createCardDB = (content) => async (dispatch) => {
     console.log('뒷면카드추가 response 확인===>', res);
 
     dispatch(createCard(res.data));
-    history.push('/mypage');
-    // window.location.replace('/mypage');
+    window.location.replace('/mypage');
   } catch (err) {
     console.log(err);
   }
@@ -163,8 +182,7 @@ export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
     console.log('뒷면카드수정 response 확인===>', res);
 
     dispatch(updateCard(res.data));
-    history.push('/mypage');
-    // window.location.replace('/mypage');
+    window.location.replace('/mypage');
   } catch (err) {
     console.log(err);
   }
@@ -173,11 +191,10 @@ export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
 export const deleteCardDB = (cardId) => async (dispatch) => {
   try {
     const res = await T.DELETE('/mypage/backCard', cardId);
-    console.log('뒷면카드삭제 response 확인===>', res);
+    console.log('뒷면카드수정 response 확인===>', res);
 
-    dispatch(deleteCard(res.data.cardId));
-    history.push('/mypage');
-    // window.location.replace('/mypage');
+    dispatch(deleteCard(cardId));
+    window.location.replace('/mypage');
   } catch (err) {
     console.log(err);
   }
