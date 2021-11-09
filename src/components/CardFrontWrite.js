@@ -15,10 +15,12 @@ const CardFrontWrite = () => {
   const userInfo = useSelector((state) => state.cards.current);
   console.log(userInfo);
   const [userName, setUserName] = React.useState(userInfo.userName);
-  const [category, setCategory] = React.useState('0');
+  const [category, setCategory] = React.useState(userInfo.field);
 
   const handleRadioChange = (e) => {
+    e.target.checked;
     setCategory(e.target.value);
+    console.log(e.target.value);
   };
 
   const fileInput = React.useRef();
@@ -27,57 +29,57 @@ const CardFrontWrite = () => {
   console.log(fileData);
 
   // 파일 미리보기 (오류 해결 코드)
-  const filePreview = (e) => {
-    const reader = new FileReader();
-    const file = fileInput.current.files[0];
-    console.log(file);
-    if (file === undefined) {
-      dispatch(setPreview(null));
-    } else {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        //  console.log(reader.result);
-        dispatch(setPreview(reader.result));
-      };
-      setFileData(e.target.files[0]);
-    }
-  };
-
-  // 기존 파일 미리보기
   // const filePreview = (e) => {
   //   const reader = new FileReader();
   //   const file = fileInput.current.files[0];
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     //  console.log(reader.result);
-  //     dispatch(setPreview(reader.result));
-  //   };
-  //   setFileData(e.target.files[0]);
-  //   // e.target.value = '';
+  //   console.log(file);
+  //   if (file === undefined) {
+  //     dispatch(setPreview(null));
+  //   } else {
+  //     reader.readAsDataURL(file);
+  //     reader.onloadend = () => {
+  //       //  console.log(reader.result);
+  //       dispatch(setPreview(reader.result));
+  //     };
+  //     setFileData(e.target.files[0]);
+  //   }
   // };
+
+  // 기존 파일 미리보기
+  const filePreview = (e) => {
+    const reader = new FileReader();
+    const file = fileInput.current.files[0];
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      //  console.log(reader.result);
+      dispatch(setPreview(reader.result));
+    };
+    setFileData(e.target.files[0]);
+    // e.target.value = '';
+  };
 
   const fileUploadHandler = () => {
     const file = fileInput.current.files[0];
     console.log(file);
     const formData = new FormData();
     formData.append('userName', userName);
-    formData.append('hashTagsStr', 'spring');
+    formData.append('hashTagsStr', 'spring,여행');
     formData.append('field', category);
     if (fileData) {
       formData.append('profile', fileData);
     }
     console.log('formData', formData);
-    for (var key of formData.keys()) {
-      console.log(key);
-    }
+    // for (var key of formData.keys()) {
+    //   console.log(key);
+    // }
 
-    for (var value of formData.values()) {
-      console.log(value);
-    }
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
 
     dispatch(editCardProfileDB(formData));
   };
-
+  console.log(category);
   return (
     <Grid
       height="590px"
@@ -120,9 +122,9 @@ const CardFrontWrite = () => {
             <input
               type="radio"
               id="categoryId"
-              name="0"
+              name="field"
               value="0"
-              checked={category === '0'}
+              checked={category === 0 ? true : false}
               onChange={handleRadioChange}
             />
             백엔드
@@ -131,9 +133,9 @@ const CardFrontWrite = () => {
             <input
               type="radio"
               id="categoryId"
-              name="1"
+              name="field"
               value="1"
-              checked={category === '1'}
+              checked={category === 1 ? true : false}
               onChange={handleRadioChange}
             />
             프론트엔드
@@ -142,9 +144,9 @@ const CardFrontWrite = () => {
             <input
               type="radio"
               id="categoryId"
-              name="2"
+              name="field"
               value="2"
-              checked={category === '2'}
+              checked={category === 2 ? true : false}
               onChange={handleRadioChange}
             />
             디자인

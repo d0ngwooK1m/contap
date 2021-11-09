@@ -11,11 +11,11 @@ const ColorStyle = {
 };
 
 const FontScale = {
-  Caption_14: '19px',
-  Body2_16: '22px',
-  Body1_20: '26px',
-  Header_24: '32px',
-  Header_32: '42px',
+  Caption_14: '14px',
+  Body2_16: '16px',
+  Body1_20: '20px',
+  Header_24: '24px',
+  Header_32: '32px',
 };
 
 const FontFamily = `-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',

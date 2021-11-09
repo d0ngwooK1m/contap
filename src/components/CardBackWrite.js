@@ -1,14 +1,14 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { useDispatch } from 'react-redux';
-import { createCardDB } from '../features/cards/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCardDB, isSuccess } from '../features/cards/actions';
 
 import { Grid, Input } from '../elements';
 
 const CardBackWrite = () => {
   const dispatch = useDispatch();
-  // console.log(getClick);
 
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
@@ -25,9 +25,12 @@ const CardBackWrite = () => {
 
   // const [click, setClick] = React.useState(propsClick.false);
 
+  const handleClick = useSelector((state) => state.cards.isSuccess);
+  console.log(handleClick);
   const addCardBack = () => {
     dispatch(createCardDB(content));
-    // getClick(true);
+
+    dispatch(isSuccess(!handleClick));
   };
 
   return (

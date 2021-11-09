@@ -1,30 +1,25 @@
 /* eslint-disable */
 import React from 'react';
-
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 import { Grid } from '../elements';
 import CardPortfolio from './CardPortfolio';
+import { ReactComponent as AddRound } from '../svgs/AddRound.svg';
+import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
 const CardAdd = () => {
-  const cardListCheck = useSelector((state) => state.cards.cardList);
+  const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
   // const [click, setClick] = React.state('');
 
   console.log(cardList);
   if (cardListCheck.length === 0) {
     return (
-      <Grid>
-        <Grid
-          width="1110px"
-          height="136px"
-          borderRadius="16px"
-          border="1px solid #dcdcdc"
-          bgcolor="background.paper"
-          margin="auto"
-        >
-          +
-        </Grid>
+      <Grid width="100%" height="100%" padding="0px 0px 10% 0px;">
+        <Div>
+          <AddRound />
+        </Div>
       </Grid>
     );
   } else {
@@ -43,3 +38,22 @@ const CardAdd = () => {
 };
 
 export default CardAdd;
+
+const Div = styled.div`
+  width: 1110px;
+  height: 136px;
+  border-radius: 16px;
+  border: 1px solid #4d4759;
+  margin: auto;
+  background-color: ${ColorStyle.BackGround100};
+  text-align: center;
+`;
+
+// const PDiv = styled.div`
+//   width: 1110px;
+//   height: 450px;
+//   border-radius: 16px;
+//   border: 1px solid #dcdcdc;
+//   margin: auto;
+//   background-color: ${ColorStyle.BackGround100};
+// `;
