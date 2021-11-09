@@ -51,16 +51,17 @@ const CardPortfolio = ({ cardId }) => {
         <Btn onClick={edit}>작성완료</Btn>
         <Grid
           width="1110px"
-          height="450px"
+          height="537px"
           borderRadius="16px"
-          border="1px solid #dcdcdc"
-          bgcolor="background.paper"
+          border="1px solid #8c4dff"
           margin="40px auto"
+          padding="60px 48px 0px 48px"
+          bg="#1d1d22"
         >
-          <Input
-            is_submit
+          <TitleBox
+            type="text"
             value={title}
-            _onChange={(e) => {
+            onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
@@ -101,14 +102,18 @@ const CardPortfolio = ({ cardId }) => {
         }}
       >
         <IconDiv>
-          <EditBtn style={display} onClick={editCardBack} />
-          <DeleteBtn style={display} onClick={deleteCardBack} />
+          <EditBtn style={display} onClick={editCardBack} cursor="pointer" />
+          <DeleteBtn
+            style={display}
+            onClick={deleteCardBack}
+            cursor="pointer"
+          />
         </IconDiv>
         <Grid
           width="1110px"
           height="450px"
           borderRadius="16px"
-          border="1px solid #a09bac"
+          border="1px solid #4D4759"
           bg="#141422"
           margin="0px auto 40px auto"
         >
@@ -168,13 +173,15 @@ const TitleText = styled.p`
 const MainText = styled.p`
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
+  font-weight: 400;
   color: ${ColorStyle.Gray500};
-  margin: 0px 0px 61px 48px;
+  margin: 0px 48px 61px 48px;
 `;
 
 const TagText = styled.p`
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
+  font-weight: 400;
   color: ${ColorStyle.Gray500};
   margin: 0px 0px 28px 48px;
   width: 10%;
@@ -187,6 +194,7 @@ const TagText = styled.p`
 const LinkText = styled.p`
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
+  font-weight: 400;
   color: ${ColorStyle.PrimaryPurple};
   margin: 0px 0px 64px 48px;
 `;
@@ -194,6 +202,7 @@ const LinkText = styled.p`
 const IconDiv = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 20px;
 `;
 
 const Btn = styled.button`

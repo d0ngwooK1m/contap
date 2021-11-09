@@ -28,12 +28,13 @@ const CardProfile = () => {
             <NameText>{cardList.userName}</NameText>
             <InterestText>#자바스크립트</InterestText>
           </Grid>
-          <BtnDiv
-            onClick={() => {
-              history.push('/edit');
-            }}
-          >
-            <UpdateBtn />
+          <BtnDiv>
+            <UpdateBtn
+              cursor="pointer"
+              onClick={() => {
+                history.push('/edit');
+              }}
+            />
           </BtnDiv>
         </Div>
         <StackText>관심사</StackText>
@@ -58,9 +59,21 @@ const ProfileDiv = styled.div`
   width: 540px;
   height: 308px;
   border-radius: 16px;
-  border: 1px solid #dcdcdc;
   margin: 62px auto 114px auto;
-  background-color: #94d1b5;
+  background: linear-gradient(
+    -45deg,
+    #7e22ce,
+    #7434c6,
+    #6451b9,
+    #5b62b1,
+    #4982a2,
+    #41929b,
+    #3e9699,
+    #37a393,
+    #29bd87,
+    #73cba7,
+    #94d1b5
+  );
   // position: absolute;
   // z-index: 1;
 `;
@@ -104,6 +117,7 @@ const Img = styled.img`
   align-items: center;
   width: 125px;
   height: 112px;
+  border-radius: 8px;
 `;
 
 // const TextDiv = styled.div`
@@ -122,7 +136,7 @@ const StackText = styled.div`
 
 const BtnDiv = styled.div`
   width: 20%;
-  cursor: pointer;
+  // cursor: pointer;
   margin: 22px 26px 0px 0px;
 `;
 
