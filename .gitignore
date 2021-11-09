@@ -38,3 +38,5 @@ firestore.rules
 ### Firebase Patch ### 
 .runtimeconfig.json 
 .firebase/
+
+.lh

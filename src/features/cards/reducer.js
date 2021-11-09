@@ -18,6 +18,7 @@ import {
   DELETE_STACK,
   SET_HOBBY,
   DELETE_HOBBY,
+  IS_SUCCESS,
 } from './types';
 
 const initialState = {
@@ -164,6 +165,11 @@ export default handleActions(
           });
           draft.hobby = deletedArr;
         }
+      }),
+    [IS_SUCCESS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isSuccess = action.payload.success;
+        console.log(action.payload);
       }),
   },
   initialState,
