@@ -6,13 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
-import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
+import BasicProfile from '../assets/image/basicProfile.png';
 
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
-import { Grid, Image, Text } from '../elements';
+import { Text } from '../elements';
 import T from '../api/tokenInstance';
 import Chat from './Chat/Chat';
+import { ColorStyle, Opacity } from '../utils/systemDesign';
 
 const CardFront = ({ userId, contap, select, grab }) => {
   const dispatch = useDispatch();
@@ -22,9 +23,6 @@ const CardFront = ({ userId, contap, select, grab }) => {
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-  // console.log(front);
-  // console.log(front[userId].hashTags);
-
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
     ?.split('@')
@@ -33,17 +31,12 @@ const CardFront = ({ userId, contap, select, grab }) => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
-  // console.log(stackHashTags, interestHashTags);
-
-  // console.log(userId);
   const showCardBackModal = async () => {
     if (!showModal) {
       await dispatch(loadCurrentCardDB(userId));
     }
     setShowMadal(true);
   };
-
-  // console.log(userId);
 
   const closeModal = () => {
     setShowMadal(false);
@@ -77,9 +70,17 @@ const CardFront = ({ userId, contap, select, grab }) => {
   };
   console.log(front[userId].profile);
 
+  // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
+  const category = () => {
+    if (front[userId].field < 2) {
+      return true;
+    }
+    return false;
+  };
+
   return (
-    <CardForm onClick={showCardBackModal}>
-      <div onClick={stopPropagation}>
+    <CardForm onClick={showCardBackModal} category={category()}>
+      <div onClick={stopPropagation} aria-hidden="true">
         {!contap && (
           <CardModal show={showModal} onHide={closeModal} userId={userId} />
         )}
@@ -103,31 +104,38 @@ const CardFront = ({ userId, contap, select, grab }) => {
           />
         )}
       </div>
-      <div>
-        {front[userId].profile ? (
-          <AspectOutter src={front[userId].profile} />
-        ) : (
-          <BasicProfileSvg />
-        )}
-        <div>
-          <Text color="#F5F3F8" regular20>
-            {front[userId] ? front[userId].userName : null}
-          </Text>
-          <Text color="#8c4dff" regular20>
-            {/* # {stackHashTags} */}
-            # React
+      <div style={{ display: 'flex' }}>
+        <ImageBox
+          className="imageBox"
+          src={front[userId].profile ? front[userId].profile : BasicProfile}
+        />
+        <div className="userInfo">
+          <div className="userName">
+            <Text color="#F5F3F8" regular20>
+              {front[userId] ? front[userId].userName : null}
+            </Text>
+          </div>
+          <Text
+            color={
+              category() ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
+            }
+            regular20
+          >
+            # {stackHashTags}
           </Text>
         </div>
       </div>
-      <Hash>
-        {/* {interestHashTags?.map((stack, idx) => {
-          return stack && <HashTag key={idx} tag={stack} />;
-        })} */}
-        <HashTag tag={'유튜브'} />;
-        <HashTag tag={'등산'} />;
-        <HashTag tag={'게임'} />;
+      <div className="interest">
+        <Text regular16>관심사</Text>
+      </div>
+      <Hash className="hash">
+        {interestHashTags?.map((stack, idx) => {
+          return (
+            stack && <HashTag key={idx} tag={stack} category={category()} />
+          );
+        })}
       </Hash>
-      <div onClick={stopPropagation}>
+      <div onClick={stopPropagation} aria-hidden="true">
         {contap && select === 'ReceiveTap' && (
           <button type="button" onClick={acceptTap}>
             수락
@@ -147,11 +155,13 @@ CardFront.propTypes = {
   userId: PropTypes.number.isRequired,
   select: PropTypes.string,
   contap: PropTypes.bool,
+  grab: PropTypes.bool,
 };
 
 CardFront.defaultProps = {
   select: null,
   contap: false,
+  grab: false,
 };
 
 export const MemoizedCardFront = React.memo(CardFront);
@@ -161,27 +171,63 @@ const CardForm = styled.div`
   width: 350px;
   height: 200px;
   border-radius: 16px;
-  border: 1px solid #4d475980;
-  margin: 16px;
-  background-color: #141422;
+  box-sizing: border-box;
+  margin: 22px 15px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
+  background-color: ${ColorStyle.BackGround100};
+
+  .userInfo {
+    margin: 40px 0px 0px 0px;
+  }
+  .userName {
+    margin: 0px 0px 15px 0px;
+  }
+
+  .interest {
+    margin: 0px 22px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: 3px solid
+      ${({ category }) =>
+        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+
+    .imageBox {
+      margin: 20px;
+    }
+    .hash {
+      margin: 14px 0px -2px 14px;
+      div {
+        background-color: ${({ category }) =>
+          category
+            ? ColorStyle.PrimaryPurple + Opacity[70]
+            : ColorStyle.PrimaryMint + Opacity[70]};
+      }
+    }
+    .userInfo {
+      margin: 38px -2px 0px 2px;
+    }
+
+    .interest {
+      margin: 2px 0px -2px 20px;
+    }
+  }
 `;
 
-const AspectOutter = styled.div`
-height: 72px;
-width: 80px;
-border-radius: 8px;
+const ImageBox = styled.div`
+  height: 72px;
+  width: 80px;
+  margin: 22px;
 
   background-image: url('${(props) => props.src}');
-`;
-
-const Div = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10% 0px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
 `;
 
 const Hash = styled.div`
   display: flex;
-  margin: -10px 10px;
+  margin: 12px 0px 0px 16px;
 `;

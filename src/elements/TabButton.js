@@ -1,22 +1,21 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const TabButton = ({ val, id, check, click }) => {
-  console.log(val)
+  console.log(val);
   return (
-      <Button
-        style={
-          check === id
-            ? { backgroundColor: '#141422' }
-            : { backgroundColor: '#0f0a1a' }
-        }
-        type="button"
-        onClick={click}
-      >
+    <Button
+      style={
+        check === id
+          ? { backgroundColor: '#141422' }
+          : { backgroundColor: '#0f0a1a' }
+      }
+      type="button"
+      onClick={click}
+    >
       {check === id ? val.clickTab : val.noneClickTab}
-      </Button>
+    </Button>
   );
 };
 
@@ -27,9 +26,7 @@ TabButton.propTypes = {
   click: PropTypes.func.isRequired,
 };
 
-
 const Button = styled.button`
-
   position: relative;
   height: 45px;
   width: 179px;
@@ -39,6 +36,7 @@ const Button = styled.button`
   border: 0px;
   margin: 8px 0px;
   padding: 8px, 12px, 8px, 12px;
+  cursor: pointer;
 
   /* p {
     color: #a09bac;

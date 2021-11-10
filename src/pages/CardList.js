@@ -4,9 +4,11 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import styled from 'styled-components';
 import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
+import { Text } from '../elements';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -23,16 +25,58 @@ const CardList = () => {
   }, [isSearching]);
 
   return (
-    <>
-      <SearchBar />
-      <div>
+    <div style={{ paddingBottom: '112px' }}>
+      <TitleWrap>
+        <Text bold48> Just Tap!</Text>
+        <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
+      </TitleWrap>
+      <SearchBarWrap>
+        <SearchBar />
+      </SearchBarWrap>
+      <TextWrap>
+        <div>
+          <Text bold32> 동료를 찾고 있나요?</Text>
+          <Text bold32> 탭! 해보세요</Text>
+        </div>
+      </TextWrap>
+      <CardListWrap>
         {cardList.allIds.map((userId) => {
           return <MemoizedCardFront key={userId} userId={userId} />;
         })}
-      </div>
-    </>
+      </CardListWrap>
+    </div>
   );
 };
+
+const CardListWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const TitleWrap = styled.div`
+  margin-top: 54px;
+  text-align: center;
+  p {
+    margin: 24px 0px 8px 0px;
+  }
+`;
+
+const SearchBarWrap = styled.div`
+  text-align: center;
+  margin: 44px 0px 120px 0px;
+`;
+
+const TextWrap = styled.div`
+  height: 230px;
+  div {
+    text-align: center;
+    padding-top: 70px;
+    p {
+      margin: 8px 0px;
+    }
+  }
+`;
 
 export default CardList;
 

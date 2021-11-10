@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Grid } from '../elements';
 import TabButton from '../elements/TabButton';
 
 import useTabs from '../hooks/useTabs';
@@ -17,19 +15,17 @@ const TabMenu = ({ content }) => {
           return (
             <TabButton
               key={val.id}
-                id={val.id}
-                val={val}
-                check={contentItem.id}
-                click={() => {
-                  contentChange(idx);
-                }}
-              />
+              id={val.id}
+              val={val}
+              check={contentItem.id}
+              click={() => {
+                contentChange(idx);
+              }}
+            />
           );
         })}
       </Menu>
-      <div>
-        {contentItem.content}
-      </div>
+      <div>{contentItem.content}</div>
     </Wrapper>
   );
 };
@@ -50,11 +46,7 @@ const Menu = styled.div`
   width: 255px;
   height: 100vh;
   margin: 0px 0px 0px 165px;
-  border-right: solid 1px #A09BAC4D;
+  border-right: solid 1px #a09bac4d;
 `;
 
-
-
-
-// export default TabMenu;
 export default TabMenu;
