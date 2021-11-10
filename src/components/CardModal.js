@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
-
 import { Grid } from '../elements';
 import Carousel from './Carousel';
 
