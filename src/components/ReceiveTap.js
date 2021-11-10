@@ -14,7 +14,6 @@ const ReceiveTap = ({ select }) => {
 
   const userName = useSelector((state) => state.user.userName);
   const conTap = useSelector((state) => state.taps);
-
   return (
     <Wrap>
       <Text color="#FFF" bold32>

@@ -23,14 +23,13 @@ const CardFront = ({ userId, contap, select, grab }) => {
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
-  const isLogin = useSelector((state) => state.user.isAuthorized)
-  const token = getToken()
+  const isLogin = useSelector((state) => state.user.isAuthorized);
+  const token = getToken();
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-
   const MySwal = withReactContent(Swal);
-
+console.log('카드프론트 프로필', front[userId].profile)
   // Modal Handler
   const showCardBackModal = async () => {
     if (!isLogin || !token) {
@@ -101,7 +100,14 @@ const CardFront = ({ userId, contap, select, grab }) => {
     <CardForm onClick={showCardBackModal} category={category()}>
       <div onClick={stopPropagation} aria-hidden="true">
         {!contap && showModal && (
-          <CardModal show={showModal} onHide={closeModal} userId={userId} />
+          <CardModal
+            show={showModal}
+            onHide={closeModal}
+            userId={userId}
+            userName={front[userId].userName}
+            profile={front[userId].profile}
+            category={category()}
+          />
         )}
         {contap && showModal && (
           <ContapModal
@@ -119,6 +125,9 @@ const CardFront = ({ userId, contap, select, grab }) => {
             show={sideModal}
             onHide={closeSideModal}
             userId={userId}
+            userName={front[userId].userName}
+            profile={front[userId].profile}
+            category={category()}
             contap
           />
         )}
