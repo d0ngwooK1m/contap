@@ -23,9 +23,13 @@ const RightWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: ${FontScale.Header_32};
-  font-family: ${FontFamily};
   margin: 160px 0px 64px 0px;
+`;
+
+const StyledLabel = styled.label`
+  span:focus {
+    color: ${ColorStyle.PrimaryPurple};
+  }
 `;
 
 const StyledInput = styled.input`
@@ -40,6 +44,7 @@ const StyledInput = styled.input`
   border-left: none;
   &:focus {
     outline: none;
+    border-bottom: 1px solid ${ColorStyle.PrimaryPurple};
   }
 `;
 
@@ -74,12 +79,13 @@ const DivideContent = styled.div`
 `;
 
 const KakaoButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 445px;
   height: 60px;
   margin: 60px 0px 0px 0px;
   color: 181600;
-  font-size: ${FontScale.Body1_20};
-  font-family: ${FontFamily};
   border-radius: 30px;
   background-color: #e5d32e;
   border: none;
@@ -96,6 +102,7 @@ export {
   LeftWrapper,
   RightWrapper,
   Title,
+  StyledLabel,
   StyledInput,
   SubmitInput,
   DivideWrapper,
