@@ -16,23 +16,23 @@ import { Text } from '../elements';
 import T from '../api/tokenInstance';
 import Chat from './Chat/Chat';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
-import useUserAuthCheck from '../hooks/useUserAuthCheck';
+import { getToken } from '../utils/auth';
 
 const CardFront = ({ userId, contap, select, grab }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
+  const isLogin = useSelector((state) => state.user.isAuthorized);
+  const token = getToken();
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-  const [isUserAuthorized, token] = useUserAuthCheck();
-
   const MySwal = withReactContent(Swal);
-
+console.log('카드프론트 프로필', front[userId].profile)
   // Modal Handler
   const showCardBackModal = async () => {
-    if (!token || !isUserAuthorized) {
+    if (!isLogin || !token) {
       await MySwal.fire({
         title: <strong>로그인을 해주세요!</strong>,
         icon: 'error',
@@ -100,7 +100,14 @@ const CardFront = ({ userId, contap, select, grab }) => {
     <CardForm onClick={showCardBackModal} category={category()}>
       <div onClick={stopPropagation} aria-hidden="true">
         {!contap && showModal && (
-          <CardModal show={showModal} onHide={closeModal} userId={userId} />
+          <CardModal
+            show={showModal}
+            onHide={closeModal}
+            userId={userId}
+            userName={front[userId].userName}
+            profile={front[userId].profile}
+            category={category()}
+          />
         )}
         {contap && showModal && (
           <ContapModal
@@ -118,6 +125,9 @@ const CardFront = ({ userId, contap, select, grab }) => {
             show={sideModal}
             onHide={closeSideModal}
             userId={userId}
+            userName={front[userId].userName}
+            profile={front[userId].profile}
+            category={category()}
             contap
           />
         )}

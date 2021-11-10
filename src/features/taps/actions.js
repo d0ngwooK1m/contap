@@ -26,6 +26,8 @@ export const modalSwitch = createAction(SHOW_MODAL, (bool) => ({
 export const loadSendTapToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap', 'dotap');
+    console.log('보낸탭 데이터 ============> ', data);
+
     dispatch(loadSendTap(data));
   } catch (error) {
     console.error(error);
