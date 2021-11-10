@@ -1,12 +1,23 @@
 /* eslint-disable no-param-reassign */
 import { produce } from 'immer';
-import { LOG_IN, LOG_OUT, AUTHORIZED, EMAIL_AUTH } from './types';
+import {
+  LOG_IN,
+  LOG_OUT,
+  AUTHORIZED,
+  EMAIL_AUTH,
+  AUTH_CHECK,
+  BACK_TO_PREV,
+  SIGNUP_DONE,
+} from './types';
 
 const initialState = {
   email: '',
   userName: '',
   isAuthorized: false,
-  isEmailAuth: false,
+  isEmailChecked: false,
+  isAuthNumChecked: false,
+  isSignupDone: false,
+  checkedEmail: '',
 };
 
 export default function userReducer(state = initialState, action) {
@@ -19,7 +30,22 @@ export default function userReducer(state = initialState, action) {
         break;
       }
       case EMAIL_AUTH: {
-        draft.isEmailAuth = true;
+        draft.isEmailChecked = true;
+        console.log(action.emailInfo.email);
+        draft.checkedEmail = action.emailInfo.email;
+        console.log(draft.checkedEmail);
+        break;
+      }
+      case AUTH_CHECK: {
+        draft.isAuthNumChecked = true;
+        break;
+      }
+      case BACK_TO_PREV: {
+        draft.isEmailChecked = false;
+        break;
+      }
+      case SIGNUP_DONE: {
+        draft.isSignupDone = true;
         break;
       }
       case AUTHORIZED: {

@@ -116,7 +116,7 @@ const SearchBar = () => {
           const searchInfo = {
             searchTags: [data],
             type: 0,
-            page: 1,
+            page: 0,
             field: field === undefined ? 3 : field,
           };
           dispatch(searchInfoDB(searchInfo));
@@ -135,14 +135,14 @@ const SearchBar = () => {
               searchInfo = {
                 searchTags: [],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 0,
               };
             } else {
               searchInfo = {
                 searchTags: [data],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 0,
               };
             }
@@ -159,14 +159,14 @@ const SearchBar = () => {
               searchInfo = {
                 searchTags: [],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 1,
               };
             } else {
               searchInfo = {
                 searchTags: [data],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 1,
               };
             }
@@ -183,14 +183,14 @@ const SearchBar = () => {
               searchInfo = {
                 searchTags: [],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 2,
               };
             } else {
               searchInfo = {
                 searchTags: [data],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 2,
               };
             }
@@ -207,14 +207,14 @@ const SearchBar = () => {
               searchInfo = {
                 searchTags: [],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 3,
               };
             } else {
               searchInfo = {
                 searchTags: [data],
                 type: 0,
-                page: 1,
+                page: 0,
                 field: 3,
               };
             }

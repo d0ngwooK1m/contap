@@ -1,7 +1,16 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { WITHDRAWAL, LOG_IN, LOG_OUT, AUTHORIZED, EMAIL_AUTH } from './types';
+import {
+  WITHDRAWAL,
+  LOG_IN,
+  LOG_OUT,
+  AUTHORIZED,
+  EMAIL_AUTH,
+  AUTH_CHECK,
+  BACK_TO_PREV,
+  SIGNUP_DONE,
+} from './types';
 import { saveToken, removeToken } from '../../utils/auth';
 import tokenAxios from '../../api/tokenInstance';
 import { history } from '../configureStore';
@@ -17,8 +26,21 @@ const withdrawal = (withdrawalInfo) => ({
   withdrawalInfo,
 });
 
-const emailAuth = () => ({
+const emailAuth = (emailInfo) => ({
   type: EMAIL_AUTH,
+  emailInfo,
+});
+
+const authCheck = () => ({
+  type: AUTH_CHECK,
+});
+
+const backToPrev = () => ({
+  type: BACK_TO_PREV,
+});
+
+const signupDone = () => ({
+  type: SIGNUP_DONE,
 });
 
 const login = (payload) => ({
@@ -70,12 +92,13 @@ const authorize = (email, userName) => ({
 //   }
 // };
 
-const sendEmailAuth = (emailInfo) => async () => {
+const sendEmailAuth = (emailInfo) => async (dispatch) => {
   try {
     console.log(emailInfo);
     const res = await axios.post(`${baseURL}/email/send`, emailInfo);
     const { data } = res;
     console.log(data);
+    dispatch(emailAuth(emailInfo));
 
     return data;
   } catch (error) {
@@ -90,7 +113,7 @@ const sendAuthInfo = (authInfo) => async (dispatch) => {
     const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
     const { data } = res;
     console.log(data);
-    dispatch(emailAuth());
+    dispatch(authCheck());
     return data;
   } catch (error) {
     console.log(error);
@@ -98,7 +121,7 @@ const sendAuthInfo = (authInfo) => async (dispatch) => {
   }
 };
 
-const signupToServer = (signupInfo) => async () => {
+const signupToServer = (signupInfo) => async (dispatch) => {
   try {
     console.log(baseURL);
     console.log(signupInfo);
@@ -110,21 +133,22 @@ const signupToServer = (signupInfo) => async () => {
       console.log(data);
       Swal.fire({
         icon: 'error',
-        title: '로그인 실패',
+        title: '실패',
         text: `${data.errorMessage}`,
       });
       return data;
     }
 
-    if (data.result === 'success') {
-      console.log(data);
-      Swal.fire({
-        icon: 'success',
-        title: '회원가입 성공!',
-      });
-      history.push('/login');
-      return data;
-    }
+    // if (data.result === 'success') {
+    //   console.log(data);
+    //   Swal.fire({
+    //     icon: 'success',
+    //     title: '회원가입 성공!',
+    //   });
+    //   history.push('/login');
+    //   return data;
+    // }
+    dispatch(signupDone());
 
     return data;
   } catch (error) {
@@ -242,6 +266,7 @@ const withdrawalToServer = (passwordInfo) => async (dispatch) => {
 export {
   login,
   logout,
+  backToPrev,
   sendEmailAuth,
   sendAuthInfo,
   signupToServer,

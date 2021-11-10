@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React from 'react';
 // import styled from 'styled-components';
+import { Text } from '../elements';
+import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
@@ -12,6 +14,7 @@ import {
   LeftWrapper,
   RightWrapper,
   Title,
+  StyledLabel,
   StyledInput,
   SubmitInput,
   DivideWrapper,
@@ -71,7 +74,9 @@ const Login = () => {
       </LeftWrapper>
       <RightWrapper>
         <div>
-          <Title>로그인</Title>
+          <Title>
+            <Text color={ColorStyle.Gray500} bold32>로그인</Text>
+          </Title>
           <form
             onSubmit={handleSubmit((loginInfo) => {
               console.log(loginInfo);
@@ -83,7 +88,7 @@ const Login = () => {
                 color: '#4D4759',
               }}
             >
-              이메일
+              <span>이메일</span>
               <br />
               <StyledInput
                 type="text"
@@ -162,16 +167,16 @@ const Login = () => {
             }}
           >
             <KakaoLogoSvg />
-            카카오 로그인
+            <Text color={ColorStyle.Gray500} regular20>카카오 로그인</Text>
           </KakaoButton>
-          <button
+          {/* <button
             onClick={() => {
               console.log(process.env.REACT_APP_GITHUB_PATH);
               window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
             }}
           >
             깃허브 로그인
-          </button>
+          </button> */}
         </div>
       </RightWrapper>
     </LoginWrapper>

@@ -55,7 +55,7 @@ export default handleActions(
         console.log(draft.isSearching);
         draft.searchInfo = action.payload.searchInfo;
         console.log(draft.searchInfo);
-        if (action.payload.searchInfo.page === 1) {
+        if (action.payload.searchInfo.page === 0) {
           draft.byId = {};
           draft.allIds = [];
 
