@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
@@ -14,6 +16,7 @@ import { Text } from '../elements';
 import T from '../api/tokenInstance';
 import Chat from './Chat/Chat';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
+import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
 const CardFront = ({ userId, contap, select, grab }) => {
   const dispatch = useDispatch();
@@ -23,15 +26,20 @@ const CardFront = ({ userId, contap, select, grab }) => {
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-  const stackHashTags = front[userId].hashTags
-    ?.split('_')[0]
-    ?.split('@')
-    .slice(1, 2);
-  const interestHashTags = front[userId].hashTags
-    ?.split('_')[1]
-    ?.split('@')
-    .slice(1, 4);
+  const [isUserAuthorized, token] = useUserAuthCheck();
+
+  const MySwal = withReactContent(Swal);
+
+  // Modal Handler
   const showCardBackModal = async () => {
+    if (!token || !isUserAuthorized) {
+      await MySwal.fire({
+        title: <strong>로그인을 해주세요!</strong>,
+        icon: 'error',
+        footer: '<a href="/login">로그인 하러 가기!</a>',
+      });
+      return null;
+    }
     if (!showModal) {
       await dispatch(loadCurrentCardDB(userId));
     }
@@ -42,10 +50,18 @@ const CardFront = ({ userId, contap, select, grab }) => {
     setShowMadal(false);
   };
 
-  const stopPropagation = (e) => {
-    e.stopPropagation();
+  // Side Modal Handler
+  const handleSideModal = () => {
+    setShowMadal(false);
+    setSideModal(true);
   };
 
+  const closeSideModal = () => {
+    setSideModal(false);
+    setShowMadal(true);
+  };
+
+  // tap 수락 거절
   const rejectTap = async () => {
     await T.POST('/contap/reject', { tagId: front[userId].tapId });
     console.log('거절');
@@ -59,16 +75,14 @@ const CardFront = ({ userId, contap, select, grab }) => {
     console.log(data);
   };
 
-  const handleSideModal = () => {
-    setShowMadal(false);
-    setSideModal(true);
-  };
-
-  const closeSideModal = () => {
-    setSideModal(false);
-    setShowMadal(true);
-  };
-  console.log(front[userId].profile);
+  const stackHashTags = front[userId].hashTags
+    ?.split('_')[0]
+    ?.split('@')
+    .slice(1, 2);
+  const interestHashTags = front[userId].hashTags
+    ?.split('_')[1]
+    ?.split('@')
+    .slice(1, 4);
 
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
   const category = () => {
@@ -78,10 +92,14 @@ const CardFront = ({ userId, contap, select, grab }) => {
     return false;
   };
 
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <CardForm onClick={showCardBackModal} category={category()}>
       <div onClick={stopPropagation} aria-hidden="true">
-        {!contap && (
+        {!contap && showModal && (
           <CardModal show={showModal} onHide={closeModal} userId={userId} />
         )}
         {contap && showModal && (
@@ -135,18 +153,17 @@ const CardFront = ({ userId, contap, select, grab }) => {
           );
         })}
       </Hash>
-      <div onClick={stopPropagation} aria-hidden="true">
-        {contap && select === 'ReceiveTap' && (
+      {contap && select === 'ReceiveTap' && (
+        <div onClick={stopPropagation} aria-hidden="true">
           <button type="button" onClick={acceptTap}>
             수락
           </button>
-        )}
-        {contap && select === 'ReceiveTap' && (
+
           <button type="button" onClick={rejectTap}>
             거절
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </CardForm>
   );
 };
