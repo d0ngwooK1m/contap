@@ -225,7 +225,7 @@ const AllBox = styled.div`
 const TagDiv = styled.div`
   display: inline-block;
   margin: 10px;
-  padding: 7px 10px;
+  padding: 10px 15px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.PrimaryPurple};
   font-size: ${FontScale.Caption_14};
@@ -233,6 +233,7 @@ const TagDiv = styled.div`
   color: ${ColorStyle.Gray500};
   font-weight: 400;
   text-align: center;
+  cursor: pointer;
 `;
 
 const SearchBox = styled.input`
