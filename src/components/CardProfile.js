@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,10 +14,21 @@ import {
   ColorStyle,
   Opacity,
 } from '../utils/systemDesign';
+import TagList from './TagList';
 
 const CardProfile = () => {
   const cardList = useSelector((state) => state.cards.current);
   console.log(cardList);
+  const stackTag = cardList.hashTagsString
+    ?.split('_')[0]
+    ?.split('@')
+    .slice(1, 2);
+  console.log('앞면 태그확인====>', stackTag);
+  const hobbyTag = cardList.hashTagsString
+    ?.split('_')[1]
+    ?.split('@')
+    .slice(1, 4);
+  console.log('앞면 관심사 태그확인====>', hobbyTag);
 
   return (
     <Grid>
@@ -31,7 +43,7 @@ const CardProfile = () => {
           </Grid>
           <Grid width="40%" margin="56px 0px 0px 0px">
             <NameText>{cardList.userName}</NameText>
-            <StackText>#자바스크립트</StackText>
+            <StackText>#{stackTag}</StackText>
           </Grid>
           <BtnDiv>
             <UpdateBtn
@@ -43,11 +55,14 @@ const CardProfile = () => {
           </BtnDiv>
         </Div>
         <HobbyText>관심사</HobbyText>
-        <Div>
-          <HobbyDiv>업무태그1</HobbyDiv>
-          <TagDiv>업무태그2</TagDiv>
-          <TagDiv>업무태그3</TagDiv>
-        </Div>
+        <HobbyDiv>
+          {/* <HobbyDiv>{hobbyTag[0]}</HobbyDiv>
+          <TagDiv>{hobbyTag[1]}</TagDiv>
+          <TagDiv>{hobbyTag[2]}</TagDiv> */}
+          {hobbyTag?.map((hobby, idx) => {
+            return hobby && <TagList key={idx} tag={hobby} />;
+          })}
+        </HobbyDiv>
       </ProfileDiv>
     </Grid>
   );
@@ -64,7 +79,7 @@ const DotDiv = styled.div`
   position: absolute;
   right: -47%;
   top: 17%;
-  z-index: 3;
+  z-index: 2;
 `;
 const ProfileDiv = styled.div`
   width: 540px;
@@ -86,10 +101,9 @@ const ProfileDiv = styled.div`
     #94d1b5
   );
   z-index: 1;
-  // position: absolute;
+  position: relative;
   // left: 450px;
   // top: 256px;
-  // z-index: 1;
 `;
 
 const Div = styled.div`
@@ -99,7 +113,7 @@ const Div = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   position: relative;
-  z-index: 2;
+  // z-index: 2;
 `;
 
 const TitleText = styled.p`
@@ -151,17 +165,9 @@ const HobbyText = styled.div`
 `;
 
 const HobbyDiv = styled.p`
-  width: 146px;
-  height: 54px;
-  line-height: 54px;
-  margin-left: 32px;
-  border-radius: 50px;
-  font-size: ${FontScale.Body1_20};
-  font-family: ${FontFamily};
-  color: ${ColorStyle.Gray500};
-  font-weight: 400;
-  text-align: center;
-  background-color: ${ColorStyle.BackGround300 + Opacity[15]};
+  display: flex;
+  justify-content: center;
+  margin: 0px auto;
 `;
 
 const TagDiv = styled.div`

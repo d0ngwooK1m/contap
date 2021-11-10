@@ -1,17 +1,22 @@
+/*eslint-disable*/
 import React from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createCardDB, isSuccess } from '../features/cards/actions';
+import { useForm } from 'react-hook-form';
 
+import { ReactComponent as Link } from '../svgs/Link.svg';
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import { ReactComponent as Flag } from '../svgs/Flag.svg';
+
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 import { Grid } from '../elements';
 
 const CardBackWrite = () => {
   const dispatch = useDispatch();
+  const { register } = useForm();
 
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
@@ -53,6 +58,13 @@ const CardBackWrite = () => {
             setTitle(e.target.value);
             // console.log(e.target.value);
           }}
+          {...register('title', {
+            requirerd: '제목을 입력해주세요',
+            pattern: {
+              value: '',
+              message: '제목이 공백입니다.',
+            },
+          })}
         />
         <Grid width="10%">
           <AddBtn cursor="pointer" onClick={addCardBack} />
@@ -60,26 +72,35 @@ const CardBackWrite = () => {
       </Div>
       <Grid>
         <MainBox
+          type="text"
           placeholder="프로젝트 설명"
           onChange={(e) => {
             setDesc(e.target.value);
           }}
+          {...register('content', { requirerd: true })}
+          // ref={register({ requirerd: true })}
         />
         <TagBox
+          type="text"
           placeholder="사용 기술"
           onChange={(e) => {
             setTagsStr(e.target.value);
           }}
+          {...register('tag', { requirerd: true })}
         />
-        <span style={{ position: 'absolute', top: '127%', left: '24%' }}>
+        <div style={{ position: 'absolute', top: '126.7%', left: '24%' }}>
           <Flag />
-        </span>
+        </div>
         <LinkBox
+          type="text"
           placeholder="링크"
           onChange={(e) => {
             setLink(e.target.value);
           }}
         />
+        <div style={{ position: 'absolute', top: '134.7%', left: '24%' }}>
+          <Link />
+        </div>
         {/* <Btn onClick={addCardBack}>작성완료</Btn> */}
       </Grid>
     </Grid>
@@ -135,7 +156,7 @@ const MainBox = styled.textarea`
 `;
 
 const TagBox = styled.input`
-  margin-bottom: 24px;
+  position: relative;
   padding-left: 60px;
   margin-top: 56px;
   background-color: ${ColorStyle.Gray300};
@@ -153,8 +174,10 @@ const TagBox = styled.input`
 `;
 
 const LinkBox = styled.input`
-  width: 1007px;
+  width: 947px;
   height: 50px;
+  padding-left: 60px;
+  margin-top: 24px;
   background-color: ${ColorStyle.Gray300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};

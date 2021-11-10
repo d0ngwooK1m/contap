@@ -1,13 +1,17 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 
+import { useDispatch, useSelector } from 'react-redux';
 import {
   searchStackList,
   updateStack,
   deleteStack,
 } from '../features/cards/actions';
 
-const searchData = ['Javascript', 'Java', 'NodeJS', 'Python'];
+import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+// import { Text } from '../elements';
+
+const searchData = ['Javascript', 'Java', 'Node.JS', 'Python'];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -49,9 +53,9 @@ const StackSearch = () => {
     console.log(stackList.length);
     if (stackList.length === 1) {
       return (
-        <li key={val.toString()}>
+        <Box key={val.toString()}>
           {button[val] ? (
-            <button
+            <TagDiv
               type="button"
               onClick={async () => {
                 console.log('test');
@@ -63,13 +67,13 @@ const StackSearch = () => {
                 console.log(button);
               }}
               style={{
-                backgroundColor: 'purple',
+                backgroundColor: '#8c4dff',
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           ) : (
-            <button
+            <TagDiv
               type="button"
               onClick={() => {
                 console.log('test');
@@ -79,14 +83,14 @@ const StackSearch = () => {
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           )}
-        </li>
+        </Box>
       );
     }
     return (
-      <li key={val.toString()}>
-        <button
+      <Box key={val.toString()}>
+        <TagDiv
           type="button"
           onClick={async () => {
             console.log('wowow');
@@ -98,8 +102,8 @@ const StackSearch = () => {
           }}
         >
           <span>{val}</span>
-        </button>
-      </li>
+        </TagDiv>
+      </Box>
     );
   });
 
@@ -107,9 +111,9 @@ const StackSearch = () => {
     console.log(stackList.length);
     if (stackList.length === 1) {
       return (
-        <li key={val.toString()}>
+        <Box key={val.toString()}>
           {button[val] ? (
-            <button
+            <TagDiv
               type="button"
               onClick={async () => {
                 console.log('test');
@@ -121,13 +125,13 @@ const StackSearch = () => {
                 console.log(button);
               }}
               style={{
-                backgroundColor: 'purple',
+                backgroundColor: '#8c4dff',
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           ) : (
-            <button
+            <TagDiv
               type="button"
               onClick={() => {
                 console.log('test');
@@ -137,15 +141,15 @@ const StackSearch = () => {
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           )}
-        </li>
+        </Box>
       );
     }
     return (
-      <li key={val.toString()}>
+      <Box key={val.toString()}>
         {button[val] ? (
-          <button
+          <TagDiv
             type="button"
             onClick={async () => {
               console.log('test');
@@ -156,13 +160,13 @@ const StackSearch = () => {
               await dispatch(deleteStack(val));
             }}
             style={{
-              backgroundColor: 'purple',
+              backgroundColor: '#8c4dff',
             }}
           >
             <span>{val}</span>
-          </button>
+          </TagDiv>
         ) : (
-          <button
+          <TagDiv
             type="button"
             onClick={async () => {
               console.log('test');
@@ -174,23 +178,23 @@ const StackSearch = () => {
             }}
           >
             <span>{val}</span>
-          </button>
+          </TagDiv>
         )}
-      </li>
+      </Box>
     );
   });
 
   return (
     <div>
       {!click ? (
-        <input
+        <SearchBox
           onChange={(e) => {
             console.log(e.target.value);
             setData(e.target.value);
           }}
         />
       ) : (
-        <input
+        <SearchBox
           onChange={(e) => {
             console.log(e.target.value);
             setData(e.target.value);
@@ -198,9 +202,54 @@ const StackSearch = () => {
           value={data}
         />
       )}
-      <ul>{!click ? ArrayData : FullList}</ul>
+      <AllBox>{!click ? ArrayData : FullList}</AllBox>
       <br />
     </div>
   );
 };
+
 export default StackSearch;
+
+const Box = styled.div`
+  display: flex;
+`;
+
+const AllBox = styled.div`
+  display: flex;
+  margin: 48px 165px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+`;
+
+const TagDiv = styled.div`
+  display: inline-block;
+  margin: 10px;
+  padding: 7px 10px;
+  border-radius: 50px;
+  border: 1px solid ${ColorStyle.PrimaryPurple};
+  font-size: ${FontScale.Caption_14};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+`;
+
+const SearchBox = styled.input`
+  width: 412px;
+  height: 35px;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 400;
+  color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround};
+  border-bottom: 1px solid ${ColorStyle.Gray300};
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  &:focus {
+    outline: none;
+  }
+  margin-left: 165px;
+  padding-left: 50px;
+`;

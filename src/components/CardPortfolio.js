@@ -42,7 +42,8 @@ const CardPortfolio = ({ cardId }) => {
     link,
   };
 
-  const [display, setDisplay] = React.useState({ display: 'none' });
+  // onMouse
+  // const [display, setDisplay] = React.useState({ display: 'none' });
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
@@ -112,23 +113,32 @@ const CardPortfolio = ({ cardId }) => {
   return (
     <Grid>
       <Div
-        onMouseEnter={() => {
-          setDisplay({ display: 'block' });
-        }}
-        onMouseLeave={() => {
-          setDisplay({ display: 'none' });
-        }}
+      // onMouse
+      // onMouseEnter={() => {
+      //   setDisplay({ display: 'block' });
+      // }}
+      // onMouseLeave={() => {
+      //   setDisplay({ display: 'none' });
+      // }}
       >
-        <IconDiv>
-          <EditBtn style={display} onClick={editCardBack} cursor="pointer" />
-          <DeleteBtn
-            style={display}
-            onClick={deleteCardBack}
-            cursor="pointer"
-          />
-        </IconDiv>
         <ProjectDiv>
-          <TitleText>{cardList[cardId].title}</TitleText>
+          <Grid is_flex>
+            <TitleText>{cardList[cardId].title}</TitleText>
+            <IconDiv>
+              <EditBtn
+                // style={display}
+                onClick={editCardBack}
+                cursor="pointer"
+                width="30%"
+              />
+              <DeleteBtn
+                // style={display}
+                onClick={deleteCardBack}
+                cursor="pointer"
+                width="38%"
+              />
+            </IconDiv>
+          </Grid>
           <MainText>{cardList[cardId].content}</MainText>
           <TagText>{cardList[cardId].tagsStr}</TagText>
           <LinkText>
@@ -170,6 +180,8 @@ const ProjectDiv = styled.div`
   border: 1px solid ${'#4d4759' + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
   margin: 0px auto 40px auto;
+  &:hover {
+    border: 1px solid ${ColorStyle.PrimaryPurple};
 `;
 
 const TitleBox = styled.input`
@@ -222,8 +234,9 @@ const TagBox = styled.input`
 `;
 
 const LinkBox = styled.input`
-  width: 1007px;
+  width: 947px;
   height: 50px;
+  padding-left: 60px;
   background-color: ${ColorStyle.Gray300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
@@ -261,7 +274,9 @@ const TagText = styled.p`
   font-weight: 400;
   color: ${ColorStyle.Gray500};
   margin: 0px 0px 28px 48px;
-  width: 10%;
+  padding: 7px 10px;
+  display: inline-block;
+  // width: 10%;
   border: 1px solid ${'#8c4dff' + Opacity[70]};
   border-radius: 8px;
   background-color: ${'#8c4dff' + Opacity[70]};
@@ -278,8 +293,8 @@ const LinkText = styled.p`
 
 const IconDiv = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
+  justify-content: space-around;
+  margin-right: 48px;
 `;
 
 const Btn = styled.button`
