@@ -1,12 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import { useDispatch, useSelector } from 'react-redux';
 import {
   searchHobbyList,
   updateHobby,
   deleteHobby,
 } from '../features/cards/actions';
+
+import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+
+// import { Grid, Text } from '../elements';
 
 const searchData = ['숨쉬기', '밥먹기', '걷기', '뛰기', '가만히 있기'];
 
@@ -52,9 +56,9 @@ const HobbySearch = () => {
     console.log(searchList.length);
     if (hobbyList.length === 3) {
       return (
-        <li key={val.toString()}>
+        <Box key={val.toString()}>
           {button[val] ? (
-            <button
+            <TagDiv
               type="button"
               onClick={async () => {
                 console.log('test');
@@ -70,9 +74,9 @@ const HobbySearch = () => {
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           ) : (
-            <button
+            <TagDiv
               type="button"
               onClick={() => {
                 console.log('test');
@@ -82,14 +86,14 @@ const HobbySearch = () => {
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           )}
-        </li>
+        </Box>
       );
     }
     return (
-      <li key={val.toString()}>
-        <button
+      <Box key={val.toString()}>
+        <TagDiv
           type="button"
           onClick={async () => {
             console.log('wowow');
@@ -101,17 +105,17 @@ const HobbySearch = () => {
           }}
         >
           <span>{val}</span>
-        </button>
-      </li>
+        </TagDiv>
+      </Box>
     );
   });
 
   const FullList = searchData.map((val) => {
     if (hobbyList.length === 3) {
       return (
-        <li key={val.toString()}>
+        <Box key={val.toString()}>
           {button[val] ? (
-            <button
+            <TagDiv
               type="button"
               onClick={async () => {
                 console.log('test');
@@ -127,9 +131,9 @@ const HobbySearch = () => {
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           ) : (
-            <button
+            <TagDiv
               type="button"
               onClick={() => {
                 console.log('test');
@@ -139,13 +143,13 @@ const HobbySearch = () => {
               }}
             >
               <span>{val}</span>
-            </button>
+            </TagDiv>
           )}
-        </li>
+        </Box>
       );
     }
     return (
-      <li key={val.toString()}>
+      <Box key={val.toString()}>
         {console.log(button[val], val)}
         {button[val] ? (
           <PurpleButton
@@ -166,7 +170,7 @@ const HobbySearch = () => {
             <span>{val}</span>
           </PurpleButton>
         ) : (
-          <button
+          <TagDiv
             type="button"
             onClick={async () => {
               console.log('test');
@@ -178,23 +182,23 @@ const HobbySearch = () => {
             }}
           >
             <span>{val}</span>
-          </button>
+          </TagDiv>
         )}
-      </li>
+      </Box>
     );
   });
 
   return (
     <div>
       {!click ? (
-        <input
+        <SearchBox
           onChange={(e) => {
             console.log(e.target.value);
             setData(e.target.value);
           }}
         />
       ) : (
-        <input
+        <SearchBox
           value={data}
           onChange={(e) => {
             console.log(e.target.value);
@@ -203,14 +207,68 @@ const HobbySearch = () => {
         />
       )}
       {console.log(FullList)}
-      <ul>{!click ? ArrayData : FullList}</ul>
+      <AllBox>{!click ? ArrayData : FullList}</AllBox>
       <br />
     </div>
   );
 };
 
-const PurpleButton = styled.button`
-  background: purple;
+export default HobbySearch;
+
+const Box = styled.div`
+  display: flex;
 `;
 
-export default HobbySearch;
+const AllBox = styled.div`
+  display: flex;
+  margin: 48px 165px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+`;
+
+const TagDiv = styled.div`
+  display: inline-block;
+  margin: 10px;
+  padding: 7px 10px;
+  border-radius: 50px;
+  border: 1px solid ${ColorStyle.PrimaryPurple};
+  font-size: ${FontScale.Caption_14};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+`;
+
+const PurpleButton = styled.div`
+  display: inline-block;
+  margin: 10px;
+  background: ${ColorStyle.PrimaryPurple};
+  padding: 7px 10px;
+  border-radius: 50px;
+  border: 1px solid ${ColorStyle.PrimaryPurple};
+  font-size: ${FontScale.Caption_14};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+`;
+
+const SearchBox = styled.input`
+  width: 412px;
+  height: 35px;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 400;
+  color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround};
+  border-bottom: 1px solid ${ColorStyle.Gray300};
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  &:focus {
+    outline: none;
+  }
+  margin-left: 165px;
+  padding-left: 50px;
+`;

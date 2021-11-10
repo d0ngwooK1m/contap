@@ -27,7 +27,7 @@ const CardFrontWrite = () => {
   const stack = useSelector((state) => state.cards.stack);
   const hobby = useSelector((state) => state.cards.hobby);
   // console.log(stack, hobby);
-  console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
+  console.log('해쉬태그 리퀘스트 값====>', stack[0] + ',' + hobby[0]);
 
   const handleRadioChange = (e) => {
     //e.target.checked;
@@ -210,37 +210,41 @@ const CardFrontWrite = () => {
           </Text>
           <br />
           {stack.length !== 0 ? (
-            <button
+            <HashTag
               type="button"
               onClick={() => {
                 dispatch(deleteStack(stack));
               }}
             >
               {stack}
-            </button>
+            </HashTag>
           ) : null}
         </Grid>
-        <Text bold20 color="#f5f3f8">
-          관심사
-        </Text>
-        <br />
-        {hobby.length !== 0
-          ? hobby.map((val) => {
-              {
-                console.log(val);
-              }
-              return (
-                <button
-                  type="button"
-                  onClick={() => {
-                    dispatch(deleteHobby(val));
-                  }}
-                >
-                  {val}
-                </button>
-              );
-            })
-          : null}
+        <Grid margin="0px 130px 0px 0px" width="100%">
+          <Text bold20 color="#f5f3f8">
+            관심사
+          </Text>
+          <br />
+          <HashTagDiv>
+            {hobby.length !== 0
+              ? hobby.map((val) => {
+                  {
+                    console.log(val);
+                  }
+                  return (
+                    <HashTag
+                      type="button"
+                      onClick={() => {
+                        dispatch(deleteHobby(val));
+                      }}
+                    >
+                      {val}
+                    </HashTag>
+                  );
+                })
+              : null}
+          </HashTagDiv>
+        </Grid>
       </TagDiv>
     </Grid>
   );
@@ -291,6 +295,41 @@ const TagDiv = styled.div`
   width: 1110px;
   margin: 20px auto;
   padding: 78px 0px 0px 0px;
+  flex-wrap: nowrap;
+`;
+
+const HashTag = styled.div`
+  // dispaly: flex;
+  // justify-content: start;
+  // flex-direction: row;
+  width: 146px;
+  height: 54px;
+  //margin: 10px;
+  border-radius: 50px;
+  border: 1px solid ${ColorStyle.PrimaryPurple};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+  line-height: 54px;
+`;
+
+const HashTagDiv = styled.div`
+  dispaly: flex;
+  justify-content: start;
+  flex-direction: row;
+  // width: 146px;
+  // height: 54px;
+  // margin: 10px;
+  // border-radius: 50px;
+  // border: 1px solid ${ColorStyle.PrimaryPurple};
+  // font-size: ${FontScale.Body1_20};
+  // font-family: ${FontFamily};
+  // color: ${ColorStyle.Gray500};
+  // font-weight: 400;
+  // text-align: center;
+  // line-height: 54px;
 `;
 
 // const TextDiv = styled.div`
