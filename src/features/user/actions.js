@@ -103,7 +103,8 @@ const sendEmailAuth = (emailInfo) => async (dispatch) => {
     return data;
   } catch (error) {
     console.log(error);
-    throw new Error(error.message);
+    // throw new Error(error.message);
+    return error.Message;
   }
 };
 
@@ -274,4 +275,5 @@ export {
   passwordChangeToServer,
   withdrawalToServer,
   authorize,
+  emailAuth,
 };

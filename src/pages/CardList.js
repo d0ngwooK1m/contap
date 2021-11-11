@@ -25,7 +25,7 @@ const CardList = () => {
   }, [isSearching]);
 
   return (
-    <div style={{ paddingBottom: '112px' }}>
+    <div style={{ paddingBottom: '112px', maxWidth: '1440px' }}>
       <TitleWrap>
         <Text bold48> Just Tap!</Text>
         <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
@@ -47,12 +47,6 @@ const CardList = () => {
     </div>
   );
 };
-
-const CardListWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
 
 const TitleWrap = styled.div`
   margin-top: 54px;
@@ -78,6 +72,14 @@ const TextWrap = styled.div`
   }
 `;
 
+const CardListWrap = styled.div`
+  width: 100%;
+  display: flex;
+  width: 1140px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto;
+`;
 export default CardList;
 
 // const Div = styled.div`

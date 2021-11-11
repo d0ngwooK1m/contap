@@ -454,9 +454,9 @@ const MoreWrapper = styled.div`
 `;
 
 const MoreContent = styled.div`
-  width: 100%
+  width: 100%;
   height: 276px;
-  background-color ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround300};
   padding: 30px;
 `;
 
