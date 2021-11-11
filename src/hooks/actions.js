@@ -103,8 +103,7 @@ const sendEmailAuth = (emailInfo) => async (dispatch) => {
     return data;
   } catch (error) {
     console.log(error);
-    // throw new Error(error.message);
-    return error.Message;
+    throw new Error(error.message);
   }
 };
 

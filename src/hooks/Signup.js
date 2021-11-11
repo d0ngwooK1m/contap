@@ -15,6 +15,9 @@ import {
 import { Grid, Input, Button, Text } from '../elements';
 import { ReactComponent as Onboard2Svg } from '../svgs/onboarding2.svg';
 import {ReactComponent as SignImgSvg} from '../svgs/SignupImg.svg'
+import axios from 'axios';
+import { emailAuth } from '../features/user/actions';
+const baseURL = process.env.REACT_APP_SERVER_URI;
 
 const Signup = () => {
   const history = useHistory();
@@ -35,6 +38,18 @@ const Signup = () => {
     watch,
   } = useForm();
 
+  const [errorMessage, setErrorMessage] = React.useState('')
+
+  const emailCheck = (errors, errorMessage) => {
+  if (!errors===null ) {
+    return true
+      
+  }
+  if (!errorMessage === null) {
+    return false 
+  }
+
+}
   return (
     <div>
       {isSignupDone ? (
@@ -83,8 +98,7 @@ const Signup = () => {
                         pwCheck: info.pwCheck,
                         userName: info.userName,
                       };
-                      await dispatch(signupToServer(signupInfo));
-                    })}
+                      await dispatch(signupToServer(signupInfo))})}
                   >
                     <br />
                     <MarginWrapper4>
@@ -185,9 +199,19 @@ const Signup = () => {
                     회원가입 전에 이메일 인증을 해야합니당.
                   </Text>
                   <form
+                    // onSubmit={handleSubmit(async (emailInfo) => {
+                    //   console.log(emailInfo);
+                    //   await dispatch(sendEmailAuth(emailInfo));
+                    // })}
                     onSubmit={handleSubmit(async (emailInfo) => {
-                      console.log(emailInfo);
-                      await dispatch(sendEmailAuth(emailInfo));
+                      const { data } = await axios.post(`${baseURL}/email/send`, emailInfo);
+                      console.log(data.errorMessage)
+                      if (data.result === 'success') {
+                        await dispatch(emailAuth(emailInfo))
+                      }
+                      console.log('실행댐')
+                      setErrorMessage(data.errorMessage)
+                      return true
                     })}
                   >
                     <MarginWrapper>
@@ -207,10 +231,9 @@ const Signup = () => {
                             },
                           })}
                         />
-                      </label>
-                      {errors.email && (
-                        <ErrorMessage>{errors.email.message}</ErrorMessage>
-                      )}
+                          </label>
+                          {errors.email ? <ErrorMessage>{errors.email.message}</ErrorMessage>
+                            : errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage> }
                     </MarginWrapper>
                     <br />
                     <SubmitInput type="submit" value="이메일 확인" />

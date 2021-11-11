@@ -53,16 +53,26 @@ const CardBack = ({ card, userId, userName, profile }) => {
               {category()}
             </Text>
           </div>
-          <div className='title'>
+          <div className="title">
             <Text bold24 color={ColorStyle.BackGround300}>
               {card?.title}
             </Text>
+            <a className="link" href="https://www.naver.com">
+              <Text
+                regular20
+                color={
+                  categoryColor()
+                    ? ColorStyle.PrimaryPurple
+                    : ColorStyle.PrimaryMint
+                }
+              >
+                본문 보러가기
+              </Text>
+            </a>
           </div>
-          <div className='content'>
-            <Text regular20 color={ColorStyle.Gray100}>
-              {card?.content}
-            </Text>
-          </div>
+          <Text regular20 color={ColorStyle.Gray100}>
+            {card?.content}
+          </Text>
           <CardTapForm categoryColor={categoryColor()}>
             <ImageBox src={profile ? profile : BasicProfile} />
             <div className="userName">
@@ -96,6 +106,7 @@ const Wrap = styled.div`
 
 const Card = styled.div`
   background-color: #f0ecf9;
+  /* background-color: ${ColorStyle.BackGround100}; */
   position: relative;
   left: 10px;
   width: 755px;
@@ -123,9 +134,20 @@ const Card = styled.div`
   }
 
   .title {
-    margin:0px 0px 28px 0px;
+    margin: 0px 0px 28px 0px;
+    display: flex;
+
+    .link {
+      :link {
+        text-decoration: none;
+      }
+      :visited {
+        text-decoration: none;
+      }
+      position: absolute;
+      right:56px ;
+    }
   }
- 
 `;
 
 const CardTapForm = styled.div`
@@ -147,6 +169,7 @@ const CardTapForm = styled.div`
   }
 
   button {
+    cursor: pointer;
     min-width: 130px;
     height: 44px;
     margin-left: 25px;
