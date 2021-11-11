@@ -15,7 +15,7 @@ const CardBack = ({ card, userId, userName, profile }) => {
   const contapCheck = useSelector((state) => state.taps.allIds);
   console.log('=====> 카드!', card);
   console.log('=====> 유저!', userId);
-  const [tapFormState, setTapFormState] = React.useState(false)
+  const [tapFormState, setTapFormState] = React.useState(false);
 
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
   const category = () => {
@@ -38,8 +38,8 @@ const CardBack = ({ card, userId, userName, profile }) => {
   };
 
   const handleTapForm = () => {
-    setTapFormState(!tapFormState)
-  }
+    setTapFormState(!tapFormState);
+  };
 
   const stopPropagation = (e) => {
     e.stopPropagation();
@@ -93,7 +93,7 @@ const CardBack = ({ card, userId, userName, profile }) => {
             </button>
           </CardTapForm>
         </div>
-          {tapFormState && <TapForm/>}
+        {tapFormState && <TapForm userId={userId} />}
       </Card>
     </Wrap>
   );
@@ -151,7 +151,7 @@ const Card = styled.div`
         text-decoration: none;
       }
       position: absolute;
-      right:56px ;
+      right: 56px;
     }
   }
 `;

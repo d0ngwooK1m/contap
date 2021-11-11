@@ -9,7 +9,7 @@ const TapForm = ({ userId }) => {
   };
   console.log(messege);
   const sendTap = async () => {
-    await T.POST('/main/posttap', { userId, msg: messege });
+    await T.POST('/main/posttap', { userId });
     window.alert('Tap을 보냈어요!');
   };
 

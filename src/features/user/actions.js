@@ -165,7 +165,7 @@ const loginToServer = (loginInfo) => async (dispatch) => {
     const { data } = res;
     console.log('로그인 res =====>', res);
     console.log('로그인 data =====>', data);
-    if (data.alarm) {
+    if (data.alarm === 'true') {
       dispatch(setChatNoti(true));
     }
     if (data.result === 'fail') {

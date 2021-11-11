@@ -4,7 +4,12 @@ import StompJs from 'stompjs';
 import SockJS from 'sockjs-client';
 import { getToken } from '../utils/auth';
 import T from '../api/tokenInstance';
-import { setChatNoti } from '../features/notice/actions';
+import {
+  setChatNoti,
+  setTapRecieveNoti,
+  setTapAcceptNoti,
+  setTapRefuseNoti,
+} from '../features/notice/actions';
 
 const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -38,8 +43,14 @@ export default function useSocketNotiRoom() {
               if (newNoti.type === 1) {
                 dispatch(setChatNoti(true));
               }
-              if (newNoti.type === 2) {
-                dispatch();
+              if (newNoti.type === 3) {
+                dispatch(setTapRecieveNoti(true));
+              }
+              if (newNoti.type === 4) {
+                dispatch(setTapRefuseNoti(true));
+              }
+              if (newNoti.type === 5) {
+                dispatch(setTapAcceptNoti(true));
               }
             }
           },

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import TabMenu from '../components/TabMenu';
 import SendTap from '../components/SendTap';
 import ReceiveTap from '../components/ReceiveTap';
@@ -11,6 +12,10 @@ import { ReactComponent as SendTapIconSvg } from '../svgs/SendTapIcon.svg';
 import { ColorStyle } from '../utils/systemDesign';
 
 const Contap = () => {
+  const isRecieveTap = useSelector((state) => state.notice.isTapRecieveNoti);
+  const isAcceptTap = useSelector((state) => state.notice.isTapAcceptNoti);
+  console.log(isRecieveTap);
+  console.log(isAcceptTap);
   const content = [
     {
       id: 'ReceiveTap',
@@ -48,9 +53,23 @@ const Contap = () => {
             <RecieveTapIconSvg fill={ColorStyle.Gray300} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color={ColorStyle.Gray300} regular20>
-              받은 탭
-            </Text>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Text color={ColorStyle.Gray300} regular20>
+                받은 탭
+              </Text>
+              {isRecieveTap && (
+                <div
+                  style={{
+                    position: 'relative',
+                    left: '16px',
+                    width: '10px',
+                    height: '10px',
+                    backgroundColor: 'red',
+                    borderRadius: '10px',
+                  }}
+                />
+              )}
+            </div>
           </div>
         </div>
       ),
@@ -136,9 +155,23 @@ const Contap = () => {
             <GrabListIconSvg fill={ColorStyle.Gray300} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
-            <Text color="#a09bac" regular20>
-              나의 그랩
-            </Text>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Text color="#a09bac" regular20>
+                나의 그랩
+              </Text>
+              {isAcceptTap && (
+                <div
+                  style={{
+                    position: 'relative',
+                    left: '16px',
+                    width: '10px',
+                    height: '10px',
+                    backgroundColor: 'red',
+                    borderRadius: '10px',
+                  }}
+                />
+              )}
+            </div>
           </div>
         </div>
       ),
