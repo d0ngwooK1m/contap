@@ -34,6 +34,7 @@ const initialState = {
   isSearching: false,
   stack: [],
   hobby: [],
+  field: '',
 };
 
 export default handleActions(
@@ -123,7 +124,7 @@ export default handleActions(
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        draft.current = action.payload;
+        // draft.current = action.payload;
         console.log(action.payload);
         draft.byId[action.payload.card.cardId] = action.payload.card;
         console.log(action.payload.card.cardId);

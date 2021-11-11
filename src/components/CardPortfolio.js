@@ -7,11 +7,7 @@ import styled from 'styled-components';
 // import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  updateCardDB,
-  deleteCardDB,
-  loadMyCardDB,
-} from '../features/cards/actions';
+import { updateCardDB, deleteCardDB } from '../features/cards/actions';
 
 import { Grid, Input } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
@@ -56,10 +52,6 @@ const CardPortfolio = ({ cardId }) => {
     dispatch(updateCardDB(cardId, content));
     setClick(!click);
   };
-
-  React.useEffect(() => {
-    dispatch(loadMyCardDB());
-  }, []);
 
   if (click) {
     return (
@@ -129,7 +121,7 @@ const CardPortfolio = ({ cardId }) => {
                 // style={display}
                 onClick={editCardBack}
                 cursor="pointer"
-                width="30%"
+                width="38%"
               />
               <DeleteBtn
                 // style={display}
@@ -182,6 +174,8 @@ const ProjectDiv = styled.div`
   margin: 0px auto 40px auto;
   &:hover {
     border: 1px solid ${ColorStyle.PrimaryPurple};
+    background: ${'#a09bac' + Opacity[15]};
+  }
 `;
 
 const TitleBox = styled.input`
@@ -194,6 +188,8 @@ const TitleBox = styled.input`
   background-color: ${ColorStyle.BackGround300};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
+  border-left: none;
+  border-top: none;
   &:focus {
     outline: none;
   }

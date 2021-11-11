@@ -21,19 +21,31 @@ const CardFrontWrite = () => {
   // console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
   console.log('카테고리 확인===>', userInfo.field);
+  console.log('유저정보 확인===>', userInfo);
 
   const [userName, setUserName] = React.useState(userInfo.userName);
-  const [category, setCategory] = React.useState('0');
+  const [category, setCategory] = React.useState(userInfo.field);
   const stack = useSelector((state) => state.cards.stack);
   const hobby = useSelector((state) => state.cards.hobby);
   // console.log(stack, hobby);
-  console.log('해쉬태그 리퀘스트 값====>', stack[0] + ',' + hobby[0]);
+  console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
-  const handleRadioChange = (e) => {
-    //e.target.checked;
-    setCategory(e.target.value);
-    console.log(e.target.value);
-  };
+  const stackTag = userInfo.hashTagsString
+    ?.split('_')[0]
+    ?.split('@')
+    .slice(1, 2);
+  console.log('앞면 태그확인====>', stackTag);
+  const hobbyTag = userInfo.hashTagsString
+    ?.split('_')[1]
+    ?.split('@')
+    .slice(1, 4);
+  console.log('앞면 관심사 태그확인====>', hobbyTag);
+
+  // const handleRadioChange = (e) => {
+  //   //e.target.checked;
+  //   setCategory(e.target.value);
+  //   console.log(e.target.value);
+  // };
 
   const fileInput = React.useRef();
 
@@ -88,7 +100,7 @@ const CardFrontWrite = () => {
     // for (var value of formData.values()) {
     //   console.log(value);
     // }
-
+    // console.log('디스패치 보내기 전====>', category);
     dispatch(editCardProfileDB(formData));
   };
   console.log(category);
@@ -150,8 +162,8 @@ const CardFrontWrite = () => {
                 id="categoryId"
                 name="field"
                 value="0"
-                //checked={category === 0 ? true : false}
-                onChange={handleRadioChange}
+                checked={category === 0 ? true : false}
+                onChange={() => setCategory(0)}
                 style={{ marginRight: '16px' }}
               />
               백엔드
@@ -171,8 +183,8 @@ const CardFrontWrite = () => {
                 id="categoryId"
                 name="field"
                 value="1"
-                // checked={category === 1 ? true : false}
-                onChange={handleRadioChange}
+                checked={category === 1 ? true : false}
+                onChange={() => setCategory(1)}
                 style={{
                   marginRight: '16px',
                   backgroundColor: ColorStyle.PrimaryPurple,
@@ -194,8 +206,8 @@ const CardFrontWrite = () => {
                 id="categoryId"
                 name="field"
                 value="2"
-                // checked={category === 2 ? true : false}
-                onChange={handleRadioChange}
+                checked={category === 2 ? true : false}
+                onChange={() => setCategory(2)}
                 style={{ marginRight: '16px' }}
               />
               디자인
@@ -208,7 +220,6 @@ const CardFrontWrite = () => {
           <Text bold20 color="#f5f3f8">
             스택/툴
           </Text>
-          <br />
           {stack.length !== 0 ? (
             <HashTag
               type="button"
@@ -218,13 +229,21 @@ const CardFrontWrite = () => {
             >
               {stack}
             </HashTag>
-          ) : null}
+          ) : (
+            <HashTag
+              type="button"
+              onClick={() => {
+                dispatch(deleteStack(stack));
+              }}
+            >
+              {stackTag}
+            </HashTag>
+          )}
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
           <Text bold20 color="#f5f3f8">
             관심사
           </Text>
-          <br />
           <HashTagDiv>
             {hobby.length !== 0
               ? hobby.map((val) => {
@@ -242,7 +261,21 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })
-              : null}
+              : hobbyTag.map((val) => {
+                  {
+                    console.log(val);
+                  }
+                  return (
+                    <HashTag
+                      type="button"
+                      onClick={() => {
+                        dispatch(deleteHobby(val));
+                      }}
+                    >
+                      {val}
+                    </HashTag>
+                  );
+                })}
           </HashTagDiv>
         </Grid>
       </TagDiv>
@@ -283,6 +316,8 @@ const TitleBox = styled.input`
   background-color: ${ColorStyle.BackGround300};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
+  border-left: none;
+  border-top: none;
   &:focus {
     outline: none;
   }
@@ -299,12 +334,12 @@ const TagDiv = styled.div`
 `;
 
 const HashTag = styled.div`
-  // dispaly: flex;
+  // display: flex;
   // justify-content: start;
   // flex-direction: row;
   width: 146px;
   height: 54px;
-  //margin: 10px;
+  margin: 18px 8px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.PrimaryPurple};
   font-size: ${FontScale.Body1_20};
@@ -313,10 +348,11 @@ const HashTag = styled.div`
   font-weight: 400;
   text-align: center;
   line-height: 54px;
+  cursor: pointer;
 `;
 
 const HashTagDiv = styled.div`
-  dispaly: flex;
+  display: flex;
   justify-content: start;
   flex-direction: row;
   // width: 146px;

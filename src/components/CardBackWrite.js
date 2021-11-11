@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createCardDB, isSuccess } from '../features/cards/actions';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 
 import { ReactComponent as Link } from '../svgs/Link.svg';
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
@@ -16,7 +16,7 @@ import { Grid } from '../elements';
 
 const CardBackWrite = () => {
   const dispatch = useDispatch();
-  const { register } = useForm();
+  // const { register } = useForm();
 
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
@@ -58,13 +58,13 @@ const CardBackWrite = () => {
             setTitle(e.target.value);
             // console.log(e.target.value);
           }}
-          {...register('title', {
-            requirerd: '제목을 입력해주세요',
-            pattern: {
-              value: '',
-              message: '제목이 공백입니다.',
-            },
-          })}
+          // {...register('title', {
+          //   requirerd: '제목을 입력해주세요',
+          //   pattern: {
+          //     value: '',
+          //     message: '제목이 공백입니다.',
+          //   },
+          // })}
         />
         <Grid width="10%">
           <AddBtn cursor="pointer" onClick={addCardBack} />
@@ -77,7 +77,7 @@ const CardBackWrite = () => {
           onChange={(e) => {
             setDesc(e.target.value);
           }}
-          {...register('content', { requirerd: true })}
+          // {...register('content', { requirerd: true })}
           // ref={register({ requirerd: true })}
         />
         <TagBox
@@ -86,7 +86,7 @@ const CardBackWrite = () => {
           onChange={(e) => {
             setTagsStr(e.target.value);
           }}
-          {...register('tag', { requirerd: true })}
+          // {...register('tag', { requirerd: true })}
         />
         <div style={{ position: 'absolute', top: '126.7%', left: '24%' }}>
           <Flag />
@@ -120,7 +120,7 @@ const Div = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  width: 1007px 
+  width: 1007px;
   margin: 0px auto;
 `;
 
@@ -134,6 +134,8 @@ const TitleBox = styled.input`
   background-color: ${ColorStyle.BackGround300};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
+  border-left: none;
+  border-top: none;
   &:focus {
     outline: none;
   }
@@ -153,6 +155,7 @@ const MainBox = styled.textarea`
   border-radius: 12px;
   &:focus {
     outline: none;
+  }
 `;
 
 const TagBox = styled.input`
