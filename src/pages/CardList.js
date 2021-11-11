@@ -39,6 +39,16 @@ const CardList = () => {
           <Text bold32> 탭! 해보세요</Text>
         </div>
       </TextWrap>
+      <RefreshWrapper>
+        <RefreshBtn
+          type="button"
+          onClick={async () => {
+            await dispatch(loadCardFrontDB());
+          }}
+        >
+          카드 새로고침
+        </RefreshBtn>
+      </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
           return <MemoizedCardFront key={userId} userId={userId} />;
@@ -70,6 +80,20 @@ const TextWrap = styled.div`
       margin: 8px 0px;
     }
   }
+`;
+
+const RefreshWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: right;
+`;
+
+const RefreshBtn = styled.button`
+  margin-right: 170px;
+  cursor: pointer;
+  background-color: #0f0a1a;
+  color: #a09bac;
+  border: none;
 `;
 
 const CardListWrap = styled.div`

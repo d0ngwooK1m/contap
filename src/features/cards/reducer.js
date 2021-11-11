@@ -17,6 +17,7 @@ import {
   SET_STACK,
   DELETE_STACK,
   SET_HOBBY,
+  SET_ALL_HOBBY,
   DELETE_HOBBY,
   IS_SUCCESS,
 } from './types';
@@ -34,7 +35,6 @@ const initialState = {
   isSearching: false,
   stack: [],
   hobby: [],
-  field: '',
 };
 
 export default handleActions(
@@ -140,6 +140,9 @@ export default handleActions(
       }),
     [SET_STACK]: (state, action) =>
       produce(state, (draft) => {
+        if (draft.stack.length !== 0) {
+          draft.stack.shift();
+        }
         draft.stack.push(action.payload.stack);
       }),
     [DELETE_STACK]: (state, action) =>
@@ -156,6 +159,10 @@ export default handleActions(
         } else {
           draft.hobby.push(action.payload.hobby);
         }
+      }),
+    [SET_ALL_HOBBY]: (state, action) =>
+      produce(state, (draft) => {
+        draft.hobby = action.payload.hobby;
       }),
     [DELETE_HOBBY]: (state, action) =>
       produce(state, (draft) => {
