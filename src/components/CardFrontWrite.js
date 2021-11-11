@@ -8,6 +8,8 @@ import {
   editCardProfileDB,
   deleteStack,
   deleteHobby,
+  updateStack,
+  updateAllHobby,
 } from '../features/cards/actions';
 
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
@@ -17,29 +19,39 @@ import { Grid, Text, Input, Image } from '../elements';
 const CardFrontWrite = () => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.cards.preview);
-  // const front = useSelector((state) => state.cards.byId);
-  // console.log(front);
+  const front = useSelector((state) => state.cards.byId);
+  console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
   console.log('카테고리 확인===>', userInfo.field);
   console.log('유저정보 확인===>', userInfo);
 
   const [userName, setUserName] = React.useState(userInfo.userName);
   const [category, setCategory] = React.useState(userInfo.field);
-  const stack = useSelector((state) => state.cards.stack);
-  const hobby = useSelector((state) => state.cards.hobby);
-  // console.log(stack, hobby);
-  console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
+  // console.log(stack, hobby);
+  // console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
   const stackTag = userInfo.hashTagsString
-    ?.split('_')[0]
-    ?.split('@')
-    .slice(1, 2);
+  ?.split('_')[0]
+  ?.split('@')
+  .slice(1, 2);
   console.log('앞면 태그확인====>', stackTag);
   const hobbyTag = userInfo.hashTagsString
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
   console.log('앞면 관심사 태그확인====>', hobbyTag);
+
+  // if (stackTag !== undefined) {
+  //   dispatch(updateStack(stackTag[0]));
+  // }
+  // if (hobbyTag !== undefined) {
+  //   dispatch(updateAllHobby(hobbyTag));
+  // }
+
+  const stack = useSelector((state) => state.cards.stack);
+  const hobby = useSelector((state) => state.cards.hobby);
+  console.log(stack, hobby);
+  console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
   // const handleRadioChange = (e) => {
   //   //e.target.checked;
@@ -227,6 +239,7 @@ const CardFrontWrite = () => {
                 dispatch(deleteStack(stack));
               }}
             >
+              {console.log('stack is exist')}
               {stack}
             </HashTag>
           ) : (
@@ -239,6 +252,7 @@ const CardFrontWrite = () => {
               {stackTag}
             </HashTag>
           )}
+
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
           <Text bold20 color="#f5f3f8">
@@ -261,7 +275,7 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })
-              : hobbyTag.map((val) => {
+              : hobbyTag?.map((val) => {
                   {
                     console.log(val);
                   }
