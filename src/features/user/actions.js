@@ -11,6 +11,7 @@ import {
   BACK_TO_PREV,
   SIGNUP_DONE,
 } from './types';
+import { setChatNoti } from '../notice/actions';
 import { saveToken, removeToken } from '../../utils/auth';
 import tokenAxios from '../../api/tokenInstance';
 import { history } from '../configureStore';
@@ -164,7 +165,9 @@ const loginToServer = (loginInfo) => async (dispatch) => {
     const { data } = res;
     console.log('로그인 res =====>', res);
     console.log('로그인 data =====>', data);
-
+    if (data.alarm) {
+      dispatch(setChatNoti(true));
+    }
     if (data.result === 'fail') {
       console.log(data);
       Swal.fire({

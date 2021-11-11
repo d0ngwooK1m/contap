@@ -14,6 +14,7 @@ import Mypage from '../pages/Mypage';
 import CardEdit from '../pages/CardEdit';
 import Permit from './Permit';
 import WsNotiRoom from './WsNotiRoom';
+import Grabtalk from '../pages/GrabTalk';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <PrivatecRoute path="/contap" component={Contap} exact />
               <PrivatecRoute path="/mypage" component={Mypage} exact />
               <PrivatecRoute path="/edit" component={CardEdit} exact />
+              <PrivatecRoute path="/grabtalk" component={Grabtalk} exact />
             </Permit>
           </WsNotiRoom>
         </Switch>
