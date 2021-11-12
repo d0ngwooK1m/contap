@@ -119,7 +119,7 @@ const Header = () => {
             window.location.href = '/';
           }}
         >
-          <div style={{ cursor: 'pointer' }}>
+          <div style={{ cursor: 'pointer' }} z-index="1000">
             <LogoSvg />
           </div>
         </Grid>
@@ -213,6 +213,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1a;
+  z-index="1001"
 `;
 
 const MenuWrapper = styled.div`

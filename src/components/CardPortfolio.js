@@ -53,6 +53,17 @@ const CardPortfolio = ({ cardId }) => {
     setClick(!click);
   };
 
+  // const url = cardList[cardId].link?.split('/')[0]?.split('@').slice(1, 4);
+  // console.log('앞면 링크 확인====>', hobbyTag);
+
+  let url = cardList[cardId].link;
+  if (url !== undefined && url.indexOf('http') === -1) {
+    // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
+    url = '//' + url;
+  }
+  console.log('url===>', url);
+  console.log(cardList[cardId].link);
+
   if (click) {
     return (
       <Grid
@@ -83,21 +94,28 @@ const CardPortfolio = ({ cardId }) => {
             setDesc(e.target.value);
           }}
         />
-        <TagBox
-          value={tagsStr}
-          onChange={(e) => {
-            setTagsStr(e.target.value);
-          }}
-        />
-        <span style={{ position: 'absolute', top: '127%', left: '24%' }}>
-          <Flag />
-        </span>
-        <LinkBox
-          value={link}
-          onChange={(e) => {
-            setLink(e.target.value);
-          }}
-        />
+        <TagDiv>
+          <TagBox
+            value={tagsStr}
+            onChange={(e) => {
+              setTagsStr(e.target.value);
+            }}
+          />
+          <div style={{ position: 'absolute', top: '50%', left: '1%' }}>
+            <Flag />
+          </div>
+        </TagDiv>
+        <LinkDiv>
+          <LinkBox
+            value={link}
+            onChange={(e) => {
+              setLink(e.target.value);
+            }}
+          />
+          <div style={{ position: 'absolute', top: '20%', left: '1%' }}>
+            <Link />
+          </div>
+        </LinkDiv>
       </Grid>
     );
   }
@@ -133,12 +151,18 @@ const CardPortfolio = ({ cardId }) => {
           </Grid>
           <MainText>{cardList[cardId].content}</MainText>
           <TagText>{cardList[cardId].tagsStr}</TagText>
-          <LinkText>
+          <LinkText href={url} target="_blank">
             <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>
               <Link />
             </span>
             {cardList[cardId].link}
           </LinkText>
+          {/* <a href={cardList[cardId].link} target="_blank">
+            <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>
+              <Link />
+            </span>
+            {cardList[cardId].link}
+          </a> */}
         </ProjectDiv>
       </Div>
     </Grid>
@@ -211,6 +235,10 @@ const MainBox = styled.textarea`
     outline: none;
 `;
 
+const TagDiv = styled.div`
+  position: relative;
+`;
+
 const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
@@ -227,6 +255,10 @@ const TagBox = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+const LinkDiv = styled.div`
+  position: relative;
 `;
 
 const LinkBox = styled.input`
@@ -279,23 +311,23 @@ const TagText = styled.p`
   text-align: center;
 `;
 
-const LinkText = styled.p`
+const LinkText = styled.a`
+  display: block;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.PrimaryPurple};
   margin: 0px 0px 64px 48px;
+  text-decoration: none;
 `;
+
+// const TextDiv = styled.div`
+//   display: flex;
+//   flex-direction: column;
+// `;
 
 const IconDiv = styled.div`
   display: flex;
   justify-content: space-around;
   margin-right: 48px;
-`;
-
-const Btn = styled.button`
-  width: 80px;
-  // position: fixed;
-  // top: 16vh;
-  // left: 47vw;
 `;

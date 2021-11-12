@@ -22,7 +22,7 @@ export const apis = {
   // 카드 불러오기 (뒷면)
   getCardBack: (userId) => api.get(`/main${userId}`),
   // 카드 작성하기
-  createCard: () => api.post('../features/cards/actions'),
+  createCard: (contents) => api.post('/main', contents),
   // 카드 수정하기
   editCard: () => api.put(''),
   // 카드 삭제하기

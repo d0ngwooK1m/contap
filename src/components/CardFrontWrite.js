@@ -233,7 +233,7 @@ const CardFrontWrite = () => {
             스택/툴
           </Text>
           {stack.length !== 0 ? (
-            <HashTag
+            <HashStackTag
               type="button"
               onClick={() => {
                 dispatch(deleteStack(stack));
@@ -241,9 +241,9 @@ const CardFrontWrite = () => {
             >
               {console.log('stack is exist')}
               {stack}
-            </HashTag>
+            </HashStackTag>
           ) : (
-            <HashTag
+            <HashStackTag
               type="button"
               onClick={() => {
                 console.log('ddd');
@@ -251,7 +251,7 @@ const CardFrontWrite = () => {
               }}
             >
               {stackTag}
-            </HashTag>
+            </HashStackTag>
           )}
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
@@ -345,6 +345,21 @@ const TagDiv = styled.div`
   margin: 20px auto;
   padding: 78px 0px 0px 0px;
   flex-wrap: nowrap;
+`;
+
+const HashStackTag = styled.div`
+  width: 146px;
+  height: 54px;
+  margin: 18px 0px;
+  border-radius: 50px;
+  border: 1px solid ${ColorStyle.PrimaryPurple};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  font-weight: 400;
+  text-align: center;
+  line-height: 54px;
+  cursor: pointer;
 `;
 
 const HashTag = styled.div`
