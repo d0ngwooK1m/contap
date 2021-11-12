@@ -39,7 +39,7 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   // onMouse
-  // const [display, setDisplay] = React.useState({ display: 'none' });
+  const [display, setDisplay] = React.useState({ display: 'none' });
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
@@ -53,16 +53,16 @@ const CardPortfolio = ({ cardId }) => {
     setClick(!click);
   };
 
-  // const url = cardList[cardId].link?.split('/')[0]?.split('@').slice(1, 4);
-  // console.log('앞면 링크 확인====>', hobbyTag);
+  const url = cardList[cardId].link?.split('//')[1];
+  console.log('앞면 링크 확인====>', url);
 
-  let url = cardList[cardId].link;
-  if (url !== undefined && url.indexOf('http') === -1) {
-    // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
-    url = '//' + url;
-  }
-  console.log('url===>', url);
-  console.log(cardList[cardId].link);
+  // let url = cardList[cardId].link;
+  // if (url !== undefined && url?.indexOf('http') === -1) {
+  //   // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
+  //   url = '//' + url;
+  // }
+  // console.log('url===>', url);
+  // console.log(cardList[cardId].link);
 
   if (click) {
     return (
@@ -123,26 +123,26 @@ const CardPortfolio = ({ cardId }) => {
   return (
     <Grid>
       <Div
-      // onMouse
-      // onMouseEnter={() => {
-      //   setDisplay({ display: 'block' });
-      // }}
-      // onMouseLeave={() => {
-      //   setDisplay({ display: 'none' });
-      // }}
+        // onMouse
+        onMouseEnter={() => {
+          setDisplay({ display: 'block' });
+        }}
+        onMouseLeave={() => {
+          setDisplay({ display: 'none' });
+        }}
       >
         <ProjectDiv>
           <Grid is_flex>
             <TitleText>{cardList[cardId].title}</TitleText>
             <IconDiv>
               <EditBtn
-                // style={display}
+                style={display}
                 onClick={editCardBack}
                 cursor="pointer"
                 width="38%"
               />
               <DeleteBtn
-                // style={display}
+                style={display}
                 onClick={deleteCardBack}
                 cursor="pointer"
                 width="38%"
@@ -151,11 +151,11 @@ const CardPortfolio = ({ cardId }) => {
           </Grid>
           <MainText>{cardList[cardId].content}</MainText>
           <TagText>{cardList[cardId].tagsStr}</TagText>
-          <LinkText href={url} target="_blank">
+          <LinkText href={cardList[cardId].link} target="_blank">
             <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>
               <Link />
             </span>
-            {cardList[cardId].link}
+            {url}
           </LinkText>
           {/* <a href={cardList[cardId].link} target="_blank">
             <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>

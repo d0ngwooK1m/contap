@@ -51,11 +51,11 @@ const Login = () => {
 
     async function handleKakaoLogin() {
       try {
-        console.log('카카오 로그인!');
         const { data } = await axios({
           method: 'GET',
           url: `${baseURL}/user/kakao?code=${code}`,
         });
+        console.log('kakaologin');
         saveToken(data.token);
         await dispatch(
           loginAction({ email: data.email, userName: data.userName }),
