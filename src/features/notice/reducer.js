@@ -47,7 +47,6 @@ export default handleActions(
       }),
     [TAP_ACCEPT_NOTI]: (state, action) =>
       produce(state, (draft) => {
-        console.log('이거 타야 함!');
         draft.isTapAcceptNoti = action.payload.isNoti;
         if (action.payload.isNoti) {
           draft.isContapNoti = true;
@@ -55,7 +54,6 @@ export default handleActions(
       }),
     [TAP_REFUSE_NOTI]: (state, action) =>
       produce(state, (draft) => {
-        console.log('이거 타면 안됨 ㅋㅋ');
         draft.isTapRefuseNoti = action.payload.isNoti;
         draft.isContapNoti = true;
       }),

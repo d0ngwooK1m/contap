@@ -23,16 +23,18 @@ const SendTap = ({ select }) => {
         <br />
         누군가에게 탭!을 보냈어요
       </Text>
-      {conTap.allIds.map((sendTapUserId) => {
-        return (
-          <MemoizedCardFront
-            key={sendTapUserId}
-            userId={sendTapUserId}
-            select={select}
-            contap
-          />
-        );
-      })}
+      <CardBox>
+        {conTap.allIds.map((sendTapUserId) => {
+          return (
+            <MemoizedCardFront
+              key={sendTapUserId}
+              userId={sendTapUserId}
+              select={select}
+              contap
+            />
+          );
+        })}
+      </CardBox>
     </Wrap>
   );
 };
@@ -44,8 +46,19 @@ SendTap.propTypes = {
 const Wrap = styled.div`
   position: relative;
   top: 75px;
+  max-height: 780px;
   left: 125px;
+`;
+
+const CardBox = styled.div`
   width: 100%;
+  display: flex;
+  width: 780px;
+  height: 600px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto;
+  overflow-y: scroll;
 `;
 
 export default SendTap;

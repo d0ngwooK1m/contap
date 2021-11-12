@@ -79,7 +79,7 @@ const SearchBar = () => {
     const { scrollTop } = document.documentElement;
     const { clientHeight } = document.documentElement;
 
-    console.log(scrollTop + clientHeight, scrollHeight, fetching);
+    // console.log(scrollTop + clientHeight, scrollHeight, fetching);
 
     if (!isSearching) {
       return;
