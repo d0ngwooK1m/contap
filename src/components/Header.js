@@ -223,6 +223,7 @@ const MenuWrapper = styled.div`
 
 const Icon = styled.div`
   margin: 0px 12px;
+  z-index: 1000;
 `;
 
 const LoginButton = styled.button`

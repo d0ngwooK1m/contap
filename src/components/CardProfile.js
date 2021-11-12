@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 import { history } from '../features/configureStore';
 
 import { Grid } from '../elements';
-import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
+// import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
+import { ReactComponent as Effects } from '../svgs/Effects.svg';
 import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
+import BasicProfile from '../assets/image/basicProfile.png';
 import {
   FontFamily,
   FontScale,
@@ -23,6 +25,8 @@ const CardProfile = () => {
     ?.split('_')[0]
     ?.split('@')
     .slice(1, 2);
+  // const tag = concat('#').stackTag;
+  // const stackTag = '#' + tag;
   console.log('앞면 태그확인====>', stackTag);
   const hobbyTag = cardList.hashTagsString
     ?.split('_')[1]
@@ -31,39 +35,44 @@ const CardProfile = () => {
   console.log('앞면 관심사 태그확인====>', hobbyTag);
 
   return (
-    <Grid>
+    <Grid
+      padding="66px 0px 114px 0px"
+      bg={ColorStyle.BackGround300 + Opacity[40]}
+    >
       <TitleText>{cardList.userName}님의 프로필</TitleText>
-      <ProfileDiv>
-        <Div>
-          <DotDiv>
-            <DoodleDots />
-          </DotDiv>
-          <Grid margin="32px" width="125px" height="112px">
-            <Img src={cardList.profile} />
-          </Grid>
-          <Grid width="40%" margin="56px 0px 0px 0px">
-            <NameText>{cardList.userName}</NameText>
-            <StackText>#{stackTag}</StackText>
-          </Grid>
-          <BtnDiv>
-            <UpdateBtn
-              cursor="pointer"
-              onClick={() => {
-                history.push('/edit');
-              }}
-            />
-          </BtnDiv>
-        </Div>
-        <HobbyText>관심사</HobbyText>
-        <HobbyDiv>
-          {/* <HobbyDiv>{hobbyTag[0]}</HobbyDiv>
+      <Box>
+        <DotDiv>
+          <Effects />
+        </DotDiv>
+        <ProfileDiv>
+          <Div>
+            <Grid margin="32px" width="124px" height="112px">
+              <Img src={cardList.profile ? cardList.profile : BasicProfile} />
+            </Grid>
+            <Grid width="40%" margin="56px 0px 0px 0px">
+              <NameText>{cardList.userName}</NameText>
+              <StackText>#{stackTag}</StackText>
+            </Grid>
+            <BtnDiv>
+              <UpdateBtn
+                cursor="pointer"
+                onClick={() => {
+                  history.push('/edit');
+                }}
+              />
+            </BtnDiv>
+          </Div>
+          <HobbyText>관심사</HobbyText>
+          <HobbyDiv>
+            {/* <HobbyDiv>{hobbyTag[0]}</HobbyDiv>
           <TagDiv>{hobbyTag[1]}</TagDiv>
           <TagDiv>{hobbyTag[2]}</TagDiv> */}
-          {hobbyTag?.map((hobby, idx) => {
-            return hobby && <TagList key={idx} tag={hobby} />;
-          })}
-        </HobbyDiv>
-      </ProfileDiv>
+            {hobbyTag?.map((hobby, idx) => {
+              return hobby && <TagList key={idx} tag={hobby} />;
+            })}
+          </HobbyDiv>
+        </ProfileDiv>
+      </Box>
     </Grid>
   );
 };
@@ -75,11 +84,19 @@ CardProfile.defaultProps = {
 
 export default CardProfile;
 
+const Box = styled.div`
+  width: 800px;
+  height: 308px;
+  margin: 0px auto;
+  position: relative;
+  z-index: 3;
+`;
+
 const DotDiv = styled.div`
   position: absolute;
-  right: -47%;
-  top: 17%;
-  z-index: 2;
+  left: -20%;
+  top: -70%;
+  z-index: -1;
 `;
 const ProfileDiv = styled.div`
   width: 540px;
@@ -100,7 +117,7 @@ const ProfileDiv = styled.div`
     #73cba7,
     #94d1b5
   );
-  z-index: 1;
+  z-index: 3;
   position: relative;
   // left: 450px;
   // top: 256px;
@@ -121,7 +138,6 @@ const TitleText = styled.p`
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
   text-align: center;
-  margin-top: 66px;
   font-weight: 700;
 `;
 
@@ -164,10 +180,10 @@ const HobbyText = styled.div`
   font-weight: 700;
 `;
 
-const HobbyDiv = styled.p`
+const HobbyDiv = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 0px auto;
+  // justify-content: center;
+  margin-left: 24px;
 `;
 
 const TagDiv = styled.div`

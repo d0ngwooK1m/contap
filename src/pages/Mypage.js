@@ -114,6 +114,7 @@ const TextBtn = styled.div`
   cursor: pointer;
   margin: 80px 0px 52px 0px;
   font-weight: 700;
+  z-index: 3;
   // position: fixed;
   // top: 16vh;
   // left: 47vw;

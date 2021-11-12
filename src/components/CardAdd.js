@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { loadMyCardDB } from '../features/cards/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { isSuccess } from '../features/cards/actions';
 
 import { Grid } from '../elements';
 import CardPortfolio from './CardPortfolio';
@@ -15,15 +15,27 @@ import {
 } from '../utils/systemDesign';
 
 const CardAdd = () => {
+  const dispatch = useDispatch();
   const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
   // const [click, setClick] = React.state('');
+
+  const handleClick = useSelector((state) => state.cards.isSuccess);
+  const [display, setDisplay] = React.useState({ display: 'flex' });
+  console.log(display);
 
   console.log(cardList);
   if (cardListCheck.length === 0) {
     return (
       <Grid width="100%" height="100%" padding="0px 0px 10% 0px;">
-        <Div>
+        <Div
+          onClick={() => {
+            dispatch(isSuccess(!handleClick));
+            setDisplay({ display: 'none' });
+          }}
+          cursor="pointer"
+          style={display}
+        >
           <AddRound />
         </Div>
       </Grid>
@@ -46,6 +58,9 @@ const CardAdd = () => {
 export default CardAdd;
 
 const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1110px;
   height: 136px;
   border-radius: 16px;
