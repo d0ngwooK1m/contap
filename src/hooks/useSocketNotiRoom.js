@@ -50,6 +50,7 @@ export default function useSocketNotiRoom() {
                 dispatch(setTapRefuseNoti(true));
               }
               if (newNoti.type === 5) {
+                console.log('그랩되었어!');
                 dispatch(setTapAcceptNoti(true));
               }
             }

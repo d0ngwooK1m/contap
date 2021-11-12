@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { loadGrabToAxios } from '../features/taps/actions';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
+import { setContapNoti, setTapAcceptNoti } from '../features/notice/actions';
 
 const GrabList = ({ select }) => {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const GrabList = ({ select }) => {
   React.useEffect(() => {
     console.log('디스패치');
     dispatch(loadGrabToAxios());
+    dispatch(setContapNoti(false));
+    dispatch(setTapAcceptNoti(false));
   }, []);
 
   return (
