@@ -93,8 +93,9 @@ const CardBack = ({ card, userId, userName, profile }) => {
             </button>
           </CardTapForm>
         </div>
-        {tapFormState && <TapForm userId={userId} />}
+        
       </Card>
+      {tapFormState && <TapForm userId={userId} categoryColor={categoryColor()} />}
     </Wrap>
   );
 };
@@ -123,6 +124,7 @@ const Card = styled.div`
       categoryColor ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
   box-sizing: border-box;
   border-radius: 16px;
+  z-index: 1;
 
   .category {
     width: max-content;
@@ -154,7 +156,9 @@ const Card = styled.div`
       right: 56px;
     }
   }
-`;
+
+  `;
+
 
 const CardTapForm = styled.div`
   display: flex;
@@ -181,6 +185,7 @@ const CardTapForm = styled.div`
     margin-left: 25px;
     background-color: ${ColorStyle.Gray500};
     border-radius: 40px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border: 2px solid
       ${({ categoryColor }) =>
         categoryColor ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};

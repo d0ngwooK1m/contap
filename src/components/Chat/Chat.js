@@ -125,7 +125,7 @@ const Chat = ({ userId }) => {
         // message: chatInfo.messageText,
         message,
         writer: userInfo.userName,
-        reciever: grapList[userId].userName,
+        receiver: grapList[userId].userName,
       };
 
       //   빈문자열이면 리턴

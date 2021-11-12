@@ -7,14 +7,14 @@ import ReceiveTap from '../components/ReceiveTap';
 import GrabList from '../components/GrabList';
 import { ReactComponent as GrabListIconSvg } from '../svgs/GrabListIcon.svg';
 import { Text } from '../elements';
-import { ReactComponent as RecieveTapIconSvg } from '../svgs/RecieveTapIcon.svg';
+import { ReactComponent as ReceiveTapIconSvg } from '../svgs/ReceiveTapIcon.svg';
 import { ReactComponent as SendTapIconSvg } from '../svgs/SendTapIcon.svg';
 import { ColorStyle } from '../utils/systemDesign';
 
 const Contap = () => {
-  const isRecieveTap = useSelector((state) => state.notice.isTapRecieveNoti);
+  const isReceiveTap = useSelector((state) => state.notice.isTapReceiveNoti);
   const isAcceptTap = useSelector((state) => state.notice.isTapAcceptNoti);
-  console.log(isRecieveTap);
+  console.log(isReceiveTap);
   console.log(isAcceptTap);
   const content = [
     {
@@ -30,7 +30,7 @@ const Contap = () => {
           }}
         >
           <div>
-            <RecieveTapIconSvg fill={ColorStyle.PrimaryMint} />
+            <ReceiveTapIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
             <Text color={ColorStyle.PrimaryMint} regular20>
@@ -50,14 +50,14 @@ const Contap = () => {
           }}
         >
           <div>
-            <RecieveTapIconSvg fill={ColorStyle.Gray300} />
+            <ReceiveTapIconSvg fill={ColorStyle.Gray300} />
           </div>
           <div style={{ position: 'relative', left: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Text color={ColorStyle.Gray300} regular20>
                 받은 탭
               </Text>
-              {isRecieveTap && (
+              {isReceiveTap && (
                 <div
                   style={{
                     position: 'relative',
