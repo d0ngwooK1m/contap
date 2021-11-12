@@ -14,7 +14,7 @@ import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
-import { Grid } from '../elements';
+// import { Grid } from '../elements';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
 import { ReactComponent as ContapAlarmIconSvg } from '../svgs/ContapAlarmIcon.svg';
@@ -111,18 +111,23 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper>
-        <Grid
+        {/* <Grid
           width="fit-content"
           height="fit-content"
           _onClick={() => {
+            history.push('/');
+            // window.location.href = '/';
+          }}
+        > */}
+        <LogoDiv
+          onClick={() => {
             // history.push('/');
             window.location.href = '/';
           }}
         >
-          <div style={{ cursor: 'pointer' }} z-index="1000">
-            <LogoSvg />
-          </div>
-        </Grid>
+          <LogoSvg />
+        </LogoDiv>
+        {/* </Grid> */}
         {isUserLogin !== '' ? (
           <MenuWrapper>
             <Icon
@@ -213,13 +218,20 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1a;
-  z-index="1001"
+  z-index: 1001;
 `;
 
 const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+const LogoDiv = styled.div`
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  z-index: 1000;
 `;
 
 const Icon = styled.div`

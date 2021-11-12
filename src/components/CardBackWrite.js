@@ -25,19 +25,12 @@ const CardBackWrite = () => {
   const [tagsStr, setTagsStr] = React.useState('');
   const [link, setLink] = React.useState('');
 
-  const content = {
-    title,
-    content: desc,
-    tagsStr,
-    link,
-  };
-
   // const [click, setClick] = React.useState(propsClick.false);
 
   const handleClick = useSelector((state) => state.cards.isSuccess);
   console.log(handleClick);
 
-  const addCardBack = () => {
+  const addCardBack = (e) => {
     if (title.length === 0) {
       Swal.fire({
         icon: 'error',
@@ -65,6 +58,18 @@ const CardBackWrite = () => {
       // alert('사용 기술을 작성해주세요');
       return false;
     }
+    let url = link;
+    if (url !== undefined && url.indexOf('http') === -1) {
+      // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
+      url = '//' + url;
+      console.log(url);
+    }
+    const content = {
+      title,
+      content: desc,
+      tagsStr,
+      link: url,
+    };
     dispatch(createCardDB(content));
     dispatch(isSuccess(!handleClick));
   };

@@ -51,10 +51,11 @@ const Login = () => {
 
     async function handleKakaoLogin() {
       try {
-        const {data} = await axios({
+        const { data } = await axios({
           method: 'GET',
           url: `${baseURL}/user/kakao?code=${code}`,
         });
+        console.log('kakaologin');
         saveToken(data.token);
         await dispatch(
           loginAction({ email: data.email, userName: data.userName }),
@@ -75,7 +76,9 @@ const Login = () => {
       <RightWrapper>
         <div>
           <Title>
-            <Text color={ColorStyle.Gray500} bold32>로그인</Text>
+            <Text color={ColorStyle.Gray500} bold32>
+              로그인
+            </Text>
           </Title>
           <form
             onSubmit={handleSubmit((loginInfo) => {
@@ -167,7 +170,9 @@ const Login = () => {
             }}
           >
             <KakaoLogoSvg />
-            <Text color={ColorStyle.Gray500} regular20>카카오 로그인</Text>
+            <Text color={ColorStyle.Gray500} regular20>
+              카카오 로그인
+            </Text>
           </KakaoButton>
           {/* <button
             onClick={() => {
