@@ -164,7 +164,7 @@ const WithdrawalForm = () => {
         </label>
         {errors.pw && <p>{errors.pw.message}</p>}
         <br />
-        <input type="submit" />
+        <SubmitInput type="submit" />
       </form>
     </Wrapper>
   );
@@ -173,6 +173,7 @@ const WithdrawalForm = () => {
 const Wrapper = styled.div`
   width: 635px;
   margin: 64px 0px 0px 126px;
+  position: relative;
 `;
 
 const RadioWrapper = styled.div`
@@ -197,6 +198,22 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+const SubmitInput = styled.input`
+  width: 253px;
+  height: 60px;
+  margin: 60px 0px 0px 0px;
+  color: white;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  border-radius: 30px;
+  background-color: ${ColorStyle.PrimaryPurple};
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: 100%;
 `;
 
 const MarginLabelWrapper = styled.label`

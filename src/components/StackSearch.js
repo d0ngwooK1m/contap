@@ -36,7 +36,7 @@ const StackSearch = () => {
       setClick(false);
     }
     searchData.filter((val) => {
-      if (val.indexOf(data) !== -1) {
+      if (val.toLowerCase().indexOf(data.toLowerCase()) !== -1) {
         searchArr.push(val);
       }
       // console.log(val);
