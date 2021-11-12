@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
 import { useSelector, useDispatch } from 'react-redux';
 // import { setChatNoti, setContapNoti } from '../features/notice/actions';
-import { setChatNoti } from '../features/notice/actions';
+import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
@@ -17,7 +17,7 @@ import { getToken, removeToken } from '../utils/auth';
 import { Grid } from '../elements';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { ReactComponent as ContapIconSvg } from '../svgs/ContapIcon.svg';
-// import { ReactComponent as ContapAlarmIconSvg } from '../svgs/ContapAlarmIcon.svg';
+import { ReactComponent as ContapAlarmIconSvg } from '../svgs/ContapAlarmIcon.svg';
 // import { ReactComponent as ContapAlarmActiveIconSvg } from '../svgs/ContapAlarmActiveIcon.svg';
 import { ReactComponent as ChatIconSvg } from '../svgs/ChatIcon.svg';
 import { ReactComponent as ChatAlarmIconSvg } from '../svgs/ChatAlarmIcon.svg';
@@ -31,6 +31,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const isUserLogin = useSelector((state) => state.user.email);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
+  const isContapNoti = useSelector((state) => state.notice.isContapNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [isContap, setIsContap] = React.useState(false);
@@ -43,8 +44,8 @@ const Header = () => {
   // useUserAuthCheck();
 
   const handleisContap = () => {
-    if (isContap) {
-      return;
+    if (isContapNoti) {
+      dispatch(setContapNoti(false));
     }
     setIsContap(true);
     setIsSetting(false);
@@ -94,6 +95,19 @@ const Header = () => {
     return <ChatIconSvg fill="#F5F3F8" />;
   };
 
+  const ContapButton = () => {
+    if (isContap) {
+      if (isContapNoti) {
+        return <ContapAlarmIconSvg fill="#8C4DFF" />;
+      }
+      return <ContapIconSvg fill="#8C4DFF" />;
+    }
+    if (isContapNoti) {
+      return <ContapAlarmIconSvg fill="#F5F3F8" />;
+    }
+    return <ContapIconSvg fill="#F5F3F8" />;
+  };
+
   return (
     <>
       <HeaderWrapper>
@@ -117,11 +131,7 @@ const Header = () => {
               }}
               onClick={handleisContap}
             >
-              {isContap ? (
-                <ContapIconSvg fill="#8C4DFF" />
-              ) : (
-                <ContapIconSvg fill="#F5F3F8" />
-              )}
+              {ContapButton()}
             </Icon>
 
             <Icon
