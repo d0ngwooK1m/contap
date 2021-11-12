@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadReceiveTapToAxios } from '../features/taps/actions';
-import { setContapNoti, setTapRecieveNoti } from '../features/notice/actions';
+import { setContapNoti, setTapReceiveNoti } from '../features/notice/actions';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
 
@@ -15,7 +15,7 @@ const ReceiveTap = ({ select }) => {
     console.log('2번 디패');
     dispatch(setContapNoti(false));
     console.log('3번 디패');
-    dispatch(setTapRecieveNoti(false));
+    dispatch(setTapReceiveNoti(false));
   }, []);
 
   const userName = useSelector((state) => state.user.userName);

@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React from 'react';
 // import styled from 'styled-components';
-import { Text } from '../elements';
-import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
+import { Text } from '../elements';
 import { loginToServer, login as loginAction } from '../features/user/actions';
 import { saveToken } from '../utils/auth';
 import {
@@ -38,7 +38,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  console.log('로케이션 ====> ', location.search);
+  console.log('로케이션 ====> ', location);
   React.useEffect(() => {
     if (!location.search) {
       return null;
@@ -51,7 +51,8 @@ const Login = () => {
 
     async function handleKakaoLogin() {
       try {
-        const {data} = await axios({
+        console.log('카카오 로그인!');
+        const { data } = await axios({
           method: 'GET',
           url: `${baseURL}/user/kakao?code=${code}`,
         });
@@ -64,7 +65,9 @@ const Login = () => {
         console.error(error);
       }
     }
+
     return handleKakaoLogin();
+
   }, []);
 
   return (
@@ -75,7 +78,9 @@ const Login = () => {
       <RightWrapper>
         <div>
           <Title>
-            <Text color={ColorStyle.Gray500} bold32>로그인</Text>
+            <Text color={ColorStyle.Gray500} bold32>
+              로그인
+            </Text>
           </Title>
           <form
             onSubmit={handleSubmit((loginInfo) => {
@@ -167,7 +172,9 @@ const Login = () => {
             }}
           >
             <KakaoLogoSvg />
-            <Text color={ColorStyle.Gray500} regular20>카카오 로그인</Text>
+            <Text color={ColorStyle.Gray500} regular20>
+              카카오 로그인
+            </Text>
           </KakaoButton>
           {/* <button
             onClick={() => {

@@ -36,43 +36,53 @@ const ContapModal = ({
       <Modal open={show} onClose={onHide}>
         <Wrap>
           <Content>
-            <Text color="#FFF" bold32>
-              <span
-                style={{
-                  color: `${
-                    category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
-                  }`,
-                }}
-              >
-                {userCradInfo.userName}
-              </span>
-              님이 탭!했어요
-            </Text>
+            {select === 'ReceiveTap' && (
+              <Text color="#FFF" bold32>
+                <span
+                  style={{
+                    color: `${
+                      category
+                        ? ColorStyle.PrimaryPurple
+                        : ColorStyle.PrimaryMint
+                    }`,
+                  }}
+                >
+                  {userCradInfo.userName}
+                </span>
+                님이 탭!했어요
+              </Text>
+            )}
             <Card>{children}</Card>
             <hr />
-            <Text regular20>To.{myName}님</Text>
-            <MessageBox>
-              <Text id="message" regular16>
-                가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
-              </Text>
-            </MessageBox>
             {select === 'ReceiveTap' && (
-              <ButtonBox category={category}>
-                <button
-                  type="button"
-                  className="refusetBtn"
-                  onClick={rejectTap}
-                >
-                  <Text bold20 color="#FFF">
-                    거절
+              <>
+                <Text regular20>To.{myName}님</Text>
+                <MessageBox>
+                  <Text id="message" regular16>
+                    가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
                   </Text>
-                </button>
-                <button type="button" className="acceptBtn" onClick={acceptTap}>
-                  <Text bold20 color="#FFF">
-                    수락
-                  </Text>
-                </button>
-              </ButtonBox>
+                </MessageBox>
+                <ButtonBox category={category}>
+                  <button
+                    type="button"
+                    className="refusetBtn"
+                    onClick={rejectTap}
+                  >
+                    <Text bold20 color="#FFF">
+                      거절
+                    </Text>
+                  </button>
+                  <button
+                    type="button"
+                    className="acceptBtn"
+                    onClick={acceptTap}
+                  >
+                    <Text bold20 color="#FFF">
+                      수락
+                    </Text>
+                  </button>
+                </ButtonBox>
+              </>
             )}
           </Content>
         </Wrap>
@@ -125,6 +135,7 @@ const ButtonBox = styled.div`
     width: 160px;
     height: 50px;
     border-radius: 100px;
+    cursor: pointer;
   }
 
   .acceptBtn {
