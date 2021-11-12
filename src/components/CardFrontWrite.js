@@ -31,9 +31,9 @@ const CardFrontWrite = () => {
   // console.log(stack, hobby);
   // console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
   const stackTag = userInfo.hashTagsString
-  ?.split('_')[0]
-  ?.split('@')
-  .slice(1, 2);
+    ?.split('_')[0]
+    ?.split('@')
+    .slice(1, 2);
   console.log('앞면 태그확인====>', stackTag);
   const hobbyTag = userInfo.hashTagsString
     ?.split('_')[1]
@@ -65,34 +65,35 @@ const CardFrontWrite = () => {
   console.log(fileData);
 
   // 파일 미리보기 (오류 해결 코드)
-  // const filePreview = (e) => {
-  //   const reader = new FileReader();
-  //   const file = fileInput.current.files[0];
-  //   console.log(file);
-  //   if (file === undefined) {
-  //     dispatch(setPreview(null));
-  //   } else {
-  //     reader.readAsDataURL(file);
-  //     reader.onloadend = () => {
-  //       //  console.log(reader.result);
-  //       dispatch(setPreview(reader.result));
-  //     };
-  //     setFileData(e.target.files[0]);
-  //   }
-  // };
-
-  // 기존 파일 미리보기
   const filePreview = (e) => {
     const reader = new FileReader();
     const file = fileInput.current.files[0];
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      //  console.log(reader.result);
+    console.log(file);
+    if (file === undefined) {
       dispatch(setPreview(reader.result));
-    };
-    setFileData(e.target.files[0]);
-    // e.target.value = '';
+      setFileData(file);
+    } else {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        //  console.log(reader.result);
+        dispatch(setPreview(reader.result));
+        setFileData(file);
+      };
+    }
   };
+
+  // 기존 파일 미리보기
+  // const filePreview = (e) => {
+  //   const reader = new FileReader();
+  //   const file = fileInput.current.files[0];
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     //  console.log(reader.result);
+  //     dispatch(setPreview(reader.result));
+  //   };
+  //   setFileData(e.target.files[0]);
+  //   // e.target.value = '';
+  // };
 
   const fileUploadHandler = () => {
     const file = fileInput.current.files[0];
@@ -119,12 +120,11 @@ const CardFrontWrite = () => {
   return (
     <Grid
       height="590px"
-      borderRadius="16px"
-      border="1px solid #4D4759"
       bg="#1d1d22"
-      margin="25px auto"
+      margin="0px auto"
+      padding="72px 0px 0px 0px"
     >
-      <Grid is_flex width="1110px" margin="72px auto">
+      <Grid is_flex width="1110px" margin="0px auto 72px auto">
         <Text bold32 color="#f5f3f8">
           {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
         </Text>
@@ -246,13 +246,13 @@ const CardFrontWrite = () => {
             <HashTag
               type="button"
               onClick={() => {
-                dispatch(deleteStack(stack));
+                console.log('ddd');
+                dispatch(deleteStack(stackTag));
               }}
             >
               {stackTag}
             </HashTag>
           )}
-
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
           <Text bold20 color="#f5f3f8">

@@ -2,6 +2,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createCardDB, isSuccess } from '../features/cards/actions';
@@ -35,7 +36,35 @@ const CardBackWrite = () => {
 
   const handleClick = useSelector((state) => state.cards.isSuccess);
   console.log(handleClick);
+
   const addCardBack = () => {
+    if (title.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '프로젝트 제목을 작성해주세요',
+      });
+      // alert('프로젝트 제목을 작성해주세요');
+      return false;
+    }
+    if (desc.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '프로젝트 설명을 작성해주세요',
+      });
+      // alert('프로젝트 설명을 작성해주세요');
+      return false;
+    }
+    if (tagsStr.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '사용 기술을 작성해주세요',
+      });
+      // alert('사용 기술을 작성해주세요');
+      return false;
+    }
     dispatch(createCardDB(content));
     dispatch(isSuccess(!handleClick));
   };
@@ -60,8 +89,8 @@ const CardBackWrite = () => {
           }}
           // {...register('title', {
           //   requirerd: '제목을 입력해주세요',
-          //   pattern: {
-          //     value: '',
+          //   minLength: {
+          //     value: 1,
           //     message: '제목이 공백입니다.',
           //   },
           // })}
