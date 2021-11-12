@@ -9,9 +9,50 @@ import {
 } from '../features/cards/actions';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
-// import { Text } from '../elements';
+// import { Grid } from '../elements';
 
-const searchData = ['Javascript', 'Java', 'Node.JS', 'Python'];
+const searchData = [
+  'Javascript',
+  'Java',
+  'Node.js',
+  'Python',
+  'Flutter',
+  '제플린',
+  '프로크리에이트',
+  '파워포인트',
+  'React Native',
+  'React',
+  'Vue.js',
+  'C++',
+  'Angular',
+  '애프터이펙트',
+  'Go',
+  'C#',
+  'TypeScript',
+  'SQL',
+  'MySQL',
+  'JSP',
+  'Django',
+  'FastAPI',
+  'PostgreSQL',
+  '프리미어',
+  'NestJS',
+  'PMO',
+  'EEO',
+  'FCC',
+  'QFD',
+  'VR',
+  'Zemax',
+  'WAN',
+  '피그마',
+  '스케치',
+  '오토캐드',
+  '스케치업',
+  '포토샵',
+  '일러스트레이터',
+  '인디자인',
+  '어도비XD',
+];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -202,7 +243,9 @@ const StackSearch = () => {
           value={data}
         />
       )}
-      <AllBox>{!click ? ArrayData : FullList}</AllBox>
+
+      {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
+
       <br />
     </div>
   );
@@ -217,13 +260,24 @@ const Box = styled.div`
 const AllBox = styled.div`
   display: flex;
   margin: 48px 165px;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
+
+// const ArrayBox = styled.div`
+// display: flex;
+// margin: 48px 165px;
+// justify-content: space-around;
+// align-items: center;
+// flex-direction: row;
+// flex-wrap: wrap;
+// `;
 
 const TagDiv = styled.div`
   display: inline-block;
+  width: 100%;
   margin: 10px;
   padding: 10px 15px;
   border-radius: 50px;

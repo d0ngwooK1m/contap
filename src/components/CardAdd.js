@@ -6,6 +6,7 @@ import { isSuccess } from '../features/cards/actions';
 
 import { Grid } from '../elements';
 import CardPortfolio from './CardPortfolio';
+import CardBackWrite from './CardBackWrite';
 import { ReactComponent as AddRound } from '../svgs/AddRound.svg';
 import {
   FontFamily,
@@ -33,8 +34,6 @@ const CardAdd = () => {
             dispatch(isSuccess(!handleClick));
             setDisplay({ display: 'none' });
           }}
-          cursor="pointer"
-          style={display}
         >
           <AddRound />
         </Div>
@@ -68,6 +67,7 @@ const Div = styled.div`
   margin: auto;
   background-color: ${ColorStyle.BackGround100};
   text-align: center;
+  cursor: pointer;
 `;
 
 // const PDiv = styled.div`

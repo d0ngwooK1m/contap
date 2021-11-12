@@ -12,7 +12,16 @@ import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
 // import { Grid, Text } from '../elements';
 
-const searchData = ['숨쉬기', '밥먹기', '걷기', '뛰기', '가만히 있기'];
+const searchData = [
+  '숨쉬기',
+  '밥먹기',
+  '걷기',
+  '뛰기',
+  '가만히 있기',
+  '지오캐싱',
+  '종이접기',
+  '피겨 스케이팅',
+];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -207,7 +216,7 @@ const HobbySearch = () => {
         />
       )}
       {console.log(FullList)}
-      <AllBox>{!click ? ArrayData : FullList}</AllBox>
+      {!click ? <AllBox> {ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
       <br />
     </div>
   );
@@ -222,9 +231,10 @@ const Box = styled.div`
 const AllBox = styled.div`
   display: flex;
   margin: 48px 165px;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const TagDiv = styled.div`

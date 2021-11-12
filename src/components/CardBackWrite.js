@@ -109,27 +109,31 @@ const CardBackWrite = () => {
           // {...register('content', { requirerd: true })}
           // ref={register({ requirerd: true })}
         />
-        <TagBox
-          type="text"
-          placeholder="사용 기술"
-          onChange={(e) => {
-            setTagsStr(e.target.value);
-          }}
-          // {...register('tag', { requirerd: true })}
-        />
-        <div style={{ position: 'absolute', top: '126.7%', left: '24%' }}>
-          <Flag />
-        </div>
-        <LinkBox
-          type="text"
-          placeholder="링크"
-          onChange={(e) => {
-            setLink(e.target.value);
-          }}
-        />
-        <div style={{ position: 'absolute', top: '134.7%', left: '24%' }}>
-          <Link />
-        </div>
+        <TagDiv>
+          <TagBox
+            type="text"
+            placeholder="사용 기술"
+            onChange={(e) => {
+              setTagsStr(e.target.value);
+            }}
+            // {...register('tag', { requirerd: true })}
+          />
+          <div style={{ position: 'absolute', top: '60%', left: '1%' }}>
+            <Flag />
+          </div>
+        </TagDiv>
+        <LinkDiv>
+          <LinkBox
+            type="text"
+            placeholder="링크"
+            onChange={(e) => {
+              setLink(e.target.value);
+            }}
+          />
+          <div style={{ position: 'absolute', top: '45%', left: '1%' }}>
+            <Link />
+          </div>
+        </LinkDiv>
         {/* <Btn onClick={addCardBack}>작성완료</Btn> */}
       </Grid>
     </Grid>
@@ -187,8 +191,11 @@ const MainBox = styled.textarea`
   }
 `;
 
-const TagBox = styled.input`
+const TagDiv = styled.div`
   position: relative;
+`;
+
+const TagBox = styled.input`
   padding-left: 60px;
   margin-top: 56px;
   background-color: ${ColorStyle.Gray300};
@@ -203,6 +210,10 @@ const TagBox = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+const LinkDiv = styled.div`
+  position: relative;
 `;
 
 const LinkBox = styled.input`
