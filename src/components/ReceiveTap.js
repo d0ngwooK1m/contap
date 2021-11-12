@@ -27,17 +27,18 @@ const ReceiveTap = ({ select }) => {
         <br />
         누군가 {userName}님을 탭!했어요
       </Text>
-
-      {conTap.allIds.map((ReceiveTapUserId) => {
-        return (
-          <MemoizedCardFront
-            key={ReceiveTapUserId}
-            userId={ReceiveTapUserId}
-            select={select}
-            contap
-          />
-        );
-      })}
+      <CardBox>
+        {conTap.allIds.map((ReceiveTapUserId) => {
+          return (
+            <MemoizedCardFront
+              key={ReceiveTapUserId}
+              userId={ReceiveTapUserId}
+              select={select}
+              contap
+            />
+          );
+        })}
+      </CardBox>
     </Wrap>
   );
 };
@@ -49,8 +50,20 @@ ReceiveTap.propTypes = {
 const Wrap = styled.div`
   position: relative;
   top: 75px;
+  max-height: 780px;
   left: 125px;
   width: 100%;
+`;
+
+const CardBox = styled.div`
+  width: 100%;
+  display: flex;
+  width: 780px;
+  height: 600px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto;
+  overflow-y: scroll;
 `;
 
 export default ReceiveTap;

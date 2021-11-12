@@ -26,17 +26,19 @@ const GrabList = ({ select }) => {
         <br />
         기회를 잡아보세요
       </Text>
-      {conTap.allIds.map((grabUserId) => {
-        return (
-          <MemoizedCardFront
-            key={grabUserId}
-            userId={grabUserId}
-            select={select}
-            contap
-            grab
-          />
-        );
-      })}
+      <CardBox>
+        {conTap.allIds.map((grabUserId) => {
+          return (
+            <MemoizedCardFront
+              key={grabUserId}
+              userId={grabUserId}
+              select={select}
+              contap
+              grab
+            />
+          );
+        })}
+      </CardBox>
     </Wrap>
   );
 };
@@ -48,8 +50,20 @@ GrabList.propTypes = {
 const Wrap = styled.div`
   position: relative;
   top: 75px;
+  max-height: 780px;
   left: 125px;
   width: 100%;
+`;
+
+const CardBox = styled.div`
+  width: 100%;
+  display: flex;
+  width: 780px;
+  height: 600px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto;
+  overflow-y: scroll;
 `;
 
 export default GrabList;

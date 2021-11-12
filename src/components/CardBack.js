@@ -28,7 +28,7 @@ const CardBack = ({ card, userId, userName, profile }) => {
     return '디자이너';
   };
 
-  console.log('필드', card.field);
+  console.log('필드', card);
 
   const categoryColor = () => {
     if (card.field < 2) {

@@ -50,7 +50,6 @@ const Carousel = ({ userId, userName, profile, category }) => {
                 userName={userName}
                 profile={profile}
               />
-              ;
             </SwiperSlide>
           );
         })}

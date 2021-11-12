@@ -37,7 +37,7 @@ export default handleActions(
       produce(state, (draft) => {
         console.log('LOADING');
         console.log(action.payload);
-        console.log(draft);
+        draft.isLoading = action.payload.isLoading;
       }),
   },
   initialState,

@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 const Menu = styled.div`
   display: flex;
   flex-direction: column;
-  width: 255px;
+  min-width: 255px;
   height: 100vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;

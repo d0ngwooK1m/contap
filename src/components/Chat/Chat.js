@@ -23,7 +23,9 @@ const Chat = ({ userId }) => {
 
   const grapList = useSelector((state) => state.taps.byId);
   const userInfo = useSelector((state) => state.user);
+  const isLoading = useSelector((state) => state.chat.isLoading);
 
+  console.log(isLoading);
   const { roomId } = grapList[userId];
 
   console.log(userInfo);
@@ -37,12 +39,10 @@ const Chat = ({ userId }) => {
 
   const wsConnectSubscribe = React.useCallback(() => {
     const data = {
-
       roomId,
       message: '',
       writer: userInfo.email,
       userEmail: userInfo.email,
-
     };
 
     try {
@@ -51,12 +51,11 @@ const Chat = ({ userId }) => {
           `/sub/chat/room/${roomId}`,
           (data) => {
             const newMessage = JSON.parse(data.body);
-            console.log(data.body);
+            console.log(userInfo);
             dispatch(getMessage(newMessage));
           },
 
-          { token, userEmail: userInfo.email },
-
+          { token, userEmail: userInfo.userName },
         );
       });
     } catch (error) {
@@ -79,9 +78,9 @@ const Chat = ({ userId }) => {
   }, [ws]);
 
   //  렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
-  React.useEffect( () => {
+  React.useEffect(() => {
     wsConnectSubscribe();
-     dispatch(loadMessagesToAxios(roomId));
+    dispatch(loadMessagesToAxios(roomId));
     console.log(ws);
     console.log(roomId);
 
@@ -125,13 +124,12 @@ const Chat = ({ userId }) => {
         roomId,
         // message: chatInfo.messageText,
         message,
-        writer: userInfo.email,
-        reciever: grapList[userId].email,
+        writer: userInfo.userName,
+        reciever: grapList[userId].userName,
       };
 
       //   빈문자열이면 리턴
       //   로딩 중
-      dispatch(loading(false));
       waitForConnection(ws, function () {
         ws.send('/pub/chat/message', {}, JSON.stringify(data));
         dispatch(writeMessage(''));

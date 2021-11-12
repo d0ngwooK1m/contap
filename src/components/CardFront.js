@@ -13,7 +13,6 @@ import BasicProfile from '../assets/image/basicProfile.png';
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
 import { Text } from '../elements';
-import T from '../api/tokenInstance';
 import Chat from './Chat/Chat';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
@@ -61,19 +60,7 @@ console.log('카드프론트 프로필', front[userId].profile)
     setShowMadal(true);
   };
 
-  // tap 수락 거절
-  const rejectTap = async () => {
-    await T.POST('/contap/reject', { tagId: front[userId].tapId });
-    console.log('거절');
-  };
 
-  const acceptTap = async () => {
-    const { data } = await T.POST('/contap/accept', {
-      tagId: front[userId].tapId,
-    });
-    console.log('수락');
-    console.log(data);
-  };
 
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
@@ -114,7 +101,9 @@ console.log('카드프론트 프로필', front[userId].profile)
             className="contapModal"
             show={showModal}
             onHide={closeModal}
-            userId={userId}
+            userCradInfo={front[userId]}
+            category={category()}
+            select={select}
           >
             <CardFrontContap onModal={handleSideModal} userId={userId} />
             {grab && <Chat userId={userId} />}
@@ -163,17 +152,7 @@ console.log('카드프론트 프로필', front[userId].profile)
           );
         })}
       </Hash>
-      {contap && select === 'ReceiveTap' && (
-        <div onClick={stopPropagation} aria-hidden="true">
-          <button type="button" onClick={acceptTap}>
-            수락
-          </button>
-
-          <button type="button" onClick={rejectTap}>
-            거절
-          </button>
-        </div>
-      )}
+      
     </CardForm>
   );
 };

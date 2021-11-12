@@ -20,7 +20,6 @@ const CardFrontContap = ({ userId, onModal }) => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
-  console.log(stackHashTags, interestHashTags);
 
   // const stopPropagation = (e) => {
   //   e.stopPropagation();
@@ -83,7 +82,6 @@ const CardForm = styled.div`
   height: 200px;
   border-radius: 16px;
   box-sizing: border-box;
-  margin: 22px 15px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
 
