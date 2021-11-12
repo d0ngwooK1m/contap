@@ -3,13 +3,19 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadReceiveTapToAxios } from '../features/taps/actions';
+import { setContapNoti, setTapRecieveNoti } from '../features/notice/actions';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
 
 const ReceiveTap = ({ select }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
+    console.log('1번 디패');
     dispatch(loadReceiveTapToAxios());
+    console.log('2번 디패');
+    dispatch(setContapNoti(false));
+    console.log('3번 디패');
+    dispatch(setTapRecieveNoti(false));
   }, []);
 
   const userName = useSelector((state) => state.user.userName);
