@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React from 'react';
 // import styled from 'styled-components';
-import { Text } from '../elements';
-import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
+import { Text } from '../elements';
 import { loginToServer, login as loginAction } from '../features/user/actions';
 import { saveToken } from '../utils/auth';
 import {
@@ -38,7 +38,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  console.log('로케이션 ====> ', location.search);
+  console.log('로케이션 ====> ', location);
   React.useEffect(() => {
     if (!location.search) {
       return null;
@@ -65,7 +65,9 @@ const Login = () => {
         console.error(error);
       }
     }
+
     return handleKakaoLogin();
+
   }, []);
 
   return (

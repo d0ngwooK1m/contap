@@ -5,7 +5,7 @@ import {
   CHAT_NOTI,
   CONTAP_NOTI,
   TAP_ACCEPT_NOTI,
-  TAP_RECIEVE_NOTI,
+  TAP_RECEIVE_NOTI,
   TAP_REFUSE_NOTI,
 } from './types';
 
@@ -22,7 +22,7 @@ export const setChatNoti = createAction(CHAT_NOTI, (isNoti) => ({ isNoti }));
 export const setContapNoti = createAction(CONTAP_NOTI, (isNoti) => ({
   isNoti,
 }));
-export const setTapRecieveNoti = createAction(TAP_RECIEVE_NOTI, (isNoti) => ({
+export const setTapReceiveNoti = createAction(TAP_RECEIVE_NOTI, (isNoti) => ({
   isNoti,
 }));
 export const setTapAcceptNoti = createAction(TAP_ACCEPT_NOTI, (isNoti) => ({

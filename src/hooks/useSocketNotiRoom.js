@@ -6,7 +6,7 @@ import { getToken } from '../utils/auth';
 import T from '../api/tokenInstance';
 import {
   setChatNoti,
-  setTapRecieveNoti,
+  setTapReceiveNoti,
   setTapAcceptNoti,
   setTapRefuseNoti,
 } from '../features/notice/actions';
@@ -41,12 +41,15 @@ export default function useSocketNotiRoom() {
               // tap 요청 거절한게 타입 4
               // tap 요청 수락한게 타입 5
               if (newNoti.type === 1) {
+                console.log('채팅알람!');
                 dispatch(setChatNoti(true));
               }
               if (newNoti.type === 3) {
-                dispatch(setTapRecieveNoti(true));
+                console.log('tap 요청 받았어!');
+                dispatch(setTapReceiveNoti(true));
               }
               if (newNoti.type === 4) {
+                console.log('거절 되었어!');
                 dispatch(setTapRefuseNoti(true));
               }
               if (newNoti.type === 5) {
@@ -55,7 +58,7 @@ export default function useSocketNotiRoom() {
               }
             }
           },
-          { token, userEmail: data.email },
+          { token, userEmail: data.userName },
         );
       });
     } catch (error) {

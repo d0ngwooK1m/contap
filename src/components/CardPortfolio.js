@@ -179,7 +179,7 @@ const EditDiv = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  width: 1007px 
+  width: 1007px ;
   margin: 0px auto;
 `;
 
@@ -233,6 +233,7 @@ const MainBox = styled.textarea`
   border-radius: 12px;
   &:focus {
     outline: none;
+  }
 `;
 
 const TagDiv = styled.div`
