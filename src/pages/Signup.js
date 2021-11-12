@@ -22,6 +22,7 @@ const Signup = () => {
   const [isAuth, setIsAuth] = React.useState(false);
   const [authNum, setAuthNum] = React.useState();
   const [content, setContent] = React.useState(false);
+  const [certificationNum, setCertificationNum] = React.useState('');
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
   const isAuthNumChecked = useSelector((state) => state.user.isAuthNumChecked);
   const checkedEmail = useSelector((state) => state.user.checkedEmail);
@@ -232,11 +233,11 @@ const Signup = () => {
                   </Text>
 
                   <form
-                    onSubmit={handleSubmit(async (numInfo) => {
-                      console.log(numInfo);
+                    onSubmit={handleSubmit(async () => {
+                      // console.log(numInfo);
                       const authInfo = {
                         email: checkedEmail,
-                        certificationNumber: numInfo.certificationNumber,
+                        certificationNumber: certificationNum,
                       };
                       console.log(authInfo);
                       await dispatch(sendAuthInfo(authInfo));
@@ -252,7 +253,16 @@ const Signup = () => {
                           // placeholder="인증번호를 입력해주세요"
                           {...register('certificationNumber', {
                             required: '인증번호를 입력해주세요',
+                            pattern: {
+                              value:
+                                /^([0-9]{6})$/,
+                              message: '인증번호가 올바르지 않습니다.',
+                            },
                           })}
+                          value={certificationNum}
+                          onChange={(e) => {
+                            setCertificationNum(e.target.value);
+                          }}
                         />
                         {errors.certificationNumber && (
                           <ErrorMessage>
@@ -282,7 +292,7 @@ const Signup = () => {
                     }}
                   >
                     <Text color={ColorStyle.Gray300} regular16>
-                      이메일 못받으심?ㅋㅋ
+                      인증번호가 오지 않나요?
                     </Text>
                   </MoreWrapper>
                   {content && (
