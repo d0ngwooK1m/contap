@@ -16,7 +16,7 @@ const TapForm = ({ userId, category }) => {
     window.alert('Tap을 보냈어요!');
   };
 
-  console.log(category);
+  console.log(userId);
 
   return (
     <Wrap category={category}>
