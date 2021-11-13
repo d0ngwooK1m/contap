@@ -91,11 +91,11 @@ const Signup = () => {
                     <MarginWrapper4>
                       <label>
                         <Text color={ColorStyle.Gray300} regular20>
-                          이름
+                          닉네임
                         </Text>
                         <StyledInput
                           type="text"
-                          // placeholder="닉네임을 입력해주세요"
+                          // placeholder="중복되지 않는 닉네임을 입력해주세요"
                           {...register('userName', {
                             required: '닉네임을 입력해주세요',
                           })}
@@ -113,7 +113,7 @@ const Signup = () => {
                         </Text>
                         <StyledInput
                           type="password"
-                          // placeholder="비밀번호를 입력해주세요"
+                          placeholder="비밀번호는 6자에서 20자 입니다."
                           {...register('pw', {
                             required: '비밀번호를 입력해주세요',
                             maxLength: {
