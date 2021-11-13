@@ -51,7 +51,7 @@ const Wrap = styled.div`
   position: relative;
   top: 75px;
   max-height: 780px;
-  left: 125px;
+  left: 100px;
   width: 100%;
 `;
 

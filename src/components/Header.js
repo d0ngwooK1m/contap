@@ -24,6 +24,7 @@ import { ReactComponent as ChatAlarmIconSvg } from '../svgs/ChatAlarmIcon.svg';
 // import { ReactComponent as ChatAlarmActiveIconSvg } from '../svgs/ChatAlarmActiveIcon.svg';
 import { ReactComponent as SettingIconSvg } from '../svgs/Setting.svg';
 import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
+import T from '../api/tokenInstance';
 
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
@@ -33,15 +34,24 @@ const Header = () => {
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
   const isContapNoti = useSelector((state) => state.notice.isContapNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [myProfile] = React.useState(<BasicProfileSvg />);
 
   const [isContap, setIsContap] = React.useState(false);
   const [isChat, setIsChat] = React.useState(false);
   const [isSetting, setIsSetting] = React.useState(false);
 
   const open = Boolean(anchorEl);
+  const token = getToken();
 
   // 로그인 체크
   // useUserAuthCheck();
+  React.useEffect(async () => {
+    if (isUserLogin) {
+      console.log('==============================================');
+    }
+    const { data } = await T.GET('/mypage/myinfo');
+    console.log(data.profile);
+  }, [myProfile]);
 
   const handleisContap = () => {
     if (isContapNoti) {
@@ -82,6 +92,12 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const logOut = () => {
+    removeToken(token);
+    logout();
+    handleClose();
+    window.location.href = '/';
+  };
   const ChatButton = () => {
     if (isChat) {
       if (isChatNoti) {
@@ -178,20 +194,10 @@ const Header = () => {
               >
                 설정
               </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  const token = getToken();
-                  removeToken(token);
-                  logout();
-                  handleClose();
-                  window.location.href = '/';
-                }}
-              >
-                로그아웃
-              </MenuItem>
+              <MenuItem onClick={logOut}>로그아웃</MenuItem>
             </Menu>
             <IconButton style={{ margin: '0px 12px' }} onClick={moveToMyPage}>
-              <BasicProfileSvg />
+              {myProfile}
             </IconButton>
           </MenuWrapper>
         ) : (

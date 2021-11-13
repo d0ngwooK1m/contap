@@ -3,19 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import Typography from '@mui/material/Typography';
-import HashTag from './HashTag';
-import TapForm from './TapForm';
-import { useSelector } from 'react-redux';
 import { Text } from '../elements';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
 
-const CardBack = ({ card, userId, userName, profile }) => {
-  const contapCheck = useSelector((state) => state.taps.allIds);
+const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
   console.log('=====> 카드!', card);
   console.log('=====> 유저!', userId);
-  const [tapFormState, setTapFormState] = React.useState(false);
+
 
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
   const category = () => {
@@ -37,13 +32,9 @@ const CardBack = ({ card, userId, userName, profile }) => {
     return false;
   };
 
-  const handleTapForm = () => {
-    setTapFormState(!tapFormState);
-  };
-
-  const stopPropagation = (e) => {
-    e.stopPropagation();
-  };
+  // const stopPropagation = (e) => {
+  //   e.stopPropagation();
+  // };
   return (
     <Wrap>
       <Card categoryColor={categoryColor()}>
@@ -79,23 +70,22 @@ const CardBack = ({ card, userId, userName, profile }) => {
             {card?.content}
           </Text>
           <CardTapForm categoryColor={categoryColor()}>
-            <ImageBox src={profile ? profile : BasicProfile} />
+            <ImageBox src={profile || BasicProfile} />
             <div className="userName">
               <Text regular16 color={ColorStyle.BackGround300}>
                 {userName}
               </Text>
             </div>
             <hr />
-            <button onClick={handleTapForm}>
+            <button type="button" onClick={onTapForm}>
               <Text bold20 color={ColorStyle.Gray300}>
                 Tap?
               </Text>
             </button>
           </CardTapForm>
         </div>
-        
       </Card>
-      {tapFormState && <TapForm userId={userId} categoryColor={categoryColor()} />}
+      {children}
     </Wrap>
   );
 };
@@ -105,6 +95,11 @@ CardBack.propTypes = {
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
   profile: PropTypes.string.isRequired,
+  children: PropTypes.any,
+};
+
+CardBack.defaultProps = {
+  children: false,
 };
 
 const Wrap = styled.div`
@@ -156,9 +151,7 @@ const Card = styled.div`
       right: 56px;
     }
   }
-
-  `;
-
+`;
 
 const CardTapForm = styled.div`
   display: flex;

@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
+import TapForm from './TapForm';
 
 import Slider from 'react-slick';
 import styled from 'styled-components';
@@ -18,12 +19,20 @@ SwiperCore.use([Pagination, Navigation]);
 
 const Carousel = ({ userId, userName, profile, category }) => {
   const currentCard = useSelector((state) => state.cards.current);
+  const [tapFormState, setTapFormState] = React.useState(false);
+  const contapCheck = useSelector((state) => state.taps.allIds);
   console.log('카테고리', category);
   const setting = {
     slidesPerView: 1,
     spaceBetween: 16,
   };
 
+  const SwRef = React.useRef('');
+  console.log(SwRef);
+
+  const handleTapForm = () => {
+    setTapFormState(!tapFormState);
+  };
   return (
     // <Wrap>
     //   <Slider {...settings}>
@@ -49,7 +58,9 @@ const Carousel = ({ userId, userName, profile, category }) => {
                 userId={userId}
                 userName={userName}
                 profile={profile}
-              />
+                onTapForm={handleTapForm}
+              ></CardBack>
+              {tapFormState && <TapForm card={userId} category={category} />}
             </SwiperSlide>
           );
         })}
