@@ -31,6 +31,7 @@ export default function useSocketNotiRoom() {
         ws.subscribe(
           `/user/sub/user`,
           (noti) => {
+            console.log(noti);
             if (!isChatNoti) {
               const newNoti = JSON.parse(noti.body);
               console.log(newNoti.type);
@@ -58,7 +59,7 @@ export default function useSocketNotiRoom() {
               }
             }
           },
-          { token, userEmail: data.userName },
+          { token, userEmail: data.email },
         );
       });
     } catch (error) {

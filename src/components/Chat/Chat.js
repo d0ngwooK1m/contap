@@ -54,7 +54,7 @@ const Chat = ({ userId }) => {
             dispatch(getMessage(newMessage));
           },
 
-          { token, userEmail: userInfo.userName },
+          { token, userEmail: userInfo.email },
         );
       });
     } catch (error) {
@@ -122,9 +122,9 @@ const Chat = ({ userId }) => {
       const data = {
         roomId,
         message,
-        writer: userInfo.userName,
+        writer: userInfo.email,
         // receiver: grapList[userId].userName,
-        receiver: grapList[userId].userName,
+        receiver: grapList[userId].email,
       };
 
       //   빈문자열이면 리턴
