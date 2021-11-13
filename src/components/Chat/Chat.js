@@ -123,8 +123,8 @@ const Chat = ({ userId }) => {
         roomId,
         message,
         writer: userInfo.userName,
+        // receiver: grapList[userId].userName,
         receiver: grapList[userId].userName,
-        // reciever: grapList[userId].userName,
       };
 
       //   빈문자열이면 리턴
