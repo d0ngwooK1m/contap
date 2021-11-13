@@ -175,7 +175,7 @@ const Contap = () => {
           </div>
         </div>
       ),
-      content: <GrabList select={ColorStyle.Gray300} />,
+      content: <GrabList select="GrabList" />,
     },
   ];
 

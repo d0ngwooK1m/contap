@@ -3,16 +3,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
+// 소켓
+import StompJs from 'stompjs';
+import SockJS from 'sockjs-client';
 import {
   loadMessagesToAxios,
   writeMessage,
   loading,
   getMessage,
 } from '../../features/chat/actions';
-
-// 소켓
-import StompJs from 'stompjs';
-import SockJS from 'sockjs-client';
 
 import { getToken } from '../../utils/auth';
 import MessageWrite from './MessageWrite';
@@ -122,10 +121,10 @@ const Chat = ({ userId }) => {
 
       const data = {
         roomId,
-        // message: chatInfo.messageText,
         message,
         writer: userInfo.userName,
-        receiver: grapList[userId].userName,
+        // receiver: grapList[userId].userName,
+        reciever: grapList[userId].userName,
       };
 
       //   빈문자열이면 리턴

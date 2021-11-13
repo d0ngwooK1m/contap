@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
 import T from '../api/tokenInstance';
+import Chat from './Chat/Chat';
 
 const ContapModal = ({
   show,
@@ -59,7 +60,7 @@ const ContapModal = ({
                 <Text regular20>To.{myName}님</Text>
                 <MessageBox>
                   <Text id="message" regular16>
-                    가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가
+                    저와 친구 하실래요?!
                   </Text>
                 </MessageBox>
                 <ButtonBox category={category}>
@@ -84,6 +85,7 @@ const ContapModal = ({
                 </ButtonBox>
               </>
             )}
+            {select === 'GrabList' && <Chat userId={userCradInfo.userId} />}
           </Content>
         </Wrap>
       </Modal>

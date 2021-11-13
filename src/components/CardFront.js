@@ -13,11 +13,10 @@ import BasicProfile from '../assets/image/basicProfile.png';
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
 import { Text } from '../elements';
-import Chat from './Chat/Chat';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
 
-const CardFront = ({ userId, contap, select, grab }) => {
+const CardFront = ({ userId, contap, select}) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
@@ -27,8 +26,9 @@ const CardFront = ({ userId, contap, select, grab }) => {
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
+  console.log(select)
   const MySwal = withReactContent(Swal);
-console.log('카드프론트 프로필', front[userId].profile)
+  console.log('카드프론트 프로필', front[userId].profile);
   // Modal Handler
   const showCardBackModal = async () => {
     if (!isLogin || !token) {
@@ -59,8 +59,6 @@ console.log('카드프론트 프로필', front[userId].profile)
     setSideModal(false);
     setShowMadal(true);
   };
-
-
 
   const stackHashTags = front[userId].hashTags
     ?.split('_')[0]
@@ -106,7 +104,6 @@ console.log('카드프론트 프로필', front[userId].profile)
             select={select}
           >
             <CardFrontContap onModal={handleSideModal} userId={userId} />
-            {grab && <Chat userId={userId} />}
           </ContapModal>
         )}
         {sideModal && (
@@ -152,7 +149,6 @@ console.log('카드프론트 프로필', front[userId].profile)
           );
         })}
       </Hash>
-      
     </CardForm>
   );
 };
