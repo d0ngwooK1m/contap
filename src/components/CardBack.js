@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+
+import { useSelector } from 'react-redux';
 import { Text } from '../elements';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
@@ -11,7 +13,8 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
   console.log('=====> 카드!', card);
   console.log('=====> 유저!', userId);
 
-
+  const cardInfo = useSelector((state) => state.cards.current);
+  console.log('링크 확인 ===>', cardInfo[0].link);
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
   const category = () => {
     if (card.field === 0) {
@@ -53,7 +56,7 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
             <Text bold24 color={ColorStyle.BackGround300}>
               {card?.title}
             </Text>
-            <a className="link" href="https://www.naver.com">
+            <a className="link" href={cardInfo[0].link}>
               <Text
                 regular20
                 color={
