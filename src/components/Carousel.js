@@ -60,7 +60,7 @@ const Carousel = ({ userId, userName, profile, category }) => {
                 profile={profile}
                 onTapForm={handleTapForm}
               ></CardBack>
-              {tapFormState && <TapForm card={userId} category={category} />}
+              {tapFormState && <TapForm userId={card.userId} category={category} />}
             </SwiperSlide>
           );
         })}
