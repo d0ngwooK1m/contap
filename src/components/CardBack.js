@@ -56,7 +56,7 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
             <Text bold24 color={ColorStyle.BackGround300}>
               {card?.title}
             </Text>
-            <a className="link" href={cardInfo[0].link}>
+            <a className="link" href={cardInfo[0].link} target="_blank">
               <Text
                 regular20
                 color={
