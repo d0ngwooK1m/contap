@@ -5,6 +5,7 @@ import {
   LOAD_SEND_TAP,
   LOAD_RECEIVE_TAP,
   SHOW_MODAL,
+  REMOVE_RECEIVE_TAP,
 } from './types';
 
 const initialState = {
@@ -53,6 +54,13 @@ export default handleActions(
           draft.byId[doc.userId] = doc;
           draft.allIds.push(doc.userId);
         });
+      }),
+    [REMOVE_RECEIVE_TAP]: (state, action) =>
+      produce(state, (draft) => {
+        delete draft.byId[action.payload.userId];
+        draft.allIds = draft.allIds.filter(
+          (id) => id !== Number(action.payload.userId),
+        );
       }),
     [SHOW_MODAL]: (state, action) =>
       produce(state, (draft) => {

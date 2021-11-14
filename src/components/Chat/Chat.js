@@ -39,13 +39,12 @@ const Chat = ({ userId }) => {
   const wsConnectSubscribe = React.useCallback(() => {
     const data = {
       roomId,
-      message: '',
-      writer: userInfo.email,
       userEmail: userInfo.email,
     };
 
     try {
       ws.connect({}, () => {
+        ws.send("/pub/chat/message", {  }, JSON.stringify(data));
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
           (data) => {
@@ -79,7 +78,8 @@ const Chat = ({ userId }) => {
   //  렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
   React.useEffect(() => {
     wsConnectSubscribe();
-    dispatch(loadMessagesToAxios(roomId));
+    
+      
     console.log(ws);
     console.log(roomId);
 
@@ -113,6 +113,7 @@ const Chat = ({ userId }) => {
       //   history.replace("/login");
       // }
 
+      //   빈문자열이면 리턴
       if (message === '') {
         return;
       }
@@ -127,7 +128,6 @@ const Chat = ({ userId }) => {
         receiver: grapList[userId].email,
       };
 
-      //   빈문자열이면 리턴
       //   로딩 중
       waitForConnection(ws, function () {
         ws.send('/pub/chat/message', {}, JSON.stringify(data));
@@ -161,7 +161,7 @@ const Chat = ({ userId }) => {
 
   return (
     <div>
-      <MessageBox />
+      <MessageBox connect={ws.connected} roomId={ roomId}/>
 
       <MessageWrite sendMessage={sendMessage} />
     </div>
