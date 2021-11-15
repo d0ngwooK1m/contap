@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,7 +9,6 @@ import SockJS from 'sockjs-client';
 import {
   loadMessagesToAxios,
   writeMessage,
-  loading,
   getMessage,
 } from '../../features/chat/actions';
 
@@ -17,34 +16,20 @@ import { getToken } from '../../utils/auth';
 import MessageWrite from './MessageWrite';
 import MessageBox from './MessageBox';
 
-const Chat = ({ userId }) => {
+const Chat = ({ current }) => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
-
-  const grapList = useSelector((state) => state.taps.byId);
   const userInfo = useSelector((state) => state.user);
-  const isLoading = useSelector((state) => state.chat.isLoading);
 
-  console.log(isLoading);
-  const { roomId } = grapList[userId];
+  const { roomId, userId, email } = current;
 
-  console.log(userInfo);
-  console.log(grapList[userId]);
-  // http://52.79.248.107:8080
   const dispatch = useDispatch();
   const sock = new SockJS(`${baseURL}/ws-stomp`);
   const ws = StompJs.over(sock);
   const token = getToken();
-  console.log(ws);
 
   const wsConnectSubscribe = React.useCallback(() => {
-    const data = {
-      roomId,
-      userEmail: userInfo.email,
-    };
-
     try {
-      ws.connect({}, () => {
-        ws.send("/pub/chat/message", {  }, JSON.stringify(data));
+      ws.connect({}, async () => {
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
           (data) => {
@@ -52,10 +37,10 @@ const Chat = ({ userId }) => {
             console.log(userInfo);
             dispatch(getMessage(newMessage));
           },
-
           { token, userEmail: userInfo.email },
         );
       });
+      dispatch(loadMessagesToAxios(roomId));
     } catch (error) {
       console.log(error);
     }
@@ -78,8 +63,7 @@ const Chat = ({ userId }) => {
   //  렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
   React.useEffect(() => {
     wsConnectSubscribe();
-    
-      
+
     console.log(ws);
     console.log(roomId);
 
@@ -89,15 +73,15 @@ const Chat = ({ userId }) => {
   }, [dispatch, userId, wsConnectSubscribe, wsDisConnectUnsubscribe]);
 
   // 웹소켓이 연결될 때 까지 실행하는 함수
-  const waitForConnection = (ws, callback) => {
+  const waitForConnection = (waitWs, callback) => {
     setTimeout(
-      function () {
+      () => {
         // 연결되었을 때 콜백함수 실행
-        if (ws.ws.readyState === 1) {
+        if (waitWs.ws.readyState === 1) {
           callback();
           // 연결이 안 되었으면 재호출
         } else {
-          waitForConnection(ws, callback);
+          waitForConnection(waitWs, callback);
         }
       },
       0.1, // 밀리초 간격으로 실행
@@ -124,12 +108,12 @@ const Chat = ({ userId }) => {
         roomId,
         message,
         writer: userInfo.email,
-        // receiver: grapList[userId].userName,
-        receiver: grapList[userId].email,
+        receiver: email,
+        // reciever: grapList[userId].email,
       };
 
       //   로딩 중
-      waitForConnection(ws, function () {
+      waitForConnection(ws, () => {
         ws.send('/pub/chat/message', {}, JSON.stringify(data));
         dispatch(writeMessage(''));
       });
@@ -138,38 +122,16 @@ const Chat = ({ userId }) => {
     }
   };
 
-  // const closeChat = () => {
-  //   setOpen(false);
-  //   wsDisConnectUnsubscribe();
-  // };
-
-  // 웹소켓 연결, 구독
-
-  // 연결해제, 구독해제;
-
-  // 메시지 보내기
-
-  // const sendMessage = React.useCallback((message) => {
-  //   ws.send(
-  //     '/pub/chat/message',
-  //     {},
-  //     JSON.stringify({ roomId: roomId, message: message, writer: userId }),
-  //   );
-  // console.log(ws);
-
-  // },[]);
-
   return (
     <div>
-      <MessageBox connect={ws.connected} roomId={ roomId}/>
-
+      <MessageBox roomId={roomId} />
       <MessageWrite sendMessage={sendMessage} />
     </div>
   );
 };
 
 Chat.propTypes = {
-  userId: PropTypes.number.isRequired,
+  current: PropTypes.any.isRequired,
 };
 
 export default Chat;

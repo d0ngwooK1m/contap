@@ -28,7 +28,8 @@ export const modalSwitch = createAction(SHOW_MODAL, (bool) => ({
 
 export const loadSendTapToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/dotap', '0');
+    // const { data } = await T.GET('/contap/dotap', '0');
+    const { data } = await T.GET('/contap/dotap');
     console.log('보낸탭 데이터 ============> ', data);
 
     dispatch(loadSendTap(data));
@@ -39,7 +40,8 @@ export const loadSendTapToAxios = () => async (dispatch) => {
 
 export const loadReceiveTapToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/gettap', '0');
+    // const { data } = await T.GET('/contap/gettap', '0');
+    const { data } = await T.GET('/contap/gettap');
     dispatch(loadReceiveTap(data));
   } catch (error) {
     console.error(error);
@@ -48,7 +50,8 @@ export const loadReceiveTapToAxios = () => async (dispatch) => {
 
 export const loadGrabToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/getothers', '0');
+    // const { data } = await T.GET('/contap/getothers', '0');
+    const { data } = await T.GET('/contap/getothers');
     dispatch(loadGrab(data));
   } catch (error) {
     console.error(error);

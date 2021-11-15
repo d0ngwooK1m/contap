@@ -70,7 +70,7 @@ const Header = () => {
     setIsChat(true);
     setIsSetting(false);
     setIsContap(false);
-    history.push('/contap');
+    history.push('/grabtalk');
   };
 
   const handleisSetting = (event) => {

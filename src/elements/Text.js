@@ -41,7 +41,7 @@ const Text = ({
 };
 
 Text.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.any,
   regular14: PropTypes.bool,
   regular16: PropTypes.bool,
   regular20: PropTypes.bool,
@@ -53,6 +53,7 @@ Text.propTypes = {
 };
 
 Text.defaultProps = {
+  children : null,
   regular14: false,
   regular16: false,
   regular20: false,
