@@ -13,6 +13,10 @@ const searchData = [
   '피겨스케이팅',
   'Javascript',
   'Java',
+  'React',
+  '피그마',
+  '스케치업',
+  '포토샵',
 ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;

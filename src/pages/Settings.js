@@ -3,55 +3,56 @@ import { Grid, Text } from '../elements';
 import TabMenu from '../components/TabMenu';
 import PwSettingForm from '../components/PwSettingForm';
 import WithdrawalForm from '../components/WithdrawalForm';
-// import Bell from '../svgs/Bell';
+import AlarmForm from '../components/AlarmForm';
 import { ReactComponent as LockIconSvg } from '../svgs/Lock.svg';
 import { ReactComponent as WithdrawalIconSvg } from '../svgs/Withdrawal.svg';
+import { ReactComponent as BellIconSvg } from '../svgs/Bell.svg';
 
 const content = [
-  // {
-  //   id: 'GrabList',
-  //   clickTab: (
-  //     <div
-  //       style={{
-  //         margin: 'auto',
-  //         display: 'flex',
-  //         position: 'relative',
-  //         left: '14.25px',
-  //         alignItems: 'center',
-  //       }}
-  //     >
-  //       <div>
-  //         <GrabListIconSvg fill="#50FFB8" />
-  //       </div>
-  //       <div style={{ position: 'relative', left: '16px' }}>
-  //         <Text color="#50FFB8" regular20>
-  //           나의 그랩
-  //         </Text>
-  //       </div>
-  //     </div>
-  //   ),
-  //   noneClickTab: (
-  //     <div
-  //       style={{
-  //         margin: 'auto',
-  //         display: 'flex',
-  //         position: 'relative',
-  //         left: '14.25px',
-  //         alignItems: 'center',
-  //       }}
-  //     >
-  //       <div>
-  //         <GrabListIconSvg fill="#A09BAC" />
-  //       </div>
-  //       <div style={{ position: 'relative', left: '16px' }}>
-  //         <Text color="#a09bac" regular20>
-  //           나의 그랩
-  //         </Text>
-  //       </div>
-  //     </div>
-  //   ),
-  //   content: <GrabList select="GrabList" />,
-  // },
+  {
+    id: 'AlarmForm',
+    clickTab: (
+      <div
+        style={{
+          margin: 'auto',
+          display: 'flex',
+          position: 'relative',
+          left: '14.25px',
+          alignItems: 'center',
+        }}
+      >
+        <div>
+          <BellIconSvg fill="#50FFB8" />
+        </div>
+        <div style={{ position: 'relative', left: '16px' }}>
+          <Text color="#50FFB8" regular20>
+            알림 설정
+          </Text>
+        </div>
+      </div>
+    ),
+    noneClickTab: (
+      <div
+        style={{
+          margin: 'auto',
+          display: 'flex',
+          position: 'relative',
+          left: '14.25px',
+          alignItems: 'center',
+        }}
+      >
+        <div>
+          <BellIconSvg fill="#A09BAC" />
+        </div>
+        <div style={{ position: 'relative', left: '16px' }}>
+          <Text color="#a09bac" regular20>
+            알림 설정
+          </Text>
+        </div>
+      </div>
+    ),
+    content: <AlarmForm select="AlarmForm" />,
+  },
   {
     id: 'PwSettingForm',
     clickTab: (
