@@ -3,6 +3,8 @@ import { handleActions } from 'redux-actions';
 import { LOAD_MESSAGES, GET_MESSAGE, WRITE_MESSAGE, LOADING } from './types';
 
 const initialState = {
+  byId: {},
+  allIds: [],
   roomId: null,
   messages: [],
   messageText: '',

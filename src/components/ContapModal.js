@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
-import T from '../api/tokenInstance';
 import Chat from './Chat/Chat';
+import { removeReceiveTapToAxios } from '../features/taps/actions';
 
 const ContapModal = ({
   show,
@@ -16,21 +16,33 @@ const ContapModal = ({
   category,
   select,
 }) => {
+  const dispatch = useDispatch();
   const myName = useSelector((state) => state.user.userName);
   console.log(userCradInfo);
   console.log(select);
   // tap 수락 거절
   const rejectTap = async () => {
-    await T.POST('/contap/reject', { tagId: userCradInfo.tapId });
+    dispatch(
+      removeReceiveTapToAxios(
+        'reject',
+        { tagId: userCradInfo.tapId },
+        userCradInfo.userId,
+      ),
+    );
     console.log('거절');
+    onHide();
   };
 
   const acceptTap = async () => {
-    const { data } = await T.POST('/contap/accept', {
-      tagId: userCradInfo.tapId,
-    });
+    dispatch(
+      removeReceiveTapToAxios(
+        'accept',
+        { tagId: userCradInfo.tapId },
+        userCradInfo.userId,
+      ),
+    );
     console.log('수락');
-    console.log(data);
+    onHide();
   };
   return (
     <div>
@@ -60,7 +72,7 @@ const ContapModal = ({
                 <Text regular20>To.{myName}님</Text>
                 <MessageBox>
                   <Text id="message" regular16>
-                    저와 친구 하실래요?!
+                    {userCradInfo.msg}
                   </Text>
                 </MessageBox>
                 <ButtonBox category={category}>

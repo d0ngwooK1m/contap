@@ -26,8 +26,12 @@ CardModal.propTypes = {
   onHide: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
-  profile: PropTypes.string.isRequired,
+  profile: PropTypes.string,
   category: PropTypes.bool.isRequired,
+};
+
+CardModal.defaultProps = {
+  profile: null,
 };
 
 export default CardModal;

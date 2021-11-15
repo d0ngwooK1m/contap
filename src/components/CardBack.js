@@ -12,9 +12,8 @@ import BasicProfile from '../assets/image/basicProfile.png';
 const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
   console.log('=====> 카드!', card);
   console.log('=====> 유저!', userId);
+  console.log('링크 확인 ===>', card.link);
 
-  const cardInfo = useSelector((state) => state.cards.current);
-  console.log('링크 확인 ===>', cardInfo[0].link);
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
   const category = () => {
     if (card.field === 0) {
@@ -56,7 +55,7 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
             <Text bold24 color={ColorStyle.BackGround300}>
               {card?.title}
             </Text>
-            <a className="link" href={cardInfo[0].link} target="_blank">
+            <a className="link" href={card.link} target="_blank">
               <Text
                 regular20
                 color={
@@ -97,12 +96,13 @@ CardBack.propTypes = {
   card: PropTypes.object.isRequired,
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
-  profile: PropTypes.string.isRequired,
+  profile: PropTypes.string,
   children: PropTypes.any,
 };
 
 CardBack.defaultProps = {
   children: false,
+  profile:null
 };
 
 const Wrap = styled.div`

@@ -42,8 +42,8 @@ const CardList = () => {
       <RefreshWrapper>
         <RefreshBtn
           type="button"
-          onClick={async () => {
-            await dispatch(loadCardFrontDB());
+          onClick={() => {
+            dispatch(loadCardFrontDB());
           }}
         >
           카드 새로고침

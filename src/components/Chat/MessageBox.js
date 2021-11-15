@@ -1,16 +1,27 @@
 /* eslint-disable */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { loadMessages } from '../../features/chat/actions';
+import { loadMessagesToAxios } from '../../features/chat/actions';
 import styled from 'styled-components';
 import { ColorStyle } from '../../utils/systemDesign';
 import { Text } from '../../elements';
 
 
-const MessageBox = ({writer, reciever}) => {
+const MessageBox = ({connect, roomId}) => {
   const dispatch = useDispatch()
   const messageList = useSelector((state) => state.chat.messages)
-  const userInfo = useSelector((state)=>state.user.userName)
+  const userInfo = useSelector((state) => state.user.userName)
+
+  console.log(roomId)
+  console.log(connect.connected)
+  React.useEffect(() => {
+    if (!connect) {
+      return
+    }
+    dispatch(loadMessagesToAxios(roomId));
+    
+  },[messageList])
+
   console.log(userInfo)
   return (
     <ChatMessageBox>
