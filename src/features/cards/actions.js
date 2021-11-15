@@ -108,7 +108,9 @@ export const searchInfoDB = (searchInfo) => async (dispatch) => {
     if (res.data === []) {
       return null;
     }
-    dispatch(searchCard(searchInfo, res.data));
+    if (res.data !== []) {
+      return dispatch(searchCard(searchInfo, res.data));
+    }
   } catch (error) {
     console.log(error);
   }

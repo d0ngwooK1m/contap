@@ -114,7 +114,7 @@ const PwSettingForm = () => {
           {errors.newPwCheck && <ErrorMessage>{errors.newPwCheck.message}</ErrorMessage>}
         <br />
         <SubmitWrapper>
-          <SubmitInput type="submit" />
+          <SubmitInput type="submit" value="변경 완료" />
         </SubmitWrapper>
       </form>
     </Wrapper>

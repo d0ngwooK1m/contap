@@ -162,9 +162,9 @@ const WithdrawalForm = () => {
             })}
           />
         </label>
-        {errors.pw && <p>{errors.pw.message}</p>}
+        {errors.pw && <ErrorMessage>{errors.pw.message}</ErrorMessage>}
         <br />
-        <SubmitInput type="submit" />
+        <SubmitInput type="submit" value="계정 삭제" />
       </form>
     </Wrapper>
   );
@@ -226,6 +226,11 @@ const ThemeWrapper = styled.div`
 
 const MarginWrapper = styled.div`
   margin: 0px 0px 48px 0px;
+`;
+
+const ErrorMessage = styled.p`
+  color: ${ColorStyle.Error};
+  margin: 10px 0px;
 `;
 
 export default WithdrawalForm;

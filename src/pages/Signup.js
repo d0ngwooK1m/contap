@@ -4,30 +4,103 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { stepContentClasses } from '@mui/material';
+// import { stepContentClasses } from '@mui/material';
+import axios from 'axios';
 import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import {
-  signupToServer,
-  sendEmailAuth,
-  sendAuthInfo,
   backToPrev,
+  emailAuth,
+  authCheck,
+  signupDone,
 } from '../features/user/actions';
 import { Grid, Input, Button, Text } from '../elements';
 import { ReactComponent as Onboard2Svg } from '../svgs/onboarding2.svg';
-import {ReactComponent as SignImgSvg} from '../svgs/SignupImg.svg'
+import { ReactComponent as SignImgSvg } from '../svgs/SignupImg.svg';
 
 const Signup = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [isAuth, setIsAuth] = React.useState(false);
-  const [authNum, setAuthNum] = React.useState();
+  // const [isAuth, setIsAuth] = React.useState(false);
+  // const [authNum, setAuthNum] = React.useState();
   const [content, setContent] = React.useState(false);
   const [certificationNum, setCertificationNum] = React.useState('');
+  const [emailDupCheck, setEmailDupCheck] = React.useState(true);
+  const [authNumCheck, setAuthNumCheck] = React.useState(true);
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
   const isAuthNumChecked = useSelector((state) => state.user.isAuthNumChecked);
   const checkedEmail = useSelector((state) => state.user.checkedEmail);
   const isSignupDone = useSelector((state) => state.user.isSignupDone);
   console.log(isEmailChecked, isAuthNumChecked);
+
+  const baseURL = process.env.REACT_APP_SERVER_URI;
+
+  const sendEmailAuth = async (emailInfo) => {
+    try {
+      console.log(emailInfo);
+      const res = await axios.post(`${baseURL}/email/send`, emailInfo);
+      const { data } = res;
+      console.log(data);
+
+      if (data.errorMessage === '이미 사용 중인 이메일 입니다.') {
+        return setEmailDupCheck(false);
+      }
+
+      setEmailDupCheck(true);
+      dispatch(emailAuth(emailInfo));
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      return error.Message;
+    }
+  };
+
+  const sendAuthInfo = async (authInfo) => {
+    try {
+      console.log(authInfo);
+      const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
+      const { data } = res;
+      console.log(data);
+
+      if (data.errorMessage === '인증번호가 일치하지 않습니다.') {
+        return setAuthNumCheck(false);
+      }
+
+      setAuthNumCheck(true);
+      dispatch(authCheck());
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+    }
+  };
+
+  const signupToServer = async (signupInfo) => {
+    try {
+      console.log(baseURL);
+      console.log(signupInfo);
+      const res = await axios.post(`${baseURL}/user/signup`, signupInfo);
+      const { data } = res;
+      console.log(data);
+
+      if (data.result === 'fail') {
+        console.log(data);
+        Swal.fire({
+          icon: 'error',
+          title: '실패',
+          text: `${data.errorMessage}`,
+        });
+        return data;
+      }
+
+      dispatch(signupDone());
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+    }
+  };
 
   const {
     register,
@@ -43,10 +116,14 @@ const Signup = () => {
           <GotoLoginWrap>
             <SignImgSvg />
             <MarginWrapper7>
-            <Text color='white' bold48>회원가입 완료</Text>
+              <Text color="white" bold48>
+                회원가입 완료
+              </Text>
             </MarginWrapper7>
             <MarginWrapper8>
-            <Text color='white' bold32>환영합니다! <br/> 이제 로그인 해서 컨탭을 탐색해보세요</Text>
+              <Text color="white" bold32>
+                환영합니다! <br /> 이제 로그인 해서 컨탭을 탐색해보세요
+              </Text>
             </MarginWrapper8>
             <GotoLoginBtn
               onClick={() => {
@@ -76,7 +153,7 @@ const Signup = () => {
                     <br /> 컨탭 회원가입을 진행합니다.
                   </Text>
                   <form
-                    onSubmit={handleSubmit(async (info) => {
+                    onSubmit={handleSubmit((info) => {
                       console.log(info);
                       const signupInfo = {
                         email: checkedEmail,
@@ -84,18 +161,19 @@ const Signup = () => {
                         pwCheck: info.pwCheck,
                         userName: info.userName,
                       };
-                      await dispatch(signupToServer(signupInfo));
+                      // await dispatch(signupToServer(signupInfo));
+                      signupToServer(signupInfo);
                     })}
                   >
                     <br />
                     <MarginWrapper4>
                       <label>
                         <Text color={ColorStyle.Gray300} regular20>
-                          이름
+                          닉네임
                         </Text>
                         <StyledInput
                           type="text"
-                          // placeholder="닉네임을 입력해주세요"
+                          // placeholder="중복되지 않는 닉네임을 입력해주세요"
                           {...register('userName', {
                             required: '닉네임을 입력해주세요',
                           })}
@@ -113,7 +191,7 @@ const Signup = () => {
                         </Text>
                         <StyledInput
                           type="password"
-                          // placeholder="비밀번호를 입력해주세요"
+                          placeholder="비밀번호는 6자에서 20자 입니다."
                           {...register('pw', {
                             required: '비밀번호를 입력해주세요',
                             maxLength: {
@@ -186,9 +264,10 @@ const Signup = () => {
                     회원가입 전에 이메일 인증을 해야합니당.
                   </Text>
                   <form
-                    onSubmit={handleSubmit(async (emailInfo) => {
+                    onSubmit={handleSubmit((emailInfo) => {
                       console.log(emailInfo);
-                      await dispatch(sendEmailAuth(emailInfo));
+                      // await dispatch(sendEmailAuth(emailInfo));
+                      sendEmailAuth(emailInfo);
                     })}
                   >
                     <MarginWrapper>
@@ -212,6 +291,11 @@ const Signup = () => {
                       {errors.email && (
                         <ErrorMessage>{errors.email.message}</ErrorMessage>
                       )}
+                      {!emailDupCheck && (
+                        <ErrorMessage>
+                          이미 사용 중인 이메일 입니다.
+                        </ErrorMessage>
+                      )}
                     </MarginWrapper>
                     <br />
                     <SubmitInput type="submit" value="이메일 확인" />
@@ -233,14 +317,15 @@ const Signup = () => {
                   </Text>
 
                   <form
-                    onSubmit={handleSubmit(async () => {
+                    onSubmit={handleSubmit(() => {
                       // console.log(numInfo);
                       const authInfo = {
                         email: checkedEmail,
                         certificationNumber: certificationNum,
                       };
                       console.log(authInfo);
-                      await dispatch(sendAuthInfo(authInfo));
+                      // await dispatch(sendAuthInfo(authInfo));
+                      sendAuthInfo(authInfo);
                     })}
                   >
                     <MarginWrapper>
@@ -254,8 +339,7 @@ const Signup = () => {
                           {...register('certificationNumber', {
                             required: '인증번호를 입력해주세요',
                             pattern: {
-                              value:
-                                /^([0-9]{6})$/,
+                              value: /^([0-9]{6})$/,
                               message: '인증번호가 올바르지 않습니다.',
                             },
                           })}
@@ -268,7 +352,8 @@ const Signup = () => {
                           <ErrorMessage>
                             {errors.certificationNumber.message}
                           </ErrorMessage>
-                        )}
+                              )}
+                              {!authNumCheck && <ErrorMessage>인증번호가 일치하지 않습니다.</ErrorMessage>}
                       </label>
                     </MarginWrapper>
                     <MarginWrapper2>

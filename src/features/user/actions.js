@@ -57,17 +57,29 @@ const authorize = (email, userName) => ({
   payload: { email, userName },
 });
 
-// 기존 프로젝트의 미들웨어
-// const emailCheckToServer = (emailInfo) => async () => {
+// const sendEmailAuth = (emailInfo) => async (dispatch) => {
 //   try {
-//     const res = await axios.post(`${baseURL}/signup/emailcheck`, emailInfo);
+//     console.log(emailInfo);
+//     const res = await axios.post(`${baseURL}/email/send`, emailInfo);
 //     const { data } = res;
 //     console.log(data);
+//     dispatch(emailAuth(emailInfo));
 
-//     if (data.result === 'success') {
-//       console.log(emailInfo);
-//     }
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//     // throw new Error(error.message);
+//     return error.Message;
+//   }
+// };
 
+// const sendAuthInfo = (authInfo) => async (dispatch) => {
+//   try {
+//     console.log(authInfo);
+//     const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
+//     const { data } = res;
+//     console.log(data);
+//     dispatch(authCheck());
 //     return data;
 //   } catch (error) {
 //     console.log(error);
@@ -75,89 +87,32 @@ const authorize = (email, userName) => ({
 //   }
 // };
 
-// const userNameCheckToServer = (userNameInfo) => async () => {
+// const signupToServer = (signupInfo) => async (dispatch) => {
 //   try {
-//     // const res = await axios.post(`${baseURL}/user/namecheck`, userNameInfo);
-//     const res = await axios.post(`${baseURL}/signup/namecheck`, userNameInfo);
-
+//     console.log(baseURL);
+//     console.log(signupInfo);
+//     const res = await axios.post(`${baseURL}/user/signup`, signupInfo);
 //     const { data } = res;
 //     console.log(data);
 
-//     if (data.result === 'success') {
-//       console.log(userNameInfo);
+//     if (data.result === 'fail') {
+//       console.log(data);
+//       Swal.fire({
+//         icon: 'error',
+//         title: '실패',
+//         text: `${data.errorMessage}`,
+//       });
+//       return data;
 //     }
+
+//     dispatch(signupDone());
 
 //     return data;
 //   } catch (error) {
+//     console.log(error);
 //     throw new Error(error.message);
 //   }
 // };
-
-const sendEmailAuth = (emailInfo) => async (dispatch) => {
-  try {
-    console.log(emailInfo);
-    const res = await axios.post(`${baseURL}/email/send`, emailInfo);
-    const { data } = res;
-    console.log(data);
-    dispatch(emailAuth(emailInfo));
-
-    return data;
-  } catch (error) {
-    console.log(error);
-    // throw new Error(error.message);
-    return error.Message;
-  }
-};
-
-const sendAuthInfo = (authInfo) => async (dispatch) => {
-  try {
-    console.log(authInfo);
-    const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
-    const { data } = res;
-    console.log(data);
-    dispatch(authCheck());
-    return data;
-  } catch (error) {
-    console.log(error);
-    throw new Error(error.message);
-  }
-};
-
-const signupToServer = (signupInfo) => async (dispatch) => {
-  try {
-    console.log(baseURL);
-    console.log(signupInfo);
-    const res = await axios.post(`${baseURL}/user/signup`, signupInfo);
-    const { data } = res;
-    console.log(data);
-
-    if (data.result === 'fail') {
-      console.log(data);
-      Swal.fire({
-        icon: 'error',
-        title: '실패',
-        text: `${data.errorMessage}`,
-      });
-      return data;
-    }
-
-    // if (data.result === 'success') {
-    //   console.log(data);
-    //   Swal.fire({
-    //     icon: 'success',
-    //     title: '회원가입 성공!',
-    //   });
-    //   history.push('/login');
-    //   return data;
-    // }
-    dispatch(signupDone());
-
-    return data;
-  } catch (error) {
-    console.log(error);
-    throw new Error(error.message);
-  }
-};
 
 const loginToServer = (loginInfo) => async (dispatch) => {
   try {
@@ -172,7 +127,7 @@ const loginToServer = (loginInfo) => async (dispatch) => {
       console.log(data);
       Swal.fire({
         icon: 'error',
-        title: '회원가입 실패',
+        title: '로그인 실패',
         text: `${data.errorMessage}`,
       });
       return data;
@@ -184,19 +139,6 @@ const loginToServer = (loginInfo) => async (dispatch) => {
       userName: data.userName,
     };
 
-    // console.log(data);
-
-    // if (data.result === 'success') {
-    //   console.log(data);
-    //   Swal.fire({
-    //     icon: 'success',
-    //     title: '로그인 성공!',
-    //   });
-    //   dispatch(login(userInfo));
-    //   saveToken(data?.token);
-    //   history.push('/');
-    //   return data;
-    // }
     dispatch(login(userInfo));
     saveToken(data?.token);
     history.push('/');
@@ -271,9 +213,11 @@ export {
   login,
   logout,
   backToPrev,
-  sendEmailAuth,
-  sendAuthInfo,
-  signupToServer,
+  authCheck,
+  signupDone,
+  // sendEmailAuth,
+  // sendAuthInfo,
+  // signupToServer,
   loginToServer,
   passwordChangeToServer,
   withdrawalToServer,
