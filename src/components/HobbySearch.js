@@ -8,6 +8,8 @@ import {
   deleteHobby,
 } from '../features/cards/actions';
 
+import { ReactComponent as Search } from '../svgs/Search.svg';
+
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
 // import { Grid, Text } from '../elements';
@@ -200,21 +202,33 @@ const HobbySearch = () => {
   return (
     <div>
       {!click ? (
-        <SearchBox
-          onChange={(e) => {
-            console.log(e.target.value);
-            setData(e.target.value);
-          }}
-        />
+        <SearchBoxDiv>
+          <SearchBox
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+            placeholder="요즘 관심사는 뭐예요?"
+          />
+          <SearchIconDiv>
+            <Search />
+          </SearchIconDiv>
+        </SearchBoxDiv>
       ) : (
-        <SearchBox
-          value={data}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setData(e.target.value);
-          }}
-        />
+        <SearchBoxDiv>
+          <SearchBox
+            value={data}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+          />
+          <SearchIconDiv>
+            <Search />
+          </SearchIconDiv>
+        </SearchBoxDiv>
       )}
+
       {console.log(FullList)}
       {!click ? <AllBox> {ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
       <br />
@@ -266,6 +280,10 @@ const PurpleButton = styled.div`
   cursor: pointer;
 `;
 
+const SearchBoxDiv = styled.div`
+  position: relative;
+`;
+
 const SearchBox = styled.input`
   width: 412px;
   height: 35px;
@@ -283,4 +301,10 @@ const SearchBox = styled.input`
   }
   margin-left: 165px;
   padding-left: 50px;
+`;
+
+const SearchIconDiv = styled.div`
+  position: absolute;
+  top: 10%;
+  left: 12%;
 `;

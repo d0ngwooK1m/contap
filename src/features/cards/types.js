@@ -33,4 +33,4 @@ export const SET_ALL_HOBBY = 'cards/SET_ALL_HOBBY';
 // 마이페이지 취미 삭제
 export const DELETE_HOBBY = 'cards/DELETE_HOBBY';
 // 카드 추가하기 클릭 확인
-export const IS_SUCCESS = 'cards/IS_SUCCESS';
+// export const IS_SUCCESS = 'cards/IS_SUCCESS';

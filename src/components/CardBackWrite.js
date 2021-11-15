@@ -5,7 +5,10 @@ import styled from 'styled-components';
 import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createCardDB, isSuccess } from '../features/cards/actions';
+import {
+  createCardDB,
+  // isSuccess
+} from '../features/cards/actions';
 // import { useForm } from 'react-hook-form';
 
 import { ReactComponent as Link } from '../svgs/Link.svg';
@@ -13,9 +16,9 @@ import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import { ReactComponent as Flag } from '../svgs/Flag.svg';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
-import { Grid } from '../elements';
+import { Grid, Text } from '../elements';
 
-const CardBackWrite = () => {
+const CardBackWrite = ({ onHide }) => {
   const dispatch = useDispatch();
   // const { register } = useForm();
 
@@ -25,10 +28,8 @@ const CardBackWrite = () => {
   const [tagsStr, setTagsStr] = React.useState('');
   const [link, setLink] = React.useState('');
 
-  // const [click, setClick] = React.useState(propsClick.false);
-
-  const handleClick = useSelector((state) => state.cards.isSuccess);
-  console.log(handleClick);
+  // const handleClick = useSelector((state) => state.cards.isSuccess);
+  // console.log(handleClick);
 
   const addCardBack = (e) => {
     if (title.length === 0) {
@@ -71,7 +72,8 @@ const CardBackWrite = () => {
       link: url,
     };
     dispatch(createCardDB(content));
-    dispatch(isSuccess(!handleClick));
+    onHide();
+    // dispatch(isSuccess(!handleClick));
   };
 
   return (
@@ -82,7 +84,7 @@ const CardBackWrite = () => {
       border="1px solid #8c4dff"
       margin="40px auto"
       padding="60px 48px 0px 48px"
-      bg="#1d1d22"
+      bg="#141422"
     >
       <Div>
         <TitleBox
@@ -105,15 +107,24 @@ const CardBackWrite = () => {
         </Grid>
       </Div>
       <Grid>
-        <MainBox
-          type="text"
-          placeholder="프로젝트 설명"
-          onChange={(e) => {
-            setDesc(e.target.value);
-          }}
-          // {...register('content', { requirerd: true })}
-          // ref={register({ requirerd: true })}
-        />
+        <MainDiv>
+          <MainBox
+            type="text"
+            value={desc}
+            placeholder="프로젝트 설명"
+            maxLength="200"
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
+            // {...register('content', { requirerd: true })}
+            // ref={register({ requirerd: true })}
+          />
+          <LengthDiv>
+            <Text regular14 color={ColorStyle.Gray300}>
+              {desc.length} / 200
+            </Text>
+          </LengthDiv>
+        </MainDiv>
         <TagDiv>
           <TagBox
             type="text"
@@ -169,7 +180,7 @@ const TitleBox = styled.input`
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround100};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
   border-left: none;
@@ -178,13 +189,20 @@ const TitleBox = styled.input`
     outline: none;
   }
   margin-bottom: 40px;
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray500};
+  }
+`;
+
+const MainDiv = styled.div`
+  position: relative;
 `;
 
 const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -194,6 +212,15 @@ const MainBox = styled.textarea`
   &:focus {
     outline: none;
   }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray500};
+  }
+`;
+
+const LengthDiv = styled.div`
+  position: absolute;
+  top: 75%;
+  right: 3%;
 `;
 
 const TagDiv = styled.div`
@@ -203,7 +230,7 @@ const TagDiv = styled.div`
 const TagBox = styled.input`
   padding-left: 60px;
   margin-top: 56px;
-  background-color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround300};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
@@ -214,6 +241,9 @@ const TagBox = styled.input`
   border-radius: 12px;
   &:focus {
     outline: none;
+  }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray500};
   }
 `;
 
@@ -226,7 +256,7 @@ const LinkBox = styled.input`
   height: 50px;
   padding-left: 60px;
   margin-top: 24px;
-  background-color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -235,5 +265,8 @@ const LinkBox = styled.input`
   border-radius: 12px;
   &:focus {
     outline: none;
+  }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.PrimaryPurple};
   }
 `;

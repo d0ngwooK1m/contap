@@ -11,6 +11,7 @@ import {
   updateStack,
   updateAllHobby,
 } from '../features/cards/actions';
+// import { history } from '../features/configureStore';
 
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
@@ -117,6 +118,15 @@ const CardFrontWrite = () => {
     dispatch(editCardProfileDB(formData));
   };
   console.log(category);
+
+  // React.useEffect(() => {
+  //   if (userInfo === '') {
+  //     history.goBack();
+
+  //     return;
+  //   }
+  // }, []);
+
   return (
     <Grid
       height="590px"
