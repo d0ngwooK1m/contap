@@ -25,7 +25,7 @@ import {
   SET_HOBBY,
   SET_ALL_HOBBY,
   DELETE_HOBBY,
-  IS_SUCCESS,
+  // IS_SUCCESS,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
@@ -80,7 +80,7 @@ export const updateAllHobby = createAction(SET_ALL_HOBBY, (hobbyArr) => ({
 export const deleteHobby = createAction(DELETE_HOBBY, (hobby) => ({
   hobby,
 }));
-export const isSuccess = createAction(IS_SUCCESS, (success) => ({ success }));
+// export const isSuccess = createAction(IS_SUCCESS, (success) => ({ success }));
 
 // 미들웨어
 

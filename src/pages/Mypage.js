@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { loadMyCardDB, isSuccess } from '../features/cards/actions';
+import {
+  loadMyCardDB,
+  //  isSuccess
+} from '../features/cards/actions';
 // import { history } from '../features/configureStore';
 
 import CardProfile from '../components/CardProfile';
@@ -16,17 +19,20 @@ const Mypage = () => {
   const dispatch = useDispatch();
   const cardCount = useSelector((state) => state.cards.allIds);
 
-  const handleClick = useSelector((state) => state.cards.isSuccess);
-  console.log(handleClick);
-  // const closeClick = () => {
-  //   setClick(false);
-  // };
+  // const handleClick = useSelector((state) => state.cards.isSuccess);
+  // console.log(handleClick);
+
+  const [click, setClick] = React.useState(false);
+
+  const closeClick = () => {
+    setClick(false);
+  };
 
   React.useEffect(() => {
     dispatch(loadMyCardDB());
   }, []);
 
-  if (handleClick) {
+  if (click) {
     return (
       <Grid>
         <Grid>
@@ -37,14 +43,15 @@ const Mypage = () => {
             <TitleText>나의 프로젝트 {cardCount.length}</TitleText>
             <TextBtn
               onClick={() => {
-                dispatch(isSuccess(!handleClick));
+                // dispatch(isSuccess(!handleClick));
+                setClick(true);
               }}
             >
               + 프로젝트 추가하기
             </TextBtn>
           </Div>
           <Grid>
-            <CardBackWrite />
+            <CardBackWrite onHide={closeClick} />
           </Grid>
           <Grid>
             <CardAdd />
@@ -66,7 +73,8 @@ const Mypage = () => {
           </TitleText>
           <TextBtn
             onClick={() => {
-              dispatch(isSuccess(!handleClick));
+              // dispatch(isSuccess(!handleClick));
+              setClick(true);
             }}
           >
             + 프로젝트 추가하기

@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
 
-import { Grid, Input } from '../elements';
+import { Grid, Text } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
 import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
 import { ReactComponent as Link } from '../svgs/Link.svg';
@@ -31,12 +31,6 @@ const CardPortfolio = ({ cardId }) => {
   const [desc, setDesc] = React.useState(cardList[cardId].content);
   const [tagsStr, setTagsStr] = React.useState(cardList[cardId].tagsStr);
   const [link, setLink] = React.useState(cardList[cardId].link);
-  const content = {
-    title,
-    content: desc,
-    tagsStr,
-    link,
-  };
 
   // onMouse
   const [display, setDisplay] = React.useState({ display: 'none' });
@@ -49,13 +43,25 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const edit = () => {
+    let editLink = link;
+    if (editLink !== undefined && editLink.indexOf('http') === -1) {
+      // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
+      editLink = '//' + editLink;
+      console.log(editLink);
+    }
+    const content = {
+      title,
+      content: desc,
+      tagsStr,
+      link: editLink,
+    };
+
     dispatch(updateCardDB(cardId, content));
     setClick(!click);
   };
 
   const url = cardList[cardId].link?.split('//')[1];
   console.log('앞면 링크 확인====>', url);
-
   // let url = cardList[cardId].link;
   // if (url !== undefined && url?.indexOf('http') === -1) {
   //   // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
@@ -73,7 +79,7 @@ const CardPortfolio = ({ cardId }) => {
         border="1px solid #8c4dff"
         margin="40px auto"
         padding="60px 48px 0px 48px"
-        bg="#1d1d22"
+        bg="#141422"
       >
         <EditDiv>
           <TitleBox
@@ -87,13 +93,22 @@ const CardPortfolio = ({ cardId }) => {
             <AddBtn cursor="pointer" onClick={edit} />
           </Grid>
         </EditDiv>
-        <MainBox
-          value={desc}
-          textarea
-          onChange={(e) => {
-            setDesc(e.target.value);
-          }}
-        />
+        <MainDiv>
+          <MainBox
+            type="text"
+            value={desc}
+            textarea
+            maxLength="200"
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
+          />
+          <LengthDiv>
+            <Text regular14 color={ColorStyle.Gray300}>
+              {desc.length} / 200
+            </Text>
+          </LengthDiv>
+        </MainDiv>
         <TagDiv>
           <TagBox
             value={tagsStr}
@@ -179,7 +194,7 @@ const EditDiv = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  width: 1007px ;
+  width: 1007px;
   margin: 0px auto;
 `;
 
@@ -209,7 +224,7 @@ const TitleBox = styled.input`
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround100};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
   border-left: none;
@@ -220,11 +235,15 @@ const TitleBox = styled.input`
   margin-bottom: 40px;
 `;
 
+const MainDiv = styled.div`
+  position: relative;
+`;
+
 const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -236,6 +255,12 @@ const MainBox = styled.textarea`
   }
 `;
 
+const LengthDiv = styled.div`
+  position: absolute;
+  top: 75%;
+  right: 3%;
+`;
+
 const TagDiv = styled.div`
   position: relative;
 `;
@@ -244,7 +269,7 @@ const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
   margin-top: 56px;
-  background-color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround300};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
@@ -266,7 +291,7 @@ const LinkBox = styled.input`
   width: 947px;
   height: 50px;
   padding-left: 60px;
-  background-color: ${ColorStyle.Gray300};
+  background-color: ${ColorStyle.BackGround300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
