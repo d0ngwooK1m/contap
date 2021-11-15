@@ -96,12 +96,13 @@ CardBack.propTypes = {
   card: PropTypes.object.isRequired,
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
-  profile: PropTypes.string.isRequired,
+  profile: PropTypes.string,
   children: PropTypes.any,
 };
 
 CardBack.defaultProps = {
   children: false,
+  profile:null
 };
 
 const Wrap = styled.div`

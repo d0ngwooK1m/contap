@@ -72,8 +72,12 @@ const Carousel = ({ userId, userName, profile, category }) => {
 Carousel.propTypes = {
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
-  profile: PropTypes.string.isRequired,
   category: PropTypes.bool.isRequired,
+  profile: PropTypes.string,
+};
+
+Carousel.defaultProps = {
+  profile: null,
 };
 
 const SwiperWrap = styled.div`

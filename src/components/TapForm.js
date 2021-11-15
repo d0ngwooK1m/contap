@@ -11,8 +11,9 @@ const TapForm = ({ userId, category }) => {
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
+
   const sendTap = async () => {
-    await T.POST('/main/posttap', { userId });
+    await T.POST('/main/posttap', { userId, msg: message });
     window.alert('Tap을 보냈어요!');
   };
 

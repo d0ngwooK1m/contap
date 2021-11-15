@@ -120,8 +120,7 @@ export const loadCurrentCardDB = (userId) => async (dispatch) => {
     console.log(userId);
     const res = await T.GET(`/main/${userId}`);
 
-    console.log('뒷면카드 조회값 확인===>', res.data);
-
+    console.log('뒷면카드 조회값 확인===>', res.data.length === 0);
     dispatch(loadCurrentCard(res.data));
   } catch (err) {
     console.log(err);
