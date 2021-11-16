@@ -7,7 +7,7 @@ import { ColorStyle, Opacity } from '../utils/systemDesign';
 import CardBackWrite from './CardBackWrite';
 import { Grid } from '../elements';
 
-const CardPlus = () => {
+const EmptyBox = () => {
   const [click, setClick] = React.useState(false);
   const [display, setDisplay] = React.useState({ display: 'flex' });
   console.log(display);
@@ -15,18 +15,23 @@ const CardPlus = () => {
   const closeClick = () => {
     setClick(false);
   };
-
+  if (!click) {
+    return (
+      <Grid width="100%" height="100%" padding="0px 0px 10% 0px;">
+        <Div
+          onClick={() => {
+            // dispatch(isSuccess(!handleClick));
+            setClick(true);
+            setDisplay({ display: 'none' });
+          }}
+        >
+          <AddRound />
+        </Div>
+      </Grid>
+    );
+  }
   return (
     <Grid width="100%" height="100%" padding="0px 0px 10% 0px;">
-      <Div
-        onClick={() => {
-          // dispatch(isSuccess(!handleClick));
-          setClick(true);
-          setDisplay({ display: 'none' });
-        }}
-      >
-        <AddRound />
-      </Div>
       <Grid>
         <CardBackWrite onHide={closeClick} />
       </Grid>
@@ -34,7 +39,7 @@ const CardPlus = () => {
   );
 };
 
-export default CardPlus;
+export default EmptyBox;
 
 const Div = styled.div`
   display: flex;

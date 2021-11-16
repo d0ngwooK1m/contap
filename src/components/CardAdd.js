@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { isSuccess } from '../features/cards/actions';
 
 import CardPortfolio from './CardPortfolio';
-import CardPlus from './CardPlus';
+import EmptyBox from './EmptyBox';
+
 import {
   FontFamily,
   FontScale,
@@ -25,7 +26,7 @@ const CardAdd = () => {
   if (cardListCheck.length === 0) {
     return (
       <Grid>
-        <CardPlus />
+        <EmptyBox />
       </Grid>
     );
   }
