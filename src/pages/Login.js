@@ -12,6 +12,7 @@ import { saveToken } from '../utils/auth';
 import {
   LoginWrapper,
   LeftWrapper,
+  SvgWrapper,
   RightWrapper,
   Title,
   StyledLabel,
@@ -73,7 +74,9 @@ const Login = () => {
   return (
     <LoginWrapper>
       <LeftWrapper>
-        <Onboard1Svg />
+        <SvgWrapper>
+          <Onboard1Svg />
+        </SvgWrapper>
       </LeftWrapper>
       <RightWrapper>
         <div>

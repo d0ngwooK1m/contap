@@ -137,7 +137,10 @@ const Signup = () => {
       ) : (
         <SignupWrapper>
           <LeftWrapper>
-            <Onboard2Svg />
+            <SvgWrapper>
+              <Onboard2Svg />
+            </SvgWrapper>
+              {/* <Onboard2Svg /> */}
           </LeftWrapper>
           <RightWrapper>
             <FormWrapper>
@@ -415,19 +418,29 @@ const Signup = () => {
 };
 
 const SignupWrapper = styled.div`
-  width: 100%;
+  width: 1435px;
   height: 100%;
   display: flex;
 `;
 
 const LeftWrapper = styled.div`
-  width: 50%;
+  width: 735px;
   height: 1080px;
-  background-color: ${ColorStyle.BackGround100};
+  background: linear-gradient(153.56deg, #8C4DFF 0%, rgba(29, 29, 34, 0) 25%);
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+`;
+
+const SvgWrapper = styled.div`
+  width: 540px;
+  height: fit-content;
+  position: absolute;
+  right: 39px;
+  top: 160px;
 `;
 
 const RightWrapper = styled.div`
-  width: 50%;
+  width: 700px;
   height: 1080px;
   background-color: ${ColorStyle.BackGround};
   color: ${ColorStyle.Gray500};

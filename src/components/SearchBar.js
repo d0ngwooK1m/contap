@@ -130,47 +130,49 @@ const SearchBar = () => {
   });
 
   return (
-    <SearchWrapper
+    <div
       onMouseLeave={() => {
         setClick(false);
       }}
     >
-      {!tag ? (
-        <StyledInput
-          onChange={(e) => {
-            console.log(e.target.value);
-            setData(e.target.value);
-          }}
+      <SearchWrapper>
+        {!tag ? (
+          <StyledInput
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+            onClick={() => {
+              setClick(true);
+            }}
+          />
+        ) : (
+          <StyledInput
+            value={data}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+            onClick={() => {
+              setClick(true);
+            }}
+          />
+        )}
+        <StyledBtn
+          type="button"
           onClick={() => {
-            setClick(true);
+            const searchInfo = {
+              searchTags: [data],
+              type: 0,
+              page: 0,
+              field: 3,
+            };
+            dispatch(searchInfoDB(searchInfo));
           }}
-        />
-      ) : (
-        <StyledInput
-          value={data}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setData(e.target.value);
-          }}
-          onClick={() => {
-            setClick(true);
-          }}
-        />
-      )}
-      <StyledBtn
-        type="button"
-        onClick={() => {
-          const searchInfo = {
-            searchTags: [data],
-            type: 0,
-            page: 0,
-            field: 3,
-          };
-          dispatch(searchInfoDB(searchInfo));
-        }}
-      >
-        <SearchSvg stroke={ColorStyle.PrimaryPurple} />
-      </StyledBtn>
+        >
+          <SearchSvg stroke={ColorStyle.PrimaryPurple} />
+        </StyledBtn>
+      </SearchWrapper>
       <SearchContent>
         {click ? (
           <div>
@@ -257,12 +259,14 @@ const SearchBar = () => {
         ) : null}
       </SearchContent>
       <br />
-    </SearchWrapper>
+    </div>
   );
 };
 
 const SearchWrapper = styled.div`
   position: relative;
+  width: fit-content;
+  margin: auto;
 `;
 
 const CategoryWrapper = styled.div`
@@ -311,11 +315,12 @@ const StyledBtn = styled.button`
   width: fit-content;
   height: fit-content;
   background-color: white;
+  color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
   position: absolute;
   top: 18px;
-  right: 450px;
+  right: 26px;
 `;
 
 const SearchContent = styled.div`
