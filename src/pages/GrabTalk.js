@@ -3,14 +3,21 @@ import React from 'react';
 import styled from 'styled-components';
 // import { ColorStyle } from '../utils/systemDesign';
 
-import ChatList from '../components/ChatRoomList'
+import { useDispatch, useSelector } from 'react-redux';
+import Chat from '../components/Chat/Chat';
+import ChatRoomList from '../components/ChatRoomList'
 const Grabtalk = () => {
-
+  const dispatch = useDispatch();
+  const currentRoom = useSelector((state) => state.chat.current)
+  console.log(currentRoom)
   return (
     <Wrapper>
       <Menu>
-        <ChatList/>
+        <ChatRoomList/>
       </Menu>
+      <Room>
+        {currentRoom.userId && <Chat current={currentRoom} />}
+      </Room>
     </Wrapper>
   );
 };
@@ -24,10 +31,15 @@ const Wrapper = styled.div`
 const Menu = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400px;
+  min-width: 400px;
   height: 100vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
+`;
+
+const Room = styled.div`
+  background-color: aqua;
+  width: 100%;
 `;
 
 export default Grabtalk;
