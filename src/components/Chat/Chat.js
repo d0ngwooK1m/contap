@@ -30,6 +30,7 @@ const Chat = ({ current }) => {
   const wsConnectSubscribe = React.useCallback(() => {
     try {
       ws.connect({}, async () => {
+        console.log('커넥트 시작');
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
           (data) => {
@@ -40,7 +41,11 @@ const Chat = ({ current }) => {
           { token, userEmail: userInfo.email },
         );
       });
+      console.log('서브스크라이브 끝');
+
+      console.log('디패시작');
       dispatch(loadMessagesToAxios(roomId));
+      console.log('디패끝');
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +113,7 @@ const Chat = ({ current }) => {
         roomId,
         message,
         writer: userInfo.email,
-        receiver: email,
+        reciever: email,
         // reciever: grapList[userId].email,
       };
 

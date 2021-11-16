@@ -1,10 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { ColorStyle } from '../utils/systemDesign';
-import {
-  loadNoneTalkRoomListToAxios,
-  loadTalkRoomListToAxios,
-} from '../features/chat/actions';
+import { loadTalkRoomListToAxios } from '../features/chat/actions';
 import ChatRoom from './ChatRoom';
 
 const ChatList = () => {
@@ -18,16 +15,8 @@ const ChatList = () => {
     dispatch(loadTalkRoomListToAxios());
   }, []);
 
-  const addChatRoom = () => {
-    dispatch(loadNoneTalkRoomListToAxios());
-  };
-
   return (
     <div>
-      <div>채팅리스트</div>
-      <button type="button" onClick={addChatRoom}>
-        추가하기
-      </button>
       {allChatList?.map((id) => {
         return <ChatRoom key={id} userId={id} />;
       })}

@@ -7,6 +7,8 @@ import {
   LOAD_TALK_ROOM_LIST,
   LOAD_NONETALK_ROOM_LIST,
   LOAD_CURRENT_ROOM,
+  CREATE_TALK_ROOM,
+  CLOSE_NONETALK_ROOM_LIST,
   LOADING,
 } from './types';
 
@@ -14,7 +16,8 @@ const initialState = {
   byId: {},
   allIds: [],
   current: {},
-  noneChatList: [],
+  noneChatList: {},
+  noneChatListIds: [],
   roomId: null,
   messages: [],
   messageText: '',
@@ -29,6 +32,7 @@ export default handleActions(
         console.log('LOAD_MESSAGES');
         console.log(action.payload);
         draft.messages = action.payload.messageList;
+        // draft.isLoading = false;
       }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
@@ -36,8 +40,8 @@ export default handleActions(
         console.log('액션 ======>', action.payload);
         console.log('스테이트 ======>', state.messages);
 
-        draft.messages.unshift(action.payload.message);
-        draft.isLoading = true;
+        draft.messages.push(action.payload.message);
+        // draft.isLoading = true;
       }),
     [WRITE_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
@@ -58,11 +62,27 @@ export default handleActions(
       }),
     [LOAD_NONETALK_ROOM_LIST]: (state, action) =>
       produce(state, (draft) => {
-        draft.noneChatList = action.payload.roomList;
+        draft.noneChatList = {};
+        draft.noneChatListIds = [];
+        action.payload.roomList.forEach((doc) => {
+          draft.noneChatList[doc.userId] = doc;
+          draft.noneChatListIds.push(doc.userId);
+        });
+      }),
+    [CLOSE_NONETALK_ROOM_LIST]: (state) =>
+      produce(state, (draft) => {
+        draft.noneChatListIds = [];
       }),
     [LOAD_CURRENT_ROOM]: (state, action) =>
       produce(state, (draft) => {
         draft.current = action.payload.roomInfo;
+      }),
+    [CREATE_TALK_ROOM]: (state, action) =>
+      produce(state, (draft) => {
+        const { userId } = action.payload.room;
+        draft.byId[userId] = action.payload.room;
+        draft.allIds.push(userId);
+        draft.noneChatListIds = [];
       }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {

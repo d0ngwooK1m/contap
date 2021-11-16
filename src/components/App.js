@@ -44,7 +44,7 @@ function App() {
 const WrapApp = styled.div`
   width: 100%;
   max-height: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0px;
   padding: 0px;
   background-position: center;
