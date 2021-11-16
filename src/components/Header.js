@@ -231,6 +231,7 @@ const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-left: 400px;
 `;
 
 const LogoDiv = styled.div`
@@ -238,6 +239,7 @@ const LogoDiv = styled.div`
   height: fit-content;
   cursor: pointer;
   z-index: 1000;
+  margin-right: 400px;
 `;
 
 const Icon = styled.div`
@@ -254,6 +256,7 @@ const LoginButton = styled.button`
   color: white;
   font-size: 20px;
   cursor: pointer;
+  margin-left: 400px;
 `;
 
 export default Header;

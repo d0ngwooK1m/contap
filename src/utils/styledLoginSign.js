@@ -2,21 +2,31 @@ import styled from 'styled-components';
 import { ColorStyle, FontScale, FontFamily } from './systemDesign';
 
 const LoginWrapper = styled.div`
-  width: 100%;
+  width: 1435px;
   height: 100%;
   display: flex;
 `;
 
 const LeftWrapper = styled.div`
-  width: 50%;
+  width: 735px;
   height: 1080px;
-  background-color: ${ColorStyle.BackGround100};
+  background: linear-gradient(153.56deg, #8c4dff 0%, rgba(29, 29, 34, 0) 25%);
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+`;
+
+const SvgWrapper = styled.div`
+  width: 540px;
+  height: fit-content;
+  position: absolute;
+  right: 39px;
+  top: 160px;
 `;
 
 const RightWrapper = styled.div`
-  width: 50%;
+  width: 700px;
   height: 1080px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround};
   color: ${ColorStyle.Gray500};
   display: flex;
   justify-content: center;
@@ -36,7 +46,7 @@ const StyledInput = styled.input`
   width: 445px;
   height: 30px;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround};
   border-bottom: 1px solid ${ColorStyle.Gray100};
   border-right: none;
   border-right: none;
@@ -85,7 +95,7 @@ const KakaoButton = styled.button`
   width: 445px;
   height: 60px;
   margin: 60px 0px 0px 0px;
-  color: 181600;
+  color: #181600;
   border-radius: 30px;
   background-color: #e5d32e;
   border: none;
@@ -100,6 +110,7 @@ const WarningText = styled.p`
 export {
   LoginWrapper,
   LeftWrapper,
+  SvgWrapper,
   RightWrapper,
   Title,
   StyledLabel,
