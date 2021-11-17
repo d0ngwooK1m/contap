@@ -22,14 +22,17 @@ import {
   DivideLine,
   DivideContent,
   KakaoButton,
+  GithubButton,
   WarningText,
 } from '../utils/styledLoginSign';
 import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
 import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
+import { ReactComponent as GithubLogoSvg } from '../svgs/GithubLogo.svg';
 
 const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const history = useHistory();
+  const [login, setLogin] = React.useState('');
 
   const {
     register,
@@ -45,29 +48,58 @@ const Login = () => {
       return null;
     }
     const query = location.search;
-    const code = query.split('=')[1];
+    const firstCode = query.split('?')[1];
+    const site = firstCode.split('&')[0]
+    const code = firstCode.split('=')[1];
     // console.log(code);
     // let code = new URL(window.location.href).searchParams.get("code");
-    console.log(code);
+    console.log(firstCode, site, code);
+    // console.log(secondCode);
 
-    async function handleKakaoLogin() {
-      try {
-        const { data } = await axios({
-          method: 'GET',
-          url: `${baseURL}/user/kakao?code=${code}`,
-        });
-        console.log('kakaologin');
-        saveToken(data.token);
-        await dispatch(
-          loginAction({ email: data.email, userName: data.userName }),
-        );
-        history.replace('/');
-      } catch (error) {
-        console.error(error);
+    if (site === 'kakao') {
+      async function handleKakaoLogin() {
+        try {
+          const { data } = await axios({
+            method: 'GET',
+            url: `${baseURL}/user/kakao?code=${code}`,
+          });
+          console.log('kakaologin');
+          saveToken(data.token);
+          await dispatch(
+            loginAction({ email: data.email, userName: data.userName }),
+          );
+          history.replace('/');
+        } catch (error) {
+          console.error(error);
+        }
       }
+  
+      handleKakaoLogin();
     }
 
-    return handleKakaoLogin();
+    if (site === 'github') {
+      async function handleGithubLogin() {
+        try {
+          const { data } = await axios({
+            method: 'GET',
+            url: `${baseURL}/user/github?code=${code}`,
+          });
+          console.log('githublogin');
+          console.log(data);
+          saveToken(data.token);
+          await dispatch(
+            loginAction({ email: data.email, userName: data.userName }),
+          );
+          history.replace('/');
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      handleGithubLogin()
+    }
+
+    return 
 
   }, []);
 
@@ -171,22 +203,28 @@ const Login = () => {
           <KakaoButton
             onClick={() => {
               console.log(process.env.REACT_APP_KAKAO_PATH);
+              setLogin('kakao');
               window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
             }}
           >
             <KakaoLogoSvg />
-            <Text color={ColorStyle.Gray500} regular20>
+            <Text color="#181600" regular20>
               카카오 로그인
             </Text>
           </KakaoButton>
-          {/* <button
+          <GithubButton
             onClick={() => {
               console.log(process.env.REACT_APP_GITHUB_PATH);
+              setLogin('github');
               window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
+
             }}
           >
-            깃허브 로그인
-          </button> */}
+            <GithubLogoSvg />
+            <Text color={ColorStyle.BackGround100} regular20>
+              깃허브 로그인
+            </Text>
+          </GithubButton>
         </div>
       </RightWrapper>
     </LoginWrapper>
