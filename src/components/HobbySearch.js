@@ -78,7 +78,7 @@ const HobbySearch = () => {
                 toggleButton(val);
                 console.log(button[val]);
                 await dispatch(deleteHobby(val));
-                console.log(button);
+                console.log('h1', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -93,7 +93,7 @@ const HobbySearch = () => {
                 console.log('test');
                 setData(val);
                 setClick(true);
-                console.log(button);
+                console.log('h2', button);
               }}
             >
               <span>{val}</span>
@@ -111,7 +111,7 @@ const HobbySearch = () => {
             setData(val);
             setClick(true);
             toggleButton(val);
-            console.log(button);
+            console.log('h3', button);
             await dispatch(updateHobby(val));
           }}
         >
@@ -135,7 +135,7 @@ const HobbySearch = () => {
                 toggleButton(val);
                 console.log(button[val]);
                 await dispatch(deleteHobby(val));
-                console.log(button);
+                console.log('h4', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -150,7 +150,7 @@ const HobbySearch = () => {
                 console.log('test');
                 setData(val);
                 setClick(true);
-                console.log(button);
+                console.log('h5', button);
               }}
             >
               <span>{val}</span>
@@ -170,7 +170,7 @@ const HobbySearch = () => {
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log(button);
+              console.log('h6', button);
               await dispatch(deleteHobby(val));
             }}
             // style={{
@@ -188,7 +188,7 @@ const HobbySearch = () => {
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log(button);
+              console.log('h7', button);
               await dispatch(updateHobby(val));
             }}
           >

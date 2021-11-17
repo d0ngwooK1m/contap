@@ -17,7 +17,7 @@ import {
 
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
-import { Grid, Text, Input, Image } from '../elements';
+import { Grid, Text } from '../elements';
 
 const CardFrontWrite = () => {
   const dispatch = useDispatch();
@@ -59,7 +59,8 @@ const CardFrontWrite = () => {
 
   const stack = useSelector((state) => state.cards.stack);
   const hobby = useSelector((state) => state.cards.hobby);
-  console.log(stack, hobby);
+  console.log('태그값 확인====>', stack);
+  console.log('관심사 태그값 확인====>', hobby);
   console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
   // const handleRadioChange = (e) => {
@@ -119,20 +120,22 @@ const CardFrontWrite = () => {
     console.log(file);
     const formData = new FormData();
     formData.append('userName', userName);
-    formData.append('hashTagsStr', stack + ',' + hobby);
+    if (stack.length !== 0 && hobby.length !== 0) {
+      formData.append('hashTagsStr', stack + ',' + hobby);
+    } else if (stack.length === 0 && hobby.length !== 0) {
+      formData.append('hashTagsStr', stackTag + ',' + hobby);
+    } else if (stack.length !== 0 && hobby.length === 0) {
+      formData.append('hashTagsStr', stack + ',' + hobbyTag);
+    } else {
+      formData.append('hashTagsStr', stackTag + ',' + hobbyTag);
+    }
+
     formData.append('field', category);
     if (fileData) {
       formData.append('profile', fileData);
     }
     console.log('formData', formData);
-    // for (var key of formData.keys()) {
-    //   console.log(key);
-    // }
 
-    // for (var value of formData.values()) {
-    //   console.log(value);
-    // }
-    // console.log('디스패치 보내기 전====>', category);
     dispatch(editCardProfileDB(formData));
     localStorage.removeItem('nick');
     localStorage.removeItem('category');

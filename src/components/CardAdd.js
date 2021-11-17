@@ -35,8 +35,8 @@ const CardAdd = () => {
       <Grid>
         {cardList.allIds.map((cardId) => {
           return (
-            <Grid key={cardId}>
-              <CardPortfolio cardId={cardId} />
+            <Grid>
+              <CardPortfolio key={cardId} cardId={cardId} />
             </Grid>
           );
         })}
