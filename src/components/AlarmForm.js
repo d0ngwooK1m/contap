@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
@@ -9,9 +9,13 @@ import { Grid, Text } from '../elements';
 import { withdrawalToServer } from '../features/user/actions';
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 import { Switch } from '@mui/material';
+import T from '../api/tokenInstance';
 
 const AlarmForm = () => {
-  const [inputStatus, setInputStatus] = React.useState('');
+  // const [inputStatus, setInputStatus] = React.useState('');
+  const switchInfo = useSelector((state) => state.user.alarm);
+  const [switchChange, setSwitchChange] = React.useState(switchInfo);
+  console.log('리덕스 알람 정보 ===>', switchInfo);
   // const [phoneNumber, setPhoneNumber] = React.useState('');
 
   const {
@@ -20,6 +24,36 @@ const AlarmForm = () => {
     formState: { errors },
     // watch,
   } = useForm();
+
+  React.useEffect(async () => {
+    const res = await T.GET('/setting/getPhoneNumber');
+    const { data } = res;
+    console.log(data);
+  }, [])
+
+  const sendPhoneNumber = async(phoneNumber) => {
+    try {
+      console.log('phoneNum 확인===>', phoneNumber)
+      const res = await T.POST(`/setting/modifyPhoneNumber`, phoneNumber);
+      const { data } = res;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendAlarm = async (alarmInfo) => {
+    try {
+      console.log('alarmInfo 확인===>', alarmInfo)
+      const res = await T.POST(`/setting/alarm?alarmState=${alarmInfo.alarmState}`);
+      const { data } = res;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Wrapper>
@@ -45,12 +79,25 @@ const AlarmForm = () => {
           <br />
           원하지 않는다면 알람을 끌 수 있어요
         </Text>
-        <Switch defaultChecked color="secondary" />
+        {
+          switchInfo === 0 ?
+            <Switch color="secondary" onChange={() => {
+              setSwitchChange(1);
+          }} /> :
+            <Switch color="secondary" defaultChecked onChange={() => {
+              setSwitchChange(0);
+            }} />
+        }
       </MarginWrapper2>
 
       <form
         onSubmit={handleSubmit((phoneInfo) => {
-          console.log(phoneInfo);
+          const alarmInfo = {
+            alarmState: switchChange,
+          }
+          console.log(phoneInfo, alarmInfo);
+          sendPhoneNumber(phoneInfo);
+          sendAlarm(alarmInfo);
         })}
       >
         <label>

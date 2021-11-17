@@ -15,6 +15,7 @@ import CardEdit from '../pages/CardEdit';
 import Permit from './Permit';
 import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
+import AlarmCheck from './AlarmCheck';
 
 function App() {
   return (
@@ -25,15 +26,17 @@ function App() {
           <PublicRoute restricted path="/signup" component={Signup} exact />
           <PublicRoute restricted path="/login" component={Login} exact />
           <WsNotiRoom>
-            <Header />
-            <PublicRoute path="/" component={CardList} exact />
-            <Permit>
-              <PrivatecRoute path="/settings" component={Settings} exact />
-              <PrivatecRoute path="/contap" component={Contap} exact />
-              <PrivatecRoute path="/mypage" component={Mypage} exact />
-              <PrivatecRoute path="/edit" component={CardEdit} exact />
-              <PrivatecRoute path="/grabtalk" component={Grabtalk} exact />
-            </Permit>
+            <AlarmCheck>
+              <Header />
+              <PublicRoute path="/" component={CardList} exact />
+              <Permit>
+                <PrivatecRoute path="/settings" component={Settings} exact />
+                <PrivatecRoute path="/contap" component={Contap} exact />
+                <PrivatecRoute path="/mypage" component={Mypage} exact />
+                <PrivatecRoute path="/edit" component={CardEdit} exact />
+                <PrivatecRoute path="/grabtalk" component={Grabtalk} exact />
+              </Permit>
+            </AlarmCheck>
           </WsNotiRoom>
         </Switch>
       </Wrap>
@@ -43,6 +46,7 @@ function App() {
 
 const WrapApp = styled.div`
   width: 100%;
+  min-width: 1440px;
   max-height: 100%;
   min-height: 100%;
   margin: 0px;
