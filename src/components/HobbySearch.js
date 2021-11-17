@@ -8,7 +8,7 @@ import {
   deleteHobby,
 } from '../features/cards/actions';
 
-import { ReactComponent as Search } from '../svgs/Search.svg';
+import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
@@ -211,7 +211,7 @@ const HobbySearch = () => {
             placeholder="요즘 관심사는 뭐예요?"
           />
           <SearchIconDiv>
-            <Search />
+            <MypageSearch />
           </SearchIconDiv>
         </SearchBoxDiv>
       ) : (
@@ -224,7 +224,7 @@ const HobbySearch = () => {
             }}
           />
           <SearchIconDiv>
-            <Search />
+            <MypageSearch />
           </SearchIconDiv>
         </SearchBoxDiv>
       )}

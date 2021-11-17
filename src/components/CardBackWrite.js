@@ -215,6 +215,7 @@ const MainBox = styled.textarea`
   ::-webkit-input-placeholder {
     color: ${ColorStyle.Gray500};
   }
+  resize: none;
 `;
 
 const LengthDiv = styled.div`

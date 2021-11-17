@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import React from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -10,6 +11,7 @@ import {
   deleteHobby,
   updateStack,
   updateAllHobby,
+  loadMyCardDB,
 } from '../features/cards/actions';
 // import { history } from '../features/configureStore';
 
@@ -25,10 +27,16 @@ const CardFrontWrite = () => {
   const userInfo = useSelector((state) => state.cards.current);
   console.log('카테고리 확인===>', userInfo.field);
   console.log('유저정보 확인===>', userInfo);
+  // const user = useSelector((state) => state.user);
+  // console.log('유저 확인===>', user);
 
-  const [userName, setUserName] = React.useState(userInfo.userName);
-  const [category, setCategory] = React.useState(userInfo.field);
-
+  const [userName, setUserName] = React.useState(
+    () => JSON.parse(localStorage.getItem('nick')) || userInfo.userName,
+  );
+  const [category, setCategory] = React.useState(
+    () => JSON.parse(localStorage.getItem('category')) || userInfo.field,
+  );
+  console.log('유저 닉네임 확인===>', userName);
   // console.log(stack, hobby);
   // console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
   const stackTag = userInfo.hashTagsString
@@ -96,7 +104,17 @@ const CardFrontWrite = () => {
   //   // e.target.value = '';
   // };
 
-  const fileUploadHandler = () => {
+  const addBtnClick = () => {
+    // 닉네임 유효성검사
+    if (userName === undefined || userName === '') {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '닉네임을 입력해주세요',
+      });
+      return false;
+    }
+
     const file = fileInput.current.files[0];
     console.log(file);
     const formData = new FormData();
@@ -116,6 +134,8 @@ const CardFrontWrite = () => {
     // }
     // console.log('디스패치 보내기 전====>', category);
     dispatch(editCardProfileDB(formData));
+    localStorage.removeItem('nick');
+    localStorage.removeItem('category');
   };
   console.log(category);
 
@@ -126,6 +146,12 @@ const CardFrontWrite = () => {
   //     return;
   //   }
   // }, []);
+  React.useEffect(() => {
+    // e.preventDefault();
+    dispatch(loadMyCardDB());
+    localStorage.setItem('nick', JSON.stringify(userName));
+    localStorage.setItem('category', JSON.stringify(category));
+  }, []);
 
   return (
     <Grid
@@ -139,7 +165,7 @@ const CardFrontWrite = () => {
           {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
         </Text>
         <Grid width="10%">
-          <AddBtn cursor="pointer" onClick={fileUploadHandler} />
+          <AddBtn cursor="pointer" onClick={addBtnClick} />
         </Grid>
       </Grid>
       <Div>
@@ -280,6 +306,7 @@ const CardFrontWrite = () => {
                       onClick={() => {
                         dispatch(deleteHobby(val));
                       }}
+                      key={val}
                     >
                       {val}
                     </HashTag>
@@ -295,6 +322,7 @@ const CardFrontWrite = () => {
                       onClick={() => {
                         dispatch(deleteHobby(val));
                       }}
+                      key={val}
                     >
                       {val}
                     </HashTag>
@@ -328,6 +356,7 @@ const Img = styled.img`
   width: 182px;
   height: 164px;
   border-radius: 8px;
+  object-fit: cover;
 `;
 
 const TitleBox = styled.input`
