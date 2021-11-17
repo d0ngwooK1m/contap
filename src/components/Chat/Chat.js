@@ -10,6 +10,7 @@ import {
   loadMessagesToAxios,
   writeMessage,
   getMessage,
+  loadTalkRoomListToAxios,
 } from '../../features/chat/actions';
 
 import { getToken } from '../../utils/auth';
@@ -19,6 +20,7 @@ import MessageBox from './MessageBox';
 const Chat = ({ current }) => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const userInfo = useSelector((state) => state.user);
+  console.log('유저정보 확인 =======>', current);
 
   const { roomId, userId, email } = current;
 
@@ -37,6 +39,7 @@ const Chat = ({ current }) => {
             const newMessage = JSON.parse(data.body);
             console.log(userInfo);
             dispatch(getMessage(newMessage));
+            dispatch(loadTalkRoomListToAxios());
           },
           { token, userEmail: userInfo.email },
         );
@@ -129,7 +132,7 @@ const Chat = ({ current }) => {
 
   return (
     <div>
-      <MessageBox roomId={roomId} />
+      <MessageBox className="messageBox" roomId={roomId} />
       <MessageWrite sendMessage={sendMessage} />
     </div>
   );
