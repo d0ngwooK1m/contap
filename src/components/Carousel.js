@@ -58,6 +58,7 @@ const Carousel = ({ userId, userName, profile, category }) => {
                 userId={userId}
                 userName={userName}
                 profile={profile}
+                show={tapFormState}
                 onTapForm={handleTapForm}
               ></CardBack>
               {tapFormState && <TapForm userId={card.userId} category={category} />}

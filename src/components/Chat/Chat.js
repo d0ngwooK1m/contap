@@ -10,6 +10,7 @@ import {
   loadMessagesToAxios,
   writeMessage,
   getMessage,
+  loadTalkRoomListToAxios,
 } from '../../features/chat/actions';
 
 import { getToken } from '../../utils/auth';
@@ -19,6 +20,7 @@ import MessageBox from './MessageBox';
 const Chat = ({ current }) => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const userInfo = useSelector((state) => state.user);
+  console.log('유저정보 확인 =======>', current);
 
   const { roomId, userId, email } = current;
 
@@ -30,17 +32,23 @@ const Chat = ({ current }) => {
   const wsConnectSubscribe = React.useCallback(() => {
     try {
       ws.connect({}, async () => {
+        console.log('커넥트 시작');
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
           (data) => {
             const newMessage = JSON.parse(data.body);
             console.log(userInfo);
             dispatch(getMessage(newMessage));
+            dispatch(loadTalkRoomListToAxios());
           },
           { token, userEmail: userInfo.email },
         );
       });
+      console.log('서브스크라이브 끝');
+
+      console.log('디패시작');
       dispatch(loadMessagesToAxios(roomId));
+      console.log('디패끝');
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +116,7 @@ const Chat = ({ current }) => {
         roomId,
         message,
         writer: userInfo.email,
-        receiver: email,
+        reciever: email,
         // reciever: grapList[userId].email,
       };
 
@@ -124,7 +132,7 @@ const Chat = ({ current }) => {
 
   return (
     <div>
-      <MessageBox roomId={roomId} />
+      <MessageBox className="messageBox" roomId={roomId} />
       <MessageWrite sendMessage={sendMessage} />
     </div>
   );

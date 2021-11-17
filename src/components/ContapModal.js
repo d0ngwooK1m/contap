@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
-import Chat from './Chat/Chat';
 import { removeReceiveTapToAxios } from '../features/taps/actions';
 
 const ContapModal = ({
@@ -97,7 +96,6 @@ const ContapModal = ({
                 </ButtonBox>
               </>
             )}
-            {select === 'GrabList' && <Chat userId={userCradInfo.userId} />}
           </Content>
         </Wrap>
       </Modal>
