@@ -31,7 +31,7 @@ const CardPortfolio = ({ cardId }) => {
   const [link, setLink] = React.useState(cardList[cardId].link);
 
   // onMouse
-  const [display, setDisplay] = React.useState({ display: 'none' });
+  // const [display, setDisplay] = React.useState({ display: 'none' });
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
@@ -162,26 +162,20 @@ const CardPortfolio = ({ cardId }) => {
   return (
     <Grid>
       <Div
-        // onMouse
-        onMouseEnter={() => {
-          setDisplay({ display: 'block' });
-        }}
-        onMouseLeave={() => {
-          setDisplay({ display: 'none' });
-        }}
+      // // onMouse
+      // onMouseEnter={() => {
+      //   setDisplay({ display: 'block' });
+      // }}
+      // onMouseLeave={() => {
+      //   setDisplay({ display: 'none' });
+      // }}
       >
         <ProjectDiv>
           <Grid is_flex>
             <TitleText>{cardList[cardId].title}</TitleText>
-            <IconDiv>
-              <EditBtn
-                style={display}
-                onClick={editCardBack}
-                cursor="pointer"
-                width="38%"
-              />
+            <IconDiv className="iconDiv">
+              <EditBtn onClick={editCardBack} cursor="pointer" width="38%" />
               <DeleteBtn
-                style={display}
                 onClick={deleteCardBack}
                 cursor="pointer"
                 width="38%"
@@ -238,6 +232,10 @@ const ProjectDiv = styled.div`
   &:hover {
     border: 1px solid ${ColorStyle.PrimaryPurple};
     background: ${'#a09bac' + Opacity[15]};
+
+    .iconDiv {
+      display: flex;
+    }
   }
 `;
 
@@ -378,7 +376,7 @@ const LinkText = styled.a`
 // `;
 
 const IconDiv = styled.div`
-  display: flex;
+  display: none;
   justify-content: space-around;
   margin-right: 48px;
 `;

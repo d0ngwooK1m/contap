@@ -107,7 +107,7 @@ const StackSearch = () => {
                 toggleButton(val);
                 console.log(button[val]);
                 await dispatch(deleteStack(val));
-                console.log(button);
+                console.log('1', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -122,7 +122,7 @@ const StackSearch = () => {
                 console.log('test');
                 setData(val);
                 setClick(true);
-                console.log(button);
+                console.log('2', button);
               }}
             >
               <span>{val}</span>
@@ -140,7 +140,7 @@ const StackSearch = () => {
             setData(val);
             setClick(true);
             toggleButton(val);
-            console.log(button);
+            console.log('3', button);
             await dispatch(updateStack(val));
           }}
         >
@@ -165,7 +165,7 @@ const StackSearch = () => {
                 toggleButton(val);
                 console.log(button[val]);
                 await dispatch(deleteStack(val));
-                console.log(button);
+                console.log('4', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -180,7 +180,7 @@ const StackSearch = () => {
                 console.log('test');
                 setData(val);
                 setClick(true);
-                console.log(button);
+                console.log('5', button);
               }}
             >
               <span>{val}</span>
@@ -199,7 +199,7 @@ const StackSearch = () => {
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log(button);
+              console.log('6', button);
               await dispatch(deleteStack(val));
             }}
             style={{
@@ -216,7 +216,7 @@ const StackSearch = () => {
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log(button);
+              console.log('7', button);
               await dispatch(updateStack(val));
             }}
           >
