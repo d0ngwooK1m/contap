@@ -102,6 +102,20 @@ const KakaoButton = styled.button`
   cursor: pointer;
 `;
 
+const GithubButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 445px;
+  height: 60px;
+  margin: 20px 0px 0px 0px;
+  color: #181600;
+  border-radius: 30px;
+  background-color: #fffafa;
+  border: none;
+  cursor: pointer;
+`;
+
 const WarningText = styled.p`
   color: ${ColorStyle.Error};
   margin: 0px;
@@ -120,5 +134,6 @@ export {
   DivideLine,
   DivideContent,
   KakaoButton,
+  GithubButton,
   WarningText,
 };
