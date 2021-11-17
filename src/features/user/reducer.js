@@ -8,6 +8,7 @@ import {
   AUTH_CHECK,
   BACK_TO_PREV,
   SIGNUP_DONE,
+  ALARM_CHECK,
 } from './types';
 
 const initialState = {
@@ -18,6 +19,13 @@ const initialState = {
   isAuthNumChecked: false,
   isSignupDone: false,
   checkedEmail: '',
+  phoneNumber: '',
+  alarm: 0,
+  canOtherRead: 0,
+  tutorial: {
+    phoneTutorial: null,
+    profileTutorial: null,
+  },
 };
 
 export default function userReducer(state = initialState, action) {
@@ -58,6 +66,34 @@ export default function userReducer(state = initialState, action) {
         draft.email = '';
         draft.userName = '';
         draft.isAuthorized = false;
+        break;
+      }
+      case ALARM_CHECK: {
+        if (action.alarmInfo.phoneTutorial !== 0) {
+          draft.tutorial.phoneTutorial = true;
+        } else {
+          draft.tutorial.phoneTutorial = false;
+        }
+
+        if (action.alarmInfo.profileTutorial !== 0) {
+          draft.tutorial.profileTutorial = true;
+        } else {
+          draft.tutorial.profileTutorial = false;
+        }
+
+        if (action.alarmInfo.canOtherRead !== 0) {
+          //  내 뒷면 카드가 있을 때 다른 사람 카드 읽기 가능
+          draft.canOtherRead = 1;
+        } else {
+          // 내 뒷면 카드가 없을 때  다른 사람 못 읽게 하기
+          draft.canOtherRead = 0;
+        }
+
+        if (action.alarmInfo.alarm !== 0) {
+          draft.alarm = 1;
+        } else {
+          draft.alarm = 0;
+        }
         break;
       }
       default:

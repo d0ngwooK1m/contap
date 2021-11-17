@@ -26,6 +26,10 @@ import { ReactComponent as SettingIconSvg } from '../svgs/Setting.svg';
 import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
 import T from '../api/tokenInstance';
 
+import TutorialForm from './TutorialForm';
+import { mainSteps, settingSteps } from '../utils/tutorialSteps';
+// import { settingSteps } from '../utils/tutorialSteps';
+
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
 const Header = () => {
@@ -42,6 +46,15 @@ const Header = () => {
 
   const open = Boolean(anchorEl);
   const token = getToken();
+
+  const mypageAlarm = useSelector(
+    (state) => state.user.tutorial.profileTutorial,
+  );
+  const settingAlarm = useSelector(
+    (state) => state.user.tutorial.phoneTutorial,
+  );
+  console.log('마이페이지 튜토리얼===>', mypageAlarm);
+  console.log('세팅 튜토리얼===>', settingAlarm);
 
   // 로그인 체크
   // useUserAuthCheck();
@@ -127,6 +140,11 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper>
+        {mypageAlarm === false ? <TutorialForm steps={mainSteps} /> : null}
+        {mypageAlarm === true && settingAlarm === false ? (
+          <TutorialForm steps={settingSteps} />
+        ) : null}
+        {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
         {/* <Grid
           width="fit-content"
           height="fit-content"
@@ -163,7 +181,7 @@ const Header = () => {
             >
               {ChatButton()}
             </Icon>
-            <Icon>
+            <Icon className="my-setting">
               <IconButton
                 aria-label="delete"
                 size="small"
@@ -196,7 +214,11 @@ const Header = () => {
               </MenuItem>
               <MenuItem onClick={logOut}>로그아웃</MenuItem>
             </Menu>
-            <IconButton style={{ margin: '0px 12px' }} onClick={moveToMyPage}>
+            <IconButton
+              className="my-page"
+              style={{ margin: '0px 12px' }}
+              onClick={moveToMyPage}
+            >
               {myProfile}
             </IconButton>
           </MenuWrapper>

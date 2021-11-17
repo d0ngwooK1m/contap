@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import React from 'react';
 // import styled from 'styled-components';
 
@@ -9,13 +9,16 @@ import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
+// import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
+
 
 const CardList = () => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
+  // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
     if (cardList.allIds.length !== 0) {
       return;
     }
@@ -26,6 +29,9 @@ const CardList = () => {
 
   return (
     <div style={{ paddingBottom: '112px', maxWidth: '1440px' }}>
+      {/* <SvgWrapper>
+        <TitleBgSvg />
+      </SvgWrapper> */}
       <TitleWrap>
         <Text bold48> Just Tap!</Text>
         <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
@@ -80,6 +86,10 @@ const TextWrap = styled.div`
       margin: 8px 0px;
     }
   }
+`;
+
+const SvgWrapper = styled.div`
+  z-index: -1;
 `;
 
 const RefreshWrapper = styled.div`
