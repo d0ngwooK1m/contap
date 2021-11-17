@@ -10,6 +10,7 @@ import {
   AUTH_CHECK,
   BACK_TO_PREV,
   SIGNUP_DONE,
+  ALARM_CHECK,
 } from './types';
 import { setChatNoti } from '../notice/actions';
 import { saveToken, removeToken } from '../../utils/auth';
@@ -55,6 +56,11 @@ const logout = () => ({ type: LOG_OUT });
 const authorize = (email, userName) => ({
   type: AUTHORIZED,
   payload: { email, userName },
+});
+
+const alarmCheck = (alarmInfo) => ({
+  type: ALARM_CHECK,
+  alarmInfo,
 });
 
 // const sendEmailAuth = (emailInfo) => async (dispatch) => {
@@ -215,6 +221,7 @@ export {
   backToPrev,
   authCheck,
   signupDone,
+  alarmCheck,
   // sendEmailAuth,
   // sendAuthInfo,
   // signupToServer,
