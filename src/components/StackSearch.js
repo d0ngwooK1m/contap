@@ -8,7 +8,7 @@ import {
   deleteStack,
 } from '../features/cards/actions';
 
-import { ReactComponent as Search } from '../svgs/Search.svg';
+import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // import { Grid } from '../elements';
@@ -239,7 +239,7 @@ const StackSearch = () => {
             placeholder="주로 사용하시는 기술이 있나요?"
           />
           <SearchIconDiv>
-            <Search />
+            <MypageSearch />
           </SearchIconDiv>
         </SearchBoxDiv>
       ) : (
@@ -252,7 +252,7 @@ const StackSearch = () => {
             value={data}
           />
           <SearchIconDiv>
-            <Search />
+            <MypageSearch />
           </SearchIconDiv>
         </SearchBoxDiv>
       )}

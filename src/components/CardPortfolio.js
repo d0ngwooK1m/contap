@@ -2,9 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-// import EditIcon from '@mui/icons-material/Edit';
-// import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
@@ -43,9 +41,35 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const edit = () => {
+    if (title.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '프로젝트 제목을 작성해주세요',
+      });
+
+      return false;
+    }
+    if (desc.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '프로젝트 설명을 작성해주세요',
+      });
+
+      return false;
+    }
+    if (tagsStr.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '사용 기술을 작성해주세요',
+      });
+
+      return false;
+    }
     let editLink = link;
-    if (editLink !== undefined && editLink.indexOf('http') === -1) {
-      // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
+    if (editLink !== undefined && editLink.indexOf('//') === -1) {
       editLink = '//' + editLink;
       console.log(editLink);
     }
@@ -253,6 +277,7 @@ const MainBox = styled.textarea`
   &:focus {
     outline: none;
   }
+  resize: none;
 `;
 
 const LengthDiv = styled.div`
