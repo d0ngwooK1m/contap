@@ -44,10 +44,11 @@ export default handleActions(
       produce(state, (draft) => {
         draft.byId = {};
         draft.allIds = [];
-        // console.log(action.payload);
+        //console.log(action.payload);
         action.payload.cardList.forEach((doc) => {
           draft.byId[doc.userId] = doc;
           draft.allIds.push(doc.userId);
+          //console.log(draft.allIds);
         });
       }),
     [SEARCH_CARD]: (state, action) =>
