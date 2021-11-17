@@ -9,7 +9,15 @@ import { Text } from '../elements';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
 
-const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
+const CardBack = ({
+  card,
+  userId,
+  userName,
+  profile,
+  children,
+  onTapForm,
+  show,
+}) => {
   console.log('=====> 카드!', card);
   console.log('=====> 유저!', userId);
   console.log('링크 확인 ===>', card.link);
@@ -45,19 +53,19 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
             <Text
               regular16
               color={
-                categoryColor() ? ColorStyle.Gray500 : ColorStyle.PrimaryPurple
+                categoryColor() ? ColorStyle.Gray500 : ColorStyle.BackGround300
               }
             >
               {category()}
             </Text>
           </div>
           <div className="title">
-            <Text bold24 color={ColorStyle.BackGround300}>
+            <Text bold24 color={ColorStyle.Gray500}>
               {card?.title}
             </Text>
-            <a className="link" href={card.link} target="_blank">
+            {card.link && <a className="link" href={card.link} target="_blank">
               <Text
-                regular20
+                bold20
                 color={
                   categoryColor()
                     ? ColorStyle.PrimaryPurple
@@ -66,12 +74,12 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
               >
                 본문 보러가기
               </Text>
-            </a>
+            </a>}
           </div>
-          <Text regular20 color={ColorStyle.Gray100}>
+          <Text regular20 color={ColorStyle.Gray500}>
             {card?.content}
           </Text>
-          <CardTapForm categoryColor={categoryColor()}>
+          <CardTapForm categoryColor={categoryColor()} isTapForm={show}>
             <ImageBox src={profile || BasicProfile} />
             <div className="userName">
               <Text regular16 color={ColorStyle.BackGround300}>
@@ -80,8 +88,15 @@ const CardBack = ({ card, userId, userName, profile, children, onTapForm }) => {
             </div>
             <hr />
             <button type="button" onClick={onTapForm}>
-              <Text bold20 color={ColorStyle.Gray300}>
-                Tap?
+              <Text
+                bold20
+                color={
+                  categoryColor()
+                    ? ColorStyle.Gray500
+                    : ColorStyle.BackGround300
+                }
+              >
+                {show ? '취소' : 'Tap?'}
               </Text>
             </button>
           </CardTapForm>
@@ -102,7 +117,7 @@ CardBack.propTypes = {
 
 CardBack.defaultProps = {
   children: false,
-  profile:null
+  profile: null,
 };
 
 const Wrap = styled.div`
@@ -110,7 +125,7 @@ const Wrap = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: #f0ecf9;
+  background-color: ${ColorStyle.BackGround300};
   /* background-color: ${ColorStyle.BackGround100}; */
   position: relative;
   left: 10px;
@@ -179,16 +194,36 @@ const CardTapForm = styled.div`
     min-width: 130px;
     height: 44px;
     margin-left: 25px;
-    background-color: ${ColorStyle.Gray500};
+    background-color: ${({ categoryColor, isTapForm }) =>
+      isTapForm
+        ? ColorStyle.Gray300
+        : categoryColor
+        ? ColorStyle.PrimaryPurple
+        : ColorStyle.PrimaryMint};
     border-radius: 40px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border: 2px solid
-      ${({ categoryColor }) =>
-        categoryColor ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+      ${({ categoryColor, isTapForm }) =>
+        isTapForm
+          ? ColorStyle.Gray300
+          : categoryColor
+          ? ColorStyle.PrimaryPurple
+          : ColorStyle.PrimaryMint};
     box-sizing: border-box;
+
+    &:hover {
+      background-color: ${({ categoryColor, isTapForm }) =>
+        isTapForm ? ColorStyle.Gray300 : categoryColor ? '#6235B5' : '#33C68A'};
+      border: 2px solid
+        ${({ categoryColor, isTapForm }) =>
+          isTapForm
+            ? ColorStyle.Gray300
+            : categoryColor
+            ? '#6235B5'
+            : '#33C68A'};
+    }
   }
 `;
-
 const ImageBox = styled.div`
   height: 40px;
   min-width: 40px;

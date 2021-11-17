@@ -2,18 +2,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = (props) => {
-  const {
-    children,
-    height,
-    short,
-    _onClick,
-    is_float,
-    crud,
-    padding,
-    width,
-    margin,
-  } = props;
+const Button = ({
+  children,
+  height,
+  short,
+  _onClick,
+  is_float,
+  crud,
+  padding,
+  width,
+  margin,
+}) => {
 
   const styles = {
     height,
@@ -62,10 +61,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   children: null,
-  short: false,
   height: '50px',
-  _onClick: () => {},
-  is_float: false,
   crud: false,
   is_me: false,
   padding: '12px 0px',

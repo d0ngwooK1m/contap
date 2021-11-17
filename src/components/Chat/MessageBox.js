@@ -8,7 +8,7 @@ import { Text } from '../../elements';
 const MessageBox = () => {
   const messageList = useSelector((state) => state.chat.messages);
   const userInfo = useSelector((state) => state.user.email);
-  console.log(userInfo);
+  console.log(messageList);
   console.log('메시지 박스 열림');
   return (
     <ChatMessageBox>
