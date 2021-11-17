@@ -47,7 +47,7 @@ const Chat = ({ current }) => {
       console.log('서브스크라이브 끝');
 
       console.log('디패시작');
-      dispatch(loadMessagesToAxios(roomId));
+      dispatch(loadMessagesToAxios(roomId, 0));
       console.log('디패끝');
     } catch (error) {
       console.log(error);

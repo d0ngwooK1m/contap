@@ -9,6 +9,7 @@ import {
   LOAD_CURRENT_ROOM,
   CREATE_TALK_ROOM,
   CLOSE_NONETALK_ROOM_LIST,
+  NEXT_PAGE,
   LOADING,
 } from './types';
 
@@ -32,6 +33,15 @@ export default handleActions(
         console.log('LOAD_MESSAGES');
         console.log(action.payload);
         draft.messages = action.payload.messageList;
+        // draft.isLoading = false;
+      }),
+    [NEXT_PAGE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log('NEXT_PAGE');
+        console.log(action.payload);
+        action.payload.messageList.forEach((doc) => {
+          draft.messages.unshift(doc);
+        });
         // draft.isLoading = false;
       }),
     [GET_MESSAGE]: (state, action) =>

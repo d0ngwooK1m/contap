@@ -16,6 +16,7 @@ import GrabTalkAdd from '../components/GrabTalkAdd';
 import { ReactComponent as Close } from '../svgs/CloseRound.svg';
 import BasicProfile from '../assets/image/basicProfile.png';
 import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
+import { ColorStyle } from '../utils/systemDesign';
 
 const Grabtalk = () => {
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ const SvgWrap = styled.div`
 const Header = styled.div`
   display: flex;
   position: relative;
+  background-color: ${ColorStyle.BackGround};
   align-items: center;
   width: 700px;
   min-height: 80px;

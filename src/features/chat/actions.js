@@ -9,11 +9,16 @@ import {
   LOAD_TALK_ROOM_LIST,
   LOAD_CURRENT_ROOM,
   CLOSE_NONETALK_ROOM_LIST,
+  NEXT_PAGE,
   CREATE_TALK_ROOM,
 } from './types';
 import T from '../../api/tokenInstance';
 
 export const loadMessages = createAction(LOAD_MESSAGES, (messageList) => ({
+  messageList,
+}));
+
+export const nextPage = createAction(NEXT_PAGE, (messageList) => ({
   messageList,
 }));
 
@@ -54,9 +59,10 @@ export const createTalkRoom = createAction(CREATE_TALK_ROOM, (room) => ({
 
 export const loading = createAction(LOADING, (isLoading) => ({ isLoading }));
 
-export const loadMessagesToAxios = (roomId) => async (dispatch) => {
+export const loadMessagesToAxios = (roomId, page) => async (dispatch) => {
   try {
-    const { data } = await T.GET('/chat/getmsg', roomId);
+    console.log('/chat/getmsg', `${roomId}/${page}`);
+    const { data } = await T.GET('/chat/getmsg', `${roomId}/${page}`);
     console.log('리스폰스 ============> ', data);
     dispatch(loadMessages(data));
   } catch (error) {
@@ -64,6 +70,17 @@ export const loadMessagesToAxios = (roomId) => async (dispatch) => {
   }
 };
 
+export const nextPageToAxios = (roomId, page) => async (dispatch) => {
+  try {
+    const { data } = await T.GET('/chat/getmsg', `${roomId}/${page}`);
+    // const { data } = await T.GET('/contap/getothers');
+    console.log('리스폰스 ============> ', data);
+    console.log(data);
+    dispatch(nextPage(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/1');

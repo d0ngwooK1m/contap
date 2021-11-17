@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import StompJs from 'stompjs';
 import SockJS from 'sockjs-client';
@@ -10,6 +11,7 @@ import {
   setTapAcceptNoti,
   setTapRefuseNoti,
 } from '../features/notice/actions';
+import { loadTalkRoomListToAxios } from '../features/chat/actions';
 
 const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -21,6 +23,9 @@ export default function useSocketNotiRoom() {
   const ws = StompJs.over(sock);
   const token = getToken();
 
+  console.log('현재 페이지 =====>', window.location.pathname);
+  const history = useHistory();
+
   const wsConnectSubscribe = React.useCallback(async () => {
     if (!token) {
       return null;
@@ -30,11 +35,10 @@ export default function useSocketNotiRoom() {
       ws.connect({}, () => {
         ws.subscribe(
           `/user/sub/user`,
-          (noti) => {
-            console.log(noti);
+          async (noti) => {
             if (!isChatNoti) {
               const newNoti = JSON.parse(noti.body);
-              console.log(newNoti.type);
+
               // chat 보냈을 때 채팅방에 둘다 있을 때 타입 0
               // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 1
               // chat 보냈을 때 상대방이 로그아웃 타입 2
@@ -42,7 +46,10 @@ export default function useSocketNotiRoom() {
               // tap 요청 거절한게 타입 4
               // tap 요청 수락한게 타입 5
               if (newNoti.type === 1) {
-                console.log('채팅알람!');
+                if (history.location.pathname === '/grabtalk') {
+                  console.log('디패 로드 톡룸');
+                  await dispatch(loadTalkRoomListToAxios());
+                }
                 dispatch(setChatNoti(true));
               }
               if (newNoti.type === 3) {
