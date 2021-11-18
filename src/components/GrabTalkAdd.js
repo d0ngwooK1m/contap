@@ -10,7 +10,7 @@ import { ReactComponent as Close } from '../svgs/CloseRound.svg';
 import {
   closeNoneTalkRoomList
 } from '../features/chat/actions';
-const GrabTalkAdd = ({ noneTalkList }) => {
+const GrabTalkAdd = ({ noneTalkList, closeList }) => {
   const dispatch = useDispatch()
   console.log(noneTalkList)
   return (
@@ -18,9 +18,7 @@ const GrabTalkAdd = ({ noneTalkList }) => {
        <Header className="header">
               <Text bold32>여긴 검색창이 들어갈 거에요</Text>
               <IconButton
-                onClick={() => {
-                  dispatch(closeNoneTalkRoomList());
-                }}
+                onClick={closeList}
               >
                 <Close />
               </IconButton>

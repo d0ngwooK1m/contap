@@ -16,7 +16,8 @@ const MessageBox = ({ roomId }) => {
   const isNext = messageList.length < 15 ? false : true;
   const [prevHeight, setPrevHeight] = React.useState(null);
 
-  console.log(page);
+  console.log( '리스트 =========>',messageList)
+  console.log( 'page =========>',page);
   // const scrollToBottom = () => {
   //   scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   // };
@@ -110,25 +111,25 @@ const ChatMessageBox = styled.div`
 
 const SpeechBubble = styled.div`
   background-color: ${({ isMe }) =>
-    isMe ? '#723CD4' : ColorStyle.BackGround300};
+  isMe ? '#723CD4' : ColorStyle.BackGround300};
   width: fit-content;
   max-width: 450px;
   word-break: break-all;
   margin: ${({ isMe }) =>
-    isMe ? '12px 0px 24px auto' : '12px auto 24px 48px'};
-  margin-bottom: ${({ isMargin }) => (isMargin ? '32px' : '16px')};
-  padding: 24px;
+    isMe ? '0px 0px 0px auto' : '0px auto 0px 48px'};
+  margin-bottom: ${({ isMargin }) => (isMargin ? '32px' : '8px')};
+  padding:20px 28px;
   border-radius: ${({ orderCheck }) =>
     orderCheck === 'meFirst'
-      ? '30px 30px 5px 30px'
+      ? '35px 25px 5px 35px'
       : orderCheck === 'meLast'
-      ? '30px 5px 30px 30px'
+      ? '35px 5px 25px 35px'
       : orderCheck === 'first'
-      ? '30px 30px 30px 5px'
+      ? '25px 35px 35px 5px'
       : orderCheck === 'last'
-      ? '5px 30px 30px 30px'
+      ? '5px 35px 35px 25px'
       : orderCheck === 'middle'
-      ? '10px 30px 30px 10px'
-      : '30px 10px 10px 30px'};
+      ? '5px 35px 35px 5px'
+      : '35px 5px 5px 35px'};
 `;
 export default MessageBox;
