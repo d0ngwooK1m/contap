@@ -12,7 +12,7 @@ import {
   SIGNUP_DONE,
   ALARM_CHECK,
 } from './types';
-import { setChatNoti } from '../notice/actions';
+import { setChatNoti, setContapNoti } from '../notice/actions';
 import { saveToken, removeToken } from '../../utils/auth';
 import tokenAxios from '../../api/tokenInstance';
 import { history } from '../configureStore';
@@ -125,9 +125,12 @@ const loginToServer = (loginInfo) => async (dispatch) => {
     const res = await axios.post(`${baseURL}/user/login`, loginInfo);
     const { data } = res;
     console.log('로그인 res =====>', res);
-    console.log('로그인 data =====>', data);
-    if (data.alarm === 'true') {
+    console.log('로그인 data =====>', data.CHAT);
+    if (data.CHAT !== '0') {
       dispatch(setChatNoti(true));
+    }
+    if (data.ACCEPT_TAP !== '0' || data.TAP_RECEIVE !== '0') {
+      dispatch(setContapNoti(true));
     }
     if (data.result === 'fail') {
       console.log(data);

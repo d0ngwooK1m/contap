@@ -6,6 +6,7 @@ import { Text } from '../elements';
 import {
   loadCurrentRoom,
   closeNoneTalkRoomList,
+  loadTalkRoomListToAxios,
 } from '../features/chat/actions';
 import BasicProfile from '../assets/image/basicProfile.png';
 import { ColorStyle } from '../utils/systemDesign';
@@ -16,6 +17,7 @@ const ChatRoom = ({ userId }) => {
   const dispatch = useDispatch();
   const roomInfo = useSelector((state) => state.chat.byId[userId]);
   const currentRoom = useSelector((state) => state.chat.current);
+  const userInfo =useSelector((state)=>state.user)
   const lastMessage = roomInfo.roomStatus?.split('/')[2];
   const openCheck = currentRoom.userId === roomInfo.userId;
 
@@ -24,8 +26,27 @@ const ChatRoom = ({ userId }) => {
       return
     }
     dispatch(closeNoneTalkRoomList());
+    dispatch(loadTalkRoomListToAxios())
     dispatch(loadCurrentRoom(roomInfo));
   };
+  const readCheck = roomInfo.roomStatus.split('/')[0]
+  console.log(currentRoom)
+  
+  
+  console.log(userInfo)
+  const isRead = () => {
+    if (openCheck) {
+      return true
+    }
+    if (readCheck === userInfo.email) {
+      return true;
+    }
+    if (readCheck !== '@@') {
+      return false;
+    } return true;
+  }
+
+  
 
   return (
     <>
@@ -47,7 +68,7 @@ const ChatRoom = ({ userId }) => {
             <Text regular16>1시간전</Text>
           </div>
           <div className="message">
-            <Text regular20>{lastMessage !== NONE_MESSAGE && lastMessage}</Text>
+            <Text regular20 color={isRead() ? ColorStyle.Gray100 : ColorStyle.Gray500}>{lastMessage !== NONE_MESSAGE && lastMessage}</Text>
           </div>
         </div>
       </Wrap>

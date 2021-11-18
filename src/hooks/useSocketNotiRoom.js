@@ -35,35 +35,34 @@ export default function useSocketNotiRoom() {
       ws.connect({}, () => {
         ws.subscribe(
           `/user/sub/user`,
-          async (noti) => {
-            if (!isChatNoti) {
-              const newNoti = JSON.parse(noti.body);
+          (noti) => {
+            const newNoti = JSON.parse(noti.body);
 
-              // chat 보냈을 때 채팅방에 둘다 있을 때 타입 0
-              // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 1
-              // chat 보냈을 때 상대방이 로그아웃 타입 2
-              // tap 요청 받았을 때 타입 3
-              // tap 요청 거절한게 타입 4
-              // tap 요청 수락한게 타입 5
-              if (newNoti.type === 1) {
-                if (history.location.pathname === '/grabtalk') {
-                  console.log('디패 로드 톡룸');
-                  await dispatch(loadTalkRoomListToAxios());
-                }
-                dispatch(setChatNoti(true));
+            // chat 보냈을 때 채팅방에 둘다 있을 때 타입 0
+            // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 1
+            // chat 보냈을 때 상대방이 로그아웃 타입 2
+            // tap 요청 받았을 때 타입 3
+            // tap 요청 거절한게 타입 4
+            // tap 요청 수락한게 타입 5
+            console.log(newNoti);
+            if (newNoti.type === 1) {
+              if (history.location.pathname === '/grabtalk') {
+                console.log('디패 로드 톡룸');
+                dispatch(loadTalkRoomListToAxios());
               }
-              if (newNoti.type === 3) {
-                console.log('tap 요청 받았어!');
-                dispatch(setTapReceiveNoti(true));
-              }
-              if (newNoti.type === 4) {
-                console.log('거절 되었어!');
-                dispatch(setTapRefuseNoti(true));
-              }
-              if (newNoti.type === 5) {
-                console.log('그랩되었어!');
-                dispatch(setTapAcceptNoti(true));
-              }
+              dispatch(setChatNoti(true, newNoti.roomId));
+            }
+            if (newNoti.type === 3) {
+              console.log('tap 요청 받았어!');
+              dispatch(setTapReceiveNoti(true));
+            }
+            if (newNoti.type === 4) {
+              console.log('거절 되었어!');
+              dispatch(setTapRefuseNoti(true));
+            }
+            if (newNoti.type === 5) {
+              console.log('그랩되었어!');
+              dispatch(setTapAcceptNoti(true));
             }
           },
           { token, userEmail: data.email },
