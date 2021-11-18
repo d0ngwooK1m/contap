@@ -21,6 +21,7 @@ import {
   DELETE_HOBBY,
   // IS_SUCCESS,
 } from './types';
+import { DraftsRounded } from '@mui/icons-material';
 
 const initialState = {
   byId: {},
@@ -141,6 +142,11 @@ export default handleActions(
       }),
     [SET_STACK]: (state, action) =>
       produce(state, (draft) => {
+        console.log(Array.isArray(action.payload.stack));
+        if (Array.isArray(action.payload.stack)) {
+          draft.stack = action.payload.stack;
+          return 
+        }
         if (draft.stack.length !== 0) {
           draft.stack.shift();
         }
@@ -154,6 +160,11 @@ export default handleActions(
       }),
     [SET_HOBBY]: (state, action) =>
       produce(state, (draft) => {
+        console.log(Array.isArray(action.payload.hobby));
+        if (Array.isArray(action.payload.hobby)) {
+          draft.hobby = action.payload.hobby;
+          return 
+        }
         if (draft.hobby.length === 3) {
           draft.hobby.shift();
           draft.hobby.push(action.payload.hobby);
