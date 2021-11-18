@@ -18,10 +18,7 @@ export const setBeforeContapNoti = createAction(
     isNoti,
   }),
 );
-export const setChatNoti = createAction(CHAT_NOTI, (isNoti, roomId) => ({
-  isNoti,
-  roomId,
-}));
+export const setChatNoti = createAction(CHAT_NOTI, (isNoti) => ({ isNoti }));
 export const setContapNoti = createAction(CONTAP_NOTI, (isNoti) => ({
   isNoti,
 }));

@@ -18,7 +18,6 @@ const initialState = {
   isTapReceiveNoti: false,
   isTapAcceptNoti: false,
   isTapRefuseNoti: false,
-  chatRoomNoti: [],
 };
 
 export default handleActions(
@@ -37,9 +36,7 @@ export default handleActions(
       }),
     [CHAT_NOTI]: (state, action) =>
       produce(state, (draft) => {
-        const { roomId, isNoti } = action.payload;
-        draft.isChatNoti = isNoti;
-        draft.chatRoomNoti.push(roomId);
+        draft.isChatNoti = action.payload.isNoti;
       }),
     [TAP_RECEIVE_NOTI]: (state, action) =>
       produce(state, (draft) => {
