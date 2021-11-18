@@ -1,41 +1,65 @@
 /* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { ColorStyle } from '../../utils/systemDesign';
 import { Text } from '../../elements';
+import ChatInfinityScroll from './ChatInfinityScroll';
+import {nextPageToAxios } from '../../features/chat/actions'
 
-const MessageBox = () => {
+const MessageBox = ({ roomId }) => {
+  const dispatch = useDispatch()
   const messageList = useSelector((state) => state.chat.messages);
   const userInfo = useSelector((state) => state.user.email);
   const scrollRef = React.useRef();
+  const page = messageList.length !== 0 ? messageList[0].id : null;
+  const isNext = messageList.length < 15 ? false : true
+  const [prevHeight, setPrevHeight] = React.useState(null);
 
+  console.log(page);
   const scrollToBottom = () => {
-    console.log('실행 됨');
-    console.log(scrollRef.current.scrollHeight);
-    console.log(scrollRef.current.scrollTop);
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    // scrollRef.current.scrollIntoView({
-    //   behavior: 'smooth',
-    //   block: 'end',
-    //   inline: 'nearest',
-    // });
   };
-  console.log(messageList);
-  console.log('메시지 박스 열림');
+
   React.useEffect(() => {
-    scrollToBottom();
-  }, [messageList.length]);
+    if (prevHeight) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
+      console.log(prevHeight, scrollRef.current.scrollHeight);
+      return setPrevHeight(null);
+    } else {
+      scrollRef.current.scrollTop =
+        scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
+    }
+    // scrollToBottom();
+  }, [messageList]);
+
+  const callNext = () => {
+    if (isNext === false) {
+      return;
+    }
+    console.log(page)
+    dispatch(nextPageToAxios(roomId, page));
+  };
+
   return (
+    <ChatInfinityScroll
+    callNext={callNext}
+    isNext={isNext}
+    // loading={is_loading}
+      scrollTo={scrollRef}
+      prevHeight={prevHeight}
+    setPrevHeight={setPrevHeight}
+    >
       <ChatMessageBox ref={scrollRef}>
         {messageList?.map((msg, i) => {
           return (
-            <Speechbubble key={i} isMe={msg.writer === userInfo}>
-              <Text regular16>{msg.message}</Text>
-            </Speechbubble>
-          );
+              <Speechbubble key={i} isMe={msg.writer === userInfo}>
+                <Text regular16>{msg.message}</Text>
+              </Speechbubble>
+            )
         })}
       </ChatMessageBox>
+    </ChatInfinityScroll>
   );
 };
 
@@ -44,7 +68,7 @@ const ChatMessageBox = styled.div`
   position: absolute;
   bottom: 72px;
   width: 700px;
-  max-height: 600px;
+  max-height: 670px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     margin-left: 30px;
