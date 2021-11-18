@@ -16,7 +16,7 @@ const AlarmForm = () => {
   const switchInfo = useSelector((state) => state.user.alarm);
   const [switchChange, setSwitchChange] = React.useState(switchInfo);
   console.log('리덕스 알람 정보 ===>', switchInfo);
-  // const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [phoneNumber, setPhoneNumber] = React.useState('');
 
   const {
     register,
@@ -29,6 +29,7 @@ const AlarmForm = () => {
     const res = await T.GET('/setting/getPhoneNumber');
     const { data } = res;
     console.log(data);
+    setPhoneNumber(data);
   }, [])
 
   const sendPhoneNumber = async(phoneNumber) => {
@@ -118,10 +119,10 @@ const AlarmForm = () => {
               //   message: '번호가 올바르지 않습니다',
               // },
             })}
-            // onChange={(e) => {
-            //   setPhoneNumber(e.target.value);
-            // }}
-            // value={phoneNumber}
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+            }}
+            value={phoneNumber}
           />
         </label>
         {errors.phoneNumber && <ErrorMessage>{errors.phoneNumber.message}</ErrorMessage>}

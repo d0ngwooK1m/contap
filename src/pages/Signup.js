@@ -26,6 +26,7 @@ const Signup = () => {
   const [certificationNum, setCertificationNum] = React.useState('');
   const [emailDupCheck, setEmailDupCheck] = React.useState(true);
   const [authNumCheck, setAuthNumCheck] = React.useState(true);
+  const [signup, setSignup] = React.useState('');
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
   const isAuthNumChecked = useSelector((state) => state.user.isAuthNumChecked);
   const checkedEmail = useSelector((state) => state.user.checkedEmail);
@@ -83,14 +84,16 @@ const Signup = () => {
       const { data } = res;
       console.log(data);
 
-      if (data.result === 'fail') {
-        console.log(data);
-        Swal.fire({
-          icon: 'error',
-          title: '실패',
-          text: `${data.errorMessage}`,
-        });
-        return data;
+      // if (data.result === 'fail') {
+      //   console.log(data);
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: '실패',
+      //     text: `${data.errorMessage}`,
+      //   });
+
+      if (data.errorMessage) {
+        return setSignup(data.errorMessage);
       }
 
       dispatch(signupDone());
@@ -210,6 +213,7 @@ const Signup = () => {
                         {errors.pw && (
                           <ErrorMessage>{errors.pw.message}</ErrorMessage>
                         )}
+                        {signup !== '' && <ErrorMessage>{signup}</ErrorMessage>}
                       </label>
                     </MarginWrapper5>
 

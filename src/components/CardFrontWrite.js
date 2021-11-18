@@ -10,7 +10,7 @@ import {
   deleteStack,
   deleteHobby,
   updateStack,
-  updateAllHobby,
+  updateHobby,
   loadMyCardDB,
 } from '../features/cards/actions';
 // import { history } from '../features/configureStore';
@@ -44,11 +44,24 @@ const CardFrontWrite = () => {
     ?.split('@')
     .slice(1, 2);
   console.log('앞면 태그확인====>', stackTag);
+  
   const hobbyTag = userInfo.hashTagsString
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
   console.log('앞면 관심사 태그확인====>', hobbyTag);
+  
+
+  React.useEffect(() => {
+    // if (stackTag?.length !== 0 && stackTag[0] !== '') {
+    //   dispatch(updateStack(stackTag));
+    // }
+    // if (hobbyTag?.length !== 0 && hobbyTag[hobbyTag?.length - 1] !== '') {
+    //   dispatch(updateHobby(hobbyTag));
+    // }
+    dispatch(updateStack(stackTag));
+    dispatch(updateHobby(hobbyTag));
+  }, [userInfo])
 
   // if (stackTag !== undefined) {
   //   dispatch(updateStack(stackTag[0]));
@@ -271,7 +284,7 @@ const CardFrontWrite = () => {
           <Text bold20 color="#f5f3f8">
             스택/툴
           </Text>
-          {stack.length !== 0 ? (
+          {/* {stack.length !== 0 ? (
             <HashStackTag
               type="button"
               onClick={() => {
@@ -291,14 +304,25 @@ const CardFrontWrite = () => {
             >
               {stackTag}
             </HashStackTag>
-          )}
+          )} */}
+          {stack.length !== 0 &&
+            <HashStackTag
+              type="button"
+              onClick={() => {
+                dispatch(deleteStack(stack));
+              }}
+            >
+              {console.log('stack is exist')}
+              {stack}
+            </HashStackTag>
+          }
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
           <Text bold20 color="#f5f3f8">
             관심사
           </Text>
           <HashTagDiv>
-            {hobby.length !== 0
+            {/* {hobby.length !== 0
               ? hobby.map((val) => {
                   {
                     console.log(val);
@@ -330,7 +354,26 @@ const CardFrontWrite = () => {
                       {val}
                     </HashTag>
                   );
-                })}
+                })} */}
+            {
+              hobby.length !== 0 &&
+              hobby.map((val) => {
+                {
+                  console.log(val);
+                }
+                return (
+                  <HashTag
+                    type="button"
+                    onClick={() => {
+                      dispatch(deleteHobby(val));
+                    }}
+                    key={val}
+                  >
+                    {val}
+                  </HashTag>
+                );
+              })
+            }
           </HashTagDiv>
         </Grid>
       </TagDiv>
