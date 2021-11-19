@@ -2,10 +2,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 // import { Grid, Input, Button } from '../elements';
 import { Margin } from '@mui/icons-material';
-import { passwordChangeToServer } from '../features/user/actions';
+// import { passwordChangeToServer } from '../features/user/actions';
+import T from '../api/tokenInstance';
+import Swal from 'sweetalert2';
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 import { Text } from '../elements';
 
@@ -13,11 +16,53 @@ const PwSettingForm = () => {
   // useEffect = (() => {
 
   // }, [])
-
-  const dispatch = useDispatch();
+  const history = useHistory();
+  // const dispatch = useDispatch();
   // const [pw, setPw] = React.useState('');
   // const [newPw, setNewPw] = React.useState('');
   // const [checkNewPw, setCheckNewPw] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  const passwordChangeToServer = async(passwordInfo)  => {
+    try {
+      const res = await T.POST('/setting/password', passwordInfo);
+  
+      const { data } = res;
+      console.log(data);
+  
+      // if (data.result === 'fail') {
+      //   console.log(data);
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: '비밀번호 변경 실패',
+      //     text: `${data.errorMessage}`,
+      //   });
+      //   return data;
+      // }
+      if (data.result === 'fail') {
+        console.log(data);
+        if (data.errorMessage === null) {
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+        } else {
+          setErrorMessage(data.errorMessage);
+        }
+        return data;
+      }
+  
+      if (data.result === 'success') {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: '비밀번호 변경 성공!',
+        });
+        history.push('/');
+        return data;
+      }
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
 
   const {
     register,
@@ -38,9 +83,10 @@ const PwSettingForm = () => {
         </Text>
       </MarginWrapper>
       <form
-        onSubmit={handleSubmit((passwordInfo) => {
+        onSubmit={handleSubmit(async (passwordInfo) => {
+          await setErrorMessage('');
           console.log(passwordInfo);
-          dispatch(passwordChangeToServer(passwordInfo));
+          passwordChangeToServer(passwordInfo);
         })}
       >
         <MarginWrapper>
@@ -111,7 +157,8 @@ const PwSettingForm = () => {
               })}
             />
           </label>
-          {errors.newPwCheck && <ErrorMessage>{errors.newPwCheck.message}</ErrorMessage>}
+        {errors.newPwCheck && <ErrorMessage>{errors.newPwCheck.message}</ErrorMessage>}
+        {!errors.currentPw && !errors.newPw && !errors.newPwCheck && errorMessage !== '' && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <br />
         <SubmitWrapper>
           <SubmitInput type="submit" value="변경 완료" />

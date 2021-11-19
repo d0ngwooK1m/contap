@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
-import Swal from 'sweetalert2';
+// import axios from 'axios';
+// import Swal from 'sweetalert2';
 import {
   WITHDRAWAL,
   LOG_IN,
@@ -12,10 +12,10 @@ import {
   SIGNUP_DONE,
   ALARM_CHECK,
 } from './types';
-import { setChatNoti, setContapNoti } from '../notice/actions';
-import { saveToken, removeToken } from '../../utils/auth';
-import tokenAxios from '../../api/tokenInstance';
-import { history } from '../configureStore';
+// import { setChatNoti, setContapNoti } from '../notice/actions';
+// import { saveToken, removeToken } from '../../utils/auth';
+// import tokenAxios from '../../api/tokenInstance';
+// import { history } from '../configureStore';
 
 // 나중에 백엔드 URL로 바꿀 것
 const baseURL = process.env.REACT_APP_SERVER_URI;
@@ -120,103 +120,100 @@ const alarmCheck = (alarmInfo) => ({
 //   }
 // };
 
-const loginToServer = (loginInfo) => async (dispatch) => {
-  try {
-    const res = await axios.post(`${baseURL}/user/login`, loginInfo);
-    const { data } = res;
-    console.log('로그인 res =====>', res);
-    console.log('로그인 data =====>', data.CHAT);
-    if (data.CHAT !== '0') {
-      dispatch(setChatNoti(true));
-    }
-    if (data.ACCEPT_TAP !== '0' || data.TAP_RECEIVE !== '0') {
-      dispatch(setContapNoti(true));
-    }
-    if (data.result === 'fail') {
-      console.log(data);
-      Swal.fire({
-        icon: 'error',
-        title: '로그인 실패',
-        text: `${data.errorMessage}`,
-      });
-      return data;
-    }
+// const loginToServer = (loginInfo) => async (dispatch) => {
+//   try {
+//     const res = await axios.post(`${baseURL}/user/login`, loginInfo);
+//     const { data } = res;
+//     console.log('로그인 res =====>', res);
+//     console.log('로그인 data =====>', data.CHAT);
+//     if (data.CHAT !== '0') {
+//       dispatch(setChatNoti(true));
+//     }
+//     if (data.ACCEPT_TAP !== '0' || data.TAP_RECEIVE !== '0') {
+//       dispatch(setContapNoti(true));
+//     }
+//     if (data.result === 'fail') {
+//       console.log(data);
+//       Swal.fire({
+//         icon: 'error',
+//         title: '로그인 실패',
+//         text: `${data.errorMessage}`,
+//       });
+//       return data;
+//     }
 
-    // console.log(data);
-    const userInfo = {
-      email: data.email,
-      userName: data.userName,
-    };
+//     // console.log(data);
+//     const userInfo = {
+//       email: data.email,
+//       userName: data.userName,
+//     };
 
-    dispatch(login(userInfo));
-    saveToken(data?.token);
-    history.push('/');
-    return data;
-  } catch (error) {
-    console.log(error);
-    throw new Error(error.message);
-  }
-};
+//     dispatch(login(userInfo));
+//     saveToken(data?.token);
+//     history.push('/');
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error(error.message);
+//   }
+// };
 
-const passwordChangeToServer = (passwordInfo) => async () => {
-  try {
-    const res = await tokenAxios.POST(
-      `${baseURL}/setting/password`,
-      passwordInfo,
-    );
+// const passwordChangeToServer = (passwordInfo) => async () => {
+//   try {
+//     const res = await tokenAxios.POST('/setting/password', passwordInfo);
 
-    const { data } = res;
-    console.log(data);
+//     const { data } = res;
+//     console.log(data);
 
-    if (data.result === 'fail') {
-      console.log(data);
-      Swal.fire({
-        icon: 'error',
-        title: '비밀번호 변경 실패',
-        text: `${data.errorMessage}`,
-      });
-      return data;
-    }
+//     if (data.result === 'fail') {
+//       console.log(data);
+//       Swal.fire({
+//         icon: 'error',
+//         title: '비밀번호 변경 실패',
+//         text: `${data.errorMessage}`,
+//       });
+//       return data;
+//     }
 
-    if (data.result === 'success') {
-      console.log(data);
-      Swal.fire({
-        icon: 'success',
-        title: '비밀번호 변경 성공!',
-      });
-      history.push('/');
-      return data;
-    }
-    return data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
+//     if (data.result === 'success') {
+//       console.log(data);
+//       Swal.fire({
+//         icon: 'success',
+//         title: '비밀번호 변경 성공!',
+//       });
+//       history.push('/');
+//       return data;
+//     }
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
 
-const withdrawalToServer = (passwordInfo) => async (dispatch) => {
-  try {
-    const res = await tokenAxios.WITHDRAWAL(baseURL, passwordInfo);
+// const withdrawalToServer = (passwordInfo) => async (dispatch) => {
+//   try {
+//     const res = await tokenAxios.POST('/setting/withdrawal', passwordInfo);
 
-    const { data } = res;
-    console.log(data);
+//     const { data } = res;
+//     console.log(data);
 
-    if (data.result === 'fail') {
-      console.log(data);
-      Swal.fire({
-        icon: 'error',
-        title: '탈퇴 실패',
-        text: `${data.errorMessage}`,
-      });
+//     if (data.result === 'fail') {
+//       console.log(data);
+//       Swal.fire({
+//         icon: 'error',
+//         title: '탈퇴 실패',
+//         text: `${data.errorMessage}`,
+//       });
 
-      return data;
-    }
-    removeToken();
-    window.location.href = '/';
-    return data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-};
+//       return data;
+//     }
+//     removeToken();
+//     window.location.href = '/';
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
 
 export {
   login,
@@ -228,9 +225,9 @@ export {
   // sendEmailAuth,
   // sendAuthInfo,
   // signupToServer,
-  loginToServer,
-  passwordChangeToServer,
-  withdrawalToServer,
+  // loginToServer,
+  // passwordChangeToServer,
+  // withdrawalToServer,
   authorize,
   emailAuth,
 };

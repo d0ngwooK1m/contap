@@ -23,10 +23,10 @@ const Signup = () => {
   // const [isAuth, setIsAuth] = React.useState(false);
   // const [authNum, setAuthNum] = React.useState();
   const [content, setContent] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
   const [certificationNum, setCertificationNum] = React.useState('');
   const [emailDupCheck, setEmailDupCheck] = React.useState(true);
   const [authNumCheck, setAuthNumCheck] = React.useState(true);
-  const [signup, setSignup] = React.useState('');
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
   const isAuthNumChecked = useSelector((state) => state.user.isAuthNumChecked);
   const checkedEmail = useSelector((state) => state.user.checkedEmail);
@@ -92,8 +92,18 @@ const Signup = () => {
       //     text: `${data.errorMessage}`,
       //   });
 
-      if (data.errorMessage) {
-        return setSignup(data.errorMessage);
+      // if (data.errorMessage) {
+      //   return setSignup(data.errorMessage);
+      // }
+
+      if (data.result === 'fail') {
+        console.log(data);
+        if (data.errorMessage === null) {
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
+        } else {
+          setErrorMessage(data.errorMessage);
+        }
+        return data;
       }
 
       dispatch(signupDone());
@@ -143,7 +153,7 @@ const Signup = () => {
             <SvgWrapper>
               <Onboard2Svg />
             </SvgWrapper>
-              {/* <Onboard2Svg /> */}
+            {/* <Onboard2Svg /> */}
           </LeftWrapper>
           <RightWrapper>
             <FormWrapper>
@@ -159,7 +169,8 @@ const Signup = () => {
                     <br /> 컨탭 회원가입을 진행합니다.
                   </Text>
                   <form
-                    onSubmit={handleSubmit((info) => {
+                    onSubmit={handleSubmit(async (info) => {
+                      await setErrorMessage('');
                       console.log(info);
                       const signupInfo = {
                         email: checkedEmail,
@@ -213,7 +224,6 @@ const Signup = () => {
                         {errors.pw && (
                           <ErrorMessage>{errors.pw.message}</ErrorMessage>
                         )}
-                        {signup !== '' && <ErrorMessage>{signup}</ErrorMessage>}
                       </label>
                     </MarginWrapper5>
 
@@ -241,6 +251,11 @@ const Signup = () => {
                         {errors.pwCheck && (
                           <ErrorMessage>{errors.pwCheck.message}</ErrorMessage>
                         )}
+                        {!errors.userName &&
+                          !errors.pw &&
+                          !errors.pwCheck && errorMessage !== '' && (
+                            <ErrorMessage>{errorMessage}</ErrorMessage>
+                          )}
                       </label>
                     )}
 
@@ -268,7 +283,8 @@ const Signup = () => {
                   <Text color={ColorStyle.Gray500} bold20>
                     반갑습니다!
                     <br />
-                    회원가입 전에 이메일 인증을 해야합니당.
+                    회원가입 전에 이메일 인증을 해주세요. 다음 단계로 넘어가기
+                    까지 시간이 걸릴 수 있습니다.
                   </Text>
                   <form
                     onSubmit={handleSubmit((emailInfo) => {
@@ -298,7 +314,7 @@ const Signup = () => {
                       {errors.email && (
                         <ErrorMessage>{errors.email.message}</ErrorMessage>
                       )}
-                      {!emailDupCheck && (
+                      {!errors.email && !emailDupCheck && (
                         <ErrorMessage>
                           이미 사용 중인 이메일 입니다.
                         </ErrorMessage>
@@ -318,7 +334,7 @@ const Signup = () => {
                   <Text color={ColorStyle.Gray500} bold20>
                     반갑습니다!
                     <br />
-                    회원가입 전에 이메일 인증을 해야합니당.
+                    회원가입 전에 이메일 인증을 해야합니다. 메일이 오지 않는다면 아래 버튼을 클릭해주세요.
                     <br />
                     현재 인증번호를 보낸 메일: <span>{checkedEmail}</span>
                   </Text>
@@ -359,8 +375,12 @@ const Signup = () => {
                           <ErrorMessage>
                             {errors.certificationNumber.message}
                           </ErrorMessage>
-                              )}
-                              {!authNumCheck && <ErrorMessage>인증번호가 일치하지 않습니다.</ErrorMessage>}
+                        )}
+                        {!errors.certificationNumber && !authNumCheck && (
+                          <ErrorMessage>
+                            인증번호가 일치하지 않습니다.
+                          </ErrorMessage>
+                        )}
                       </label>
                     </MarginWrapper>
                     <MarginWrapper2>
@@ -430,7 +450,7 @@ const SignupWrapper = styled.div`
 const LeftWrapper = styled.div`
   width: 735px;
   height: 1080px;
-  background: linear-gradient(153.56deg, #8C4DFF 0%, rgba(29, 29, 34, 0) 25%);
+  background: linear-gradient(153.56deg, #8c4dff 0%, rgba(29, 29, 34, 0) 25%);
   background-color: rgba(0, 0, 0, 0.5);
   position: relative;
 `;
