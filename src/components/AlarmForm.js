@@ -32,7 +32,11 @@ const AlarmForm = () => {
     const res = await T.GET('/setting/getPhoneNumber');
     const { data } = res;
     console.log(data);
-    setPhoneNumber(data);
+    if (data === null) {
+      setPhoneNumber('');
+    } else {
+      setPhoneNumber(data);
+    }
   }, [phoneNumberInfo]);
 
   const handleChange = (e) => {

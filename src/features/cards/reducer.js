@@ -17,7 +17,7 @@ import {
   SET_STACK,
   DELETE_STACK,
   SET_HOBBY,
-  SET_ALL_HOBBY,
+  // SET_ALL_HOBBY,
   DELETE_HOBBY,
   // IS_SUCCESS,
 } from './types';
@@ -172,10 +172,10 @@ export default handleActions(
           draft.hobby.push(action.payload.hobby);
         }
       }),
-    [SET_ALL_HOBBY]: (state, action) =>
-      produce(state, (draft) => {
-        draft.hobby = action.payload.hobby;
-      }),
+    // [SET_ALL_HOBBY]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.hobby = action.payload.hobby;
+    //   }),
     [DELETE_HOBBY]: (state, action) =>
       produce(state, (draft) => {
         if (draft.hobby.length >= 1) {

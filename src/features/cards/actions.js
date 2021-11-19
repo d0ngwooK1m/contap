@@ -23,7 +23,7 @@ import {
   SET_STACK,
   DELETE_STACK,
   SET_HOBBY,
-  SET_ALL_HOBBY,
+  // SET_ALL_HOBBY,
   DELETE_HOBBY,
   // IS_SUCCESS,
 } from './types';
@@ -74,9 +74,9 @@ export const deleteStack = createAction(DELETE_STACK, () => ({}));
 export const updateHobby = createAction(SET_HOBBY, (hobby) => ({
   hobby,
 }));
-export const updateAllHobby = createAction(SET_ALL_HOBBY, (hobbyArr) => ({
-  hobbyArr,
-}));
+// export const updateAllHobby = createAction(SET_ALL_HOBBY, (hobbyArr) => ({
+//   hobbyArr,
+// }));
 export const deleteHobby = createAction(DELETE_HOBBY, (hobby) => ({
   hobby,
 }));

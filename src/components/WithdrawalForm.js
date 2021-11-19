@@ -183,7 +183,7 @@ const WithdrawalForm = () => {
       >
         <label>
           <Text color={ColorStyle.Gray300} regular20>
-            한번 더 입력해주세요
+            비밀번호를 입력해주세요
           </Text>
           <StyledInput
             type="password"
