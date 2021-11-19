@@ -1,11 +1,15 @@
 import React from 'react';
 import Joyride from 'react-joyride';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-// import T from '../api/tokenInstance';
+import {
+  profileTutorialCheck,
+  phoneTutorialCheck,
+} from '../features/user/actions';
+import T from '../api/tokenInstance';
 
 const TutorialForm = ({ steps, page }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleJoyRideCallback = React.useCallback(
     async (data) => {
@@ -16,8 +20,13 @@ const TutorialForm = ({ steps, page }) => {
         // };
         // console.log(tutorialInfo);
         console.log('넘어가는 페이지===>', page);
-        // await T.POST(`/main/tutorial?tutorialNum=${page}`);
-        // dispatch()
+        await T.POST(`/main/tutorial?tutorialNum=${page}`);
+        if (page === 1) {
+          dispatch(profileTutorialCheck(true));
+        }
+        if (page === 0) {
+          dispatch(phoneTutorialCheck(true));
+        }
       }
     },
     [page],

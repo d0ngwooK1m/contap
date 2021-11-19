@@ -13,3 +13,5 @@ export const AUTHORIZED = 'user/AUTHORIZED';
 export const ALARM_CHECK = 'user/ALARM_CHECK';
 export const SETTING_ALARM = 'user/SETTING_ALARM';
 export const SETTING_PHONENUM = 'user/SETTING_PHONENUM';
+export const PROFILE_TUTORIAL = 'user/PROFILE_TUTORIAL';
+export const PHONE_TUTORIAL = 'user/PHONE_TUTORIAL';

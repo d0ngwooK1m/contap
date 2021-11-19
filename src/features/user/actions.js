@@ -13,6 +13,8 @@ import {
   ALARM_CHECK,
   SETTING_ALARM,
   SETTING_PHONENUM,
+  PROFILE_TUTORIAL,
+  PHONE_TUTORIAL,
 } from './types';
 // import { setChatNoti, setContapNoti } from '../notice/actions';
 // import { saveToken, removeToken } from '../../utils/auth';
@@ -74,6 +76,19 @@ const settingPhoneNum = (settingPhoneInfo) => ({
   type: SETTING_PHONENUM,
   settingPhoneInfo,
 });
+
+const profileTutorialCheck = (profileInfo) => ({
+  type: PROFILE_TUTORIAL,
+  profileInfo,
+});
+
+const phoneTutorialCheck = (phoneInfo) => ({
+  type: PHONE_TUTORIAL,
+  phoneInfo,
+});
+
+// const phoneTutorialCheck = (tutorialInfo) => ({
+// });
 
 // const sendEmailAuth = (emailInfo) => async (dispatch) => {
 //   try {
@@ -236,6 +251,8 @@ export {
   alarmCheck,
   settingAlarm,
   settingPhoneNum,
+  profileTutorialCheck,
+  phoneTutorialCheck,
   // sendEmailAuth,
   // sendAuthInfo,
   // signupToServer,
