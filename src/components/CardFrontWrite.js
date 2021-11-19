@@ -13,10 +13,16 @@ import {
   updateHobby,
   loadMyCardDB,
 } from '../features/cards/actions';
-// import { history } from '../features/configureStore';
 
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
-import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+import BasicProfile from '../assets/image/Profile.svg';
+
+import {
+  FontFamily,
+  FontScale,
+  ColorStyle,
+  Opacity,
+} from '../utils/systemDesign';
 import { Grid, Text } from '../elements';
 
 const CardFrontWrite = () => {
@@ -27,8 +33,6 @@ const CardFrontWrite = () => {
   const userInfo = useSelector((state) => state.cards.current);
   console.log('카테고리 확인===>', userInfo.field);
   console.log('유저정보 확인===>', userInfo);
-  // const user = useSelector((state) => state.user);
-  // console.log('유저 확인===>', user);
 
   const [userName, setUserName] = React.useState(
     () => JSON.parse(localStorage.getItem('nick')) || userInfo.userName,
@@ -37,20 +41,17 @@ const CardFrontWrite = () => {
     () => JSON.parse(localStorage.getItem('category')) || userInfo.field,
   );
   console.log('유저 닉네임 확인===>', userName);
-  // console.log(stack, hobby);
-  // console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
-  const stackTag = userInfo.hashTagsString
-    ?.split('_')[0]
-    ?.split('@')
-    .slice(1, 2);
+
+  const stackTag = userInfo.hashTagsString?.split('_')[0]?.split('@')[1];
+  // .slice(1, 2);
+  console.log('앞면 태그확인====>', userInfo.hashTagsString?.split('_')[0]);
   console.log('앞면 태그확인====>', stackTag);
-  
+
   const hobbyTag = userInfo.hashTagsString
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
   console.log('앞면 관심사 태그확인====>', hobbyTag);
-  
 
   React.useEffect(() => {
     // if (stackTag?.length !== 0 && stackTag[0] !== '') {
@@ -61,7 +62,7 @@ const CardFrontWrite = () => {
     // }
     dispatch(updateStack(stackTag));
     dispatch(updateHobby(hobbyTag));
-  }, [userInfo])
+  }, [userInfo]);
 
   // if (stackTag !== undefined) {
   //   dispatch(updateStack(stackTag[0]));
@@ -133,15 +134,16 @@ const CardFrontWrite = () => {
     console.log(file);
     const formData = new FormData();
     formData.append('userName', userName);
-    if (stack.length !== 0 && hobby.length !== 0) {
-      formData.append('hashTagsStr', stack + ',' + hobby);
-    } else if (stack.length === 0 && hobby.length !== 0) {
-      formData.append('hashTagsStr', stackTag + ',' + hobby);
-    } else if (stack.length !== 0 && hobby.length === 0) {
-      formData.append('hashTagsStr', stack + ',' + hobbyTag);
-    } else {
-      formData.append('hashTagsStr', stackTag + ',' + hobbyTag);
-    }
+    // console.log('입력 전 확인', stack, hobby);
+    // if (stack.length !== 0 && hobby.length !== 0) {
+    formData.append('hashTagsStr', stack + ',' + hobby);
+    // } else if (stack.length === 0 && hobby.length !== 0) {
+    //   formData.append('hashTagsStr', stack + ',' + hobby);
+    // } else if (stack.length !== 0 && hobby.length === 0) {
+    //   formData.append('hashTagsStr', stack + ',' + hobby);
+    // } else {
+    //   formData.append('hashTagsStr', stack + ',' + hobby);
+    // }
 
     formData.append('field', category);
     if (fileData) {
@@ -187,7 +189,7 @@ const CardFrontWrite = () => {
       <Div>
         <Grid margin="190px 103px 165px 0px" width="182px">
           <label htmlFor="fileUpload">
-            <Img src={preview || userInfo.profile} />
+            <Img src={preview || userInfo.profile || BasicProfile} />
           </label>
           <input
             type="file"
@@ -211,71 +213,75 @@ const CardFrontWrite = () => {
             </Text>
           </Grid>
           <Grid width="501px">
-            <label
-              htmlFor="category"
-              style={{
-                color: ColorStyle.Gray500,
-                fontSize: FontScale.Body1_20,
-                fontFamily: FontFamily,
-                fontWeight: 400,
-                marginRight: '32px',
-              }}
-            >
-              <input
-                type="radio"
-                id="categoryId"
-                name="field"
-                value="0"
-                checked={category === 0 ? true : false}
-                onChange={() => setCategory(0)}
-                style={{ marginRight: '16px' }}
-              />
-              백엔드
-            </label>
-            <label
-              htmlFor="category"
-              style={{
-                color: ColorStyle.Gray500,
-                fontSize: FontScale.Body1_20,
-                fontFamily: FontFamily,
-                fontWeight: 400,
-                marginRight: '32px',
-              }}
-            >
-              <input
-                type="radio"
-                id="categoryId"
-                name="field"
-                value="1"
-                checked={category === 1 ? true : false}
-                onChange={() => setCategory(1)}
-                style={{
-                  marginRight: '16px',
-                  backgroundColor: ColorStyle.PrimaryPurple,
-                }}
-              />
-              프론트엔드
-            </label>
-            <label
-              htmlFor="category"
-              style={{
-                color: ColorStyle.Gray500,
-                fontSize: FontScale.Body1_20,
-                fontFamily: FontFamily,
-                fontWeight: 400,
-              }}
-            >
-              <input
-                type="radio"
-                id="categoryId"
-                name="field"
-                value="2"
-                checked={category === 2 ? true : false}
-                onChange={() => setCategory(2)}
-                style={{ marginRight: '16px' }}
-              />
-              디자인
-            </label>
+            <RadioWrap>
+              <InputLabel
+                htmlFor="category"
+                // style={{
+                //   color: ColorStyle.Gray500,
+                //   fontSize: FontScale.Body1_20,
+                //   fontFamily: FontFamily,
+                //   fontWeight: 400,
+                //   marginRight: '32px',
+                // }}
+              >
+                <RadioInput
+                  type="radio"
+                  id="categoryId"
+                  name="field"
+                  value="0"
+                  checked={category === 0 ? true : false}
+                  onChange={() => setCategory(0)}
+                />
+                백엔드
+              </InputLabel>
+            </RadioWrap>
+            <RadioWrap>
+              <InputLabel
+                htmlFor="category"
+                // style={{
+                //   color: ColorStyle.Gray500,
+                //   fontSize: FontScale.Body1_20,
+                //   fontFamily: FontFamily,
+                //   fontWeight: 400,
+                //   marginRight: '32px',
+                // }}
+              >
+                <RadioInput
+                  type="radio"
+                  id="categoryId"
+                  name="field"
+                  value="1"
+                  checked={category === 1 ? true : false}
+                  onChange={() => setCategory(1)}
+                  // style={{
+                  //   marginRight: '16px',
+                  // }}
+                />
+                프론트엔드
+              </InputLabel>
+            </RadioWrap>
+            <RadioWrap>
+              <InputLabel
+                htmlFor="category"
+                // style={{
+                //   color: ColorStyle.Gray500,
+                //   fontSize: FontScale.Body1_20,
+                //   fontFamily: FontFamily,
+                //   fontWeight: 400,
+                // }}
+              >
+                <RadioInput
+                  type="radio"
+                  id="categoryId"
+                  name="field"
+                  value="2"
+                  checked={category === 2 ? true : false}
+                  onChange={() => setCategory(2)}
+                  // style={{ marginRight: '16px' }}
+                />
+                디자인
+              </InputLabel>
+            </RadioWrap>
           </Grid>
         </Grid>
       </Div>
@@ -284,6 +290,7 @@ const CardFrontWrite = () => {
           <Text bold20 color="#f5f3f8">
             스택/툴
           </Text>
+
           {/* {stack.length !== 0 ? (
             <HashStackTag
               type="button"
@@ -305,7 +312,7 @@ const CardFrontWrite = () => {
               {stackTag}
             </HashStackTag>
           )} */}
-          {stack.length !== 0 &&
+          {stack.length !== 0 && (
             <HashStackTag
               type="button"
               onClick={() => {
@@ -315,7 +322,7 @@ const CardFrontWrite = () => {
               {console.log('stack is exist')}
               {stack}
             </HashStackTag>
-          }
+          )}
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
           <Text bold20 color="#f5f3f8">
@@ -355,8 +362,7 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })} */}
-            {
-              hobby.length !== 0 &&
+            {hobby.length !== 0 &&
               hobby.map((val) => {
                 {
                   console.log(val);
@@ -372,8 +378,7 @@ const CardFrontWrite = () => {
                     {val}
                   </HashTag>
                 );
-              })
-            }
+              })}
           </HashTagDiv>
         </Grid>
       </TagDiv>
@@ -401,6 +406,7 @@ const Img = styled.img`
   margin: 5px 0px;
   width: 182px;
   height: 164px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
   border-radius: 8px;
   object-fit: cover;
 `;
@@ -422,10 +428,40 @@ const TitleBox = styled.input`
   }
 `;
 
+const RadioWrap = styled.div`
+  display: inline-flex;
+  align-items: center;
+`;
+
+const InputLabel = styled.label`
+  color: ${ColorStyle.Gray500};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 400;
+  margin-right: 32px;
+`;
+
+const RadioInput = styled.input`
+    cursor: pointer;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    margin-right: 16px;
+    background-color: ${ColorStyle.Gray300 + Opacity[30]};
+    // background: ${ColorStyle.PrimaryPurple};
+  }
+  &:checked {
+    // width: 11.85px;
+    // height: 11.85px;
+    background: ${ColorStyle.PrimaryPurple};
+  }
+`;
+
 const TagDiv = styled.div`
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: flex-start;
   width: 1110px;
   margin: 20px auto;
   padding: 78px 0px 0px 0px;

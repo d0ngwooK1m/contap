@@ -145,7 +145,7 @@ export default handleActions(
         console.log(Array.isArray(action.payload.stack));
         if (Array.isArray(action.payload.stack)) {
           draft.stack = action.payload.stack;
-          return 
+          return;
         }
         if (draft.stack.length !== 0) {
           draft.stack.shift();
@@ -163,7 +163,7 @@ export default handleActions(
         console.log(Array.isArray(action.payload.hobby));
         if (Array.isArray(action.payload.hobby)) {
           draft.hobby = action.payload.hobby;
-          return 
+          return;
         }
         if (draft.hobby.length === 3) {
           draft.hobby.shift();
