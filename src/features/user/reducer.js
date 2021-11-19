@@ -9,6 +9,8 @@ import {
   BACK_TO_PREV,
   SIGNUP_DONE,
   ALARM_CHECK,
+  SETTING_ALARM,
+  SETTING_PHONENUM,
 } from './types';
 
 const initialState = {
@@ -94,6 +96,14 @@ export default function userReducer(state = initialState, action) {
         } else {
           draft.alarm = 0;
         }
+        break;
+      }
+      case SETTING_ALARM: {
+        draft.alarm = action.settingAlarmInfo.alarmState;
+        break;
+      }
+      case SETTING_PHONENUM: {
+        draft.phoneNumber = action.settingPhoneInfo.phoneNumber;
         break;
       }
       default:

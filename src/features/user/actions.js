@@ -11,6 +11,8 @@ import {
   BACK_TO_PREV,
   SIGNUP_DONE,
   ALARM_CHECK,
+  SETTING_ALARM,
+  SETTING_PHONENUM,
 } from './types';
 // import { setChatNoti, setContapNoti } from '../notice/actions';
 // import { saveToken, removeToken } from '../../utils/auth';
@@ -61,6 +63,16 @@ const authorize = (email, userName) => ({
 const alarmCheck = (alarmInfo) => ({
   type: ALARM_CHECK,
   alarmInfo,
+});
+
+const settingAlarm = (settingAlarmInfo) => ({
+  type: SETTING_ALARM,
+  settingAlarmInfo,
+});
+
+const settingPhoneNum = (settingPhoneInfo) => ({
+  type: SETTING_PHONENUM,
+  settingPhoneInfo,
 });
 
 // const sendEmailAuth = (emailInfo) => async (dispatch) => {
@@ -222,6 +234,8 @@ export {
   authCheck,
   signupDone,
   alarmCheck,
+  settingAlarm,
+  settingPhoneNum,
   // sendEmailAuth,
   // sendAuthInfo,
   // signupToServer,

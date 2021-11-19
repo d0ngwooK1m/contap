@@ -11,3 +11,5 @@ export const AUTHORIZED = 'user/AUTHORIZED';
 // export const CAN_OTHER_READ = 'user/CAN_OTHER_READ';
 // export const ALARM = 'user/ALARM';
 export const ALARM_CHECK = 'user/ALARM_CHECK';
+export const SETTING_ALARM = 'user/SETTING_ALARM';
+export const SETTING_PHONENUM = 'user/SETTING_PHONENUM';
