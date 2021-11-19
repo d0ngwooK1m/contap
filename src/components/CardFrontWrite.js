@@ -40,7 +40,12 @@ const CardFrontWrite = () => {
   const [category, setCategory] = React.useState(
     () => JSON.parse(localStorage.getItem('category')) || userInfo.field,
   );
-  console.log('유저 닉네임 확인===>', userName);
+  // const [hobbyTag, setHobbyTag] = React.useState(() => {
+  //   JSON.parse(localStorage.getItem('tag')) ||
+  //     userInfo.hashTagsString?.split('_')[1]?.split('@').slice(1, 4);
+  // });
+  // console.log('유저 닉네임 확인===>', userName);
+  // console.log('dsadsadsa', hobbyTag);
 
   const stackTag = userInfo.hashTagsString?.split('_')[0]?.split('@')[1];
   // .slice(1, 2);
@@ -52,6 +57,23 @@ const CardFrontWrite = () => {
     ?.split('@')
     .slice(1, 4);
   console.log('앞면 관심사 태그확인====>', hobbyTag);
+  // if (hobbyTag !== undefined) {
+  //   for (let i = 0; i < hobbyTag.length; i++) {
+  //     if (hobbyTag[i] === '') {
+  //       hobbyTag.pop();
+  //     }
+  //   }
+  // }
+
+  const stackText = '스택';
+  const hobbyText = '관심사';
+
+  //let test = userInfo.hashTagsString?.split('_')[1]?.split('@').slice(1, 4);
+  //test = JSON.parse(localStorage.getItem('tag'));
+
+  // const ddd = '';
+  // const abc = hobbyTag.filter(ddd);
+  // console.log('앞면 관심사 스플릿 태그확인====>', abc);
 
   React.useEffect(() => {
     // if (stackTag?.length !== 0 && stackTag[0] !== '') {
@@ -73,6 +95,7 @@ const CardFrontWrite = () => {
 
   const stack = useSelector((state) => state.cards.stack);
   const hobby = useSelector((state) => state.cards.hobby);
+  console.log('태그 길이 확인====>', stack.length);
   console.log('태그값 확인====>', stack);
   console.log('관심사 태그값 확인====>', hobby);
   console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
@@ -154,6 +177,7 @@ const CardFrontWrite = () => {
     dispatch(editCardProfileDB(formData));
     localStorage.removeItem('nick');
     localStorage.removeItem('category');
+    localStorage.removeItem('tag');
   };
   console.log(category);
 
@@ -169,6 +193,7 @@ const CardFrontWrite = () => {
     dispatch(loadMyCardDB());
     localStorage.setItem('nick', JSON.stringify(userName));
     localStorage.setItem('category', JSON.stringify(category));
+    // localStorage.setItem('tag', JSON.stringify(hobbyTag));
   }, []);
 
   return (
@@ -214,6 +239,14 @@ const CardFrontWrite = () => {
           </Grid>
           <Grid width="501px">
             <RadioWrap>
+              <RadioInput
+                type="radio"
+                id="categoryId"
+                name="field"
+                value="0"
+                checked={category === 0 ? true : false}
+                onChange={() => setCategory(0)}
+              />
               <InputLabel
                 htmlFor="category"
                 // style={{
@@ -224,14 +257,6 @@ const CardFrontWrite = () => {
                 //   marginRight: '32px',
                 // }}
               >
-                <RadioInput
-                  type="radio"
-                  id="categoryId"
-                  name="field"
-                  value="0"
-                  checked={category === 0 ? true : false}
-                  onChange={() => setCategory(0)}
-                />
                 백엔드
               </InputLabel>
             </RadioWrap>
@@ -290,7 +315,6 @@ const CardFrontWrite = () => {
           <Text bold20 color="#f5f3f8">
             스택/툴
           </Text>
-
           {/* {stack.length !== 0 ? (
             <HashStackTag
               type="button"
@@ -312,7 +336,12 @@ const CardFrontWrite = () => {
               {stackTag}
             </HashStackTag>
           )} */}
-          {stack.length !== 0 && (
+          {stack.length === 0 || stack === '' ? (
+            <HashStackTag type="button">
+              {console.log('stack is no')}
+              {stackText}
+            </HashStackTag>
+          ) : (
             <HashStackTag
               type="button"
               onClick={() => {
@@ -323,6 +352,31 @@ const CardFrontWrite = () => {
               {stack}
             </HashStackTag>
           )}
+          {/* // {stack.length !== 0 && (
+          //   // stack[0] !== '' &&
+          //   <HashStackTag
+          //     type="button"
+          //     onClick={() => {
+          //       dispatch(deleteStack(stack));
+          //     }}
+          //   >
+          //     {console.log('stack is exist')}
+          //     {stack}
+          //   </HashStackTag>
+          // )} */}
+          {/* if(stack.length !== 0)
+          { return(
+            <HashStackTag
+              type="button"
+              onClick={() => {
+                dispatch(deleteStack(stack));
+              }}
+            >
+              {console.log('stack is exist')}
+              {stack}
+            </HashStackTag>
+           ) }
+          else if(stack.length === ""){<div> {stack}</div>}} */}
         </Grid>
         <Grid margin="0px 130px 0px 0px" width="100%">
           <Text bold20 color="#f5f3f8">
@@ -362,7 +416,22 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })} */}
-            {hobby.length !== 0 &&
+            {hobby.length === 0 || hobby === '' ? (
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <HashStackTag type="button">
+                  {console.log('stack is no')}
+                  {hobbyText}
+                </HashStackTag>
+                <HashStackTag type="button">
+                  {console.log('stack is no')}
+                  {hobbyText}
+                </HashStackTag>
+                <HashStackTag type="button">
+                  {console.log('stack is no')}
+                  {hobbyText}
+                </HashStackTag>
+              </div>
+            ) : (
               hobby.map((val) => {
                 {
                   console.log(val);
@@ -378,7 +447,8 @@ const CardFrontWrite = () => {
                     {val}
                   </HashTag>
                 );
-              })}
+              })
+            )}
           </HashTagDiv>
         </Grid>
       </TagDiv>
@@ -428,6 +498,62 @@ const TitleBox = styled.input`
   }
 `;
 
+// const RadioWrap = styled.div`
+//   display: inline-block;
+//   position: relative;
+//   padding: 0 6px;
+//   margin: 10px 0;
+// `;
+
+// const InputLabel = styled.label`
+//   color: ${ColorStyle.Gray500};
+//   font-size: ${FontScale.Body1_20};
+//   font-family: ${FontFamily};
+//   font-weight: 400;
+//   margin-right: 32px;
+//   &:before {
+//     content: ' ';
+//     display: inline-block;
+//     position: relative;
+//     top: 5px;
+//     margin: 0 5px 0 0;
+//     width: 22px;
+//     height: 22px;
+//     border-radius: 100%;
+//     background-color: ${ColorStyle.Gray300 + Opacity[30]};
+//   }
+// `;
+
+// const RadioInput = styled.input`
+//   display: none;
+//   // position: absolute;
+//   // appearance: none;
+//   // width: 22px;
+//   // height: 22px;
+//   // border-radius: 100%;
+//   // margin-right: 16px;
+//   // background-color: ${ColorStyle.Gray300 + Opacity[30]};
+//   // background: ${ColorStyle.PrimaryPurple};
+
+//   &:checked + ${InputLabel}:after {
+//     display: block;
+//     content: '';
+//     position: absolute;
+//     top: 1px;
+//     left: 5px;
+//     width: 11.85px;
+//     height: 11.85px;
+//     background: ${ColorStyle.PrimaryPurple};
+//     border-radius: 100%;
+//     // box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+//   }
+//   // &:checked {
+//   //   // width: 11.85px;
+//   //   // height: 11.85px;
+//   //   background: ${ColorStyle.PrimaryPurple};
+//   // }
+// `;
+
 const RadioWrap = styled.div`
   display: inline-flex;
   align-items: center;
@@ -455,6 +581,7 @@ const RadioInput = styled.input`
     // width: 11.85px;
     // height: 11.85px;
     background: ${ColorStyle.PrimaryPurple};
+    border: 5px solid #4b4950;
   }
 `;
 
@@ -471,7 +598,8 @@ const TagDiv = styled.div`
 const HashStackTag = styled.div`
   width: 146px;
   height: 54px;
-  margin: 18px 0px;
+  margin-top: 18px;
+  margin-right: 16px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.PrimaryPurple};
   font-size: ${FontScale.Body1_20};

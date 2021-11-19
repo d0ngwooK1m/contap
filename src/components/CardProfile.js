@@ -93,6 +93,7 @@ const DotDiv = styled.div`
   top: -70%;
   z-index: -1;
 `;
+
 const ProfileDiv = styled.div`
   width: 540px;
   height: 308px;

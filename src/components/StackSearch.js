@@ -64,9 +64,8 @@ const StackSearch = () => {
   const [click, setClick] = React.useState(false);
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.stackArr);
-  console.log('서치리스트===>', searchList);
+  // console.log('서치리스트===>', searchList);
   const stackList = useSelector((state) => state.cards.stack);
-
   const [button, setButton] = React.useState({});
   const toggleButton = (id) => {
     setButton((prevButton) => ({
