@@ -4,19 +4,58 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
 import { useForm } from 'react-hook-form';
+import T from '../api/tokenInstance';
+import { removeToken } from '../utils/auth';
 import Swal from 'sweetalert2';
 import { Grid, Text } from '../elements';
-import { withdrawalToServer } from '../features/user/actions';
+// import { withdrawalToServer } from '../features/user/actions';
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 
 const WithdrawalForm = () => {
   const dispatch = useDispatch();
   const [inputStatus, setInputStatus] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
   // const [pw, setPw] = React.useState('');
   // const [pwCheck, setPwCheck] = React.useState('');
 
   const handleClickRadioButton = (radioBtnName) => {
     setInputStatus(radioBtnName);
+  };
+
+  const withdrawalToServer = async(passwordInfo) => {
+    try {
+      const res = await T.POST('/setting/withdrawal', passwordInfo);
+  
+      const { data } = res;
+      console.log(data);
+  
+      // if (data.result === 'fail') {
+      //   console.log(data);
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: '탈퇴 실패',
+      //     text: `${data.errorMessage}`,
+      //   });
+  
+      //   return data;
+      // }
+
+      if (data.result === 'fail') {
+        console.log(data);
+        if (data.errorMessage === null) {
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+        } else {
+          setErrorMessage(data.errorMessage);
+        }
+        return data;
+      }
+
+      removeToken();
+      window.location.href = '/';
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   };
 
   const {
@@ -163,6 +202,7 @@ const WithdrawalForm = () => {
           />
         </label>
         {errors.pw && <ErrorMessage>{errors.pw.message}</ErrorMessage>}
+        {!errors.pw && errorMessage !== '' && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <br />
         <SubmitInput type="submit" value="계정 삭제" />
       </form>

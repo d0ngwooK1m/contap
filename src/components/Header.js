@@ -140,9 +140,11 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper>
-        {mypageAlarm === false ? <TutorialForm steps={mainSteps} /> : null}
+        {mypageAlarm === false ? (
+          <TutorialForm steps={mainSteps} page={1} />
+        ) : null}
         {mypageAlarm === true && settingAlarm === false ? (
-          <TutorialForm steps={settingSteps} />
+          <TutorialForm steps={settingSteps} page={0} />
         ) : null}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
         {/* <Grid

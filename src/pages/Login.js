@@ -9,6 +9,7 @@ import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { Text } from '../elements';
 import { loginToServer, login as loginAction } from '../features/user/actions';
 import { saveToken } from '../utils/auth';
+import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import {
   LoginWrapper,
   LeftWrapper,
@@ -33,6 +34,7 @@ const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const history = useHistory();
   const [login, setLogin] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const {
     register,
@@ -110,6 +112,49 @@ const Login = () => {
     return;
   }, []);
 
+  const loginToServer = async (loginInfo) => {
+    try {
+      const res = await axios.post(`${baseURL}/user/login`, loginInfo);
+      const { data } = res;
+      console.log('로그인 res =====>', res);
+      console.log('로그인 data =====>', data.CHAT);
+      if (data.CHAT !== '0') {
+        dispatch(setChatNoti(true));
+      }
+      if (data.ACCEPT_TAP !== '0' || data.TAP_RECEIVE !== '0') {
+        dispatch(setContapNoti(true));
+      }
+      if (data.result === 'fail') {
+        console.log(data);
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: '로그인 실패',
+        //   text: `${data.errorMessage}`,
+        // });
+        if (data.errorMessage === null) {
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+        } else {
+          setErrorMessage(data.errorMessage);
+        }
+        return data;
+      }
+  
+      // console.log(data);
+      const userInfo = {
+        email: data.email,
+        userName: data.userName,
+      };
+  
+      dispatch(loginAction(userInfo));
+      saveToken(data?.token);
+      history.push('/');
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+    }
+  };
+
   return (
     <LoginWrapper>
       <LeftWrapper>
@@ -125,9 +170,11 @@ const Login = () => {
             </Text>
           </Title>
           <form
-            onSubmit={handleSubmit((loginInfo) => {
+            onSubmit={handleSubmit(async (loginInfo) => {
+              await setErrorMessage('');
               console.log(loginInfo);
-              dispatch(loginToServer(loginInfo));
+              // dispatch(loginToServer(loginInfo));
+              loginToServer(loginInfo);
             })}
           >
             <label
@@ -181,6 +228,7 @@ const Login = () => {
               />
             </label>
             {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
+            {!errors.email && !errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
             <br />
             <div
               style={{

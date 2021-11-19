@@ -4,16 +4,45 @@ import Joyride from 'react-joyride';
 import PropTypes from 'prop-types';
 // import T from '../api/tokenInstance';
 
-const TutorialForm = ({ steps }) => {
-  return <Joyride steps={steps} />;
+const TutorialForm = ({ steps, page }) => {
+  // const dispatch = useDispatch();
+
+  const handleJoyRideCallback = React.useCallback(
+    async (data) => {
+      const { status } = data;
+      if (status === 'finished') {
+        // const tutorialInfo = {
+        //   tutorialNum: page,
+        // };
+        // console.log(tutorialInfo);
+        console.log('넘어가는 페이지===>', page);
+        // await T.POST(`/main/tutorial?tutorialNum=${page}`);
+        // dispatch()
+      }
+    },
+    [page],
+  );
+
+  return (
+    <Joyride
+      steps={steps}
+      showSkipButton
+      showCloseButton={false}
+      disableScrolling
+      disableScrollParentFix
+      callback={handleJoyRideCallback}
+    />
+  );
 };
 
 TutorialForm.propTypes = {
   steps: PropTypes.any,
+  page: PropTypes.any,
 };
 
 TutorialForm.defaultProps = {
   steps: false,
+  page: false,
 };
 
 // const TutorialForm = ({ run, steps, page }) => {
