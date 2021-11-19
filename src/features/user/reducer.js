@@ -11,6 +11,8 @@ import {
   ALARM_CHECK,
   SETTING_ALARM,
   SETTING_PHONENUM,
+  PROFILE_TUTORIAL,
+  PHONE_TUTORIAL,
 } from './types';
 
 const initialState = {
@@ -104,6 +106,14 @@ export default function userReducer(state = initialState, action) {
       }
       case SETTING_PHONENUM: {
         draft.phoneNumber = action.settingPhoneInfo.phoneNumber;
+        break;
+      }
+      case PROFILE_TUTORIAL: {
+        draft.tutorial.profileTutorial = action.profileInfo;
+        break;
+      }
+      case PHONE_TUTORIAL: {
+        draft.tutorial.profileTutorial = action.phoneInfo;
         break;
       }
       default:
