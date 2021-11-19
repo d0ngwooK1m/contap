@@ -9,7 +9,7 @@ import { Grid } from '../elements';
 // import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
 import { ReactComponent as Effects } from '../svgs/Effects.svg';
 import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
-import BasicProfile from '../assets/image/basicProfile.png';
+import BasicProfile from '../assets/image/Profile.svg';
 import {
   FontFamily,
   FontScale,
@@ -77,11 +77,6 @@ const CardProfile = () => {
   );
 };
 
-CardProfile.defaultProps = {
-  profile:
-    'http://file3.instiz.net/data/cached_img/upload/2019/12/09/17/c7dc4d6a28ec0d6079a6738c0e3fcc38.jpg',
-};
-
 export default CardProfile;
 
 const Box = styled.div`
@@ -109,18 +104,21 @@ const ProfileDiv = styled.div`
     #7434c6,
     #6451b9,
     #5b62b1,
+    #5867ae,
     #4982a2,
     #41929b,
     #3e9699,
     #37a393,
     #29bd87,
     #73cba7,
+    #78cca9,
     #94d1b5
   );
   z-index: 3;
   position: relative;
   // left: 450px;
   // top: 256px;
+  box-shadow: 14px 30px 35px 4px ${'#0a0a0a' + Opacity[40]};
 `;
 
 const Div = styled.div`
@@ -163,6 +161,7 @@ const Img = styled.img`
   align-items: center;
   width: 125px;
   height: 112px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
   border-radius: 8px;
   object-fit: cover;
 `;
