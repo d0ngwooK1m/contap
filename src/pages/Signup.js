@@ -14,6 +14,7 @@ import {
   signupDone,
 } from '../features/user/actions';
 import { Grid, Input, Button, Text } from '../elements';
+import Timer from '../components/Timer';
 import { ReactComponent as Onboard2Svg } from '../svgs/onboarding2.svg';
 import { ReactComponent as SignImgSvg } from '../svgs/SignupImg.svg';
 
@@ -337,6 +338,8 @@ const Signup = () => {
                     회원가입 전에 이메일 인증을 해야합니다. 메일이 오지 않는다면 아래 버튼을 클릭해주세요.
                     <br />
                     현재 인증번호를 보낸 메일: <span>{checkedEmail}</span>
+                    <br />
+                    <Timer mm={3} ss={0} />      
                   </Text>
 
                   <form

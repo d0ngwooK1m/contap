@@ -42,6 +42,7 @@ const HobbySearch = () => {
       [id]: !prevButton[id],
     }));
   };
+
   console.log(button);
 
   React.useEffect(() => {
