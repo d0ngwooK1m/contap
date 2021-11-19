@@ -6,17 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Grid, Text } from '../elements';
-import { withdrawalToServer } from '../features/user/actions';
+import { settingAlarm, settingPhoneNum, withdrawalToServer } from '../features/user/actions';
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 import { Switch } from '@mui/material';
 import T from '../api/tokenInstance';
 
 const AlarmForm = () => {
+  const dispatch = useDispatch();
   // const [inputStatus, setInputStatus] = React.useState('');
   const switchInfo = useSelector((state) => state.user.alarm);
+  const phoneNumberInfo = useSelector((state) => state.user.phoneNumber);
   const [switchChange, setSwitchChange] = React.useState(switchInfo);
   console.log('리덕스 알람 정보 ===>', switchInfo);
   const [phoneNumber, setPhoneNumber] = React.useState('');
+
 
   const {
     register,
@@ -30,7 +33,24 @@ const AlarmForm = () => {
     const { data } = res;
     console.log(data);
     setPhoneNumber(data);
-  }, [])
+  }, [phoneNumberInfo]);
+
+  const handleChange = (e) => {
+    const regex = /^[0-9\b -]{0,13}$/;
+    console.log(e.target.value, regex.test(e.target.value));
+    if (regex.test(e.target.value)) {
+      setPhoneNumber(e.target.value);
+    }
+  }
+
+  React.useEffect(() => {
+    if (phoneNumber.length === 10) {
+      setPhoneNumber(phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'));
+    }
+    if (phoneNumber.length === 13) {
+      setPhoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+    }
+  }, [phoneNumber]);
 
   const sendPhoneNumber = async(phoneNumber) => {
     try {
@@ -38,6 +58,7 @@ const AlarmForm = () => {
       const res = await T.POST(`/setting/modifyPhoneNumber`, phoneNumber);
       const { data } = res;
       console.log(data);
+      dispatch(settingPhoneNum(phoneNumber));
       return data;
     } catch (error) {
       console.log(error);
@@ -50,6 +71,7 @@ const AlarmForm = () => {
       const res = await T.POST(`/setting/alarm?alarmState=${alarmInfo.alarmState}`);
       const { data } = res;
       console.log(data);
+      dispatch(settingAlarm(alarmInfo));
       return data;
     } catch (error) {
       console.log(error);
@@ -108,24 +130,12 @@ const AlarmForm = () => {
           <StyledInput
             type="text"
             // placeholder="비밀번호를 입력해주세요"
-            {...register('phoneNumber', {
-              required: '전화번호를 입력해주세요',
-              maxLength: {
-                value: 13,
-                message: '번호가 올바르지 않습니다',
-              },
-              // minLength: {
-              //   value: 12,
-              //   message: '번호가 올바르지 않습니다',
-              // },
-            })}
-            onChange={(e) => {
-              setPhoneNumber(e.target.value);
-            }}
+            {...register('phoneNumber')}
+            onChange={handleChange}
             value={phoneNumber}
           />
         </label>
-        {errors.phoneNumber && <ErrorMessage>{errors.phoneNumber.message}</ErrorMessage>}
+        {/* {errors.phoneNumber && <ErrorMessage>{errors.phoneNumber.message}</ErrorMessage>} */}
         <br />
         <SubmitInput type="submit" value="번호 저장" />
       </form>

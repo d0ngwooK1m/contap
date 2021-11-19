@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 // import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -134,8 +135,15 @@ const SearchBar = () => {
       onMouseLeave={() => {
         setClick(false);
       }}
+      // onClick={() => {
+      //   setClick(false);
+      // }}
     >
-      <SearchWrapper>
+      <SearchWrapper
+      // onClick={() => {
+      //   setClick(false);
+      // }}
+      >
         {!tag ? (
           <StyledInput
             onChange={(e) => {
