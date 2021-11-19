@@ -48,7 +48,6 @@ const CardBack = ({
   return (
     <Wrap>
       <Card categoryColor={categoryColor()}>
-        <div style={{ padding: '48px' }}>
           <div className="category">
             <Text
               regular16
@@ -82,7 +81,7 @@ const CardBack = ({
           <CardTapForm categoryColor={categoryColor()} isTapForm={show}>
             <ImageBox src={profile || BasicProfile} />
             <div className="userName">
-              <Text regular16 color={ColorStyle.BackGround300}>
+              <Text regular16 color={ColorStyle.Gray500}>
                 {userName}
               </Text>
             </div>
@@ -100,7 +99,6 @@ const CardBack = ({
               </Text>
             </button>
           </CardTapForm>
-        </div>
       </Card>
       {children}
     </Wrap>
@@ -137,6 +135,7 @@ const Card = styled.div`
       categoryColor ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
   box-sizing: border-box;
   border-radius: 16px;
+  padding: 48px;
   z-index: 1;
 
   .category {
@@ -174,8 +173,8 @@ const Card = styled.div`
 const CardTapForm = styled.div`
   display: flex;
   position: absolute;
-  bottom: 50px;
-  left: 48px;
+  width: 652px;
+  bottom: 48px;
   align-items: center;
 
   .userName {
@@ -185,15 +184,17 @@ const CardTapForm = styled.div`
     }
   }
   hr {
-    width: 380px;
-    border: 1px solid ${ColorStyle.Gray300};
+    width: 100%;
+    border: 1px solid ${ColorStyle.Gray100+Opacity[50]};
   }
 
   button {
+    position: relative;
+    right: 0px;
     cursor: pointer;
     min-width: 130px;
     height: 44px;
-    margin-left: 25px;
+    margin-left:25px;
     background-color: ${({ categoryColor, isTapForm }) =>
       isTapForm
         ? ColorStyle.Gray300

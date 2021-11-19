@@ -227,6 +227,8 @@ const ImageBox = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid ${ColorStyle.Gray100};
 `;
 
 const Hash = styled.div`

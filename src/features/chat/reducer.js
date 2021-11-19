@@ -38,10 +38,24 @@ export default handleActions(
     [NEXT_PAGE]: (state, action) =>
       produce(state, (draft) => {
         console.log('NEXT_PAGE');
-        console.log(action.payload);
-        action.payload.messageList.forEach((doc) => {
-          draft.messages.unshift(doc);
-        });
+        console.log(action.payload.messageList.length);
+        if (action.payload.messageList.length < 15) {
+          console.log('여기 걸렸음');
+
+          action.payload.messageList.forEach((doc) => {
+            doc.isNext = false;
+            console.log('마지막 페이지', doc);
+            draft.messages.unshift(doc);
+          });
+        }
+        if (action.payload.messageList.length >= 15) {
+          action.payload.messageList.forEach((doc) => {
+            doc.isNext = true;
+            console.log(doc);
+            draft.messages.unshift(doc);
+          });
+        }
+
         // draft.isLoading = false;
       }),
     [GET_MESSAGE]: (state, action) =>

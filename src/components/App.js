@@ -2,7 +2,7 @@ import React from 'react';
 import { Reset } from 'styled-reset';
 import styled from 'styled-components';
 import { Switch } from 'react-router-dom';
-import PrivatecRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import CardList from '../pages/CardList';
 import Login from '../pages/Login';
@@ -30,11 +30,11 @@ function App() {
               <Header />
               <PublicRoute path="/" component={CardList} exact />
               <Permit>
-                <PrivatecRoute path="/settings" component={Settings} exact />
-                <PrivatecRoute path="/contap" component={Contap} exact />
-                <PrivatecRoute path="/mypage" component={Mypage} exact />
-                <PrivatecRoute path="/edit" component={CardEdit} exact />
-                <PrivatecRoute path="/grabtalk" component={Grabtalk} exact />
+                <PrivateRoute path="/settings" component={Settings} exact />
+                <PrivateRoute path="/contap" component={Contap} exact />
+                <PrivateRoute path="/mypage" component={Mypage} exact />
+                <PrivateRoute path="/edit" component={CardEdit} exact />
+                <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
               </Permit>
             </AlarmCheck>
           </WsNotiRoom>

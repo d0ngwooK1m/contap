@@ -81,6 +81,7 @@ export const nextPageToAxios = (roomId, page) => async (dispatch) => {
     console.error(error);
   }
 };
+
 export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/1');

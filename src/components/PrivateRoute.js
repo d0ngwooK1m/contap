@@ -3,7 +3,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router';
 import isLogin from '../utils/isLogin';
 
-const PrivatecRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   console.log(isLogin())
   return (
     <Route
@@ -15,4 +15,4 @@ const PrivatecRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-export default PrivatecRoute;
+export default PrivateRoute;
