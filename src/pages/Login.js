@@ -49,7 +49,7 @@ const Login = () => {
     }
     const query = location.search;
     const firstCode = query.split('?')[1];
-    const site = firstCode.split('&')[0]
+    const site = firstCode.split('&')[0];
     const code = firstCode.split('=')[1];
     // console.log(code);
     // let code = new URL(window.location.href).searchParams.get("code");
@@ -66,14 +66,18 @@ const Login = () => {
           console.log('kakaologin');
           saveToken(data.token);
           await dispatch(
-            loginAction({ email: data.email, userName: data.userName }),
+            loginAction({
+              email: data.email,
+              userName: data.userName,
+              profile: data.profile,
+            }),
           );
           history.replace('/');
         } catch (error) {
           console.error(error);
         }
       }
-  
+
       handleKakaoLogin();
     }
 
@@ -88,7 +92,11 @@ const Login = () => {
           console.log(data);
           saveToken(data.token);
           await dispatch(
-            loginAction({ email: data.email, userName: data.userName }),
+            loginAction({
+              email: data.email,
+              userName: data.userName,
+              profile: data.profile,
+            }),
           );
           history.replace('/');
         } catch (error) {
@@ -96,11 +104,10 @@ const Login = () => {
         }
       }
 
-      handleGithubLogin()
+      handleGithubLogin();
     }
 
-    return 
-
+    return;
   }, []);
 
   return (
@@ -136,7 +143,7 @@ const Login = () => {
                 {...register('email', {
                   required: '이메일을 입력해주세요',
                   pattern: {
-                    value: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+                    value: /^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)*@(?:\w+\.)+\w+$/,
                     message: '이메일 양식에 맞지 않습니다',
                   },
                 })}
@@ -217,7 +224,6 @@ const Login = () => {
               console.log(process.env.REACT_APP_GITHUB_PATH);
               setLogin('github');
               window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
-
             }}
           >
             <GithubLogoSvg />

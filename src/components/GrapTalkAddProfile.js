@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import HashTag from './HashTag';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
-import { createTalkRoom } from '../features/chat/actions';
+import { createTalkRoom, loadCurrentRoom,closeNoneTalkRoomList, } from '../features/chat/actions';
 
 const GrapTalkAddProfile = ({ userId }) => {
   const dispatch = useDispatch()
   const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
+  const roomList = useSelector((state)=>state.chat.allIds)
   console.log(roomInfo);
   const stackHashTags = roomInfo.hashTags
     ?.split('_')[0]
@@ -21,8 +22,17 @@ const GrapTalkAddProfile = ({ userId }) => {
     ?.split('@')
     .slice(1, 4);
   
+  console.log(roomList.indexOf(roomInfo.userId))
+  
   const addTalkRoom = () => {
+    // 유저아이디가 왼쪽 룸 리스트에 있으면
+    if (roomList.indexOf(roomInfo.userId) !== -1) {
+      dispatch(closeNoneTalkRoomList())
+      dispatch(loadCurrentRoom(roomInfo))
+      return
+    }
     dispatch(createTalkRoom(roomInfo))
+    dispatch(loadCurrentRoom(roomInfo))
   }
   
   return (

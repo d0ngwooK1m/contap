@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ColorStyle } from '../../utils/systemDesign';
+import { ReactComponent as SendHorSvg } from '../../svgs/SendHor.svg'
 
 const MessageWrite = ({ sendMessage }) => {
   const [message, setMessage] = useState('');
@@ -41,7 +42,7 @@ const MessageWrite = ({ sendMessage }) => {
           sendMsg(message);
           setMessage('');
         }}
-      />
+      ><SendHorSvg/></SendButton>
     </InputField>
   );
 };
@@ -90,4 +91,5 @@ const SendButton = styled.button`
   height: 56px;
   border-radius: 40px;
   background-color: ${ColorStyle.PrimaryPurple};
+  border : 0px;
 `;
