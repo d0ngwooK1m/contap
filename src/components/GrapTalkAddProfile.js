@@ -6,12 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import HashTag from './HashTag';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
-import { createTalkRoom, loadCurrentRoom,closeNoneTalkRoomList, } from '../features/chat/actions';
+import {
+  createTalkRoom,
+  loadCurrentRoom,
+  closeNoneTalkRoomList,
+} from '../features/chat/actions';
 
 const GrapTalkAddProfile = ({ userId }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
-  const roomList = useSelector((state)=>state.chat.allIds)
+  const roomList = useSelector((state) => state.chat.allIds);
   console.log(roomInfo);
   const stackHashTags = roomInfo.hashTags
     ?.split('_')[0]
@@ -21,76 +25,87 @@ const GrapTalkAddProfile = ({ userId }) => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
-  
-  console.log(roomList.indexOf(roomInfo.userId))
-  
+
+  const category = roomInfo.field === 2 ? false : true;
+
+  console.log(category)
+
+
   const addTalkRoom = () => {
     // 유저아이디가 왼쪽 룸 리스트에 있으면
     if (roomList.indexOf(roomInfo.userId) !== -1) {
-      dispatch(closeNoneTalkRoomList())
-      dispatch(loadCurrentRoom(roomInfo))
-      return
+      dispatch(closeNoneTalkRoomList());
+      dispatch(loadCurrentRoom(roomInfo));
+      return;
     }
-    dispatch(createTalkRoom(roomInfo))
-    dispatch(loadCurrentRoom(roomInfo))
-  }
-  
+    dispatch(createTalkRoom(roomInfo));
+    dispatch(loadCurrentRoom(roomInfo));
+  };
+
   return (
-    <>
-      <Wrap onClick={addTalkRoom}>
-    <ImageBox
+    <Wrap>
+      <ProfileWrap onClick={addTalkRoom}>
+        <ImageBox
           className="imageBox"
           src={roomInfo.profile ? roomInfo.profile : BasicProfile}
         />
-      <div className="name">
         <div>
-          <Text bold20>{roomInfo.userName}</Text>
+          <div className="name">
+            <Text bold20>{roomInfo.userName}</Text>
+          </div>
+          <div>
+            <Text
+              // color={ColorStyle.PrimaryPurple}
+              color={
+                category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
+              }
+              regular20
+            >
+              # {stackHashTags}
+            </Text>
+          </div>
         </div>
-        <div>
-          <Text
-            color={ColorStyle.PrimaryPurple}
-            // color={
-            //   category() ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
-            // }
-            regular20
-          >
-            # {stackHashTags}
-          </Text>
-        </div>
-      </div>
-      <Hash className="tags">
-        {interestHashTags?.map((stack, idx) => {
-          // return (
-          //   stack && <HashTag key={idx} tag={stack} category={category()} />
-          // );
-          return (
-            stack && <HashTag key={idx} tag={stack} />
-          );
-        })}
-      </Hash>
-      </Wrap>
-      <hr/>
-    </>
+        <Hash className="tags">
+          {interestHashTags?.map((stack, idx) => {
+            return stack && <HashTag key={idx} tag={stack} category={category} />;
+          })}
+        </Hash>
+      </ProfileWrap>
+        <hr />
+    </Wrap>
   );
 };
 
 const Wrap = styled.div`
+position: relative;
+top:40px;
+hr {
+    position: relative;
+    top:-20px;
+    width: 95%;
+    border: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
+  }
+`;
+
+const ProfileWrap = styled.div`
   width: 580px;
   /* background-color: red; */
-  margin: 16px auto 16px 80px;
-  min-height: 70px;
+  margin: 0px auto 32px 80px;
   display: flex;
-  align-items: center;
   .tags {
     margin: auto;
     display: flex;
     flex-direction: row;
   }
+  .name {
+    margin: 0px 0px 10px 0px;
+  }
+
 `;
 const ImageBox = styled.div`
   height: 50px;
   width: 50px;
-  margin: 22px;
+  margin: 0px 20px 20px 0px;
 
   background-image: url('${(props) => props.src}');
   background-position: center;

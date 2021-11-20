@@ -36,9 +36,8 @@ const Grabtalk = () => {
 
   const closeList = () => {
     setIsAddRoom(false);
-  dispatch(closeNoneTalkRoomList());
-  }
-  
+    dispatch(closeNoneTalkRoomList());
+  };
 
   return (
     <Wrapper>
@@ -46,12 +45,18 @@ const Grabtalk = () => {
         <div className="roomListHeader">
           <Text bold32>메세지함</Text>
           <IconButton className="addBtn" type="button" onClick={addChatRoom}>
-            {isAddRoom ? <ChatAddSvg stroke={ColorStyle.PrimaryPurple}/> : <ChatAddSvg stroke={ColorStyle.Gray500}/>}
+            {isAddRoom ? (
+              <ChatAddSvg stroke={ColorStyle.PrimaryPurple} />
+            ) : (
+              <ChatAddSvg stroke={ColorStyle.Gray500} />
+            )}
           </IconButton>
         </div>
         <ChatRoomList />
       </Menu>
-      {noneTalkList.length !== 0 && <GrabTalkAdd noneTalkList={noneTalkList} closeList={closeList}/>}
+      {noneTalkList.length !== 0 && (
+        <GrabTalkAdd noneTalkList={noneTalkList} closeList={closeList} />
+      )}
       <Room>
         {!currentRoom.userId && noneTalkList.length == 0 && (
           <SvgWrap>

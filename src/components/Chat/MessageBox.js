@@ -13,7 +13,8 @@ const MessageBox = ({ roomId }) => {
   const userInfo = useSelector((state) => state.user.email);
   const scrollRef = React.useRef();
   const page = messageList.length !== 0 ? messageList[0].id : null;
-  const isNext = messageList.length < 15 ? false : true;
+  const isNext = messageList[0]?.isNext===false ? false : true
+  
   const [prevHeight, setPrevHeight] = React.useState(null);
 
   console.log( '리스트 =========>',messageList)
@@ -35,10 +36,6 @@ const MessageBox = ({ roomId }) => {
   }, [messageList]);
 
   const callNext = () => {
-    if (isNext === false) {
-      return;
-    }
-    console.log(page);
     dispatch(nextPageToAxios(roomId, page));
   };
 
@@ -64,7 +61,10 @@ const MessageBox = ({ roomId }) => {
           
           const orderCheck = () => {
             if (arr.length === 1) {
-              return;
+              if (isMe) {
+                return 'meFirst';
+              }
+              return 'first';
             }
             if (arr[i].writer !== arr[i - 1]?.writer) {
               if (isMe) {

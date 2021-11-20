@@ -43,6 +43,7 @@ const ContapModal = ({
     console.log('수락');
     onHide();
   };
+
   return (
     <div>
       <Modal open={show} onClose={onHide}>
@@ -94,6 +95,33 @@ const ContapModal = ({
                     </Text>
                   </button>
                 </ButtonBox>
+              </>
+            )}
+            {select === 'GrabList' && (
+              <>
+                <GrabButtonBox category={category}>
+                  <button
+                    type="button"
+                    className="acceptBtn"
+                    onClick={acceptTap}
+                  >
+                    <Text
+                      bold20
+                      color={category ? '#FFF' : ColorStyle.BackGround300}
+                    >
+                      메세지 보내기
+                    </Text>
+                  </button>
+                  <button
+                    type="button"
+                    className="refusetBtn"
+                    onClick={rejectTap}
+                  >
+                    <Text bold20 color="#FFF">
+                      그랩 끊기
+                    </Text>
+                  </button>
+                </GrabButtonBox>
               </>
             )}
           </Content>
@@ -163,6 +191,45 @@ const ButtonBox = styled.div`
     border: 1px solid
       ${({ category }) =>
         category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+  }
+`;
+
+const GrabButtonBox = styled.div`
+  margin: 30px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    width: 350px;
+    height: 50px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin: 10px 0px 22px 0px;
+  }
+
+  .acceptBtn {
+    background-color: ${({ category }) =>
+      category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    border: 2px solid
+      ${({ category }) =>
+        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    box-sizing: border-box;
+    &:hover {
+      background-color: ${({ category }) => (category ? '#6235B5' : '#33C68A')};
+      border: 2px solid ${({ category }) => (category ? '#6235B5' : '#33C68A')};
+    }
+  }
+
+  .refusetBtn {
+    background-color: ${ColorStyle.BackGround100};
+    box-sizing: border-box;
+    border: 1px solid
+      ${({ category }) =>
+        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    &:hover {
+      background-color: ${ColorStyle.BackGround300};
+      border: 2px solid ${({ category }) => (category ? '#6235B5' : '#33C68A')};
+    }
   }
 `;
 
