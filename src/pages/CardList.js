@@ -13,6 +13,7 @@ import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
 import { ReactComponent as SquareShadow } from '../svgs/Reflex.svg';
 import { ReactComponent as SquareLeft } from '../svgs/ShapeLeft.svg';
 import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
+import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -40,13 +41,11 @@ const CardList = () => {
       <div className="SquareRight">
         <SquareRight />
       </div>
-      {/* <div className="TitleBgSvg">
-        <TitleBgSvg />
-      </div> */}
-      <TitleWrap >
+      <TitleWrap />
+      <div className='title'>
         <Text bold48> Just Tap!</Text>
         <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
-      </TitleWrap>
+      </div>
       <SearchBarWrap>
         <SearchBar />
       </SearchBarWrap>
@@ -57,18 +56,15 @@ const CardList = () => {
         </div>
       </TextWrap>
       <RefreshWrapper>
-        <FlexWrapper>
         <RefreshSvg />
-        <RefreshBtn
+        <button
           type="button"
           onClick={() => {
             dispatch(loadCardFrontDB());
           }}
         >
-          
           카드 섞기
-        </RefreshBtn>
-        </FlexWrapper>
+        </button>
       </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
@@ -84,44 +80,55 @@ const Wrap = styled.div`
   padding-top: 76px;
   padding-bottom: 112px;
   position: relative;
-  z-index: 99;
 
   .SquareLeft {
     position: absolute;
-    top:80px;
+    top: 80px;
     left: 130px;
     z-index: 1;
   }
   .SquareShadow {
     position: absolute;
-    top:268px;
+    top: 268px;
     left: 130px;
     z-index: 1;
   }
   .SquareRight {
     position: absolute;
-    top:32px;
+    top: 32px;
     right: 130px;
     z-index: 1;
   }
-  .TitleBgSvg{
-    position: absolute;
-    top: 0px;
-    z-index: 9699;
+  .title{
+    position: relative;
+    top:-100px;
+    text-align: center;
+    p{
+      margin-bottom: 24px;
+    }
   }
 `;
 
 const TitleWrap = styled.div`
+position: relative;
   text-align: center;
-  p {
-    margin-bottom: 24px;
-  }
-
+  background: conic-gradient(
+    from 88.92deg at 47.81% 59.2%,
+    #db83e9 -16.52deg,
+    #844aef 62.85deg,
+    #1fb8cd 95.04deg,
+    #1edbd7 115.28deg,
+    #4ceeb6 132.84deg,
+    #db83e9 343.48deg,
+    #844aef 422.85deg
+  );
+  filter: blur(140px);
+  height: 100px;
 `;
 
 const SearchBarWrap = styled.div`
   text-align: center;
-  margin: 20px 0px 50px 0px;
+  margin: -70px 0px 50px 0px;
 `;
 
 const TextWrap = styled.div`
@@ -134,14 +141,24 @@ const TextWrap = styled.div`
 `;
 
 const RefreshWrapper = styled.div`
-  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: right;
+  margin-right: 165px;
+
+  button {
+    cursor: pointer;
+    background-color: #0f0a1a;
+    color: #a09bac;
+    font-family: ${FontFamily};
+    font-size: 20px;
+    border: none;
+  }
 `;
 
-const FlexWrapper = styled.div`
-  display: flex;
-`;
+// const FlexWrapper = styled.div`
+//   display: flex;
+// `;
 
 const RefreshBtn = styled.button`
   margin-right: 170px;

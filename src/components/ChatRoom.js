@@ -63,6 +63,7 @@ const ChatRoom = ({ userId }) => {
           <ImageBox
             className="imageBox"
             src={roomInfo.profile ? roomInfo.profile : BasicProfile}
+            isLogin={roomInfo.login}
           />
         </div>
         <div>
@@ -140,6 +141,7 @@ const ImageBox = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 25px;
+  border : ${({isLogin})=>isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px' };
+  border-radius: 50px;
 `;
 export default ChatRoom;
