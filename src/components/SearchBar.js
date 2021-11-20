@@ -1,26 +1,27 @@
 /* eslint-disable */
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Text } from '../elements';
-import { searchInfoDB, searchArrList } from '../features/cards/actions';
+import { searchInfoDB, searchArrList, searchDataList } from '../features/cards/actions';
 import { ColorStyle, FontScale } from '../utils/systemDesign';
 import { ReactComponent as SearchSvg } from '../svgs/Search.svg';
+import { Opacity } from '@mui/icons-material';
 
-const searchData = [
-  '지오캐싱',
-  '종이접기',
-  '피겨스케이팅',
-  'Javascript',
-  'Java',
-  'React',
-  '피그마',
-  '스케치업',
-  '포토샵',
-];
+// const searchData = [
+//   '지오캐싱',
+//   '종이접기',
+//   '피겨스케이팅',
+//   'Javascript',
+//   'Java',
+//   'React',
+//   '피그마',
+//   '스케치업',
+//   '포토샵',
+// ];
 
-// const baseURL = process.env.REACT_APP_SERVER_URI;
+const baseURL = process.env.REACT_APP_SERVER_URI;
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,26 @@ const SearchBar = () => {
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.searchArr);
   console.log(searchList);
+  const searchData = useSelector((state) => state.cards.searchData);
+
+  React.useEffect(async() => {
+    try {
+      const res = await axios.get(`${baseURL}/main/hashtag`);
+
+      const { data } = res;
+
+      console.log(data);
+      const searchDataArr = [];
+      data.forEach((val) => {
+        searchDataArr.push(val.name);
+      });
+      console.log(searchDataArr);
+      dispatch(searchDataList(searchDataArr));
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   React.useEffect(() => {
     searchData.filter((val) => {
@@ -121,7 +142,7 @@ const SearchBar = () => {
               setClick(false);
             }}
           >
-            <Text color="black" regular16>
+            <Text color="white" regular16>
               {val}
             </Text>
           </ContentBtn>
@@ -146,6 +167,7 @@ const SearchBar = () => {
       >
         {!tag ? (
           <StyledInput
+            placeholder='어떤 분야에서 찾아볼까요?'
             onChange={(e) => {
               console.log(e.target.value);
               setData(e.target.value);
@@ -155,7 +177,8 @@ const SearchBar = () => {
             }}
           />
         ) : (
-          <StyledInput
+            <StyledInput
+            placeholder='어떤 분야에서 찾아볼까요?'
             value={data}
             onChange={(e) => {
               console.log(e.target.value);
@@ -297,7 +320,7 @@ const CategoryBtn = styled.button`
 `;
 
 const ContentBtn = styled.button`
-  background-color: white;
+  background-color: ${ColorStyle.BackGround300};
   cursor: pointer;
   border: none;
   margin: 0px 0px 14px 0px;
@@ -308,8 +331,13 @@ const StyledInput = styled.input`
   height: 60px;
   padding: 0px 32px;
   border-radius: 50px;
-  border: 3px solid ${ColorStyle.Gray500};
+  border: none;
   font-size: ${FontScale.Body2_16};
+  background-color: ${ColorStyle.BackGround300};
+  color: white;
+  &::placeholder {
+    color: ${ColorStyle.Gray300};
+  }
   &:focus {
     outline: none;
   }
@@ -317,17 +345,20 @@ const StyledInput = styled.input`
 
 const StyledHr = styled.hr`
   width: 560px;
+  height: 0.01px;
+  background-color: ${ColorStyle.Gray300};
+  border: solid 0.05px ${ColorStyle.Gray300 + Opacity[20]};
 `;
 
 const StyledBtn = styled.button`
   width: fit-content;
   height: fit-content;
-  background-color: white;
+  background-color: ${ColorStyle.BackGround300};
   color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
   position: absolute;
-  top: 18px;
+  top: 15px;
   right: 26px;
 `;
 
@@ -337,7 +368,7 @@ const SearchContent = styled.div`
   margin: auto;
   padding: 0px 32px;
   margin-top: 12px;
-  background-color: white;
+  background-color: ${ColorStyle.BackGround300};
   border-radius: 30px;
   display: flex;
 `;

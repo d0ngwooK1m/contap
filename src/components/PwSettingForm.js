@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 // import { Grid, Input, Button } from '../elements';
@@ -22,6 +22,7 @@ const PwSettingForm = () => {
   // const [newPw, setNewPw] = React.useState('');
   // const [checkNewPw, setCheckNewPw] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
+  const userName = useSelector((state) => state.user.userName);
 
   const passwordChangeToServer = async(passwordInfo)  => {
     try {
@@ -79,10 +80,11 @@ const PwSettingForm = () => {
       </ThemeWrapper>
       <MarginWrapper>
         <Text color={ColorStyle.Gray300} regular20>
-          새로운 비밀번호를 설정합니다
+          {userName !== '' ? userName : 회원}님의 비밀번호를 다시 설정합니다.
         </Text>
       </MarginWrapper>
       <form
+        autocomplete='off'
         onSubmit={handleSubmit(async (passwordInfo) => {
           await setErrorMessage('');
           console.log(passwordInfo);
@@ -194,6 +196,8 @@ const StyledInput = styled.input`
   width: 100%;
   height: 30px;
   color: ${ColorStyle.Gray500};
+  font-size: 16px;
+  font-family: ${FontFamily};
   background-color: ${ColorStyle.BackGround};
   border-bottom: 1px solid ${ColorStyle.Gray100};
   border-right: none;

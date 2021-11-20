@@ -38,7 +38,7 @@ const content = [
         }}
       >
         <div>
-          <BellIconSvg fill="#A09BAC" />
+          <BellIconSvg stroke="#A09BAC" />
         </div>
         <div>
           <Text color="#a09bac" regular20>

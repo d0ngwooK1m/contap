@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from 'react';
-// import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { FontFamily } from '../utils/systemDesign';
 
 import styled from 'styled-components';
 import { loadCardFrontDB } from '../features/cards/actions';
@@ -57,14 +57,18 @@ const CardList = () => {
         </div>
       </TextWrap>
       <RefreshWrapper>
+        <FlexWrapper>
+        <RefreshSvg />
         <RefreshBtn
           type="button"
           onClick={() => {
             dispatch(loadCardFrontDB());
           }}
         >
-          카드 새로고침
+          
+          카드 섞기
         </RefreshBtn>
+        </FlexWrapper>
       </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
@@ -135,12 +139,18 @@ const RefreshWrapper = styled.div`
   justify-content: right;
 `;
 
+const FlexWrapper = styled.div`
+  display: flex;
+`;
+
 const RefreshBtn = styled.button`
   margin-right: 170px;
   margin-top: 18px;
   cursor: pointer;
   background-color: #0f0a1a;
   color: #a09bac;
+  font-family: ${FontFamily};
+  font-size: 20px;
   border: none;
 `;
 

@@ -2,6 +2,8 @@
 export const LOAD_CARD = 'cards/LOAD_CARD';
 // 검색 시 카드 리스트
 export const SEARCH_CARD = 'cards/SEARCH_CARD';
+// 검색에 필요한 데이터 업데이트
+export const SEARCH_DATA = 'cards/SEARCH_DATA';
 // 검색 시 자동완성 리스트
 export const SEARCH_ARR = 'cards/SEARCH_ARR';
 // 검색 시 스택 자동완성 리스트
