@@ -18,6 +18,7 @@ import {
 const initialState = {
   email: '',
   userName: '',
+  profile: '',
   isAuthorized: false,
   isEmailChecked: false,
   isAuthNumChecked: false,
@@ -38,6 +39,7 @@ export default function userReducer(state = initialState, action) {
       case LOG_IN: {
         draft.email = action.payload.email;
         draft.userName = action.payload.userName;
+        draft.profile = action.payload.profile;
         draft.isAuthorized = true;
         break;
       }
@@ -49,6 +51,9 @@ export default function userReducer(state = initialState, action) {
         break;
       }
       case AUTH_CHECK: {
+        draft.email = action.payload.email;
+        draft.userName = action.payload.userName;
+        draft.profile = action.payload.profile;
         draft.isAuthNumChecked = true;
         break;
       }

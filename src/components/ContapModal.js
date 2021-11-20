@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+// import { useHistory } from 'react-router';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -58,10 +59,10 @@ const ContapModal = ({
     onHide();
   };
 
-  const openGrabTalk = () => {
-    history.push('/grabtalk');
-    dispatch(closeNoneTalkRoomList());
-    dispatch(loadCurrentRoom(userCradInfo));
+  const openGrabTalk = async () => {
+    await dispatch(closeNoneTalkRoomList());
+    await dispatch(loadCurrentRoom(userCradInfo));
+    history.replace('/grabtalk');
   };
 
   const MySwal = withReactContent(Swal);
