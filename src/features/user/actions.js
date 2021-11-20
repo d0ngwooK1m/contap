@@ -57,9 +57,9 @@ const login = (payload) => ({
 // 로그아웃 미들웨어 없음
 const logout = () => ({ type: LOG_OUT });
 
-const authorize = (email, userName) => ({
+const authorize = (email, userName, profile) => ({
   type: AUTHORIZED,
-  payload: { email, userName },
+  payload: { email, userName, profile },
 });
 
 const alarmCheck = (alarmInfo) => ({

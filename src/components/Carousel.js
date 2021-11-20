@@ -3,7 +3,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
-import SwiperCore, { Pagination, Navigation } from 'swiper';
+import SwiperCore, { Pagination, Navigation, Keyboard } from 'swiper';
 import TapForm from './TapForm';
 
 import Slider from 'react-slick';
@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import CardBack from './CardBack';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 
-SwiperCore.use([Pagination, Navigation]);
+SwiperCore.use([Pagination, Navigation, Keyboard]);
 
 const Carousel = ({ userId, userName, profile, category }) => {
   const currentCard = useSelector((state) => state.cards.current);
@@ -49,6 +49,8 @@ const Carousel = ({ userId, userName, profile, category }) => {
         }}
         navigation={true}
         className="mySwiper"
+        allowTouchMove={false}
+        keyboard={true}
       >
         {currentCard?.map((card) => {
           return (

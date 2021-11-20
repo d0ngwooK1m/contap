@@ -99,7 +99,7 @@ const ChatMessageBox = styled.div`
   position: absolute;
   bottom: 72px;
   width: 700px;
-  max-height: 670px;
+  max-height: 660px;
   padding-bottom: 16px;
   overflow-y: scroll;
   ::-webkit-scrollbar {

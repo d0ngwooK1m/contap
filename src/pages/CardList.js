@@ -28,7 +28,7 @@ const CardList = () => {
   }, [isSearching]);
 
   return (
-    <div style={{ paddingBottom: '112px', maxWidth: '1440px' }}>
+    <div style={{ paddingBottom: '112px', maxWidth: '1440px'}}>
       {/* <SvgWrapper>
         <TitleBgSvg />
       </SvgWrapper> */}
@@ -88,9 +88,6 @@ const TextWrap = styled.div`
   }
 `;
 
-const SvgWrapper = styled.div`
-  z-index: -1;
-`;
 
 const RefreshWrapper = styled.div`
   width: 100%;
@@ -113,6 +110,7 @@ const CardListWrap = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: auto;
+  padding-left: 30px;
 `;
 export default CardList;
 

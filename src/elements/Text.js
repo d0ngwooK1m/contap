@@ -74,6 +74,7 @@ const Regular14 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 14px;
+  line-height: 21px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
@@ -81,6 +82,7 @@ const Regular16 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 16px;
+  line-height: 20px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
@@ -88,6 +90,7 @@ const Regular20 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 20px;
+  line-height: 28px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
@@ -95,6 +98,7 @@ const Regular24 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 24px;
+  line-height: 26px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
@@ -102,6 +106,7 @@ const Bold20 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 20px;
+  line-height: 28px;
   font-weight: 700;
   color: ${({color}) => color};
 `;
@@ -109,6 +114,7 @@ const Bold24 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 24px;
+  line-height: 26px;
   font-weight: 700;
   color: ${({color}) => color};
 `;
@@ -116,6 +122,7 @@ const Bold32 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 32px;
+  line-height: 40px;
   font-weight: 700;
   color: ${({color}) => color};
 `;
@@ -123,6 +130,7 @@ const Bold48 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 48px;
+  line-height: 34px;
   font-weight: 700;
   color: ${({color}) => color};
 `;

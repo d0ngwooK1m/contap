@@ -101,19 +101,23 @@ top:40px;
     left:-10px;
   }
   .name {
-    margin: 0px 0px 20px 0px;
+    position: absolute;
+    top: 0px;
+    margin: 0px;
     width: 350px;
     display: flex;
     justify-content: space-between;
   }
 
   .message {
+    margin-top: 8px;
+
     p {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 350px;
-      height: 20px;
+      height: 28px;
     }
   }
 `;

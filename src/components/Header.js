@@ -37,12 +37,13 @@ const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const isUserLogin = useSelector((state) => state.user.email);
+  const userInfo = useSelector((state) => state.user);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
   const isContapNoti = useSelector((state) => state.notice.isContapNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [myProfile] = React.useState(<BasicProfileSvg />);
-
+  const isUserLogin = userInfo.email;
+  const userProfile = userInfo.profile ? userInfo.profile : '';
   const [isSetting, setIsSetting] = React.useState(false);
 
   const open = Boolean(anchorEl);
@@ -117,7 +118,7 @@ const Header = () => {
     // return <ChatIconSvg fill="#F5F3F8" />;
     if (location.pathname === '/grabtalk') {
       return <ChatIconSvg fill="#8C4DFF" />;
-    } 
+    }
     if (isChatNoti && location.pathname !== '/grabtalk') {
       return <ChatAlarmIconSvg fill="#F5F3F8" />;
     }
@@ -221,7 +222,14 @@ const Header = () => {
               style={{ margin: '0px 12px' }}
               onClick={moveToMyPage}
             >
-              {myProfile}
+              {userProfile ? (
+                <ImageBox
+                  className="imageBox"
+                  src={userProfile}
+                />
+              ) : (
+                <BasicProfileSvg />
+              )}
             </IconButton>
           </MenuWrapper>
         ) : (
@@ -281,6 +289,18 @@ const LoginButton = styled.button`
   font-size: 20px;
   cursor: pointer;
   margin-left: 400px;
+`;
+
+const ImageBox = styled.div`
+  height: 50px;
+  width: 50px;
+  margin: 0px 20px 20px 0px;
+
+  background-image: url('${(props) => props.src}');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 25px;
 `;
 
 export default Header;

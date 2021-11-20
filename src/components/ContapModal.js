@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router';
 import { useHistory } from 'react-router';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import BasicAlert from '../utils/alert';
 // import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
@@ -18,8 +17,6 @@ import {
   closeNoneTalkRoomList,
   loadCurrentRoom,
 } from '../features/chat/actions';
-import { ReactComponent as Close } from '../svgs/CloseRound.svg';
-import '../style/scss/alert.css';
 
 const ContapModal = ({
   show,
@@ -65,36 +62,9 @@ const ContapModal = ({
     history.replace('/grabtalk');
   };
 
-  const MySwal = withReactContent(Swal);
-
-  const Alert = MySwal.mixin({
-    showCancelButton: true,
-    confirmButtonText: (
-      <Text bold24 color={ColorStyle.BackGround300}>
-        네
-      </Text>
-    ),
-    cancelButtonText: (
-      <Text bold24 color={ColorStyle.PrimaryPurple}>
-        아니요
-      </Text>
-    ),
-    showCloseButton: true,
-    closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
-    confirmButtonColor: '#FFF',
-    cancelButtonColor: '#FFF',
-    padding: '46px',
-    customClass: {
-      popup: 'swal-popup',
-      title: 'swal-title',
-      cancelButton: 'swal-cancel',
-      confirmButton: 'swal-confirm',
-    },
-  });
-
   const unGrab = async () => {
     onHide();
-    const { isConfirmed } = await Alert.fire({
+    const { isConfirmed } = await BasicAlert.fire({
       title: (
         <div style={{ textAlign: 'left' }}>
           <div style={{ marginBottom: '40px' }}>
@@ -119,7 +89,15 @@ const ContapModal = ({
 
   return (
     <div>
-      <Modal open={show} onClose={onHide}>
+      <Modal
+        open={show}
+        onClose={onHide}
+        BackdropProps={{
+          style: {
+            backgroundColor: '#000000BF',
+          },
+        }}
+      >
         <Wrap>
           <Content select={select}>
             {select === 'ReceiveTap' && (

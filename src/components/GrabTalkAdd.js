@@ -45,7 +45,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
           .toLowerCase()
           .indexOf(searchValue.toLowerCase()) === -1) {
           
-            return '검색결과없쩡'
+            return <Text bold32 color={ColorStyle.Gray500}>검색결과없쩡</Text>
           }
       })}
     </div>

@@ -141,10 +141,8 @@ const Card = styled.div`
   .category {
     width: max-content;
     margin-bottom: 30px;
-    padding: 0px 15px;
-    height: 32px;
+    padding: 8px 12px;
     text-align: center;
-    line-height: 32px;
     border-radius: 8px;
 
     background-color: ${({ categoryColor }) =>
