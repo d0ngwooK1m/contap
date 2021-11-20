@@ -45,8 +45,8 @@ const MessageBox = ({ roomId }) => {
       isNext={isNext}
       // loading={is_loading}
       scrollTo={scrollRef}
-      prevHeight={prevHeight}
       setPrevHeight={setPrevHeight}
+      type='top'
     >
       <ChatMessageBox ref={scrollRef}>
         {messageList?.map((msg, i, arr) => {

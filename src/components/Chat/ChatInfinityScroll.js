@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 const ChatInfinityScroll = ({
   children,
+  type,
   callNext,
   isNext,
   loading,
   scrollTo,
-  prevHeight,
   setPrevHeight,
 }) => {
   const handleScroll = lodash.throttle(() => {
@@ -17,10 +17,22 @@ const ChatInfinityScroll = ({
     if (loading) {
       return;
     }
+    const {scrollHeight, clientHeight, scrollTop } = scrollTo.current
+    console.log('============================================')
+    console.log('스크롤 하이',scrollTo.current.scrollHeight)
+    console.log('클라이언트 하이',scrollTo.current.clientHeight)
+    console.log('스크롤 탑',scrollTo.current.scrollTop)
+    console.log('콜 할 위치',scrollTo.current.clientHeight + scrollTo.current.scrollTop === scrollTo.current.scrollHeight)
+    console.log('============================================')
 
-    if (scrollTo.current.scrollTop === 0) {
-      setPrevHeight(scrollTo.current.scrollHeight);
-      console.log(scrollTo.current.scrollHeight);
+    if (type==='bottom' && scrollHeight - clientHeight - scrollTop < 200) {
+      setPrevHeight(scrollHeight);
+      callNext();
+      console.log('이때 콜 할거임!')
+      
+    }
+    if (type==='top' && scrollTop === 0) {
+      setPrevHeight(scrollHeight);
       callNext();
     }
   }, 500);
@@ -57,6 +69,7 @@ ChatInfinityScroll.propTypes = {
   loading: PropTypes.bool,
   scrollTo: PropTypes.any.isRequired,
   setPrevHeight: PropTypes.func.isRequired,
+  type : PropTypes.string.isRequired
 };
 
 ChatInfinityScroll.defaultProps = {
