@@ -3,13 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import T from '../api/tokenInstance';
 import { removeToken } from '../utils/auth';
 import Swal from 'sweetalert2';
 import { Grid, Text } from '../elements';
 // import { withdrawalToServer } from '../features/user/actions';
-import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
+import { ColorStyle, FontScale, FontFamily, Opacity } from '../utils/systemDesign';
+import '../utils/swal.css';
 
 const WithdrawalForm = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ const WithdrawalForm = () => {
   const [errorMessage, setErrorMessage] = React.useState('');
   // const [pw, setPw] = React.useState('');
   // const [pwCheck, setPwCheck] = React.useState('');
+  const userName = useSelector((state) => state.user.userName);
 
   const handleClickRadioButton = (radioBtnName) => {
     setInputStatus(radioBtnName);
@@ -73,13 +76,20 @@ const WithdrawalForm = () => {
       </ThemeWrapper>
       <MarginWrapper>
         <Text color={ColorStyle.Gray300} regular20>
-          왜 탈퇴하려는지 알려주세요ㅠㅠ
+          {userName !== '' ? userName : 회원}님 탈퇴 후 한달 뒤 모든 기록이 사라져요
+          <br />
+          재가입해도 복구할 수 없답니다😥
+        </Text>
+      </MarginWrapper>
+      <MarginWrapper>
+        <Text color={ColorStyle.Gray300} regular20>
+          탈퇴하시려는 이유를 말씀해 주세요
         </Text>
       </MarginWrapper>
       <RadioWrapper>
         <MarginLabelWrapper htmlFor="radio1">
           <LabelInnerWrapper>
-            <input
+            <RadioInput
               type="radio"
               id="radio1"
               checked={inputStatus === 'radio1'}
@@ -94,7 +104,7 @@ const WithdrawalForm = () => {
         </MarginLabelWrapper>
         <MarginLabelWrapper htmlFor="radio2">
           <LabelInnerWrapper>
-            <input
+            <RadioInput
               type="radio"
               id="radio2"
               checked={inputStatus === 'radio2'}
@@ -109,7 +119,7 @@ const WithdrawalForm = () => {
         </MarginLabelWrapper>
         <MarginLabelWrapper htmlFor="radio3">
           <LabelInnerWrapper>
-            <input
+            <RadioInput
               type="radio"
               id="radio3"
               checked={inputStatus === 'radio3'}
@@ -124,7 +134,7 @@ const WithdrawalForm = () => {
         </MarginLabelWrapper>
         <MarginLabelWrapper htmlFor="radio4">
           <LabelInnerWrapper>
-            <input
+            <RadioInput
               type="radio"
               id="radio4"
               checked={inputStatus === 'radio4'}
@@ -142,6 +152,7 @@ const WithdrawalForm = () => {
         onSubmit={handleSubmit((passwordInfo) => {
           const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
+              popup: 'swal-popup',
               confirmButton: 'btn btn-success',
               cancelButton: 'btn btn-danger',
             },
@@ -158,14 +169,14 @@ const WithdrawalForm = () => {
               cancelButtonText: 'No, cancel!',
               reverseButtons: true,
             })
-            .then((result) => {
+            .then(async(result) => {
               if (result.isConfirmed) {
                 // swalWithBootstrapButtons.fire(
                 //   'Deleted!',
                 //   'Your file has been deleted.',
                 //   'success'
                 // )
-                dispatch(withdrawalToServer(passwordInfo));
+                await dispatch(withdrawalToServer(passwordInfo));
               } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
@@ -230,6 +241,8 @@ const StyledInput = styled.input`
   width: 100%;
   height: 30px;
   color: ${ColorStyle.Gray500};
+  font-size: 16px;
+  font-family: ${FontFamily};
   background-color: ${ColorStyle.BackGround};
   border-bottom: 1px solid ${ColorStyle.Gray100};
   border-right: none;
@@ -271,6 +284,24 @@ const MarginWrapper = styled.div`
 const ErrorMessage = styled.p`
   color: ${ColorStyle.Error};
   margin: 10px 0px;
+`;
+
+const RadioInput = styled.input`
+    cursor: pointer;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    margin-right: 16px;
+    background-color: ${ColorStyle.Gray300 + Opacity[30]};
+    // background: ${ColorStyle.PrimaryPurple};
+  }
+  &:checked {
+    // width: 11.85px;
+    // height: 11.85px;
+    background: ${ColorStyle.PrimaryPurple};
+    border: 5px solid #4b4950;
+  }
 `;
 
 export default WithdrawalForm;

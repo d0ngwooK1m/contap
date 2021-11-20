@@ -28,7 +28,7 @@ import T from '../api/tokenInstance';
 
 import TutorialForm from './TutorialForm';
 import { mainSteps, settingSteps } from '../utils/tutorialSteps';
-// import { settingSteps } from '../utils/tutorialSteps';
+// import { mainSteps } from '../utils/tutorialSteps';
 
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
@@ -140,6 +140,7 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper>
+        {/* <TutorialForm steps={mainSteps} page={1} /> */}
         {mypageAlarm === false ? (
           <TutorialForm steps={mainSteps} page={1} />
         ) : null}
@@ -247,7 +248,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0f0a1a;
+  background-color: #0f0a1aff;
   z-index: 1001;
 `;
 

@@ -17,6 +17,7 @@ import {
   CREATE_CARD,
   UPDATE_CARD,
   DELETE_CARD,
+  SEARCH_DATA,
   SEARCH_ARR,
   SEARCH_STACK,
   SEARCH_HOBBY,
@@ -36,6 +37,10 @@ export const loadCard = createAction(LOAD_CARD, (cardList) => ({
 export const searchCard = createAction(SEARCH_CARD, (searchInfo, cardList) => ({
   searchInfo,
   cardList,
+}));
+
+export const searchDataList = createAction(SEARCH_DATA, (searchDataArr) => ({
+  searchDataArr,
 }));
 
 export const searchArrList = createAction(SEARCH_ARR, (searchList) => ({

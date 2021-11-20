@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 // import { stepContentClasses } from '@mui/material';
 import axios from 'axios';
-import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
+import { ColorStyle, FontScale, Opacity, FontFamily } from '../utils/systemDesign';
 import {
   backToPrev,
   emailAuth,
@@ -17,6 +17,8 @@ import { Grid, Input, Button, Text } from '../elements';
 import Timer from '../components/Timer';
 import { ReactComponent as Onboard2Svg } from '../svgs/onboarding2.svg';
 import { ReactComponent as SignImgSvg } from '../svgs/SignupImg.svg';
+import { ReactComponent as ExpandDownSvg } from '../svgs/ExpandDown.svg';
+import { ReactComponent as ExpandOpenSvg } from '../svgs/ExpandOpen.svg';
 
 const Signup = () => {
   const history = useHistory();
@@ -131,12 +133,12 @@ const Signup = () => {
             <SignImgSvg />
             <MarginWrapper7>
               <Text color="white" bold48>
-                회원가입 완료
+                회원가입 완료!
               </Text>
             </MarginWrapper7>
             <MarginWrapper8>
               <Text color="white" bold32>
-                환영합니다! <br /> 이제 로그인 해서 컨탭을 탐색해보세요
+                환영합니다! <br /> 이제 로그인 해서 Contap을 탐색해보세요
               </Text>
             </MarginWrapper8>
             <GotoLoginBtn
@@ -151,6 +153,11 @@ const Signup = () => {
       ) : (
         <SignupWrapper>
           <LeftWrapper>
+            <Link
+              onClick={() => {
+                history.push('/');
+              }}
+            />
             <SvgWrapper>
               <Onboard2Svg />
             </SvgWrapper>
@@ -170,6 +177,7 @@ const Signup = () => {
                     <br /> 컨탭 회원가입을 진행합니다.
                   </Text>
                   <form
+                    autoComplete="off"
                     onSubmit={handleSubmit(async (info) => {
                       await setErrorMessage('');
                       console.log(info);
@@ -185,10 +193,7 @@ const Signup = () => {
                   >
                     <br />
                     <MarginWrapper4>
-                      <label>
-                        <Text color={ColorStyle.Gray300} regular20>
-                          닉네임
-                        </Text>
+                      <InputWrapper>
                         <StyledInput
                           type="text"
                           // placeholder="중복되지 않는 닉네임을 입력해주세요"
@@ -196,17 +201,20 @@ const Signup = () => {
                             required: '닉네임을 입력해주세요',
                           })}
                         />
-                        {errors.userName && (
-                          <ErrorMessage>{errors.userName.message}</ErrorMessage>
-                        )}
-                      </label>
+                        <StyledLabel>
+                          {/* <Text color={ColorStyle.Gray300} regular20>
+                          
+                        </Text> */}
+                          닉네임
+                        </StyledLabel>
+                      </InputWrapper>
+                      {errors.userName && (
+                        <ErrorMessage>{errors.userName.message}</ErrorMessage>
+                      )}
                     </MarginWrapper4>
                     <br />
                     <MarginWrapper5>
-                      <label>
-                        <Text color={ColorStyle.Gray300} regular20>
-                          비밀번호
-                        </Text>
+                      <InputWrapper>
                         <StyledInput
                           type="password"
                           placeholder="비밀번호는 6자에서 20자 입니다."
@@ -222,42 +230,54 @@ const Signup = () => {
                             },
                           })}
                         />
-                        {errors.pw && (
-                          <ErrorMessage>{errors.pw.message}</ErrorMessage>
-                        )}
-                      </label>
+                        <StyledLabel>
+                          {/* <Text color={ColorStyle.Gray300} regular20>
+                          
+                        </Text> */}
+                          비밀번호
+                        </StyledLabel>
+                      </InputWrapper>
+                      {errors.pw && (
+                        <ErrorMessage>{errors.pw.message}</ErrorMessage>
+                      )}
                     </MarginWrapper5>
 
                     <br />
                     {watch('pw') !== undefined && watch('pw')?.length >= 6 && (
-                      <label>
-                        <Text color={ColorStyle.Gray300} regular20>
-                          비밀번호 확인
-                        </Text>
-                        <StyledInput
-                          type="password"
-                          // placeholder="비밀번호를 확인해주세요"
-                          {...register('pwCheck', {
-                            required: '비밀번호를 입력해주세요',
-                            maxLength: {
-                              value: 20,
-                              message: '비밀번호는 최대 20자입니다',
-                            },
-                            minLength: {
-                              value: 6,
-                              message: '비밀번호는 최소 6자 이상입니다',
-                            },
-                          })}
-                        />
+                      <div>
+                        <InputWrapper>
+                          <StyledInput
+                            type="password"
+                            // placeholder="비밀번호를 확인해주세요"
+                            {...register('pwCheck', {
+                              required: '비밀번호를 입력해주세요',
+                              maxLength: {
+                                value: 20,
+                                message: '비밀번호는 최대 20자입니다',
+                              },
+                              minLength: {
+                                value: 6,
+                                message: '비밀번호는 최소 6자 이상입니다',
+                              },
+                            })}
+                          />
+                          <StyledLabel>
+                            {/* <Text color={ColorStyle.Gray300} regular20>
+                          
+                        </Text> */}
+                            비밀번호 확인
+                          </StyledLabel>
+                        </InputWrapper>
                         {errors.pwCheck && (
                           <ErrorMessage>{errors.pwCheck.message}</ErrorMessage>
                         )}
                         {!errors.userName &&
                           !errors.pw &&
-                          !errors.pwCheck && errorMessage !== '' && (
+                          !errors.pwCheck &&
+                          errorMessage !== '' && (
                             <ErrorMessage>{errorMessage}</ErrorMessage>
                           )}
-                      </label>
+                      </div>
                     )}
 
                     {/* {console.log(watch('pw').length, watch('pwCheck').length)} */}
@@ -284,10 +304,12 @@ const Signup = () => {
                   <Text color={ColorStyle.Gray500} bold20>
                     반갑습니다!
                     <br />
-                    회원가입 전에 이메일 인증을 해주세요. 다음 단계로 넘어가기
-                    까지 시간이 걸릴 수 있습니다.
+                    Contap가입 전에 이메일 인증을 해주세요.
+                    <br />
+                    다음 단계로 넘어가기 까지 시간이 걸릴 수 있습니다.
                   </Text>
                   <form
+                    autoComplete="off"
                     onSubmit={handleSubmit((emailInfo) => {
                       console.log(emailInfo);
                       // await dispatch(sendEmailAuth(emailInfo));
@@ -295,10 +317,7 @@ const Signup = () => {
                     })}
                   >
                     <MarginWrapper>
-                      <label>
-                        <Text color={ColorStyle.Gray300} regular20>
-                          이메일
-                        </Text>
+                      <InputWrapper>
                         <StyledInput
                           type="text"
                           // placeholder="이메일을 입력해주세요"
@@ -311,7 +330,13 @@ const Signup = () => {
                             },
                           })}
                         />
-                      </label>
+                        <StyledLabel>
+                          {/* <Text color={ColorStyle.Gray300} regular20>
+                            
+                          </Text> */}
+                          이메일
+                        </StyledLabel>
+                      </InputWrapper>
                       {errors.email && (
                         <ErrorMessage>{errors.email.message}</ErrorMessage>
                       )}
@@ -335,14 +360,15 @@ const Signup = () => {
                   <Text color={ColorStyle.Gray500} bold20>
                     반갑습니다!
                     <br />
-                    회원가입 전에 이메일 인증을 해야합니다. 메일이 오지 않는다면 아래 버튼을 클릭해주세요.
+                    Contap가입 전에 이메일 인증을 해야합니다.
                     <br />
                     현재 인증번호를 보낸 메일: <span>{checkedEmail}</span>
                     <br />
-                    <Timer mm={3} ss={0} />      
+                    <Timer mm={3} ss={0} />
                   </Text>
 
                   <form
+                    autoComplete="off"
                     onSubmit={handleSubmit(() => {
                       // console.log(numInfo);
                       const authInfo = {
@@ -355,10 +381,7 @@ const Signup = () => {
                     })}
                   >
                     <MarginWrapper>
-                      <label>
-                        <Text color={ColorStyle.Gray300} regular20>
-                          인증번호
-                        </Text>
+                      <InputWrapper>
                         <StyledInput
                           type="text"
                           // placeholder="인증번호를 입력해주세요"
@@ -374,17 +397,23 @@ const Signup = () => {
                             setCertificationNum(e.target.value);
                           }}
                         />
-                        {errors.certificationNumber && (
-                          <ErrorMessage>
-                            {errors.certificationNumber.message}
-                          </ErrorMessage>
-                        )}
-                        {!errors.certificationNumber && !authNumCheck && (
-                          <ErrorMessage>
-                            인증번호가 일치하지 않습니다.
-                          </ErrorMessage>
-                        )}
-                      </label>
+                        <StyledLabel>
+                          {/* <Text color={ColorStyle.Gray300} regular20>
+                          
+                        </Text> */}
+                          인증번호
+                        </StyledLabel>
+                      </InputWrapper>
+                      {errors.certificationNumber && (
+                        <ErrorMessage>
+                          {errors.certificationNumber.message}
+                        </ErrorMessage>
+                      )}
+                      {!errors.certificationNumber && !authNumCheck && (
+                        <ErrorMessage>
+                          인증번호가 일치하지 않습니다.
+                        </ErrorMessage>
+                      )}
                     </MarginWrapper>
                     <MarginWrapper2>
                       <SubmitInput type="submit" value="인증번호 확인하기" />
@@ -406,20 +435,48 @@ const Signup = () => {
                       }
                     }}
                   >
-                    <Text color={ColorStyle.Gray300} regular16>
-                      인증번호가 오지 않나요?
-                    </Text>
+                    {!content ? (
+                      <EmailWrapper>
+                        <div
+                          style={{
+                            marginRight: '10px',
+                          }}
+                        >
+                          <ExpandDownSvg />
+                        </div>
+                        <Text color={ColorStyle.Gray300} regular16>
+                          이메일을 받지 못하셨나요?
+                        </Text>
+                      </EmailWrapper>
+                    ) : (
+                      <EmailWrapper>
+                        <div
+                          style={{
+                            marginRight: '10px',
+                          }}
+                        >
+                          <ExpandOpenSvg />
+                        </div>
+                        <Text color={ColorStyle.Gray300} regular16>
+                          이메일을 받지 못하셨나요?
+                        </Text>
+                      </EmailWrapper>
+                    )}
                   </MoreWrapper>
                   {content && (
                     <MoreContent>
-                      <Text color={ColorStyle.Gray500} regular14>
+                      <Text color={ColorStyle.Gray500} regular16>
                         1. 발송된 이메일은 3분 동안 유효해요.
                         <br />
-                        2. 메일이 도착할때 까지 약간의 시간이 걸릴수도 있어요
+                        메일이 도착할때 까지 약간의 시간이 걸릴수도 있어요
+                        <br />
+                        2. 혹시 스팸메일함을 확인해보셨나요?
                       </Text>
                       <MarginWrapper3>
-                        <Text color={ColorStyle.Gray500} regular14>
-                          그래도 못받았다면 이메일 다시 보내기를 요청해주세요
+                        <Text color={ColorStyle.Gray500} regular16>
+                          그래도 받지 못하셨다면
+                          <br />
+                          이메일 다시 보내기를 요청해주세요
                         </Text>
                       </MarginWrapper3>
                       <BackToPrevBtn
@@ -427,7 +484,7 @@ const Signup = () => {
                           const emailInfo = {
                             email: checkedEmail,
                           };
-                          dispatch(sendEmailAuth(emailInfo));
+                          sendEmailAuth(emailInfo);
                         }}
                       >
                         이메일 다시 보내기
@@ -456,6 +513,16 @@ const LeftWrapper = styled.div`
   background: linear-gradient(153.56deg, #8c4dff 0%, rgba(29, 29, 34, 0) 25%);
   background-color: rgba(0, 0, 0, 0.5);
   position: relative;
+`;
+
+const Link = styled.div`
+  width: 125px;
+  height: 36px;
+  position: absolute;
+  top: 160px;
+  left: 165px;
+  cursor: pointer;
+  z-index: 1000;
 `;
 
 const SvgWrapper = styled.div`
@@ -488,14 +555,24 @@ const StyledInput = styled.input`
   height: 30px;
   color: ${ColorStyle.Gray500};
   background-color: ${ColorStyle.BackGround};
-  border-bottom: 1px solid ${ColorStyle.Gray100};
+  border-bottom: 1px solid ${ColorStyle.Gray300};
+  font-size: 16px;
+  font-family: ${FontFamily};
   border-right: none;
   border-top: none;
   border-left: none;
   &:focus {
     outline: none;
     border-bottom: 1px solid ${ColorStyle.PrimaryPurple};
+    + label {
+      color: ${ColorStyle.PrimaryPurple};
+    }
   }
+`;
+
+const EmailWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const GotoLoginWrap = styled.div`
@@ -503,6 +580,7 @@ const GotoLoginWrap = styled.div`
   height: 100vh;
   display: flex;
   margin: auto;
+  padding: 150px 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -517,6 +595,15 @@ const GotoLoginBtn = styled.button`
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`;
+
+const StyledLabel = styled.label`
+  color: ${ColorStyle.Gray300};
 `;
 
 const SubmitInput = styled.input`
@@ -590,7 +677,7 @@ const MoreWrapper = styled.div`
 
 const MoreContent = styled.div`
   width: 100%;
-  height: 276px;
+  height: fit-content;
   background-color: ${ColorStyle.BackGround300};
   padding: 30px;
 `;
