@@ -15,6 +15,16 @@ const LeftWrapper = styled.div`
   position: relative;
 `;
 
+const Link = styled.div`
+  width: 125px;
+  height: 36px;
+  position: absolute;
+  top: 160px;
+  left: 165px;
+  cursor: pointer;
+  z-index: 1000;
+`;
+
 const SvgWrapper = styled.div`
   width: 540px;
   height: fit-content;
@@ -36,10 +46,13 @@ const Title = styled.div`
   margin: 160px 0px 64px 0px;
 `;
 
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`;
+
 const StyledLabel = styled.label`
-  span:focus {
-    color: ${ColorStyle.PrimaryPurple};
-  }
+  color: ${ColorStyle.Gray300};
 `;
 
 const StyledInput = styled.input`
@@ -47,7 +60,9 @@ const StyledInput = styled.input`
   height: 30px;
   color: ${ColorStyle.Gray500};
   background-color: ${ColorStyle.BackGround};
-  border-bottom: 1px solid ${ColorStyle.Gray100};
+  border-bottom: 1px solid ${ColorStyle.Gray300};
+  font-size: 16px;
+  font-family: ${FontFamily};
   border-right: none;
   border-right: none;
   border-top: none;
@@ -55,6 +70,9 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
     border-bottom: 1px solid ${ColorStyle.PrimaryPurple};
+    + label {
+      color: ${ColorStyle.PrimaryPurple};
+    }
   }
 `;
 
@@ -62,9 +80,10 @@ const SubmitInput = styled.input`
   width: 445px;
   height: 60px;
   margin: 60px 0px 0px 0px;
+  font-family: ${FontFamily};
   color: white;
   font-size: ${FontScale.Body1_20};
-  font-family: ${FontFamily};
+  font-weight: bold;
   border-radius: 30px;
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
@@ -124,9 +143,11 @@ const WarningText = styled.p`
 export {
   LoginWrapper,
   LeftWrapper,
+  Link,
   SvgWrapper,
   RightWrapper,
   Title,
+  InputWrapper,
   StyledLabel,
   StyledInput,
   SubmitInput,

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from 'react';
-// import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { FontFamily } from '../utils/systemDesign';
 
 import styled from 'styled-components';
 import { loadCardFrontDB } from '../features/cards/actions';
@@ -10,6 +10,7 @@ import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
 // import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
+import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
 
 
 const CardList = () => {
@@ -28,7 +29,7 @@ const CardList = () => {
   }, [isSearching]);
 
   return (
-    <div style={{ paddingBottom: '112px', maxWidth: '1440px' }}>
+    <Box>
       {/* <SvgWrapper>
         <TitleBgSvg />
       </SvgWrapper> */}
@@ -46,23 +47,33 @@ const CardList = () => {
         </div>
       </TextWrap>
       <RefreshWrapper>
+        <FlexWrapper>
+        <RefreshSvg />
         <RefreshBtn
           type="button"
           onClick={() => {
             dispatch(loadCardFrontDB());
           }}
         >
-          카드 새로고침
+          
+          카드 섞기
         </RefreshBtn>
+        </FlexWrapper>
       </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
           return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </CardListWrap>
-    </div>
+    </Box>
   );
 };
+
+const Box = styled.div`
+  padding-bottom: 112px;
+  max-width: 1440px;
+  position: relative;
+`;
 
 const TitleWrap = styled.div`
   margin-top: 54px;
@@ -88,9 +99,11 @@ const TextWrap = styled.div`
   }
 `;
 
-const SvgWrapper = styled.div`
-  z-index: -1;
-`;
+// const SvgWrapper = styled.div`
+//   z-index: -1;
+//   position: absolute;
+//   top: -91px;
+// `;
 
 const RefreshWrapper = styled.div`
   width: 100%;
@@ -98,11 +111,17 @@ const RefreshWrapper = styled.div`
   justify-content: right;
 `;
 
+const FlexWrapper = styled.div`
+  display: flex;
+`;
+
 const RefreshBtn = styled.button`
   margin-right: 170px;
   cursor: pointer;
   background-color: #0f0a1a;
   color: #a09bac;
+  font-family: ${FontFamily};
+  font-size: 20px;
   border: none;
 `;
 

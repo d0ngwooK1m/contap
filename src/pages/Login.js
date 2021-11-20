@@ -14,8 +14,10 @@ import {
   LoginWrapper,
   LeftWrapper,
   SvgWrapper,
+  Link,
   RightWrapper,
   Title,
+  InputWrapper,
   StyledLabel,
   StyledInput,
   SubmitInput,
@@ -158,6 +160,11 @@ const Login = () => {
   return (
     <LoginWrapper>
       <LeftWrapper>
+        <Link
+          onClick={() => {
+            history.push('/');
+          }}
+        ></Link>
         <SvgWrapper>
           <Onboard1Svg />
         </SvgWrapper>
@@ -170,6 +177,7 @@ const Login = () => {
             </Text>
           </Title>
           <form
+            autocomplete='off'
             onSubmit={handleSubmit(async (loginInfo) => {
               await setErrorMessage('');
               console.log(loginInfo);
@@ -177,13 +185,7 @@ const Login = () => {
               loginToServer(loginInfo);
             })}
           >
-            <label
-              style={{
-                color: '#4D4759',
-              }}
-            >
-              <span>이메일</span>
-              <br />
+            <InputWrapper>
               <StyledInput
                 type="text"
                 // placeholder="이메일을 입력해주세요"
@@ -198,16 +200,13 @@ const Login = () => {
                   margin: '0px 0px 28px 0px',
                 }}
               />
-            </label>
+              <StyledLabel>
+                이메일
+              </StyledLabel>
+            </InputWrapper>
             {errors.email && <WarningText>{errors.email.message}</WarningText>}
             <br />
-            <label
-              style={{
-                color: '#4D4759',
-              }}
-            >
-              비밀번호
-              <br />
+            <InputWrapper>
               <StyledInput
                 type="password"
                 // placeholder="비밀번호를 입력해주세요"
@@ -226,7 +225,10 @@ const Login = () => {
                   margin: '0px 0px 40px 0px',
                 }}
               />
-            </label>
+              <StyledLabel>
+                비밀번호
+              </StyledLabel>
+            </InputWrapper>
             {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
             {!errors.email && !errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
             <br />
@@ -249,6 +251,9 @@ const Login = () => {
               </span>
             </div>
             <SubmitInput type="submit" value="로그인" />
+            {/* <SubmitInput type="submit" >
+              <Text color='white' regular20>로그인</Text>
+            </SubmitInput> */}
           </form>
           <DivideWrapper>
             <DivideLine />
@@ -262,7 +267,14 @@ const Login = () => {
               window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
             }}
           >
-            <KakaoLogoSvg />
+            <div
+              style={{
+                marginRight: '16px',
+                marginTop: '5px',
+              }}
+            >
+              <KakaoLogoSvg />
+            </div>
             <Text color="#181600" regular20>
               카카오 로그인
             </Text>
@@ -274,7 +286,14 @@ const Login = () => {
               window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
             }}
           >
-            <GithubLogoSvg />
+            <div
+              style={{
+                marginRight: '16px',
+                marginTop: '5px',
+              }}
+            >
+              <GithubLogoSvg />
+            </div>
             <Text color={ColorStyle.BackGround100} regular20>
               깃허브 로그인
             </Text>

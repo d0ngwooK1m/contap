@@ -4,6 +4,7 @@ import { produce } from 'immer'; // reducer 불변성 유지
 import {
   LOAD_CARD,
   SEARCH_CARD,
+  SEARCH_DATA,
   SEARCH_ARR,
   SEARCH_STACK,
   SEARCH_HOBBY,
@@ -30,6 +31,7 @@ const initialState = {
   preview: null,
   cardList: {},
   searchInfo: {},
+  searchData: [],
   searchArr: [],
   stackArr: [],
   hobbyArr: [],
@@ -72,6 +74,10 @@ export default handleActions(
             draft.allIds.push(doc.userId);
           });
         }
+      }),
+    [SEARCH_DATA]: (state, action) =>
+      produce(state, (draft) => {
+        draft.searchData = action.payload.searchDataArr;
       }),
     [SEARCH_ARR]: (state, action) =>
       produce(state, (draft) => {

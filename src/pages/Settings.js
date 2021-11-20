@@ -22,7 +22,7 @@ const content = [
         }}
       >
         <div>
-          <BellIconSvg fill="#50FFB8" />
+          <BellIconSvg stroke="#50FFB8" />
         </div>
         <div style={{ position: 'relative', left: '16px' }}>
           <Text color="#50FFB8" regular20>
@@ -42,7 +42,7 @@ const content = [
         }}
       >
         <div>
-          <BellIconSvg fill="#A09BAC" />
+          <BellIconSvg stroke="#A09BAC" />
         </div>
         <div style={{ position: 'relative', left: '16px' }}>
           <Text color="#a09bac" regular20>
