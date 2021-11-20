@@ -9,8 +9,10 @@ import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
-// import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
-
+import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
+import { ReactComponent as SquareShadow } from '../svgs/Reflex.svg';
+import { ReactComponent as SquareLeft } from '../svgs/ShapeLeft.svg';
+import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -28,11 +30,20 @@ const CardList = () => {
   }, [isSearching]);
 
   return (
-    <div style={{ paddingBottom: '112px', maxWidth: '1440px'}}>
-      {/* <SvgWrapper>
+    <Wrap>
+      <div className="SquareShadow">
+        <SquareShadow />
+      </div>
+      <div className="SquareLeft">
+        <SquareLeft />
+      </div>
+      <div className="SquareRight">
+        <SquareRight />
+      </div>
+      {/* <div className="TitleBgSvg">
         <TitleBgSvg />
-      </SvgWrapper> */}
-      <TitleWrap>
+      </div> */}
+      <TitleWrap >
         <Text bold48> Just Tap!</Text>
         <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
       </TitleWrap>
@@ -60,34 +71,63 @@ const CardList = () => {
           return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </CardListWrap>
-    </div>
+    </Wrap>
   );
 };
 
+const Wrap = styled.div`
+  width: 100%;
+  padding-top: 76px;
+  padding-bottom: 112px;
+  position: relative;
+  z-index: 99;
+
+  .SquareLeft {
+    position: absolute;
+    top:80px;
+    left: 130px;
+    z-index: 1;
+  }
+  .SquareShadow {
+    position: absolute;
+    top:268px;
+    left: 130px;
+    z-index: 1;
+  }
+  .SquareRight {
+    position: absolute;
+    top:32px;
+    right: 130px;
+    z-index: 1;
+  }
+  .TitleBgSvg{
+    position: absolute;
+    top: 0px;
+    z-index: 9699;
+  }
+`;
+
 const TitleWrap = styled.div`
-  margin-top: 54px;
   text-align: center;
   p {
-    margin: 24px 0px 8px 0px;
+    margin-bottom: 24px;
   }
+
 `;
 
 const SearchBarWrap = styled.div`
   text-align: center;
-  margin: 44px 0px 120px 0px;
+  margin: 20px 0px 50px 0px;
 `;
 
 const TextWrap = styled.div`
-  height: 230px;
   div {
     text-align: center;
-    padding-top: 70px;
     p {
       margin: 8px 0px;
     }
   }
 `;
-
 
 const RefreshWrapper = styled.div`
   width: 100%;
@@ -97,6 +137,7 @@ const RefreshWrapper = styled.div`
 
 const RefreshBtn = styled.button`
   margin-right: 170px;
+  margin-top: 18px;
   cursor: pointer;
   background-color: #0f0a1a;
   color: #a09bac;

@@ -16,15 +16,13 @@ const content = [
         style={{
           margin: 'auto',
           display: 'flex',
-          position: 'relative',
-          left: '14.25px',
           alignItems: 'center',
         }}
       >
         <div>
-          <BellIconSvg fill="#50FFB8" />
+          <BellIconSvg stroke="#50FFB8" />
         </div>
-        <div style={{ position: 'relative', left: '16px' }}>
+        <div>
           <Text color="#50FFB8" regular20>
             알림 설정
           </Text>
@@ -36,15 +34,13 @@ const content = [
         style={{
           margin: 'auto',
           display: 'flex',
-          position: 'relative',
-          left: '14.25px',
           alignItems: 'center',
         }}
       >
         <div>
           <BellIconSvg fill="#A09BAC" />
         </div>
-        <div style={{ position: 'relative', left: '16px' }}>
+        <div>
           <Text color="#a09bac" regular20>
             알림 설정
           </Text>
@@ -60,15 +56,13 @@ const content = [
         style={{
           margin: 'auto',
           display: 'flex',
-          position: 'relative',
-          left: '14.25px',
           alignItems: 'center',
         }}
       >
         <div>
           <LockIconSvg stroke="#50FFB8" />
         </div>
-        <div style={{ position: 'relative', left: '16px' }}>
+        <div>
           <Text color="#50FFB8" regular20>
             비밀번호 변경
           </Text>
@@ -80,15 +74,13 @@ const content = [
         style={{
           margin: 'auto',
           display: 'flex',
-          position: 'relative',
-          left: '14.25px',
           alignItems: 'center',
         }}
       >
         <div>
           <LockIconSvg stroke="#A09BAC" />
         </div>
-        <div style={{ position: 'relative', left: '16px' }}>
+        <div>
           <Text color="#a09bac" regular20>
             비밀번호 변경
           </Text>
@@ -104,15 +96,13 @@ const content = [
         style={{
           margin: 'auto',
           display: 'flex',
-          position: 'relative',
-          left: '14.25px',
           alignItems: 'center',
         }}
       >
         <div>
           <WithdrawalIconSvg fill="#50FFB8" />
         </div>
-        <div style={{ position: 'relative', left: '16px' }}>
+        <div>
           <Text color="#50FFB8" regular20>
             회원 탈퇴
           </Text>
@@ -124,15 +114,13 @@ const content = [
         style={{
           margin: 'auto',
           display: 'flex',
-          position: 'relative',
-          left: '14.25px',
           alignItems: 'center',
         }}
       >
         <div>
           <WithdrawalIconSvg fill="#A09BAC" />
         </div>
-        <div style={{ position: 'relative', left: '16px' }}>
+        <div>
           <Text color="#a09bac" regular20>
             회원 탈퇴
           </Text>

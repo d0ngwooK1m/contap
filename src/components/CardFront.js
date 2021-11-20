@@ -195,6 +195,8 @@ const CardForm = styled.div`
     border: 3px solid
       ${({ category }) =>
         category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    background-color: ${({ category }) =>
+      category ? ColorStyle.BackGround300 : ColorStyle.BackGround100};
 
     .imageBox {
       margin: 20px;
