@@ -6,6 +6,7 @@ import {
   LOAD_GRAB,
   SHOW_MODAL,
   REMOVE_RECEIVE_TAP,
+  REMOVE_GRAB,
 } from './types';
 import T from '../../api/tokenInstance';
 // import { apis } from '. ./../api/api';
@@ -20,6 +21,9 @@ export const loadGrab = createAction(LOAD_GRAB, (cardBundles) => ({
   cardBundles,
 }));
 export const removeReceiveTap = createAction(REMOVE_RECEIVE_TAP, (userId) => ({
+  userId,
+}));
+export const removeGrab = createAction(REMOVE_GRAB, (userId) => ({
   userId,
 }));
 export const modalSwitch = createAction(SHOW_MODAL, (bool) => ({
@@ -70,3 +74,12 @@ export const removeReceiveTapToAxios =
       console.error(error);
     }
   };
+
+export const removeGrabToAxios = (userId) => async (dispatch) => {
+  try {
+    await T.POST(`/contap/deletefriend/${userId}`);
+    dispatch(removeGrab(userId));
+  } catch (error) {
+    console.error(error);
+  }
+};

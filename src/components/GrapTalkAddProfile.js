@@ -93,9 +93,10 @@ const ProfileWrap = styled.div`
   margin: 0px auto 32px 80px;
   display: flex;
   .tags {
-    margin: auto;
+    width: 60%;
     display: flex;
     flex-direction: row;
+    margin: 0px 0px 0px auto;
   }
   .name {
     margin: 0px 0px 10px 0px;

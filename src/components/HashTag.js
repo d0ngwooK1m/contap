@@ -23,8 +23,9 @@ const HashTagWrap = styled.div`
   font-size: 16px;
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  width: 90px;
+  width: fit-content;
   height: 35px;
+  padding: 0px 16px;
   background-color: ${({category}) => category ? ColorStyle.PrimaryPurple+Opacity[20] : ColorStyle.PrimaryMint+Opacity[20]};
   border-radius: 50px;
   align-items: center;

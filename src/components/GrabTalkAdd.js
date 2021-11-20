@@ -27,7 +27,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
           <input type="text" placeholder='   이름을 입력해 주세요' value={searchValue} onChange={handleSearchValue} />
         </SearchBarFrom>
         <IconButton onClick={closeList}>
-          <Close />
+          <Close stroke={ColorStyle.Gray500}/>
         </IconButton>
       </Header>
       {noneTalkList.map((id) => {

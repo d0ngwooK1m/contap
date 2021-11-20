@@ -9,8 +9,8 @@ import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
 import { useSelector, useDispatch } from 'react-redux';
 // import { setChatNoti, setContapNoti } from '../features/notice/actions';
+import { useHistory } from 'react-router';
 import { setChatNoti, setContapNoti } from '../features/notice/actions';
-import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
@@ -34,6 +34,7 @@ import { mainSteps, settingSteps } from '../utils/tutorialSteps';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const isUserLogin = useSelector((state) => state.user.email);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
   const isContapNoti = useSelector((state) => state.notice.isContapNoti);

@@ -21,7 +21,7 @@ const ChatRoom = ({ userId }) => {
   const userInfo = useSelector((state) => state.user);
   const lastMessage = roomInfo.roomStatus?.split('/')[2];
   const openCheck = currentRoom.userId === roomInfo.userId;
-
+  console.log(roomInfo)
   const openChatRoom = () => {
     if (openCheck) {
       return;

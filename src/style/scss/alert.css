@@ -1,0 +1,26 @@
+.swal-popup {
+  border-radius: 30px;
+  width: 730px;
+  min-width: 500px;
+}
+
+.swal-title {
+  margin-top: 56px;
+  padding: 0px;
+  padding-left: 10px;
+}
+
+.swal2-actions {
+  margin-right: 0px;
+}
+
+.swal-cancel {
+  margin: 0px;
+  padding: 0px 10px;
+}
+
+.swal-confirm {
+  margin: 0px;
+  padding: 0px 10px;
+  margin-right: 98px;
+}

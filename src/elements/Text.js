@@ -6,6 +6,7 @@ const Text = ({
   regular14,
   regular16,
   regular20,
+  regular24,
   bold20,
   bold24,
   bold32,
@@ -24,6 +25,9 @@ const Text = ({
   }
   if (regular20) {
     return <Regular20 {...styles}>{children}</Regular20>;
+  }
+  if (regular24) {
+    return <Regular24 {...styles}>{children}</Regular24>;
   }
   if (bold20) {
     return <Bold20 {...styles}>{children}</Bold20>;
@@ -45,6 +49,7 @@ Text.propTypes = {
   regular14: PropTypes.bool,
   regular16: PropTypes.bool,
   regular20: PropTypes.bool,
+  regular24: PropTypes.bool,
   bold20: PropTypes.bool,
   bold24: PropTypes.bool,
   bold32: PropTypes.bool,
@@ -57,6 +62,7 @@ Text.defaultProps = {
   regular14: false,
   regular16: false,
   regular20: false,
+  regular24: false,
   bold20: false,
   bold24: false,
   bold32: false,
@@ -82,6 +88,13 @@ const Regular20 = styled.p`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 20px;
+  font-weight: 400;
+  color: ${({color}) => color};
+`;
+const Regular24 = styled.p`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 24px;
   font-weight: 400;
   color: ${({color}) => color};
 `;
