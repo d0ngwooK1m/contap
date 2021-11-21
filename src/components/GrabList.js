@@ -49,21 +49,23 @@ GrabList.propTypes = {
 
 const Wrap = styled.div`
   position: relative;
-  top: 75px;
-  max-height: 780px;
+  top: 0px;
+  padding-top: 72px;
+  max-height: 688px;
   left: 100px;
   width: 100%;
+  overflow-y: scroll;
 `;
 
 const CardBox = styled.div`
   width: 100%;
   display: flex;
   width: 780px;
-  height: 600px;
+  height: 688px;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-content: flex-start;
   margin: auto;
-  overflow-y: scroll;
 `;
 
 export default GrabList;

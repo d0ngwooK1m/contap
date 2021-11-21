@@ -225,7 +225,7 @@ const CardFrontWrite = () => {
       height="560px"
       bg="#141422"
       margin="0px auto"
-      padding="66px 0px 0px 0px"
+      padding="100px 0px 0px 0px"
     >
       <Grid is_flex width="1110px" margin="0px auto 64px auto">
         <Text bold32 color="#f5f3f8">
@@ -604,7 +604,7 @@ const RadioInput = styled.input`
     margin-right: 16px;
     background-color: ${ColorStyle.Gray300 + Opacity[30]};
     // background: ${ColorStyle.PrimaryPurple};
-  }
+  
   &:checked {
     // width: 11.85px;
     // height: 11.85px;

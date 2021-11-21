@@ -31,7 +31,7 @@ const CardProfile = () => {
   const hobbyTag = cardList.hashTagsString
     ?.split('_')[1]
     ?.split('@')
-    .slice(1, 4);
+    ?.slice(1, 4);
   console.log('앞면 관심사 태그확인====>', hobbyTag);
 
   return (
