@@ -15,7 +15,7 @@ const ReceiveTap = ({ select }) => {
 
   React.useEffect(async () => {
     console.log('1번 디패');
-    await dispatch(loadReceiveTapToAxios('0'));
+    await dispatch(loadReceiveTapToAxios("0"));
     console.log('2번 디패');
     dispatch(setContapNoti(false));
     console.log('3번 디패');
@@ -24,7 +24,7 @@ const ReceiveTap = ({ select }) => {
 
   const userName = useSelector((state) => state.user.userName);
   const conTap = useSelector((state) => state.taps);
-  const page = 2;
+  const [page, setPage] = React.useState(0);
   const isNext = true;
   const [prevHeight, setPrevHeight] = React.useState(null);
 
@@ -34,15 +34,13 @@ const ReceiveTap = ({ select }) => {
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
-    scrollRef.current.scrollTop =
-      scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
-
     // scrollToBottom();
   }, []);
 
   const callNext = () => {
-    console.log('한무 스크롤 가능!')
-    dispatch(loadReceiveTapToAxios(page));
+    console.log('한무 스크롤 가능!', page)
+    dispatch(loadReceiveTapToAxios(String(page)));
+    setPage(page+1)
   };
   return (
     <ChatInfinityScroll
