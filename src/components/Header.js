@@ -29,6 +29,7 @@ import T from '../api/tokenInstance';
 
 import TutorialForm from './TutorialForm';
 import { mainSteps, settingSteps } from '../utils/tutorialSteps';
+import { ColorStyle, FontFamily } from '../utils/systemDesign';
 // import { mainSteps } from '../utils/tutorialSteps';
 
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
@@ -57,6 +58,7 @@ const Header = () => {
   );
   console.log('마이페이지 튜토리얼===>', mypageAlarm);
   console.log('세팅 튜토리얼===>', settingAlarm);
+  console.log(open);
 
   // 로그인 체크
   // useUserAuthCheck();
@@ -145,8 +147,8 @@ const Header = () => {
         {mypageAlarm === false ? (
           <TutorialForm steps={mainSteps} page={1} />
         ) : null}
-        {mypageAlarm === true && settingAlarm === false ? (
-          <TutorialForm steps={settingSteps} page={0} />
+        {history.location.pathname === '/' && mypageAlarm === true && settingAlarm === false ? (
+          <TutorialForm open={open} steps={settingSteps} page={0} />
         ) : null}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
         {/* <Grid
@@ -281,15 +283,21 @@ const Icon = styled.div`
 `;
 
 const LoginButton = styled.button`
-  width: 125px;
-  height: 50px;
-  background-color: #8c4dff;
+  width: 114px;
+  height: 44px;
+  background-color: ${ColorStyle.PrimaryPurple};
   border-radius: 30px;
   border: none;
   color: white;
   font-size: 20px;
+  font-family: ${FontFamily};
+  font-weight: bold;
   cursor: pointer;
   margin-left: 400px;
+  &:hover {
+    background-color: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
 `;
 
 const ImageBox = styled.div`

@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Text } from '../elements';
 import { searchInfoDB, searchArrList, searchDataList } from '../features/cards/actions';
-import { ColorStyle, FontScale } from '../utils/systemDesign';
+import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { ReactComponent as SearchSvg } from '../svgs/Search.svg';
-import { Opacity } from '@mui/icons-material';
 
 // const searchData = [
 //   '지오캐싱',
@@ -303,10 +302,12 @@ const SearchWrapper = styled.div`
 const CategoryWrapper = styled.div`
   width: fit-content;
   margin: 22px 0px 4px 0px;
+  background-color: ${ColorStyle.BackGround300 + Opacity[100]};
 `;
 
 const ContentWrapper = styled.div`
   width: fit-content;
+  background-color: ${ColorStyle.BackGround300 + Opacity[100]};
 `;
 
 const CategoryBtn = styled.button`
@@ -368,7 +369,7 @@ const SearchContent = styled.div`
   margin: auto;
   padding: 0px 32px;
   margin-top: 12px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround300 + Opacity[100]};
   border-radius: 30px;
   display: flex;
 `;

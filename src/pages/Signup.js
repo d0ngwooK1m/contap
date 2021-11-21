@@ -173,8 +173,8 @@ const Signup = () => {
                     </Text>
                   </Title>
                   <Text color={ColorStyle.Gray500} regular20>
-                    <span>{checkedEmail}</span>으로
-                    <br /> 컨탭 회원가입을 진행합니다.
+                    <span>{checkedEmail}</span>&nbsp;으로
+                    <br /> 컨탭 가입을 진행합니다
                   </Text>
                   <form
                     autoComplete="off"
@@ -217,7 +217,7 @@ const Signup = () => {
                       <InputWrapper>
                         <StyledInput
                           type="password"
-                          placeholder="비밀번호는 6자에서 20자 입니다."
+                          placeholder="6자리 이상으로 입력해 주세요"
                           {...register('pw', {
                             required: '비밀번호를 입력해주세요',
                             maxLength: {
@@ -248,7 +248,7 @@ const Signup = () => {
                         <InputWrapper>
                           <StyledInput
                             type="password"
-                            // placeholder="비밀번호를 확인해주세요"
+                            placeholder="비밀번호를 한 번 더 입력해 주세요"
                             {...register('pwCheck', {
                               required: '비밀번호를 입력해주세요',
                               maxLength: {
@@ -301,12 +301,10 @@ const Signup = () => {
                       이메일 인증
                     </Text>
                   </Title>
-                  <Text color={ColorStyle.Gray500} bold20>
-                    반갑습니다!
+                  <Text color={ColorStyle.Gray500} regular20>
+                    반갑습니다! 
                     <br />
-                    Contap가입 전에 이메일 인증을 해주세요.
-                    <br />
-                    다음 단계로 넘어가기 까지 시간이 걸릴 수 있습니다.
+                    Contap 가입 전에 이메일을 먼저 인증해 주세요
                   </Text>
                   <form
                     autoComplete="off"
@@ -357,14 +355,10 @@ const Signup = () => {
                       이메일 인증
                     </Text>
                   </Title>
-                  <Text color={ColorStyle.Gray500} bold20>
-                    반갑습니다!
+                  <Text color={ColorStyle.Gray500} regular20>
+                          <span>{checkedEmail}</span>&nbsp;으로
                     <br />
-                    Contap가입 전에 이메일 인증을 해야합니다.
-                    <br />
-                    현재 인증번호를 보낸 메일: <span>{checkedEmail}</span>
-                    <br />
-                    <Timer mm={3} ss={0} />
+                    메일 발송 후 도착까지 시간이 걸릴 수 있어요
                   </Text>
 
                   <form
@@ -381,29 +375,37 @@ const Signup = () => {
                     })}
                   >
                     <MarginWrapper>
-                      <InputWrapper>
-                        <StyledInput
-                          type="text"
-                          // placeholder="인증번호를 입력해주세요"
-                          {...register('certificationNumber', {
-                            required: '인증번호를 입력해주세요',
-                            pattern: {
-                              value: /^([0-9]{6})$/,
-                              message: '인증번호가 올바르지 않습니다.',
-                            },
-                          })}
-                          value={certificationNum}
-                          onChange={(e) => {
-                            setCertificationNum(e.target.value);
-                          }}
-                        />
-                        <StyledLabel>
-                          {/* <Text color={ColorStyle.Gray300} regular20>
-                          
-                        </Text> */}
-                          인증번호
-                        </StyledLabel>
-                      </InputWrapper>
+                      <CounterWrapper>
+                        {/* <Text color={ColorStyle.Gray500} regular20>
+                          <Timer mm={3} ss={0} />        
+                        </Text>         */}
+                        <Timer mm={3} ss={0} />
+                      </CounterWrapper>
+                      <RelativeInputWrapper>
+                        <InputWrapper>
+                          <StyledInput
+                            type="text"
+                            // placeholder="인증번호를 입력해주세요"
+                            {...register('certificationNumber', {
+                              required: '인증번호를 입력해주세요',
+                              pattern: {
+                                value: /^([0-9]{6})$/,
+                                message: '인증번호가 올바르지 않습니다.',
+                              },
+                            })}
+                            value={certificationNum}
+                            onChange={(e) => {
+                              setCertificationNum(e.target.value);
+                            }}
+                          />
+                          <StyledLabel>
+                            {/* <Text color={ColorStyle.Gray300} regular20>
+                            
+                          </Text> */}
+                            인증번호
+                          </StyledLabel>
+                        </InputWrapper>        
+                      </RelativeInputWrapper>
                       {errors.certificationNumber && (
                         <ErrorMessage>
                           {errors.certificationNumber.message}
@@ -547,7 +549,15 @@ const FormWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  margin: 160px 0px 64px 0px;
+  margin: 160px 0px 44px 0px;
+`;
+
+const CounterWrapper = styled.div`
+
+`;
+
+const RelativeInputWrapper = styled.div`
+
 `;
 
 const StyledInput = styled.input`
@@ -610,37 +620,51 @@ const SubmitInput = styled.input`
   width: 100%;
   height: 60px;
   color: white;
+  font-family: ${FontFamily};
   font-size: ${FontScale.Body1_20};
+  font-weight: bold;
   border-radius: 30px;
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
+  &:hover {
+    background-color: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
 `;
 
 const NotWorkingInput = styled.input`
   width: 100%;
   height: 60px;
   color: white;
+  font-family: ${FontFamily};
   font-size: ${FontScale.Body1_20};
+  font-weight: bold;
   border-radius: 30px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray300};
   border: none;
-  cursor: pointer;
 `;
 
 const BackToPrevBtn = styled.button`
   width: 100%;
   height: 60px;
   color: white;
+  font-family: ${FontFamily};
   font-size: ${FontScale.Body1_20};
+  font-weight: bold;
   border-radius: 30px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround};
   border: 1px solid ${ColorStyle.PrimaryPurple};
   cursor: pointer;
+  &:hover {
+    background-color: ${ColorStyle.BackGround300};
+    transition: 0.3s;
+  }
 `;
 
 const MarginWrapper = styled.div`
   margin: 44px 0px 54px 0px;
+  
 `;
 
 const MarginWrapper2 = styled.div`

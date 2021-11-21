@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
 import { useSelector } from 'react-redux';
+import BasicAlert from '../utils/alert';
 import { useForm } from 'react-hook-form';
 import T from '../api/tokenInstance';
 import { removeToken } from '../utils/auth';
@@ -23,6 +24,23 @@ const WithdrawalForm = () => {
 
   const handleClickRadioButton = (radioBtnName) => {
     setInputStatus(radioBtnName);
+  };
+
+  const withdrawalModal = async (passwordInfo) => {
+    const { isConfirmed } = await BasicAlert.fire({
+      title: (
+        <div style={{ textAlign: 'left' }}>
+          <div style={{ marginBottom: '40px' }}>
+            <Text bold32 color={ColorStyle.BackGround300}>
+              정말 떠나시는 건가요?
+            </Text>
+          </div>
+        </div>
+      ),
+    });
+    if (isConfirmed) {
+      dispatch(withdrawalToServer(passwordInfo));
+    }
   };
 
   const withdrawalToServer = async(passwordInfo) => {
@@ -75,8 +93,8 @@ const WithdrawalForm = () => {
         </Text>
       </ThemeWrapper>
       <MarginWrapper>
-        <Text color={ColorStyle.Gray300} regular20>
-          {userName !== '' ? userName : 회원}님 탈퇴 후 한달 뒤 모든 기록이 사라져요
+        <Text color={ColorStyle.Gray500} regular20>
+          {userName !== '' ? userName : 회원}님 <span style={{ color: `${ColorStyle.Error}` }} >탈퇴</span>하시면 모든 기록이 사라져요
           <br />
           재가입해도 복구할 수 없답니다😥
         </Text>
@@ -149,48 +167,53 @@ const WithdrawalForm = () => {
         </MarginLabelWrapper>
       </RadioWrapper>
       <form
-        onSubmit={handleSubmit((passwordInfo) => {
-          const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              popup: 'swal-popup',
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger',
-            },
-            buttonsStyling: false,
-          });
+        onSubmit={
+          handleSubmit((passwordInfo) => {
+        //   const swalWithBootstrapButtons = Swal.mixin({
+        //     customClass: {
+        //       popup: 'swal-popup',
+        //       confirmButton: 'btn btn-success',
+        //       cancelButton: 'btn btn-danger',
+        //     },
+        //     buttonsStyling: false,
+        //   });
 
-          swalWithBootstrapButtons
-            .fire({
-              title: 'Are you sure?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonText: 'Yes, delete it!',
-              cancelButtonText: 'No, cancel!',
-              reverseButtons: true,
-            })
-            .then(async(result) => {
-              if (result.isConfirmed) {
-                // swalWithBootstrapButtons.fire(
-                //   'Deleted!',
-                //   'Your file has been deleted.',
-                //   'success'
-                // )
-                await dispatch(withdrawalToServer(passwordInfo));
-              } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-              ) {
-                swalWithBootstrapButtons.fire(
-                  'Cancelled',
-                  'Your imaginary file is safe :)',
-                  'error',
-                );
-              }
-            });
-          // console.log(passwordInfo);
-          // dispatch(withdrawalToServer(passwordInfo));
-        })}
+        //   swalWithBootstrapButtons
+        //     .fire({
+        //       title: 'Are you sure?',
+        //       text: "You won't be able to revert this!",
+        //       icon: 'warning',
+        //       showCancelButton: true,
+        //       confirmButtonText: 'Yes, delete it!',
+        //       cancelButtonText: 'No, cancel!',
+        //       reverseButtons: true,
+        //     })
+        //     .then(async(result) => {
+        //       if (result.isConfirmed) {
+        //         // swalWithBootstrapButtons.fire(
+        //         //   'Deleted!',
+        //         //   'Your file has been deleted.',
+        //         //   'success'
+        //         // )
+        //         await dispatch(withdrawalToServer(passwordInfo));
+        //       } else if (
+        //         /* Read more about handling dismissals below */
+        //         result.dismiss === Swal.DismissReason.cancel
+        //       ) {
+        //         swalWithBootstrapButtons.fire(
+        //           'Cancelled',
+        //           'Your imaginary file is safe :)',
+        //           'error',
+        //         );
+        //       }
+        //     });
+        //   // console.log(passwordInfo);
+        //   // dispatch(withdrawalToServer(passwordInfo));
+        
+            withdrawalModal(passwordInfo);
+          })
+        
+        }
       >
         <label>
           <Text color={ColorStyle.Gray300} regular20>

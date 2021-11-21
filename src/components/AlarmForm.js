@@ -110,16 +110,16 @@ const AlarmForm = () => {
         </Text>
       </MarginWrapper>
 
-      <MarginWrapper>
+      <MarginWrapper11>
         <Text color={ColorStyle.Gray300} regular20>
           알림 설정
         </Text>
-      </MarginWrapper>
+      </MarginWrapper11>
       <MarginWrapper2>
         <Text color={ColorStyle.Gray500} regular20>
           이제 문자로 알림을 받아 보실 수 있습니다!
           <br />
-          여기서 잠시 알람을 끌 수 있어요
+          여기서 잠시 알람을 끌 수도 있어요
         </Text>
         {/* {
           switchInfo === 0 ?
@@ -166,9 +166,11 @@ const AlarmForm = () => {
         })}
       >
         <label>
-          <Text color={ColorStyle.Gray300} regular20>
-            알림 정보 입력
-          </Text>
+          <MarginWrapper11>
+            <Text color={ColorStyle.Gray300} regular20>
+              알림 정보 입력
+            </Text>
+          </MarginWrapper11>
           <Text color={ColorStyle.Gray300} regular20>
             받아보실 연락처를 입력해주세요
           </Text>
@@ -246,6 +248,10 @@ const ThemeWrapper = styled.div`
 
 const MarginWrapper = styled.div`
   margin: 0px 0px 48px 0px;
+`;
+
+const MarginWrapper11 = styled.div`
+  margin: 0px 0px 16px 0px;
 `;
 
 const MarginWrapper2 = styled.div`

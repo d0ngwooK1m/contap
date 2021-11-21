@@ -23,6 +23,14 @@ const searchData = [
   '지오캐싱',
   '종이접기',
   '피겨 스케이팅',
+  '맛집탐방',
+  '음악감상',
+  '카페탐방',
+  '산책',
+  '독서',
+  '스노우보드',
+  '스키',
+  '낚시',
 ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
