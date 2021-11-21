@@ -80,7 +80,7 @@ const PwSettingForm = () => {
       </ThemeWrapper>
       <MarginWrapper>
         <Text color={ColorStyle.Gray300} regular20>
-          {userName !== '' ? userName : 회원}님의 비밀번호를 다시 설정합니다.
+          비밀번호를 다시 설정합니다
         </Text>
       </MarginWrapper>
       <form

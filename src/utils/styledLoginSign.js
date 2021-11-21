@@ -80,14 +80,18 @@ const SubmitInput = styled.input`
   width: 445px;
   height: 60px;
   margin: 60px 0px 0px 0px;
-  font-family: ${FontFamily};
   color: white;
+  font-family: ${FontFamily};
   font-size: ${FontScale.Body1_20};
   font-weight: bold;
   border-radius: 30px;
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
+  &:hover {
+    background-color: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
 `;
 
 const DivideWrapper = styled.div`
@@ -114,11 +118,18 @@ const KakaoButton = styled.button`
   width: 445px;
   height: 60px;
   margin: 60px 0px 0px 0px;
+  font-family: ${FontFamily};
+  font-size: ${FontScale.Body1_20};
+  font-weight: bold;
   color: #181600;
   border-radius: 30px;
   background-color: #e5d32e;
   border: none;
   cursor: pointer;
+  &:hover {
+    background-color: #ccbd2f;
+    transition: 0.3s;
+  }
 `;
 
 const GithubButton = styled.button`
@@ -133,6 +144,10 @@ const GithubButton = styled.button`
   background-color: #fffafa;
   border: none;
   cursor: pointer;
+  &:hover {
+    background-color: #e0e0e0;
+    transition: 0.3s;
+  }
 `;
 
 const WarningText = styled.p`

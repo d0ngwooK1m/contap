@@ -3,9 +3,12 @@ const ColorStyle = {
   Gray300: '#A09BAC',
   Gray100: '#4D4759',
   PrimaryMint: '#50FFB8',
+  HoverMint: '#33C68A',
   PrimaryPurple: '#8C4DFF',
+  HoverPurple: '#6235B5',
   BackGround: '#0F0A1A',
   BackGround100: '#141422',
+  // 호버 시 BG => BG300
   BackGround300: '#1D1D22',
   Error: '#ED4956',
 };
