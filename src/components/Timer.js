@@ -27,7 +27,7 @@ const Timer = ({ mm, ss }) => {
   return (
     <div>
       <Text color={ColorStyle.Gray500} regular20>
-        {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        {minutes}분&nbsp;{seconds < 10 ? `0${seconds}` : seconds}초
       </Text>
     </div>
   );

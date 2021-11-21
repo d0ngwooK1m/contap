@@ -349,7 +349,7 @@ const Signup = () => {
                   </form>
                 </div>
               ) : (
-                <div>
+                <EmailAuthWrapper>
                   <Title>
                     <Text color={ColorStyle.Gray500} bold32>
                       이메일 인증
@@ -493,7 +493,7 @@ const Signup = () => {
                       </BackToPrevBtn>
                     </MoreContent>
                   )}
-                </div>
+                </EmailAuthWrapper>
               )}
             </FormWrapper>
           </RightWrapper>
@@ -548,12 +548,18 @@ const FormWrapper = styled.div`
   width: 445px;
 `;
 
+const EmailAuthWrapper = styled.div`
+  position: relative;
+`;
+
 const Title = styled.div`
   margin: 160px 0px 44px 0px;
 `;
 
 const CounterWrapper = styled.div`
-
+  position: absolute;
+  right: 0;
+  top: 200px;
 `;
 
 const RelativeInputWrapper = styled.div`
