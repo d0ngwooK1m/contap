@@ -64,7 +64,7 @@ const Signup = () => {
       console.log(authInfo);
       const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
       const { data } = res;
-      console.log(data);
+      console.log('====== 안되는곳',data);
 
       if (data.errorMessage === '인증번호가 일치하지 않습니다.') {
         return setAuthNumCheck(false);

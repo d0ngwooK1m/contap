@@ -145,6 +145,7 @@ const Login = () => {
       const userInfo = {
         email: data.email,
         userName: data.userName,
+        profile:data.profile
       };
   
       dispatch(loginAction(userInfo));
