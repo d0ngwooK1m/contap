@@ -25,7 +25,7 @@ const ReceiveTap = ({ select }) => {
       <Text color="#FFF" bold32>
         똑똑,
         <br />
-        누군가 {userName}님을 탭!했어요
+        누군가 {userName}님을 Tap!
       </Text>
       <CardBox>
         {conTap.allIds.map((ReceiveTapUserId) => {

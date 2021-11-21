@@ -34,7 +34,7 @@ const Mypage = () => {
 
   if (click) {
     return (
-      <Grid>
+      <div style={{ paddingTop: '88px' }}>
         <Grid>
           <CardProfile />
         </Grid>
@@ -57,12 +57,12 @@ const Mypage = () => {
             <CardAdd />
           </Grid>
         </Grid>
-      </Grid>
+      </div>
     );
   }
 
   return (
-    <Grid>
+    <div style={{ paddingTop: '88px' }}>
       <Grid>
         <CardProfile />
       </Grid>
@@ -84,7 +84,7 @@ const Mypage = () => {
           <CardAdd />
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 

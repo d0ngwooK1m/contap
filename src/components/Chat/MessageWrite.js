@@ -51,21 +51,20 @@ const MessageWrite = ({ sendMessage }) => {
 export default MessageWrite;
 
 const InputField = styled.div`
-  width: 700px;
+  position: absolute;
+  bottom: 0px;
+  width: 665px;
   height: 72px;
   display: flex;
   justify-content: space-between;
   border-top: 2px solid aliceblue;
   background-color: ${ColorStyle.BackGround};
-  position: absolute;
-  bottom: 0px;
   align-items: center;
   input {
-    position: relative;
-    left: 20px;
+    bottom: 0px;
     width: 80%;
     background-color: ${ColorStyle.BackGround};
-    height: 100%;
+    height: 95%;
     border: 0px;
     color: ${ColorStyle.Gray500};
     caret-color: ${ColorStyle.Gray500};

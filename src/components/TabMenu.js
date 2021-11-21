@@ -35,9 +35,10 @@ TabMenu.propTypes = {
 };
 
 const Wrapper = styled.div`
+  padding-top: 88px;
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 89vh;
 `;
 
 const Menu = styled.div`
@@ -45,7 +46,7 @@ const Menu = styled.div`
   flex-direction: column;
   width: fit-content;
   min-width: 255px;
-  height: 100vh;
+  min-height: 89vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
 `;

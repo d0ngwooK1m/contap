@@ -113,7 +113,7 @@ const ContapModal = ({
                 >
                   {userCradInfo.userName}
                 </span>
-                님이 탭!했어요
+                님이 Tap!했어요
               </Text>
             )}
             <Card>{children}</Card>

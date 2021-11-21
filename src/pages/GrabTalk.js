@@ -40,7 +40,7 @@ const Grabtalk = () => {
   };
 
   return (
-    <Wrapper>
+    <div style={{display:'flex'}}>
       <Menu>
         <div className="roomListHeader">
           <Text bold32>메세지함</Text>
@@ -54,54 +54,52 @@ const Grabtalk = () => {
         </div>
         <ChatRoomList />
       </Menu>
-      {noneTalkList.length !== 0 && (
-        <GrabTalkAdd noneTalkList={noneTalkList} closeList={closeList} />
-      )}
-      <Room>
-        {!currentRoom.userId && noneTalkList.length == 0 && (
-          <SvgWrap>
-            <GrabTalkBasicSvg />
-            <Text bold32>그랩이 되면 대화할 수 있어요</Text>
-          </SvgWrap>
+      <Wrapper>
+        {noneTalkList.length !== 0 && (
+          <GrabTalkAdd noneTalkList={noneTalkList} closeList={closeList} />
         )}
-        {currentRoom.userId && (
-          <>
-            <Header className="header">
-              <ImageBox
-                className="imageBox"
-                src={currentRoom.profile ? currentRoom.profile : BasicProfile}
-              />
-              <Text bold32>{currentRoom.userName}</Text>
-              <IconButton
-                onClick={() => {
-                  dispatch(loadCurrentRoom({}));
-                }}
-              >
-                <Close stroke={ColorStyle.Gray500} />
-              </IconButton>
-            </Header>
-            <Chat current={currentRoom} />
-          </>
-        )}
-      </Room>
-    </Wrapper>
+        <Room>
+          {!currentRoom.userId && noneTalkList.length == 0 && (
+            <SvgWrap>
+              <GrabTalkBasicSvg />
+              <Text bold32>그랩이 되면 대화할 수 있어요</Text>
+            </SvgWrap>
+          )}
+          {currentRoom.userId && (
+            <>
+              <Header className="header">
+                <ImageBox
+                  className="imageBox"
+                  src={currentRoom.profile ? currentRoom.profile : BasicProfile}
+                />
+                <Text bold32>{currentRoom.userName}</Text>
+                <IconButton
+                  onClick={() => {
+                    dispatch(loadCurrentRoom({}));
+                  }}
+                >
+                  <Close stroke={ColorStyle.Gray500} />
+                </IconButton>
+              </Header>
+              <Chat current={currentRoom} />
+            </>
+          )}
+        </Room>
+      </Wrapper>
+    </div>
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  max-height: 100vh;
-  overflow-y: hidden;
-`;
-
 const Menu = styled.div`
+  position: relative;
+  top: 0px;
   display: flex;
   flex-direction: column;
-  min-width: 445px;
+  padding-top: 88px;
+  width: 445px;
   max-width: 445px;
-  min-height: 89vh;
-  margin: 0px 0px 0px 128px;
+  min-height: 80vh;
+  height: 89vh;
+  margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
   .addBtn {
     position: relative;
@@ -116,18 +114,25 @@ const Menu = styled.div`
   }
 `;
 
-const Room = styled.div`
-  width: 700px;
+const Wrapper = styled.div`
   position: relative;
+  top: 0px;
+  padding-top: 88px;
+  display: flex;
+  width: 665px;
+`;
+
+const Room = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const SvgWrap = styled.div`
-  position: absolute;
-  top: 40px;
-  left: 200px;
-  p {
-    position: relative;
-    top: -50px;
+width: fit-content;
+margin: auto;
+p {
+  position: relative;
+  top:-50px;
   }
 `;
 
@@ -136,7 +141,7 @@ const Header = styled.div`
   position: relative;
   background-color: ${ColorStyle.BackGround};
   align-items: center;
-  width: 700px;
+  width: 665px;
   min-height: 80px;
   max-height: 80px;
   z-index: 1;

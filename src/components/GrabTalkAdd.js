@@ -77,20 +77,20 @@ const Header = styled.div`
   display: flex;
   position: relative;
   align-items: center;
-  width: 700px;
+  width: 665px;
   min-height: 80px;
   max-height: 80px;
   z-index: 1;
 
   button {
-    position: absolute;
-    right: 0px;
+    padding:0px;
+    margin-left: 48px;
   }
 `;
 
 const SearchBarFrom = styled.div`
   display: flex;
-  margin-left: 60px;
+  margin-left: 48px;
   height: 46px;
   width: 523px;
   border-bottom: 1px solid ${ColorStyle.Gray300};

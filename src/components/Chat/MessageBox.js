@@ -97,10 +97,10 @@ const MessageBox = ({ roomId }) => {
 const ChatMessageBox = styled.div`
   background-color: ${ColorStyle.BackGround};
   position: absolute;
-  bottom: 72px;
-  width: 700px;
-  max-height: 660px;
-  padding-bottom: 16px;
+  bottom: 0px;
+  padding-bottom: 72px;
+  width: 665px;
+  max-height: 700px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     margin-left: 30px;

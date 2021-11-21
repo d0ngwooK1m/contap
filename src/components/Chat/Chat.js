@@ -2,6 +2,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 // 소켓
 import StompJs from 'stompjs';
@@ -131,12 +132,18 @@ const Chat = ({ current }) => {
   };
 
   return (
-    <div>
+    <MessageWrap>
       <MessageBox className="messageBox" roomId={roomId} />
       <MessageWrite sendMessage={sendMessage} />
-    </div>
+    </MessageWrap>
   );
 };
+
+const MessageWrap = styled.div`
+  position: relative;
+  width: 665px;
+  height: 75vh;
+`;
 
 Chat.propTypes = {
   current: PropTypes.any.isRequired,
