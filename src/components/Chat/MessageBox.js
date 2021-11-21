@@ -45,8 +45,8 @@ const MessageBox = ({ roomId }) => {
       isNext={isNext}
       // loading={is_loading}
       scrollTo={scrollRef}
-      prevHeight={prevHeight}
       setPrevHeight={setPrevHeight}
+      type='top'
     >
       <ChatMessageBox ref={scrollRef}>
         {messageList?.map((msg, i, arr) => {
@@ -99,7 +99,7 @@ const ChatMessageBox = styled.div`
   position: absolute;
   bottom: 72px;
   width: 700px;
-  max-height: 670px;
+  max-height: 660px;
   padding-bottom: 16px;
   overflow-y: scroll;
   ::-webkit-scrollbar {

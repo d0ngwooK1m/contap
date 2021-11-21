@@ -24,15 +24,13 @@ const Contap = () => {
           style={{
             margin: 'auto',
             display: 'flex',
-            position: 'relative',
-            left: '14.25px',
             alignItems: 'center',
           }}
         >
           <div>
             <ReceiveTapIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
-          <div style={{ position: 'relative', left: '16px' }}>
+          <div style={{ marginLeft: '16px' }}>
             <Text color={ColorStyle.PrimaryMint} regular20>
               받은 탭
             </Text>
@@ -44,15 +42,13 @@ const Contap = () => {
           style={{
             margin: 'auto',
             display: 'flex',
-            position: 'relative',
-            left: '14.25px',
             alignItems: 'center',
           }}
         >
           <div>
             <ReceiveTapIconSvg fill={ColorStyle.Gray300} />
           </div>
-          <div style={{ position: 'relative', left: '16px' }}>
+          <div style={{ marginLeft: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Text color={ColorStyle.Gray300} regular20>
                 받은 탭
@@ -82,15 +78,13 @@ const Contap = () => {
           style={{
             margin: 'auto',
             display: 'flex',
-            position: 'relative',
-            left: '14.25px',
             alignItems: 'center',
           }}
         >
           <div>
             <SendTapIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
-          <div style={{ position: 'relative', left: '16px' }}>
+          <div style={{ marginLeft: '16px' }}>
             <Text color={ColorStyle.PrimaryMint} regular20>
               보낸 탭
             </Text>
@@ -102,15 +96,13 @@ const Contap = () => {
           style={{
             margin: 'auto',
             display: 'flex',
-            position: 'relative',
-            left: '14.25px',
             alignItems: 'center',
           }}
         >
           <div>
             <SendTapIconSvg fill={ColorStyle.Gray300} />
           </div>
-          <div style={{ position: 'relative', left: '16px' }}>
+          <div style={{ marginLeft: '16px' }}>
             <Text color={ColorStyle.Gray300} regular20>
               보낸 탭
             </Text>
@@ -126,15 +118,13 @@ const Contap = () => {
           style={{
             margin: 'auto',
             display: 'flex',
-            position: 'relative',
-            left: '14.25px',
             alignItems: 'center',
           }}
         >
           <div>
             <GrabListIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
-          <div style={{ position: 'relative', left: '16px' }}>
+          <div style={{ marginLeft: '16px' }}>
             <Text color={ColorStyle.PrimaryMint} regular20>
               나의 그랩
             </Text>
@@ -146,15 +136,13 @@ const Contap = () => {
           style={{
             margin: 'auto',
             display: 'flex',
-            position: 'relative',
-            left: '14.25px',
             alignItems: 'center',
           }}
         >
           <div>
             <GrabListIconSvg fill={ColorStyle.Gray300} />
           </div>
-          <div style={{ position: 'relative', left: '16px' }}>
+          <div style={{ marginLeft: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Text color="#a09bac" regular20>
                 나의 그랩

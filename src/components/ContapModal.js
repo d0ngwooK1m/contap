@@ -3,9 +3,20 @@ import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
+import BasicAlert from '../utils/alert';
+// import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
-import { removeReceiveTapToAxios } from '../features/taps/actions';
+import {
+  removeReceiveTapToAxios,
+  removeGrabToAxios,
+} from '../features/taps/actions';
+import {
+  closeNoneTalkRoomList,
+  loadCurrentRoom,
+} from '../features/chat/actions';
 
 const ContapModal = ({
   show,
@@ -16,6 +27,7 @@ const ContapModal = ({
   select,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const myName = useSelector((state) => state.user.userName);
   console.log(userCradInfo);
   console.log(select);
@@ -44,13 +56,52 @@ const ContapModal = ({
     onHide();
   };
 
+  const openGrabTalk = async () => {
+    await dispatch(closeNoneTalkRoomList());
+    await dispatch(loadCurrentRoom(userCradInfo));
+    history.replace('/grabtalk');
+  };
+
+  const unGrab = async () => {
+    onHide();
+    const { isConfirmed } = await BasicAlert.fire({
+      title: (
+        <div style={{ textAlign: 'left' }}>
+          <div style={{ marginBottom: '40px' }}>
+            <Text bold32 color={ColorStyle.BackGround300}>
+              {userCradInfo.userName}님과 <br />
+              그랩을 끊으실 건가요?
+            </Text>
+          </div>
+          <div>
+            <Text regular24 color={ColorStyle.Gray300}>
+              그랩을 끊어도 <br />
+              상대방에게 알림이 가지 않아요
+            </Text>
+          </div>
+        </div>
+      ),
+    });
+    if (isConfirmed) {
+      dispatch(removeGrabToAxios(userCradInfo.userId));
+    }
+  };
+
   return (
     <div>
-      <Modal open={show} onClose={onHide}>
+      <Modal
+        open={show}
+        onClose={onHide}
+        BackdropProps={{
+          style: {
+            backgroundColor: '#000000BF',
+          },
+        }}
+      >
         <Wrap>
-          <Content>
+          <Content select={select}>
             {select === 'ReceiveTap' && (
-              <Text color="#FFF" bold32>
+              <Text className="desc" color="#FFF" bold32>
                 <span
                   style={{
                     color: `${
@@ -103,7 +154,7 @@ const ContapModal = ({
                   <button
                     type="button"
                     className="acceptBtn"
-                    onClick={acceptTap}
+                    onClick={openGrabTalk}
                   >
                     <Text
                       bold20
@@ -112,11 +163,7 @@ const ContapModal = ({
                       메세지 보내기
                     </Text>
                   </button>
-                  <button
-                    type="button"
-                    className="refusetBtn"
-                    onClick={rejectTap}
-                  >
+                  <button type="button" className="refusetBtn" onClick={unGrab}>
                     <Text bold20 color="#FFF">
                       그랩 끊기
                     </Text>
@@ -144,7 +191,8 @@ const Content = styled.div`
   background-color: ${ColorStyle.BackGround100};
   width: fit-content;
   max-width: 350px;
-  margin: 90px 0px 0px 65px;
+  margin: ${({ select }) =>
+    select === 'GrabList' ? '188px 0px 0px 65px' : '112px 0px 0px 65px'};
 
   hr {
     margin: 40px 0px;
@@ -153,7 +201,7 @@ const Content = styled.div`
 `;
 
 const Card = styled.div`
-  margin: 30px 0px 0px 0px;
+  margin: 48px 0px 0px 0px;
 `;
 
 const MessageBox = styled.div`
@@ -204,7 +252,7 @@ const GrabButtonBox = styled.div`
     height: 50px;
     border-radius: 100px;
     cursor: pointer;
-    margin: 10px 0px 22px 0px;
+    margin: 0px 0px 22px 0px;
   }
 
   .acceptBtn {

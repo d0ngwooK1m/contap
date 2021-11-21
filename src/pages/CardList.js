@@ -9,9 +9,11 @@ import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
-// import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
+import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
+import { ReactComponent as SquareShadow } from '../svgs/Reflex.svg';
+import { ReactComponent as SquareLeft } from '../svgs/ShapeLeft.svg';
+import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
 import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
-
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -29,14 +31,21 @@ const CardList = () => {
   }, [isSearching]);
 
   return (
-    <Box>
-      {/* <SvgWrapper>
-        <TitleBgSvg />
-      </SvgWrapper> */}
-      <TitleWrap>
+    <Wrap>
+      <div className="SquareShadow">
+        <SquareShadow />
+      </div>
+      <div className="SquareLeft">
+        <SquareLeft />
+      </div>
+      <div className="SquareRight">
+        <SquareRight />
+      </div>
+      <TitleWrap />
+      <div className='title'>
         <Text bold48> Just Tap!</Text>
         <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
-      </TitleWrap>
+      </div>
       <SearchBarWrap>
         <SearchBar />
       </SearchBarWrap>
@@ -47,76 +56,113 @@ const CardList = () => {
         </div>
       </TextWrap>
       <RefreshWrapper>
-        <FlexWrapper>
         <RefreshSvg />
-        <RefreshBtn
+        <button
           type="button"
           onClick={() => {
             dispatch(loadCardFrontDB());
           }}
         >
-          
           카드 섞기
-        </RefreshBtn>
-        </FlexWrapper>
+        </button>
       </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
           return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </CardListWrap>
-    </Box>
+    </Wrap>
   );
 };
 
-const Box = styled.div`
+const Wrap = styled.div`
+  width: 100%;
+  padding-top: 76px;
   padding-bottom: 112px;
-  max-width: 1440px;
   position: relative;
+
+  .SquareLeft {
+    position: absolute;
+    top: 80px;
+    left: 130px;
+    z-index: 1;
+  }
+  .SquareShadow {
+    position: absolute;
+    top: 268px;
+    left: 130px;
+    z-index: 1;
+  }
+  .SquareRight {
+    position: absolute;
+    top: 32px;
+    right: 130px;
+    z-index: 1;
+  }
+  .title{
+    position: relative;
+    top:-100px;
+    text-align: center;
+    p{
+      margin-bottom: 24px;
+    }
+  }
 `;
 
 const TitleWrap = styled.div`
-  margin-top: 54px;
+position: relative;
   text-align: center;
-  p {
-    margin: 24px 0px 8px 0px;
-  }
+  background: conic-gradient(
+    from 88.92deg at 47.81% 59.2%,
+    #db83e9 -16.52deg,
+    #844aef 62.85deg,
+    #1fb8cd 95.04deg,
+    #1edbd7 115.28deg,
+    #4ceeb6 132.84deg,
+    #db83e9 343.48deg,
+    #844aef 422.85deg
+  );
+  filter: blur(140px);
+  height: 100px;
 `;
 
 const SearchBarWrap = styled.div`
   text-align: center;
-  margin: 44px 0px 120px 0px;
+  margin: -70px 0px 50px 0px;
 `;
 
 const TextWrap = styled.div`
-  height: 230px;
   div {
     text-align: center;
-    padding-top: 70px;
     p {
       margin: 8px 0px;
     }
   }
 `;
 
-// const SvgWrapper = styled.div`
-//   z-index: -1;
-//   position: absolute;
-//   top: -91px;
-// `;
-
 const RefreshWrapper = styled.div`
-  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: right;
+  margin-right: 165px;
+
+  button {
+    cursor: pointer;
+    background-color: #0f0a1a;
+    color: #a09bac;
+    font-family: ${FontFamily};
+    font-size: 20px;
+    border: none;
+  }
 `;
 
-const FlexWrapper = styled.div`
-  display: flex;
-`;
+// const FlexWrapper = styled.div`
+//   display: flex;
+// `;
 
 const RefreshBtn = styled.button`
   margin-right: 170px;
+  margin-top: 18px;
   cursor: pointer;
   background-color: #0f0a1a;
   color: #a09bac;
@@ -132,6 +178,7 @@ const CardListWrap = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: auto;
+  padding-left: 30px;
 `;
 export default CardList;
 

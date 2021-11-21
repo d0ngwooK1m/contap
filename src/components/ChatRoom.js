@@ -21,7 +21,7 @@ const ChatRoom = ({ userId }) => {
   const userInfo = useSelector((state) => state.user);
   const lastMessage = roomInfo.roomStatus?.split('/')[2];
   const openCheck = currentRoom.userId === roomInfo.userId;
-
+  console.log(roomInfo)
   const openChatRoom = () => {
     if (openCheck) {
       return;
@@ -63,6 +63,7 @@ const ChatRoom = ({ userId }) => {
           <ImageBox
             className="imageBox"
             src={roomInfo.profile ? roomInfo.profile : BasicProfile}
+            isLogin={roomInfo.login}
           />
         </div>
         <div>
@@ -101,19 +102,23 @@ top:40px;
     left:-10px;
   }
   .name {
-    margin: 0px 0px 20px 0px;
+    position: absolute;
+    top: 0px;
+    margin: 0px;
     width: 350px;
     display: flex;
     justify-content: space-between;
   }
 
   .message {
+    margin-top: 8px;
+
     p {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 350px;
-      height: 20px;
+      height: 28px;
     }
   }
 `;
@@ -136,6 +141,7 @@ const ImageBox = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 25px;
+  border : ${({isLogin})=>isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px' };
+  border-radius: 50px;
 `;
 export default ChatRoom;

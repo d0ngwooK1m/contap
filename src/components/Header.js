@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 // import { useHistory } from 'react-router';
@@ -9,8 +10,8 @@ import MenuItem from '@mui/material/MenuItem';
 // import useStyles from '../hooks/styles';
 import { useSelector, useDispatch } from 'react-redux';
 // import { setChatNoti, setContapNoti } from '../features/notice/actions';
+import { useHistory, useLocation } from 'react-router';
 import { setChatNoti, setContapNoti } from '../features/notice/actions';
-import { history } from '../features/configureStore';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
@@ -34,14 +35,15 @@ import { mainSteps, settingSteps } from '../utils/tutorialSteps';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const isUserLogin = useSelector((state) => state.user.email);
+  const history = useHistory();
+  const location = useLocation();
+  const userInfo = useSelector((state) => state.user);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
   const isContapNoti = useSelector((state) => state.notice.isContapNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [myProfile] = React.useState(<BasicProfileSvg />);
-
-  const [isContap, setIsContap] = React.useState(false);
-  const [isChat, setIsChat] = React.useState(false);
+  const isUserLogin = userInfo.email;
+  const userProfile = userInfo.profile ? userInfo.profile : '';
   const [isSetting, setIsSetting] = React.useState(false);
 
   const open = Boolean(anchorEl);
@@ -59,45 +61,34 @@ const Header = () => {
   // 로그인 체크
   // useUserAuthCheck();
   React.useEffect(async () => {
-    if (isUserLogin) {
-      console.log('==============================================');
-    }
-    const { data } = await T.GET('/mypage/myinfo');
-    console.log(data.profile);
-  }, [myProfile]);
+    // setPathName(history.location.pathname)
+    // if (isUserLogin) {
+    //   const { data } = await T.GET('/mypage/myinfo');
+    // }
+    // console.log(data.profile);
+  }, []);
 
   const handleisContap = () => {
     if (isContapNoti) {
       dispatch(setContapNoti(false));
     }
-    setIsContap(true);
-    setIsSetting(false);
-    setIsChat(false);
-    history.push('/contap');
+    history.replace('/contap');
   };
 
   const handleisChat = () => {
     if (isChatNoti) {
       dispatch(setChatNoti(false));
     }
-    setIsChat(true);
-    setIsSetting(false);
-    setIsContap(false);
-    history.push('/grabtalk');
+    history.replace('/grabtalk');
   };
 
   const handleisSetting = (event) => {
     setIsSetting(true);
-    setIsChat(false);
-    setIsContap(false);
     setAnchorEl(event.currentTarget);
   };
 
   const moveToMyPage = () => {
-    setIsSetting(false);
-    setIsChat(false);
-    setIsContap(false);
-    history.push('/mypage');
+    history.replace('/mypage');
   };
 
   const handleClose = () => {
@@ -111,21 +102,31 @@ const Header = () => {
     handleClose();
     window.location.href = '/';
   };
+  console.log('=============================');
+  console.log(history.location.pathname);
+
   const ChatButton = () => {
-    if (isChat) {
-      if (isChatNoti) {
-        return <ChatAlarmIconSvg fill="#8C4DFF" />;
-      }
+    // if (isChat || location.pathname === '/grabtalk') {
+    //   // if (isChatNoti) {
+    //   //   return <ChatAlarmIconSvg fill="#8C4DFF" />;
+    //   // }
+    //   return <ChatIconSvg fill="#8C4DFF" />;
+    // }
+    // if (isChatNoti) {
+    //   return <ChatAlarmIconSvg fill="#F5F3F8" />;
+    // }
+    // return <ChatIconSvg fill="#F5F3F8" />;
+    if (location.pathname === '/grabtalk') {
       return <ChatIconSvg fill="#8C4DFF" />;
     }
-    if (isChatNoti) {
+    if (isChatNoti && location.pathname !== '/grabtalk') {
       return <ChatAlarmIconSvg fill="#F5F3F8" />;
     }
     return <ChatIconSvg fill="#F5F3F8" />;
   };
 
   const ContapButton = () => {
-    if (isContap) {
+    if (location.pathname === '/contap') {
       if (isContapNoti) {
         return <ContapAlarmIconSvg fill="#8C4DFF" />;
       }
@@ -222,7 +223,14 @@ const Header = () => {
               style={{ margin: '0px 12px' }}
               onClick={moveToMyPage}
             >
-              {myProfile}
+              {userProfile ? (
+                <ImageBox
+                  className="imageBox"
+                  src={userProfile}
+                />
+              ) : (
+                <BasicProfileSvg />
+              )}
             </IconButton>
           </MenuWrapper>
         ) : (
@@ -282,6 +290,18 @@ const LoginButton = styled.button`
   font-size: 20px;
   cursor: pointer;
   margin-left: 400px;
+`;
+
+const ImageBox = styled.div`
+  height: 50px;
+  width: 50px;
+  margin: 0px 20px 20px 0px;
+
+  background-image: url('${(props) => props.src}');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 25px;
 `;
 
 export default Header;

@@ -45,21 +45,24 @@ function App() {
 }
 
 const WrapApp = styled.div`
-  width: 100%;
-  min-width: 1440px;
+  max-width: 100%;
+  min-width: 100%;
   max-height: 100%;
-  min-height: 100vh;
-  margin: 0px;
+  min-height: 100%;
+  margin: auto;
   padding: 0px;
   background-position: center;
   background-size: cover;
   background-color: #0f0a1a;
+  z-index: -3;
 `;
 
 const Wrap = styled.div`
   max-width: 1440px;
-  height: 100%;
+  max-height: 100%;
+  min-height: 100vh;
   margin: auto;
+  z-index: -3;
 `;
 
 export default App;

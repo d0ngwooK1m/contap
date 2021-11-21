@@ -86,10 +86,10 @@ const CardForm = styled.div`
   background-color: ${ColorStyle.BackGround100};
 
   .userInfo {
-    margin: 40px 0px 0px 0px;
+    margin: 32px 0px 0px 0px;
   }
   .userName {
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 10px 0px;
   }
 
   .interest {
@@ -101,7 +101,8 @@ const CardForm = styled.div`
     border: 3px solid
       ${({ category }) =>
         category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
-
+    background-color: ${({ category }) =>
+      category ? ColorStyle.BackGround300 : ColorStyle.BackGround100};
     .imageBox {
       margin: 20px;
     }
@@ -115,7 +116,7 @@ const CardForm = styled.div`
       }
     }
     .userInfo {
-      margin: 38px -2px 0px 2px;
+      margin: 30px -2px 0px 2px;
     }
 
     .interest {

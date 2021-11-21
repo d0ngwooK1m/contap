@@ -29,7 +29,8 @@ TabButton.propTypes = {
 const Button = styled.button`
   position: relative;
   height: 45px;
-  width: 179px;
+  width: fit-content;
+  padding: 0px 12px;
   left: 0px;
   top: 63px;
   border-radius: 50px;

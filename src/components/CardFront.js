@@ -16,7 +16,7 @@ import { Text } from '../elements';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
 
-const CardFront = ({ userId, contap, select}) => {
+const CardFront = ({ userId, contap, select }) => {
   const dispatch = useDispatch();
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
@@ -26,7 +26,7 @@ const CardFront = ({ userId, contap, select}) => {
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-  console.log(select)
+  console.log(select);
   const MySwal = withReactContent(Swal);
   console.log('카드프론트 프로필', front[userId].profile);
   // Modal Handler
@@ -174,15 +174,16 @@ const CardForm = styled.div`
   height: 200px;
   border-radius: 16px;
   box-sizing: border-box;
-  margin: 22px 15px;
+  margin: 22px 0px;
+  margin-right: 30px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
 
   .userInfo {
-    margin: 40px 0px 0px 0px;
+    margin: 32px 0px 0px 0px;
   }
   .userName {
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 10px 0px;
   }
 
   .interest {
@@ -194,6 +195,8 @@ const CardForm = styled.div`
     border: 3px solid
       ${({ category }) =>
         category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    background-color: ${({ category }) =>
+      category ? ColorStyle.BackGround300 : ColorStyle.BackGround100};
 
     .imageBox {
       margin: 20px;
@@ -208,7 +211,7 @@ const CardForm = styled.div`
       }
     }
     .userInfo {
-      margin: 38px -2px 0px 2px;
+      margin: 30px -2px 0px 2px;
     }
 
     .interest {

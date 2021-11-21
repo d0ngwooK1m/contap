@@ -23,11 +23,16 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
     <div>
       <Header className="header">
         <SearchBarFrom>
-        <Search />
-          <input type="text" placeholder='   이름을 입력해 주세요' value={searchValue} onChange={handleSearchValue} />
+          <Search />
+          <input
+            type="text"
+            placeholder="   이름을 입력해 주세요"
+            value={searchValue}
+            onChange={handleSearchValue}
+          />
         </SearchBarFrom>
         <IconButton onClick={closeList}>
-          <Close />
+          <Close stroke={ColorStyle.Gray500} />
         </IconButton>
       </Header>
       {noneTalkList.map((id) => {
@@ -41,13 +46,12 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
         ) {
           return <GrapTalkAddProfile key={id} userId={id} />;
         }
-        if (roomInfo[id].userName
-          .toLowerCase()
-          .indexOf(searchValue.toLowerCase()) === -1) {
-          
-            return '검색결과없쩡'
-          }
       })}
+      {/* <NoneValueText>
+        <Text bold32 color={ColorStyle.Gray500}>
+          검색결과없쩡
+        </Text>
+      </NoneValueText> */}
     </div>
   );
 
@@ -101,9 +105,9 @@ const SearchBarFrom = styled.div`
     color: ${ColorStyle.Gray500};
 
     font-family: 'Pretendard';
-      font-style: normal;
-      font-size: 20px;
-      font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 400;
 
     ::placeholder {
       font-family: 'Pretendard';
@@ -116,6 +120,11 @@ const SearchBarFrom = styled.div`
       outline: none;
     }
   }
+`;
+
+const NoneValueText = styled.div`
+  text-align: center;
+  margin-top: 20px;
 `;
 
 export default GrabTalkAdd;

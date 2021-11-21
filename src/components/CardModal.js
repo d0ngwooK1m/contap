@@ -7,7 +7,15 @@ import Carousel from './Carousel';
 const CardModal = ({ show, onHide, userId, userName, profile, category }) => {
   return (
     <Grid>
-      <Modal open={show} onClose={onHide}>
+      <Modal
+        open={show}
+        onClose={onHide}
+        BackdropProps={{
+          style: {
+            backgroundColor: '#000000BF',
+          },
+        }}
+      >
         <>
           <Carousel
             userId={userId}

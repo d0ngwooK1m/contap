@@ -77,7 +77,7 @@ const Grabtalk = () => {
                   dispatch(loadCurrentRoom({}));
                 }}
               >
-                <Close />
+                <Close stroke={ColorStyle.Gray500} />
               </IconButton>
             </Header>
             <Chat current={currentRoom} />
