@@ -21,7 +21,7 @@ const SendTap = ({ select }) => {
       <Text color="#FFF" bold32>
         두근두근
         <br />
-        누군가에게 탭!을 보냈어요
+        누군가에게 보낸 Tap!
       </Text>
       <CardBox>
         {conTap.allIds.map((sendTapUserId) => {

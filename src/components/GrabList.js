@@ -22,9 +22,9 @@ const GrabList = ({ select }) => {
   return (
     <Wrap>
       <Text color="#FFF" bold32>
-        <span style={{ color: '#8C4DFF' }}>Grab</span> the opportunity!
-        <br />
         기회를 잡아보세요
+        <br />
+        <span style={{ color: '#8C4DFF' }}>Grab</span> the opportunity!
       </Text>
       <CardBox>
         {conTap.allIds.map((grabUserId) => {

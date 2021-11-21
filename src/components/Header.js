@@ -142,7 +142,7 @@ const Header = () => {
 
   return (
     <>
-      <HeaderWrapper>
+      <HeaderWrapper location={location.pathname}>
         {/* <TutorialForm steps={mainSteps} page={1} /> */}
         {mypageAlarm === false ? (
           <TutorialForm steps={mainSteps} page={1} />
@@ -220,9 +220,9 @@ const Header = () => {
               </MenuItem>
               <MenuItem onClick={logOut}>로그아웃</MenuItem>
             </Menu>
+            <div>
             <IconButton
               className="my-page"
-              style={{ margin: '0px 12px' }}
               onClick={moveToMyPage}
             >
               {userProfile ? (
@@ -234,6 +234,7 @@ const Header = () => {
                 <BasicProfileSvg />
               )}
             </IconButton>
+            </div>
           </MenuWrapper>
         ) : (
           <LoginButton
@@ -252,21 +253,29 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  width: auto;
+${({ location }) => location === '/' ? null : 'position : fixed;'}
+  top: 0px;
+  width: 1112px;
   height: 88px;
-  padding: 0px 10%;
+  padding: 0px 164px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;
   z-index: 1001;
+
+  .my-page{
+    padding-right: 0px;
+    margin-right: 0px;
+    
+  }
+  
 `;
 
 const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-left: 400px;
 `;
 
 const LogoDiv = styled.div`
@@ -301,9 +310,8 @@ const LoginButton = styled.button`
 `;
 
 const ImageBox = styled.div`
-  height: 50px;
-  width: 50px;
-  margin: 0px 20px 20px 0px;
+  height: 48px;
+  width: 48px;
 
   background-image: url('${(props) => props.src}');
   background-position: center;

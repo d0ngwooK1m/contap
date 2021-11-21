@@ -32,7 +32,7 @@ const SearchBar = () => {
   console.log(searchList);
   const searchData = useSelector((state) => state.cards.searchData);
 
-  React.useEffect(async() => {
+  React.useEffect(async () => {
     try {
       const res = await axios.get(`${baseURL}/main/hashtag`);
 

@@ -44,7 +44,7 @@ const CardList = () => {
       <TitleWrap />
       <div className='title'>
         <Text bold48> Just Tap!</Text>
-        <Text regular20> 내가 찾던 동료를 탭해서 만나보세요</Text>
+        <Text regular20> 내가 찾던 동료를 Tap! 해서 만나보세요</Text>
       </div>
       <SearchBarWrap>
         <SearchBar />
@@ -52,7 +52,7 @@ const CardList = () => {
       <TextWrap>
         <div>
           <Text bold32> 동료를 찾고 있나요?</Text>
-          <Text bold32> 탭! 해보세요</Text>
+          <Text bold32> Tap! 해보세요</Text>
         </div>
       </TextWrap>
       <RefreshWrapper>
@@ -112,6 +112,7 @@ const Wrap = styled.div`
 const TitleWrap = styled.div`
 position: relative;
   text-align: center;
+  
   background: conic-gradient(
     from 88.92deg at 47.81% 59.2%,
     #db83e9 -16.52deg,
