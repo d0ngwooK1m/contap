@@ -40,7 +40,9 @@ const Mypage = () => {
         </Grid>
         <Grid width="100%" height="100%" bg="#0F0a1A">
           <Div>
-            <TitleText>나의 프로젝트 {cardCount.length}</TitleText>
+            <TitleText>
+              나의 프로젝트 <Count>{cardCount.length}</Count>
+            </TitleText>
             <TextBtn
               onClick={() => {
                 // dispatch(isSuccess(!handleClick));

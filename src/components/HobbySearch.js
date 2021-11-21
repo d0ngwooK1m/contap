@@ -253,7 +253,7 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  margin: 48px 165px;
+  margin: 43px 165px 119px 165px;
   justify-content: start;
   align-items: center;
   flex-direction: row;
@@ -263,10 +263,10 @@ const AllBox = styled.div`
 const TagDiv = styled.div`
   display: inline-block;
   margin: 10px;
-  padding: 10px 15px;
+  padding: 12px 20px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.PrimaryPurple};
-  font-size: ${FontScale.Caption_14};
+  font-size: ${FontScale.Body2_16};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
   font-weight: 400;

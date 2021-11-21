@@ -16,6 +16,7 @@ import {
 
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import BasicProfile from '../assets/image/Profile.svg';
+import { history } from '../features/configureStore';
 
 import {
   FontFamily,
@@ -35,10 +36,12 @@ const CardFrontWrite = () => {
   console.log('유저정보 확인===>', userInfo);
 
   const [userName, setUserName] = React.useState(
-    () => JSON.parse(localStorage.getItem('nick')) || userInfo.userName,
+    // () => JSON.parse(localStorage.getItem('nick')) ||
+    userInfo.userName,
   );
   const [category, setCategory] = React.useState(
-    () => JSON.parse(localStorage.getItem('category')) || userInfo.field,
+    // () => JSON.parse(localStorage.getItem('category')) ||
+    userInfo.field,
   );
   // const [hobbyTag, setHobbyTag] = React.useState(() => {
   //   JSON.parse(localStorage.getItem('tag')) ||
@@ -56,17 +59,19 @@ const CardFrontWrite = () => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
-  console.log('앞면 관심사 태그확인====>', hobbyTag);
-  // if (hobbyTag !== undefined) {
-  //   for (let i = 0; i < hobbyTag.length; i++) {
-  //     if (hobbyTag[i] === '') {
-  //       hobbyTag.pop();
-  //     }
-  //   }
+  // if (hobbyTag === undefined) {
+  //   // for (let i = 0; i < hobbyTag.length; i++) {
+  //   // if (hobbyTag[i] === '') {
+  //   //   hobbyTag.pop();
+  //   // }
+  // hobby = [];
+  // }
   // }
 
-  const stackText = '스택';
-  const hobbyText = '관심사';
+  const stackText = '나의 스택';
+  const hobbyText1 = '관심사1';
+  const hobbyText2 = '관심사2';
+  const hobbyText3 = '관심사3';
 
   //let test = userInfo.hashTagsString?.split('_')[1]?.split('@').slice(1, 4);
   //test = JSON.parse(localStorage.getItem('tag'));
@@ -93,12 +98,24 @@ const CardFrontWrite = () => {
   //   dispatch(updateAllHobby(hobbyTag));
   // }
 
-  const stack = useSelector((state) => state.cards.stack);
-  const hobby = useSelector((state) => state.cards.hobby);
+  let stack = useSelector((state) => state.cards.stack);
+  let hobby = useSelector((state) => state.cards.hobby);
   console.log('태그 길이 확인====>', stack.length);
   console.log('태그값 확인====>', stack);
   console.log('관심사 태그값 확인====>', hobby);
   console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
+
+  // if (stack === '') {
+  //   stack = [];
+  // }
+  // if (hobbyTag === undefined) {
+  //   // for (let i = 0; i < hobbyTag.length; i++) {
+  //   // if (hobbyTag[i] === '') {
+  //   //   hobbyTag.pop();
+  //   // }
+  //   hobby = [];
+  //   // }
+  // }
 
   // const handleRadioChange = (e) => {
   //   //e.target.checked;
@@ -175,8 +192,8 @@ const CardFrontWrite = () => {
     console.log('formData', formData);
 
     dispatch(editCardProfileDB(formData));
-    localStorage.removeItem('nick');
-    localStorage.removeItem('category');
+    // localStorage.removeItem('nick');
+    // localStorage.removeItem('category');
     localStorage.removeItem('tag');
   };
   console.log(category);
@@ -188,22 +205,29 @@ const CardFrontWrite = () => {
   //     return;
   //   }
   // }, []);
+
   React.useEffect(() => {
     // e.preventDefault();
-    dispatch(loadMyCardDB());
-    localStorage.setItem('nick', JSON.stringify(userName));
-    localStorage.setItem('category', JSON.stringify(category));
+    if (!userInfo.userName) {
+      history.goBack();
+
+      return;
+    }
+
+    // dispatch(loadMyCardDB());
+    // localStorage.setItem('nick', JSON.stringify(userName));
+    // localStorage.setItem('category', JSON.stringify(category));
     // localStorage.setItem('tag', JSON.stringify(hobbyTag));
   }, []);
 
   return (
     <Grid
-      height="590px"
-      bg="#1d1d22"
+      height="560px"
+      bg="#141422"
       margin="0px auto"
-      padding="72px 0px 0px 0px"
+      padding="66px 0px 0px 0px"
     >
-      <Grid is_flex width="1110px" margin="0px auto 72px auto">
+      <Grid is_flex width="1110px" margin="0px auto 64px auto">
         <Text bold32 color="#f5f3f8">
           {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
         </Text>
@@ -231,6 +255,7 @@ const CardFrontWrite = () => {
             onChange={(e) => {
               setUserName(e.target.value);
             }}
+            placeholder="닉네임을 입력해 주세요"
           />
           <Grid margin="54px 0px 18px 0px">
             <Text bold20 color="#f5f3f8">
@@ -336,11 +361,11 @@ const CardFrontWrite = () => {
               {stackTag}
             </HashStackTag>
           )} */}
-          {stack.length === 0 || stack === '' ? (
-            <HashStackTag type="button">
+          {stack[0] === '' ? (
+            <BasicHashTag type="button">
               {console.log('stack is no')}
               {stackText}
-            </HashStackTag>
+            </BasicHashTag>
           ) : (
             <HashStackTag
               type="button"
@@ -416,20 +441,20 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })} */}
-            {hobby.length === 0 || hobby === '' ? (
+            {hobby[0] === '' ? (
               <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <HashStackTag type="button">
+                <BasicHashTag type="button">
                   {console.log('stack is no')}
-                  {hobbyText}
-                </HashStackTag>
-                <HashStackTag type="button">
+                  {hobbyText1}
+                </BasicHashTag>
+                <BasicHashTag type="button">
                   {console.log('stack is no')}
-                  {hobbyText}
-                </HashStackTag>
-                <HashStackTag type="button">
+                  {hobbyText2}
+                </BasicHashTag>
+                <BasicHashTag type="button">
                   {console.log('stack is no')}
-                  {hobbyText}
-                </HashStackTag>
+                  {hobbyText3}
+                </BasicHashTag>
               </div>
             ) : (
               hobby.map((val) => {
@@ -488,13 +513,16 @@ const TitleBox = styled.input`
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.BackGround100};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
   border-left: none;
   border-top: none;
   &:focus {
     outline: none;
+  }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray100};
   }
 `;
 
@@ -591,8 +619,24 @@ const TagDiv = styled.div`
   align-items: flex-start;
   width: 1110px;
   margin: 20px auto;
-  padding: 78px 0px 0px 0px;
+  padding: 72px 0px 0px 0px;
   flex-wrap: nowrap;
+`;
+
+const BasicHashTag = styled.div`
+  width: 146px;
+  height: 54px;
+  margin-top: 18px;
+  margin-right: 16px;
+  border-radius: 50px;
+  border: 1px solid ${'#4d4759' + Opacity[40]};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray100};
+  font-weight: 400;
+  text-align: center;
+  line-height: 54px;
+  background: ${ColorStyle.BackGround};
 `;
 
 const HashStackTag = styled.div`
