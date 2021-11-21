@@ -65,7 +65,13 @@ const StackSearch = () => {
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.stackArr);
   // console.log('서치리스트===>', searchList);
-  const stackList = useSelector((state) => state.cards.stack);
+  // const stackList = useSelector((state) => state.cards.stack);
+  let stackList = useSelector((state) => state.cards.stack);
+  if (stackList.length === 1) {
+    if (stackList[0] === '') {
+      stackList = [];
+    }
+  }
   const [button, setButton] = React.useState({});
   const toggleButton = (id) => {
     setButton((prevButton) => ({
@@ -228,7 +234,7 @@ const StackSearch = () => {
   });
 
   return (
-    <div>
+    <StackDiv>
       {!click ? (
         <SearchBoxDiv>
           <SearchBox
@@ -258,13 +264,17 @@ const StackSearch = () => {
       )}
 
       {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
-
-      <br />
-    </div>
+    </StackDiv>
   );
 };
 
 export default StackSearch;
+
+const StackDiv = styled.div`
+  width: 1110px
+  margin-bottom: 72px;
+  border-bottom: 1px solid ${ColorStyle.BackGround300};
+`;
 
 const Box = styled.div`
   display: flex;

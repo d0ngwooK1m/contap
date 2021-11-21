@@ -9,8 +9,22 @@ import {
   Opacity,
 } from '../utils/systemDesign';
 
+import { Grid } from '../elements';
+
 const TagList = ({ tag }) => {
-  return <HashTagWrap>{tag}</HashTagWrap>;
+  return (
+    <Grid>
+      {tag === '' ? (
+        <Grid>
+          <HashTagWrap />
+          <HashTagWrap />
+          <HashTagWrap />
+        </Grid>
+      ) : (
+        <HashTagWrap>{tag}</HashTagWrap>
+      )}
+    </Grid>
+  );
 };
 
 TagList.propTypes = {
@@ -31,6 +45,7 @@ const HashTagWrap = styled.div`
   font-weight: 400;
   color: ${ColorStyle.Gray500};
   background-color: ${ColorStyle.BackGround300 + Opacity[15]};
+  border: 1px solid ${ColorStyle.Gray500 + Opacity[15]};
   border-radius: 50px;
   align-items: center;
   justify-content: center;
