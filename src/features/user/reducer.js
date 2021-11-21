@@ -51,9 +51,6 @@ export default function userReducer(state = initialState, action) {
         break;
       }
       case AUTH_CHECK: {
-        draft.email = action.payload.email;
-        draft.userName = action.payload.userName;
-        draft.profile = action.payload.profile;
         draft.isAuthNumChecked = true;
         break;
       }
@@ -68,6 +65,7 @@ export default function userReducer(state = initialState, action) {
       case AUTHORIZED: {
         draft.email = action.payload.email;
         draft.userName = action.payload.userName;
+        draft.profile = action.payload.profile;
         draft.isAuthorized = true;
         break;
       }

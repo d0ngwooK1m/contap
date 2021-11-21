@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { Grid, Text } from '../elements';
 // import { withdrawalToServer } from '../features/user/actions';
 import { ColorStyle, FontScale, FontFamily, Opacity } from '../utils/systemDesign';
-import '../utils/swal.css';
+
 
 const WithdrawalForm = () => {
   const dispatch = useDispatch();
@@ -295,7 +295,7 @@ const RadioInput = styled.input`
     margin-right: 16px;
     background-color: ${ColorStyle.Gray300 + Opacity[30]};
     // background: ${ColorStyle.PrimaryPurple};
-  }
+  
   &:checked {
     // width: 11.85px;
     // height: 11.85px;
