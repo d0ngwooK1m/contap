@@ -15,20 +15,20 @@ const ChatInfinityScroll = ({
   const handleScroll = lodash.throttle(() => {
     // 로딩중이면 callNext()를 안부르도록
     if (loading) {
+      console.log('로딩주우우우웅우우우우웅')
       return;
     }
     const {scrollHeight, clientHeight, scrollTop } = scrollTo.current
-    console.log('============================================')
-    console.log('스크롤 하이',scrollTo.current.scrollHeight)
-    console.log('클라이언트 하이',scrollTo.current.clientHeight)
-    console.log('스크롤 탑',scrollTo.current.scrollTop)
-    console.log('콜 할 위치',scrollTo.current.clientHeight + scrollTo.current.scrollTop === scrollTo.current.scrollHeight)
-    console.log('============================================')
+    // console.log('============================================')
+    // console.log('스크롤 하이',scrollTo.current.scrollHeight)
+    // console.log('클라이언트 하이',scrollTo.current.clientHeight)
+    // console.log('스크롤 탑',scrollTo.current.scrollTop)
+    // console.log('콜 할 위치',scrollTo.current.clientHeight + scrollTo.current.scrollTop === scrollTo.current.scrollHeight)
+    // console.log('============================================')
 
-    if (type==='bottom' && scrollHeight - clientHeight - scrollTop === 0) {
+    if (type==='bottom' && scrollHeight - clientHeight - scrollTop < 200) {
       setPrevHeight(clientHeight);
       callNext();
-      console.log('이때 콜 할거임!')
       
     }
     if (type==='top' && scrollTop === 0) {
@@ -45,13 +45,13 @@ const ChatInfinityScroll = ({
   React.useEffect(() => {
     // 자료를 받아오는 loading 중에는 이벤트 발생하지 않도록
     // 꼭 잘 막아주기!
-    // if (loading) {
-    //   return;
-    // }
+    if (loading) {
+      return;
+    }
 
     if (isNext) {
-      console.log('애드이벤트')
-      scrollTo.current.addEventListener('scroll', handleInfinityScroll);
+      scrollTo.current?.addEventListener('scroll', handleInfinityScroll);
+      
     } else {
       console.log('얘는 펄스라 없어짐')
       scrollTo.current?.removeEventListener('scroll', handleInfinityScroll);

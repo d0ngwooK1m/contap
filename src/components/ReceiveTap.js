@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
+<<<<<<< HEAD
+=======
+  loading,
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
   loadReceiveTapToAxios,
   nextPageToAxios,
 } from '../features/taps/actions';
@@ -15,6 +19,7 @@ import ChatInfinityScroll from './Chat/ChatInfinityScroll';
 const ReceiveTap = ({ select }) => {
   const dispatch = useDispatch();
   const scrollRef = React.useRef();
+<<<<<<< HEAD
 
   React.useEffect(async () => {
     console.log('1번 디패');
@@ -29,20 +34,42 @@ const ReceiveTap = ({ select }) => {
   const conTap = useSelector((state) => state.taps);
   const [page, setPage] = React.useState(1);
   const { isNext } = conTap;
+=======
+  const userName = useSelector((state) => state.user.userName);
+  const conTap = useSelector((state) => state.taps);
+  const [page, setPage] = React.useState(1);
+  const { isNext, isLoading } = conTap;
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
   const [prevHeight, setPrevHeight] = React.useState(null);
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
+<<<<<<< HEAD
   }, []);
 
   const callNext = () => {
     if (conTap.allIds < 12) {
       return;
     }
+=======
+    dispatch(loading(true))
+    await dispatch(loadReceiveTapToAxios('0'));
+    dispatch(setContapNoti(false));
+    dispatch(setTapReceiveNoti(false));
+    return null;
+  }, []);
+
+  const callNext = () => {
+    if (conTap.allIds < 12 || isLoading) {
+      return;
+    }
+    
+    dispatch(loading(true))
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
     dispatch(nextPageToAxios(select, page));
     setPage(page + 1);
   };
@@ -51,7 +78,7 @@ const ReceiveTap = ({ select }) => {
     <ChatInfinityScroll
       callNext={callNext}
       isNext={isNext}
-      // loading={is_loading}
+      loading={isLoading}
       scrollTo={scrollRef}
       setPrevHeight={setPrevHeight}
       type="bottom"

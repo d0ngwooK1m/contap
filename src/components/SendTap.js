@@ -2,7 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { loadSendTapToAxios, nextPageToAxios } from '../features/taps/actions';
+=======
+import {
+  loadSendTapToAxios,
+  nextPageToAxios,
+  loading,
+} from '../features/taps/actions';
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
 // import CardFront from './CardFront';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
@@ -12,6 +20,7 @@ const SendTap = ({ select }) => {
   const dispatch = useDispatch();
   const conTap = useSelector((state) => state.taps);
   const [page, setPage] = React.useState(1);
+<<<<<<< HEAD
   const { isNext } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
   const scrollRef = React.useRef();
@@ -33,10 +42,35 @@ const SendTap = ({ select }) => {
     setPage(page + 1);
   };
   console.log(select);
+=======
+  const { isNext, isLoading } = conTap;
+  const [prevHeight, setPrevHeight] = React.useState(null);
+  const scrollRef = React.useRef();
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
 
+  console.log('여기 샌드 탭', isNext);
+  console.log('여기 샌드 탭', select);
   React.useEffect(() => {
+    if (prevHeight) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
+      console.log(prevHeight, scrollRef.current.scrollHeight);
+      return setPrevHeight(null);
+    }
+    console.log('로딩 시작');
+    dispatch(loading(true));
     dispatch(loadSendTapToAxios());
+    return null;
   }, []);
+
+  const callNext = () => {
+    if (conTap.allIds < 12 || isLoading) {
+      return;
+    }
+    dispatch(loading(true));
+    dispatch(nextPageToAxios(select, page));
+    setPage(page + 1);
+  };
+  console.log(select);
 
   return (
     <ChatInfinityScroll
@@ -47,7 +81,11 @@ const SendTap = ({ select }) => {
       setPrevHeight={setPrevHeight}
       type="bottom"
     >
+<<<<<<< HEAD
       <Wrap>
+=======
+      <Wrap ref={scrollRef}>
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
         <Text color="#FFF" bold32>
           두근두근
           <br />

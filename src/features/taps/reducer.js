@@ -15,6 +15,10 @@ const initialState = {
   allIds: [],
   showModal: false,
   isNext: true,
+<<<<<<< HEAD
+=======
+  isLoading: false,
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
 };
 
 export default handleActions(
@@ -33,26 +37,33 @@ export default handleActions(
           draft.byId[doc.userId] = doc;
           draft.allIds.push(doc.userId);
         });
+        draft.isLoading = false;
       }),
     [LOAD_SEND_TAP]: (state, action) =>
       produce(state, (draft) => {
         draft.byId = {};
         draft.allIds = [];
         draft.isNext = true;
+<<<<<<< HEAD
 
         console.log(action.payload);
+=======
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
         const { cardBundles } = action.payload;
 
         cardBundles.forEach((doc) => {
           draft.byId[doc.userId] = doc;
           draft.allIds.push(doc.userId);
         });
+        draft.isLoading = false;
+        console.log('로딩 로딩 끝');
       }),
     [LOAD_RECEIVE_TAP]: (state, action) =>
       produce(state, (draft) => {
         draft.byId = {};
         draft.allIds = [];
         draft.isNext = true;
+<<<<<<< HEAD
 
         console.log(action.payload);
         const { cardBundles } = action.payload;
@@ -87,6 +98,8 @@ export default handleActions(
       produce(state, (draft) => {
         draft.byId = {};
         draft.allIds = [];
+=======
+>>>>>>> 64a4e75fb9798d5b44fdddd2dec857d4940d3797
 
         console.log(action.payload);
         const { cardBundles } = action.payload;
@@ -95,6 +108,35 @@ export default handleActions(
           draft.byId[doc.userId] = doc;
           draft.allIds.push(doc.userId);
         });
+
+        draft.isLoading = false;
+      }),
+    [NEXT_PAGE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload);
+        const { cardBundles } = action.payload;
+        if (cardBundles.length < 12) {
+          console.log('여기 걸렸음');
+          draft.isNext = false;
+          cardBundles.forEach((doc) => {
+            draft.byId[doc.userId] = doc;
+            draft.allIds.push(doc.userId);
+            console.log('마지막 페이지', doc);
+          });
+          // draft.allIds.push(doc);
+          draft.isLoading = false;
+          return;
+        }
+
+        cardBundles.forEach((doc) => {
+          draft.byId[doc.userId] = doc;
+          draft.allIds.push(doc.userId);
+        });
+        draft.isLoading = false;
+      }),
+    [LOADING]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isLoading = action.payload.isLoading;
       }),
     [REMOVE_RECEIVE_TAP]: (state, action) =>
       produce(state, (draft) => {
