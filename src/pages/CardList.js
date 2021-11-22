@@ -42,7 +42,7 @@ const CardList = () => {
         <SquareRight />
       </div>
       <TitleWrap />
-      <div className='title'>
+      <div className="title">
         <Text bold48> Just Tap!</Text>
         <Text regular20> 내가 찾던 동료를 Tap! 해서 만나보세요</Text>
       </div>
@@ -99,20 +99,21 @@ const Wrap = styled.div`
     right: 130px;
     z-index: 1;
   }
-  .title{
+  .title {
     position: relative;
-    top:-100px;
+    top: -100px;
     text-align: center;
-    p{
+    p {
       margin-bottom: 24px;
     }
   }
+  
 `;
 
 const TitleWrap = styled.div`
-position: relative;
+  position: relative;
   text-align: center;
-  
+
   background: conic-gradient(
     from 88.92deg at 47.81% 59.2%,
     #db83e9 -16.52deg,

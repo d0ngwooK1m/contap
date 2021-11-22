@@ -232,20 +232,32 @@ const CardFrontWrite = () => {
   }, []);
 
   return (
-    <Grid>
-      <Grid
-        height="560px"
-        bg="#141422"
-        margin="0px auto"
-        padding="66px 0px 0px 0px"
-      >
-        <Grid is_flex width="1110px" margin="0px auto 64px auto">
-          <Text bold32 color="#f5f3f8">
-            {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
-          </Text>
-          <Grid width="10%">
-            <AddBtn cursor="pointer" onClick={addBtnClick} />
-          </Grid>
+    <Grid
+      height="560px"
+      bg="#141422"
+      margin="0px auto"
+      padding="100px 0px 0px 0px"
+    >
+      <Grid is_flex width="1110px" margin="0px auto 64px auto">
+        <Text bold32 color="#f5f3f8">
+          {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
+        </Text>
+        <Grid width="10%">
+          <AddBtn cursor="pointer" onClick={addBtnClick} />
+        </Grid>
+      </Grid>
+      <Div>
+        <Grid margin="190px 103px 165px 0px" width="182px">
+          <label htmlFor="fileUpload">
+            <Img src={preview || userInfo.profile || BasicProfile} />
+          </label>
+          <input
+            type="file"
+            ref={fileInput}
+            id="fileUpload"
+            onChange={filePreview}
+            hidden
+          />
         </Grid>
         <Div>
           <Grid margin="190px 103px 165px 0px" width="182px">
@@ -616,7 +628,7 @@ const RadioInput = styled.input`
     margin-right: 16px;
     background-color: ${ColorStyle.Gray300 + Opacity[30]};
     // background: ${ColorStyle.PrimaryPurple};
-  }
+  
   &:checked {
     // width: 11.85px;
     // height: 11.85px;
