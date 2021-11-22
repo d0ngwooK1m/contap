@@ -36,6 +36,9 @@ const MessageBox = ({ roomId }) => {
   }, [messageList]);
 
   const callNext = () => {
+    if (!page) {
+      return
+    }
     dispatch(nextPageToAxios(roomId, page));
   };
 

@@ -3,7 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loadReceiveTapToAxios } from '../features/taps/actions';
+import {
+  loading,
+  loadReceiveTapToAxios,
+  nextPageToAxios,
+} from '../features/taps/actions';
 import { setContapNoti, setTapReceiveNoti } from '../features/notice/actions';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
@@ -12,41 +16,40 @@ import ChatInfinityScroll from './Chat/ChatInfinityScroll';
 const ReceiveTap = ({ select }) => {
   const dispatch = useDispatch();
   const scrollRef = React.useRef();
-
-  React.useEffect(async () => {
-    console.log('1번 디패');
-    await dispatch(loadReceiveTapToAxios("0"));
-    console.log('2번 디패');
-    dispatch(setContapNoti(false));
-    console.log('3번 디패');
-    dispatch(setTapReceiveNoti(false));
-  }, []);
-
   const userName = useSelector((state) => state.user.userName);
   const conTap = useSelector((state) => state.taps);
-  const [page, setPage] = React.useState(0);
-  const isNext = true;
+  const [page, setPage] = React.useState(1);
+  const { isNext, isLoading } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
-    // scrollToBottom();
+    dispatch(loading(true))
+    await dispatch(loadReceiveTapToAxios('0'));
+    dispatch(setContapNoti(false));
+    dispatch(setTapReceiveNoti(false));
+    return null;
   }, []);
 
   const callNext = () => {
-    console.log('한무 스크롤 가능!', page)
-    dispatch(loadReceiveTapToAxios(String(page)));
-    setPage(page+1)
+    if (conTap.allIds < 12 || isLoading) {
+      return;
+    }
+    
+    dispatch(loading(true))
+    dispatch(nextPageToAxios(select, page));
+    setPage(page + 1);
   };
+
   return (
     <ChatInfinityScroll
       callNext={callNext}
       isNext={isNext}
-      // loading={is_loading}
+      loading={isLoading}
       scrollTo={scrollRef}
       setPrevHeight={setPrevHeight}
       type="bottom"

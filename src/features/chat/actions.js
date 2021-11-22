@@ -72,6 +72,7 @@ export const loadMessagesToAxios = (roomId, page) => async (dispatch) => {
 
 export const nextPageToAxios = (roomId, page) => async (dispatch) => {
   try {
+    console.log(roomId, page);
     const { data } = await T.GET('/chat/getmsg', `${roomId}/${page}`);
     // const { data } = await T.GET('/contap/getothers');
     console.log('리스폰스 ============> ', data);
@@ -84,7 +85,7 @@ export const nextPageToAxios = (roomId, page) => async (dispatch) => {
 
 export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/getothers/1');
+    const { data } = await T.GET('/contap/getothers/1/0');
     // const { data } = await T.GET('/contap/getothers');
     dispatch(loadTalkRoomList(data));
   } catch (error) {
