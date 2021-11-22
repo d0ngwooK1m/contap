@@ -27,9 +27,7 @@ const CardFront = ({ userId, contap, select }) => {
   const [showModal, setShowMadal] = React.useState(false);
   const [sideModal, setSideModal] = React.useState(false);
 
-  console.log(select);
   const MySwal = withReactContent(Swal);
-  console.log('카드프론트 프로필', front[userId].profile);
   // Modal Handler
   const showCardBackModal = async () => {
     if (!isLogin || !token) {
