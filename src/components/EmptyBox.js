@@ -2,12 +2,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useSelector } from 'react-redux';
+
 import { ReactComponent as AddRound } from '../svgs/AddRound.svg';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import {
+  FontFamily,
+  FontScale,
+  ColorStyle,
+  Opacity,
+} from '../utils/systemDesign';
 import CardBackWrite from './CardBackWrite';
 import { Grid } from '../elements';
 
 const EmptyBox = () => {
+  const cardCount = useSelector((state) => state.cards.allIds);
   const [click, setClick] = React.useState(false);
   const [display, setDisplay] = React.useState({ display: 'flex' });
   console.log(display);
@@ -15,9 +23,23 @@ const EmptyBox = () => {
   const closeClick = () => {
     setClick(false);
   };
+
   if (!click) {
     return (
-      <Grid width="100%" height="100%" padding="0px 0px 10% 0px;">
+      <Grid width="100%" height="100%" padding="0px 0px 15% 0px;">
+        <TextDiv>
+          <TitleText>
+            나의 프로젝트 <Count>{cardCount.length}</Count>
+          </TitleText>
+          <TextBtn
+            onClick={() => {
+              // dispatch(isSuccess(!handleClick));
+              setClick(true);
+            }}
+          >
+            + 프로젝트 추가하기
+          </TextBtn>
+        </TextDiv>
         <Div
           onClick={() => {
             // dispatch(isSuccess(!handleClick));
@@ -31,7 +53,20 @@ const EmptyBox = () => {
     );
   }
   return (
-    <Grid width="100%" height="100%" padding="0px 0px 10% 0px;">
+    <Grid width="100%" height="100%" padding="0px 0px 7% 0px;">
+      <TextDiv>
+        <TitleText>
+          나의 프로젝트 <Count>{cardCount.length}</Count>
+        </TitleText>
+        <TextBtn
+          onClick={() => {
+            // dispatch(isSuccess(!handleClick));
+            setClick(true);
+          }}
+        >
+          + 프로젝트 추가하기
+        </TextBtn>
+      </TextDiv>
       <Grid>
         <CardBackWrite onHide={closeClick} />
       </Grid>
@@ -53,4 +88,42 @@ const Div = styled.div`
   background-color: ${ColorStyle.BackGround100};
   text-align: center;
   cursor: pointer;
+`;
+
+const TextDiv = styled.div`
+  width: 1110px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px auto;
+`;
+
+const TitleText = styled.p`
+  font-size: ${FontScale.Header_24};
+  font-family: ${FontFamily};
+  margin: 80px 0px 64px 0px;
+  color: ${ColorStyle.Gray500};
+  font-weight: 700;
+`;
+
+const Count = styled.span`
+  font-size: ${FontScale.Header_24};
+  font-family: ${FontFamily};
+  // margin: 160px 0px 64px 0px;
+  color: ${ColorStyle.PrimaryPurple};
+  font-weight: 700;
+`;
+
+const TextBtn = styled.div`
+  width: 15%;
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray500};
+  cursor: pointer;
+  margin: 80px 0px 61px 0px;
+  font-weight: 700;
+  z-index: 3;
+  // position: fixed;
+  // top: 16vh;
+  // left: 47vw;
 `;

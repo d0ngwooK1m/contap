@@ -9,21 +9,14 @@ import {
   Opacity,
 } from '../utils/systemDesign';
 
-import { Grid } from '../elements';
+// import { Grid } from '../elements';
 
 const TagList = ({ tag }) => {
+  console.log('태그확인===>', tag);
   return (
-    <Grid>
-      {tag === '' ? (
-        <Grid>
-          <HashTagWrap />
-          <HashTagWrap />
-          <HashTagWrap />
-        </Grid>
-      ) : (
-        <HashTagWrap>{tag}</HashTagWrap>
-      )}
-    </Grid>
+    <HobbyDiv>
+      <HashTagWrap>{tag}</HashTagWrap>
+    </HobbyDiv>
   );
 };
 
@@ -44,11 +37,15 @@ const HashTagWrap = styled.div`
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround300 + Opacity[15]};
+  background-color: ${ColorStyle.BackGround300 + Opacity[10]};
   border: 1px solid ${ColorStyle.Gray500 + Opacity[15]};
   border-radius: 50px;
   align-items: center;
-  justify-content: center;
   display: flex;
-  margin: 0px 8px;
+  justify-content: center;
+  margin-right: 16px;
+`;
+
+const HobbyDiv = styled.div`
+  // margin-left: 32px;
 `;

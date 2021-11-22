@@ -7,6 +7,7 @@ import { history } from '../features/configureStore';
 
 import { Grid } from '../elements';
 import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
+import { ReactComponent as CardEffect } from '../svgs/CardEffect.svg';
 // import { ReactComponent as Effects } from '../svgs/Effects.svg';
 import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
 import BasicProfile from '../assets/image/CardProfile.svg';
@@ -23,10 +24,7 @@ const CardProfile = () => {
 
   // const copy = cardList.slice();
 
-  const stackTag = cardList?.hashTagsString
-    ?.split('_')[0]
-    ?.split('@')
-    ?.slice(1, 2);
+  const stackTag = cardList?.hashTagsString?.split('_')[0]?.split('@')[1];
   // .slice(1, 2);
   // const tag = concat('#').stackTag;
   // const stackTag = '#' + tag;
@@ -56,11 +54,14 @@ const CardProfile = () => {
 
   return (
     <Grid padding="66px 0px 114px 0px" bg={ColorStyle.BackGround}>
-      <Effect />
       <TitleText>{cardList.userName}님의 프로필</TitleText>
+
       <Box>
         <DotDiv>
           <DoodleDots />
+          <div style={{ position: 'absolute', top: '-70%', left: '3%' }}>
+            <CardEffect />
+          </div>
         </DotDiv>
         <ProfileDiv>
           <Div>
@@ -76,13 +77,6 @@ const CardProfile = () => {
                   <StackEditText>#{stackTag}</StackEditText>
                 )}
               </StackText>
-              <StackText>
-                {/* {stackTag.length === 0 ? (
-                  '# 나의 스택'
-                ) : (
-                  <StackEditText>#{stackTag}</StackEditText>
-                )} */}
-              </StackText>
             </Grid>
             <BtnDiv>
               <UpdateBtn
@@ -94,28 +88,22 @@ const CardProfile = () => {
             </BtnDiv>
           </Div>
           <HobbyText>관심사</HobbyText>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              marginLeft: '32px',
+            }}
+          >
+            <BasicHashTag />
+            <BasicHashTag />
+            <BasicHashTag />
+          </div>
           <HobbyDiv>
-            {/* <HobbyDiv>{hobbyTag[0]}</HobbyDiv>
-          <TagDiv>{hobbyTag[1]}</TagDiv>
-          <TagDiv>{hobbyTag[2]}</TagDiv> */}
-            {/* {hobbyTag === 0 ? (
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <BasicHashTag type="button">
-                  {console.log('stack is no')}
-                  {}
-                </BasicHashTag>
-                <BasicHashTag type="button">
-                  {console.log('stack is no')}
-                </BasicHashTag>
-                <BasicHashTag type="button">
-                  {console.log('stack is no')}
-                </BasicHashTag>
-              </div>
-            ) : ( */}
             {hobbyTag?.map((hobby, idx) => {
               return hobby && <TagList key={idx} tag={hobby} />;
             })}
-            {/* )} */}
           </HobbyDiv>
         </ProfileDiv>
       </Box>
@@ -143,25 +131,25 @@ const Box = styled.div`
   // filter: blur(140px);
 `;
 
-const Effect = styled.div`
-  position: absolute;
-  width: 800px;
-  top: 10%;
-  background: conic-gradient(
-    from 90deg at 50% 50%,
-    #e153c2 -15.52deg,
-    #9230df 45.42deg,
-    #3f94e2 125.96deg,
-    #23d28b 230.98deg,
-    #3bacdb 274.1deg,
-    #aa63e2 313.48deg,
-    #e153c2 344.48deg,
-    #9230df 405.42deg
-  );
-  filter: blur(90px);
-  z-index: 3;
-  text-align: center;
-`;
+// const Effect = styled.div`
+//   position: relative;
+//   width: 800px;
+//   top: 50%
+//   background: conic-gradient(
+//     from 90deg at 50% 50%,
+//     #e153c2 -15.52deg,
+//     #9230df 45.42deg,
+//     #3f94e2 125.96deg,
+//     #23d28b 230.98deg,
+//     #3bacdb 274.1deg,
+//     #aa63e2 313.48deg,
+//     #e153c2 344.48deg,
+//     #9230df 405.42deg
+//   );
+//   filter: blur(90px);
+//   z-index: -10;
+//   text-align: center;
+// `;
 
 const DotDiv = styled.div`
   position: absolute;
@@ -191,23 +179,7 @@ const ProfileDiv = styled.div`
   );
   box-shadow: 14px 30px 35px 4px rgba(10, 10, 10, 0.4);
   border-radius: 16px;
-  // background: linear-gradient(
-  //   -45deg,
-  //   #7e22ce,
-  //   #7434c6,
-  //   #6451b9,
-  //   #5b62b1,
-  //   #5867ae,
-  //   #4982a2,
-  //   #41929b,
-  //   #3e9699,
-  //   #37a393,
-  //   #29bd87,
-  //   #73cba7,
-  //   #78cca9,
-  //   #94d1b5
-  // );
-  z-index: 3;
+  z-index: 100;
   position: relative;
   // box-shadow: 14px 30px 35px 4px ${'#0a0a0a' + Opacity[40]};
 `;
@@ -253,6 +225,21 @@ const StackEditText = styled.p`
   font-weight: 700;
 `;
 
+const BasicHashTag = styled.div`
+  width: 146px;
+  height: 54px;
+  margin-right: 16px;
+  border-radius: 50px;
+  border: 1px solid ${ColorStyle.Gray500 + Opacity[15]};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  color: ${ColorStyle.Gray100};
+  font-weight: 400;
+  text-align: center;
+  line-height: 54px;
+  background: ${ColorStyle.BackGround300 + Opacity[10]};
+`;
+
 const Img = styled.img`
   display: flex;
   justify-content: center;
@@ -279,19 +266,14 @@ const HobbyText = styled.div`
 `;
 
 const HobbyDiv = styled.div`
+  position: absolute;
+  top: 69%;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   // justify-content: center;
-  margin-left: 24px;
+  margin-left: 32px;
 `;
-
-// const BasicHashTag = styled.div`
-//   width: 146px;
-//   height: 54px;
-//   margin-right: 16px;
-//   border-radius: 50px;
-//   border: 1px solid ${ColorStyle.Gray500 + Opacity[15]};
-//   background: ${ColorStyle.BackGround300 + Opacity[15]};
-// `;
 
 const TagDiv = styled.div`
   width: 146px;
@@ -312,10 +294,3 @@ const BtnDiv = styled.div`
   // cursor: pointer;
   margin: 22px 26px 0px 0px;
 `;
-
-// const Btn = styled.button`
-//   width: 80px;
-//   position: absolute;
-//   top: 21vh;
-//   left: 53vw;
-// `;

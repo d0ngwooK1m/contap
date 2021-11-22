@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,52 +9,53 @@ import {
   deleteStack,
 } from '../features/cards/actions';
 
+import { Grid } from '../elements';
 import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // import { Grid } from '../elements';
 
 const searchData = [
-  'JavaScript',
+  'Spring',
+  'Spring Boot',
   'Java',
+  'React',
+  'React Native',
+  'Flutter',
   'Node.js',
   'Python',
-  'Flutter',
-  '제플린',
-  '프로크리에이트',
-  '파워포인트',
-  'React Native',
-  'React',
+  'Zeplin',
+  'Angular',
   'Vue.js',
   'C++',
-  'Angular',
-  '애프터이펙트',
-  'Go',
+  'Express',
   'C#',
-  'TypeScript',
-  'SQL',
-  'MySQL',
-  'JSP',
   'Django',
-  'FastAPI',
-  'PostgreSQL',
-  '프리미어',
-  'NestJS',
-  'PMO',
-  'EEO',
-  'FCC',
-  'QFD',
-  'VR',
-  'Zemax',
-  'WAN',
-  '피그마',
-  '스케치',
-  '오토캐드',
-  '스케치업',
-  '포토샵',
-  '일러스트레이터',
-  '인디자인',
-  '어도비XD',
+  'Next.js',
+  'Ruby',
+  'Java Script',
+  'Premiere Pro',
+  'After Effects',
+  'C',
+  'Android Studio',
+  'HTML CSS',
+  'SQL',
+  'TypeScript',
+  'Swift',
+  'Assembly',
+  'PHP',
+  'Nuxt.js',
+  'Flask',
+  'Nest.js',
+  'Figma',
+  'Sketch',
+  'Adobe XD',
+  'Illustrator',
+  'Photoshop',
+  'Proto.io',
+  'AutoCAD',
+  'JQuery',
+  'Go',
 ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
@@ -112,7 +114,7 @@ const StackSearch2 = () => {
         };
     const BtnSearchColor = stackList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
-      : `${ColorStyle.BackGround300}`;
+      : `${ColorStyle.BackGround}`;
     return (
       <Box key={val.toString()}>
         {/* {toggleCheck} */}
@@ -146,7 +148,7 @@ const StackSearch2 = () => {
     // const toggleCheck = stackList.includes(val) ? toggleButton(val) : null;
     const BtnColor = stackList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
-      : `${ColorStyle.BackGround300}`;
+      : `${ColorStyle.BackGround}`;
     return (
       <Box key={val.toString()}>
         {/* {toggleCheck} */}
@@ -158,7 +160,7 @@ const StackSearch2 = () => {
   });
 
   return (
-    <div>
+    <StackDiv>
       {!click ? (
         <SearchBoxDiv>
           <SearchBox
@@ -189,12 +191,15 @@ const StackSearch2 = () => {
 
       {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
       {/* <AllBox>{FullList}</AllBox> */}
-      <br />
-    </div>
+    </StackDiv>
   );
 };
 
 export default StackSearch2;
+
+const StackDiv = styled.div`
+  margin-bottom: 72px;
+`;
 
 const Box = styled.div`
   display: flex;
@@ -202,11 +207,14 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
+  width: 1180px;
   margin: 43px 165px 72px 165px;
+  padding-bottom: 72px;
   justify-content: start;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  border-bottom: 1px solid ${ColorStyle.BackGround300};
 `;
 
 // const ArrayBox = styled.div`

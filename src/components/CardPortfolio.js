@@ -115,7 +115,7 @@ const CardPortfolio = ({ cardId }) => {
         height="537px"
         borderRadius="16px"
         border="1px solid #8c4dff"
-        margin="40px auto"
+        margin="48px auto"
         padding="60px 48px 0px 48px"
         bg="#141422"
       >
@@ -242,7 +242,7 @@ const ProjectDiv = styled.div`
   border-radius: 16px;
   border: 1px solid ${'#4d4759' + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
-  margin: 0px auto 40px auto;
+  margin: 0px auto 48px auto;
   &:hover {
     border: 1px solid ${ColorStyle.PrimaryPurple};
     background: ${'#a09bac' + Opacity[15]};
@@ -256,7 +256,7 @@ const ProjectDiv = styled.div`
 const TitleBox = styled.input`
   width: 587px;
   height: 41px;
-  font-size: ${FontScale.Body1_20};
+  font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
@@ -279,7 +279,7 @@ const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray500 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -306,7 +306,7 @@ const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
   margin-top: 56px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray500 + Opacity[10]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
@@ -328,7 +328,7 @@ const LinkBox = styled.input`
   width: 947px;
   height: 50px;
   padding-left: 60px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray500 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;

@@ -15,7 +15,12 @@ import { ReactComponent as Link } from '../svgs/Link.svg';
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import { ReactComponent as Flag } from '../svgs/Flag.svg';
 
-import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+import {
+  FontFamily,
+  FontScale,
+  ColorStyle,
+  Opacity,
+} from '../utils/systemDesign';
 import { Grid, Text } from '../elements';
 
 const CardBackWrite = ({ onHide }) => {
@@ -82,14 +87,14 @@ const CardBackWrite = ({ onHide }) => {
       height="537px"
       borderRadius="16px"
       border="1px solid #8c4dff"
-      margin="40px auto"
+      margin="0px auto"
       padding="60px 48px 0px 48px"
       bg="#141422"
     >
       <Div>
         <TitleBox
           type="text"
-          placeholder="프로젝트 제목"
+          placeholder="카드 제목"
           onChange={(e) => {
             setTitle(e.target.value);
             // console.log(e.target.value);
@@ -111,7 +116,8 @@ const CardBackWrite = ({ onHide }) => {
           <MainBox
             type="text"
             value={desc}
-            placeholder="프로젝트 설명"
+            placeholder=" 어떤 프로젝트를 했었나요?
+            아직 프로젝트를 한 경험이 없다면 함께 하고 싶은 프로젝트를 공유해 주세요"
             maxLength="200"
             onChange={(e) => {
               setDesc(e.target.value);
@@ -128,7 +134,7 @@ const CardBackWrite = ({ onHide }) => {
         <TagDiv>
           <TagBox
             type="text"
-            placeholder="사용 기술"
+            placeholder="담당했던 대표 업무"
             onChange={(e) => {
               setTagsStr(e.target.value);
             }}
@@ -141,7 +147,7 @@ const CardBackWrite = ({ onHide }) => {
         <LinkDiv>
           <LinkBox
             type="text"
-            placeholder="링크"
+            placeholder="추가로 공개하고 싶은 링크가 있나요? / 프로젝트를 자세히 볼 수 있는 링크가 있나요?"
             onChange={(e) => {
               setLink(e.target.value);
             }}
@@ -176,7 +182,7 @@ const Div = styled.div`
 const TitleBox = styled.input`
   width: 587px;
   height: 41px;
-  font-size: ${FontScale.Body1_20};
+  font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
@@ -190,7 +196,7 @@ const TitleBox = styled.input`
   }
   margin-bottom: 40px;
   ::-webkit-input-placeholder {
-    color: ${ColorStyle.Gray500};
+    color: ${ColorStyle.Gray300};
   }
 `;
 
@@ -202,18 +208,18 @@ const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray500 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
-  color: ${ColorStyle.Gray500};
+  color: ${ColorStyle.Gray300};
   border: none;
   border-radius: 12px;
   &:focus {
     outline: none;
   }
   ::-webkit-input-placeholder {
-    color: ${ColorStyle.Gray500};
+    color: ${ColorStyle.Gray300};
   }
   resize: none;
 `;
@@ -231,7 +237,7 @@ const TagDiv = styled.div`
 const TagBox = styled.input`
   padding-left: 60px;
   margin-top: 56px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray500 + Opacity[10]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
@@ -244,7 +250,7 @@ const TagBox = styled.input`
     outline: none;
   }
   ::-webkit-input-placeholder {
-    color: ${ColorStyle.Gray500};
+    color: ${ColorStyle.Gray300};
   }
 `;
 
@@ -257,7 +263,7 @@ const LinkBox = styled.input`
   height: 50px;
   padding-left: 60px;
   margin-top: 24px;
-  background-color: ${ColorStyle.BackGround300};
+  background-color: ${ColorStyle.Gray500 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -268,6 +274,6 @@ const LinkBox = styled.input`
     outline: none;
   }
   ::-webkit-input-placeholder {
-    color: ${ColorStyle.PrimaryPurple};
+    color: ${ColorStyle.Gray300};
   }
 `;
