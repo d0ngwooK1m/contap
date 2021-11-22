@@ -84,7 +84,7 @@ const PwSettingForm = () => {
         </Text>
       </MarginWrapper>
       <form
-        autocomplete='off'
+        autoComplete='off'
         onSubmit={handleSubmit(async (passwordInfo) => {
           await setErrorMessage('');
           console.log(passwordInfo);

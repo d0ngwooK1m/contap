@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import CardFrontWrite from '../components/CardFrontWrite';
 // import StackSearch from '../components/StackSearch';
 import StackSearch2 from '../components/StackSearch2';
-import HobbySearch from '../components/HobbySearch';
+// import HobbySearch from '../components/HobbySearch';
+import HobbySearch2 from '../components/HobbySearch2';
 
 import { ColorStyle } from '../utils/systemDesign';
 import { Grid, Text } from '../elements';
@@ -38,7 +39,7 @@ const CardEdit = () => {
             <Text bold32>관심사</Text>
           </TagDiv>
           <Grid>
-            <HobbySearch />
+            <HobbySearch2 />
           </Grid>
         </Grid>
       </Grid>

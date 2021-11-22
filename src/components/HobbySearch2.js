@@ -3,69 +3,52 @@ import styled from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  searchStackList,
-  updateStack,
-  deleteStack,
+  searchHobbyList,
+  updateHobby,
+  deleteHobby,
+  // updateCard,
 } from '../features/cards/actions';
 
 import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
-// import { Grid } from '../elements';
+
+// import { Grid, Text } from '../elements';
 
 const searchData = [
-  'JavaScript',
-  'Java',
-  'Node.js',
-  'Python',
-  'Flutter',
-  '제플린',
-  '프로크리에이트',
-  '파워포인트',
-  'React Native',
-  'React',
-  'Vue.js',
-  'C++',
-  'Angular',
-  '애프터이펙트',
-  'Go',
-  'C#',
-  'TypeScript',
-  'SQL',
-  'MySQL',
-  'JSP',
-  'Django',
-  'FastAPI',
-  'PostgreSQL',
-  '프리미어',
-  'NestJS',
-  'PMO',
-  'EEO',
-  'FCC',
-  'QFD',
-  'VR',
-  'Zemax',
-  'WAN',
-  '피그마',
-  '스케치',
-  '오토캐드',
-  '스케치업',
-  '포토샵',
-  '일러스트레이터',
-  '인디자인',
-  '어도비XD',
+  '숨쉬기',
+  '밥먹기',
+  '걷기',
+  '뛰기',
+  '가만히 있기',
+  '지오캐싱',
+  '종이접기',
+  '피겨 스케이팅',
+  '맛집탐방',
+  '음악감상',
+  '카페탐방',
+  '산책',
+  '독서',
+  '스노우보드',
+  '스키',
+  '낚시',
 ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
-const StackSearch2 = () => {
+const HobbySearch = () => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState('');
   const [click, setClick] = React.useState(false);
   const searchArr = [];
-  const searchList = useSelector((state) => state.cards.stackArr);
-  // console.log('서치리스트===>', searchList);
-  const stackList = useSelector((state) => state.cards.stack);
+  const searchList = useSelector((state) => state.cards.hobbyArr);
+  // const hobbyList = useSelector((state) => state.cards.hobby);
+  let hobbyList = useSelector((state) => state.cards.hobby);
+  if (hobbyList.length === 1) {
+    if (hobbyList[0] === '') {
+      hobbyList = [];
+    }
+  }
   // const [button, setButton] = React.useState({});
   // const toggleButton = (id) => {
   //   setButton((prevButton) => ({
@@ -74,8 +57,11 @@ const StackSearch2 = () => {
   //   }));
   // };
 
+  // console.log(button);
+
   React.useEffect(() => {
     if (data === '') {
+      console.log('data');
       setClick(false);
     }
     searchData.filter((val) => {
@@ -88,35 +74,28 @@ const StackSearch2 = () => {
       return searchArr;
     });
     if (searchArr !== []) {
-      dispatch(searchStackList(searchArr));
+      dispatch(searchHobbyList(searchArr));
     }
   }, [data]);
 
   const ArrayData = searchList.map((val) => {
-    const stackSearchFunc = stackList.includes(val)
+    const hobbySearchFunc = hobbyList.includes(val)
       ? async () => {
-          console.log('test');
           setData(val);
           setClick(true);
-          // toggleButton(val);
-          // console.log('6', button);
-          await dispatch(deleteStack(val));
+          await dispatch(deleteHobby(val));
         }
       : async () => {
-          console.log('test');
           setData(val);
           setClick(true);
-          // toggleButton(val);
-          // console.log('7', button);
-          await dispatch(updateStack(val));
+          await dispatch(updateHobby(val));
         };
-    const BtnSearchColor = stackList.includes(val)
+    const BtnSearchColor = hobbyList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
-        {/* {toggleCheck} */}
-        <TagDiv color={BtnSearchColor} type="button" onClick={stackSearchFunc}>
+        <TagDiv color={BtnSearchColor} type="button" onClick={hobbySearchFunc}>
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -124,33 +103,23 @@ const StackSearch2 = () => {
   });
 
   const FullList = searchData.map((val) => {
-    console.log(stackList, val);
-    console.log(stackList?.includes(val));
-    const stackFunc = stackList.includes(val)
+    const hobbyFunc = hobbyList.includes(val)
       ? async () => {
-          console.log('test');
           setData(val);
           setClick(true);
-          // toggleButton(val);
-          // console.log('6', button);
-          await dispatch(deleteStack(val));
+          await dispatch(deleteHobby(val));
         }
       : async () => {
-          console.log('test');
           setData(val);
           setClick(true);
-          // toggleButton(val);
-          // console.log('7', button);
-          await dispatch(updateStack(val));
+          await dispatch(updateHobby(val));
         };
-    // const toggleCheck = stackList.includes(val) ? toggleButton(val) : null;
-    const BtnColor = stackList.includes(val)
+    const BtnColor = hobbyList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
-        {/* {toggleCheck} */}
-        <TagDiv color={BtnColor} type="button" onClick={stackFunc}>
+        <TagDiv color={BtnColor} type="button" onClick={hobbyFunc}>
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -166,7 +135,7 @@ const StackSearch2 = () => {
               console.log(e.target.value);
               setData(e.target.value);
             }}
-            placeholder="주로 사용하시는 기술이 있나요?"
+            placeholder="요즘 관심사는 뭐예요?"
           />
           <SearchIconDiv>
             <MypageSearch />
@@ -175,11 +144,11 @@ const StackSearch2 = () => {
       ) : (
         <SearchBoxDiv>
           <SearchBox
+            value={data}
             onChange={(e) => {
               console.log(e.target.value);
               setData(e.target.value);
             }}
-            value={data}
           />
           <SearchIconDiv>
             <MypageSearch />
@@ -187,14 +156,14 @@ const StackSearch2 = () => {
         </SearchBoxDiv>
       )}
 
-      {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
-      {/* <AllBox>{FullList}</AllBox> */}
+      {console.log(FullList)}
+      {!click ? <AllBox> {ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
       <br />
     </div>
   );
 };
 
-export default StackSearch2;
+export default HobbySearch;
 
 const Box = styled.div`
   display: flex;
@@ -202,25 +171,15 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  margin: 43px 165px 72px 165px;
+  margin: 43px 165px 119px 165px;
   justify-content: start;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
 `;
 
-// const ArrayBox = styled.div`
-// display: flex;
-// margin: 48px 165px;
-// justify-content: space-around;
-// align-items: center;
-// flex-direction: row;
-// flex-wrap: wrap;
-// `;
-
 const TagDiv = styled.div`
   display: inline-block;
-  width: 100%;
   margin: 10px;
   padding: 12px 20px;
   border-radius: 50px;
@@ -233,6 +192,21 @@ const TagDiv = styled.div`
   text-align: center;
   cursor: pointer;
 `;
+
+// const PurpleButton = styled.div`
+//   display: inline-block;
+//   margin: 10px;
+//   background: ${ColorStyle.PrimaryPurple};
+//   padding: 7px 10px;
+//   border-radius: 50px;
+//   border: 1px solid ${ColorStyle.PrimaryPurple};
+//   font-size: ${FontScale.Caption_14};
+//   font-family: ${FontFamily};
+//   color: ${ColorStyle.Gray500};
+//   font-weight: 400;
+//   text-align: center;
+//   cursor: pointer;
+// `;
 
 const SearchBoxDiv = styled.div`
   position: relative;

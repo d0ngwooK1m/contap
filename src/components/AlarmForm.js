@@ -155,7 +155,7 @@ const AlarmForm = () => {
       </MarginWrapper2>
 
       <form
-        autocomplete='off'
+        autoComplete='off'
         onSubmit={handleSubmit((phoneInfo) => {
           const alarmInfo = {
             alarmState: switchChange,

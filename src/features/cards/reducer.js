@@ -162,6 +162,7 @@ export default handleActions(
         }
         if (draft.stack.length !== 0) {
           draft.stack.shift();
+          draft.stack.push(action.payload.stack);
         } else {
           draft.stack.push(action.payload.stack);
         }
