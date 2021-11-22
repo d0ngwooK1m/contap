@@ -15,6 +15,7 @@ import ContapModal from './ContapModal';
 import { Text } from '../elements';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
+// import T from '../api/tokenInstance';
 
 const CardFront = ({ userId, contap, select }) => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const CardFront = ({ userId, contap, select }) => {
     if (!showModal) {
       await dispatch(loadCurrentCardDB(userId));
     }
+    // await T.POST('/main/posttap', { userId});
     setShowMadal(true);
   };
 

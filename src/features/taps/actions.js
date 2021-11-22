@@ -42,9 +42,11 @@ export const loadSendTapToAxios = () => async (dispatch) => {
   }
 };
 
-export const loadReceiveTapToAxios = () => async (dispatch) => {
+export const loadReceiveTapToAxios = (page) => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/gettap', '0');
+    console.log('받은탭 ============> ', '/contap/gettap', page);
+    const { data } = await T.GET('/contap/gettap', page);
+    console.log('받은탭 데이터============> ', data);
     // const { data } = await T.GET('/contap/gettap');
     dispatch(loadReceiveTap(data));
   } catch (error) {
@@ -54,7 +56,7 @@ export const loadReceiveTapToAxios = () => async (dispatch) => {
 
 export const loadGrabToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/getothers', '0');
+    const { data } = await T.GET('/contap/getothers', '0/0');
     // const { data } = await T.GET('/contap/getothers');
     dispatch(loadGrab(data));
   } catch (error) {

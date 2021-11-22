@@ -25,8 +25,8 @@ const ChatInfinityScroll = ({
     console.log('콜 할 위치',scrollTo.current.clientHeight + scrollTo.current.scrollTop === scrollTo.current.scrollHeight)
     console.log('============================================')
 
-    if (type==='bottom' && scrollHeight - clientHeight - scrollTop < 200) {
-      setPrevHeight(scrollHeight);
+    if (type==='bottom' && scrollHeight - clientHeight - scrollTop === 0) {
+      setPrevHeight(clientHeight);
       callNext();
       console.log('이때 콜 할거임!')
       

@@ -71,17 +71,23 @@ const Header = () => {
   }, []);
 
   const handleisContap = () => {
+    if (location.pathname === '/contap') {
+      return;
+    }
     if (isContapNoti) {
       dispatch(setContapNoti(false));
     }
-    history.replace('/contap');
+    history.push('/contap');
   };
 
   const handleisChat = () => {
+    if (location.pathname === '/grabtalk') {
+      return;
+    }
     if (isChatNoti) {
       dispatch(setChatNoti(false));
     }
-    history.replace('/grabtalk');
+    history.push('/grabtalk');
   };
 
   const handleisSetting = (event) => {
@@ -90,7 +96,10 @@ const Header = () => {
   };
 
   const moveToMyPage = () => {
-    history.replace('/mypage');
+    if (location.pathname === '/mypage') {
+      return;
+    }
+    history.push('/mypage');
   };
 
   const handleClose = () => {
@@ -104,8 +113,6 @@ const Header = () => {
     handleClose();
     window.location.href = '/';
   };
-  console.log('=============================');
-  console.log(history.location.pathname);
 
   const ChatButton = () => {
     // if (isChat || location.pathname === '/grabtalk') {

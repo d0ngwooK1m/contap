@@ -94,7 +94,7 @@ export const loadTalkRoomListToAxios = () => async (dispatch) => {
 
 export const loadNoneTalkRoomListToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/getothers/0');
+    const { data } = await T.GET('/contap/getothers/2/0');
     // const { data } = await T.GET('/contap/getothers');
     console.log(data);
     dispatch(loadNoneTalkRoomList(data));
