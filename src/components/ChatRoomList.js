@@ -16,7 +16,7 @@ const ChatList = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingRight: '24px', paddingTop: '40px' }}>
       {allChatList?.map((id) => {
         return <ChatRoom key={id} userId={id} />;
       })}

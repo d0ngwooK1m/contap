@@ -17,6 +17,7 @@ import {
   closeNoneTalkRoomList,
   loadCurrentRoom,
 } from '../features/chat/actions';
+import { setTapAcceptNoti } from '../features/notice/actions';
 
 const ContapModal = ({
   show,
@@ -52,6 +53,7 @@ const ContapModal = ({
         userCradInfo.userId,
       ),
     );
+    dispatch(setTapAcceptNoti(true));
     console.log('수락');
     onHide();
   };

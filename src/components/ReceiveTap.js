@@ -22,17 +22,18 @@ const ReceiveTap = ({ select }) => {
   const { isNext, isLoading } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
 
-  React.useEffect(async () => {
+  React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
     dispatch(loading(true))
-    await dispatch(loadReceiveTapToAxios('0'));
+    dispatch(loadReceiveTapToAxios('0'));
     dispatch(setContapNoti(false));
-    dispatch(setTapReceiveNoti(false));
-    return null;
+    return () => {
+      dispatch(setTapReceiveNoti(false));
+    };
   }, []);
 
   const callNext = () => {

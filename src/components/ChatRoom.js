@@ -21,26 +21,26 @@ const ChatRoom = ({ userId }) => {
   const userInfo = useSelector((state) => state.user);
   const lastMessage = roomInfo.roomStatus?.split('/')[2];
   const openCheck = currentRoom.userId === roomInfo.userId;
-  console.log(roomInfo)
+  console.log(roomInfo);
 
   React.useEffect(() => {
-    if (roomInfo.roomStatus===null) {
-      console.log('룸 안들어올떄')
+    if (roomInfo.roomStatus === null) {
+      console.log('룸 안들어올떄');
       dispatch(loadCurrentRoom(roomInfo));
     }
- },[])
+  }, []);
 
   const openChatRoom = () => {
     if (openCheck) {
       return;
     }
-    
+
     dispatch(closeNoneTalkRoomList());
     dispatch(loadTalkRoomListToAxios());
     dispatch(loadCurrentRoom(roomInfo));
   };
   const readCheck = roomInfo.roomStatus?.split('/')[0];
-  
+
   console.log('리드체크======>', readCheck);
 
   console.log('룸 인포======>', roomInfo);
@@ -85,7 +85,7 @@ const ChatRoom = ({ userId }) => {
             >
               {roomInfo.userName}
             </Text>
-            <Text regular16>{timeCheck(lastMessageTime)}</Text>
+            <Text regular16 color={ColorStyle.Gray100}>{timeCheck(lastMessageTime)}</Text>
           </div>
           <div className="message">
             <Text
@@ -97,48 +97,41 @@ const ChatRoom = ({ userId }) => {
           </div>
         </div>
       </ProfileWrap>
-      <hr />
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
-position: relative;
-top:40px;
-  hr {
-    position: relative;
-    width: 95%;
-    border: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
-    top:-20px;
-    left:-10px;
-  }
+  border-bottom: 1px solid ${ColorStyle.Gray100+Opacity[30]};
+  align-items: center;
+  padding: 16px;
+  height: 70px;
+  margin-bottom: 16px;
+  cursor: pointer;
   .name {
-    position: absolute;
-    top: 0px;
-    margin: 0px;
-    width: 350px;
+    margin-top: 6px;
+    width: 326px;
+    max-width: 326px;
     display: flex;
     justify-content: space-between;
   }
 
   .message {
-    margin-top: 8px;
-
     p {
       overflow: hidden;
+      max-width: 326px;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 350px;
       height: 28px;
     }
+  }
+
+  &:hover{
+    background-color: ${ColorStyle.BackGround100};
   }
 `;
 
 const ProfileWrap = styled.div`
-
-  min-height: 70px;
-  max-height: 70px;
-  margin: 0px 0px 32px 0px;
   display: flex;
   align-items: center;
 `;
@@ -146,13 +139,14 @@ const ProfileWrap = styled.div`
 const ImageBox = styled.div`
   height: 50px;
   width: 50px;
-  margin: 0px 20px 20px 0px;
+  margin: 8px 12px 0px 0px;
 
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border : ${({isLogin})=>isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px' };
+  border: ${({ isLogin }) =>
+    isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px'};
   border-radius: 50px;
 `;
 export default ChatRoom;

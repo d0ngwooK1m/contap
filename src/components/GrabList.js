@@ -22,17 +22,20 @@ const GrabList = ({ select }) => {
 
   console.log(conTap);
 
-  React.useEffect(async () => {
+  React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
     dispatch(loading(true));
-    await dispatch(loadGrabToAxios());
+    dispatch(loadGrabToAxios());
     dispatch(setContapNoti(false));
-    dispatch(setTapAcceptNoti(false));
-    return null;
+
+    return () => {
+      console.log('사라져야지');
+      dispatch(setTapAcceptNoti(false));
+    };
   }, []);
 
   const callNext = () => {

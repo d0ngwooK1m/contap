@@ -28,8 +28,7 @@ const GrapTalkAddProfile = ({ userId }) => {
 
   const category = roomInfo.field === 2 ? false : true;
 
-  console.log(category)
-
+  console.log(category);
 
   const addTalkRoom = () => {
     // 유저아이디가 왼쪽 룸 리스트에 있으면
@@ -45,15 +44,12 @@ const GrapTalkAddProfile = ({ userId }) => {
   return (
     <Wrap>
       <ProfileWrap onClick={addTalkRoom}>
-        <ImageBox
-          className="imageBox"
-          src={roomInfo.profile ? roomInfo.profile : BasicProfile}
-        />
+        <ImageBox src={roomInfo.profile ? roomInfo.profile : BasicProfile} />
         <div>
           <div className="name">
             <Text bold20>{roomInfo.userName}</Text>
           </div>
-          <div>
+          <div className="stackHashTags">
             <Text
               // color={ColorStyle.PrimaryPurple}
               color={
@@ -67,56 +63,99 @@ const GrapTalkAddProfile = ({ userId }) => {
         </div>
         <Hash className="tags">
           {interestHashTags?.map((stack, idx) => {
-            return stack && <HashTag key={idx} tag={stack} category={category} />;
+            return (
+              stack && <HashTag key={idx} tag={stack} category={category} />
+            );
           })}
         </Hash>
       </ProfileWrap>
-        <hr />
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
-position: relative;
-top:40px;
-hr {
-    position: relative;
-    top:-20px;
-    width: 95%;
-    border: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
+  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
+  width: 580px;
+  max-width: 580px;
+  padding: 16px;
+  height: 70px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  .stackHashTags{
+    width: 150px;
+    max-width: 150px;
+  }
+
+  &:hover{
+    background-color: ${ColorStyle.BackGround100};
   }
 `;
 
 const ProfileWrap = styled.div`
-  width: 580px;
+  align-items: center;
   /* background-color: red; */
-  margin: 0px auto 32px 80px;
   display: flex;
+  .name {
+    margin-top: 6px;
+  }
   .tags {
     width: 60%;
     display: flex;
     flex-direction: row;
-    margin: 0px 0px 0px auto;
   }
-  .name {
-    margin: 0px 0px 10px 0px;
-  }
-
 `;
 const ImageBox = styled.div`
   height: 50px;
   width: 50px;
-  margin: 0px 20px 20px 0px;
+  margin: 8px 28px 0px 0px;
 
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 25px;
+  border-radius: 50px;
 `;
 const Hash = styled.div`
   display: flex;
-  margin: 12px 0px 0px 16px;
+  margin-left:20px;
 `;
+
+// const Wrap = styled.div`
+// background-color: red;
+
+// `;
+
+// const ProfileWrap = styled.div`
+//   width: 580px;
+//   /* background-color: red; */
+//   margin: 0px auto 32px 80px;
+//   display: flex;
+//   .tags {
+//     width: 60%;
+//     display: flex;
+//     flex-direction: row;
+//     margin: 0px 0px 0px auto;
+//   }
+//   .name {
+//     margin: 0px 0px 10px 0px;
+//   }
+
+// `;
+// const ImageBox = styled.div`
+//   height: 50px;
+//   width: 50px;
+//   margin: 0px 20px 20px 0px;
+
+//   background-image: url('${(props) => props.src}');
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   border-radius: 25px;
+// `;
+// const Hash = styled.div`
+//   display: flex;
+//   margin: 12px 0px 0px 16px;
+// `;
 
 export default GrapTalkAddProfile;

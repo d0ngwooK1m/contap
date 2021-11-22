@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ColorStyle } from '../../utils/systemDesign';
+import { ColorStyle, Opacity } from '../../utils/systemDesign';
 import { ReactComponent as SendHorSvg } from '../../svgs/SendHor.svg'
 
 const MessageWrite = ({ sendMessage }) => {
@@ -53,16 +53,18 @@ export default MessageWrite;
 const InputField = styled.div`
   position: absolute;
   bottom: 0px;
+  max-width: 665px;
   width: 665px;
   height: 72px;
   display: flex;
   justify-content: space-between;
-  border-top: 2px solid aliceblue;
+  border-top: 1px solid ${ColorStyle.Gray300 + Opacity[30]};
   background-color: ${ColorStyle.BackGround};
   align-items: center;
   input {
+    margin-left: 70px;
+    width: 510px;
     bottom: 0px;
-    width: 80%;
     background-color: ${ColorStyle.BackGround};
     height: 95%;
     border: 0px;
@@ -92,4 +94,5 @@ const SendButton = styled.button`
   border-radius: 40px;
   background-color: ${ColorStyle.PrimaryPurple};
   border : 0px;
+  cursor: pointer;
 `;

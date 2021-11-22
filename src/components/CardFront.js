@@ -119,6 +119,7 @@ const CardFront = ({ userId, contap, select }) => {
         )}
       </div>
       <div style={{ display: 'flex' }}>
+        {front[userId].newFriend && <NotiBadge className="NotiBadge" />}
         <ImageBox
           className="imageBox"
           src={front[userId].profile ? front[userId].profile : BasicProfile}
@@ -170,6 +171,7 @@ export const MemoizedCardFront = React.memo(CardFront);
 // export default CardFront;
 
 const CardForm = styled.div`
+  position: relative;
   width: 350px;
   height: 200px;
   border-radius: 16px;
@@ -198,6 +200,10 @@ const CardForm = styled.div`
     background-color: ${({ category }) =>
       category ? ColorStyle.BackGround300 : ColorStyle.BackGround100};
 
+    .NotiBadge {
+      margin: -2px -2px 0px 0px;
+    }
+
     .imageBox {
       margin: 20px;
     }
@@ -218,6 +224,16 @@ const CardForm = styled.div`
       margin: 2px 0px -2px 20px;
     }
   }
+`;
+
+const NotiBadge = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 20px;
+  background-color: ${ColorStyle.Error};
 `;
 
 const ImageBox = styled.div`

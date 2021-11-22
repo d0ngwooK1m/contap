@@ -98,7 +98,7 @@ const Menu = styled.div`
   width: 445px;
   max-width: 445px;
   min-height: 80vh;
-  height: 89vh;
+  height: 84vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
   .addBtn {

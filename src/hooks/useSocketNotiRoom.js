@@ -12,6 +12,7 @@ import {
   setTapRefuseNoti,
 } from '../features/notice/actions';
 import { loadTalkRoomListToAxios } from '../features/chat/actions';
+import { loadReceiveTapToAxios } from '../features/taps/actions';
 
 const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -54,6 +55,10 @@ export default function useSocketNotiRoom() {
               }
               if (newNoti.type === 3) {
                 console.log('tap 요청 받았어!');
+                if (history.location.pathname === '/contap') {
+                  console.log('디패 로드 톡룸');
+                  await dispatch(loadReceiveTapToAxios());
+                }
                 dispatch(setTapReceiveNoti(true));
               }
               if (newNoti.type === 4) {

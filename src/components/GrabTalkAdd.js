@@ -10,6 +10,7 @@ import { ReactComponent as Search } from '../svgs/SearchSvg.svg';
 
 import { closeNoneTalkRoomList } from '../features/chat/actions';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
+import { wrap } from 'lodash';
 const GrabTalkAdd = ({ noneTalkList, closeList }) => {
   const [searchValue, setSearchValue] = React.useState('');
   const roomInfo = useSelector((state) => state.chat.noneChatList);
@@ -20,7 +21,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
 
   const dispatch = useDispatch();
   return (
-    <div>
+    <Wrap >
       <Header className="header">
         <SearchBarFrom>
           <Search />
@@ -35,6 +36,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
           <Close stroke={ColorStyle.Gray500} />
         </IconButton>
       </Header>
+      <div style={{ paddingRight: '24px', paddingTop: '40px' }}>
       {noneTalkList.map((id) => {
         if (searchValue === '') {
           return <GrapTalkAddProfile key={id} userId={id} />;
@@ -47,12 +49,13 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
           return <GrapTalkAddProfile key={id} userId={id} />;
         }
       })}
+        </div>
       {/* <NoneValueText>
         <Text bold32 color={ColorStyle.Gray500}>
           검색결과없쩡
         </Text>
       </NoneValueText> */}
-    </div>
+    </Wrap>
   );
 
   // return (
@@ -73,6 +76,12 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
   // );
 };
 
+const Wrap = styled.div`
+padding-left: 48px;
+min-width: 665px;
+overflow-y: scroll;
+max-height: 760px;
+`;
 const Header = styled.div`
   display: flex;
   position: relative;
@@ -90,7 +99,6 @@ const Header = styled.div`
 
 const SearchBarFrom = styled.div`
   display: flex;
-  margin-left: 48px;
   height: 46px;
   width: 523px;
   border-bottom: 1px solid ${ColorStyle.Gray300};

@@ -14,8 +14,8 @@ import { ColorStyle } from '../utils/systemDesign';
 const Contap = () => {
   const isReceiveTap = useSelector((state) => state.notice.isTapReceiveNoti);
   const isAcceptTap = useSelector((state) => state.notice.isTapAcceptNoti);
-  console.log(isReceiveTap);
-  console.log(isAcceptTap);
+  console.log('받은탭 알람', isReceiveTap);
+  console.log('그랩 알람', isAcceptTap);
   const content = [
     {
       id: 'ReceiveTap',
@@ -30,10 +30,27 @@ const Contap = () => {
           <div>
             <ReceiveTapIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
-          <div style={{ marginLeft: '16px' }}>
+          <div
+            style={{
+              marginLeft: '16px',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
             <Text color={ColorStyle.PrimaryMint} regular20>
               받은 탭
             </Text>
+            {isReceiveTap && (
+              <div
+                style={{
+                  marginLeft: '16px',
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: `${ColorStyle.Error}`,
+                  borderRadius: '10px',
+                }}
+              />
+            )}
           </div>
         </div>
       ),
@@ -48,19 +65,24 @@ const Contap = () => {
           <div>
             <ReceiveTapIconSvg fill={ColorStyle.Gray300} />
           </div>
-          <div style={{ marginLeft: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <div
+              style={{
+                marginLeft: '16px',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
               <Text color={ColorStyle.Gray300} regular20>
                 받은 탭
               </Text>
               {isReceiveTap && (
                 <div
                   style={{
-                    position: 'relative',
-                    left: '16px',
-                    width: '10px',
-                    height: '10px',
-                    backgroundColor: 'red',
+                    marginLeft: '16px',
+                    width: '20px',
+                    height: '20px',
+                    backgroundColor: `${ColorStyle.Error}`,
                     borderRadius: '10px',
                   }}
                 />
@@ -124,10 +146,27 @@ const Contap = () => {
           <div>
             <GrabListIconSvg fill={ColorStyle.PrimaryMint} />
           </div>
-          <div style={{ marginLeft: '16px' }}>
+          <div
+            style={{
+              marginLeft: '16px',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
             <Text color={ColorStyle.PrimaryMint} regular20>
               나의 그랩
             </Text>
+            {isAcceptTap && (
+              <div
+                style={{
+                  marginLeft: '16px',
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: `${ColorStyle.Error}`,
+                  borderRadius: '10px',
+                }}
+              />
+            )}
           </div>
         </div>
       ),
@@ -142,19 +181,24 @@ const Contap = () => {
           <div>
             <GrabListIconSvg fill={ColorStyle.Gray300} />
           </div>
-          <div style={{ marginLeft: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <div
+              style={{
+                marginLeft: '16px',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
               <Text color="#a09bac" regular20>
                 나의 그랩
               </Text>
               {isAcceptTap && (
                 <div
                   style={{
-                    position: 'relative',
-                    left: '16px',
-                    width: '10px',
-                    height: '10px',
-                    backgroundColor: 'red',
+                    marginLeft: '16px',
+                    width: '20px',
+                    height: '20px',
+                    backgroundColor: `${ColorStyle.Error}`,
                     borderRadius: '10px',
                   }}
                 />
