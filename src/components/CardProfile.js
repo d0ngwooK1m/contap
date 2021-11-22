@@ -146,7 +146,7 @@ const Box = styled.div`
 const Effect = styled.div`
   position: absolute;
   width: 800px;
-  top: 10%
+  top: 10%;
   background: conic-gradient(
     from 90deg at 50% 50%,
     #e153c2 -15.52deg,

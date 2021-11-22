@@ -14,7 +14,7 @@ import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // import { Grid } from '../elements';
 
 const searchData = [
-  'Javascript',
+  'JavaScript',
   'Java',
   'Node.js',
   'Python',
@@ -58,27 +58,21 @@ const searchData = [
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
-const StackSearch = () => {
+const StackSearch2 = () => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState('');
   const [click, setClick] = React.useState(false);
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.stackArr);
   // console.log('서치리스트===>', searchList);
-  // const stackList = useSelector((state) => state.cards.stack);
-  let stackList = useSelector((state) => state.cards.stack);
-  if (stackList.length === 1) {
-    if (stackList[0] === '') {
-      stackList = [];
-    }
-  }
-  const [button, setButton] = React.useState({});
-  const toggleButton = (id) => {
-    setButton((prevButton) => ({
-      ...prevButton,
-      [id]: !prevButton[id],
-    }));
-  };
+  const stackList = useSelector((state) => state.cards.stack);
+  // const [button, setButton] = React.useState({});
+  // const toggleButton = (id) => {
+  //   setButton((prevButton) => ({
+  //     ...prevButton,
+  //     [id]: !prevButton[id],
+  //   }));
+  // };
 
   React.useEffect(() => {
     if (data === '') {
@@ -99,57 +93,30 @@ const StackSearch = () => {
   }, [data]);
 
   const ArrayData = searchList.map((val) => {
-    console.log(stackList.length);
-    if (stackList.length === 1) {
-      return (
-        <Box key={val.toString()}>
-          {button[val] ? (
-            <TagDiv
-              type="button"
-              onClick={async () => {
-                console.log('test');
-                setData(val);
-                setClick(true);
-                toggleButton(val);
-                console.log(button[val]);
-                await dispatch(deleteStack(val));
-                console.log('1', button);
-              }}
-              style={{
-                backgroundColor: '#8c4dff',
-              }}
-            >
-              <span>{val}</span>
-            </TagDiv>
-          ) : (
-            <TagDiv
-              type="button"
-              onClick={() => {
-                console.log('test');
-                setData(val);
-                setClick(true);
-                console.log('2', button);
-              }}
-            >
-              <span>{val}</span>
-            </TagDiv>
-          )}
-        </Box>
-      );
-    }
+    const stackSearchFunc = stackList.includes(val)
+      ? async () => {
+          console.log('test');
+          setData(val);
+          setClick(true);
+          // toggleButton(val);
+          // console.log('6', button);
+          await dispatch(deleteStack(val));
+        }
+      : async () => {
+          console.log('test');
+          setData(val);
+          setClick(true);
+          // toggleButton(val);
+          // console.log('7', button);
+          await dispatch(updateStack(val));
+        };
+    const BtnSearchColor = stackList.includes(val)
+      ? `${ColorStyle.PrimaryPurple}`
+      : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
-        <TagDiv
-          type="button"
-          onClick={async () => {
-            console.log('wowow');
-            setData(val);
-            setClick(true);
-            toggleButton(val);
-            console.log('3', button);
-            await dispatch(updateStack(val));
-          }}
-        >
+        {/* {toggleCheck} */}
+        <TagDiv color={BtnSearchColor} type="button" onClick={stackSearchFunc}>
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -157,84 +124,41 @@ const StackSearch = () => {
   });
 
   const FullList = searchData.map((val) => {
-    console.log(stackList.length);
-    if (stackList.length === 1) {
-      return (
-        <Box key={val.toString()}>
-          {button[val] ? (
-            <TagDiv
-              type="button"
-              onClick={async () => {
-                console.log('test');
-                setData(val);
-                setClick(true);
-                toggleButton(val);
-                console.log(button[val]);
-                await dispatch(deleteStack(val));
-                console.log('4', button);
-              }}
-              style={{
-                backgroundColor: '#8c4dff',
-              }}
-            >
-              <span>{val}</span>
-            </TagDiv>
-          ) : (
-            <TagDiv
-              type="button"
-              onClick={() => {
-                console.log('test');
-                setData(val);
-                setClick(true);
-                console.log('5', button);
-              }}
-            >
-              <span>{val}</span>
-            </TagDiv>
-          )}
-        </Box>
-      );
-    }
+    console.log(stackList, val);
+    console.log(stackList?.includes(val));
+    const stackFunc = stackList.includes(val)
+      ? async () => {
+          console.log('test');
+          setData(val);
+          setClick(true);
+          // toggleButton(val);
+          // console.log('6', button);
+          await dispatch(deleteStack(val));
+        }
+      : async () => {
+          console.log('test');
+          setData(val);
+          setClick(true);
+          // toggleButton(val);
+          // console.log('7', button);
+          await dispatch(updateStack(val));
+        };
+    // const toggleCheck = stackList.includes(val) ? toggleButton(val) : null;
+    const BtnColor = stackList.includes(val)
+      ? `${ColorStyle.PrimaryPurple}`
+      : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
-        {button[val] ? (
-          <TagDiv
-            type="button"
-            onClick={async () => {
-              console.log('test');
-              setData(val);
-              setClick(true);
-              toggleButton(val);
-              console.log('6', button);
-              await dispatch(deleteStack(val));
-            }}
-            style={{
-              backgroundColor: '#8c4dff',
-            }}
-          >
-            <span>{val}</span>
-          </TagDiv>
-        ) : (
-          <TagDiv
-            type="button"
-            onClick={async () => {
-              console.log('test');
-              setData(val);
-              setClick(true);
-              toggleButton(val);
-              console.log('7', button);
-              await dispatch(updateStack(val));
-            }}
-          >
-            <span>{val}</span>
-          </TagDiv>
-        )}
+        {/* {toggleCheck} */}
+        <TagDiv color={BtnColor} type="button" onClick={stackFunc}>
+          <span>{val}</span>
+        </TagDiv>
       </Box>
     );
   });
 
   return (
-    <StackDiv>
+    <div>
       {!click ? (
         <SearchBoxDiv>
           <SearchBox
@@ -264,17 +188,13 @@ const StackSearch = () => {
       )}
 
       {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
-    </StackDiv>
+      {/* <AllBox>{FullList}</AllBox> */}
+      <br />
+    </div>
   );
 };
 
-export default StackSearch;
-
-const StackDiv = styled.div`
-  width: 1110px;
-  margin-bottom: 72px;
-  border-bottom: 1px solid ${ColorStyle.BackGround300};
-`;
+export default StackSearch2;
 
 const Box = styled.div`
   display: flex;
@@ -308,6 +228,7 @@ const TagDiv = styled.div`
   font-size: ${FontScale.Body2_16};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
+  background-color: ${(props) => props.color};
   font-weight: 400;
   text-align: center;
   cursor: pointer;

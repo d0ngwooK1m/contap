@@ -53,9 +53,11 @@ const ChatInfinityScroll = ({
       scrollTo.current?.addEventListener('scroll', handleInfinityScroll);
       
     } else {
+      console.log('얘는 펄스라 없어짐')
       scrollTo.current?.removeEventListener('scroll', handleInfinityScroll);
     }
     return () => {
+      console.log('없어졌는데?')
       scrollTo.current?.removeEventListener('scroll', handleInfinityScroll);
     };
   }, [isNext, loading, handleInfinityScroll, scrollTo]);
