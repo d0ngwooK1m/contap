@@ -12,9 +12,9 @@ import {
   closeNoneTalkRoomList,
 } from '../features/chat/actions';
 
-const GrapTalkAddProfile = ({ userId }) => {
+const GrapTalkAddProfile = ({ roomInfo }) => {
   const dispatch = useDispatch();
-  const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
+  // const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
   const roomList = useSelector((state) => state.chat.allIds);
   console.log(roomInfo);
   const stackHashTags = roomInfo.hashTags

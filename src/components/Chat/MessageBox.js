@@ -5,20 +5,20 @@ import styled from 'styled-components';
 import { ColorStyle } from '../../utils/systemDesign';
 import { Text } from '../../elements';
 import ChatInfinityScroll from './ChatInfinityScroll';
-import { nextPageToAxios } from '../../features/chat/actions';
+import { nextPageToAxios, loading } from '../../features/chat/actions';
 
 const MessageBox = ({ roomId }) => {
   const dispatch = useDispatch();
-  const messageList = useSelector((state) => state.chat.messages);
+  const {messages,isNext, isLoading } = useSelector((state) => state.chat);
   const userInfo = useSelector((state) => state.user.email);
   const scrollRef = React.useRef();
-  const page = messageList.length !== 0 ? messageList[0].id : null;
-  const isNext = messageList[0]?.isNext===false ? false : true
-  
+  const page = messages.length !== 0 ? messages[0].id : null;
+  // const isNext = messages[0]?.isNext===false ? false : true
+
   const [prevHeight, setPrevHeight] = React.useState(null);
 
-  console.log( '리스트 =========>',messageList)
-  console.log( 'page =========>',page);
+  console.log('리스트 =========>', messages);
+  console.log('page =========>', page);
   // const scrollToBottom = () => {
   //   scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   // };
@@ -33,12 +33,13 @@ const MessageBox = ({ roomId }) => {
         scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
     }
     // scrollToBottom();
-  }, [messageList]);
+  }, [messages]);
 
   const callNext = () => {
     if (!page) {
-      return
+      return;
     }
+    dispatch(loading(true));
     dispatch(nextPageToAxios(roomId, page));
   };
 
@@ -46,13 +47,13 @@ const MessageBox = ({ roomId }) => {
     <ChatInfinityScroll
       callNext={callNext}
       isNext={isNext}
-      // loading={is_loading}
+      loading={isLoading}
       scrollTo={scrollRef}
       setPrevHeight={setPrevHeight}
-      type='top'
+      type="top"
     >
       <ChatMessageBox ref={scrollRef}>
-        {messageList?.map((msg, i, arr) => {
+        {messages?.map((msg, i, arr) => {
           const isMe = msg.writer === userInfo;
 
           const isMargin =
@@ -61,7 +62,7 @@ const MessageBox = ({ roomId }) => {
             arr[i].writer === arr[i + 1].writer
               ? false
               : true;
-          
+
           const orderCheck = () => {
             if (arr.length === 1) {
               if (isMe) {
@@ -87,7 +88,12 @@ const MessageBox = ({ roomId }) => {
             return 'middle';
           };
           return (
-            <SpeechBubble key={i} isMe={isMe} isMargin={isMargin} orderCheck={orderCheck()}>
+            <SpeechBubble
+              key={i}
+              isMe={isMe}
+              isMargin={isMargin}
+              orderCheck={orderCheck()}
+            >
               <Text regular16>{msg.message}</Text>
             </SpeechBubble>
           );
@@ -101,7 +107,7 @@ const ChatMessageBox = styled.div`
   background-color: ${ColorStyle.BackGround};
   position: absolute;
   bottom: 0px;
-  padding-bottom: 72px;
+  padding-bottom: 80px;
   width: 665px;
   max-height: 700px;
   overflow-y: scroll;
@@ -114,14 +120,13 @@ const ChatMessageBox = styled.div`
 
 const SpeechBubble = styled.div`
   background-color: ${({ isMe }) =>
-  isMe ? '#723CD4' : ColorStyle.BackGround300};
+    isMe ? '#723CD4' : ColorStyle.BackGround300};
   width: fit-content;
   max-width: 450px;
   word-break: break-all;
-  margin: ${({ isMe }) =>
-    isMe ? '0px 0px 0px auto' : '0px auto 0px 48px'};
+  margin: ${({ isMe }) => (isMe ? '0px 0px 0px auto' : '0px auto 0px 48px')};
   margin-bottom: ${({ isMargin }) => (isMargin ? '32px' : '8px')};
-  padding:20px 28px;
+  padding: 20px 28px;
   border-radius: ${({ orderCheck }) =>
     orderCheck === 'meFirst'
       ? '35px 25px 5px 35px'

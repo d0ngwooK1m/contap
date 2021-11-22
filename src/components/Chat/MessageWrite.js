@@ -1,8 +1,9 @@
-/* eslint-disable */
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { ColorStyle, Opacity } from '../../utils/systemDesign';
-import { ReactComponent as SendHorSvg } from '../../svgs/SendHor.svg'
+import { ReactComponent as SendHorSvg } from '../../svgs/SendHor.svg';
+import { BLANCK_CHECK } from '../../utils/validation';
 
 const MessageWrite = ({ sendMessage }) => {
   const [message, setMessage] = useState('');
@@ -11,8 +12,13 @@ const MessageWrite = ({ sendMessage }) => {
     setMessage(e.target.value);
   };
 
-  const sendMsg = (message) => {
-    sendMessage(message);
+  // 공백 입력 방지
+
+  const sendMsg = (msg) => {
+    if (msg.replace(BLANCK_CHECK, '') === '') {
+      return;
+    }
+    sendMessage(msg);
   };
 
   // 오토 포커스 대상
@@ -43,9 +49,17 @@ const MessageWrite = ({ sendMessage }) => {
           sendMsg(message);
           setMessage('');
         }}
-      ><SendHorSvg/></SendButton>
+      >
+        <div className="svg">
+          <SendHorSvg />
+        </div>
+      </SendButton>
     </InputField>
   );
+};
+
+MessageWrite.propTypes = {
+  sendMessage: PropTypes.func.isRequired,
 };
 
 export default MessageWrite;
@@ -72,9 +86,9 @@ const InputField = styled.div`
     caret-color: ${ColorStyle.Gray500};
 
     font-family: 'Pretendard';
-      font-style: normal;
-      font-size: 20px;
-      font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 700;
     ::placeholder {
       font-family: 'Pretendard';
       font-style: normal;
@@ -89,10 +103,16 @@ const InputField = styled.div`
 `;
 
 const SendButton = styled.button`
-  width: 56px;
-  height: 56px;
+  position: relative;
+  width: 45px;
+  height: 45px;
   border-radius: 40px;
   background-color: ${ColorStyle.PrimaryPurple};
-  border : 0px;
+  border: 0px;
   cursor: pointer;
+  .svg {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+  }
 `;
