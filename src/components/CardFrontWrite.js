@@ -501,7 +501,7 @@ const CardFrontWrite = () => {
             </HashTagDiv>
           </Grid>
         </TagDiv>
-      </Grid>
+      </Div>
     </Grid>
   );
 };

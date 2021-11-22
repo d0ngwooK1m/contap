@@ -600,6 +600,10 @@ const GotoLoginWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &:hover {
+    background-color: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
 `;
 
 const GotoLoginBtn = styled.button`

@@ -10,6 +10,7 @@ import Signup from '../pages/Signup';
 import Settings from '../pages/Settings';
 import Contap from '../pages/Contap';
 import Header from './Header';
+// import Footer from './Footer';
 import Mypage from '../pages/Mypage';
 import CardEdit from '../pages/CardEdit';
 import Permit from './Permit';
@@ -36,6 +37,7 @@ function App() {
                 <PrivateRoute path="/edit" component={CardEdit} exact />
                 <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
               </Permit>
+              {/* <Footer /> */}
             </AlarmCheck>
           </WsNotiRoom>
         </Switch>

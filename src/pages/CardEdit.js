@@ -3,7 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CardFrontWrite from '../components/CardFrontWrite';
-import StackSearch from '../components/StackSearch';
+// import StackSearch from '../components/StackSearch';
+import StackSearch2 from '../components/StackSearch2';
 import HobbySearch from '../components/HobbySearch';
 
 import { ColorStyle } from '../utils/systemDesign';
@@ -30,7 +31,7 @@ const CardEdit = () => {
               <Text bold32>스택/툴</Text>
             </TagDiv>
             <Grid>
-              <StackSearch />
+              <StackSearch2 />
             </Grid>
           </StackDiv>
           <TagDiv>
