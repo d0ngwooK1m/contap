@@ -42,7 +42,8 @@
     "sweetalert2": "^11.1.9",
     "sweetalert2-react-content": "^4.2.0",
     "swiper": "6.8.4",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yarn": "^1.22.17"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -36,7 +36,7 @@ export const loading = createAction(LOADING, (isLoading) => ({
 
 export const loadSendTapToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/dotap', '0');
+    const { data } = await T.GET('/contap/dotap/0');
     // const { data } = await T.GET('/contap/dotap');
     console.log('보낸탭 데이터 ============> ', data);
 
@@ -60,7 +60,7 @@ export const loadReceiveTapToAxios = () => async (dispatch) => {
 
 export const loadGrabToAxios = () => async (dispatch) => {
   try {
-    const { data } = await T.GET('/contap/getothers', '0/0');
+    const { data } = await T.GET('/contap/getothers/0/0');
     // const { data } = await T.GET('/contap/getothers');
     dispatch(loadGrab(data));
   } catch (error) {
@@ -78,11 +78,11 @@ export const nextPageToAxios = (callPage, page) => async (dispatch) => {
       console.log('받은탭 데이터============> ', callPage, data);
       dispatch(nextPage(data));
     } else if (callPage === 'SendTap') {
-      const { data } = await T.GET('/contap/dotap', callPage, page);
+      const { data } = await T.GET('/contap/dotap', page);
       console.log('보낸탭 데이터 ============> ', data);
       dispatch(nextPage(data));
     } else if (callPage === 'GrabList') {
-      const { data } = await T.GET('/contap/getothers/0', callPage, page);
+      const { data } = await T.GET('/contap/getothers/0', page);
       console.log('그랩 ============> ', data);
       dispatch(nextPage(data));
     }
