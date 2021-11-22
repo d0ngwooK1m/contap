@@ -186,9 +186,7 @@ const StackSearch2 = () => {
           </SearchIconDiv>
         </SearchBoxDiv>
       )}
-
       {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
-      {/* <AllBox>{FullList}</AllBox> */}
       <br />
     </div>
   );

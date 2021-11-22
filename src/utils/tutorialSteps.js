@@ -37,6 +37,7 @@ export const mainSteps = [
         zIndex: 10000,
       },
     },
+    event: 'click',
   },
 ];
 
