@@ -45,6 +45,7 @@ const Header = () => {
   const [myProfile] = React.useState(<BasicProfileSvg />);
   const isUserLogin = userInfo.email;
   const userProfile = userInfo.profile ? userInfo.profile : '';
+  const [isMyPage, setIsMyPage] = React.useState(false);
   const [isSetting, setIsSetting] = React.useState(false);
 
   const open = Boolean(anchorEl);
@@ -59,6 +60,7 @@ const Header = () => {
   console.log('마이페이지 튜토리얼===>', mypageAlarm);
   console.log('세팅 튜토리얼===>', settingAlarm);
   console.log(open);
+  console.log(isSetting, isMyPage);
 
   // 로그인 체크
   // useUserAuthCheck();
@@ -152,10 +154,22 @@ const Header = () => {
       <HeaderWrapper location={location.pathname}>
         {/* <TutorialForm steps={mainSteps} page={1} /> */}
         {mypageAlarm === false ? (
-          <TutorialForm steps={mainSteps} page={1} />
+          <TutorialForm
+            stepIndex={isMyPage ? 1 : 0}
+            steps={mainSteps}
+            page={1}
+            disableScrolling
+            disableScrollParentFix
+          />
         ) : null}
         {history.location.pathname === '/' && mypageAlarm === true && settingAlarm === false ? (
-          <TutorialForm open={open} steps={settingSteps} page={0} />
+          <TutorialForm
+            stepIndex={isSetting ? 1 : 0}
+            steps={settingSteps}
+            page={0}
+            disableScrolling
+            disableScrollParentFix
+          />
         ) : null}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
         {/* <Grid
@@ -220,6 +234,7 @@ const Header = () => {
               <MenuItem
                 onClick={() => {
                   history.push('/settings');
+                  setIsMyPage(true);
                   handleClose();
                 }}
               >

@@ -107,6 +107,7 @@ export default handleActions(
     [SET_PREVIEW]: (state, action) =>
       produce(state, (draft) => {
         draft.preview = action.payload.preview;
+        console.log(action.payload.preview);
       }),
     [LOAD_MY_CARD]: (state, action) =>
       produce(state, (draft) => {
@@ -178,7 +179,7 @@ export default handleActions(
         console.log(Array.isArray(action.payload.hobby));
         if (
           Array.isArray(action.payload.hobby) &&
-          action.payload.stack !== ['']
+          action.payload.hobby !== ['']
         ) {
           draft.hobby = action.payload.hobby;
           return;

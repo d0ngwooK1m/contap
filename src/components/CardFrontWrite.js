@@ -59,14 +59,12 @@ const CardFrontWrite = () => {
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
-  // if (hobbyTag === undefined) {
-  //   // for (let i = 0; i < hobbyTag.length; i++) {
-  //   // if (hobbyTag[i] === '') {
-  //   //   hobbyTag.pop();
-  //   // }
-  // hobby = [];
-  // }
-  // }
+  for (let i = 0; i < hobbyTag?.length; i++) {
+    if (hobbyTag[i] === '') {
+      hobbyTag.pop();
+    }
+  }
+
   console.log('hobbyTag', hobbyTag);
   const stackText = '나의 스택';
   const hobbyText1 = '관심사1';
@@ -230,6 +228,8 @@ const CardFrontWrite = () => {
     // localStorage.setItem('category', JSON.stringify(category));
     // localStorage.setItem('tag', JSON.stringify(hobbyTag));
   }, []);
+
+  console.log('프리뷰 확인===>', preview);
 
   return (
     <Grid>
@@ -516,6 +516,7 @@ const Img = styled.img`
   border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
   border-radius: 8px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const TitleBox = styled.input`
@@ -657,7 +658,7 @@ const HashStackTag = styled.div`
   margin-top: 18px;
   margin-right: 16px;
   border-radius: 50px;
-  border: 1px solid ${ColorStyle.PrimaryPurple};
+  background: #723cd4;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
@@ -675,7 +676,7 @@ const HashTag = styled.div`
   height: 54px;
   margin: 18px 8px;
   border-radius: 50px;
-  border: 1px solid ${ColorStyle.PrimaryPurple};
+  background: #723cd4;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
