@@ -611,6 +611,10 @@ const GotoLoginBtn = styled.button`
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
+  &:hover {
+    background-color: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
 `;
 
 const InputWrapper = styled.div`

@@ -178,7 +178,7 @@ const Login = () => {
             </Text>
           </Title>
           <form
-            autocomplete='off'
+            autoComplete='off'
             onSubmit={handleSubmit(async (loginInfo) => {
               await setErrorMessage('');
               console.log(loginInfo);
