@@ -47,14 +47,13 @@ export default handleActions(
             console.log('마지막 페이지', doc);
             draft.messages.unshift(doc);
           });
+          return;
         }
-        if (action.payload.messageList.length >= 15) {
-          action.payload.messageList.forEach((doc) => {
-            doc.isNext = true;
-            console.log(doc);
-            draft.messages.unshift(doc);
-          });
-        }
+        action.payload.messageList.forEach((doc) => {
+          doc.isNext = true;
+          console.log(doc);
+          draft.messages.unshift(doc);
+        });
 
         // draft.isLoading = false;
       }),
