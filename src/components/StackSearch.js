@@ -271,7 +271,7 @@ const StackSearch = () => {
 export default StackSearch;
 
 const StackDiv = styled.div`
-  width: 1110px
+  width: 1110px;
   margin-bottom: 72px;
   border-bottom: 1px solid ${ColorStyle.BackGround300};
 `;

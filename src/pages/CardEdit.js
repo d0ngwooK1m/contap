@@ -53,6 +53,6 @@ const TagDiv = styled.div`
 `;
 
 const StackDiv = styled.div`
-  width: 1110px
+  width: 1110px;
   border-bottom: 1px solid ${ColorStyle.BackGround300};
 `;
