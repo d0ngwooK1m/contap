@@ -3,7 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loadReceiveTapToAxios } from '../features/taps/actions';
+import {
+  loadReceiveTapToAxios,
+  nextPageToAxios,
+} from '../features/taps/actions';
 import { setContapNoti, setTapReceiveNoti } from '../features/notice/actions';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
@@ -15,7 +18,7 @@ const ReceiveTap = ({ select }) => {
 
   React.useEffect(async () => {
     console.log('1번 디패');
-    await dispatch(loadReceiveTapToAxios("0"));
+    await dispatch(loadReceiveTapToAxios('0'));
     console.log('2번 디패');
     dispatch(setContapNoti(false));
     console.log('3번 디패');
@@ -24,8 +27,8 @@ const ReceiveTap = ({ select }) => {
 
   const userName = useSelector((state) => state.user.userName);
   const conTap = useSelector((state) => state.taps);
-  const [page, setPage] = React.useState(0);
-  const isNext = true;
+  const [page, setPage] = React.useState(1);
+  const { isNext } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
 
   React.useEffect(() => {
@@ -34,14 +37,16 @@ const ReceiveTap = ({ select }) => {
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
-    // scrollToBottom();
   }, []);
 
   const callNext = () => {
-    console.log('한무 스크롤 가능!', page)
-    dispatch(loadReceiveTapToAxios(String(page)));
-    setPage(page+1)
+    if (conTap.allIds < 12) {
+      return;
+    }
+    dispatch(nextPageToAxios(select, page));
+    setPage(page + 1);
   };
+
   return (
     <ChatInfinityScroll
       callNext={callNext}
