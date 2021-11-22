@@ -41,8 +41,13 @@ const HobbySearch = () => {
   const [click, setClick] = React.useState(false);
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.hobbyArr);
-  const hobbyList = useSelector((state) => state.cards.hobby);
-
+  // const hobbyList = useSelector((state) => state.cards.hobby);
+  let hobbyList = useSelector((state) => state.cards.hobby);
+  if (hobbyList.length === 1) {
+    if (hobbyList[0] === '') {
+      hobbyList = [];
+    }
+  }
   const [button, setButton] = React.useState({});
   const toggleButton = (id) => {
     setButton((prevButton) => ({

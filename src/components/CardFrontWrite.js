@@ -67,7 +67,7 @@ const CardFrontWrite = () => {
   // hobby = [];
   // }
   // }
-
+  console.log('hobbyTag', hobbyTag);
   const stackText = '나의 스택';
   const hobbyText1 = '관심사1';
   const hobbyText2 = '관심사2';
@@ -105,6 +105,17 @@ const CardFrontWrite = () => {
   console.log('관심사 태그값 확인====>', hobby);
   console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
+  if (stack.length === 1) {
+    if (stack[0] === '') {
+      stack = [];
+    }
+  }
+
+  if (hobby.length === 1) {
+    if (hobby[0] === '') {
+      hobby = [];
+    }
+  }
   // if (stack === '') {
   //   stack = [];
   // }
@@ -209,7 +220,7 @@ const CardFrontWrite = () => {
   React.useEffect(() => {
     // e.preventDefault();
     if (!userInfo.userName) {
-      history.goBack();
+      window.location.href = '/mypage';
 
       return;
     }
@@ -248,99 +259,112 @@ const CardFrontWrite = () => {
             hidden
           />
         </Grid>
-        <Grid width="345px">
-          <TitleBox
-            type="text"
-            value={userName}
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
-            placeholder="닉네임을 입력해 주세요"
-          />
-          <Grid margin="54px 0px 18px 0px">
-            <Text bold20 color="#f5f3f8">
-              직무
-            </Text>
+        <Div>
+          <Grid margin="190px 103px 165px 0px" width="182px">
+            <label htmlFor="fileUpload">
+              <Img src={preview || userInfo.profile || BasicProfile} />
+            </label>
+            <input
+              type="file"
+              ref={fileInput}
+              id="fileUpload"
+              onChange={filePreview}
+              hidden
+            />
           </Grid>
-          <Grid width="501px">
-            <RadioWrap>
-              <RadioInput
-                type="radio"
-                id="categoryId"
-                name="field"
-                value="0"
-                checked={category === 0 ? true : false}
-                onChange={() => setCategory(0)}
-              />
-              <InputLabel
-                htmlFor="category"
-                // style={{
-                //   color: ColorStyle.Gray500,
-                //   fontSize: FontScale.Body1_20,
-                //   fontFamily: FontFamily,
-                //   fontWeight: 400,
-                //   marginRight: '32px',
-                // }}
-              >
-                백엔드
-              </InputLabel>
-            </RadioWrap>
-            <RadioWrap>
-              <InputLabel
-                htmlFor="category"
-                // style={{
-                //   color: ColorStyle.Gray500,
-                //   fontSize: FontScale.Body1_20,
-                //   fontFamily: FontFamily,
-                //   fontWeight: 400,
-                //   marginRight: '32px',
-                // }}
-              >
+          <Grid width="345px">
+            <TitleBox
+              type="text"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value);
+              }}
+              placeholder="닉네임을 입력해 주세요"
+            />
+            <Grid margin="54px 0px 18px 0px">
+              <Text bold20 color="#f5f3f8">
+                직무
+              </Text>
+            </Grid>
+            <Grid width="501px">
+              <RadioWrap>
                 <RadioInput
                   type="radio"
                   id="categoryId"
                   name="field"
-                  value="1"
-                  checked={category === 1 ? true : false}
-                  onChange={() => setCategory(1)}
+                  value="0"
+                  checked={category === 0 ? true : false}
+                  onChange={() => setCategory(0)}
+                />
+                <InputLabel
+                  htmlFor="category"
                   // style={{
-                  //   marginRight: '16px',
+                  //   color: ColorStyle.Gray500,
+                  //   fontSize: FontScale.Body1_20,
+                  //   fontFamily: FontFamily,
+                  //   fontWeight: 400,
+                  //   marginRight: '32px',
                   // }}
-                />
-                프론트엔드
-              </InputLabel>
-            </RadioWrap>
-            <RadioWrap>
-              <InputLabel
-                htmlFor="category"
-                // style={{
-                //   color: ColorStyle.Gray500,
-                //   fontSize: FontScale.Body1_20,
-                //   fontFamily: FontFamily,
-                //   fontWeight: 400,
-                // }}
-              >
-                <RadioInput
-                  type="radio"
-                  id="categoryId"
-                  name="field"
-                  value="2"
-                  checked={category === 2 ? true : false}
-                  onChange={() => setCategory(2)}
-                  // style={{ marginRight: '16px' }}
-                />
-                디자인
-              </InputLabel>
-            </RadioWrap>
+                >
+                  백엔드
+                </InputLabel>
+              </RadioWrap>
+              <RadioWrap>
+                <InputLabel
+                  htmlFor="category"
+                  // style={{
+                  //   color: ColorStyle.Gray500,
+                  //   fontSize: FontScale.Body1_20,
+                  //   fontFamily: FontFamily,
+                  //   fontWeight: 400,
+                  //   marginRight: '32px',
+                  // }}
+                >
+                  <RadioInput
+                    type="radio"
+                    id="categoryId"
+                    name="field"
+                    value="1"
+                    checked={category === 1 ? true : false}
+                    onChange={() => setCategory(1)}
+                    // style={{
+                    //   marginRight: '16px',
+                    // }}
+                  />
+                  프론트엔드
+                </InputLabel>
+              </RadioWrap>
+              <RadioWrap>
+                <InputLabel
+                  htmlFor="category"
+                  // style={{
+                  //   color: ColorStyle.Gray500,
+                  //   fontSize: FontScale.Body1_20,
+                  //   fontFamily: FontFamily,
+                  //   fontWeight: 400,
+                  // }}
+                >
+                  <RadioInput
+                    type="radio"
+                    id="categoryId"
+                    name="field"
+                    value="2"
+                    checked={category === 2 ? true : false}
+                    onChange={() => setCategory(2)}
+                    // style={{ marginRight: '16px' }}
+                  />
+                  디자인
+                </InputLabel>
+              </RadioWrap>
+            </Grid>
           </Grid>
-        </Grid>
-      </Div>
-      <TagDiv>
-        <Grid margin="0px 130px 0px 0px" width="60px">
-          <Text bold20 color="#f5f3f8">
-            스택/툴
-          </Text>
-          {/* {stack.length !== 0 ? (
+        </Div>
+        <TagDiv>
+          <Grid margin="0px 130px 0px 0px" width="60px">
+            <Text bold20 color="#f5f3f8">
+              스택/툴
+            </Text>
+            {/* {stack.length !== 0 ? (
             <HashStackTag
               type="button"
               onClick={() => {
@@ -361,23 +385,23 @@ const CardFrontWrite = () => {
               {stackTag}
             </HashStackTag>
           )} */}
-          {stack[0] === '' ? (
-            <BasicHashTag type="button">
-              {console.log('stack is no')}
-              {stackText}
-            </BasicHashTag>
-          ) : (
-            <HashStackTag
-              type="button"
-              onClick={() => {
-                dispatch(deleteStack(stack));
-              }}
-            >
-              {console.log('stack is exist')}
-              {stack}
-            </HashStackTag>
-          )}
-          {/* // {stack.length !== 0 && (
+            {stack.length === 0 ? (
+              <BasicHashTag type="button">
+                {console.log('stack is no')}
+                {stackText}
+              </BasicHashTag>
+            ) : (
+              <HashStackTag
+                type="button"
+                onClick={() => {
+                  dispatch(deleteStack(stack));
+                }}
+              >
+                {console.log('stack is exist')}
+                {stack}
+              </HashStackTag>
+            )}
+            {/* // {stack.length !== 0 && (
           //   // stack[0] !== '' &&
           //   <HashStackTag
           //     type="button"
@@ -389,7 +413,7 @@ const CardFrontWrite = () => {
           //     {stack}
           //   </HashStackTag>
           // )} */}
-          {/* if(stack.length !== 0)
+            {/* if(stack.length !== 0)
           { return(
             <HashStackTag
               type="button"
@@ -402,13 +426,13 @@ const CardFrontWrite = () => {
             </HashStackTag>
            ) }
           else if(stack.length === ""){<div> {stack}</div>}} */}
-        </Grid>
-        <Grid margin="0px 130px 0px 0px" width="100%">
-          <Text bold20 color="#f5f3f8">
-            관심사
-          </Text>
-          <HashTagDiv>
-            {/* {hobby.length !== 0
+          </Grid>
+          <Grid margin="0px 130px 0px 0px" width="100%">
+            <Text bold20 color="#f5f3f8">
+              관심사
+            </Text>
+            <HashTagDiv>
+              {/* {hobby.length !== 0
               ? hobby.map((val) => {
                   {
                     console.log(val);
@@ -441,46 +465,46 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })} */}
-            {hobby[0] === '' ? (
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <BasicHashTag type="button">
-                  {console.log('stack is no')}
-                  {hobbyText1}
-                </BasicHashTag>
-                <BasicHashTag type="button">
-                  {console.log('stack is no')}
-                  {hobbyText2}
-                </BasicHashTag>
-                <BasicHashTag type="button">
-                  {console.log('stack is no')}
-                  {hobbyText3}
-                </BasicHashTag>
-              </div>
-            ) : (
-              hobby.map((val) => {
-                {
-                  console.log(val);
-                }
-                return (
-                  <HashTag
-                    type="button"
-                    onClick={() => {
-                      dispatch(deleteHobby(val));
-                    }}
-                    key={val}
-                  >
-                    {val}
-                  </HashTag>
-                );
-              })
-            )}
-          </HashTagDiv>
-        </Grid>
-      </TagDiv>
+              {hobby.length === 0 ? (
+                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <BasicHashTag type="button">
+                    {console.log('stack is no')}
+                    {hobbyText1}
+                  </BasicHashTag>
+                  <BasicHashTag type="button">
+                    {console.log('stack is no')}
+                    {hobbyText2}
+                  </BasicHashTag>
+                  <BasicHashTag type="button">
+                    {console.log('stack is no')}
+                    {hobbyText3}
+                  </BasicHashTag>
+                </div>
+              ) : (
+                hobby.map((val) => {
+                  {
+                    console.log(val);
+                  }
+                  return (
+                    <HashTag
+                      type="button"
+                      onClick={() => {
+                        dispatch(deleteHobby(val));
+                      }}
+                      key={val}
+                    >
+                      {val}
+                    </HashTag>
+                  );
+                })
+              )}
+            </HashTagDiv>
+          </Grid>
+        </TagDiv>
+      </Grid>
     </Grid>
   );
 };
-
 export default CardFrontWrite;
 
 const Div = styled.div`

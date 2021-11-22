@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
+import BasicAlert from '../utils/deleteAlert';
 
 import { Grid, Text } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
@@ -36,8 +37,21 @@ const CardPortfolio = ({ cardId }) => {
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
 
-  const deleteCardBack = () => {
-    dispatch(deleteCardDB(cardId));
+  const deleteCardBack = async () => {
+    const { isConfirmed } = await BasicAlert.fire({
+      title: (
+        <div style={{ textAlign: 'left' }}>
+          <div style={{ marginBottom: '108px' }}>
+            <Text bold32 color={ColorStyle.BackGround300}>
+              카드를 삭제할까요?
+            </Text>
+          </div>
+        </div>
+      ),
+    });
+    if (isConfirmed) {
+      dispatch(deleteCardDB(cardId));
+    }
   };
 
   const edit = () => {

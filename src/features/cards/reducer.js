@@ -114,10 +114,10 @@ export default handleActions(
         draft.allIds = [];
         console.log(action.payload);
         const { card } = action.payload;
-        const cardList = action.payload.card.cardDtoList;
+        const cardList = card.cardDtoList;
         console.log(cardList);
         draft.current = card;
-        draft.cardList = cardList;
+        // draft.cardList = cardList;
         cardList.forEach((doc) => {
           draft.byId[doc.cardId] = doc;
           draft.allIds.push(doc.cardId);
@@ -148,15 +148,23 @@ export default handleActions(
       }),
     [SET_STACK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(Array.isArray(action.payload.stack));
-        if (Array.isArray(action.payload.stack)) {
+        console.log(
+          '태그 리듀서 확인====>',
+          Array.isArray(action.payload.stack),
+        );
+        console.log('태그 리듀서 액션 확인====>', action.payload.stack);
+        if (
+          Array.isArray(action.payload.stack) &&
+          action.payload.stack !== ['']
+        ) {
           draft.stack = action.payload.stack;
           return;
         }
         if (draft.stack.length !== 0) {
           draft.stack.shift();
+        } else {
+          draft.stack.push(action.payload.stack);
         }
-        draft.stack.push(action.payload.stack);
       }),
     [DELETE_STACK]: (state, action) =>
       produce(state, (draft) => {
@@ -167,7 +175,10 @@ export default handleActions(
     [SET_HOBBY]: (state, action) =>
       produce(state, (draft) => {
         console.log(Array.isArray(action.payload.hobby));
-        if (Array.isArray(action.payload.hobby)) {
+        if (
+          Array.isArray(action.payload.hobby) &&
+          action.payload.stack !== ['']
+        ) {
           draft.hobby = action.payload.hobby;
           return;
         }

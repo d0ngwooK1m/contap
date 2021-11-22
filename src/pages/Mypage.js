@@ -28,8 +28,8 @@ const Mypage = () => {
     setClick(false);
   };
 
-  React.useEffect(() => {
-    dispatch(loadMyCardDB());
+  React.useEffect(async () => {
+    await dispatch(loadMyCardDB());
   }, []);
 
   if (click) {
