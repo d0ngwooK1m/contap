@@ -101,6 +101,8 @@ const Header = () => {
     if (location.pathname === '/mypage') {
       return;
     }
+    setIsMyPage(true);
+    console.log('프로필 클릭시 통과하는지 체크', isMyPage)
     history.push('/mypage');
   };
 
@@ -234,7 +236,6 @@ const Header = () => {
               <MenuItem
                 onClick={() => {
                   history.push('/settings');
-                  setIsMyPage(true);
                   handleClose();
                 }}
               >
