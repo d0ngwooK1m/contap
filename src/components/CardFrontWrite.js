@@ -207,13 +207,9 @@ const CardFrontWrite = () => {
   };
   console.log(category);
 
-  // React.useEffect(() => {
-  //   if (userInfo === '') {
-  //     history.goBack();
-
-  //     return;
-  //   }
-  // }, []);
+  // const cancel = () => {
+  //   setFileData(null);
+  // };
 
   React.useEffect(() => {
     // e.preventDefault();
@@ -260,6 +256,7 @@ const CardFrontWrite = () => {
               hidden
             />
           </Grid>
+          {/* <Grid _onClick={cancel}>취소</Grid> */}
           <Grid width="345px">
             <TitleBox
               type="text"
@@ -373,7 +370,7 @@ const CardFrontWrite = () => {
               {stackTag}
             </HashStackTag>
           )} */}
-            {stack.length === 0 ? (
+            {stack.length === 0 || stack[0] === undefined ? (
               <BasicHashTag type="button">
                 {console.log('stack is no')}
                 {stackText}
@@ -453,7 +450,7 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })} */}
-              {hobby.length === 0 ? (
+              {hobby.length === 0 || hobby[0] === undefined ? (
                 <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                   <BasicHashTag type="button">
                     {console.log('stack is no')}

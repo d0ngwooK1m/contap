@@ -116,8 +116,10 @@ const CardBackWrite = ({ onHide }) => {
           <MainBox
             type="text"
             value={desc}
-            placeholder=" 어떤 프로젝트를 했었나요?
-            아직 프로젝트를 한 경험이 없다면 함께 하고 싶은 프로젝트를 공유해 주세요"
+            placeholder=" · 좋은 프로젝트는 널리 공유해요! 나의 프로젝트를 소개하고 대화를 나눠보세요 &#13;&#10; 
+            · 아직 프로젝트 경험이 없다면 함께 성장할 수 있는 일을 제안해 보세요 &#13;&#10; 
+            &nbsp; 팀원을 찾거나 스터디나 뭐든 좋아요!  "
+            //  ('\u00a0')
             maxLength="200"
             onChange={(e) => {
               setDesc(e.target.value);
@@ -134,7 +136,7 @@ const CardBackWrite = ({ onHide }) => {
         <TagDiv>
           <TagBox
             type="text"
-            placeholder="담당했던 대표 업무"
+            placeholder="카드 내용과 관련 된 분야를 태그로 달아주세요"
             onChange={(e) => {
               setTagsStr(e.target.value);
             }}
@@ -147,7 +149,7 @@ const CardBackWrite = ({ onHide }) => {
         <LinkDiv>
           <LinkBox
             type="text"
-            placeholder="추가로 공개하고 싶은 링크가 있나요? / 프로젝트를 자세히 볼 수 있는 링크가 있나요?"
+            placeholder="더 자세한 내용을 링크로 공유해보세요! 예시) Github 링크, 블로그 링크, 포트폴리오 링크"
             onChange={(e) => {
               setLink(e.target.value);
             }}

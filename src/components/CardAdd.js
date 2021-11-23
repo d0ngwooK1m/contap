@@ -44,7 +44,7 @@ const CardAdd = () => {
         <div style={{ marginBottom: '92px' }}>
           <TextDiv>
             <TitleText>
-              나의 프로젝트 <Count>{cardCount.length}</Count>
+              나의 카드 <Count>{cardCount.length}</Count>
             </TitleText>
             <TextBtn
               onClick={() => {
@@ -52,7 +52,7 @@ const CardAdd = () => {
                 setClick(true);
               }}
             >
-              + 프로젝트 추가하기
+              + 카드 추가하기
             </TextBtn>
           </TextDiv>
         </div>
@@ -70,7 +70,7 @@ const CardAdd = () => {
     <Grid width="100%" height="100%" padding="0px 0px 7% 0px;">
       <TextDiv>
         <TitleText>
-          나의 프로젝트 <Count>{cardCount.length}</Count>
+          나의 카드 <Count>{cardCount.length}</Count>
         </TitleText>
         <TextBtn
           onClick={() => {
@@ -78,7 +78,7 @@ const CardAdd = () => {
             setClick(true);
           }}
         >
-          + 프로젝트 추가하기
+          + 카드 추가하기
         </TextBtn>
       </TextDiv>
       <Grid margin="0px 0px 48px 0px">
@@ -129,6 +129,7 @@ const TextBtn = styled.div`
   cursor: pointer;
   margin: 80px 0px 48px 0px;
   font-weight: 700;
+  text-align: end;
   z-index: 3;
   // position: fixed;
   // top: 16vh;

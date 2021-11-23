@@ -24,7 +24,7 @@ const BasicAlert = MySwal.mixin({
   closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
   confirmButtonColor: '#FFF',
   cancelButtonColor: '#FFF',
-  padding: '46px',
+  padding: '52px',
   customClass: {
     popup: 'swal-popup',
     title: 'swal-title',
