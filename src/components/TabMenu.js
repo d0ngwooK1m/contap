@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import TabButton from '../elements/TabButton';
 
 import useTabs from '../hooks/useTabs';
+import { ColorStyle, Opacity } from '../utils/systemDesign';
 
 const TabMenu = ({ content }) => {
   const { contentItem, contentChange } = useTabs(0, content);
@@ -36,11 +37,7 @@ TabMenu.propTypes = {
 
 const Wrapper = styled.div`
   padding-top: 88px;
-<<<<<<< Updated upstream
-  padding-bottom: 160px;
-=======
   /* padding-bottom: 130px; */
->>>>>>> Stashed changes
   display: flex;
   width: 100%;
   height: 85vh;
@@ -53,7 +50,7 @@ const Menu = styled.div`
   min-width: 255px;
   min-height: 85vh;
   margin: 0px 0px 0px 165px;
-  border-right: solid 1px #a09bac4d;
+  border-right: solid 1px ${ColorStyle.Gray300 + Opacity[15]};
 `;
 
 export default TabMenu;

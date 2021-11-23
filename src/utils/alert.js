@@ -34,7 +34,7 @@ export const BasicAlert = MySwal.mixin({
   },
 });
 
-export const Toast = Swal.mixin({
+export const Toast = MySwal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,

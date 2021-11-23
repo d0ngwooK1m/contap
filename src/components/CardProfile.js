@@ -30,7 +30,7 @@ const CardProfile = () => {
   // const stackTag = '#' + tag;
   console.log('카드리스트====>', cardList);
   console.log('앞면 태그1 확인====>', stackTag);
-  console.log('앞면 태그확인====>', stackTag ? stackTag[0] === '' : null);
+  console.log('앞면 태그확인====>', typeof stackTag);
   // if (stackTag.length === 1) {
   //   if (stackTag[0] === '') {
   //     stackTag = [];
@@ -70,13 +70,14 @@ const CardProfile = () => {
             </Grid>
             <Grid width="40%" margin="56px 0px 0px 0px">
               <NameText>{cardList.userName}</NameText>
-              <StackText>
-                {stackTag === '' ? (
-                  '# 나의 스택'
-                ) : (
-                  <StackEditText>#{stackTag}</StackEditText>
-                )}
-              </StackText>
+
+              {stackTag === '' || stackTag === undefined ? (
+                <StackText># 나의 스택</StackText>
+              ) : (
+                <StackEditText>
+                  #{stackTag ? stackTag : '나의 스택'}
+                </StackEditText>
+              )}
             </Grid>
             <BtnDiv>
               <UpdateBtn

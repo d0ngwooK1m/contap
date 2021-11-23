@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
-import BasicAlert from '../utils/deleteAlert';
+import{ BasicAlert} from '../utils/alert';
 
 import { Grid, Text } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
