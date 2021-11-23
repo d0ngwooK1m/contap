@@ -23,10 +23,13 @@ const Grabtalk = () => {
   const noneTalkList = useSelector((state) => state.chat.noneChatList);
   const [isAddRoom, setIsAddRoom] = React.useState(false);
 
-  const addChatRoom = () => {
-    setIsAddRoom(true);
+  const addChatRoom = async () => {
+    if (isAddRoom) {
+      return;
+    }
+    await dispatch(loadNoneTalkRoomListToAxios());
     dispatch(loadCurrentRoom({}));
-    dispatch(loadNoneTalkRoomListToAxios());
+    setIsAddRoom(true);
   };
 
   const closeList = () => {
@@ -48,18 +51,18 @@ const Grabtalk = () => {
         <ChatRoomList />
       </Menu>
       <Wrapper>
-        {noneTalkList.length !== 0 && (
+        {isAddRoom && (
           <GrabTalkAdd noneTalkList={noneTalkList} closeList={closeList} />
         )}
         <Room>
-          {!currentRoom.userId && noneTalkList.length === 0 && (
+          {!currentRoom.userId && !isAddRoom && (
             <SvgWrap>
               <GrabTalkBasicSvg />
-              <Text bold32>그랩이 되면 대화할 수 있어요</Text>
+              <Text bold24>그랩이 되면 대화할 수 있어요</Text>
             </SvgWrap>
           )}
           {currentRoom.userId && (
-            <>
+            <Chat current={currentRoom} className="chat">
               <Header className="header">
                 <ImageBox
                   className="imageBox"
@@ -74,8 +77,7 @@ const Grabtalk = () => {
                   <Close stroke={ColorStyle.Gray500} />
                 </IconButton>
               </Header>
-              <Chat current={currentRoom} />
-            </>
+            </Chat>
           )}
         </Room>
       </Wrapper>
@@ -88,7 +90,7 @@ const Menu = styled.div`
   top: 0px;
   display: flex;
   flex-direction: column;
-  padding-top: 88px;
+  padding-top: 120px;
   width: 445px;
   max-width: 445px;
   min-height: 80vh;
@@ -111,7 +113,7 @@ const Menu = styled.div`
 const Wrapper = styled.div`
   position: relative;
   top: 0px;
-  padding-top: 88px;
+  padding-top: 120px;
   display: flex;
   width: 665px;
 `;
@@ -119,6 +121,11 @@ const Wrapper = styled.div`
 const Room = styled.div`
   position: relative;
   width: 100%;
+  background-color: antiquewhite;
+
+  .mseeageRoom {
+    background-color: red;
+  }
 `;
 
 const SvgWrap = styled.div`
@@ -154,7 +161,6 @@ const ImageBox = styled.div`
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   border-radius: 60px;
 `;

@@ -335,13 +335,13 @@ const LoginButton = styled.button`
 const ImageBox = styled.div`
   height: 48px;
   width: 48px;
-  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
+  box-sizing: border-box;
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 25px;
+  border-radius: 50px;
 `;
 
 export default Header;

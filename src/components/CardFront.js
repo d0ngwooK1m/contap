@@ -9,6 +9,7 @@ import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
 import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
+import { useLocation, useHistory } from 'react-router-dom'
 
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
@@ -25,6 +26,9 @@ import { getToken } from '../utils/auth';
 
 const CardFront = ({ userId, contap, select }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
+  
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
@@ -101,7 +105,7 @@ const CardFront = ({ userId, contap, select }) => {
             category={cat}
           />
         )}
-        {contap && showModal && (
+        {contap && showModal &&  (
           <ContapModal
             className="contapModal"
             show={showModal}
@@ -264,7 +268,6 @@ const ImageBox = styled.div`
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
   box-sizing: border-box;

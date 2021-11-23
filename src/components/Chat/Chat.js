@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -19,7 +19,7 @@ import { getToken } from '../../utils/auth';
 import MessageWrite from './MessageWrite';
 import MessageBox from './MessageBox';
 
-const Chat = ({ current }) => {
+const Chat = ({ current, children }) => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const userInfo = useSelector((state) => state.user);
   console.log('유저정보 확인 =======>', current);
@@ -113,6 +113,7 @@ const Chat = ({ current }) => {
 
   return (
     <MessageWrap>
+      {children}
       <MessageBox className="messageBox" roomId={roomId} />
       <MessageWrite sendMessage={sendMessage} />
     </MessageWrap>

@@ -138,7 +138,6 @@ const ImageBox = styled.div`
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
   box-sizing: border-box;

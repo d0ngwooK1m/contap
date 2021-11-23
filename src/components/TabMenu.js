@@ -36,7 +36,11 @@ TabMenu.propTypes = {
 
 const Wrapper = styled.div`
   padding-top: 88px;
+<<<<<<< Updated upstream
   padding-bottom: 160px;
+=======
+  /* padding-bottom: 130px; */
+>>>>>>> Stashed changes
   display: flex;
   width: 100%;
   height: 85vh;

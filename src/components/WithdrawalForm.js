@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
 import { useSelector } from 'react-redux';
-import BasicAlert from '../utils/alert';
+import {BasicAlert }from '../utils/alert';
 import { useForm } from 'react-hook-form';
 import T from '../api/tokenInstance';
 import { removeToken } from '../utils/auth';

@@ -8,7 +8,7 @@ import { Text } from '../elements';
 
 const MySwal = withReactContent(Swal);
 
-const BasicAlert = MySwal.mixin({
+export const BasicAlert = MySwal.mixin({
   showCancelButton: true,
   confirmButtonText: (
     <Text bold24 color={ColorStyle.BackGround300}>
@@ -24,7 +24,8 @@ const BasicAlert = MySwal.mixin({
   closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
   confirmButtonColor: '#FFF',
   cancelButtonColor: '#FFF',
-  padding: '46px',
+  position: 'relative',
+  padding: '52px',
   customClass: {
     popup: 'swal-popup',
     title: 'swal-title',
@@ -33,4 +34,14 @@ const BasicAlert = MySwal.mixin({
   },
 });
 
-export default BasicAlert;
+export const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  },
+});

@@ -35,7 +35,7 @@ CardModal.propTypes = {
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
   profile: PropTypes.string,
-  category: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 CardModal.defaultProps = {

@@ -15,6 +15,49 @@ import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // import { Grid } from '../elements';
 
+// const searchData = [
+//   'Spring',
+//   'Spring Boot',
+//   'Java',
+//   'React',
+//   'React Native',
+//   'Flutter',
+//   'Node.js',
+//   'Python',
+//   'Zeplin',
+//   'Angular',
+//   'Vue.js',
+//   'C++',
+//   'Express',
+//   'C#',
+//   'Django',
+//   'Next.js',
+//   'Ruby',
+//   'Java Script',
+//   'Premiere Pro',
+//   'After Effects',
+//   'C',
+//   'Android Studio',
+//   'HTML CSS',
+//   'SQL',
+//   'TypeScript',
+//   'Swift',
+//   'Assembly',
+//   'PHP',
+//   'Nuxt.js',
+//   'Flask',
+//   'Nest.js',
+//   'Figma',
+//   'Sketch',
+//   'Adobe XD',
+//   'Illustrator',
+//   'Photoshop',
+//   'Proto.io',
+//   'AutoCAD',
+//   'JQuery',
+//   'Go',
+// ];
+
 const searchData = [
   'Spring',
   'Spring Boot',
@@ -24,7 +67,6 @@ const searchData = [
   'Flutter',
   'Node.js',
   'Python',
-  'Zeplin',
   'Angular',
   'Vue.js',
   'C++',
@@ -33,12 +75,12 @@ const searchData = [
   'Django',
   'Next.js',
   'Ruby',
-  'Java Script',
-  'Premiere Pro',
-  'After Effects',
-  'C',
+  'JavaScript',
+  'Nest.js',
+  'Go',
   'Android Studio',
   'HTML CSS',
+  'C',
   'SQL',
   'TypeScript',
   'Swift',
@@ -46,16 +88,17 @@ const searchData = [
   'PHP',
   'Nuxt.js',
   'Flask',
-  'Nest.js',
+  'JQuery',
   'Figma',
+  'After Effects',
+  'Illustrator',
   'Sketch',
   'Adobe XD',
-  'Illustrator',
   'Photoshop',
   'Proto.io',
   'AutoCAD',
-  'JQuery',
-  'Go',
+  'Premiere Pro',
+  'Zeplin',
 ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
@@ -229,7 +272,7 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  width: 1180px;
+  width: 1210px;
   margin: 43px 165px 72px 165px;
   padding-bottom: 72px;
   justify-content: start;
@@ -251,7 +294,7 @@ const AllBox = styled.div`
 const TagDiv = styled.div`
   display: inline-block;
   width: 100%;
-  margin: 10px;
+  margin: 7px;
   padding: 12px 20px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.PrimaryPurple};

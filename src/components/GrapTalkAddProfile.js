@@ -33,6 +33,7 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
 
   const cat = category(roomInfo.field);
   const color = professionColor(cat);
+  const hashColor = professionColor(cat, 15);
 
   console.log(category);
 
@@ -74,7 +75,7 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
         <Hash className="tags">
           {interestHashTags?.map((stack, idx) => {
             return (
-              stack && <HashTag key={idx} tag={stack} category={category} />
+              stack && <HashTag key={idx} tag={stack} hashColor={hashColor} category={ cat} />
             );
           })}
         </Hash>
@@ -85,8 +86,6 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
 
 const Wrap = styled.div`
   border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
-  width: 580px;
-  max-width: 580px;
   padding: 18px 16px;
   max-height: 100px;
   cursor: pointer;
@@ -129,7 +128,6 @@ const ImageBox = styled.div`
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50px;
 `;

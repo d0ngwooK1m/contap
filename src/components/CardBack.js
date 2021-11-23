@@ -56,7 +56,7 @@ const CardBack = ({
                 : ColorStyle.Gray500
             }
           >
-            {profession()}
+            {card.hashTags}
           </Text>
         </div>
         <div className="title">
@@ -213,7 +213,6 @@ const ImageBox = styled.div`
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
 `;
