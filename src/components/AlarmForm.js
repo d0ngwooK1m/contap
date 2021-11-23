@@ -55,6 +55,13 @@ const AlarmForm = () => {
     if (phoneNumber.length === 10) {
       setPhoneNumber(phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'));
     }
+    if (phoneNumber.length === 12) {
+      setPhoneNumber(
+        phoneNumber
+          .replace(/-/g, '')
+          .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
+      );
+    }
     if (phoneNumber.length === 13) {
       setPhoneNumber(
         phoneNumber
@@ -116,11 +123,19 @@ const AlarmForm = () => {
         </Text>
       </MarginWrapper11>
       <MarginWrapper2>
-        <Text color={ColorStyle.Gray500} regular20>
-          이제 문자로 알림을 받아 보실 수 있습니다!
-          <br />
-          여기서 잠시 알람을 끌 수도 있어요
-        </Text>
+        {
+          switchChange === 1 ?
+          <Text color={ColorStyle.Gray500} regular20>
+            이제 문자로 알림을 받아 보실 수 있습니다!
+            <br />
+            여기서 잠시 알람을 끌 수도 있어요
+          </Text> :
+          <Text color={ColorStyle.Gray300} regular20>
+            알림 기능이 꺼져있어요
+            <br />
+            문자로 알림을 받아보세요!
+          </Text>
+        }
         {/* {
           switchInfo === 0 ?
             <Switch color="secondary" onChange={() => {
@@ -135,7 +150,11 @@ const AlarmForm = () => {
             <SwitchInput
               type="checkbox"
               onChange={() => {
-                setSwitchChange(1);
+                if (switchChange === 1) {
+                  setSwitchChange(0);
+                } else {
+                  setSwitchChange(1);
+                } 
               }}
             />
             <Slider />
@@ -146,7 +165,11 @@ const AlarmForm = () => {
               type="checkbox"
               defaultChecked
               onChange={() => {
-                setSwitchChange(0);
+                if (switchChange === 1) {
+                  setSwitchChange(0);
+                } else {
+                  setSwitchChange(1);
+                } 
               }}
             />
             <Slider />
@@ -171,9 +194,11 @@ const AlarmForm = () => {
               알림 정보 입력
             </Text>
           </MarginWrapper11>
-          <Text color={ColorStyle.Gray300} regular20>
-            받아보실 연락처를 입력해주세요
-          </Text>
+          <MarginWrapper11>
+            <Text color={ColorStyle.Gray300} regular20>
+              받아보실 연락처를 입력해주세요
+            </Text>
+          </MarginWrapper11>
           <StyledInput
             type="text"
             // placeholder="비밀번호를 입력해주세요"

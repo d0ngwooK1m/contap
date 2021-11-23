@@ -199,6 +199,7 @@ const StackSearch2 = () => {
       )} */}
       <SearchBoxDiv>
         <SearchBox
+          placeholder='주로 사용하시는 기술이 있나요?'
           value={inputValue}
           onChange={(e) => {
             console.log(e.target.value);
