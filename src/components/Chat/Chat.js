@@ -9,9 +9,10 @@ import StompJs from 'stompjs';
 import SockJS from 'sockjs-client';
 import {
   loadMessagesToAxios,
-  writeMessage,
+  // writeMessage,
   getMessage,
   loadTalkRoomListToAxios,
+  loading,
 } from '../../features/chat/actions';
 
 import { getToken } from '../../utils/auth';
@@ -33,6 +34,7 @@ const Chat = ({ current }) => {
   const wsConnectSubscribe = React.useCallback(() => {
     try {
       ws.connect({}, async () => {
+        dispatch(loading(true));
         console.log('커넥트 시작');
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
@@ -45,11 +47,7 @@ const Chat = ({ current }) => {
           { token, userEmail: userInfo.email },
         );
       });
-      console.log('서브스크라이브 끝');
-
-      console.log('디패시작');
       dispatch(loadMessagesToAxios(roomId, 0));
-      console.log('디패끝');
     } catch (error) {
       console.log(error);
     }
@@ -72,10 +70,6 @@ const Chat = ({ current }) => {
   //  렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
   React.useEffect(() => {
     wsConnectSubscribe();
-
-    console.log(ws);
-    console.log(roomId);
-
     return () => {
       wsDisConnectUnsubscribe();
     };
@@ -100,31 +94,17 @@ const Chat = ({ current }) => {
   // 메시지 보내기
   const sendMessage = (message) => {
     try {
-      // token이 없으면 로그인 페이지로 이동
-      // if (!token) {
-      //   alert("토큰이 없습니다. 다시 로그인 해주세요.");
-      //   history.replace("/login");
-      // }
-
-      //   빈문자열이면 리턴
-      if (message === '') {
-        return;
-      }
-
-      // send할 데이터
-
+      dispatch(loading(true));
       const data = {
         roomId,
         message,
         writer: userInfo.email,
         reciever: email,
-        // reciever: grapList[userId].email,
       };
 
-      //   로딩 중
       waitForConnection(ws, () => {
         ws.send('/pub/chat/message', {}, JSON.stringify(data));
-        dispatch(writeMessage(''));
+        // dispatch(writeMessage(''));
       });
     } catch (error) {
       console.log(error);

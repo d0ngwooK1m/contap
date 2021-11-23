@@ -1,11 +1,8 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-// import { ColorStyle } from '../utils/systemDesign';
 import { IconButton } from '@mui/material';
-import { Text } from '../elements';
-
 import { useDispatch, useSelector } from 'react-redux';
+import { Text } from '../elements';
 import {
   loadCurrentRoom,
   loadNoneTalkRoomListToAxios,
@@ -18,17 +15,15 @@ import { ReactComponent as Close } from '../svgs/CloseRound.svg';
 import BasicProfile from '../assets/image/basicProfile.png';
 import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
 import { ReactComponent as ChatAddSvg } from '../svgs/ChatAdd.svg';
-import { ColorStyle } from '../utils/systemDesign';
+import { ColorStyle, Opacity } from '../utils/systemDesign';
 
 const Grabtalk = () => {
   const dispatch = useDispatch();
   const currentRoom = useSelector((state) => state.chat.current);
-  const noneTalkList = useSelector((state) => state.chat.noneChatListIds);
+  const noneTalkList = useSelector((state) => state.chat.noneChatList);
   const [isAddRoom, setIsAddRoom] = React.useState(false);
+
   const addChatRoom = () => {
-    if (noneTalkList.length !== 0) {
-      return;
-    }
     setIsAddRoom(true);
     dispatch(loadCurrentRoom({}));
     dispatch(loadNoneTalkRoomListToAxios());
@@ -40,16 +35,14 @@ const Grabtalk = () => {
   };
 
   return (
-    <div style={{display:'flex'}}>
+    <div style={{ display: 'flex' }}>
       <Menu>
         <div className="roomListHeader">
           <Text bold32>메세지함</Text>
           <IconButton className="addBtn" type="button" onClick={addChatRoom}>
-            {isAddRoom ? (
-              <ChatAddSvg stroke={ColorStyle.PrimaryPurple} />
-            ) : (
-              <ChatAddSvg stroke={ColorStyle.Gray500} />
-            )}
+            <ChatAddSvg
+              stroke={isAddRoom ? ColorStyle.PrimaryPurple : ColorStyle.Gray500}
+            />
           </IconButton>
         </div>
         <ChatRoomList />
@@ -59,7 +52,7 @@ const Grabtalk = () => {
           <GrabTalkAdd noneTalkList={noneTalkList} closeList={closeList} />
         )}
         <Room>
-          {!currentRoom.userId && noneTalkList.length == 0 && (
+          {!currentRoom.userId && noneTalkList.length === 0 && (
             <SvgWrap>
               <GrabTalkBasicSvg />
               <Text bold32>그랩이 되면 대화할 수 있어요</Text>
@@ -89,6 +82,7 @@ const Grabtalk = () => {
     </div>
   );
 };
+
 const Menu = styled.div`
   position: relative;
   top: 0px;
@@ -98,7 +92,7 @@ const Menu = styled.div`
   width: 445px;
   max-width: 445px;
   min-height: 80vh;
-  height: 89vh;
+  height: 84vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
   .addBtn {
@@ -128,11 +122,11 @@ const Room = styled.div`
 `;
 
 const SvgWrap = styled.div`
-width: fit-content;
-margin: auto;
-p {
-  position: relative;
-  top:-50px;
+  width: fit-content;
+  margin: auto;
+  p {
+    position: relative;
+    top: -50px;
   }
 `;
 
@@ -156,6 +150,7 @@ const ImageBox = styled.div`
   height: 60px;
   width: 60px;
   margin: 20px 32px 20px 48px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

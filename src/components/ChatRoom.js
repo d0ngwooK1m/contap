@@ -8,9 +8,10 @@ import {
   closeNoneTalkRoomList,
   loadTalkRoomListToAxios,
 } from '../features/chat/actions';
-import BasicProfile from '../assets/image/basicProfile.png';
+import { ReactComponent as BasicProfile } from '../svgs/BasicProfile.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import timeCheck from '../utils/timeCheck';
+import { border, borderRadius } from '@mui/system';
 
 const NONE_MESSAGE = '_test용_';
 
@@ -21,26 +22,26 @@ const ChatRoom = ({ userId }) => {
   const userInfo = useSelector((state) => state.user);
   const lastMessage = roomInfo.roomStatus?.split('/')[2];
   const openCheck = currentRoom.userId === roomInfo.userId;
-  console.log(roomInfo)
+  console.log(roomInfo);
 
   React.useEffect(() => {
-    if (roomInfo.roomStatus===null) {
-      console.log('룸 안들어올떄')
+    if (roomInfo.roomStatus === null) {
+      console.log('룸 안들어올떄');
       dispatch(loadCurrentRoom(roomInfo));
     }
- },[])
+  }, []);
 
   const openChatRoom = () => {
     if (openCheck) {
       return;
     }
-    
+
     dispatch(closeNoneTalkRoomList());
     dispatch(loadTalkRoomListToAxios());
     dispatch(loadCurrentRoom(roomInfo));
   };
   const readCheck = roomInfo.roomStatus?.split('/')[0];
-  
+
   console.log('리드체크======>', readCheck);
 
   console.log('룸 인포======>', roomInfo);
@@ -71,13 +72,19 @@ const ChatRoom = ({ userId }) => {
     <Wrap>
       <ProfileWrap onClick={openChatRoom}>
         <div>
-          <ImageBox
-            className="imageBox"
-            src={roomInfo.profile ? roomInfo.profile : BasicProfile}
-            isLogin={roomInfo.login}
-          />
+          {roomInfo.profile ? (
+            <ImageBox
+              className="imageBox"
+              src={roomInfo.profile}
+              isLogin={roomInfo.login}
+            />
+          ) : (
+            <div className="basicProfile">
+              <BasicProfile />
+            </div>
+          )}
         </div>
-        <div>
+        <div className="desc">
           <div className="name">
             <Text
               bold20
@@ -85,7 +92,9 @@ const ChatRoom = ({ userId }) => {
             >
               {roomInfo.userName}
             </Text>
-            <Text regular16>{timeCheck(lastMessageTime)}</Text>
+            <Text regular16 color={ColorStyle.Gray100}>
+              {timeCheck(lastMessageTime)}
+            </Text>
           </div>
           <div className="message">
             <Text
@@ -97,62 +106,67 @@ const ChatRoom = ({ userId }) => {
           </div>
         </div>
       </ProfileWrap>
-      <hr />
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
-position: relative;
-top:40px;
-  hr {
-    position: relative;
-    width: 95%;
-    border: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
-    top:-20px;
-    left:-10px;
+  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
+  align-items: center;
+  padding: 18px 16px;
+  max-height: 100px;
+  cursor: pointer;
+
+  .desc {
+    min-width: 309px;
   }
   .name {
-    position: absolute;
-    top: 0px;
-    margin: 0px;
-    width: 350px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
   }
 
   .message {
-    margin-top: 8px;
-
     p {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 350px;
       height: 28px;
     }
+  }
+
+  .basicProfile {
+    border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
+    height: 64px;
+    width: 64px;
+    box-sizing: border-box;
+    border-radius: 32px;
+    margin: 0px 16px 0px 0px;
+  }
+
+  &:hover {
+    background-color: ${ColorStyle.BackGround100};
   }
 `;
 
 const ProfileWrap = styled.div`
-
-  min-height: 70px;
-  max-height: 70px;
-  margin: 0px 0px 32px 0px;
   display: flex;
   align-items: center;
 `;
 
 const ImageBox = styled.div`
-  height: 50px;
-  width: 50px;
-  margin: 0px 20px 20px 0px;
+  height: 64px;
+  width: 64px;
+  margin: 0px 16px 0px 0px;
+  box-sizing: border-box;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border : ${({isLogin})=>isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px' };
+  border: ${({ isLogin }) =>
+    isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px'};
   border-radius: 50px;
 `;
 export default ChatRoom;

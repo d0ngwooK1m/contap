@@ -1,29 +1,18 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import GrapTalkAddProfile from './GrapTalkAddProfile';
+import { ColorStyle, Opacity } from '../../utils/systemDesign';
 import { IconButton } from '@mui/material';
-import { Text } from '../elements';
-import { ReactComponent as Close } from '../svgs/CloseRound.svg';
-import { ReactComponent as Search } from '../svgs/SearchSvg.svg';
-import { ReactComponent as SearchFail } from '../svgs/searchFail.svg';
-
-import { closeNoneTalkRoomList } from '../features/chat/actions';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
-import { wrap } from 'lodash';
-import ChatSearchBar from './Chat/ChatSearchBar';
-const GrabTalkAdd = ({ noneTalkList, closeList }) => {
+import { ReactComponent as Close } from '../../svgs/CloseRound.svg';
+import { ReactComponent as Search } from '../../svgs/SearchSvg.svg';
+import GrapTalkAddProfile from '../GrapTalkAddProfile';
+import { Text } from '../../elements';
+const ChatSearchBar = ({ list, children }) => {
   const [searchValue, setSearchValue] = React.useState('');
-  // const roomInfo = useSelector((state) => state.chat.noneChatList);
 
-  const handleSearchValue = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const searchList = noneTalkList.filter((data) => {
-    if (noneTalkList.length === 0) {
-      return;
+  const items = list.filter((data) => {
+    if (list.length === 0) {
+      return false;
     } else if (searchValue === null) {
       return data;
     } else if (
@@ -35,7 +24,12 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
     ) {
       return null;
     }
+    console.log(items);
   });
+
+  const handleSearchValue = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   return (
     <Wrap>
@@ -49,37 +43,20 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
             onChange={handleSearchValue}
           />
         </SearchBarFrom>
-        <IconButton onClick={closeList}>
+        <IconButton>
           <Close stroke={ColorStyle.Gray500} />
         </IconButton>
       </Header>
-      <div
-        style={{
-          paddingRight: '24px',
-          paddingTop: '40px',
-          textAlign: 'center',
-        }}
-      >
-        {noneTalkList.length === 0 && (
-          <Text regular20 color={ColorStyle.Gray300}>
-            아직 그랩 된 친구가 없어요
-            <br />
-            탭해서 그랩이 되면 대화 할 수 있어요
-          </Text>
-        )}
-        {searchList.length !== 0 ? (
-          searchList.map((val) => {
-            return <GrapTalkAddProfile key={val.userId} roomInfo={val} />;
-          })
-        ) : (
-          <>
-            <Text regular20 color={ColorStyle.Gray300}>
-              나의 그랩에서 ‘{searchValue}’님을 찾을 수 없습니다
-            </Text>
-            <SearchFail />
-          </>
-        )}
+      <div style={{ paddingRight: '24px', paddingTop: '40px' }}>
+        {items.map((val) => {
+          return <GrapTalkAddProfile key={val.userId} roomInfo={val} />;
+        })}
       </div>
+      {/* <NoneValueText>
+      <Text bold32 color={ColorStyle.Gray500}>
+        검색결과없쩡
+      </Text>
+    </NoneValueText> */}
     </Wrap>
   );
 };
@@ -137,10 +114,4 @@ const SearchBarFrom = styled.div`
     }
   }
 `;
-
-const NoneValueText = styled.div`
-  text-align: center;
-  margin-top: 20px;
-`;
-
-export default GrabTalkAdd;
+export default ChatSearchBar;

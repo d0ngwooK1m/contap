@@ -17,12 +17,12 @@ const initialState = {
   byId: {},
   allIds: [],
   current: {},
-  noneChatList: {},
-  noneChatListIds: [],
+  noneChatList: [],
   roomId: null,
   messages: [],
   messageText: '',
-  isLoading: true,
+  isLoading: false,
+  isNext: true,
 };
 
 export default handleActions(
@@ -33,29 +33,25 @@ export default handleActions(
         console.log('LOAD_MESSAGES');
         console.log(action.payload);
         draft.messages = action.payload.messageList;
-        // draft.isLoading = false;
+        draft.isNext = true;
+        draft.isLoading = false;
       }),
     [NEXT_PAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log('NEXT_PAGE');
         console.log(action.payload.messageList.length);
         if (action.payload.messageList.length < 15) {
           console.log('여기 걸렸음');
-
+          draft.isNext = false;
           action.payload.messageList.forEach((doc) => {
-            doc.isNext = false;
-            console.log('마지막 페이지', doc);
             draft.messages.unshift(doc);
           });
+          draft.isLoading = false;
           return;
         }
         action.payload.messageList.forEach((doc) => {
-          doc.isNext = true;
-          console.log(doc);
           draft.messages.unshift(doc);
         });
-
-        // draft.isLoading = false;
+        draft.isLoading = false;
       }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
@@ -64,13 +60,14 @@ export default handleActions(
         console.log('스테이트 ======>', state.messages);
 
         draft.messages.push(action.payload.message);
-        // draft.isLoading = true;
+        draft.isLoading = false;
       }),
     [WRITE_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
         console.log('WRITE_MESSAGE');
         console.log(action.payload);
         console.log(draft);
+        draft.isLoading = false;
       }),
     [LOAD_TALK_ROOM_LIST]: (state, action) =>
       produce(state, (draft) => {
@@ -85,16 +82,13 @@ export default handleActions(
       }),
     [LOAD_NONETALK_ROOM_LIST]: (state, action) =>
       produce(state, (draft) => {
-        draft.noneChatList = {};
-        draft.noneChatListIds = [];
-        action.payload.roomList.forEach((doc) => {
-          draft.noneChatList[doc.userId] = doc;
-          draft.noneChatListIds.push(doc.userId);
-        });
+        console.log(action.payload);
+        draft.noneChatList = action.payload.roomList;
+        console.log(state.noneChatList);
       }),
     [CLOSE_NONETALK_ROOM_LIST]: (state) =>
       produce(state, (draft) => {
-        draft.noneChatListIds = [];
+        draft.noneChatList = [];
       }),
     [LOAD_CURRENT_ROOM]: (state, action) =>
       produce(state, (draft) => {
@@ -105,7 +99,7 @@ export default handleActions(
         const { userId } = action.payload.room;
         draft.byId[userId] = action.payload.room;
         draft.allIds.push(userId);
-        draft.noneChatListIds = [];
+        draft.noneChatList = [];
       }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {

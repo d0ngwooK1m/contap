@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   padding-top: 88px;
   display: flex;
   width: 100%;
-  height: 89vh;
+  height: 85vh;
 `;
 
 const Menu = styled.div`
@@ -46,7 +46,7 @@ const Menu = styled.div`
   flex-direction: column;
   width: fit-content;
   min-width: 255px;
-  min-height: 89vh;
+  min-height: 85vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
 `;

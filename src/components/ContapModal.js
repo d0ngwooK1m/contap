@@ -7,7 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import BasicAlert from '../utils/alert';
 // import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { ColorStyle } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  professionColor,
+  professionHoverColor,
+} from '../utils/systemDesign';
 import { Text } from '../elements';
 import {
   removeReceiveTapToAxios,
@@ -17,6 +21,7 @@ import {
   closeNoneTalkRoomList,
   loadCurrentRoom,
 } from '../features/chat/actions';
+import { setTapAcceptNoti } from '../features/notice/actions';
 
 const ContapModal = ({
   show,
@@ -52,6 +57,7 @@ const ContapModal = ({
         userCradInfo.userId,
       ),
     );
+    dispatch(setTapAcceptNoti(true));
     console.log('수락');
     onHide();
   };
@@ -61,6 +67,9 @@ const ContapModal = ({
     await dispatch(loadCurrentRoom(userCradInfo));
     history.replace('/grabtalk');
   };
+
+  const color = professionColor(category);
+  const hoverColor = professionHoverColor(category);
 
   const unGrab = async () => {
     onHide();
@@ -104,11 +113,7 @@ const ContapModal = ({
               <Text className="desc" color="#FFF" bold32>
                 <span
                   style={{
-                    color: `${
-                      category
-                        ? ColorStyle.PrimaryPurple
-                        : ColorStyle.PrimaryMint
-                    }`,
+                    color: `${color}`,
                   }}
                 >
                   {userCradInfo.userName}
@@ -126,7 +131,7 @@ const ContapModal = ({
                     {userCradInfo.msg}
                   </Text>
                 </MessageBox>
-                <ButtonBox category={category}>
+                <ButtonBox color={color} hoverColor={hoverColor}>
                   <button
                     type="button"
                     className="refusetBtn"
@@ -150,10 +155,10 @@ const ContapModal = ({
             )}
             {select === 'GrabList' && (
               <>
-                <GrabButtonBox category={category}>
+                <GrabButtonBox color={color} hoverColor={hoverColor}>
                   <button
                     type="button"
-                    className="acceptBtn"
+                    className="messageBtn"
                     onClick={openGrabTalk}
                   >
                     <Text
@@ -163,7 +168,7 @@ const ContapModal = ({
                       메세지 보내기
                     </Text>
                   </button>
-                  <button type="button" className="refusetBtn" onClick={unGrab}>
+                  <button type="button" className="unGrabBtn" onClick={unGrab}>
                     <Text bold20 color="#FFF">
                       그랩 끊기
                     </Text>
@@ -227,18 +232,23 @@ const ButtonBox = styled.div`
   }
 
   .acceptBtn {
-    background-color: ${({ category }) =>
-      category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    background-color: ${({ color }) => color};
     box-sizing: border-box;
-    border: 1px solid ${ColorStyle.PrimaryPurple};
+    border: 1px solid ${({ color }) => color};
+    &:hover {
+      background-color: ${({ hoverColor }) => hoverColor};
+      border: 2px solid ${({ hoverColor }) => hoverColor};
+    }
   }
 
   .refusetBtn {
     background-color: ${ColorStyle.BackGround100};
     box-sizing: border-box;
-    border: 1px solid
-      ${({ category }) =>
-        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    border: 1px solid ${({ color }) => color};
+    &:hover {
+      background-color: ${ColorStyle.BackGround300};
+      border: 2px solid ${({ hoverColor }) => hoverColor};
+    }
   }
 `;
 
@@ -255,28 +265,23 @@ const GrabButtonBox = styled.div`
     margin: 0px 0px 22px 0px;
   }
 
-  .acceptBtn {
-    background-color: ${({ category }) =>
-      category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
-    border: 2px solid
-      ${({ category }) =>
-        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+  .messageBtn {
+    background-color: ${({ color }) => color};
+    border: 2px solid ${({ color }) => color};
     box-sizing: border-box;
     &:hover {
-      background-color: ${({ category }) => (category ? '#6235B5' : '#33C68A')};
-      border: 2px solid ${({ category }) => (category ? '#6235B5' : '#33C68A')};
+      background-color: ${({ hoverColor }) => hoverColor};
+      border: 2px solid ${({ hoverColor }) => hoverColor};
     }
   }
 
-  .refusetBtn {
+  .unGrabBtn {
     background-color: ${ColorStyle.BackGround100};
     box-sizing: border-box;
-    border: 1px solid
-      ${({ category }) =>
-        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    border: 1px solid ${({ color }) => color};
     &:hover {
       background-color: ${ColorStyle.BackGround300};
-      border: 2px solid ${({ category }) => (category ? '#6235B5' : '#33C68A')};
+      border: 2px solid ${({ hoverColor }) => hoverColor};
     }
   }
 `;
