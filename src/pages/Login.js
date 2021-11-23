@@ -17,7 +17,8 @@ import {
   Link,
   RightWrapper,
   Title,
-  InputWrapper,
+  InputWrapperEmail,
+  InputWrapperPw,
   StyledLabel,
   StyledInput,
   SubmitInput,
@@ -30,7 +31,7 @@ import {
 } from '../utils/styledLoginSign';
 import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
 import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
-import { ReactComponent as GithubLogoSvg } from '../svgs/GithubLogo.svg';
+import GithubLogoPng from '../svgs/GithubLogo.png';
 
 const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
@@ -186,7 +187,8 @@ const Login = () => {
               loginToServer(loginInfo);
             })}
           >
-            <InputWrapper>
+            <InputWrapperEmail>
+              {errors.email && <WarningText>{errors.email.message}</WarningText>}
               <StyledInput
                 type="text"
                 // placeholder="이메일을 입력해주세요"
@@ -197,17 +199,15 @@ const Login = () => {
                     message: '이메일 양식에 맞지 않습니다',
                   },
                 })}
-                style={{
-                  margin: '0px 0px 28px 0px',
-                }}
               />
               <StyledLabel>
                 이메일
               </StyledLabel>
-            </InputWrapper>
-            {errors.email && <WarningText>{errors.email.message}</WarningText>}
+            </InputWrapperEmail>
             <br />
-            <InputWrapper>
+            <InputWrapperPw>
+              {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
+              {!errors.email && !errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
               <StyledInput
                 type="password"
                 // placeholder="비밀번호를 입력해주세요"
@@ -222,16 +222,11 @@ const Login = () => {
                     message: '비밀번호는 최소 6자 이상입니다',
                   },
                 })}
-                style={{
-                  margin: '0px 0px 40px 0px',
-                }}
               />
               <StyledLabel>
                 비밀번호
               </StyledLabel>
-            </InputWrapper>
-            {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
-            {!errors.email && !errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
+            </InputWrapperPw>
             <br />
             <div
               style={{
@@ -293,7 +288,7 @@ const Login = () => {
                 marginTop: '5px',
               }}
             >
-              <GithubLogoSvg />
+              <img src={GithubLogoPng} />
             </div>
             <Text color={ColorStyle.BackGround100} regular20>
               깃허브 로그인

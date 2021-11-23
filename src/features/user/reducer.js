@@ -5,6 +5,7 @@ import {
   LOG_OUT,
   AUTHORIZED,
   EMAIL_AUTH,
+  EMAIL_TIMER,
   AUTH_CHECK,
   BACK_TO_PREV,
   SIGNUP_DONE,
@@ -25,6 +26,7 @@ const initialState = {
   isSignupDone: false,
   checkedEmail: '',
   phoneNumber: '',
+  timerReset: false,
   alarm: 0,
   canOtherRead: 0,
   tutorial: {
@@ -52,6 +54,10 @@ export default function userReducer(state = initialState, action) {
       }
       case AUTH_CHECK: {
         draft.isAuthNumChecked = true;
+        break;
+      }
+      case EMAIL_TIMER: {
+        draft.timerReset = action.timerInfo;
         break;
       }
       case BACK_TO_PREV: {

@@ -10,6 +10,7 @@ import { ColorStyle, FontScale, Opacity, FontFamily } from '../utils/systemDesig
 import {
   backToPrev,
   emailAuth,
+  emailTimer,
   authCheck,
   signupDone,
 } from '../features/user/actions';
@@ -30,6 +31,9 @@ const Signup = () => {
   const [certificationNum, setCertificationNum] = React.useState('');
   const [emailDupCheck, setEmailDupCheck] = React.useState(true);
   const [authNumCheck, setAuthNumCheck] = React.useState(true);
+  // const [sendEmail, setSendEmail] = React.useState(false);
+  const timerReset = useSelector((state) => state.user.timerReset);
+  console.log('타이머 체킹===>', timerReset);
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
   const isAuthNumChecked = useSelector((state) => state.user.isAuthNumChecked);
   const checkedEmail = useSelector((state) => state.user.checkedEmail);
@@ -40,6 +44,8 @@ const Signup = () => {
 
   const sendEmailAuth = async (emailInfo) => {
     try {
+      // setSendEmail(true);
+      // console.log('이메일 들어가는지 확인===>', sendEmail);
       console.log(emailInfo);
       const res = await axios.post(`${baseURL}/email/send`, emailInfo);
       const { data } = res;
@@ -117,6 +123,19 @@ const Signup = () => {
       throw new Error(error.message);
     }
   };
+
+  // React.useEffect(async() => {
+  //   // console.log('useEffect 작동하는지 확인1===>', sendEmail);
+  //   // if (sendEmail) {
+  //   //   setSendEmail(false);
+  //   // }
+  //   // console.log('useEffect 작동하는지 확인2===>', sendEmail);
+  //   console.log('useEffect 작동하는지 확인1===>', timerReset);
+  //   if (timerReset) {
+  //     await dispatch(emailTimer(false));
+  //   }
+  //   console.log('useEffect 작동하는지 확인1===>', timerReset);
+  // }, [timerReset]);
 
   const {
     register,
@@ -379,6 +398,7 @@ const Signup = () => {
                         {/* <Text color={ColorStyle.Gray500} regular20>
                           <Timer mm={3} ss={0} />        
                         </Text>         */}
+                        {/* {timerReset ? <Timer mm={3} ss={0} /> : <Timer mm={10} ss={0} />} */}
                         <Timer mm={3} ss={0} />
                       </CounterWrapper>
                       <RelativeInputWrapper>
@@ -486,7 +506,8 @@ const Signup = () => {
                           const emailInfo = {
                             email: checkedEmail,
                           };
-                          sendEmailAuth(emailInfo);
+                        sendEmailAuth(emailInfo);
+                        dispatch(emailTimer(false));
                         }}
                       >
                         이메일 다시 보내기

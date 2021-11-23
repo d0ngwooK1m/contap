@@ -21,6 +21,8 @@ const CardList = () => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
+  const isLoading = useSelector((state) => state.cards.isLoading);
+  console.log('isLoading으로 로딩중===>', isLoading);
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
   const scrollTop = () => {
@@ -79,6 +81,7 @@ const CardList = () => {
           return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </CardListWrap>
+      {/* {isLoading ? <img src='https://ww.namu.la/s/0a451619bf1a1a638dba4d855d19036588d1623d23f9a44c0181991fa1d9cbe0e8413b7ce3f1f83070850324f1a2b069939d882f87596328eb6fe2328a8ecfa5d8b1071a500cc7b04cff81d3cedd7c5b' /> : null} */}
       <IconButton className='floatingBtn' onClick={scrollTop} >
         <ArrowTopLightSvg/>
       </IconButton>

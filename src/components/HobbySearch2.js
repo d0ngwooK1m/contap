@@ -119,6 +119,9 @@ const HobbySearch2 = () => {
           await dispatch(deleteHobby(val));
         }
       : async () => {
+          if (hobbyList.length === 3) {
+            return;
+          }
           setData(val);
           setClick(true);
           await dispatch(updateHobby(val));
@@ -143,6 +146,9 @@ const HobbySearch2 = () => {
           await dispatch(deleteHobby(val));
         }
       : async () => {
+          if (hobbyList.length === 3) {
+            return;
+          }
           setData(val);
           setClick(true);
           await dispatch(updateHobby(val));

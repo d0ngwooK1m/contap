@@ -2,6 +2,8 @@
 export const LOAD_CARD = 'cards/LOAD_CARD';
 // 검색 시 카드 리스트
 export const SEARCH_CARD = 'cards/SEARCH_CARD';
+// 무한 스크롤 로딩 시작 및 종료
+export const SET_LOADING = 'cards/SET_LOADING';
 // 검색에 필요한 데이터 업데이트
 export const SEARCH_DATA = 'cards/SEARCH_DATA';
 // 검색 시 자동완성 리스트
