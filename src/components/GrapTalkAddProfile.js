@@ -4,7 +4,12 @@ import { Text } from '../elements';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import HashTag from './HashTag';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  Opacity,
+  category,
+  professionColor,
+} from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
 import {
   createTalkRoom,
@@ -26,7 +31,8 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
     ?.split('@')
     .slice(1, 4);
 
-  const category = roomInfo.field === 2 ? false : true;
+  const cat = category(roomInfo.field);
+  const color = professionColor(cat);
 
   console.log(category);
 
@@ -45,16 +51,13 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
     <Wrap>
       <ProfileWrap onClick={addTalkRoom}>
         <ImageBox src={roomInfo.profile ? roomInfo.profile : BasicProfile} />
-        <div>
+        <div style={{textAlign:'left'}}>
           <div className="name">
             <Text bold20>{roomInfo.userName}</Text>
           </div>
           <div className="stackHashTags">
             <Text
-              // color={ColorStyle.PrimaryPurple}
-              color={
-                category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
-              }
+              color={color}
               regular20
             >
               # {stackHashTags}
@@ -82,12 +85,12 @@ const Wrap = styled.div`
   margin-bottom: 16px;
   cursor: pointer;
 
-  .stackHashTags{
+  .stackHashTags {
     width: 150px;
     max-width: 150px;
   }
 
-  &:hover{
+  &:hover {
     background-color: ${ColorStyle.BackGround100};
   }
 `;
@@ -118,7 +121,7 @@ const ImageBox = styled.div`
 `;
 const Hash = styled.div`
   display: flex;
-  margin-left:20px;
+  margin-left: 20px;
 `;
 
 // const Wrap = styled.div`

@@ -13,14 +13,13 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardBack from './CardBack';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import { ColorStyle, Opacity, professionColor } from '../utils/systemDesign';
 
 SwiperCore.use([Pagination, Navigation, Keyboard]);
 
 const Carousel = ({ userId, userName, profile, category }) => {
   const currentCard = useSelector((state) => state.cards.current);
   const [tapFormState, setTapFormState] = React.useState(false);
-  const contapCheck = useSelector((state) => state.taps.allIds);
   console.log('카테고리', category);
   const setting = {
     slidesPerView: 1,
@@ -33,15 +32,11 @@ const Carousel = ({ userId, userName, profile, category }) => {
   const handleTapForm = () => {
     setTapFormState(!tapFormState);
   };
+
+  const color = professionColor(category)
+
   return (
-    // <Wrap>
-    //   <Slider {...settings}>
-    //     {currentCard?.map((card) => {
-    //       return <CardBack key={card.cardId} card={card} userId={userId} />;
-    //     })}
-    //   </Slider>
-    // </Wrap>
-    <SwiperWrap category={category}>
+    <SwiperWrap color={color}>
       <Swiper
         {...setting}
         pagination={{
@@ -63,7 +58,9 @@ const Carousel = ({ userId, userName, profile, category }) => {
                 show={tapFormState}
                 onTapForm={handleTapForm}
               ></CardBack>
-              {tapFormState && <TapForm userId={card.userId} category={category} />}
+              {tapFormState && (
+                <TapForm userId={card.userId} category={category} />
+              )}
             </SwiperSlide>
           );
         })}
@@ -75,7 +72,7 @@ const Carousel = ({ userId, userName, profile, category }) => {
 Carousel.propTypes = {
   userId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
-  category: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
   profile: PropTypes.string,
 };
 
@@ -116,8 +113,7 @@ const SwiperWrap = styled.div`
       left: 84px;
 
       .swiper-pagination-progressbar-fill {
-        background-color: ${({ category }) =>
-          category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+        background-color: ${({ color }) => color};
       }
     }
   }

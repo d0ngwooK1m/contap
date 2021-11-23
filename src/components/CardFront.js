@@ -13,7 +13,13 @@ import BasicProfile from '../assets/image/basicProfile.png';
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
 import { Text } from '../elements';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  Opacity,
+  professionColor,
+  category,
+  professionHoverColor,
+} from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
 // import T from '../api/tokenInstance';
 
@@ -69,20 +75,16 @@ const CardFront = ({ userId, contap, select }) => {
     ?.split('@')
     .slice(1, 4);
 
-  // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
-  const category = () => {
-    if (front[userId].field < 2) {
-      return true;
-    }
-    return false;
-  };
+  const cat = category(front[userId].field);
+  const color = professionColor(cat);
+  const hashColor = professionColor(cat, 70);
 
   const stopPropagation = (e) => {
     e.stopPropagation();
   };
 
   return (
-    <CardForm onClick={showCardBackModal} category={category()}>
+    <CardForm onClick={showCardBackModal} color={color} category={cat} hashColor={hashColor}>
       <div onClick={stopPropagation} aria-hidden="true">
         {!contap && showModal && (
           <CardModal
@@ -91,7 +93,7 @@ const CardFront = ({ userId, contap, select }) => {
             userId={userId}
             userName={front[userId].userName}
             profile={front[userId].profile}
-            category={category()}
+            category={cat}
           />
         )}
         {contap && showModal && (
@@ -100,7 +102,7 @@ const CardFront = ({ userId, contap, select }) => {
             show={showModal}
             onHide={closeModal}
             userCradInfo={front[userId]}
-            category={category()}
+            category={cat}
             select={select}
           >
             <CardFrontContap onModal={handleSideModal} userId={userId} />
@@ -113,7 +115,7 @@ const CardFront = ({ userId, contap, select }) => {
             userId={userId}
             userName={front[userId].userName}
             profile={front[userId].profile}
-            category={category()}
+            category={cat}
             contap
           />
         )}
@@ -130,12 +132,7 @@ const CardFront = ({ userId, contap, select }) => {
               {front[userId] ? front[userId].userName : null}
             </Text>
           </div>
-          <Text
-            color={
-              category() ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
-            }
-            regular20
-          >
+          <Text color={color} regular20>
             # {stackHashTags}
           </Text>
         </div>
@@ -143,10 +140,17 @@ const CardFront = ({ userId, contap, select }) => {
       <div className="interest">
         <Text regular16>관심사</Text>
       </div>
-      <Hash className="hash">
+      <Hash className="hash" >
         {interestHashTags?.map((stack, idx) => {
           return (
-            stack && <HashTag key={idx} tag={stack} category={category()} />
+            stack && (
+              <HashTag
+                key={idx}
+                tag={stack}
+                hashColor={hashColor}
+                category={cat}
+              />
+            )
           );
         })}
       </Hash>
@@ -194,11 +198,11 @@ const CardForm = styled.div`
 
   &:hover {
     cursor: pointer;
-    border: 3px solid
-      ${({ category }) =>
-        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    border: 3px solid ${({ color }) => color};
     background-color: ${({ category }) =>
-      category ? ColorStyle.BackGround300 : ColorStyle.BackGround100};
+      category === '디자이너'
+        ? ColorStyle.BackGround100
+        : ColorStyle.BackGround300};
 
     .NotiBadge {
       margin: -2px -2px 0px 0px;
@@ -210,10 +214,7 @@ const CardForm = styled.div`
     .hash {
       margin: 14px 0px -2px 14px;
       div {
-        background-color: ${({ category }) =>
-          category
-            ? ColorStyle.PrimaryPurple + Opacity[70]
-            : ColorStyle.PrimaryMint + Opacity[70]};
+        background-color: ${({ hashColor }) => hashColor};
       }
     }
     .userInfo {

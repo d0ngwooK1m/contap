@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import BasicProfile from '../assets/image/basicProfile.png';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import { ColorStyle, Opacity, category, professionColor, professionHoverColor } from '../utils/systemDesign';
 
 import { Text } from '../elements';
 import HashTag from './HashTag';
@@ -21,20 +21,12 @@ const CardFrontContap = ({ userId, onModal }) => {
     ?.split('@')
     .slice(1, 4);
 
-  // const stopPropagation = (e) => {
-  //   e.stopPropagation();
-  // };
-
-  // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
-  const category = () => {
-    if (front[userId].field < 2) {
-      return true;
-    }
-    return false;
-  };
+    const cat = category(front[userId].field);
+    const color = professionColor(cat);
+    const hashColor = professionColor(cat, 70);
 
   return (
-    <CardForm onClick={onModal} category={category()}>
+    <CardForm onClick={onModal} color={color} category={cat} hashColor={hashColor}>
       <div style={{ display: 'flex' }}>
         <ImageBox
           className="imageBox"
@@ -48,7 +40,7 @@ const CardFrontContap = ({ userId, onModal }) => {
           </div>
           <Text
             color={
-              category() ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint
+              color
             }
             regular20
           >
@@ -99,20 +91,19 @@ const CardForm = styled.div`
   &:hover {
     cursor: pointer;
     border: 3px solid
-      ${({ category }) =>
-        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
-    background-color: ${({ category }) =>
-      category ? ColorStyle.BackGround300 : ColorStyle.BackGround100};
+      ${({ color }) =>
+        color};
+    background-color:${({ category }) =>
+      category === '디자이너'
+        ? ColorStyle.BackGround100
+        : ColorStyle.BackGround300};
     .imageBox {
       margin: 20px;
     }
     .hash {
       margin: 14px 0px -2px 14px;
       div {
-        background-color: ${({ category }) =>
-          category
-            ? ColorStyle.PrimaryPurple + Opacity[70]
-            : ColorStyle.PrimaryMint + Opacity[70]};
+        background-color:  ${({ hashColor }) => hashColor};
       }
     }
     .userInfo {

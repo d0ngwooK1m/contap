@@ -2,20 +2,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import { ColorStyle, Opacity, professionColor } from '../utils/systemDesign';
 
 const HashTag = ({ tag, category }) => {
-  return <HashTagWrap category={category}>{tag}</HashTagWrap>;
+  const opacityColor = professionColor(category, 20);
+  return <HashTagWrap opacityColor={opacityColor}>{tag}</HashTagWrap>;
 };
 
 HashTag.propTypes = {
   tag: PropTypes.string,
-  category: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 HashTag.defaultProps = {
-  tag: null
-}
+  tag: null,
+};
 
 const HashTagWrap = styled.div`
   font-family: 'Pretendard';
@@ -26,7 +27,7 @@ const HashTagWrap = styled.div`
   width: fit-content;
   height: 35px;
   padding: 0px 16px;
-  background-color: ${({category}) => category ? ColorStyle.PrimaryPurple+Opacity[20] : ColorStyle.PrimaryMint+Opacity[20]};
+  background-color: ${({ opacityColor }) => opacityColor};
   border-radius: 50px;
   align-items: center;
   justify-content: center;

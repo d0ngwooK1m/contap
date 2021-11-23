@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import T from '../api/tokenInstance';
-import { ColorStyle, Opacity } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  Opacity,
+  professionColor,
+  professionHoverColor,
+} from '../utils/systemDesign';
 import { Text } from '../elements';
 // import { ColorStyle } from '../utils/systemDesign';
 
@@ -17,11 +22,12 @@ const TapForm = ({ userId, category }) => {
     window.alert('Tap을 보냈어요!');
   };
 
-  console.log(userId);
+  const color = professionColor(category);
+  const hoverColor = professionHoverColor(category);
 
   return (
-    <Wrap category={category}>
-      <TextAreaWrap category={category}>
+    <Wrap>
+      <TextAreaWrap>
         <MessageTextarea
           type="text"
           id="textbox"
@@ -33,7 +39,7 @@ const TapForm = ({ userId, category }) => {
           <Text regular20>{message.length} / 200</Text>
         </div>
       </TextAreaWrap>
-      <TapButton category={category}>
+      <TapButton color={color} hoverColor={hoverColor}>
         <button type="button" onClick={sendTap}>
           <Text
             bold20
@@ -107,17 +113,14 @@ const TapButton = styled.div`
     float: right;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     bottom: 10px;
-    background-color: ${({ category }) =>
-      category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
-    border: 2px solid
-      ${({ category }) =>
-        category ? ColorStyle.PrimaryPurple : ColorStyle.PrimaryMint};
+    background-color: ${({ color }) => color};
+    border: 2px solid ${({ color }) => color};
     box-sizing: border-box;
     border-radius: 40px;
 
     &:hover {
-      background-color: ${({ category }) => (category ? '#6235B5' : '#33C68A')};
-      border: 2px solid ${({ category }) => (category ? '#6235B5' : '#33C68A')};
+      background-color: ${({ hoverColor }) => hoverColor};
+      border: 2px solid ${({ hoverColor }) => hoverColor};
     }
   }
 `;
