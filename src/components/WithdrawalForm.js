@@ -39,7 +39,7 @@ const WithdrawalForm = () => {
       ),
     });
     if (isConfirmed) {
-      dispatch(withdrawalToServer(passwordInfo));
+      withdrawalToServer(passwordInfo);
     }
   };
 
@@ -216,9 +216,11 @@ const WithdrawalForm = () => {
         }
       >
         <label>
-          <Text color={ColorStyle.Gray300} regular20>
-            비밀번호를 입력해주세요
-          </Text>
+          <MarginWrapper11>
+            <Text color={ColorStyle.Gray300} regular20>
+              비밀번호를 입력해주세요
+            </Text>
+          </MarginWrapper11>
           <StyledInput
             type="password"
             // placeholder="비밀번호를 입력해주세요"
@@ -302,6 +304,10 @@ const ThemeWrapper = styled.div`
 
 const MarginWrapper = styled.div`
   margin: 0px 0px 48px 0px;
+`;
+
+const MarginWrapper11 = styled.div`
+  margin: 0px 0px 16px 0px;
 `;
 
 const ErrorMessage = styled.p`
