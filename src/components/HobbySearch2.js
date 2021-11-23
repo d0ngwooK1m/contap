@@ -60,7 +60,7 @@ const searchData = [
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
-const HobbySearch = () => {
+const HobbySearch2 = () => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState('');
   const [click, setClick] = React.useState(false);
@@ -103,6 +103,13 @@ const HobbySearch = () => {
       dispatch(searchHobbyList(searchArr));
     }
   }, [data]);
+
+  React.useEffect(() => {
+    setData('');
+    if (click === true) {
+      setClick(false);
+    }
+  }, [click]);
 
   const ArrayData = searchList.map((val) => {
     const hobbySearchFunc = hobbyList.includes(val)
@@ -152,9 +159,11 @@ const HobbySearch = () => {
     );
   });
 
+  const inputValue = click ? '' : data;
+
   return (
     <div>
-      {!click ? (
+      {/* {!click ? (
         <SearchBoxDiv>
           <SearchBox
             onChange={(e) => {
@@ -180,16 +189,34 @@ const HobbySearch = () => {
             <MypageSearch />
           </SearchIconDiv>
         </SearchBoxDiv>
-      )}
+      )} */}
+      <SearchBoxDiv>
+        <SearchBox
+          value={inputValue}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setData(e.target.value);
+          }}
+          placeholder="요즘 관심사는 뭐예요?"
+        />
+        <SearchIconDiv>
+          <MypageSearch />
+        </SearchIconDiv>
+      </SearchBoxDiv>
 
-      {console.log(FullList)}
-      {!click ? <AllBox> {ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
+      {/* {console.log(FullList)} */}
+      {/* {!click ? <AllBox> {ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>} */}
+      {data !== '' ? (
+        <AllBox> {ArrayData}</AllBox>
+      ) : (
+        <AllBox>{FullList}</AllBox>
+      )}
       <br />
     </div>
   );
 };
 
-export default HobbySearch;
+export default HobbySearch2;
 
 const Box = styled.div`
   display: flex;
