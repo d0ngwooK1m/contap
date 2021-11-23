@@ -24,21 +24,20 @@ const searchData = [
   'Flutter',
   'Node.js',
   'Python',
-  'Zeplin',
   'Angular',
   'Vue.js',
-  'C++',
+  'Unreal Engine',
   'Express',
-  'C#',
+  'C',
   'Django',
   'Next.js',
   'Ruby',
   'Java Script',
-  'Premiere Pro',
-  'After Effects',
-  'C',
+  'Nest.js',
+  'Go',
   'Android Studio',
   'HTML CSS',
+  'Elastic Search',
   'SQL',
   'TypeScript',
   'Swift',
@@ -46,16 +45,17 @@ const searchData = [
   'PHP',
   'Nuxt.js',
   'Flask',
-  'Nest.js',
+  'JQuery',
   'Figma',
+  'After Effects',
+  'Illustrator',
   'Sketch',
   'Adobe XD',
-  'Illustrator',
   'Photoshop',
   'Proto.io',
   'AutoCAD',
-  'JQuery',
-  'Go',
+  'Premiere Pro',
+  'Zeplin',
 ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
@@ -199,7 +199,7 @@ const StackSearch2 = () => {
       )} */}
       <SearchBoxDiv>
         <SearchBox
-          placeholder='주로 사용하시는 기술이 있나요?'
+          placeholder="주로 사용하시는 기술이 있나요?"
           value={inputValue}
           onChange={(e) => {
             console.log(e.target.value);
@@ -229,7 +229,7 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  width: 1180px;
+  width: 1280px;
   margin: 43px 165px 72px 165px;
   padding-bottom: 72px;
   justify-content: start;
@@ -237,6 +237,15 @@ const AllBox = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   border-bottom: 1px solid ${ColorStyle.BackGround300};
+  /* display: grid; */
+  // grid-gap: 4px;
+  /* grid-template-columns: repeat(10, minmax(auto, 1fr));
+  align-items: center;
+  // 최대넓이 설정
+  max-width: 1440px;
+  justify-content: space-around; */
+  // 양 옆 여백 간격 통일 - 가운데 정렬
+  //margin: auto
 `;
 
 // const ArrayBox = styled.div`
