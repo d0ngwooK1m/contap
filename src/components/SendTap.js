@@ -94,8 +94,8 @@ const Wrap = styled.div`
   position: relative;
   top: 0px;
   padding-top: 72px;
-  min-height: 700px;
-  max-height: 700px;
+  min-height: 70vh;
+  max-height: 77vh;
   left: 100px;
   width: 100%;
   overflow-y: scroll;

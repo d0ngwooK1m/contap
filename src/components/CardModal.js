@@ -22,6 +22,7 @@ const CardModal = ({ show, onHide, userId, userName, profile, category }) => {
             userName={userName}
             profile={profile}
             category={category}
+            onHide={onHide}
           />
         </>
       </Modal>

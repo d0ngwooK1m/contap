@@ -76,14 +76,13 @@ const ContapModal = ({
     const { isConfirmed } = await BasicAlert.fire({
       title: (
         <div style={{ textAlign: 'left' }}>
-          <div style={{ marginBottom: '0px', position: 'absolute' }}>
+          <div style={{ marginTop: '5px' }}>
             <Text bold32 color={ColorStyle.BackGround300}>
-              {userCradInfo.userName}님과 <br />
-              그랩을 끊으실 건가요?
+              {userCradInfo.userName}님과 그랩을 끊을까요?
             </Text>
           </div>
-          <div>
-            <Text regular24 color={ColorStyle.Gray300}>
+          <div style={{ marginTop: '48px' }}>
+            <Text regular16 color={ColorStyle.Gray300}>
               그랩을 끊어도 <br />
               상대방에게 알림이 가지 않아요
             </Text>
@@ -315,7 +314,7 @@ ContapModal.propTypes = {
   onHide: PropTypes.func.isRequired,
   children: PropTypes.any,
   userCradInfo: PropTypes.object.isRequired,
-  category: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
   select: PropTypes.string,
 };
 

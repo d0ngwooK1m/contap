@@ -102,7 +102,7 @@ const Header = () => {
       return;
     }
     setIsMyPage(true);
-    console.log('프로필 클릭시 통과하는지 체크', isMyPage)
+    console.log('프로필 클릭시 통과하는지 체크', isMyPage);
     history.push('/mypage');
   };
 
@@ -164,7 +164,9 @@ const Header = () => {
             disableScrollParentFix
           />
         ) : null}
-        {history.location.pathname === '/' && mypageAlarm === true && settingAlarm === false ? (
+        {history.location.pathname === '/' &&
+        mypageAlarm === true &&
+        settingAlarm === false ? (
           <TutorialForm
             stepIndex={isSetting ? 1 : 0}
             steps={settingSteps}
@@ -244,19 +246,12 @@ const Header = () => {
               <MenuItem onClick={logOut}>로그아웃</MenuItem>
             </Menu>
             <div>
-            <IconButton
-              className="my-page"
-              onClick={moveToMyPage}
-            >
-              {userProfile ? (
+              <IconButton className="my-page" onClick={moveToMyPage}>
                 <ImageBox
                   className="imageBox"
-                  src={userProfile}
+                  src={userProfile ? userProfile : HeaderProfileSvg}
                 />
-              ) : (
-                <HeaderProfileSvg />
-              )}
-            </IconButton>
+              </IconButton>
             </div>
           </MenuWrapper>
         ) : (
@@ -276,7 +271,7 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-${({ location }) => location === '/' ? null : 'position : fixed;'}
+  ${({ location }) => (location === '/' ? null : 'position : fixed;')}
   top: 0px;
   width: 1112px;
   height: 88px;
@@ -287,12 +282,10 @@ ${({ location }) => location === '/' ? null : 'position : fixed;'}
   background-color: #0f0a1aff;
   z-index: 1001;
 
-  .my-page{
+  .my-page {
     padding-right: 0px;
     margin-right: 0px;
-    
   }
-  
 `;
 
 const MenuWrapper = styled.div`

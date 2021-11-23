@@ -130,7 +130,7 @@ const CardFront = ({ userId, contap, select }) => {
         )}
       </div>
       <div style={{ display: 'flex' }}>
-        {front[userId].newFriend && <NotiBadge className="NotiBadge" />}
+        {front[userId].newFriend && select !== 'SendTap' && <NotiBadge className="NotiBadge" />}
         {front[userId].profile ? (
           <ImageBox className="imageBox" src={front[userId].profile} />
         ) : (

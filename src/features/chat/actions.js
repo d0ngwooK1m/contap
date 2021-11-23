@@ -87,6 +87,7 @@ export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/1/0');
     // const { data } = await T.GET('/contap/getothers');
+    console.log('로드톡룸====>', data);
     dispatch(loadTalkRoomList(data));
   } catch (error) {
     console.error(error);
@@ -97,7 +98,7 @@ export const loadNoneTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/2/0');
     // const { data } = await T.GET('/contap/getothers');
-    console.log(data);
+    console.log('로드톡룸====>', data);
     dispatch(loadNoneTalkRoomList(data));
   } catch (error) {
     console.error(error);
