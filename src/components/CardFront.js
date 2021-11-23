@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
-import BasicProfile from '../assets/image/basicProfile.png';
+import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
 
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
@@ -84,7 +84,12 @@ const CardFront = ({ userId, contap, select }) => {
   };
 
   return (
-    <CardForm onClick={showCardBackModal} color={color} category={cat} hashColor={hashColor}>
+    <CardForm
+      onClick={showCardBackModal}
+      color={color}
+      category={cat}
+      hashColor={hashColor}
+    >
       <div onClick={stopPropagation} aria-hidden="true">
         {!contap && showModal && (
           <CardModal
@@ -122,10 +127,13 @@ const CardFront = ({ userId, contap, select }) => {
       </div>
       <div style={{ display: 'flex' }}>
         {front[userId].newFriend && <NotiBadge className="NotiBadge" />}
-        <ImageBox
-          className="imageBox"
-          src={front[userId].profile ? front[userId].profile : BasicProfile}
-        />
+        {front[userId].profile ? (
+          <ImageBox className="imageBox" src={front[userId].profile} />
+        ) : (
+          <div className="basicProfile">
+            <FrontProfileSvg />
+          </div>
+        )}
         <div className="userInfo">
           <div className="userName">
             <Text color="#F5F3F8" regular20>
@@ -140,7 +148,7 @@ const CardFront = ({ userId, contap, select }) => {
       <div className="interest">
         <Text regular16>관심사</Text>
       </div>
-      <Hash className="hash" >
+      <Hash className="hash">
         {interestHashTags?.map((stack, idx) => {
           return (
             stack && (
@@ -180,7 +188,7 @@ const CardForm = styled.div`
   height: 200px;
   border-radius: 16px;
   box-sizing: border-box;
-  margin: 22px 0px;
+  margin: 16px 0px;
   margin-right: 30px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
@@ -194,6 +202,14 @@ const CardForm = styled.div`
 
   .interest {
     margin: 0px 22px;
+  }
+  .basicProfile{
+    height: 72px;
+  width: 80px;
+  margin: 22px;
+
+  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
+  border-radius: 8px;
   }
 
   &:hover {
@@ -217,6 +233,9 @@ const CardForm = styled.div`
         background-color: ${({ hashColor }) => hashColor};
       }
     }
+    .basicProfile{
+  margin: 20px;
+  }
     .userInfo {
       margin: 30px -2px 0px 2px;
     }
@@ -241,6 +260,7 @@ const ImageBox = styled.div`
   height: 72px;
   width: 80px;
   margin: 22px;
+  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

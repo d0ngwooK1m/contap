@@ -15,7 +15,7 @@ import { ReactComponent as Close } from '../svgs/CloseRound.svg';
 import BasicProfile from '../assets/image/basicProfile.png';
 import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
 import { ReactComponent as ChatAddSvg } from '../svgs/ChatAdd.svg';
-import { ColorStyle } from '../utils/systemDesign';
+import { ColorStyle, Opacity } from '../utils/systemDesign';
 
 const Grabtalk = () => {
   const dispatch = useDispatch();
@@ -150,6 +150,7 @@ const ImageBox = styled.div`
   height: 60px;
   width: 60px;
   margin: 20px 32px 20px 48px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

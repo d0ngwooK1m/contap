@@ -12,6 +12,9 @@ import { setContapNoti, setTapReceiveNoti } from '../features/notice/actions';
 import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
 import ChatInfinityScroll from './Chat/ChatInfinityScroll';
+import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
+import { IconButton } from '@mui/material';
+import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 
 const ReceiveTap = ({ select }) => {
   const dispatch = useDispatch();
@@ -22,13 +25,20 @@ const ReceiveTap = ({ select }) => {
   const { isNext, isLoading } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
 
+  // const scrollTop = () => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: 'smooth',
+  //   });
+  // };
+
   React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
       console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
-    dispatch(loading(true))
+    dispatch(loading(true));
     dispatch(loadReceiveTapToAxios('0'));
     dispatch(setContapNoti(false));
     return () => {
@@ -40,8 +50,8 @@ const ReceiveTap = ({ select }) => {
     if (conTap.allIds < 12 || isLoading) {
       return;
     }
-    
-    dispatch(loading(true))
+
+    dispatch(loading(true));
     dispatch(nextPageToAxios(select, page));
     setPage(page + 1);
   };
@@ -74,6 +84,9 @@ const ReceiveTap = ({ select }) => {
           })}
         </CardBox>
       </Wrap>
+      {/* <IconButton className='floatingBtn' onClick={scrollTop} >
+        <ArrowTopLightSvg/>
+      </IconButton> */}
     </ChatInfinityScroll>
   );
 };
@@ -90,6 +103,18 @@ const Wrap = styled.div`
   left: 100px;
   width: 100%;
   overflow-y: scroll;
+
+  /* .floatingBtn{
+    width: 64px;
+    height: 64px;
+    background-color: ${ColorStyle.Gray100 + Opacity[25]};
+    position: fixed;
+    bottom: 80px;
+    right: 340px;
+    &:hover{
+    background-color: ${ColorStyle.Gray500 + Opacity[25]};
+    }
+  } */
 `;
 
 const CardBox = styled.div`
@@ -97,6 +122,7 @@ const CardBox = styled.div`
   display: flex;
   width: 780px;
   flex-wrap: wrap;
+  padding-top: 42px;
   justify-content: flex-start;
   align-content: flex-start;
   margin: auto;

@@ -24,12 +24,12 @@ import { ReactComponent as ChatIconSvg } from '../svgs/ChatIcon.svg';
 import { ReactComponent as ChatAlarmIconSvg } from '../svgs/ChatAlarmIcon.svg';
 // import { ReactComponent as ChatAlarmActiveIconSvg } from '../svgs/ChatAlarmActiveIcon.svg';
 import { ReactComponent as SettingIconSvg } from '../svgs/Setting.svg';
-import { ReactComponent as BasicProfileSvg } from '../svgs/BasicProfile.svg';
+import { ReactComponent as HeaderProfileSvg } from '../svgs/HeaderProfile.svg';
 import T from '../api/tokenInstance';
 
 import TutorialForm from './TutorialForm';
 import { mainSteps, settingSteps } from '../utils/tutorialSteps';
-import { ColorStyle, FontFamily } from '../utils/systemDesign';
+import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 // import { mainSteps } from '../utils/tutorialSteps';
 
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
@@ -42,7 +42,7 @@ const Header = () => {
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
   const isContapNoti = useSelector((state) => state.notice.isContapNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [myProfile] = React.useState(<BasicProfileSvg />);
+  const [myProfile] = React.useState(<HeaderProfileSvg />);
   const isUserLogin = userInfo.email;
   const userProfile = userInfo.profile ? userInfo.profile : '';
   const [isMyPage, setIsMyPage] = React.useState(false);
@@ -253,7 +253,7 @@ const Header = () => {
                   src={userProfile}
                 />
               ) : (
-                <BasicProfileSvg />
+                <HeaderProfileSvg />
               )}
             </IconButton>
             </div>
@@ -334,6 +334,7 @@ const LoginButton = styled.button`
 const ImageBox = styled.div`
   height: 48px;
   width: 48px;
+  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

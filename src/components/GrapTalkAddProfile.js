@@ -10,7 +10,7 @@ import {
   category,
   professionColor,
 } from '../utils/systemDesign';
-import BasicProfile from '../assets/image/basicProfile.png';
+import { ReactComponent as BasicProfile } from '../svgs/BasicProfile.svg';
 import {
   createTalkRoom,
   loadCurrentRoom,
@@ -50,16 +50,23 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
   return (
     <Wrap>
       <ProfileWrap onClick={addTalkRoom}>
-        <ImageBox src={roomInfo.profile ? roomInfo.profile : BasicProfile} />
-        <div style={{textAlign:'left'}}>
+        {roomInfo.profile ? (
+          <ImageBox
+            className="imageBox"
+            src={roomInfo.profile}
+            isLogin={roomInfo.login}
+          />
+        ) : (
+          <div className="basicProfile">
+            <BasicProfile />
+          </div>
+        )}
+        <div style={{ textAlign: 'left' }}>
           <div className="name">
             <Text bold20>{roomInfo.userName}</Text>
           </div>
           <div className="stackHashTags">
-            <Text
-              color={color}
-              regular20
-            >
+            <Text color={color} regular20>
               # {stackHashTags}
             </Text>
           </div>
@@ -80,14 +87,21 @@ const Wrap = styled.div`
   border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
   width: 580px;
   max-width: 580px;
-  padding: 16px;
-  height: 70px;
-  margin-bottom: 16px;
+  padding: 18px 16px;
+  max-height: 100px;
   cursor: pointer;
 
   .stackHashTags {
     width: 150px;
     max-width: 150px;
+  }
+  .basicProfile {
+    border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
+    height: 64px;
+    width: 64px;
+    box-sizing: border-box;
+    border-radius: 32px;
+    margin: 0px 16px 0px 0px;
   }
 
   &:hover {
@@ -109,9 +123,9 @@ const ProfileWrap = styled.div`
   }
 `;
 const ImageBox = styled.div`
-  height: 50px;
-  width: 50px;
-  margin: 8px 28px 0px 0px;
+  height: 64px;
+  width: 64px;
+  margin: 0px 16px 0px 0px;
 
   background-image: url('${(props) => props.src}');
   background-position: center;

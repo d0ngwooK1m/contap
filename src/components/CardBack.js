@@ -209,6 +209,7 @@ const CardTapForm = styled.div`
 const ImageBox = styled.div`
   height: 40px;
   min-width: 40px;
+  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

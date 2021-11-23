@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import BasicProfile from '../assets/image/basicProfile.png';
 import { ColorStyle, Opacity, category, professionColor, professionHoverColor } from '../utils/systemDesign';
+import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
 
 import { Text } from '../elements';
 import HashTag from './HashTag';
@@ -28,10 +28,13 @@ const CardFrontContap = ({ userId, onModal }) => {
   return (
     <CardForm onClick={onModal} color={color} category={cat} hashColor={hashColor}>
       <div style={{ display: 'flex' }}>
-        <ImageBox
-          className="imageBox"
-          src={front[userId].profile ? front[userId].profile : BasicProfile}
-        />
+      {front[userId].profile ? (
+          <ImageBox className="imageBox" src={front[userId].profile} />
+        ) : (
+          <div className="basicProfile">
+            <FrontProfileSvg />
+          </div>
+        )}
         <div className="userInfo">
           <div className="userName">
             <Text color="#F5F3F8" regular20>
@@ -87,6 +90,14 @@ const CardForm = styled.div`
   .interest {
     margin: 0px 22px;
   }
+  .basicProfile{
+    height: 72px;
+  width: 80px;
+  margin: 22px;
+
+  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
+  border-radius: 8px;
+  }
 
   &:hover {
     cursor: pointer;
@@ -109,6 +120,9 @@ const CardForm = styled.div`
     .userInfo {
       margin: 30px -2px 0px 2px;
     }
+    .basicProfile{
+  margin: 20px;
+  }
 
     .interest {
       margin: 2px 0px -2px 20px;
@@ -120,6 +134,7 @@ const ImageBox = styled.div`
   height: 72px;
   width: 80px;
   margin: 22px;
+  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

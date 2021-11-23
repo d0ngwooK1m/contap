@@ -8,9 +8,10 @@ import {
   closeNoneTalkRoomList,
   loadTalkRoomListToAxios,
 } from '../features/chat/actions';
-import BasicProfile from '../assets/image/basicProfile.png';
+import { ReactComponent as BasicProfile } from '../svgs/BasicProfile.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import timeCheck from '../utils/timeCheck';
+import { border, borderRadius } from '@mui/system';
 
 const NONE_MESSAGE = '_test용_';
 
@@ -71,13 +72,19 @@ const ChatRoom = ({ userId }) => {
     <Wrap>
       <ProfileWrap onClick={openChatRoom}>
         <div>
-          <ImageBox
-            className="imageBox"
-            src={roomInfo.profile ? roomInfo.profile : BasicProfile}
-            isLogin={roomInfo.login}
-          />
+          {roomInfo.profile ? (
+            <ImageBox
+              className="imageBox"
+              src={roomInfo.profile}
+              isLogin={roomInfo.login}
+            />
+          ) : (
+            <div className="basicProfile">
+              <BasicProfile />
+            </div>
+          )}
         </div>
-        <div>
+        <div className="desc">
           <div className="name">
             <Text
               bold20
@@ -85,7 +92,9 @@ const ChatRoom = ({ userId }) => {
             >
               {roomInfo.userName}
             </Text>
-            <Text regular16 color={ColorStyle.Gray100}>{timeCheck(lastMessageTime)}</Text>
+            <Text regular16 color={ColorStyle.Gray100}>
+              {timeCheck(lastMessageTime)}
+            </Text>
           </div>
           <div className="message">
             <Text
@@ -102,16 +111,17 @@ const ChatRoom = ({ userId }) => {
 };
 
 const Wrap = styled.div`
-  border-bottom: 1px solid ${ColorStyle.Gray100+Opacity[30]};
+  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
   align-items: center;
-  padding: 16px;
-  height: 70px;
-  margin-bottom: 16px;
+  padding: 18px 16px;
+  max-height: 100px;
   cursor: pointer;
+
+  .desc {
+    min-width: 309px;
+  }
   .name {
-    margin-top: 6px;
-    width: 326px;
-    max-width: 326px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
   }
@@ -119,14 +129,22 @@ const Wrap = styled.div`
   .message {
     p {
       overflow: hidden;
-      max-width: 326px;
       text-overflow: ellipsis;
       white-space: nowrap;
       height: 28px;
     }
   }
 
-  &:hover{
+  .basicProfile {
+    border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
+    height: 64px;
+    width: 64px;
+    box-sizing: border-box;
+    border-radius: 32px;
+    margin: 0px 16px 0px 0px;
+  }
+
+  &:hover {
     background-color: ${ColorStyle.BackGround100};
   }
 `;
@@ -137,9 +155,11 @@ const ProfileWrap = styled.div`
 `;
 
 const ImageBox = styled.div`
-  height: 50px;
-  width: 50px;
-  margin: 8px 12px 0px 0px;
+  height: 64px;
+  width: 64px;
+  margin: 0px 16px 0px 0px;
+  box-sizing: border-box;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

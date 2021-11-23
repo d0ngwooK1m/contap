@@ -97,6 +97,7 @@ const Wrap = styled.div`
 const CardBox = styled.div`
   width: 100%;
   display: flex;
+  padding-top: 42px;
   width: 780px;
   height: 688px;
   flex-wrap: wrap;
