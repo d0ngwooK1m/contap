@@ -55,19 +55,29 @@ const AlarmForm = () => {
     if (phoneNumber.length === 10) {
       setPhoneNumber(phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'));
     }
-    if (phoneNumber.length === 12) {
-      setPhoneNumber(
-        phoneNumber
-          .replace(/-/g, '')
-          .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
-      );
-    }
+    // if (phoneNumber.length === 12) {
+    //   setPhoneNumber(
+    //     phoneNumber
+    //       .replace(/-/g, '')
+    //       .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
+    //   );
+    // }
     if (phoneNumber.length === 13) {
-      setPhoneNumber(
-        phoneNumber
-          .replace(/-/g, '')
-          .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
-      );
+      if (phoneNumber.replace(/-/g, '').length === 12) {
+        const editPhoneNumber = phoneNumber.replace(/-/, '').slice(0, 11);
+        console.log(editPhoneNumber);
+        setPhoneNumber(
+          editPhoneNumber
+            .replace(/-/g, '')
+            .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
+        );
+      } else {
+        setPhoneNumber(
+          phoneNumber
+            .replace(/-/g, '')
+            .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
+        );
+      }
     }
   }, [phoneNumber]);
 
@@ -202,7 +212,7 @@ const AlarmForm = () => {
           <StyledInput
             type="text"
             // placeholder="비밀번호를 입력해주세요"
-            {...register('phoneNumber')}
+            {...register('phoneNumber', {maxLength: 13})}
             onChange={handleChange}
             value={phoneNumber}
           />

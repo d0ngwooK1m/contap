@@ -3,10 +3,13 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { setLoading } from '../features/cards/actions';
 import { Text } from '../elements';
 import { searchInfoDB, searchArrList, searchDataList } from '../features/cards/actions';
 import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { ReactComponent as SearchSvg } from '../svgs/Search.svg';
+import { Checkbox } from '@mui/material';
+import { style } from '@mui/system';
 
 // const searchData = [
 //   '지오캐싱',
@@ -71,11 +74,17 @@ const SearchBar = () => {
 
   const page = useSelector((state) => state.cards.searchInfo?.page);
   const field = useSelector((state) => state.cards.searchInfo?.field);
-  const [fetching, setFetching] = React.useState(false);
+  // const [fetching, setFetching] = React.useState(false);
   const isSearching = useSelector((state) => state.cards.isSearching);
+  const isLoading = useSelector((state) => state.cards.isLoading);
 
-  const fetchMoreData = () => {
-    setFetching(true);
+  const fetchMoreData = async () => {
+    console.log('카드 로딩 안되는지 확인===>', isSearching);
+    if (isSearching === false) {
+      return;
+    }
+
+    await dispatch(setLoading(true));
     let searchInfo;
 
     if (data === '') {
@@ -94,9 +103,10 @@ const SearchBar = () => {
       };
     }
 
-    dispatch(searchInfoDB(searchInfo));
+    await dispatch(searchInfoDB(searchInfo));
 
-    setFetching(false);
+    // setFetching(false);
+    await dispatch(setLoading(false));
   };
 
   const handleScroll = () => {
@@ -109,8 +119,8 @@ const SearchBar = () => {
     if (!isSearching) {
       return;
     }
-
-    if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
+    // fetching ==> isLoading
+    if (scrollTop + clientHeight >= scrollHeight && isLoading === false) {
       fetchMoreData();
     }
   };
@@ -152,9 +162,9 @@ const SearchBar = () => {
 
   return (
     <div
-      onMouseLeave={() => {
-        setClick(false);
-      }}
+      // onMouseLeave={() => {
+      //   setClick(false);
+      // }}
       // onClick={() => {
       //   setClick(false);
       // }}
@@ -205,13 +215,19 @@ const SearchBar = () => {
       </SearchWrapper>
       <SearchContent>
         {click ? (
-          <div>
+          <CategoryOuter>
+            <CloseBtn onClick={
+              () => {
+                setClick(false);
+              }
+            }>✖</CloseBtn>
             <CategoryWrapper>
               <Text color={ColorStyle.Gray300} regular16>
                 카테고리
               </Text>
             </CategoryWrapper>
             <ContentWrapper>
+
               <CategoryBtn
                 type="button"
                 onClick={async () => {
@@ -285,7 +301,7 @@ const SearchBar = () => {
                     전체
                   </button> */}
             <ul>{ArrayData}</ul>
-          </div>
+          </CategoryOuter>
         ) : null}
       </SearchContent>
       <br />
@@ -299,6 +315,26 @@ const SearchWrapper = styled.div`
   margin: auto;
 `;
 
+const CloseBtn = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+`;
+
+const CategoryOuter = styled.div`
+  width: 560px;
+  padding: 0px 32px;
+  margin: auto;
+  border-radius: 30px;
+  background-color: ${ColorStyle.BackGround300 + Opacity[100]};
+  position: relative;
+`;
+
 const CategoryWrapper = styled.div`
   width: fit-content;
   margin: 22px 0px 4px 0px;
@@ -308,6 +344,7 @@ const CategoryWrapper = styled.div`
 const ContentWrapper = styled.div`
   width: fit-content;
   background-color: ${ColorStyle.BackGround300 + Opacity[100]};
+
 `;
 
 const CategoryBtn = styled.button`
@@ -364,10 +401,10 @@ const StyledBtn = styled.button`
 `;
 
 const SearchContent = styled.div`
-  width: 560px;
+  width: fit-content;
   height: 100%;
   margin: auto;
-  padding: 0px 32px;
+  /* padding: 0px 32px; */
   margin-top: 12px;
   background-color: ${ColorStyle.BackGround300 + Opacity[100]};
   border-radius: 30px;

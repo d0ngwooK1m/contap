@@ -46,9 +46,16 @@ const Title = styled.div`
   margin: 160px 0px 64px 0px;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapperEmail = styled.div`
   display: flex;
   flex-direction: column-reverse;
+  margin: 0px 0px 28px 0px;
+`;
+
+const InputWrapperPw = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 0px 0px 40px 0px;
 `;
 
 const StyledLabel = styled.label`
@@ -152,7 +159,7 @@ const GithubButton = styled.button`
 
 const WarningText = styled.p`
   color: ${ColorStyle.Error};
-  margin: 0px;
+  margin-top: 8px;
 `;
 
 export {
@@ -162,7 +169,8 @@ export {
   SvgWrapper,
   RightWrapper,
   Title,
-  InputWrapper,
+  InputWrapperEmail,
+  InputWrapperPw,
   StyledLabel,
   StyledInput,
   SubmitInput,

@@ -10,6 +10,7 @@ import { history } from '../configureStore';
 import {
   LOAD_CARD,
   SEARCH_CARD,
+  SET_LOADING,
   LOAD_CURRENT_CARD,
   EDIT_CARD_PROFILE,
   SET_PREVIEW,
@@ -37,6 +38,10 @@ export const loadCard = createAction(LOAD_CARD, (cardList) => ({
 export const searchCard = createAction(SEARCH_CARD, (searchInfo, cardList) => ({
   searchInfo,
   cardList,
+}));
+
+export const setLoading = createAction(SET_LOADING, (loadingInfo) => ({
+  loadingInfo,
 }));
 
 export const searchDataList = createAction(SEARCH_DATA, (searchDataArr) => ({

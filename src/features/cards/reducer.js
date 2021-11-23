@@ -4,6 +4,7 @@ import { produce } from 'immer'; // reducer 불변성 유지
 import {
   LOAD_CARD,
   SEARCH_CARD,
+  SET_LOADING,
   SEARCH_DATA,
   SEARCH_ARR,
   SEARCH_STACK,
@@ -35,6 +36,7 @@ const initialState = {
   searchArr: [],
   stackArr: [],
   hobbyArr: [],
+  isLoading: false,
   isSearching: false,
   stack: [],
   hobby: [],
@@ -56,10 +58,15 @@ export default handleActions(
       }),
     [SEARCH_CARD]: (state, action) =>
       produce(state, (draft) => {
+        console.log('카드리스트 서치되는지 확인 ===>', action.payload.cardList);
+        if (action.payload.cardList.length < 9) {
+          draft.isSearching = false;
+          return;
+        }
         draft.isSearching = true;
-        console.log(draft.isSearching);
+        // console.log(draft.isSearching);
         draft.searchInfo = action.payload.searchInfo;
-        console.log(draft.searchInfo);
+        // console.log(draft.searchInfo);
         if (action.payload.searchInfo.page === 0) {
           draft.byId = {};
           draft.allIds = [];
@@ -74,6 +81,10 @@ export default handleActions(
             draft.allIds.push(doc.userId);
           });
         }
+      }),
+    [SET_LOADING]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isLoading = action.payload.loadingInfo;
       }),
     [SEARCH_DATA]: (state, action) =>
       produce(state, (draft) => {

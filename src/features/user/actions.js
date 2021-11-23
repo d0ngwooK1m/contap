@@ -7,6 +7,7 @@ import {
   LOG_OUT,
   AUTHORIZED,
   EMAIL_AUTH,
+  EMAIL_TIMER,
   AUTH_CHECK,
   BACK_TO_PREV,
   SIGNUP_DONE,
@@ -35,6 +36,11 @@ const withdrawal = (withdrawalInfo) => ({
 const emailAuth = (emailInfo) => ({
   type: EMAIL_AUTH,
   emailInfo,
+});
+
+const emailTimer = (timerInfo) => ({
+  type: EMAIL_TIMER,
+  timerInfo,
 });
 
 const authCheck = () => ({
@@ -247,6 +253,7 @@ export {
   logout,
   backToPrev,
   authCheck,
+  emailTimer,
   signupDone,
   alarmCheck,
   settingAlarm,
