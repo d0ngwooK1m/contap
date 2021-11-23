@@ -94,6 +94,13 @@ const StackSearch2 = () => {
     }
   }, [data]);
 
+  React.useEffect(() => {
+    setData('');
+    if (click === true) {
+      setClick(false);
+    }
+  }, [click]);
+
   const ArrayData = searchList.map((val) => {
     const stackSearchFunc = stackList.includes(val)
       ? async () => {
@@ -159,9 +166,11 @@ const StackSearch2 = () => {
     );
   });
 
+  const inputValue = click ? '' : data;
+
   return (
     <StackDiv>
-      {!click ? (
+      {/* {!click ? (
         <SearchBoxDiv>
           <SearchBox
             onChange={(e) => {
@@ -176,19 +185,32 @@ const StackSearch2 = () => {
         </SearchBoxDiv>
       ) : (
         <SearchBoxDiv>
-          <SearchBox
+            <SearchBox
+            value={data}
             onChange={(e) => {
               console.log(e.target.value);
               setData(e.target.value);
             }}
-            value={data}
           />
           <SearchIconDiv>
             <MypageSearch />
           </SearchIconDiv>
         </SearchBoxDiv>
-      )}
-      {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
+      )} */}
+      <SearchBoxDiv>
+        <SearchBox
+          value={inputValue}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setData(e.target.value);
+          }}
+        />
+        <SearchIconDiv>
+          <MypageSearch />
+        </SearchIconDiv>
+      </SearchBoxDiv>
+      {/* {!click ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>} */}
+      {data !== '' ? <AllBox>{ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
       {/* <AllBox>{FullList}</AllBox> */}
     </StackDiv>
   );
