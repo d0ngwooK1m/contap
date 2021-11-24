@@ -6,7 +6,13 @@ import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
 import { Text } from '../elements';
-import { ColorStyle, Opacity, professionColor, category, professionHoverColor } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  Opacity,
+  professionColor,
+  category,
+  professionHoverColor,
+} from '../utils/systemDesign';
 import BasicProfile from '../assets/image/basicProfile.png';
 
 const CardBack = ({
@@ -36,24 +42,27 @@ const CardBack = ({
     return '디자이너';
   };
 
-  const cat = category(card.field)
-  const color = professionColor(cat)
-  const OpacityColor = professionColor(cat,70)
-  const hoverColor = professionHoverColor(cat)
+  const cat = category(card.field);
+  const color = professionColor(cat);
+  const OpacityColor = professionColor(cat, 70);
+  const hoverColor = professionHoverColor(cat);
 
   // const stopPropagation = (e) => {
   //   e.stopPropagation();
   // };
   return (
     <Wrap>
-      <Card color={color} category={ cat} OpacityColor={OpacityColor} hoverColor={hoverColor}>
+      <Card
+        color={color}
+        category={cat}
+        OpacityColor={OpacityColor}
+        hoverColor={hoverColor}
+      >
         <div className="category">
           <Text
             regular16
             color={
-              cat === '디자이너'
-                ? ColorStyle.BackGround300
-                : ColorStyle.Gray500
+              cat === '디자이너' ? ColorStyle.BackGround300 : ColorStyle.Gray500
             }
           >
             {card.hashTags}
@@ -71,14 +80,12 @@ const CardBack = ({
             </a>
           )}
         </div>
-        <Text regular20 color={ColorStyle.Gray500}>
-          {card?.content}
-        </Text>
-        <CardTapForm
-          color={color}
-          hoverColor={hoverColor}
-          isTapForm={show}
-        >
+        <div style={{ whiteSpace: 'pre-line' }}>
+          <Text regular20 color={ColorStyle.Gray500}>
+            {card?.content}
+          </Text>
+        </div>
+        <CardTapForm color={color} hoverColor={hoverColor} isTapForm={show}>
           <ImageBox src={profile || BasicProfile} />
           <div className="userName">
             <Text regular16 color={ColorStyle.Gray500}>
@@ -143,8 +150,7 @@ const Card = styled.div`
     text-align: center;
     border-radius: 8px;
 
-    background-color: ${({ OpacityColor }) =>
-      OpacityColor};
+    background-color: ${({ OpacityColor }) => OpacityColor};
   }
 
   .title {
@@ -195,21 +201,22 @@ const CardTapForm = styled.div`
     border-radius: 40px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border: 2px solid
-      ${({ color, isTapForm }) => isTapForm ? ColorStyle.Gray300 : color};
+      ${({ color, isTapForm }) => (isTapForm ? ColorStyle.Gray300 : color)};
     box-sizing: border-box;
 
     &:hover {
       background-color: ${({ hoverColor, isTapForm }) =>
         isTapForm ? ColorStyle.Gray300 : hoverColor};
       border: 2px solid
-        ${({ hoverColor, isTapForm }) => isTapForm ? ColorStyle.Gray300 : hoverColor};
+        ${({ hoverColor, isTapForm }) =>
+          isTapForm ? ColorStyle.Gray300 : hoverColor};
     }
   }
 `;
 const ImageBox = styled.div`
   height: 40px;
   min-width: 40px;
-  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

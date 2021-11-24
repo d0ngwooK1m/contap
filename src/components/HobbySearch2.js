@@ -15,48 +15,48 @@ import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 
 // import { Grid, Text } from '../elements';
 
-const searchData = [
-  '영화감상',
-  '독서',
-  '헬스',
-  '인테리어',
-  '여행',
-  '스포츠',
-  '요리',
-  '카페투어',
-  '맛집탐방',
-  '공예',
-  '드로잉',
-  '게임',
-  '피규어',
-  '자동차',
-  '산책',
-  '뷰티',
-  '디자인',
-  '아이돌',
-  '테크',
-  '반려동물',
-  '스포츠관람',
-  '쇼핑',
-  '사진찍기',
-  '춤',
-  '악기연주',
-  '코딩',
-  '전시회',
-  '보컬',
-  '뮤지컬',
-  '글쓰기',
-  '등산',
-  '레저',
-  '음악감상',
-  '콘서트',
-  '패션',
-  '재태크',
-  '파이낸스',
-  '애니메이션',
-  '웹툰',
-  'SNS',
-];
+// const searchData = [
+//   '영화감상',
+//   '독서',
+//   '헬스',
+//   '인테리어',
+//   '여행',
+//   '스포츠',
+//   '요리',
+//   '카페투어',
+//   '맛집탐방',
+//   '공예',
+//   '드로잉',
+//   '게임',
+//   '피규어',
+//   '자동차',
+//   '산책',
+//   '뷰티',
+//   '디자인',
+//   '아이돌',
+//   '테크',
+//   '반려동물',
+//   '스포츠관람',
+//   '쇼핑',
+//   '사진찍기',
+//   '춤',
+//   '악기연주',
+//   '코딩',
+//   '전시회',
+//   '보컬',
+//   '뮤지컬',
+//   '글쓰기',
+//   '등산',
+//   '레저',
+//   '음악감상',
+//   '콘서트',
+//   '패션',
+//   '재태크',
+//   '파이낸스',
+//   '애니메이션',
+//   '웹툰',
+//   'SNS',
+// ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -69,6 +69,7 @@ const HobbySearch2 = () => {
   // const hobbyList = useSelector((state) => state.cards.hobby);
   let hobbyList = useSelector((state) => state.cards.hobby);
   console.log('하비리스트===>', hobbyList);
+  const searchData = useSelector((state) => state.cards.hobbyTag);
 
   if (hobbyList[0] === '') {
     hobbyList = [];

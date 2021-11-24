@@ -13,11 +13,7 @@ import {
 
 const TagList = ({ tag }) => {
   console.log('태그확인===>', tag);
-  return (
-    <HobbyDiv>
-      <HashTagWrap>{tag}</HashTagWrap>
-    </HobbyDiv>
-  );
+  return <HashTagWrap>{tag}</HashTagWrap>;
 };
 
 TagList.propTypes = {
@@ -31,8 +27,8 @@ TagList.defaultProps = {
 export default TagList;
 
 const HashTagWrap = styled.div`
-  width: 146px;
-  height: 54px;
+  width: 132px;
+  height: 44.63px;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -43,9 +39,5 @@ const HashTagWrap = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 16px;
-`;
-
-const HobbyDiv = styled.div`
-  // margin-left: 32px;
+  margin-right: 20px;
 `;

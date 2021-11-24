@@ -7,6 +7,7 @@ import {
   searchStackList,
   updateStack,
   deleteStack,
+  searchTagListDB,
 } from '../features/cards/actions';
 
 import { Grid } from '../elements';
@@ -18,88 +19,45 @@ import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // const searchData = [
 //   'Spring',
 //   'Spring Boot',
-//   'Java',
+//   'Go',
 //   'React',
 //   'React Native',
 //   'Flutter',
 //   'Node.js',
 //   'Python',
-//   'Zeplin',
+//   'C++',
+//   'C',
+//   'C#',
 //   'Angular',
 //   'Vue.js',
-//   'C++',
 //   'Express',
-//   'C#',
 //   'Django',
 //   'Next.js',
-//   'Ruby',
-//   'Java Script',
-//   'Premiere Pro',
-//   'After Effects',
-//   'C',
-//   'Android Studio',
-//   'HTML CSS',
 //   'SQL',
+//   'Nest.js',
+//   'Java',
+//   'HTML CSS',
 //   'TypeScript',
+//   'Android Studio',
+//   'Ruby',
+//   'JavaScript',
 //   'Swift',
 //   'Assembly',
 //   'PHP',
 //   'Nuxt.js',
 //   'Flask',
-//   'Nest.js',
+//   'JQuery',
 //   'Figma',
+//   'After Effects',
+//   'Illustrator',
 //   'Sketch',
 //   'Adobe XD',
-//   'Illustrator',
 //   'Photoshop',
 //   'Proto.io',
 //   'AutoCAD',
-//   'JQuery',
-//   'Go',
+//   'Premiere Pro',
+//   'Zeplin',
 // ];
-
-const searchData = [
-  'Spring',
-  'Spring Boot',
-  'Java',
-  'React',
-  'React Native',
-  'Flutter',
-  'Node.js',
-  'Python',
-  'Angular',
-  'Vue.js',
-  'Unreal Engine',
-  'Express',
-  'C',
-  'Django',
-  'Next.js',
-  'Ruby',
-  'Java Script',
-  'Nest.js',
-  'Go',
-  'Android Studio',
-  'HTML CSS',
-  'Elastic Search',
-  'SQL',
-  'TypeScript',
-  'Swift',
-  'Assembly',
-  'PHP',
-  'Nuxt.js',
-  'Flask',
-  'JQuery',
-  'Figma',
-  'After Effects',
-  'Illustrator',
-  'Sketch',
-  'Adobe XD',
-  'Photoshop',
-  'Proto.io',
-  'AutoCAD',
-  'Premiere Pro',
-  'Zeplin',
-];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -109,8 +67,9 @@ const StackSearch2 = () => {
   const [click, setClick] = React.useState(false);
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.stackArr);
-  // console.log('서치리스트===>', searchList);
+  console.log('서치리스트===>', searchList);
   const stackList = useSelector((state) => state.cards.stack);
+  const searchData = useSelector((state) => state.cards.stackTag);
   // const [button, setButton] = React.useState({});
   // const toggleButton = (id) => {
   //   setButton((prevButton) => ({
@@ -118,6 +77,10 @@ const StackSearch2 = () => {
   //     [id]: !prevButton[id],
   //   }));
   // };
+
+  React.useEffect(() => {
+    dispatch(searchTagListDB());
+  }, []);
 
   React.useEffect(() => {
     if (data === '') {
@@ -166,12 +129,17 @@ const StackSearch2 = () => {
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround}`;
     const HoverColor = stackList.includes(val)
-    ? `${ColorStyle.HoverPurple}`
-    : `${ColorStyle.BackGround300}`;
+      ? `${ColorStyle.HoverPurple}`
+      : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
         {/* {toggleCheck} */}
-        <TagDiv color={BtnSearchColor} hover={HoverColor} type="button" onClick={stackSearchFunc}>
+        <TagDiv
+          color={BtnSearchColor}
+          hover={HoverColor}
+          type="button"
+          onClick={stackSearchFunc}
+        >
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -203,12 +171,17 @@ const StackSearch2 = () => {
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround}`;
     const HoverColor = stackList.includes(val)
-    ? `${ColorStyle.HoverPurple}`
-    : `${ColorStyle.BackGround300}`;
+      ? `${ColorStyle.HoverPurple}`
+      : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
         {/* {toggleCheck} */}
-        <TagDiv color={BtnColor} hover={HoverColor} type="button" onClick={stackFunc}>
+        <TagDiv
+          color={BtnColor}
+          hover={HoverColor}
+          type="button"
+          onClick={stackFunc}
+        >
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -278,7 +251,7 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  width: 1280px;
+  width: 1200px;
   margin: 43px 165px 72px 165px;
   padding-bottom: 72px;
   justify-content: start;

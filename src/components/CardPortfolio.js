@@ -6,14 +6,14 @@ import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
-import{ BasicAlert} from '../utils/alert';
+import { BasicAlert } from '../utils/alert';
 
 import { Grid, Text } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
 import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
+import { ReactComponent as TagIcon } from '../svgs/TagIcon.svg';
 import { ReactComponent as Link } from '../svgs/Link.svg';
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
-import { ReactComponent as Flag } from '../svgs/Flag.svg';
 import {
   FontFamily,
   FontScale,
@@ -55,7 +55,7 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const edit = () => {
-    if (title.length === 0) {
+    if (title.trim() === '') {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
@@ -64,7 +64,7 @@ const CardPortfolio = ({ cardId }) => {
 
       return false;
     }
-    if (desc.length === 0) {
+    if (desc.trim() === '') {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
@@ -73,15 +73,25 @@ const CardPortfolio = ({ cardId }) => {
 
       return false;
     }
-    if (tagsStr.length === 0) {
+    if (tagsStr.trim() === '') {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
-        text: '사용 기술을 작성해주세요',
+        text: '카드 내용과 관련된 분야를 작성해주세요',
       });
 
       return false;
     }
+    if (link.match(/\s/g)) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '링크를 작성하시거나 공백을 지워주세요',
+      });
+
+      return false;
+    }
+
     let editLink = link;
     if (editLink !== undefined && editLink.indexOf('//') === -1) {
       editLink = '//' + editLink;
@@ -112,22 +122,24 @@ const CardPortfolio = ({ cardId }) => {
     return (
       <Grid
         width="1110px"
-        height="537px"
+        height="509px"
         borderRadius="16px"
         border="1px solid #8c4dff"
         margin="48px auto"
-        padding="60px 48px 0px 48px"
+        padding="48px 48px 0px 48px"
         bg="#141422"
       >
         <EditDiv>
           <TitleBox
             type="text"
             value={title}
+            maxLength="50"
+            placeholder="카드 제목"
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
-          <Grid width="10%">
+          <Grid width="8%">
             <AddBtn cursor="pointer" onClick={edit} />
           </Grid>
         </EditDiv>
@@ -135,6 +147,8 @@ const CardPortfolio = ({ cardId }) => {
           <MainBox
             type="text"
             value={desc}
+            placeholder="· 좋은 프로젝트는 널리 공유해요! 나의 프로젝트를 소개하고 대화를 나눠보세요 &#13;&#10;· 아직 프로젝트 경험이 없다면 함께 성장할 수 있는 일을 제안해 보세요 &#13;&#10; 
+              프로젝트를 함께 할 팀원을 찾거나 스터디를 같이 할 사람을 찾아볼 수도 있어요!"
             textarea
             maxLength="200"
             onChange={(e) => {
@@ -150,22 +164,24 @@ const CardPortfolio = ({ cardId }) => {
         <TagDiv>
           <TagBox
             value={tagsStr}
+            placeholder="카드 내용과 관련 된 분야를 태그로 달아주세요"
             onChange={(e) => {
               setTagsStr(e.target.value);
             }}
           />
-          <div style={{ position: 'absolute', top: '50%', left: '1%' }}>
-            <Flag />
+          <div style={{ position: 'absolute', top: '52%', left: '2%' }}>
+            <TagIcon />
           </div>
         </TagDiv>
         <LinkDiv>
           <LinkBox
             value={link}
+            placeholder="더 자세한 내용을 링크로 공유해보세요! 예시) Github 링크, 블로그 링크, 포트폴리오 링크"
             onChange={(e) => {
               setLink(e.target.value);
             }}
           />
-          <div style={{ position: 'absolute', top: '20%', left: '1%' }}>
+          <div style={{ position: 'absolute', top: '34%', left: '2%' }}>
             <Link />
           </div>
         </LinkDiv>
@@ -188,20 +204,39 @@ const CardPortfolio = ({ cardId }) => {
           <Grid is_flex>
             <TitleText>{cardList[cardId].title}</TitleText>
             <IconDiv className="iconDiv">
-              <EditBtn onClick={editCardBack} cursor="pointer" width="38%" />
+              <EditBtn
+                onClick={editCardBack}
+                cursor="pointer"
+                className="editBtn"
+              />
               <DeleteBtn
                 onClick={deleteCardBack}
                 cursor="pointer"
-                width="38%"
+                className="deleteBtn"
               />
             </IconDiv>
           </Grid>
           <MainText>{cardList[cardId].content}</MainText>
-          <TagText>{cardList[cardId].tagsStr}</TagText>
+          <div
+            style={{
+              marginLeft: '48px',
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+            }}
+          >
+            <TagIcon />
+            <TagText>{cardList[cardId].tagsStr}</TagText>
+          </div>
           <LinkText href={cardList[cardId].link} target="_blank">
-            <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>
+            <div
+              style={{
+                marginRight: '20px',
+                position: 'relative',
+              }}
+            >
               <Link />
-            </span>
+            </div>
             {url}
           </LinkText>
           {/* <a href={cardList[cardId].link} target="_blank">
@@ -232,13 +267,13 @@ const EditDiv = styled.div`
 
 const Div = styled.div`
   width: 1110px;
-  height: 490px;
-  margin: 0px auto;
+  height: 370px;
+  margin: 0px auto 48px auto;
 `;
 
 const ProjectDiv = styled.div`
   width: 1110px;
-  height: 450px;
+  height: 370px;
   border-radius: 16px;
   border: 1px solid ${'#4d4759' + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
@@ -249,6 +284,13 @@ const ProjectDiv = styled.div`
 
     .iconDiv {
       display: flex;
+    }
+    .editBtn {
+      margin-right: 36px;
+      width: 64px;
+    }
+    .deleteBtn {
+      width: 64px;
     }
   }
 `;
@@ -269,6 +311,10 @@ const TitleBox = styled.input`
     outline: none;
   }
   margin-bottom: 40px;
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Header_24};
+  }
 `;
 
 const MainDiv = styled.div`
@@ -279,7 +325,7 @@ const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.Gray500 + Opacity[10]};
+  background-color: ${ColorStyle.Gray100 + Opacity[20]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -288,6 +334,10 @@ const MainBox = styled.textarea`
   border-radius: 12px;
   &:focus {
     outline: none;
+  }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Body1_20};
   }
   resize: none;
 `;
@@ -305,8 +355,8 @@ const TagDiv = styled.div`
 const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
-  margin-top: 56px;
-  background-color: ${ColorStyle.Gray500 + Opacity[10]};
+  margin-top: 40px;
+  background-color: ${ColorStyle.Gray100 + Opacity[20]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
@@ -317,6 +367,10 @@ const TagBox = styled.input`
   border-radius: 12px;
   &:focus {
     outline: none;
+  }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Body1_20};
   }
 `;
 
@@ -328,7 +382,7 @@ const LinkBox = styled.input`
   width: 947px;
   height: 50px;
   padding-left: 60px;
-  background-color: ${ColorStyle.Gray500 + Opacity[10]};
+  background-color: ${ColorStyle.Gray100 + Opacity[20]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -338,16 +392,20 @@ const LinkBox = styled.input`
   &:focus {
     outline: none;
   }
+  ::-webkit-input-placeholder {
+    color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Body1_20};
+  }
 `;
 
 const TitleText = styled.p`
   font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
-  border-bottom: 1px solid ${ColorStyle.Gray100};
+  // border-bottom: 1px solid ${ColorStyle.Gray100};
   padding: 14px 0px;
   width: 587px;
-  margin: 64px 0px 40px 48px;
+  margin: 48px 0px 36px 48px;
   font-weight: 700;
 `;
 
@@ -356,18 +414,17 @@ const MainText = styled.p`
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  margin: 0px 48px 61px 48px;
+  white-space: pre-line;
+  margin: 0px 48px 48px 48px;
 `;
 
-const TagText = styled.p`
+const TagText = styled.div`
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  margin: 0px 0px 28px 48px;
+  margin-left: 20px;
   padding: 7px 10px;
-  display: inline-block;
-  // width: 10%;
   border: 1px solid ${'#8c4dff' + Opacity[70]};
   border-radius: 8px;
   background-color: ${'#8c4dff' + Opacity[70]};
@@ -375,12 +432,13 @@ const TagText = styled.p`
 `;
 
 const LinkText = styled.a`
-  display: block;
+  display: flex;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.PrimaryPurple};
-  margin: 0px 0px 64px 48px;
+  margin: 0px 0px 48px 48px;
+  padding-top: 20px;
   text-decoration: none;
 `;
 
@@ -392,5 +450,5 @@ const LinkText = styled.a`
 const IconDiv = styled.div`
   display: none;
   justify-content: space-around;
-  margin-right: 48px;
+  margin-right: 32px;
 `;

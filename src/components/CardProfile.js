@@ -53,7 +53,7 @@ const CardProfile = () => {
   // }
 
   return (
-    <Grid padding="66px 0px 114px 0px" bg={ColorStyle.BackGround}>
+    <Grid padding="66px 0px 100px 0px" bg={ColorStyle.BackGround}>
       <TitleText>{cardList.userName}님의 프로필</TitleText>
 
       <Box>
@@ -65,10 +65,14 @@ const CardProfile = () => {
         </DotDiv>
         <ProfileDiv>
           <Div>
-            <Grid margin="32px 32px 38px 32px" width="124px" height="112px">
+            <Grid
+              margin="44.63px 32px 23.33px 32px"
+              width="124px"
+              height="112px"
+            >
               <Img src={cardList.profile ? cardList.profile : BasicProfile} />
             </Grid>
-            <Grid width="40%" margin="56px 0px 0px 0px">
+            <Grid width="40%" margin="63.9px 0px 0px 0px">
               <NameText>{cardList.userName}</NameText>
 
               {stackTag === '' || stackTag === undefined ? (
@@ -115,8 +119,8 @@ const CardProfile = () => {
 export default CardProfile;
 
 const Box = styled.div`
-  width: 540px;
-  height: 308px;
+  width: 500px;
+  height: 284px;
   margin: 0px auto;
   position: relative;
   z-index: 3;
@@ -154,15 +158,15 @@ const Box = styled.div`
 
 const DotDiv = styled.div`
   position: absolute;
-  left: -43%;
+  left: -50%;
   top: 3%;
   z-index: -1;
 `;
 
 const ProfileDiv = styled.div`
-  width: 540px;
-  height: 308px;
-  margin: 62px auto 114px auto;
+  width: 500px;
+  height: 284px;
+  margin: 62px auto 100px auto;
   background: linear-gradient(
     108.12deg,
     #94d1b5 0%,
@@ -203,10 +207,10 @@ const TitleText = styled.p`
 `;
 
 const NameText = styled.p`
-  font-size: ${FontScale.Header_32};
+  font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
-  margin-bottom: 22px;
+  margin-bottom: 24.71px;
   font-weight: 700;
 `;
 
@@ -227,9 +231,9 @@ const StackEditText = styled.p`
 `;
 
 const BasicHashTag = styled.div`
-  width: 146px;
-  height: 54px;
-  margin-right: 16px;
+  width: 132px;
+  height: 44.63px;
+  margin-right: 20px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.Gray500 + Opacity[15]};
   font-size: ${FontScale.Body1_20};
@@ -245,8 +249,8 @@ const Img = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 125px;
-  height: 112px;
+  width: 112px;
+  height: 102px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
   border-radius: 8px;
   object-fit: cover;
@@ -263,7 +267,7 @@ const HobbyText = styled.div`
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
   margin: 0px 0px 12px 32px;
-  font-weight: 700;
+  font-weight: 400;
 `;
 
 const HobbyDiv = styled.div`
@@ -273,7 +277,7 @@ const HobbyDiv = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   // justify-content: center;
-  margin-left: 32px;
+  margin: 15px 0px 0px 32px;
 `;
 
 const TagDiv = styled.div`
@@ -293,5 +297,5 @@ const TagDiv = styled.div`
 const BtnDiv = styled.div`
   width: 20%;
   // cursor: pointer;
-  margin: 22px 26px 0px 0px;
+  margin: 16.23px 24px 0px 0px;
 `;

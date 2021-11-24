@@ -13,7 +13,7 @@ import {
 
 import { ReactComponent as Link } from '../svgs/Link.svg';
 import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
-import { ReactComponent as Flag } from '../svgs/Flag.svg';
+import { ReactComponent as TagIcon } from '../svgs/TagIcon.svg';
 
 import {
   FontFamily,
@@ -38,33 +38,44 @@ const CardBackWrite = ({ onHide }) => {
   // console.log(handleClick);
 
   const addCardBack = (e) => {
-    if (title.length === 0) {
+    if (title.trim() === '') {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
         text: '프로젝트 제목을 작성해주세요',
       });
-      // alert('프로젝트 제목을 작성해주세요');
+
       return false;
     }
-    if (desc.length === 0) {
+    if (desc.trim() === '') {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
         text: '프로젝트 설명을 작성해주세요',
       });
-      // alert('프로젝트 설명을 작성해주세요');
+
       return false;
     }
-    if (tagsStr.length === 0) {
+    if (tagsStr.trim() === '') {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
-        text: '사용 기술을 작성해주세요',
+        text: '카드 내용과 관련된 분야를 작성해주세요',
       });
-      // alert('사용 기술을 작성해주세요');
+
       return false;
     }
+
+    if (link.match(/\s/g)) {
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '링크를 작성하시거나 공백을 지워주세요',
+      });
+
+      return false;
+    }
+
     let url = link;
     if (url !== undefined && url.indexOf('http') === -1) {
       // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
@@ -85,17 +96,18 @@ const CardBackWrite = ({ onHide }) => {
   return (
     <Grid
       width="1110px"
-      height="537px"
+      height="509px"
       borderRadius="16px"
       border="1px solid #8c4dff"
       margin="0px auto"
-      padding="60px 48px 0px 48px"
+      padding="48px 48px 0px 48px"
       bg="#141422"
     >
       <Div>
         <TitleBox
           type="text"
           placeholder="카드 제목"
+          maxLength="50"
           onChange={(e) => {
             setTitle(e.target.value);
             // console.log(e.target.value);
@@ -108,7 +120,7 @@ const CardBackWrite = ({ onHide }) => {
           //   },
           // })}
         />
-        <Grid width="10%">
+        <Grid width="8%">
           <AddBtn cursor="pointer" onClick={addCardBack} />
         </Grid>
       </Div>
@@ -117,9 +129,8 @@ const CardBackWrite = ({ onHide }) => {
           <MainBox
             type="text"
             value={desc}
-            placeholder=" · 좋은 프로젝트는 널리 공유해요! 나의 프로젝트를 소개하고 대화를 나눠보세요 &#13;&#10; 
-            · 아직 프로젝트 경험이 없다면 함께 성장할 수 있는 일을 제안해 보세요 &#13;&#10; 
-            &nbsp; 팀원을 찾거나 스터디나 뭐든 좋아요!  "
+            placeholder="· 좋은 프로젝트는 널리 공유해요! 나의 프로젝트를 소개하고 대화를 나눠보세요 &#13;&#10;· 아직 프로젝트 경험이 없다면 함께 성장할 수 있는 일을 제안해 보세요  &#13;&#10;                                                                                  
+                프로젝트를 함께 할 팀원을 찾거나 스터디를 같이 할 사람을 찾아볼 수도 있어요!"
             //  ('\u00a0')
             maxLength="200"
             onChange={(e) => {
@@ -143,8 +154,8 @@ const CardBackWrite = ({ onHide }) => {
             }}
             // {...register('tag', { requirerd: true })}
           />
-          <div style={{ position: 'absolute', top: '60%', left: '1%' }}>
-            <Flag />
+          <div style={{ position: 'absolute', top: '63%', left: '2%' }}>
+            <TagIcon />
           </div>
         </TagDiv>
         <LinkDiv>
@@ -155,7 +166,7 @@ const CardBackWrite = ({ onHide }) => {
               setLink(e.target.value);
             }}
           />
-          <div style={{ position: 'absolute', top: '45%', left: '1%' }}>
+          <div style={{ position: 'absolute', top: '55%', left: '2%' }}>
             <Link />
           </div>
         </LinkDiv>
@@ -200,6 +211,7 @@ const TitleBox = styled.input`
   margin-bottom: 40px;
   ::-webkit-input-placeholder {
     color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Header_24};
   }
 `;
 
@@ -211,11 +223,11 @@ const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.Gray500 + Opacity[10]};
+  background-color: ${ColorStyle.Gray100 + Opacity[20]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
-  color: ${ColorStyle.Gray300};
+  color: ${ColorStyle.Gray500};
   border: none;
   border-radius: 12px;
   &:focus {
@@ -223,6 +235,7 @@ const MainBox = styled.textarea`
   }
   ::-webkit-input-placeholder {
     color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Body1_20};
   }
   resize: none;
 `;
@@ -239,8 +252,8 @@ const TagDiv = styled.div`
 
 const TagBox = styled.input`
   padding-left: 60px;
-  margin-top: 56px;
-  background-color: ${ColorStyle.Gray500 + Opacity[10]};
+  margin-top: 40px;
+  background-color: ${ColorStyle.Gray100 + Opacity[20]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
@@ -254,6 +267,7 @@ const TagBox = styled.input`
   }
   ::-webkit-input-placeholder {
     color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Body1_20};
   }
 `;
 
@@ -266,7 +280,7 @@ const LinkBox = styled.input`
   height: 50px;
   padding-left: 60px;
   margin-top: 24px;
-  background-color: ${ColorStyle.Gray500 + Opacity[10]};
+  background-color: ${ColorStyle.Gray100 + Opacity[20]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
@@ -278,5 +292,6 @@ const LinkBox = styled.input`
   }
   ::-webkit-input-placeholder {
     color: ${ColorStyle.Gray300};
+    font-size: ${FontScale.Body1_20};
   }
 `;
