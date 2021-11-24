@@ -17,7 +17,7 @@ import {
   closeNoneTalkRoomList,
 } from '../features/chat/actions';
 
-const GrapTalkAddProfile = ({ roomInfo }) => {
+const GrapTalkAddProfile = ({ roomInfo, closeList }) => {
   const dispatch = useDispatch();
   // const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
   const roomList = useSelector((state) => state.chat.allIds);
@@ -40,10 +40,12 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
   const addTalkRoom = () => {
     // 유저아이디가 왼쪽 룸 리스트에 있으면
     if (roomList.indexOf(roomInfo.userId) !== -1) {
-      dispatch(closeNoneTalkRoomList());
+      closeList()
+      // dispatch(closeNoneTalkRoomList());
       dispatch(loadCurrentRoom(roomInfo));
       return;
     }
+    closeList()
     dispatch(createTalkRoom(roomInfo));
     dispatch(loadCurrentRoom(roomInfo));
   };

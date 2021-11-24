@@ -46,6 +46,7 @@ const ChatInfinityScroll = ({
     // 자료를 받아오는 loading 중에는 이벤트 발생하지 않도록
     // 꼭 잘 막아주기!
     if (loading) {
+      console.log('로딩중이야')
       return;
     }
 

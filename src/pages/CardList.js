@@ -266,9 +266,9 @@ const RefreshWrapper = styled.div`
 const CardListWrap = styled.div`
   width: 100%;
   display: flex;
-  width: 1140px;
+  width: 1110px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin: auto;
   padding-left: 30px;
 `;

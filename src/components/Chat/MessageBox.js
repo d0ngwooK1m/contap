@@ -107,9 +107,9 @@ const ChatMessageBox = styled.div`
   background-color: ${ColorStyle.BackGround};
   position: absolute;
   bottom: 0px;
-  padding-bottom: 80px;
+  /* padding-bottom: 80px; */
   width: 665px;
-  max-height: 553px;
+  max-height: 88%;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     margin-left: 30px;

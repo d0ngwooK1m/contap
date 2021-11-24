@@ -77,7 +77,7 @@ const ContapModal = ({
       title: (
         <div style={{ textAlign: 'left' }}>
           <div style={{ marginTop: '5px' }}>
-            <Text bold32 color={ColorStyle.BackGround300}>
+            <Text bold32 color={ColorStyle.Gray500}>
               {userCradInfo.userName}님과 그랩을 끊을까요?
             </Text>
           </div>
@@ -136,7 +136,7 @@ const ContapModal = ({
                     className="refusetBtn"
                     onClick={rejectTap}
                   >
-                    <Text bold20 color="#FFF">
+                    <Text bold20 color={ColorStyle.Gray500}>
                       거절
                     </Text>
                   </button>
@@ -145,7 +145,14 @@ const ContapModal = ({
                     className="acceptBtn"
                     onClick={acceptTap}
                   >
-                    <Text bold20 color="#FFF">
+                    <Text
+                      bold20
+                      color={
+                        category === '디자이너'
+                          ? ColorStyle.BackGround300
+                          : ColorStyle.Gray500
+                      }
+                    >
                       수락
                     </Text>
                   </button>
@@ -162,7 +169,11 @@ const ContapModal = ({
                   >
                     <Text
                       bold20
-                      color={category ? '#FFF' : ColorStyle.BackGround300}
+                      color={
+                        category === '디자이너'
+                          ? ColorStyle.BackGround300
+                          : ColorStyle.Gray500
+                      }
                     >
                       메세지 보내기
                     </Text>

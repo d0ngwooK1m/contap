@@ -103,14 +103,14 @@ const Header = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  // const moveToMyPage = () => {
-  //   if (location.pathname === '/mypage') {
-  //     return;
-  //   }
-  //   setIsMyPage(true);
-  //   console.log('프로필 클릭시 통과하는지 체크', isMyPage);
-  //   history.push('/mypage');
-  // };
+  const moveToMyPage = () => {
+    if (location.pathname === '/mypage') {
+      return;
+    }
+    setIsMyPage(true);
+    console.log('프로필 클릭시 통과하는지 체크', isMyPage);
+    history.push('/mypage');
+  };
 
   const handleClose = () => {
     setIsSetting(false);
@@ -136,12 +136,12 @@ const Header = () => {
     // }
     // return <ChatIconSvg fill="#F5F3F8" />;
     if (location.pathname === '/grabtalk') {
-      return <ChatIconSvg fill="#8C4DFF" />;
+      return <ChatIconSvg stroke="#8C4DFF" />;
     }
     if (isChatNoti && location.pathname !== '/grabtalk') {
-      return <ChatAlarmIconSvg fill="#F5F3F8" />;
+      return <ChatAlarmIconSvg stroke="#F5F3F8" />;
     }
-    return <ChatIconSvg fill="#F5F3F8" />;
+    return <ChatIconSvg stroke="#F5F3F8" />;
   };
 
   const ContapButton = () => {
@@ -296,11 +296,11 @@ const Header = () => {
               </MenuItem>
             </Menu>
             <div>
-              <IconButton className="my-page" onClick={() => {history.push('/mypage')}}>
-                <ImageBox
+              <IconButton className="my-page" onClick={moveToMyPage}>
+              {userProfile ? <ImageBox
                   className="imageBox"
-                  src={userProfile ? userProfile : HeaderProfileSvg}
-                />
+                  src={userProfile}
+                />: <HeaderProfileSvg/> }
               </IconButton>
             </div>
           </MenuWrapper>

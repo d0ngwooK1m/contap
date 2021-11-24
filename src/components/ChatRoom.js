@@ -8,14 +8,14 @@ import {
   closeNoneTalkRoomList,
   loadTalkRoomListToAxios,
 } from '../features/chat/actions';
-import { ReactComponent as BasicProfile } from '../svgs/BasicProfile.svg';
+import BasicProfile from '../svgs/BasicProfile.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import timeCheck from '../utils/timeCheck';
 import { border, borderRadius } from '@mui/system';
 
 const NONE_MESSAGE = '_test용_';
 
-const ChatRoom = ({ userId }) => {
+const ChatRoom = ({ userId, closeList }) => {
   const dispatch = useDispatch();
   const roomInfo = useSelector((state) => state.chat.byId[userId]);
   const currentRoom = useSelector((state) => state.chat.current);
@@ -35,8 +35,8 @@ const ChatRoom = ({ userId }) => {
     if (openCheck) {
       return;
     }
-
-    dispatch(closeNoneTalkRoomList());
+    closeList();
+    // dispatch(closeNoneTalkRoomList());
     dispatch(loadTalkRoomListToAxios());
     dispatch(loadCurrentRoom(roomInfo));
   };
@@ -48,15 +48,15 @@ const ChatRoom = ({ userId }) => {
   const isRead = () => {
     if (openCheck) {
       return true;
-    }
-    if (readCheck === userInfo.email) {
+    } else if (readCheck === userInfo.email) {
+      return true;
+    } else if (readCheck === '@@') {
       return true;
     }
-    if (readCheck !== '@@') {
-      return false;
-    }
-    return true;
+    return false;
   };
+
+  // const isRead = readCheck !== '@@' ? false : true
 
   const year = roomInfo.date.substring(0, 2);
   const month = roomInfo.date.substring(2, 4);
@@ -71,24 +71,24 @@ const ChatRoom = ({ userId }) => {
   return (
     <Wrap>
       <ProfileWrap onClick={openChatRoom}>
-        <div>
-          {roomInfo.profile ? (
-            <ImageBox
-              className="imageBox"
-              src={roomInfo.profile}
-              isLogin={roomInfo.login}
-            />
-          ) : (
-            <div className="basicProfile">
-              <BasicProfile />
-            </div>
-          )}
+        <div className="profile">
+          <ImageBox
+            className="imageBox"
+            src={roomInfo.profile ? roomInfo.profile : BasicProfile}
+          />
+          {roomInfo.login && <OnlineBadge />}
         </div>
         <div className="desc">
           <div className="name">
             <Text
               bold20
-              color={openCheck ? ColorStyle.PrimaryPurple : ColorStyle.Gray500}
+              color={
+                openCheck
+                  ? ColorStyle.PrimaryPurple
+                  : isRead()
+                  ? ColorStyle.Gray100
+                  : ColorStyle.Gray500
+              }
             >
               {roomInfo.userName}
             </Text>
@@ -152,6 +152,22 @@ const Wrap = styled.div`
 const ProfileWrap = styled.div`
   display: flex;
   align-items: center;
+
+  .profile {
+    position: relative;
+  }
+`;
+
+const OnlineBadge = styled.div`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 40px;
+  left: 42px;
+  border-radius: 20px;
+  background: #2bac76;
+  border: 4px solid #0f0a1a;
+  box-sizing: border-box;
 `;
 
 const ImageBox = styled.div`
@@ -164,8 +180,6 @@ const ImageBox = styled.div`
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-size: cover;
-  border: ${({ isLogin }) =>
-    isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px'};
-  border-radius: 50px;
+  border-radius: 60px;
 `;
 export default ChatRoom;

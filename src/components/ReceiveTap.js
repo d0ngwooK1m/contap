@@ -13,6 +13,7 @@ import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
 import ChatInfinityScroll from './Chat/ChatInfinityScroll';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
+import { ReactComponent as NoneReceiveTapSvg } from '../svgs/NoneReceiveTap.svg';
 import { IconButton } from '@mui/material';
 import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 
@@ -23,10 +24,10 @@ const ReceiveTap = ({ select }) => {
   const [page, setPage] = React.useState(1);
   const { isNext, isLoading } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
-  
+
   const scrollRef = React.useRef();
   const scrollTop = () => {
-    scrollRef.current.scrollTop = 0
+    scrollRef.current.scrollTop = 0;
   };
 
   React.useEffect(() => {
@@ -63,26 +64,49 @@ const ReceiveTap = ({ select }) => {
       type="bottom"
     >
       <Wrap ref={scrollRef}>
-        <Text color="#FFF" bold32>
-          똑똑,
-          <br />
-          누군가 {userName}님을 Tap!
-        </Text>
-        <CardBox>
-          {conTap.allIds.map((ReceiveTapUserId) => {
-            return (
-              <MemoizedCardFront
-                key={ReceiveTapUserId}
-                userId={ReceiveTapUserId}
-                select={select}
-                contap
-              />
-            );
-          })}
-        </CardBox>
-      <IconButton className='floatingBtn' onClick={scrollTop} >
-        <ArrowTopLightSvg/>
-      </IconButton>
+        {conTap.allIds === 0 ? (
+          <>
+            <Text color={ColorStyle.Gray500} bold32>
+              아직 받은 Tap이 없어요
+            </Text>
+            <CardBox>
+              <div className="none">
+                <NoneReceiveTap>
+                  <div className="svg">
+                    <NoneReceiveTapSvg />
+                  </div>
+                  <Text regular20 color={ColorStyle.Gray500}>
+                    다른 사람이 Tap! 할 수 있게 카드로 나를 표현 해주세요!
+                  </Text>
+                </NoneReceiveTap>
+              </div>
+            </CardBox>
+          </>
+        ) : (
+          <>
+            <Text color={ColorStyle.Gray500} bold32>
+              똑똑,
+              <br />
+              누군가 {userName}님을 Tap!
+            </Text>
+            <CardBox>
+              {conTap.allIds.map((ReceiveTapUserId) => {
+                return (
+                  <MemoizedCardFront
+                    key={ReceiveTapUserId}
+                    userId={ReceiveTapUserId}
+                    select={select}
+                    contap
+                  />
+                );
+              })}
+            </CardBox>
+          </>
+        )}
+
+        <IconButton className="floatingBtn" onClick={scrollTop}>
+          <ArrowTopLightSvg />
+        </IconButton>
       </Wrap>
     </ChatInfinityScroll>
   );
@@ -98,21 +122,20 @@ const Wrap = styled.div`
   padding-top: 72px;
   min-height: 70vh;
   max-height: 77vh;
-  left: 100px;
+  left: 125px;
   width: 100%;
   overflow-y: scroll;
   scroll-behavior: smooth;
 
-
-  .floatingBtn{
+  .floatingBtn {
     width: 64px;
     height: 64px;
     background-color: ${ColorStyle.Gray100 + Opacity[25]};
     position: fixed;
     bottom: 20px;
     right: 20px;
-    &:hover{
-    background-color: ${ColorStyle.Gray500 + Opacity[25]};
+    &:hover {
+      background-color: ${ColorStyle.Gray500 + Opacity[25]};
     }
   }
 `;
@@ -120,12 +143,31 @@ const Wrap = styled.div`
 const CardBox = styled.div`
   width: 100%;
   display: flex;
-  width: 780px;
+  width: 730px;
   flex-wrap: wrap;
-  padding-top: 42px;
-  justify-content: flex-start;
+  padding-top: 64px;
+  justify-content: space-between;
   align-content: flex-start;
   margin: auto;
+
+  .none {
+    padding-top: 16px;
+  }
+`;
+
+const NoneReceiveTap = styled.div`
+  word-break: break-all;
+  text-align: center;
+  border-radius: 16px;
+  height: 342px;
+  margin: 0px;
+  padding:64px;
+  width: 730px;
+  background-color: ${ColorStyle.BackGround100 + Opacity[70]};
+  box-sizing: border-box;
+  .svg {
+    margin-bottom: 36px;
+  }
 `;
 
 export default ReceiveTap;

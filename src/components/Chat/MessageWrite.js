@@ -66,7 +66,7 @@ export default MessageWrite;
 
 const InputField = styled.div`
   position: absolute;
-  bottom: 0px;
+  bottom: -73px;
   max-width: 665px;
   width: 665px;
   height: 72px;
