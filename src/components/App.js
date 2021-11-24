@@ -30,6 +30,11 @@ function App() {
             <AlarmCheck>
               <Header />
               <PublicRoute path="/" component={CardList} exact />
+              <PublicRoute
+                path="/back/:userId/:cardId"
+                component={CardList}
+                exact
+              />
               <Permit>
                 <PrivateRoute path="/settings" component={Settings} exact />
                 <PrivateRoute path="/contap" component={Contap} exact />

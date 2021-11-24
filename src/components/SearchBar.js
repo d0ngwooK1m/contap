@@ -370,11 +370,23 @@ const StyledInput = styled.input`
   padding: 0px 32px;
   border-radius: 50px;
   border: none;
-  font-size: ${FontScale.Body2_16};
+  /* font-size: ${FontScale.Body2_16}; */
+  color: ${ColorStyle.Gray500};
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
   background-color: ${ColorStyle.BackGround300};
   color: white;
   &::placeholder {
     color: ${ColorStyle.Gray300};
+    font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  background-color: ${ColorStyle.BackGround300};
   }
   &:focus {
     outline: none;

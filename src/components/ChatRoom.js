@@ -163,7 +163,6 @@ const ImageBox = styled.div`
 
   background-image: url('${(props) => props.src}');
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   border: ${({ isLogin }) =>
     isLogin ? `4px solid ${ColorStyle.PrimaryMint}` : '0px'};

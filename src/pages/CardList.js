@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 import { IconButton } from '@mui/material';
 
-import styled , {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { loadCardFrontDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
@@ -15,7 +15,7 @@ import { ReactComponent as SquareShadow } from '../svgs/Reflex.svg';
 import { ReactComponent as SquareLeft } from '../svgs/ShapeLeft.svg';
 import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
 import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
-import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg'
+import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -28,9 +28,9 @@ const CardList = () => {
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
-  }
+  };
   React.useEffect(async () => {
     if (cardList.allIds.length !== 0) {
       return;
@@ -54,7 +54,7 @@ const CardList = () => {
       <TitleWrap />
       <div className="title">
         <Text bold48> Just Tap!</Text>
-        <Text regular20> 내가 찾던 동료를 Tap! 해서 만나보세요</Text>
+        <Text regular20> Contap에서는 함께 성장할 수 있어요</Text>
       </div>
       <SearchBarWrap>
         <SearchBar />
@@ -81,52 +81,53 @@ const CardList = () => {
           return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </CardListWrap>
-      {/* {isLoading ? <img src='https://ww.namu.la/s/0a451619bf1a1a638dba4d855d19036588d1623d23f9a44c0181991fa1d9cbe0e8413b7ce3f1f83070850324f1a2b069939d882f87596328eb6fe2328a8ecfa5d8b1071a500cc7b04cff81d3cedd7c5b' /> : null} */}
-      <IconButton className='floatingBtn' onClick={scrollTop} >
-        <ArrowTopLightSvg/>
-      </IconButton>
+      {cardList.allIds.length > 9 && (
+        <IconButton className="floatingBtn" onClick={scrollTop}>
+          <ArrowTopLightSvg />
+        </IconButton>
+      )}
     </Wrap>
   );
 };
 
 const upDown = keyframes`
   0% {
-    top: 60px;
+    top: 45px;
   }
   25% {
-    top: 40px;
+    top: 35px;
   }
   50% {
     top: 20px;
     /* right : 600px; */
   }
   75% {
-    top: 40px;
+    top: 35px;
     /* right : 600px; */
   }
   100% {
-    top: 60px;
+    top: 45px;
     
   }
 `;
 
 const downUp = keyframes`
  0% {
-    top: 240px;
+    top: 245px;
   }
   25% {
-    top: 260px;
+    top: 255px;
   }
   50% {
-    top: 280px;
+    top: 270px;
     /* right : 600px; */
   }
   75% {
-    top: 260px;
+    top: 255px;
     /* right : 600px; */
   }
   100% {
-    top: 240px;
+    top: 245px;
     
   }
 `;
@@ -136,7 +137,6 @@ const Wrap = styled.div`
   padding-top: 76px;
   padding-bottom: 112px;
   position: relative;
-
 
   .SquareLeft {
     position: absolute;
@@ -168,18 +168,43 @@ const Wrap = styled.div`
     }
   }
 
-  .floatingBtn{
+  .floatingBtn {
     width: 64px;
     height: 64px;
-    background-color: ${ColorStyle.Gray100+Opacity[25]};
+    background-color: ${ColorStyle.Gray100 + Opacity[25]};
     position: sticky;
     bottom: 80px;
     margin-left: 1300px;
-    &:hover{
-    background-color: ${ColorStyle.Gray500+Opacity[25]};
+    &:hover {
+      background-color: ${ColorStyle.Gray500 + Opacity[25]};
     }
   }
-  
+`;
+
+const mainBack = keyframes`
+ 0% {
+  background-position:0% 50%;
+  filter: blur(140px);
+  }
+  25% {
+    background-position:25% 75%;
+  filter: blur(120px);
+  }
+  50% {
+    background-position:100% 50%;
+  filter: blur(100px);
+    /* right : 600px; */
+  }
+  75% {
+    background-position:25% 75%;
+  filter: blur(120px);
+    /* right : 600px; */
+  }
+  100% {
+    background-position:0% 50%;
+  filter: blur(140px);
+    
+  }
 `;
 
 const TitleWrap = styled.div`
@@ -196,13 +221,15 @@ const TitleWrap = styled.div`
     #db83e9 343.48deg,
     #844aef 422.85deg
   );
+  background-size: 200%;
   filter: blur(140px);
   height: 100px;
+  animation: ${mainBack} 17s infinite linear alternate;
 `;
 
 const SearchBarWrap = styled.div`
   text-align: center;
-  margin: -70px 0px 50px 0px;
+  margin: -70px 0px 90px 0px;
 `;
 
 const TextWrap = styled.div`
@@ -219,6 +246,8 @@ const RefreshWrapper = styled.div`
   align-items: center;
   justify-content: right;
   margin-right: 165px;
+  margin-top: 28px;
+  margin-bottom: 8px;
 
   button {
     cursor: pointer;
@@ -233,7 +262,6 @@ const RefreshWrapper = styled.div`
 // const FlexWrapper = styled.div`
 //   display: flex;
 // `;
-
 
 const CardListWrap = styled.div`
   width: 100%;

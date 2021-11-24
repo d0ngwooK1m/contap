@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { IconButton } from '@mui/material';
 import {
   loadGrabToAxios,
   nextPageToAxios,
@@ -11,6 +12,8 @@ import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
 import { setContapNoti, setTapAcceptNoti } from '../features/notice/actions';
 import ChatInfinityScroll from './Chat/ChatInfinityScroll';
+import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
+import { ColorStyle, Opacity } from '../utils/systemDesign';
 
 const GrabList = ({ select }) => {
   const dispatch = useDispatch();
@@ -19,6 +22,10 @@ const GrabList = ({ select }) => {
   const { isNext, isLoading } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
   const scrollRef = React.useRef();
+
+  const scrollTop = () => {
+    scrollRef.current.scrollTop = 0;
+  };
 
   console.log(conTap);
 
@@ -75,6 +82,9 @@ const GrabList = ({ select }) => {
             );
           })}
         </CardBox>
+        <IconButton className="floatingBtn" onClick={scrollTop}>
+          <ArrowTopLightSvg />
+        </IconButton>
       </Wrap>
     </ChatInfinityScroll>
   );
@@ -88,10 +98,24 @@ const Wrap = styled.div`
   position: relative;
   top: 0px;
   padding-top: 72px;
-  max-height: 688px;
+  min-height: 70vh;
+  max-height: 77vh;
   left: 100px;
   width: 100%;
   overflow-y: scroll;
+  scroll-behavior: smooth;
+
+  .floatingBtn {
+    width: 64px;
+    height: 64px;
+    background-color: ${ColorStyle.Gray100 + Opacity[25]};
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    &:hover {
+      background-color: ${ColorStyle.Gray500 + Opacity[25]};
+    }
+  }
 `;
 
 const CardBox = styled.div`

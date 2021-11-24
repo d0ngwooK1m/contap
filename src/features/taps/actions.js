@@ -70,20 +70,14 @@ export const loadGrabToAxios = () => async (dispatch) => {
 
 export const nextPageToAxios = (callPage, page) => async (dispatch) => {
   try {
-    console.log('넥스트페이지 들어옴============> ', callPage);
     if (callPage === 'ReceiveTap') {
-      console.log('리시브 탭============> ', `/contap/gettap/${page}`);
-
       const { data } = await T.GET('/contap/gettap', page);
-      console.log('받은탭 데이터============> ', callPage, data);
       dispatch(nextPage(data));
     } else if (callPage === 'SendTap') {
       const { data } = await T.GET('/contap/dotap', page);
-      console.log('보낸탭 데이터 ============> ', data);
       dispatch(nextPage(data));
     } else if (callPage === 'GrabList') {
       const { data } = await T.GET('/contap/getothers/0', page);
-      console.log('그랩 ============> ', data);
       dispatch(nextPage(data));
     }
     // const { data } = await T.GET('/contap/gettap');
@@ -94,11 +88,13 @@ export const nextPageToAxios = (callPage, page) => async (dispatch) => {
 
 export const removeReceiveTapToAxios =
   (state, tapId, userId) => async (dispatch) => {
+    console.log(tapId);
     try {
-      await T.POST(
+      const { data } = await T.POST(
         `/contap/${state === 'reject' ? 'reject' : 'accept'}`,
         tapId,
       );
+      console.log(data);
       dispatch(removeReceiveTap(userId));
     } catch (error) {
       console.error(error);

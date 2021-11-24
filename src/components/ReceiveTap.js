@@ -18,19 +18,16 @@ import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 
 const ReceiveTap = ({ select }) => {
   const dispatch = useDispatch();
-  const scrollRef = React.useRef();
   const userName = useSelector((state) => state.user.userName);
   const conTap = useSelector((state) => state.taps);
   const [page, setPage] = React.useState(1);
   const { isNext, isLoading } = conTap;
   const [prevHeight, setPrevHeight] = React.useState(null);
-
-  // const scrollTop = () => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'smooth',
-  //   });
-  // };
+  
+  const scrollRef = React.useRef();
+  const scrollTop = () => {
+    scrollRef.current.scrollTop = 0
+  };
 
   React.useEffect(() => {
     if (prevHeight) {
@@ -83,10 +80,10 @@ const ReceiveTap = ({ select }) => {
             );
           })}
         </CardBox>
-      </Wrap>
-      {/* <IconButton className='floatingBtn' onClick={scrollTop} >
+      <IconButton className='floatingBtn' onClick={scrollTop} >
         <ArrowTopLightSvg/>
-      </IconButton> */}
+      </IconButton>
+      </Wrap>
     </ChatInfinityScroll>
   );
 };
@@ -99,22 +96,25 @@ const Wrap = styled.div`
   position: relative;
   top: 0px;
   padding-top: 72px;
-  max-height: 688px;
+  min-height: 70vh;
+  max-height: 77vh;
   left: 100px;
   width: 100%;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 
-  /* .floatingBtn{
+
+  .floatingBtn{
     width: 64px;
     height: 64px;
     background-color: ${ColorStyle.Gray100 + Opacity[25]};
     position: fixed;
-    bottom: 80px;
-    right: 340px;
+    bottom: 20px;
+    right: 20px;
     &:hover{
     background-color: ${ColorStyle.Gray500 + Opacity[25]};
     }
-  } */
+  }
 `;
 
 const CardBox = styled.div`

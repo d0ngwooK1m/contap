@@ -17,7 +17,7 @@ import { ColorStyle, Opacity, professionColor } from '../utils/systemDesign';
 
 SwiperCore.use([Pagination, Navigation, Keyboard]);
 
-const Carousel = ({ userId, userName, profile, category }) => {
+const Carousel = ({ userId, userName, profile, category, onHide }) => {
   const currentCard = useSelector((state) => state.cards.current);
   const [tapFormState, setTapFormState] = React.useState(false);
   console.log('카테고리', category);
@@ -33,7 +33,7 @@ const Carousel = ({ userId, userName, profile, category }) => {
     setTapFormState(!tapFormState);
   };
 
-  const color = professionColor(category)
+  const color = professionColor(category);
 
   return (
     <SwiperWrap color={color}>
@@ -59,7 +59,12 @@ const Carousel = ({ userId, userName, profile, category }) => {
                 onTapForm={handleTapForm}
               ></CardBack>
               {tapFormState && (
-                <TapForm userId={card.userId} category={category} />
+                <TapForm
+                  userId={card.userId}
+                  category={category}
+                  onHide={onHide}
+                  userName={userName}
+                />
               )}
             </SwiperSlide>
           );

@@ -13,6 +13,7 @@ import { closeNoneTalkRoomList } from '../features/chat/actions';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import { wrap } from 'lodash';
 import ChatSearchBar from './Chat/ChatSearchBar';
+import { maxWidth } from '@mui/system';
 const GrabTalkAdd = ({ noneTalkList, closeList }) => {
   const [searchValue, setSearchValue] = React.useState('');
   // const roomInfo = useSelector((state) => state.chat.noneChatList);
@@ -45,6 +46,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
           <input
             type="text"
             placeholder="   이름을 입력해 주세요"
+            maxLength='25'
             value={searchValue}
             onChange={handleSearchValue}
           />
@@ -56,8 +58,9 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
       <div
         style={{
           paddingRight: '24px',
-          paddingTop: '40px',
-          textAlign: 'center',
+          paddingTop: '16px',
+          maxWidth:'580px'
+          // textAlign: 'center',
         }}
       >
         {noneTalkList.length === 0 && (
@@ -67,16 +70,22 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
             탭해서 그랩이 되면 대화 할 수 있어요
           </Text>
         )}
-        {searchList.length !== 0 ? (
+        {searchList.length !== 0 &&
           searchList.map((val) => {
             return <GrapTalkAddProfile key={val.userId} roomInfo={val} />;
-          })
-        ) : (
+          })}
+        {searchList.length === 0 && noneTalkList.length !== 0 && (
           <>
-            <Text regular20 color={ColorStyle.Gray300}>
-              나의 그랩에서 ‘{searchValue}’님을 찾을 수 없습니다
-            </Text>
-            <SearchFail />
+            {/* <div style={{width:'fit-content', paddingLeft:'81px'}}> */}
+            <NoneValueText>
+              <Text regular20 color={ColorStyle.Gray300}>
+                나의 그랩에서 ‘{searchValue}’님을 찾을 수 없습니다
+              </Text>
+              <div className='svg'>
+              <SearchFail />
+              </div>
+            </NoneValueText>
+            {/* </div> */}
           </>
         )}
       </div>
@@ -139,8 +148,13 @@ const SearchBarFrom = styled.div`
 `;
 
 const NoneValueText = styled.div`
+  word-break: break-all;
   text-align: center;
-  margin-top: 20px;
+  .svg{
+    
+    width: fit-content;
+    margin:auto;
+  }
 `;
 
 export default GrabTalkAdd;

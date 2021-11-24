@@ -15,6 +15,49 @@ import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // import { Grid } from '../elements';
 
+// const searchData = [
+//   'Spring',
+//   'Spring Boot',
+//   'Java',
+//   'React',
+//   'React Native',
+//   'Flutter',
+//   'Node.js',
+//   'Python',
+//   'Zeplin',
+//   'Angular',
+//   'Vue.js',
+//   'C++',
+//   'Express',
+//   'C#',
+//   'Django',
+//   'Next.js',
+//   'Ruby',
+//   'Java Script',
+//   'Premiere Pro',
+//   'After Effects',
+//   'C',
+//   'Android Studio',
+//   'HTML CSS',
+//   'SQL',
+//   'TypeScript',
+//   'Swift',
+//   'Assembly',
+//   'PHP',
+//   'Nuxt.js',
+//   'Flask',
+//   'Nest.js',
+//   'Figma',
+//   'Sketch',
+//   'Adobe XD',
+//   'Illustrator',
+//   'Photoshop',
+//   'Proto.io',
+//   'AutoCAD',
+//   'JQuery',
+//   'Go',
+// ];
+
 const searchData = [
   'Spring',
   'Spring Boot',
@@ -260,7 +303,7 @@ const AllBox = styled.div`
 const TagDiv = styled.div`
   display: inline-block;
   width: 100%;
-  margin: 10px;
+  margin: 7px;
   padding: 12px 20px;
   border-radius: 50px;
   border: 1px solid ${ColorStyle.PrimaryPurple};

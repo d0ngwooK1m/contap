@@ -2,25 +2,31 @@
   border-radius: 30px;
   width: 700px;
   min-width: 500px;
+  padding: 52px;
 }
 
 .swal-title {
-  margin-top: 56px;
-  padding: 0px;
-  padding-left: 10px;
 }
 
+.swal2-title {
+  padding: 0px;
+}
 .swal2-actions {
   margin-right: 0px;
+  margin-top: 54px;
+  width: 265px;
+  justify-content: space-between;
 }
 
 .swal-cancel {
-  margin: 0px;
-  padding: 0px 10px;
 }
 
 .swal-confirm {
-  margin: 0px;
-  padding: 0px 10px;
-  margin-right: 98px;
+}
+
+.swal-toast-popup {
+  width: 300px;
+  height: 80px;
+  border-radius: 8px;
+  background-color: '#1d1d22';
 }

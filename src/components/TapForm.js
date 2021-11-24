@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import T from '../api/tokenInstance';
 import {
   ColorStyle,
@@ -10,17 +11,43 @@ import {
 } from '../utils/systemDesign';
 import { Text } from '../elements';
 // import { ColorStyle } from '../utils/systemDesign';
+import { Toast } from '../utils/alert';
+// import { ReactComponent as HandFingerThumb } from '../svgs/HandFingerThumb.svg';
 
-const TapForm = ({ userId, category }) => {
+const TapForm = ({ userId, category, onHide, userName }) => {
+  const userInfo = useSelector((state) => state.user.userName);
   const [message, setMessage] = React.useState('');
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
+  console.log(userName);
+  console.log(userInfo);
+
+  const ERROR_BEFORE_SEND = '이미 상대에게 요청을 보낸 상태입니다.';
 
   const sendTap = async () => {
-    await T.POST('/main/posttap', { userId, msg: message });
-    window.alert('Tap을 보냈어요!');
+    const { data } = await T.POST('/main/posttap', { userId, msg: message });
+
+    if (data.msg === ERROR_BEFORE_SEND) {
+      onHide();
+      Toast.fire({
+        title: ERROR_BEFORE_SEND,
+      });
+      return;
+    }
+    console.log(data);
+    onHide();
+    Toast.fire({
+      title: (
+        <Text regular20 color={ColorStyle.Gray500}>
+          👏 {userName}님께 탭 성공!
+        </Text>
+      ),
+    });
   };
+
+  // {msg: '이미 상대에게 요청을 보낸 상태입니다.'}
+  // {msg: '자신한테 탭요청하지못해요'}
 
   const color = professionColor(category);
   const hoverColor = professionHoverColor(category);
@@ -36,14 +63,18 @@ const TapForm = ({ userId, category }) => {
           onChange={handleChange}
         />
         <div className="checkWords">
-          <Text regular20>{message.length} / 200</Text>
+          <Text regular16>{message.length} / 200</Text>
         </div>
       </TextAreaWrap>
       <TapButton color={color} hoverColor={hoverColor}>
         <button type="button" onClick={sendTap}>
           <Text
             bold20
-            color={category ? ColorStyle.Gray500 : ColorStyle.BackGround300}
+            color={
+              category === '디자이너'
+                ? ColorStyle.BackGround300
+                : ColorStyle.Gray500
+            }
           >
             Tap!
           </Text>
@@ -61,7 +92,7 @@ const Wrap = styled.div`
   box-sizing: border-box;
   border: 1px solid ${ColorStyle.Gray100};
   width: 755px;
-  height: 250px;
+  height: 270px;
   margin: auto;
   z-index: 0;
   border-radius: 0px 0px 16px 16px;
@@ -102,6 +133,7 @@ const MessageTextarea = styled.textarea`
   font-family: 'Pretendard';
   font-style: normal;
   font-size: 20px;
+  line-height: 23px;
   font-weight: 400;
 `;
 const TapButton = styled.div`
@@ -112,7 +144,7 @@ const TapButton = styled.div`
     height: 44px;
     float: right;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    bottom: 10px;
+    bottom: 20px;
     background-color: ${({ color }) => color};
     border: 2px solid ${({ color }) => color};
     box-sizing: border-box;
@@ -127,7 +159,9 @@ const TapButton = styled.div`
 
 TapForm.propTypes = {
   userId: PropTypes.number.isRequired,
-  category: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
+  onHide: PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 export default TapForm;

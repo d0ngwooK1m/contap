@@ -20,6 +20,7 @@ import {
   FontScale,
   ColorStyle,
   Opacity,
+  category,
 } from '../utils/systemDesign';
 import { Grid, Text } from '../elements';
 

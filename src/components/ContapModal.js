@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@mui/material/Modal';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router';
 import { useHistory } from 'react-router';
-import BasicAlert from '../utils/alert';
+import { BasicAlert } from '../utils/alert';
 // import Swal from 'sweetalert2/dist/sweetalert2.js';
 import {
   ColorStyle,
@@ -76,14 +76,13 @@ const ContapModal = ({
     const { isConfirmed } = await BasicAlert.fire({
       title: (
         <div style={{ textAlign: 'left' }}>
-          <div style={{ marginBottom: '40px' }}>
+          <div style={{ marginTop: '5px' }}>
             <Text bold32 color={ColorStyle.BackGround300}>
-              {userCradInfo.userName}님과 <br />
-              그랩을 끊으실 건가요?
+              {userCradInfo.userName}님과 그랩을 끊을까요?
             </Text>
           </div>
-          <div>
-            <Text regular24 color={ColorStyle.Gray300}>
+          <div style={{ marginTop: '48px' }}>
+            <Text regular16 color={ColorStyle.Gray300}>
               그랩을 끊어도 <br />
               상대방에게 알림이 가지 않아요
             </Text>
@@ -183,12 +182,36 @@ const ContapModal = ({
   );
 };
 
+const upDown = keyframes`
+  0% {
+    right: -600px;
+  }
+  25% {
+    right: -450px;
+  }
+  50% {
+    right: -300px;
+    /* right : 600px; */
+  }
+  75% {
+    right: -150px;
+    /* right : 600px; */
+  }
+  100% {
+    right: 0px;
+    
+  }
+`;
+
 const Wrap = styled.div`
   width: 610px;
+  position: relative;
+  right: 0px;
   display: block;
   float: right;
   height: 100vh;
   background-color: ${ColorStyle.BackGround100};
+  animation: ${upDown} 0.3s linear alternate;
 `;
 
 const Content = styled.div`
@@ -197,10 +220,10 @@ const Content = styled.div`
   width: fit-content;
   max-width: 350px;
   margin: ${({ select }) =>
-    select === 'GrabList' ? '188px 0px 0px 65px' : '112px 0px 0px 65px'};
+    select === 'GrabList' ? '158px 0px 0px 65px' : '62px 0px 0px 65px'};
 
   hr {
-    margin: 40px 0px;
+    margin: 30px 0px;
     border: 1px solid ${ColorStyle.Gray100};
   }
 `;
@@ -291,7 +314,7 @@ ContapModal.propTypes = {
   onHide: PropTypes.func.isRequired,
   children: PropTypes.any,
   userCradInfo: PropTypes.object.isRequired,
-  category: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
   select: PropTypes.string,
 };
 
