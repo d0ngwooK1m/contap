@@ -5,6 +5,7 @@ import {
   LOAD_SEND_TAP,
   LOAD_GRAB,
   REMOVE_RECEIVE_TAP,
+  REMOVE_SEND_TAP,
   REMOVE_GRAB,
   NEXT_PAGE,
   LOADING,
@@ -22,6 +23,9 @@ export const loadGrab = createAction(LOAD_GRAB, (cardBundles) => ({
   cardBundles,
 }));
 export const removeReceiveTap = createAction(REMOVE_RECEIVE_TAP, (userId) => ({
+  userId,
+}));
+export const removeSendTap = createAction(REMOVE_SEND_TAP, (userId) => ({
   userId,
 }));
 export const removeGrab = createAction(REMOVE_GRAB, (userId) => ({
@@ -94,12 +98,23 @@ export const removeReceiveTapToAxios =
         `/contap/${state === 'reject' ? 'reject' : 'accept'}`,
         tapId,
       );
-      console.log(data);
+      console.log('이게 된다고?.. =====>', data);
       dispatch(removeReceiveTap(userId));
     } catch (error) {
       console.error(error);
     }
   };
+
+export const removeSendTapToAxios = (tapId, userId) => async (dispatch) => {
+  console.log(tapId);
+  try {
+    const { data } = await T.POST(`/contap/deltap`, tapId);
+    console.log('샌드 삭제 =====>', data);
+    dispatch(removeSendTap(userId));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const removeGrabToAxios = (userId) => async (dispatch) => {
   try {

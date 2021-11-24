@@ -44,8 +44,9 @@ const Contap = () => {
               <div
                 style={{
                   marginLeft: '16px',
-                  width: '20px',
-                  height: '20px',
+                  marginRight: '12px',
+                  width: '8px',
+                  height: '8px',
                   backgroundColor: `${ColorStyle.Error}`,
                   borderRadius: '10px',
                 }}
@@ -80,8 +81,9 @@ const Contap = () => {
                 <div
                   style={{
                     marginLeft: '16px',
-                    width: '20px',
-                    height: '20px',
+                    marginRight: '12px',
+                    width: '8px',
+                    height: '8px',
                     backgroundColor: `${ColorStyle.Error}`,
                     borderRadius: '10px',
                   }}
@@ -160,8 +162,9 @@ const Contap = () => {
               <div
                 style={{
                   marginLeft: '16px',
-                  width: '20px',
-                  height: '20px',
+                  marginRight: '12px',
+                  width: '8px',
+                  height: '8px',
                   backgroundColor: `${ColorStyle.Error}`,
                   borderRadius: '10px',
                 }}
@@ -196,8 +199,9 @@ const Contap = () => {
                 <div
                   style={{
                     marginLeft: '16px',
-                    width: '20px',
-                    height: '20px',
+                    marginRight: '12px',
+                    width: '8px',
+                    height: '8px',
                     backgroundColor: `${ColorStyle.Error}`,
                     borderRadius: '10px',
                   }}

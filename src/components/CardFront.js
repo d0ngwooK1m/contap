@@ -192,8 +192,7 @@ const CardForm = styled.div`
   height: 200px;
   border-radius: 16px;
   box-sizing: border-box;
-  margin: 16px 0px;
-  margin-right: 30px;
+  margin-bottom: 32px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
 

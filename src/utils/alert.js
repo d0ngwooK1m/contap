@@ -11,8 +11,8 @@ const MySwal = withReactContent(Swal);
 export const BasicAlert = MySwal.mixin({
   showCancelButton: true,
   confirmButtonText: (
-    <Text bold24 color={ColorStyle.BackGround300}>
-      네
+    <Text bold24 color={ColorStyle.Gray500}>
+      끊기
     </Text>
   ),
   cancelButtonText: (
@@ -22,8 +22,9 @@ export const BasicAlert = MySwal.mixin({
   ),
   showCloseButton: true,
   closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
-  confirmButtonColor: '#FFF',
-  cancelButtonColor: '#FFF',
+  confirmButtonColor: '#1d1d22',
+  cancelButtonColor: '#1d1d22',
+  background: '#1d1d22',
   position: 'relative',
   padding: '52px',
   customClass: {

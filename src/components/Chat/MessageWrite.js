@@ -7,6 +7,7 @@ import { BLANCK_CHECK } from '../../utils/validation';
 
 const MessageWrite = ({ sendMessage }) => {
   const [message, setMessage] = useState('');
+  const isNull = message.length === 0;
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
@@ -49,6 +50,7 @@ const MessageWrite = ({ sendMessage }) => {
           sendMsg(message);
           setMessage('');
         }}
+        isNull={isNull}
       >
         <div className="svg">
           <SendHorSvg />
@@ -66,7 +68,7 @@ export default MessageWrite;
 
 const InputField = styled.div`
   position: absolute;
-  bottom: 0px;
+  bottom: -73px;
   max-width: 665px;
   width: 665px;
   height: 72px;
@@ -76,7 +78,7 @@ const InputField = styled.div`
   background-color: ${ColorStyle.BackGround};
   align-items: center;
   input {
-    margin-left: 70px;
+    margin-left: 50px;
     width: 510px;
     bottom: 0px;
     background-color: ${ColorStyle.BackGround};
@@ -104,15 +106,17 @@ const InputField = styled.div`
 
 const SendButton = styled.button`
   position: relative;
-  width: 45px;
-  height: 45px;
+  margin-top: 8px;
+  width: 50px;
+  height: 50px;
   border-radius: 40px;
-  background-color: ${ColorStyle.PrimaryPurple};
+  background-color: ${({ isNull }) =>
+    isNull ? ColorStyle.Gray300 : ColorStyle.PrimaryPurple};
   border: 0px;
   cursor: pointer;
   .svg {
     position: absolute;
-    top: 7px;
-    left: 7px;
+    top: 10px;
+    left: 10px;
   }
 `;

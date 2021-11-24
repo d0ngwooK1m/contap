@@ -10,14 +10,14 @@ import {
   category,
   professionColor,
 } from '../utils/systemDesign';
-import { ReactComponent as BasicProfile } from '../svgs/BasicProfile.svg';
+import BasicProfile from '../svgs/BasicProfile.svg';
 import {
   createTalkRoom,
   loadCurrentRoom,
   closeNoneTalkRoomList,
 } from '../features/chat/actions';
 
-const GrapTalkAddProfile = ({ roomInfo }) => {
+const GrapTalkAddProfile = ({ roomInfo, closeList }) => {
   const dispatch = useDispatch();
   // const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
   const roomList = useSelector((state) => state.chat.allIds);
@@ -40,10 +40,12 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
   const addTalkRoom = () => {
     // 유저아이디가 왼쪽 룸 리스트에 있으면
     if (roomList.indexOf(roomInfo.userId) !== -1) {
-      dispatch(closeNoneTalkRoomList());
+      closeList();
+      // dispatch(closeNoneTalkRoomList());
       dispatch(loadCurrentRoom(roomInfo));
       return;
     }
+    closeList();
     dispatch(createTalkRoom(roomInfo));
     dispatch(loadCurrentRoom(roomInfo));
   };
@@ -51,17 +53,12 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
   return (
     <Wrap>
       <ProfileWrap onClick={addTalkRoom}>
-        {roomInfo.profile ? (
-          <ImageBox
-            className="imageBox"
-            src={roomInfo.profile}
-            isLogin={roomInfo.login}
-          />
-        ) : (
-          <div className="basicProfile">
-            <BasicProfile />
-          </div>
-        )}
+        <ImageBox
+          className="imageBox"
+          src={roomInfo.profile ? roomInfo.profile : BasicProfile}
+        >
+          {roomInfo.login && <OnlineBadge />}
+        </ImageBox>
         <div style={{ textAlign: 'left' }}>
           <div className="name">
             <Text bold20>{roomInfo.userName}</Text>
@@ -75,7 +72,14 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
         <Hash className="tags">
           {interestHashTags?.map((stack, idx) => {
             return (
-              stack && <HashTag key={idx} tag={stack} hashColor={hashColor} category={ cat} />
+              stack && (
+                <HashTag
+                  key={idx}
+                  tag={stack}
+                  hashColor={hashColor}
+                  category={cat}
+                />
+              )
             );
           })}
         </Hash>
@@ -85,7 +89,7 @@ const GrapTalkAddProfile = ({ roomInfo }) => {
 };
 
 const Wrap = styled.div`
-  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
+  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[20]};
   padding: 18px 16px;
   max-height: 100px;
   cursor: pointer;
@@ -110,10 +114,10 @@ const Wrap = styled.div`
 
 const ProfileWrap = styled.div`
   align-items: center;
-  /* background-color: red; */
   display: flex;
   .name {
     margin-top: 6px;
+    padding-left: 16px;
   }
   .tags {
     width: 60%;
@@ -121,19 +125,44 @@ const ProfileWrap = styled.div`
     flex-direction: row;
   }
 `;
+// const ImageBox = styled.div`
+//   height: 64px;
+//   width: 64px;
+//   margin: 0px 16px 0px 0px;
+
+//   background-image: url('${(props) => props.src}');
+//   background-position: center;
+//   background-size: cover;
+//   border-radius: 50px;
+// `;
 const ImageBox = styled.div`
+  position: relative;
   height: 64px;
   width: 64px;
-  margin: 0px 16px 0px 0px;
+  box-sizing: border-box;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-size: cover;
   border-radius: 50px;
 `;
+
+const OnlineBadge = styled.div`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 40px;
+  left: 42px;
+  border-radius: 20px;
+  background: #2bac76;
+  border: 4px solid #0f0a1a;
+  box-sizing: border-box;
+`;
+
 const Hash = styled.div`
   display: flex;
-  margin-left: 20px;
+  margin-left: 10px;
 `;
 
 // const Wrap = styled.div`

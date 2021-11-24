@@ -22,7 +22,13 @@ const content = [
         <div>
           <BellIconSvg stroke="#50FFB8" />
         </div>
-        <div>
+        <div
+          style={{
+            marginLeft: '16px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Text color="#50FFB8" regular20>
             알림 설정
           </Text>
@@ -40,7 +46,13 @@ const content = [
         <div>
           <BellIconSvg stroke="#A09BAC" />
         </div>
-        <div>
+        <div
+          style={{
+            marginLeft: '16px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Text color="#a09bac" regular20>
             알림 설정
           </Text>
@@ -62,7 +74,13 @@ const content = [
         <div>
           <LockIconSvg stroke="#50FFB8" />
         </div>
-        <div>
+        <div
+          style={{
+            marginLeft: '16px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Text color="#50FFB8" regular20>
             비밀번호 변경
           </Text>
@@ -80,7 +98,13 @@ const content = [
         <div>
           <LockIconSvg stroke="#A09BAC" />
         </div>
-        <div>
+        <div
+          style={{
+            marginLeft: '16px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Text color="#a09bac" regular20>
             비밀번호 변경
           </Text>
@@ -102,7 +126,13 @@ const content = [
         <div>
           <WithdrawalIconSvg fill="#50FFB8" />
         </div>
-        <div>
+        <div
+          style={{
+            marginLeft: '16px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Text color="#50FFB8" regular20>
             회원 탈퇴
           </Text>
@@ -120,7 +150,13 @@ const content = [
         <div>
           <WithdrawalIconSvg fill="#A09BAC" />
         </div>
-        <div>
+        <div
+          style={{
+            marginLeft: '16px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Text color="#a09bac" regular20>
             회원 탈퇴
           </Text>
