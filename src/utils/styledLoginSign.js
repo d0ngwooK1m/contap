@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ColorStyle, FontScale, FontFamily } from './systemDesign';
+import { ColorStyle, FontScale, FontFamily, Opacity } from './systemDesign';
 
 const LoginWrapper = styled.div`
   width: 1435px;
@@ -111,6 +111,7 @@ const DivideLine = styled.hr`
   width: 40%;
   height: 0px;
   margin: 0px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
 `;
 
 const DivideContent = styled.div`

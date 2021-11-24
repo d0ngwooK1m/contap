@@ -17,6 +17,8 @@ import Permit from './Permit';
 import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
+import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
+// import SizeCheck from '../pages/SizeCheck';
 
 function App() {
   return (
@@ -26,6 +28,11 @@ function App() {
         <Switch>
           <PublicRoute restricted path="/signup" component={Signup} exact />
           <PublicRoute restricted path="/login" component={Login} exact />
+          <PrivateRoute
+            path="/withdrawal"
+            component={WithdrawalCompleteForm}
+            exact
+          />
           <WsNotiRoom>
             <AlarmCheck>
               <Header />

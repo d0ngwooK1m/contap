@@ -165,10 +165,13 @@ const StackSearch2 = () => {
     const BtnSearchColor = stackList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround}`;
+    const HoverColor = stackList.includes(val)
+    ? `${ColorStyle.HoverPurple}`
+    : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
         {/* {toggleCheck} */}
-        <TagDiv color={BtnSearchColor} type="button" onClick={stackSearchFunc}>
+        <TagDiv color={BtnSearchColor} hover={HoverColor} type="button" onClick={stackSearchFunc}>
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -199,10 +202,13 @@ const StackSearch2 = () => {
     const BtnColor = stackList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround}`;
+    const HoverColor = stackList.includes(val)
+    ? `${ColorStyle.HoverPurple}`
+    : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
         {/* {toggleCheck} */}
-        <TagDiv color={BtnColor} type="button" onClick={stackFunc}>
+        <TagDiv color={BtnColor} hover={HoverColor} type="button" onClick={stackFunc}>
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -314,6 +320,10 @@ const TagDiv = styled.div`
   font-weight: 400;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    background-color: ${(props) => props.hover};
+    transition: 0.3s;
+  }
 `;
 
 const SearchBoxDiv = styled.div`

@@ -15,7 +15,7 @@ const TutorialForm = ({ stepIndex, steps, page }) => {
     console.log(data);
     const { status } = data;
     console.log('튜토리얼 단계통과 체크', status);
-    if (stepIndex === 1 || status === 'finished') {
+    if (stepIndex === 1 || status === 'finished' || status === 'running') {
       const tutorialInfo = {
         tutorialNum: page,
       };
@@ -29,7 +29,7 @@ const TutorialForm = ({ stepIndex, steps, page }) => {
       if (page === 0) {
         dispatch(phoneTutorialCheck(true));
       }
-      console.log('확인완료!', stepIndex, page);
+      console.log('확인완료!', stepIndex, status, page);
     }
   }, []);
 
