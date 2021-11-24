@@ -57,12 +57,12 @@ const Grabtalk = () => {
         )}
         <Room>
           {!currentRoom.userId && !isAddRoom && (
-            <NoneReceiveTap>
+            <BasicImageWrap>
               <div className="svg">
                 <GrabTalkBasicSvg />
               </div>
               <Text bold24>그랩이 되면 대화할 수 있어요</Text>
-            </NoneReceiveTap>
+            </BasicImageWrap>
           )}
           {currentRoom.userId && (
             <Chat current={currentRoom} className="chat">
@@ -96,7 +96,7 @@ const Menu = styled.div`
   top: 0px;
   display: flex;
   flex-direction: column;
-  padding-top: 120px;
+  padding-top: 100px;
   width: 445px;
   max-width: 445px;
   min-height: 80vh;
@@ -110,8 +110,8 @@ const Menu = styled.div`
   .roomListHeader {
     display: flex;
     justify-content: space-between;
-    min-height: 80px;
-    max-height: 80px;
+    min-height: 90px;
+    max-height: 90px;
     align-items: center;
   }
 `;
@@ -119,7 +119,7 @@ const Menu = styled.div`
 const Wrapper = styled.div`
   position: relative;
   top: 0px;
-  padding-top: 120px;
+  padding-top: 100px;
   display: flex;
   width: 665px;
 `;
@@ -133,7 +133,7 @@ const Room = styled.div`
   }
 `;
 
-const NoneReceiveTap = styled.div`
+const BasicImageWrap = styled.div`
   word-break: break-all;
   text-align: center;
   border-radius: 16px;
@@ -155,8 +155,8 @@ const Header = styled.div`
   background-color: ${ColorStyle.BackGround};
   align-items: center;
   width: 665px;
-  min-height: 80px;
-  max-height: 80px;
+  min-height: 90px;
+  max-height: 90px;
   z-index: 1;
 
   button {

@@ -17,7 +17,7 @@ const ChatList = ({ closeList }) => {
   }, []);
 
   return (
-    <div style={{ paddingRight: '24px', paddingTop: '16px' }}>
+    <div style={{ paddingRight: '24px', paddingTop: '8px' }}>
       {allChatList?.map((id) => {
         return <ChatRoom key={id} userId={id} closeList={closeList} />;
       })}

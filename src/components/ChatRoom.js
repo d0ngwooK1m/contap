@@ -111,7 +111,7 @@ const ChatRoom = ({ userId, closeList }) => {
 };
 
 const Wrap = styled.div`
-  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[30]};
+  border-bottom: 1px solid ${ColorStyle.Gray100 + Opacity[20]};
   align-items: center;
   padding: 18px 16px;
   max-height: 100px;
