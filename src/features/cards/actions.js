@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { createAction } from 'redux-actions';
+import { authorize } from '../user/actions';
+
 import T from '../../api/tokenInstance';
 
 import { getToken } from '../../utils/auth';
@@ -28,6 +30,8 @@ import {
   // SET_ALL_HOBBY,
   DELETE_HOBBY,
   // IS_SUCCESS,
+  LOAD_HOBBY,
+  LOAD_STACK,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
@@ -91,6 +95,8 @@ export const deleteHobby = createAction(DELETE_HOBBY, (hobby) => ({
   hobby,
 }));
 // export const isSuccess = createAction(IS_SUCCESS, (success) => ({ success }));
+export const loadStack = createAction(LOAD_STACK, (tags) => ({ tags }));
+export const loadHobby = createAction(LOAD_HOBBY, (tags) => ({ tags }));
 
 // 미들웨어
 
@@ -159,7 +165,32 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
         text: `${res.data.errorMessage}`,
       });
     }
+    dispatch(authorize(null, res.data.userName, res.data.profile));
     history.push('/mypage');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const searchTagListDB = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`${baseURL}/main/hashtag`);
+
+    console.log('검색 태그 목록 response 확인 ====>', res);
+
+    const stackTagData = [];
+    const hobbyTagData = [];
+    res.data.forEach((val, idx) => {
+      console.log(idx);
+      if (idx <= 39) {
+        stackTagData.push(val.name);
+      } else {
+        hobbyTagData.push(val.name);
+      }
+    });
+    console.log('태그 데이터들 ===>', stackTagData, hobbyTagData);
+    dispatch(loadStack(stackTagData));
+    dispatch(loadHobby(hobbyTagData));
   } catch (err) {
     console.log(err);
   }

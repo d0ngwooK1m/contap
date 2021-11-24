@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
 
+import { ReactComponent as Round } from '../svgs/Round.svg';
 import { ReactComponent as AddRound } from '../svgs/AddRound.svg';
 import {
   FontFamily,
@@ -47,7 +48,8 @@ const EmptyBox = () => {
             setDisplay({ display: 'none' });
           }}
         >
-          <AddRound />
+          <AddRound fill="#8C4DFF" className="addRound" />
+          {/* <Round className="addRound" /> */}
         </Div>
       </Grid>
     );
@@ -88,6 +90,10 @@ const Div = styled.div`
   background-color: ${ColorStyle.BackGround100};
   text-align: center;
   cursor: pointer;
+  .addRound {
+    &:hover {
+    }
+  }
 `;
 
 const TextDiv = styled.div`
@@ -101,7 +107,7 @@ const TextDiv = styled.div`
 const TitleText = styled.p`
   font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
-  margin: 80px 0px 64px 0px;
+  margin: 68px 0px 57px 0px;
   color: ${ColorStyle.Gray500};
   font-weight: 700;
 `;
@@ -120,7 +126,7 @@ const TextBtn = styled.div`
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
   cursor: pointer;
-  margin: 80px 0px 61px 0px;
+  margin: 68px 0px 54px 0px;
   font-weight: 700;
   text-align: end;
   z-index: 3;

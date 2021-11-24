@@ -230,21 +230,21 @@ const CardFrontWrite = () => {
   return (
     <Grid>
       <Grid
-        height="560px"
-        bg="#141422"
+        height="540px"
+        bg={ColorStyle.BackGround100 + Opacity[50]}
         margin="0px auto"
-        padding="66px 0px 0px 0px"
+        padding="72px 0px 0px 0px"
       >
-        <Grid is_flex width="1110px" margin="0px auto 64px auto">
-          <Text bold32 color="#f5f3f8">
+        <Grid is_flex width="1110px" margin="0px auto 88px auto">
+          <Text bold24 color="#f5f3f8">
             {userInfo.userName}님을 나타낼 수 있는 프로필을 만들어보세요
           </Text>
-          <Grid width="10%">
+          <Grid width="7%">
             <AddBtn cursor="pointer" onClick={addBtnClick} />
           </Grid>
         </Grid>
         <Div>
-          <Grid margin="190px 103px 165px 0px" width="182px">
+          <Grid margin="88px 72px 72px 0px" width="124px">
             <label htmlFor="fileUpload">
               <Img src={preview || userInfo.profile || BasicProfile} />
             </label>
@@ -266,21 +266,8 @@ const CardFrontWrite = () => {
               }}
               placeholder="닉네임을 입력해 주세요"
             />
-            <Grid margin="54px 0px 18px 0px">
-              <Text bold20 color="#f5f3f8">
-                직무
-              </Text>
-            </Grid>
-            <Grid width="501px">
+            <Grid width="501px" margin="46px 0px 0px 0px">
               <RadioWrap>
-                <RadioInput
-                  type="radio"
-                  id="categoryId"
-                  name="field"
-                  value="0"
-                  checked={category === 0 ? true : false}
-                  onChange={() => setCategory(0)}
-                />
                 <InputLabel
                   htmlFor="category"
                   // style={{
@@ -291,6 +278,14 @@ const CardFrontWrite = () => {
                   //   marginRight: '32px',
                   // }}
                 >
+                  <RadioInput
+                    type="radio"
+                    id="categoryId"
+                    name="field"
+                    value="0"
+                    checked={category === 0 ? true : false}
+                    onChange={() => setCategory(0)}
+                  />
                   백엔드
                 </InputLabel>
               </RadioWrap>
@@ -345,7 +340,7 @@ const CardFrontWrite = () => {
           </Grid>
         </Div>
         <TagDiv>
-          <Grid margin="0px 130px 0px 0px" width="60px">
+          <Grid margin="0px 136px 0px 0px" width="60px">
             <Text bold20 color="#f5f3f8">
               스택/툴
             </Text>
@@ -499,7 +494,7 @@ const Div = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   width: 1110px;
-  height: 150px;
+  height: 110px;
   margin: 0px auto;
 `;
 
@@ -508,8 +503,8 @@ const Img = styled.img`
   justify-content: center;
   align-items: center;
   margin: 5px 0px;
-  width: 182px;
-  height: 164px;
+  width: 124px;
+  height: 112px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
   border-radius: 8px;
   object-fit: cover;
@@ -518,12 +513,12 @@ const Img = styled.img`
 
 const TitleBox = styled.input`
   width: 345px;
-  height: 38px;
-  font-size: ${FontScale.Header_24};
+  height: 36px;
+  font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround100};
+  background-color: ${ColorStyle.BackGround100 + Opacity[50]};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
   border-left: none;
@@ -634,10 +629,10 @@ const TagDiv = styled.div`
 `;
 
 const BasicHashTag = styled.div`
-  width: 146px;
-  height: 54px;
-  margin-top: 18px;
-  margin-right: 16px;
+  width: 148px;
+  height: 48px;
+  margin-top: 20px;
+  margin-right: 20px;
   border-radius: 50px;
   border: 1px solid ${'#4d4759' + Opacity[40]};
   font-size: ${FontScale.Body1_20};
@@ -645,14 +640,14 @@ const BasicHashTag = styled.div`
   color: ${ColorStyle.Gray100};
   font-weight: 400;
   text-align: center;
-  line-height: 54px;
+  line-height: 48px;
   background: ${ColorStyle.BackGround};
 `;
 
 const HashStackTag = styled.div`
-  width: 146px;
-  height: 54px;
-  margin-top: 18px;
+  width: 148px;
+  height: 48px;
+  margin-top: 20px;
   margin-right: 16px;
   border-radius: 50px;
   background: #723cd4;
@@ -661,17 +656,22 @@ const HashStackTag = styled.div`
   color: ${ColorStyle.Gray500};
   font-weight: 400;
   text-align: center;
-  line-height: 54px;
+  line-height: 48px;
   cursor: pointer;
+  &:hover {
+    background-color: #6235b5;
+    transition: 0.3s;
+  }
 `;
 
 const HashTag = styled.div`
   // display: flex;
   // justify-content: start;
   // flex-direction: row;
-  width: 146px;
-  height: 54px;
-  margin: 18px 8px;
+  width: 148px;
+  height: 48px;
+  margin-top: 20px;
+  margin-right: 20px;
   border-radius: 50px;
   background: #723cd4;
   font-size: ${FontScale.Body1_20};
@@ -679,8 +679,12 @@ const HashTag = styled.div`
   color: ${ColorStyle.Gray500};
   font-weight: 400;
   text-align: center;
-  line-height: 54px;
+  line-height: 48px;
   cursor: pointer;
+  &:hover {
+    background-color: #6235b5;
+    transition: 0.3s;
+  }
 `;
 
 const HashTagDiv = styled.div`

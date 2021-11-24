@@ -22,6 +22,8 @@ import {
   // SET_ALL_HOBBY,
   DELETE_HOBBY,
   // IS_SUCCESS,
+  LOAD_HOBBY,
+  LOAD_STACK,
 } from './types';
 import { DraftsRounded } from '@mui/icons-material';
 
@@ -40,6 +42,8 @@ const initialState = {
   isSearching: false,
   stack: [],
   hobby: [],
+  stackTag: [],
+  hobbyTag: [],
 };
 
 export default handleActions(
@@ -219,6 +223,15 @@ export default handleActions(
           draft.hobby = deletedArr;
         }
       }),
+    [LOAD_STACK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.stackTag = action.payload.tags;
+      }),
+    [LOAD_HOBBY]: (state, action) =>
+      produce(state, (draft) => {
+        draft.hobbyTag = action.payload.tags;
+      }),
+
     // [IS_SUCCESS]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.isSuccess = action.payload.success;

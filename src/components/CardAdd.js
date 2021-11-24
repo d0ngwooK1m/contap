@@ -41,21 +41,19 @@ const CardAdd = () => {
   if (!click) {
     return (
       <Grid width="100%" height="100%" padding="0px 0px 7% 0px;">
-        <div style={{ marginBottom: '92px' }}>
-          <TextDiv>
-            <TitleText>
-              나의 카드 <Count>{cardCount.length}</Count>
-            </TitleText>
-            <TextBtn
-              onClick={() => {
-                // dispatch(isSuccess(!handleClick));
-                setClick(true);
-              }}
-            >
-              + 카드 추가하기
-            </TextBtn>
-          </TextDiv>
-        </div>
+        <TextDiv>
+          <TitleText>
+            나의 카드 <Count>{cardCount.length}</Count>
+          </TitleText>
+          <TextBtn
+            onClick={() => {
+              // dispatch(isSuccess(!handleClick));
+              setClick(true);
+            }}
+          >
+            + 카드 추가하기
+          </TextBtn>
+        </TextDiv>
         {cardList.allIds.map((cardId) => {
           return (
             <Grid>
@@ -108,7 +106,7 @@ const TextDiv = styled.div`
 const TitleText = styled.p`
   font-size: ${FontScale.Header_24};
   font-family: ${FontFamily};
-  margin: 80px 0px 48px 0px;
+  margin: 68px 0px 52px 0px;
   color: ${ColorStyle.Gray500};
   font-weight: 700;
 `;
@@ -127,7 +125,7 @@ const TextBtn = styled.div`
   font-family: ${FontFamily};
   color: ${ColorStyle.Gray500};
   cursor: pointer;
-  margin: 80px 0px 48px 0px;
+  margin: 68px 0px 52px 0px;
   font-weight: 700;
   text-align: end;
   z-index: 3;

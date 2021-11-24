@@ -38,3 +38,5 @@ export const SET_HOBBY = 'cards/SET_HOBBY';
 export const DELETE_HOBBY = 'cards/DELETE_HOBBY';
 // 카드 추가하기 클릭 확인
 // export const IS_SUCCESS = 'cards/IS_SUCCESS';
+export const LOAD_STACK = 'cards/LOAD_STACK';
+export const LOAD_HOBBY = 'cards/LOAD_HOBBY';
