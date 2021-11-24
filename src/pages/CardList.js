@@ -247,7 +247,7 @@ const RefreshWrapper = styled.div`
   justify-content: right;
   margin-right: 165px;
   margin-top: 28px;
-  margin-bottom: 8px;
+  margin-bottom: 18px;
 
   button {
     cursor: pointer;
@@ -265,12 +265,11 @@ const RefreshWrapper = styled.div`
 
 const CardListWrap = styled.div`
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 1140px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-items: center;
   margin: auto;
-  padding-left: 30px;
 `;
 export default CardList;
 

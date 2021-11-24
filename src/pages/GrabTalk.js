@@ -6,16 +6,16 @@ import { Text } from '../elements';
 import {
   loadCurrentRoom,
   loadNoneTalkRoomListToAxios,
-  closeNoneTalkRoomList,
+  // closeNoneTalkRoomList,
 } from '../features/chat/actions';
 import Chat from '../components/Chat/Chat';
 import ChatRoomList from '../components/ChatRoomList';
 import GrabTalkAdd from '../components/GrabTalkAdd';
 import { ReactComponent as Close } from '../svgs/CloseRound.svg';
-import BasicProfile from '../assets/image/basicProfile.png';
 import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
 import { ReactComponent as ChatAddSvg } from '../svgs/ChatAdd.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
+import BasicProfile from '../svgs/BasicProfile.svg';
 
 const Grabtalk = () => {
   const dispatch = useDispatch();
@@ -34,8 +34,9 @@ const Grabtalk = () => {
 
   const closeList = () => {
     setIsAddRoom(false);
-    dispatch(closeNoneTalkRoomList());
   };
+
+  console.log(currentRoom.login);
 
   return (
     <div style={{ display: 'flex' }}>
@@ -48,7 +49,7 @@ const Grabtalk = () => {
             />
           </IconButton>
         </div>
-        <ChatRoomList />
+        <ChatRoomList closeList={closeList} />
       </Menu>
       <Wrapper>
         {isAddRoom && (
@@ -56,10 +57,12 @@ const Grabtalk = () => {
         )}
         <Room>
           {!currentRoom.userId && !isAddRoom && (
-            <SvgWrap>
-              <GrabTalkBasicSvg />
+            <BasicImageWrap>
+              <div className="svg">
+                <GrabTalkBasicSvg />
+              </div>
               <Text bold24>그랩이 되면 대화할 수 있어요</Text>
-            </SvgWrap>
+            </BasicImageWrap>
           )}
           {currentRoom.userId && (
             <Chat current={currentRoom} className="chat">
@@ -67,7 +70,10 @@ const Grabtalk = () => {
                 <ImageBox
                   className="imageBox"
                   src={currentRoom.profile ? currentRoom.profile : BasicProfile}
-                />
+                >
+                  {currentRoom.login && <OnlineBadge />}
+                </ImageBox>
+
                 <Text bold32>{currentRoom.userName}</Text>
                 <IconButton
                   onClick={() => {
@@ -90,7 +96,7 @@ const Menu = styled.div`
   top: 0px;
   display: flex;
   flex-direction: column;
-  padding-top: 120px;
+  padding-top: 100px;
   width: 445px;
   max-width: 445px;
   min-height: 80vh;
@@ -104,8 +110,8 @@ const Menu = styled.div`
   .roomListHeader {
     display: flex;
     justify-content: space-between;
-    min-height: 80px;
-    max-height: 80px;
+    min-height: 90px;
+    max-height: 90px;
     align-items: center;
   }
 `;
@@ -113,7 +119,7 @@ const Menu = styled.div`
 const Wrapper = styled.div`
   position: relative;
   top: 0px;
-  padding-top: 120px;
+  padding-top: 100px;
   display: flex;
   width: 665px;
 `;
@@ -121,19 +127,25 @@ const Wrapper = styled.div`
 const Room = styled.div`
   position: relative;
   width: 100%;
-  background-color: antiquewhite;
 
   .mseeageRoom {
     background-color: red;
   }
 `;
 
-const SvgWrap = styled.div`
-  width: fit-content;
-  margin: auto;
-  p {
-    position: relative;
-    top: -50px;
+const BasicImageWrap = styled.div`
+  word-break: break-all;
+  text-align: center;
+  border-radius: 16px;
+  margin: 0px;
+  padding: 42px;
+  width: 617px;
+  margin-top: 96px;
+  margin-left: 48px;
+  background-color: ${ColorStyle.BackGround100 + Opacity[70]};
+  box-sizing: border-box;
+  .svg {
+    margin-bottom: 32px;
   }
 `;
 
@@ -143,8 +155,8 @@ const Header = styled.div`
   background-color: ${ColorStyle.BackGround};
   align-items: center;
   width: 665px;
-  min-height: 80px;
-  max-height: 80px;
+  min-height: 90px;
+  max-height: 90px;
   z-index: 1;
 
   button {
@@ -154,15 +166,29 @@ const Header = styled.div`
 `;
 
 const ImageBox = styled.div`
-  height: 60px;
-  width: 60px;
+  position: relative;
+  height: 64px;
+  width: 64px;
   margin: 20px 32px 20px 48px;
+  box-sizing: border-box;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-size: cover;
   border-radius: 60px;
+`;
+
+const OnlineBadge = styled.div`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 40px;
+  left: 42px;
+  border-radius: 20px;
+  background: #2bac76;
+  border: 4px solid #0f0a1a;
+  box-sizing: border-box;
 `;
 
 export default Grabtalk;

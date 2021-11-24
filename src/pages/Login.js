@@ -31,7 +31,8 @@ import {
 } from '../utils/styledLoginSign';
 import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
 import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
-import GithubLogoPng from '../svgs/GithubLogo.png';
+// import GithubLogoPng from '../svgs/GithubLogo.png';
+import GithubLogoPng from '../svgs/GithubLogo.svg';
 
 const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;

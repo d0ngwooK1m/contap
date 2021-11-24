@@ -5,6 +5,7 @@ import {
   LOAD_SEND_TAP,
   LOAD_RECEIVE_TAP,
   REMOVE_RECEIVE_TAP,
+  REMOVE_SEND_TAP,
   REMOVE_GRAB,
   NEXT_PAGE,
   LOADING,
@@ -94,6 +95,13 @@ export default handleActions(
         draft.isLoading = action.payload.isLoading;
       }),
     [REMOVE_RECEIVE_TAP]: (state, action) =>
+      produce(state, (draft) => {
+        delete draft.byId[action.payload.userId];
+        draft.allIds = draft.allIds.filter(
+          (id) => id !== Number(action.payload.userId),
+        );
+      }),
+    [REMOVE_SEND_TAP]: (state, action) =>
       produce(state, (draft) => {
         delete draft.byId[action.payload.userId];
         draft.allIds = draft.allIds.filter(

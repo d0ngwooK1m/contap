@@ -16,6 +16,7 @@ import { Text } from '../elements';
 import {
   removeReceiveTapToAxios,
   removeGrabToAxios,
+  removeSendTapToAxios,
 } from '../features/taps/actions';
 import {
   closeNoneTalkRoomList,
@@ -62,6 +63,14 @@ const ContapModal = ({
     onHide();
   };
 
+  const cancelSendTap = () => {
+    dispatch(
+      removeSendTapToAxios({ tagId: userCradInfo.tapId }, userCradInfo.userId),
+    );
+    console.log('거절');
+    onHide();
+  };
+
   const openGrabTalk = async () => {
     await dispatch(closeNoneTalkRoomList());
     await dispatch(loadCurrentRoom(userCradInfo));
@@ -77,7 +86,7 @@ const ContapModal = ({
       title: (
         <div style={{ textAlign: 'left' }}>
           <div style={{ marginTop: '5px' }}>
-            <Text bold32 color={ColorStyle.BackGround300}>
+            <Text bold32 color={ColorStyle.Gray500}>
               {userCradInfo.userName}님과 그랩을 끊을까요?
             </Text>
           </div>
@@ -108,8 +117,8 @@ const ContapModal = ({
       >
         <Wrap>
           <Content select={select}>
-            {select === 'ReceiveTap' && (
-              <Text className="desc" color="#FFF" bold32>
+            {select !== 'GrabList' && (
+              <Text className="desc" color={ColorStyle.Gray500} bold32>
                 <span
                   style={{
                     color: `${color}`,
@@ -122,37 +131,68 @@ const ContapModal = ({
             )}
             <Card>{children}</Card>
             <hr />
-            {select === 'ReceiveTap' && (
+            {select !== 'GrabList' ? (
               <>
-                <Text regular20>To.{myName}님</Text>
+                <Text regular20>
+                  To. {select === 'ReceiveTap' ? myName : userCradInfo.userName}
+                  님
+                </Text>
                 <MessageBox>
                   <Text id="message" regular16>
                     {userCradInfo.msg}
                   </Text>
                 </MessageBox>
-                <ButtonBox color={color} hoverColor={hoverColor}>
-                  <button
-                    type="button"
-                    className="refusetBtn"
-                    onClick={rejectTap}
+                {select === 'ReceiveTap' ? (
+                  <ButtonBox
+                    color={color}
+                    hoverColor={hoverColor}
+                    select={select}
                   >
-                    <Text bold20 color="#FFF">
-                      거절
-                    </Text>
-                  </button>
-                  <button
-                    type="button"
-                    className="acceptBtn"
-                    onClick={acceptTap}
+                    <button
+                      type="button"
+                      className="refusetBtn"
+                      onClick={rejectTap}
+                    >
+                      <Text bold20 color={ColorStyle.Gray500}>
+                        거절
+                      </Text>
+                    </button>
+                    <button
+                      type="button"
+                      className="acceptBtn"
+                      onClick={acceptTap}
+                    >
+                      <Text
+                        bold20
+                        color={
+                          category === '디자이너'
+                            ? ColorStyle.BackGround300
+                            : ColorStyle.Gray500
+                        }
+                      >
+                        수락
+                      </Text>
+                    </button>
+                  </ButtonBox>
+                ) : (
+                  <ButtonBox
+                    color={color}
+                    hoverColor={hoverColor}
+                    select={select}
                   >
-                    <Text bold20 color="#FFF">
-                      수락
-                    </Text>
-                  </button>
-                </ButtonBox>
+                    <button
+                      type="button"
+                      className="refusetBtn"
+                      onClick={cancelSendTap}
+                    >
+                      <Text bold20 color={ColorStyle.Gray500}>
+                        요청 취소
+                      </Text>
+                    </button>
+                  </ButtonBox>
+                )}
               </>
-            )}
-            {select === 'GrabList' && (
+            ) : (
               <>
                 <GrabButtonBox color={color} hoverColor={hoverColor}>
                   <button
@@ -162,13 +202,17 @@ const ContapModal = ({
                   >
                     <Text
                       bold20
-                      color={category ? '#FFF' : ColorStyle.BackGround300}
+                      color={
+                        category === '디자이너'
+                          ? ColorStyle.BackGround300
+                          : ColorStyle.Gray500
+                      }
                     >
                       메세지 보내기
                     </Text>
                   </button>
                   <button type="button" className="unGrabBtn" onClick={unGrab}>
-                    <Text bold20 color="#FFF">
+                    <Text bold20 color={ColorStyle.Gray500}>
                       그랩 끊기
                     </Text>
                   </button>
@@ -248,7 +292,7 @@ const ButtonBox = styled.div`
   justify-content: space-between;
 
   button {
-    width: 160px;
+    width: ${({ select }) => (select === 'ReceiveTap' ? '160px' : '350px')};
     height: 50px;
     border-radius: 100px;
     cursor: pointer;

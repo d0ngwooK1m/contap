@@ -39,21 +39,22 @@ export default function useSocketNotiRoom() {
           async (noti) => {
             if (!isChatNoti) {
               const newNoti = JSON.parse(noti.body);
+              console.log('노티 들어옴!!!!!!!!!!!!!!!!!!!!!!!!', newNoti);
 
-              // chat 보냈을 때 채팅방에 둘다 있을 때 타입 0
-              // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 1
-              // chat 보냈을 때 상대방이 로그아웃 타입 2
-              // tap 요청 받았을 때 타입 3
-              // tap 요청 거절한게 타입 4
-              // tap 요청 수락한게 타입 5
-              if (newNoti.type === 1) {
+              // chat 보냈을 때 채팅방에 둘다 있을 때 타입 1
+              // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 2
+              // chat 보냈을 때 상대방이 로그아웃 타입 4
+              // tap 요청 받았을 때 타입 8
+              // tap 요청 거절한게 타입 16
+              // tap 요청 수락한게 타입 32
+              if (newNoti.type === 2) {
                 if (history.location.pathname === '/grabtalk') {
                   console.log('디패 로드 톡룸');
                   await dispatch(loadTalkRoomListToAxios());
                 }
                 dispatch(setChatNoti(true));
               }
-              if (newNoti.type === 3) {
+              if (newNoti.type === 8) {
                 console.log('tap 요청 받았어!');
                 if (history.location.pathname === '/contap') {
                   console.log('디패 로드 톡룸');
@@ -61,11 +62,11 @@ export default function useSocketNotiRoom() {
                 }
                 dispatch(setTapReceiveNoti(true));
               }
-              if (newNoti.type === 4) {
+              if (newNoti.type === 16) {
                 console.log('거절 되었어!');
                 dispatch(setTapRefuseNoti(true));
               }
-              if (newNoti.type === 5) {
+              if (newNoti.type === 32) {
                 console.log('그랩되었어!');
                 dispatch(setTapAcceptNoti(true));
               }

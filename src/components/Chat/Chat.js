@@ -9,7 +9,7 @@ import StompJs from 'stompjs';
 import SockJS from 'sockjs-client';
 import {
   loadMessagesToAxios,
-  // writeMessage,
+  writeMessage,
   getMessage,
   loadTalkRoomListToAxios,
   loading,
@@ -34,7 +34,7 @@ const Chat = ({ current, children }) => {
   const wsConnectSubscribe = React.useCallback(() => {
     try {
       ws.connect({}, async () => {
-        dispatch(loading(true));
+        // dispatch(loading(true));
         console.log('커넥트 시작');
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
@@ -94,7 +94,7 @@ const Chat = ({ current, children }) => {
   // 메시지 보내기
   const sendMessage = (message) => {
     try {
-      dispatch(loading(true));
+      // dispatch(loading(true));
       const data = {
         roomId,
         message,
@@ -104,6 +104,7 @@ const Chat = ({ current, children }) => {
 
       waitForConnection(ws, () => {
         ws.send('/pub/chat/message', {}, JSON.stringify(data));
+        // dispatch(loading(false));
         // dispatch(writeMessage(''));
       });
     } catch (error) {
@@ -124,6 +125,9 @@ const MessageWrap = styled.div`
   position: relative;
   width: 665px;
   height: 75vh;
+
+  .messageBox {
+  }
 `;
 
 Chat.propTypes = {
