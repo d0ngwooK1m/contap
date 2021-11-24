@@ -87,8 +87,7 @@ const professionHoverColor = (category) => {
   }
 };
 
-const FontFamily = `-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
-Pretendard, Roboto, 'Noto Sans KR', 'Segoe UI', 'Malgun Gothic', sans-serif`;
+const FontFamily = 'Pretendard';
 
 export {
   ColorStyle,

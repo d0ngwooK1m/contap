@@ -129,9 +129,17 @@ const HobbySearch2 = () => {
     const BtnSearchColor = hobbyList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround}`;
+    const HoverColor = hobbyList.includes(val)
+      ? `${ColorStyle.HoverPurple}`
+      : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
-        <TagDiv color={BtnSearchColor} type="button" onClick={hobbySearchFunc}>
+        <TagDiv
+          color={BtnSearchColor}
+          hover={HoverColor}
+          type="button"
+          onClick={hobbySearchFunc}
+        >
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -156,9 +164,17 @@ const HobbySearch2 = () => {
     const BtnColor = hobbyList.includes(val)
       ? `${ColorStyle.PrimaryPurple}`
       : `${ColorStyle.BackGround}`;
+    const HoverColor = hobbyList.includes(val)
+      ? `${ColorStyle.HoverPurple}`
+      : `${ColorStyle.BackGround300}`;
     return (
       <Box key={val.toString()}>
-        <TagDiv color={BtnColor} type="button" onClick={hobbyFunc}>
+        <TagDiv
+          color={BtnColor}
+          hover={HoverColor}
+          type="button"
+          onClick={hobbyFunc}
+        >
           <span>{val}</span>
         </TagDiv>
       </Box>
@@ -250,6 +266,10 @@ const TagDiv = styled.div`
   font-weight: 400;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    background-color: ${(props) => props.hover};
+    transition: 0.3s;
+  }
 `;
 
 // const PurpleButton = styled.div`

@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
+import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import {BasicAlert }from '../utils/alert';
 import { useForm } from 'react-hook-form';
@@ -15,7 +16,8 @@ import { ColorStyle, FontScale, FontFamily, Opacity } from '../utils/systemDesig
 
 
 const WithdrawalForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const history = useHistory();
   const [inputStatus, setInputStatus] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
   // const [pw, setPw] = React.useState('');
@@ -72,7 +74,8 @@ const WithdrawalForm = () => {
       }
 
       removeToken();
-      window.location.href = '/';
+      // window.location.href = '/';
+      history.push('/withdrawal');
       return data;
     } catch (error) {
       throw new Error(error.message);

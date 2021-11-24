@@ -3,13 +3,17 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setLoading } from '../features/cards/actions';
+import {
+  setLoading,
+  searchInfoDB,
+  searchArrList,
+  searchDataList,
+} from '../features/cards/actions';
 import { Text } from '../elements';
-import { searchInfoDB, searchArrList, searchDataList } from '../features/cards/actions';
+
 import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { ReactComponent as SearchSvg } from '../svgs/Search.svg';
-import { Checkbox } from '@mui/material';
-import { style } from '@mui/system';
+import { ReactComponent as CloseSvg } from '../svgs/Close.svg';
 
 // const searchData = [
 //   '지오캐싱',
@@ -48,19 +52,27 @@ const SearchBar = () => {
       });
       console.log(searchDataArr);
       dispatch(searchDataList(searchDataArr));
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   }, []);
 
   React.useEffect(() => {
     searchData.filter((val) => {
+      const searchIndex = val.toLocaleLowerCase().indexOf(data.toLocaleLowerCase());
       if (data.toLocaleLowerCase() === '') {
         return null;
       }
-      if (val.toLocaleLowerCase().indexOf(data.toLocaleLowerCase()) !== -1) {
-        searchArr.push(val);
+      if (searchIndex !== -1) {
+        console.log(searchIndex);
+        searchArr.splice(searchIndex, 0, val);
+        // if (before >= searchIndex) {
+        //   searchArr.unshift(val);
+        //   before = searchIndex;
+        // } else {
+        //   searchArr.push(val);
+        //   before = searchIndex;
+        // }
       }
       // console.log(val);
       console.log(searchArr);
@@ -130,7 +142,7 @@ const SearchBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
-  const [tag, setTag] = React.useState(false);
+  // const [tag, setTag] = React.useState(false);
 
   const ArrayData = searchList.map((val) => {
     return (
@@ -147,7 +159,7 @@ const SearchBar = () => {
                 field: 3,
               };
               await dispatch(searchInfoDB(searchInfo));
-              setTag(true);
+              // setTag(true);
               setClick(false);
             }}
           >
@@ -162,21 +174,31 @@ const SearchBar = () => {
 
   return (
     <div
-      // onMouseLeave={() => {
-      //   setClick(false);
-      // }}
-      // onClick={() => {
-      //   setClick(false);
-      // }}
+    // onMouseLeave={() => {
+    //   setClick(false);
+    // }}
+    // onClick={() => {
+    //   setClick(false);
+    // }}
     >
       <SearchWrapper
       // onClick={() => {
       //   setClick(false);
       // }}
       >
-        {!tag ? (
+        {data !== "" || click ? (
+          <CloseWrapper
+            onClick={() => {
+              setClick(false);
+              setData('');
+            }}
+          >
+            <CloseSvg />
+          </CloseWrapper>
+        ) : null}
+        {/* {!tag ? (
           <StyledInput
-            placeholder='어떤 분야에서 찾아볼까요?'
+            placeholder="어떤 분야에서 찾아볼까요?"
             onChange={(e) => {
               console.log(e.target.value);
               setData(e.target.value);
@@ -186,8 +208,8 @@ const SearchBar = () => {
             }}
           />
         ) : (
-            <StyledInput
-            placeholder='어떤 분야에서 찾아볼까요?'
+          <StyledInput
+            placeholder="어떤 분야에서 찾아볼까요?"
             value={data}
             onChange={(e) => {
               console.log(e.target.value);
@@ -197,7 +219,18 @@ const SearchBar = () => {
               setClick(true);
             }}
           />
-        )}
+        )} */}
+          <StyledInput
+            placeholder="어떤 분야에서 찾아볼까요?"
+            value={data}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setData(e.target.value);
+            }}
+            onClick={() => {
+              setClick(true);
+            }}
+          />
         <StyledBtn
           type="button"
           onClick={() => {
@@ -216,18 +249,19 @@ const SearchBar = () => {
       <SearchContent>
         {click ? (
           <CategoryOuter>
-            <CloseBtn onClick={
-              () => {
+            {/* <CloseBtn
+              onClick={() => {
                 setClick(false);
-              }
-            }>✖</CloseBtn>
+              }}
+            >
+              ✖
+            </CloseBtn> */}
             <CategoryWrapper>
               <Text color={ColorStyle.Gray300} regular16>
                 카테고리
               </Text>
             </CategoryWrapper>
             <ContentWrapper>
-
               <CategoryBtn
                 type="button"
                 onClick={async () => {
@@ -242,9 +276,10 @@ const SearchBar = () => {
                   setClick(false);
                 }}
               >
-                <Text color={ColorStyle.Gray500} regular16>
+                {/* <Text color={ColorStyle.Gray500} regular16>
                   백엔드
-                </Text>
+                </Text> */}
+                <CategorySpan>백엔드 개발자</CategorySpan>
               </CategoryBtn>
               <CategoryBtn
                 type="button"
@@ -260,9 +295,10 @@ const SearchBar = () => {
                   setClick(false);
                 }}
               >
-                <Text color={ColorStyle.Gray500} regular16>
+                {/* <Text color={ColorStyle.Gray500} regular16>
                   프론트엔드
-                </Text>
+                </Text> */}
+                <CategorySpan>프론트엔드 개발자</CategorySpan>
               </CategoryBtn>
               <CategoryBtn
                 type="button"
@@ -278,9 +314,10 @@ const SearchBar = () => {
                   setClick(false);
                 }}
               >
-                <Text color={ColorStyle.Gray500} regular16>
+                {/* <Text color={ColorStyle.Gray500} regular16>
                   디자이너
-                </Text>
+                </Text> */}
+                <CategorySpan>디자이너</CategorySpan>
               </CategoryBtn>
             </ContentWrapper>
             {searchList.length !== 0 ? <StyledHr /> : null}
@@ -300,7 +337,13 @@ const SearchBar = () => {
                   >
                     전체
                   </button> */}
-            <ul>{ArrayData}</ul>
+            <ul
+              style={{
+                marginTop: '16px',
+              }}
+            >
+              {ArrayData}
+            </ul>
           </CategoryOuter>
         ) : null}
       </SearchContent>
@@ -326,6 +369,13 @@ const CloseBtn = styled.div`
   cursor: pointer;
 `;
 
+const CloseWrapper = styled.div`
+  position: absolute;
+  top: 17px;
+  right: 70px;
+  cursor: pointer;
+`;
+
 const CategoryOuter = styled.div`
   width: 560px;
   padding: 0px 32px;
@@ -337,24 +387,37 @@ const CategoryOuter = styled.div`
 
 const CategoryWrapper = styled.div`
   width: fit-content;
-  margin: 22px 0px 4px 0px;
+  margin: 22px 0px 10px 0px;
   background-color: ${ColorStyle.BackGround300 + Opacity[100]};
 `;
 
 const ContentWrapper = styled.div`
   width: fit-content;
   background-color: ${ColorStyle.BackGround300 + Opacity[100]};
-
 `;
 
 const CategoryBtn = styled.button`
-  width: 113px;
+  width: fit-content;
   height: 32px;
   background-color: ${ColorStyle.PrimaryPurple};
   border-radius: 8px;
   border: none;
   margin: 0px 20px 16px 0px;
   cursor: pointer;
+  &:hover {
+    background-color: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
+`;
+
+const CategorySpan = styled.span`
+  color: ${ColorStyle.Gray500};
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  padding: 6px 12px;
 `;
 
 const ContentBtn = styled.button`
@@ -382,11 +445,11 @@ const StyledInput = styled.input`
   &::placeholder {
     color: ${ColorStyle.Gray300};
     font-family: 'Pretendard';
-  font-style: normal;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 400;
-  background-color: ${ColorStyle.BackGround300};
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    background-color: ${ColorStyle.BackGround300};
   }
   &:focus {
     outline: none;
@@ -396,8 +459,7 @@ const StyledInput = styled.input`
 const StyledHr = styled.hr`
   width: 560px;
   height: 0.01px;
-  background-color: ${ColorStyle.Gray300};
-  border: solid 0.05px ${ColorStyle.Gray300 + Opacity[20]};
+  border: solid 0.05px ${ColorStyle.Gray100 + Opacity[50]};
 `;
 
 const StyledBtn = styled.button`

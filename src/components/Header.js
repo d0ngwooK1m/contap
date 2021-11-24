@@ -29,7 +29,7 @@ import T from '../api/tokenInstance';
 
 import TutorialForm from './TutorialForm';
 import { mainSteps, settingSteps } from '../utils/tutorialSteps';
-import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
+import { ColorStyle, FontFamily, Opacity, FontScale } from '../utils/systemDesign';
 // import { mainSteps } from '../utils/tutorialSteps';
 
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
@@ -61,6 +61,7 @@ const Header = () => {
   console.log('세팅 튜토리얼===>', settingAlarm);
   console.log(open);
   console.log(isSetting, isMyPage);
+  // console.log('이전 주소 확인====>', `${history.goBack()}`)
 
   // 로그인 체크
   // useUserAuthCheck();
@@ -70,7 +71,12 @@ const Header = () => {
     //   const { data } = await T.GET('/mypage/myinfo');
     // }
     // console.log(data.profile);
-  }, []);
+    if (location.pathname === '/mypage') {
+      setIsMyPage(true);
+      console.log('프로필 클릭시 통과하는지 체크', isMyPage);
+    }
+
+  }, [location.pathname]);
 
   const handleisContap = () => {
     if (location.pathname === '/contap') {
@@ -97,14 +103,14 @@ const Header = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const moveToMyPage = () => {
-    if (location.pathname === '/mypage') {
-      return;
-    }
-    setIsMyPage(true);
-    console.log('프로필 클릭시 통과하는지 체크', isMyPage);
-    history.push('/mypage');
-  };
+  // const moveToMyPage = () => {
+  //   if (location.pathname === '/mypage') {
+  //     return;
+  //   }
+  //   setIsMyPage(true);
+  //   console.log('프로필 클릭시 통과하는지 체크', isMyPage);
+  //   history.push('/mypage');
+  // };
 
   const handleClose = () => {
     setIsSetting(false);
@@ -160,8 +166,6 @@ const Header = () => {
             stepIndex={isMyPage ? 1 : 0}
             steps={mainSteps}
             page={1}
-            disableScrolling
-            disableScrollParentFix
           />
         ) : null}
         {history.location.pathname === '/' &&
@@ -171,8 +175,6 @@ const Header = () => {
             stepIndex={isSetting ? 1 : 0}
             steps={settingSteps}
             page={0}
-            disableScrolling
-            disableScrollParentFix
           />
         ) : null}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
@@ -234,19 +236,67 @@ const Header = () => {
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
               }}
+              PaperProps={{
+                style: {
+                  transform: 'translateX(-80px) translateY(25px)',
+                  backgroundColor: `${ColorStyle.BackGround300 + Opacity[70]}`,
+                  color: `${ColorStyle.Gray500}`,
+                  borderRadius: '17px',
+                  border: `1px solid ${ColorStyle.Gray100}`,
+                  boxShadow: 'none',
+                },
+                sx: {
+                  "& .MuiList-padding": {
+                    paddingTop: '0px',
+                    paddingBottom: '0px',
+                  },
+                  // "& .MuiMenuItem-root.Mui-selected": {
+                  //   backgroundColor: "yellow"
+                  // },
+                  "& .MuiMenuItem-root:hover": {
+                    backgroundColor: `#F5F3F8${Opacity[10]}`,
+                    transition: '0.3s',
+                  },
+                  // "& .MuiMenuItem-root.Mui-selected:hover": {
+                  //   backgroundColor: "red"
+                  // }
+                }
+            }}
             >
               <MenuItem
                 onClick={() => {
                   history.push('/settings');
                   handleClose();
                 }}
+                sx={{
+                  padding: '18px 70px 18px 28px',
+                  fontFamily: `${FontFamily}`,
+                  fontSize: `${FontScale.Body1_16}`
+                  
+                }}
               >
                 설정
               </MenuItem>
-              <MenuItem onClick={logOut}>로그아웃</MenuItem>
+              <hr
+                style={{
+                  width: '85%',
+                  border: `1px solid ${ColorStyle.Gray100 + Opacity[30]}`,
+                  margin: '0px',
+                }}
+              />
+              <MenuItem
+                onClick={logOut}
+                sx={{
+                  padding: '18px 70px 18px 28px',
+                  fontFamily: `${FontFamily}`,
+                  fontSize: `${FontScale.Body1_16}`
+                }}
+              >
+                로그아웃
+              </MenuItem>
             </Menu>
             <div>
-              <IconButton className="my-page" onClick={moveToMyPage}>
+              <IconButton className="my-page" onClick={() => {history.push('/mypage')}}>
                 <ImageBox
                   className="imageBox"
                   src={userProfile ? userProfile : HeaderProfileSvg}
@@ -292,6 +342,13 @@ const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+const StyledMenu = styled(Menu)`
+  && {
+    top: 74px;
+    left: 1200px;
+  }
 `;
 
 const LogoDiv = styled.div`
