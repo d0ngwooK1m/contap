@@ -111,7 +111,7 @@ const SendButton = styled.button`
   height: 50px;
   border-radius: 40px;
   background-color: ${({ isNull }) =>
-    isNull ? ColorStyle.Gray300 : ColorStyle.PrimaryPurple};
+    isNull ? ColorStyle.Gray100 + Opacity[70] : ColorStyle.PrimaryPurple};
   border: 0px;
   cursor: pointer;
   .svg {

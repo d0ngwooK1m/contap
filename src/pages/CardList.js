@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 import { IconButton } from '@mui/material';
 import { useParams } from 'react-router-dom';
-
+import { useHistory } from 'react-router';
 import styled, { keyframes } from 'styled-components';
-import { loadCardFrontDB , loadCurrentCardDB} from '../features/cards/actions';
+import { loadCardFrontDB, loadCurrentCardDB } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
@@ -17,16 +17,20 @@ import { ReactComponent as SquareLeft } from '../svgs/ShapeLeft.svg';
 import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
 import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
-
+import { getToken } from '../utils/auth';
+import {LoginAlert }from '../utils/alert';
+import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
 const CardList = () => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
+  const token = getToken();
   const params = useParams();
-  console.log('isLoading으로 로딩중===>', isLoading);
+  console.log('렌더링 몇번 되는거니?');
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
+  console.log(params);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -34,14 +38,40 @@ const CardList = () => {
     });
   };
   React.useEffect(async () => {
+    if (params.userId) {
+      if (!token) {
+        const { isConfirmed, isDismissed } = await LoginAlert.fire({
+          title: (
+            <>
+              <LoginAlertSvg />
+              <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                <Text bold24>회원이신가요?</Text>
+              </div>
+              <Text regular16>로그인을 먼저 해주세요</Text>
+            </>
+          ),
+        });
+        if (dismiss === 'backdrop') {
+          return;
+        }
+        if (isConfirmed) {
+          history.push('/login');
+        } else if (isDismissed) {
+          history.push('/signup');
+        }
+        return null;
+      } else {
+        await dispatch(loadCurrentCardDB(parseInt(params.userId)));
+      }
+    }
+  }, []);
+  React.useEffect(() => {
     if (cardList.allIds.length !== 0) {
       return;
     }
-    if (params.userId !== null) {
-      console.log('이거 타냐?')
-      await dispatch(loadCurrentCardDB(parseInt(params.userId)))
-    }
+
     if (!isSearching) {
+      console.log('이게 문제야?');
       dispatch(loadCardFrontDB());
     }
   }, [isSearching]);
@@ -84,8 +114,8 @@ const CardList = () => {
       </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
-          console.log('카드 프론트 뿌려줌 =======>', userId)
-          return <MemoizedCardFront key={userId} propUserId={userId} />;
+          console.log('카드 프론트 뿌려줌 =======>', userId);
+          return <MemoizedCardFront key={userId} userId={userId} />;
         })}
       </CardListWrap>
       {cardList.allIds.length > 9 && (

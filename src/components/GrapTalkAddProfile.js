@@ -163,6 +163,7 @@ const OnlineBadge = styled.div`
 
 const Hash = styled.div`
   display: flex;
+  margin-top: 15px;
   margin-left: 10px;
 `;
 

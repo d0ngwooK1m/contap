@@ -32,11 +32,16 @@ import {
   // IS_SUCCESS,
   LOAD_HOBBY,
   LOAD_STACK,
+  DELETE_MY_CARD,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
 export const loadCard = createAction(LOAD_CARD, (cardList) => ({
   cardList,
+}));
+
+export const deleteMyCard = createAction(DELETE_MY_CARD, (userId) => ({
+  userId,
 }));
 
 export const searchCard = createAction(SEARCH_CARD, (searchInfo, cardList) => ({
@@ -104,7 +109,7 @@ const baseURL = process.env.REACT_APP_SERVER_URI;
 
 export const loadCardFrontDB = () => async (dispatch) => {
   try {
-    const res = await axios.get(`${baseURL}/main`);
+    const res = await T.GET(`${baseURL}/main`);
 
     console.log('앞면카드 조회값 확인===>', res.data);
 

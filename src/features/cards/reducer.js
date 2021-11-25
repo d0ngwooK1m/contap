@@ -24,6 +24,7 @@ import {
   // IS_SUCCESS,
   LOAD_HOBBY,
   LOAD_STACK,
+  DELETE_MY_CARD
 } from './types';
 import { DraftsRounded } from '@mui/icons-material';
 
@@ -162,6 +163,13 @@ export default handleActions(
           (id) => id !== Number(action.payload.cardId),
         );
         console.log(draft.allIds);
+      }),
+      [DELETE_MY_CARD]: (state, action) =>
+      produce(state, (draft) => {
+        delete draft.byId[action.payload.userId];
+        draft.allIds = draft.allIds.filter(
+          (id) => id !== Number(action.payload.userId),
+        );
       }),
     [SET_STACK]: (state, action) =>
       produce(state, (draft) => {
