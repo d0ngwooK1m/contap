@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
@@ -38,6 +38,7 @@ const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const history = useHistory();
   const [login, setLogin] = React.useState('');
+  const [emailError, setEmailError] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
 
   const {
@@ -135,8 +136,11 @@ const Login = () => {
         //   text: `${data.errorMessage}`,
         // });
         if (data.errorMessage === null) {
-          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
+          setErrorMessage('잘못된 정보가 있습니다 다시 확인해주세요')
+        } else if (data.errorMessage === '존재하지 않는 이메일입니다') {
+          setEmailError('존재하지 않는 이메일입니다');
         } else {
+          setEmailError('');
           setErrorMessage(data.errorMessage);
         }
         return data;
@@ -188,9 +192,8 @@ const Login = () => {
             })}
           >
             <InputWrapperEmail>
-              {errors.email && (
-                <WarningText>{errors.email.message}</WarningText>
-              )}
+              {errors.email && <WarningText>{errors.email.message}</WarningText>}
+              {!errors.email && emailError !== ''  && <WarningText> { emailError }</WarningText>}
               <StyledInput
                 type="text"
                 // placeholder="이메일을 입력해주세요"
@@ -207,9 +210,7 @@ const Login = () => {
             <br />
             <InputWrapperPw>
               {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
-              {!errors.email && !errors.pw && errorMessage !== '' && (
-                <WarningText>{errorMessage}</WarningText>
-              )}
+              {!errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
               <StyledInput
                 type="password"
                 // placeholder="비밀번호를 입력해주세요"
@@ -266,10 +267,10 @@ const Login = () => {
             <div
               style={{
                 marginRight: '16px',
-                marginTop: '5px',
+                marginTop: '10px',
               }}
             >
-              <img src={KakaoLogoSvg} />
+              <StyledKakaoLogoSvg />
             </div>
             <Text color="#181600" regular20>
               카카오로 시작하기
@@ -291,7 +292,7 @@ const Login = () => {
               <img src={GithubLogoSvg} />
             </div>
             <Text color={ColorStyle.BackGround100} regular20>
-              Github로 시작하기
+              Github으로 시작하기
             </Text>
           </GithubButton>
         </div>
@@ -299,5 +300,10 @@ const Login = () => {
     </LoginWrapper>
   );
 };
+
+const StyledKakaoLogoSvg = styled(KakaoLogoSvg)`
+  width: 26px;
+  height: 24px;
+`;
 
 export default Login;

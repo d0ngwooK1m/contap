@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-import {BasicAlert }from '../utils/alert';
+import {BasicAlert2 }from '../utils/alert';
 import { useForm } from 'react-hook-form';
 import T from '../api/tokenInstance';
 import { removeToken } from '../utils/auth';
@@ -29,11 +29,11 @@ const WithdrawalForm = () => {
   };
 
   const withdrawalModal = async (passwordInfo) => {
-    const { isConfirmed } = await BasicAlert.fire({
+    const { isConfirmed } = await BasicAlert2.fire({
       title: (
         <div style={{ textAlign: 'left' }}>
           <div style={{ marginBottom: '40px' }}>
-            <Text bold32 color={ColorStyle.BackGround300}>
+            <Text bold32 color={ColorStyle.Gray500}>
               정말 떠나시는 건가요?
             </Text>
           </div>
@@ -231,11 +231,11 @@ const WithdrawalForm = () => {
               required: '비밀번호를 입력해주세요',
               maxLength: {
                 value: 20,
-                message: '비밀번호는 최대 20자입니다',
+                message: '비밀번호는 6~20자리로 해주세요',
               },
               minLength: {
                 value: 6,
-                message: '비밀번호는 최소 6자 이상입니다',
+                message: '비밀번호는 6~20자리로 해주세요',
               },
             })}
           />
