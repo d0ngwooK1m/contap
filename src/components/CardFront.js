@@ -9,7 +9,7 @@ import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
 import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, useParams } from 'react-router-dom';
 
 import CardModal from './CardModal';
 import ContapModal from './ContapModal';
@@ -24,17 +24,38 @@ import {
 import { getToken } from '../utils/auth';
 // import T from '../api/tokenInstance';
 
-const CardFront = ({ userId, contap, select }) => {
+const CardFront = ({ propUserId, contap, select }) => {
+  console.log('유저 아이디를 받아 왔어요! ===== > ', propUserId);
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
+  const params = useParams();
+  const userId =
+    parseInt(params.userId) === propUserId
+      ? parseInt(params.userId)
+      : propUserId;
   
+  
+      console.log(location)
+  
+  
+  
+  console.log(
+    parseInt(location),
+    userId,
+    parseInt(params.userId) === propUserId,
+  );
+  console.log(parseInt(params.userId));
+  console.log('주소창에 파람이 있으면 유저아이디로 쓸거야! ===== > ', userId);
+
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
   const isLogin = useSelector((state) => state.user.isAuthorized);
   const token = getToken();
-  const [showModal, setShowMadal] = React.useState(false);
+  const [showModal, setShowMadal] = React.useState(
+    parseInt(params.userId) === userId ? true : false,
+  );
   const [sideModal, setSideModal] = React.useState(false);
 
   const MySwal = withReactContent(Swal);
@@ -51,11 +72,16 @@ const CardFront = ({ userId, contap, select }) => {
     if (!showModal) {
       await dispatch(loadCurrentCardDB(userId));
     }
-    // await T.POST('/main/posttap', { userId});
     setShowMadal(true);
+    history.push(`/back/${userId}`);
+    // await T.POST('/main/posttap', { userId});
   };
 
   const closeModal = () => {
+    if (params.userId !== null) {
+      history.push('/');
+    }
+
     setShowMadal(false);
   };
 
@@ -105,7 +131,7 @@ const CardFront = ({ userId, contap, select }) => {
             category={cat}
           />
         )}
-        {contap && showModal &&  (
+        {contap && showModal && (
           <ContapModal
             className="contapModal"
             show={showModal}
@@ -130,7 +156,9 @@ const CardFront = ({ userId, contap, select }) => {
         )}
       </div>
       <div style={{ display: 'flex' }}>
-        {front[userId].newFriend && select !== 'SendTap' && <NotiBadge className="NotiBadge" />}
+        {front[userId].newFriend && select !== 'SendTap' && (
+          <NotiBadge className="NotiBadge" />
+        )}
         {front[userId].profile ? (
           <ImageBox className="imageBox" src={front[userId].profile} />
         ) : (
@@ -171,7 +199,7 @@ const CardFront = ({ userId, contap, select }) => {
 };
 
 CardFront.propTypes = {
-  userId: PropTypes.number.isRequired,
+  propUserId: PropTypes.number.isRequired,
   select: PropTypes.string,
   contap: PropTypes.bool,
   grab: PropTypes.bool,
@@ -206,13 +234,13 @@ const CardForm = styled.div`
   .interest {
     margin: 0px 22px;
   }
-  .basicProfile{
+  .basicProfile {
     height: 72px;
-  width: 80px;
-  margin: 22px;
+    width: 80px;
+    margin: 22px;
 
-  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
-  border-radius: 8px;
+    border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
+    border-radius: 8px;
   }
 
   &:hover {
@@ -236,9 +264,9 @@ const CardForm = styled.div`
         background-color: ${({ hashColor }) => hashColor};
       }
     }
-    .basicProfile{
-  margin: 20px;
-  }
+    .basicProfile {
+      margin: 20px;
+    }
     .userInfo {
       margin: 30px -2px 0px 2px;
     }
@@ -263,7 +291,7 @@ const ImageBox = styled.div`
   height: 72px;
   width: 80px;
   margin: 22px;
-  border: 1px solid ${ColorStyle.Gray100+Opacity[25]};
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
 
   background-image: url('${(props) => props.src}');
   background-position: center;

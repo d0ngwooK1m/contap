@@ -4,9 +4,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 import { IconButton } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 import styled, { keyframes } from 'styled-components';
-import { loadCardFrontDB } from '../features/cards/actions';
+import { loadCardFrontDB , loadCurrentCardDB} from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
@@ -22,6 +23,7 @@ const CardList = () => {
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
+  const params = useParams();
   console.log('isLoading으로 로딩중===>', isLoading);
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
@@ -34,6 +36,10 @@ const CardList = () => {
   React.useEffect(async () => {
     if (cardList.allIds.length !== 0) {
       return;
+    }
+    if (params.userId !== null) {
+      console.log('이거 타냐?')
+      await dispatch(loadCurrentCardDB(parseInt(params.userId)))
     }
     if (!isSearching) {
       dispatch(loadCardFrontDB());
@@ -78,7 +84,8 @@ const CardList = () => {
       </RefreshWrapper>
       <CardListWrap>
         {cardList.allIds.map((userId) => {
-          return <MemoizedCardFront key={userId} userId={userId} />;
+          console.log('카드 프론트 뿌려줌 =======>', userId)
+          return <MemoizedCardFront key={userId} propUserId={userId} />;
         })}
       </CardListWrap>
       {cardList.allIds.length > 9 && (

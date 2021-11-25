@@ -65,7 +65,7 @@ const GrabList = ({ select }) => {
       type="bottom"
     >
       <Wrap ref={scrollRef}>
-        {conTap.allIds === 0 ? (
+        {conTap.allIds.length === 0 ? (
           <>
             <Text color={ColorStyle.Gray500} bold32>
               아직 그랩이 없어요

@@ -321,7 +321,7 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  ${({ location }) => (location === '/' ? null : 'position : fixed;')}
+  ${({ location }) => (location === '/' || location.includes("/back/")  ? null : 'position : fixed;')}
   top: 0px;
   width: 1112px;
   height: 88px;

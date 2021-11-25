@@ -37,10 +37,8 @@ TabMenu.propTypes = {
 
 const Wrapper = styled.div`
   padding-top: 88px;
-  padding-bottom: 88px;
   display: flex;
   width: 100%;
-  height: 100vh;
 `;
 
 const Menu = styled.div`

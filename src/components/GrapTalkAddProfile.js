@@ -97,6 +97,7 @@ const Wrap = styled.div`
   .stackHashTags {
     width: 150px;
     max-width: 150px;
+    margin-left: 16px;
   }
   .basicProfile {
     border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
