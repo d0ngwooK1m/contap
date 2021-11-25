@@ -61,7 +61,7 @@ const Grabtalk = () => {
               <div className="svg">
                 <GrabTalkBasicSvg />
               </div>
-              <Text bold24>그랩이 되면 대화할 수 있어요</Text>
+              <Text regular20>그랩이 되면 대화할 수 있어요</Text>
             </BasicImageWrap>
           )}
           {currentRoom.userId && (
@@ -103,6 +103,7 @@ const Menu = styled.div`
   height: 84vh;
   margin: 0px 0px 0px 165px;
   border-right: solid 1px #a09bac4d;
+
   .addBtn {
     position: relative;
     right: 10px;

@@ -57,7 +57,7 @@ const CardFrontContap = ({ userId, onModal }) => {
       <Hash className="hash">
         {interestHashTags?.map((stack, idx) => {
           return (
-            stack && <HashTag key={idx} tag={stack} category={category()} />
+            stack && <HashTag key={idx} tag={stack} category={cat} />
           );
         })}
       </Hash>

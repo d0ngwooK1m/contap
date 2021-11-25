@@ -30,9 +30,9 @@ import {
   WarningText,
 } from '../utils/styledLoginSign';
 import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
-import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
-// import GithubLogoPng from '../svgs/GithubLogo.png';
-import GithubLogoPng from '../svgs/GithubLogo.svg';
+// import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
+import GithubLogoSvg from '../svgs/GithubLogo.svg';
+import KakaoLogoSvg from '../svgs/KakaoLogo.svg';
 
 const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
@@ -86,7 +86,6 @@ const Login = () => {
 
       handleKakaoLogin();
     }
-
     if (site === 'github') {
       async function handleGithubLogin() {
         try {
@@ -136,20 +135,20 @@ const Login = () => {
         //   text: `${data.errorMessage}`,
         // });
         if (data.errorMessage === null) {
-          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
         } else {
           setErrorMessage(data.errorMessage);
         }
         return data;
       }
-  
+
       // console.log(data);
       const userInfo = {
         email: data.email,
         userName: data.userName,
-        profile:data.profile
+        profile: data.profile,
       };
-  
+
       dispatch(loginAction(userInfo));
       saveToken(data?.token);
       history.push('/');
@@ -180,7 +179,7 @@ const Login = () => {
             </Text>
           </Title>
           <form
-            autoComplete='off'
+            autoComplete="off"
             onSubmit={handleSubmit(async (loginInfo) => {
               await setErrorMessage('');
               console.log(loginInfo);
@@ -189,7 +188,9 @@ const Login = () => {
             })}
           >
             <InputWrapperEmail>
-              {errors.email && <WarningText>{errors.email.message}</WarningText>}
+              {errors.email && (
+                <WarningText>{errors.email.message}</WarningText>
+              )}
               <StyledInput
                 type="text"
                 // placeholder="이메일을 입력해주세요"
@@ -201,14 +202,14 @@ const Login = () => {
                   },
                 })}
               />
-              <StyledLabel>
-                이메일
-              </StyledLabel>
+              <StyledLabel>이메일</StyledLabel>
             </InputWrapperEmail>
             <br />
             <InputWrapperPw>
               {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
-              {!errors.email && !errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
+              {!errors.email && !errors.pw && errorMessage !== '' && (
+                <WarningText>{errorMessage}</WarningText>
+              )}
               <StyledInput
                 type="password"
                 // placeholder="비밀번호를 입력해주세요"
@@ -224,9 +225,7 @@ const Login = () => {
                   },
                 })}
               />
-              <StyledLabel>
-                비밀번호
-              </StyledLabel>
+              <StyledLabel>비밀번호</StyledLabel>
             </InputWrapperPw>
             <br />
             <div
@@ -270,10 +269,10 @@ const Login = () => {
                 marginTop: '5px',
               }}
             >
-              <KakaoLogoSvg />
+              <img src={KakaoLogoSvg} />
             </div>
             <Text color="#181600" regular20>
-              카카오 로그인
+              카카오로 시작하기
             </Text>
           </KakaoButton>
           <GithubButton
@@ -289,10 +288,10 @@ const Login = () => {
                 marginTop: '5px',
               }}
             >
-              <img src={GithubLogoPng} />
+              <img src={GithubLogoSvg} />
             </div>
             <Text color={ColorStyle.BackGround100} regular20>
-              깃허브 로그인
+              Github로 시작하기
             </Text>
           </GithubButton>
         </div>
