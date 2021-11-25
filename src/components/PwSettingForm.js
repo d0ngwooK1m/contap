@@ -21,6 +21,7 @@ const PwSettingForm = () => {
   // const [pw, setPw] = React.useState('');
   // const [newPw, setNewPw] = React.useState('');
   // const [checkNewPw, setCheckNewPw] = React.useState('');
+  const [pwError, setPwError] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
   const userName = useSelector((state) => state.user.userName);
 
@@ -44,6 +45,8 @@ const PwSettingForm = () => {
         console.log(data);
         if (data.errorMessage === null) {
           setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+        } else if (data.errorMessage === '비밀번호가 맞지 않습니다') {
+          setPwError('비밀번호가 일치하지 않습니다')
         } else {
           setErrorMessage(data.errorMessage);
         }
@@ -103,16 +106,17 @@ const PwSettingForm = () => {
                 required: '비밀번호를 입력해주세요',
                 maxLength: {
                   value: 20,
-                  message: '비밀번호는 최대 20자입니다',
+                  message: '비밀번호는 6~20자리로 해주세요',
                 },
                 minLength: {
                   value: 6,
-                  message: '비밀번호는 최소 6자 이상입니다',
+                  message: '비밀번호는 6~20자리로 해주세요',
                 },
               })}
             />
           </label>
           {errors.currentPw && <ErrorMessage>{errors.currentPw.message}</ErrorMessage>}
+          {!errors.currentPw && pwError !== '' && <ErrorMessage>{pwError}</ErrorMessage>}
         </MarginWrapper>
         <br />
         <MarginWrapper>
@@ -127,11 +131,11 @@ const PwSettingForm = () => {
                 required: '비밀번호를 입력해주세요',
                 maxLength: {
                   value: 20,
-                  message: '비밀번호는 최대 20자입니다',
+                  message: '비밀번호는 6~20자리로 해주세요',
                 },
                 minLength: {
                   value: 6,
-                  message: '비밀번호는 최소 6자 이상입니다',
+                  message: '비밀번호는 6~20자리로 해주세요',
                 },
               })}
             />
@@ -150,11 +154,11 @@ const PwSettingForm = () => {
                 required: '비밀번호를 입력해주세요',
                 maxLength: {
                   value: 20,
-                  message: '비밀번호는 최대 20자입니다',
+                  message: '비밀번호는 6~20자리로 해주세요',
                 },
                 minLength: {
                   value: 6,
-                  message: '비밀번호는 최소 6자 이상입니다',
+                  message: '비밀번호는 6~20자리로 해주세요',
                 },
               })}
             />

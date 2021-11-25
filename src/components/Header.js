@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import { useHistory, useLocation } from 'react-router';
 import { setChatNoti, setContapNoti } from '../features/notice/actions';
+import { phoneTutorialCheck, profileTutorialCheck } from '../features/user/actions';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
@@ -30,6 +31,7 @@ import T from '../api/tokenInstance';
 import TutorialForm from './TutorialForm';
 import { mainSteps, settingSteps } from '../utils/tutorialSteps';
 import { ColorStyle, FontFamily, Opacity, FontScale } from '../utils/systemDesign';
+import axios from 'axios';
 // import { mainSteps } from '../utils/tutorialSteps';
 
 // import useUserAuthCheck from '../hooks/useUserAuthCheck';
@@ -48,6 +50,8 @@ const Header = () => {
   const [isMyPage, setIsMyPage] = React.useState(false);
   const [isSetting, setIsSetting] = React.useState(false);
 
+  // T.GET(`http://3.34.133.254:8080/setalarm/kiiid12321@naver.com/1`);
+
   const open = Boolean(anchorEl);
   const token = getToken();
 
@@ -65,18 +69,41 @@ const Header = () => {
 
   // 로그인 체크
   // useUserAuthCheck();
-  React.useEffect(async () => {
+  // React.useEffect(async () => {
     // setPathName(history.location.pathname)
     // if (isUserLogin) {
     //   const { data } = await T.GET('/mypage/myinfo');
     // }
     // console.log(data.profile);
-    if (location.pathname === '/mypage') {
-      setIsMyPage(true);
-      console.log('프로필 클릭시 통과하는지 체크', isMyPage);
-    }
+  //   if (location.pathname === '/mypage') {
+  //     setIsMyPage(true);
+  //     console.log('프로필 클릭시 통과하는지 체크', isMyPage);
+  //   }
 
-  }, [location.pathname]);
+  // }, [location.pathname]);
+
+  const Tutorial = () => {
+    {mypageAlarm === false ? (
+      <TutorialForm
+        run={true}
+        steps={mainSteps}
+        page={1}
+      />
+    ) : null}
+    {history.location.pathname === '/' &&
+    mypageAlarm === true &&
+    settingAlarm === false ? (
+      <TutorialForm
+        run={true}
+        steps={settingSteps}
+        page={0}
+      />
+    ) : null}
+  };
+
+  React.useEffect(() => {
+    Tutorial;
+  }, [mypageAlarm, settingAlarm])
 
   const handleisContap = () => {
     if (location.pathname === '/contap') {
@@ -98,17 +125,27 @@ const Header = () => {
     history.push('/grabtalk');
   };
 
-  const handleisSetting = (event) => {
+  const handleisSetting = async(event) => {
     setIsSetting(true);
     setAnchorEl(event.currentTarget);
+    if (!settingAlarm) {
+      const res = await T.POST(`/main/tutorial?tutorialNum=0`);
+      console.log('세팅버튼 클릭===>', res);
+      dispatch(phoneTutorialCheck(true));
+    }
   };
 
-  const moveToMyPage = () => {
+  const moveToMyPage = async() => {
     if (location.pathname === '/mypage') {
       return;
     }
-    setIsMyPage(true);
-    console.log('프로필 클릭시 통과하는지 체크', isMyPage);
+    if (!mypageAlarm) {
+      const res = await T.POST(`/main/tutorial?tutorialNum=1`);
+      console.log('마이페이지 버튼 클릭===>', res);
+      dispatch(profileTutorialCheck(true));
+    }
+    // setIsMyPage(true);
+    // console.log('프로필 클릭시 통과하는지 체크', isMyPage);
     history.push('/mypage');
   };
 
@@ -160,23 +197,8 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper location={location.pathname}>
-        {/* <TutorialForm steps={mainSteps} page={1} /> */}
-        {mypageAlarm === false ? (
-          <TutorialForm
-            stepIndex={isMyPage ? 1 : 0}
-            steps={mainSteps}
-            page={1}
-          />
-        ) : null}
-        {history.location.pathname === '/' &&
-        mypageAlarm === true &&
-        settingAlarm === false ? (
-          <TutorialForm
-            stepIndex={isSetting ? 1 : 0}
-            steps={settingSteps}
-            page={0}
-          />
-        ) : null}
+        {/* <TutorialForm run={true} steps={mainSteps} page='main' /> */}
+        {Tutorial}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
         {/* <Grid
           width="fit-content"
@@ -331,6 +353,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   background-color: #0f0a1aff;
   z-index: 1001;
+  margin: auto;
 
   .my-page {
     padding-right: 0px;

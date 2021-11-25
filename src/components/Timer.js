@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 import { Text } from '../elements';
 import { ColorStyle } from '../utils/systemDesign';
 
-const Timer = ({ mm, ss }) => {
+const Timer = ({ mm, ss, reset }) => {
   const [minutes, setMinutes] = React.useState(parseInt(mm, 10));
   const [seconds, setSeconds] = React.useState(parseInt(ss, 10));
+  console.log(reset);
+
+  React.useEffect(() => {
+    setMinutes(parseInt(3, 10));
+    setSeconds(parseInt(0, 10));
+  }, [reset]);
 
   React.useEffect(() => {
     const countdown = setInterval(() => {
@@ -36,11 +42,13 @@ const Timer = ({ mm, ss }) => {
 Timer.propTypes = {
   mm: PropTypes.number,
   ss: PropTypes.number,
+  reset: PropTypes.bool,
 };
 
 Timer.defaultProps = {
   mm: 3,
   ss: 0,
+  reset: false,
 };
 
 export default Timer;
