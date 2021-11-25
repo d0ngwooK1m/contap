@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { debounce } from 'lodash';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -86,24 +87,27 @@ const HobbySearch2 = () => {
 
   // console.log(button);
 
-  React.useEffect(() => {
-    if (data === '') {
-      console.log('data');
-      setClick(false);
-    }
-    searchData.filter((val) => {
-      if (val.toLowerCase().indexOf(data.toLowerCase()) !== -1) {
-        searchArr.push(val);
+  React.useEffect(
+    debounce(() => {
+      if (data === '') {
+        console.log('data');
+        setClick(false);
       }
-      // console.log(val);
-      // console.log(searchArr);
+      searchData.filter((val) => {
+        if (val.toLowerCase().indexOf(data.toLowerCase()) !== -1) {
+          searchArr.push(val);
+        }
+        // console.log(val);
+        // console.log(searchArr);
 
-      return searchArr;
-    });
-    if (searchArr !== []) {
-      dispatch(searchHobbyList(searchArr));
-    }
-  }, [data]);
+        return searchArr;
+      });
+      if (searchArr !== []) {
+        dispatch(searchHobbyList(searchArr));
+      }
+    }, 1000),
+    [data],
+  );
 
   React.useEffect(() => {
     setData('');

@@ -18,43 +18,45 @@ import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
-// import SizeCheck from '../pages/SizeCheck';
+import SizeCheck from './SizeCheck';
 
 function App() {
   return (
-    <WrapApp>
-      <Wrap>
-        <Reset />
-        <Switch>
-          <PublicRoute restricted path="/signup" component={Signup} exact />
-          <PublicRoute restricted path="/login" component={Login} exact />
-          <PrivateRoute
-            path="/withdrawal"
-            component={WithdrawalCompleteForm}
-            exact
-          />
-          <WsNotiRoom>
-            <AlarmCheck>
-              <Header />
-              <PublicRoute
-                path={['/', '/card/:userId']}
-                component={CardList}
-                exact
-              />
-              <Permit>
-                {/* <PrivateRoute path="/card/:userId" component={CardList} exact /> */}
-                <PrivateRoute path="/settings" component={Settings} exact />
-                <PrivateRoute path="/contap" component={Contap} exact />
-                <PrivateRoute path="/mypage" component={Mypage} exact />
-                <PrivateRoute path="/edit" component={CardEdit} exact />
-                <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
-              </Permit>
-              {/* <Footer /> */}
-            </AlarmCheck>
-          </WsNotiRoom>
-        </Switch>
-      </Wrap>
-    </WrapApp>
+    <SizeCheck>
+      <WrapApp>
+        <Wrap>
+          <Reset />
+          <Switch>
+            <PublicRoute restricted path="/signup" component={Signup} exact />
+            <PublicRoute restricted path="/login" component={Login} exact />
+            <PublicRoute
+              path="/withdrawal"
+              component={WithdrawalCompleteForm}
+              exact
+            />
+            <WsNotiRoom>
+              <AlarmCheck>
+                <Header />
+                <PublicRoute
+                  path={['/', '/card/:userId']}
+                  component={CardList}
+                  exact
+                />
+                <Permit>
+                  {/* <PrivateRoute path="/card/:userId" component={CardList} exact /> */}
+                  <PrivateRoute path="/settings" component={Settings} exact />
+                  <PrivateRoute path="/contap" component={Contap} exact />
+                  <PrivateRoute path="/mypage" component={Mypage} exact />
+                  <PrivateRoute path="/edit" component={CardEdit} exact />
+                  <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
+                </Permit>
+                {/* <Footer /> */}
+              </AlarmCheck>
+            </WsNotiRoom>
+          </Switch>
+        </Wrap>
+      </WrapApp>
+    </SizeCheck>
   );
 }
 
@@ -71,10 +73,12 @@ const WrapApp = styled.div`
 `;
 
 const Wrap = styled.div`
-  max-width: 1440px;
-  min-width: 1110px;
+  /* max-width: 1440px;
+  min-width: 1110px; */
+  min-width: 1440px;
   max-height: 100%;
   min-height: 100vh;
+  width: 100vw;
   margin: auto;
 `;
 
