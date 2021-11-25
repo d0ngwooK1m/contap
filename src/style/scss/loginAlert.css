@@ -1,0 +1,38 @@
+.swal-popup {
+  border-radius: 30px;
+  width: 700px;
+  min-width: 500px;
+  padding: 52px;
+  border: 3px solid #4d4759;
+  box-sizing: border-box;
+}
+
+.swal2-title {
+  padding: 0px;
+}
+.swal2-actions {
+  margin-top: 32px;
+  justify-content: space-between;
+}
+
+.swal2-styled.swal2-cancel {
+  width: 255px;
+  height: 60px;
+  box-sizing: border-box;
+  border: 1px solid #8c4dff;
+  border-radius: 60px;
+}
+
+.swal2-styled.swal2-confirm {
+  width: 255px;
+  height: 60px;
+  margin-left: 31px;
+  border-radius: 60px;
+}
+
+.swal-toast-popup {
+  width: 300px;
+  height: 80px;
+  border-radius: 8px;
+  background-color: '#1d1d22';
+}
