@@ -7,11 +7,12 @@ import CardFrontWrite from '../components/CardFrontWrite';
 import StackSearch2 from '../components/StackSearch2';
 // import HobbySearch from '../components/HobbySearch';
 import HobbySearch2 from '../components/HobbySearch2';
+import { useParams } from 'react-router-dom';
 
 import { ColorStyle } from '../utils/systemDesign';
 import { Grid, Text } from '../elements';
 
-const CardEdit = () => {
+const CardEdit = (props) => {
   // 새로고침 감지시 발생하는 이벤트
   // onbeforeunload = function (e) {
   //   e.preventDefault();
@@ -19,12 +20,16 @@ const CardEdit = () => {
   //   //e.returnValue = dialogText;
   //   return 0;
   // };
+  const params = useParams();
+  console.log('url확인====>', params);
+  const userId = params.userId;
+  const [maxMessage, setMaxMessage] = React.useState(false);
 
   return (
     <div style={{ paddingTop: '88px' }}>
       <Grid>
         <Grid>
-          <CardFrontWrite />
+          <CardFrontWrite userId={userId} setMaxMessage={setMaxMessage} />
         </Grid>
         <Grid>
           <TagDiv>
@@ -37,7 +42,10 @@ const CardEdit = () => {
             <Text bold32>관심사</Text>
           </TagDiv>
           <Grid>
-            <HobbySearch2 />
+            <HobbySearch2
+              maxMessage={maxMessage}
+              setMaxMessage={setMaxMessage}
+            />
           </Grid>
         </Grid>
       </Grid>

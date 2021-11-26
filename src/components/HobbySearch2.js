@@ -21,11 +21,54 @@ import { truncate } from 'lodash';
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
-const HobbySearch2 = () => {
+// const searchData = [
+//   '렌더링',
+//   '범용성',
+//   '오너십',
+//   'TestCode',
+//   '가독성',
+//   '유지보수',
+//   '개발과정',
+//   '완성도',
+//   '호기심',
+//   'Log',
+//   'Library',
+//   '신기술',
+//   '데드라인',
+//   '리더십',
+//   '성장',
+//   'Logic',
+//   '리팩토링',
+//   '인터랙션',
+//   '응답속도',
+//   '소통',
+//   '커버리지',
+//   'Infra',
+//   '예외처리',
+//   '웹소켓',
+//   'Debug',
+//   'JWT',
+//   '최적화',
+//   'OAuth',
+//   '시각화',
+//   'API설계',
+//   '리서치',
+//   'UX/UI',
+//   'CX',
+//   'UX라이팅',
+//   '마케팅',
+//   '퍼블리싱',
+//   '콘텐츠',
+//   'PM',
+//   '브랜딩',
+//   '기획',
+// ];
+
+const HobbySearch2 = ({ setMaxMessage, maxMessage }) => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState('');
   const [click, setClick] = React.useState(false);
-  const [maxMessage, setMaxMessage] = React.useState(false);
+  // const [maxMessage, setMaxMessage] = React.useState(false);
 
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.hobbyArr);
@@ -230,7 +273,7 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  width: 1100px;
+  width: 1110px;
   margin: 63px 165px 119px 154px;
   justify-content: start;
   align-items: center;

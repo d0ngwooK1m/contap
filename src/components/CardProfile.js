@@ -86,7 +86,7 @@ const CardProfile = () => {
               <UpdateBtn
                 cursor="pointer"
                 onClick={() => {
-                  history.push('/edit');
+                  history.push(`/mypage/${cardList.userId}/edit`);
                 }}
               />
             </BtnDiv>
