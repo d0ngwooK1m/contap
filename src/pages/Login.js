@@ -30,9 +30,9 @@ import {
   WarningText,
 } from '../utils/styledLoginSign';
 import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
-// import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
+import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
 import GithubLogoSvg from '../svgs/GithubLogo.svg';
-import KakaoLogoSvg from '../svgs/KakaoLogo.svg';
+// import KakaoLogoSvg from '../svgs/KakaoLogo.svg';
 
 const Login = () => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
