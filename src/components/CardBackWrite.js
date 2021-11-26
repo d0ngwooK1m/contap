@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 
+import { history } from '../features/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createCardDB,
@@ -29,6 +30,7 @@ import { Grid, Text } from '../elements';
 const CardBackWrite = ({ onHide }) => {
   const dispatch = useDispatch();
   // const { register } = useForm();
+  const cardCount = useSelector((state) => state.cards.backCardIdx);
 
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
@@ -52,6 +54,16 @@ const CardBackWrite = ({ onHide }) => {
   console.log(disabled);
 
   const addCardBack = () => {
+    if (cardCount.length === 10) {
+      console.log('카드 갯수====>', cardCount.length);
+      Swal.fire({
+        icon: 'error',
+        title: '작성 실패',
+        text: '카드 10개까지만 작성 가능합니다!',
+      });
+
+      return false;
+    }
     if (title.trim() === '') {
       Swal.fire({
         icon: 'error',
@@ -93,10 +105,9 @@ const CardBackWrite = ({ onHide }) => {
       tagsStr,
       link: url,
     };
-    if (disabled) {
-      dispatch(createCardDB(content));
-      onHide();
-    }
+
+    dispatch(createCardDB(content));
+    onHide();
 
     // dispatch(isSuccess(!handleClick));
   };
@@ -131,19 +142,13 @@ const CardBackWrite = ({ onHide }) => {
               // console.log(e.target.value);
             }}
             // onKeyUp={checkValid}
-            // {...register('title', {
-            //   requirerd: '제목을 입력해주세요',
-            //   minLength: {
-            //     value: 1,
-            //     message: '제목이 공백입니다.',
-            //   },
-            // })}
           />
 
           {/* <DisAddBtn className="disAddBtn" />
             <AddBtn className="addBtn" cursor="pointer"/> */}
           <AddBtn
             // className={disabled ? 'addBtn' : 'disAddBtn'}
+            type="button"
             onClick={addCardBack}
           >
             <Text
@@ -154,6 +159,13 @@ const CardBackWrite = ({ onHide }) => {
               작성 완료
             </Text>
           </AddBtn>
+          <button
+            onClick={() => {
+              onHide();
+            }}
+          >
+            작성 취소
+          </button>
         </Div>
         <Grid>
           <MainDiv>
@@ -166,8 +178,6 @@ const CardBackWrite = ({ onHide }) => {
               onChange={(e) => {
                 setDesc(e.target.value);
               }}
-              // {...register('content', { requirerd: true })}
-              // ref={register({ requirerd: true })}
             />
             <LengthDiv>
               <Text regular14 color={ColorStyle.Gray300}>
@@ -183,7 +193,6 @@ const CardBackWrite = ({ onHide }) => {
               onChange={(e) => {
                 setTagsStr(e.target.value);
               }}
-              // {...register('tag', { requirerd: true })}
             />
             <div style={{ position: 'absolute', top: '63%', left: '2%' }}>
               <TagIcon />
@@ -202,7 +211,6 @@ const CardBackWrite = ({ onHide }) => {
               <Link />
             </div>
           </LinkDiv>
-          {/* <Btn onClick={addCardBack}>작성완료</Btn> */}
         </Grid>
       </Grid>
     </div>

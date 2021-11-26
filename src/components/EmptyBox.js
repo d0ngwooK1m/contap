@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
 
-import { ReactComponent as Round } from '../svgs/Round.svg';
+//import { ReactComponent as Round } from '../svgs/Round.svg';
 import { ReactComponent as AddRound } from '../svgs/AddRound.svg';
 import {
   FontFamily,
@@ -16,7 +16,7 @@ import CardBackWrite from './CardBackWrite';
 import { Grid } from '../elements';
 
 const EmptyBox = () => {
-  const cardCount = useSelector((state) => state.cards.allIds);
+  const cardCount = useSelector((state) => state.cards.backCardIdx);
   const [click, setClick] = React.useState(false);
   const [display, setDisplay] = React.useState({ display: 'flex' });
   console.log(display);
@@ -48,7 +48,7 @@ const EmptyBox = () => {
             setDisplay({ display: 'none' });
           }}
         >
-          <StyledAddRound fill="#8C4DFF" className="addRound" />
+          <StyledAddRound className="addRound" />
           {/* <Round className="addRound" /> */}
         </Div>
       </Grid>
@@ -93,8 +93,13 @@ const Div = styled.div`
 `;
 
 const StyledAddRound = styled(AddRound)`
+  width: 64px;
+  height: 64px;
+  fill: ${ColorStyle.PrimaryPurple};
   &:hover {
-    fill: '#6235b5';
+    fill: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+    // stroke: '#6235b5';
   }
 `;
 

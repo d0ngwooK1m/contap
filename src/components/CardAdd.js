@@ -17,7 +17,7 @@ import { Grid } from '../elements';
 
 const CardAdd = () => {
   const dispatch = useDispatch();
-  const cardCount = useSelector((state) => state.cards.allIds);
+  const cardCount = useSelector((state) => state.cards.backCardIdx);
   // const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
   console.log(cardList);
@@ -54,7 +54,7 @@ const CardAdd = () => {
             + 카드 추가하기
           </TextBtn>
         </TextDiv>
-        {cardList.allIds.map((cardId) => {
+        {cardList.backCardIdx.map((cardId) => {
           return (
             <Grid key={cardId}>
               <CardPortfolio cardId={cardId} />
@@ -82,7 +82,7 @@ const CardAdd = () => {
       <Grid margin="0px 0px 48px 0px">
         <CardBackWrite onHide={closeClick} />
       </Grid>
-      {cardList.allIds.map((cardId) => {
+      {cardList.backCardIdx.map((cardId) => {
         return (
           <Grid key={cardId}>
             <CardPortfolio cardId={cardId} />

@@ -18,7 +18,7 @@ import { Grid } from '../elements';
 
 const Mypage = () => {
   const dispatch = useDispatch();
-  const cardCount = useSelector((state) => state.cards.allIds);
+  const cardCount = useSelector((state) => state.cards.backCardIdx);
   // const handleClick = useSelector((state) => state.cards.isSuccess);
   // console.log(handleClick);
 
@@ -32,7 +32,7 @@ const Mypage = () => {
     await dispatch(loadMyCardDB());
   }, []);
 
-  if (cardCount.length === 0) {
+  if (cardCount?.length === 0) {
     return (
       <div style={{ paddingTop: '88px' }}>
         <Grid>
