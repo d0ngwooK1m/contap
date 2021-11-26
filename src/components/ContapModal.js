@@ -226,7 +226,7 @@ const ContapModal = ({
   );
 };
 
-const upDown = keyframes`
+const sideModalOn = keyframes`
   0% {
     right: -600px;
   }
@@ -255,7 +255,7 @@ const Wrap = styled.div`
   float: right;
   height: 100vh;
   background-color: ${ColorStyle.BackGround100};
-  animation: ${upDown} 0.3s linear alternate;
+  animation: ${sideModalOn} 0.3s linear alternate;
 `;
 
 const Content = styled.div`

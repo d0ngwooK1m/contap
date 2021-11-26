@@ -40,6 +40,7 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
         pagination={{
           type: 'progressbar',
         }}
+        onSlideChange={() => {setTapFormState(false)}}
         navigation={true}
         className="mySwiper"
         allowTouchMove={false}
@@ -56,18 +57,18 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
                 show={tapFormState}
                 onTapForm={handleTapForm}
               ></CardBack>
-              {tapFormState && (
-                <TapForm
-                  userId={card.userId}
-                  category={category}
-                  onHide={onHide}
-                  userName={userName}
-                />
-              )}
             </SwiperSlide>
           );
         })}
       </Swiper>
+        {tapFormState && (
+          <TapForm
+            userId={userId}
+            category={category}
+            onHide={onHide}
+            userName={userName}
+          />
+        )}
     </SwiperWrap>
   );
 };

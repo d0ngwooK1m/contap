@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
 import T from '../api/tokenInstance';
 import {
@@ -92,6 +92,27 @@ const TapForm = ({ userId, category, onHide, userName }) => {
   );
 };
 
+const sideModalOn = keyframes`
+  0% {
+    top: -300px;
+  }
+  25% {
+    right: -230px;
+  }
+  50% {
+    right: -180px;
+    /* right : 600px; */
+  }
+  75% {
+    right: -130px;
+    /* right : 600px; */
+  }
+  100% {
+    right: -80px;
+    
+  }
+`;
+
 const Wrap = styled.div`
   position: relative;
   top: -80px;
@@ -106,6 +127,7 @@ const Wrap = styled.div`
   border-radius: 0px 0px 16px 16px;
   display: flex;
   flex-direction: column;
+  animation: ${sideModalOn} 0.2s linear alternate;
 `;
 
 const TextAreaWrap = styled.div`

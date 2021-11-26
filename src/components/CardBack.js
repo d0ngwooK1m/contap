@@ -13,7 +13,7 @@ import {
   category,
   professionHoverColor,
 } from '../utils/systemDesign';
-import BasicProfile from '../assets/image/basicProfile.png';
+import BasicProfile from '../svgs/BasicProfile.svg';
 
 const CardBack = ({
   card,
@@ -31,16 +31,6 @@ const CardBack = ({
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
 
   console.log('필드', card);
-
-  const profession = () => {
-    if (card.field === 0) {
-      return '백엔드 개발자';
-    }
-    if (card.field === 1) {
-      return '프론트엔드 개발자';
-    }
-    return '디자이너';
-  };
 
   const cat = category(card.field);
   const color = professionColor(cat);
@@ -86,7 +76,7 @@ const CardBack = ({
           </Text>
         </div>
         <CardTapForm color={color} hoverColor={hoverColor} isTapForm={show}>
-          <ImageBox src={profile || BasicProfile} />
+          <ImageBox src={profile ? profile : BasicProfile} />
           <div className="userName">
             <Text regular16 color={ColorStyle.Gray500}>
               {userName}
