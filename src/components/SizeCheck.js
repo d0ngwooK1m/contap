@@ -8,23 +8,23 @@ import { ReactComponent as ResizeSvg } from '../svgs/Resize.svg';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 
 const SizeCheck = ({ children }) => {
-  const [innerWidth, setInnerWidth] = React.useState(window.innerWidth);
+  // const [innerWidth, setInnerWidth] = React.useState(window.innerWidth);
 
-  const handleResize = () => {
-    console.log(
-      `브라우저 화면 사이즈 x: ${window.innerWidth}, y: ${window.innerHeight}`,
-    );
-    setInnerWidth(window.innerWidth);
-  };
+  // const handleResize = () => {
+  //   console.log(
+  //     `브라우저 화면 사이즈 x: ${window.innerWidth}, y: ${window.innerHeight}`,
+  //   );
+  //   setInnerWidth(window.innerWidth);
+  // };
 
-  React.useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
 
-  if (innerWidth < 1440) {
+  if (window.matchMedia('(max-width: 1440px)').matches) {
     return (
       <Wrapper>
         <ContentWrapper>
