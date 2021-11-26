@@ -17,17 +17,17 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
-  ${({ location }) =>
-    location === '/' ||
-    location === '/login' ||
-    location === '/signup' ||
-    location === '/withdrawal'
-      ? 'height: 80px;'
-      : 'height: 41px;'};
+  ${({ location }) => (location === '/' ? 'height: 80px;' : 'height: 41px;')};
   bottom: 0px;
   width: 100%;
   padding: 0px 164px;
-  display: flex;
+  ${({ location }) =>
+    location === '/login' ||
+    location === '/signup' ||
+    location === '/withdrawal'
+      ? 'display: none;'
+      : 'display: flex;'};
+  /* display: flex; */
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;
