@@ -1,4 +1,4 @@
-/*eslint-disable*/
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -78,9 +78,7 @@ const CardProfile = () => {
               {stackTag === '' || stackTag === undefined ? (
                 <StackText># 나의 스택</StackText>
               ) : (
-                <StackEditText>
-                  #{stackTag ? stackTag : '나의 스택'}
-                </StackEditText>
+                <StackEditText>#{stackTag}</StackEditText>
               )}
             </Grid>
             <BtnDiv>
@@ -106,8 +104,8 @@ const CardProfile = () => {
             <BasicHashTag />
           </div>
           <HobbyDiv>
-            {hobbyTag?.map((hobby, idx) => {
-              return hobby && <TagList key={idx} tag={hobby} />;
+            {hobbyTag?.map((hobby) => {
+              return hobby && <TagList key={hobby} tag={hobby} />;
             })}
           </HobbyDiv>
         </ProfileDiv>
@@ -186,7 +184,6 @@ const ProfileDiv = styled.div`
   border-radius: 16px;
   z-index: 100;
   position: relative;
-  // box-shadow: 14px 30px 35px 4px ${'#0a0a0a' + Opacity[40]};
 `;
 
 const Div = styled.div`

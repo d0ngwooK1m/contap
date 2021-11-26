@@ -23,7 +23,7 @@ import {
 
 const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
-  const cardList = useSelector((state) => state.cards.byId);
+  const cardList = useSelector((state) => state.cards.backCard);
   console.log(cardList);
 
   const [title, setTitle] = React.useState(cardList[cardId].title);
@@ -271,6 +271,7 @@ const ProjectDiv = styled.div`
   &:hover {
     border: 1px solid ${ColorStyle.PrimaryPurple};
     background: ${'#a09bac' + Opacity[15]};
+    transition: 0.3s;
 
     .iconDiv {
       display: flex;

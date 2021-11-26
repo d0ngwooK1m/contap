@@ -25,7 +25,7 @@ import {
   LOAD_HOBBY,
   LOAD_STACK,
   DELETE_MY_CARD,
-  LOADING
+  LOADING,
 } from './types';
 import { DraftsRounded } from '@mui/icons-material';
 
@@ -35,6 +35,9 @@ const initialState = {
   current: {},
   preview: null,
   cardList: {},
+  profileCard: {},
+  backCard: {},
+  backCardIdx: [],
   searchInfo: {},
   searchData: [],
   searchArr: [],
@@ -46,7 +49,7 @@ const initialState = {
   hobby: [],
   stackTag: [],
   hobbyTag: [],
-  isLoading:false,
+  isLoading: false,
 };
 
 export default handleActions(
@@ -115,14 +118,14 @@ export default handleActions(
         const { data } = action.payload;
         // console.log(action.payload);
         draft.current = data;
-        draft.isLoading = false
+        draft.isLoading = false;
       }),
     [EDIT_CARD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
-        const { userId } = action.payload;
-        console.log(action.payload);
-        draft.byId[userId] = action.payload;
-        draft.allIds.unshift(userId);
+        // const { userId } = action.payload;
+        console.log('카드 프로필 확인===>', action.payload);
+        draft.profileCard = action.payload;
+        // draft.allIds.unshift(userId);
       }),
     [SET_PREVIEW]: (state, action) =>
       produce(state, (draft) => {
@@ -131,8 +134,8 @@ export default handleActions(
       }),
     [LOAD_MY_CARD]: (state, action) =>
       produce(state, (draft) => {
-        draft.byId = {};
-        draft.allIds = [];
+        draft.backCard = {};
+        draft.backCardIdx = [];
         console.log(action.payload);
         const { card } = action.payload;
         const cardList = card.cardDtoList;
@@ -140,34 +143,34 @@ export default handleActions(
         draft.current = card;
         // draft.cardList = cardList;
         cardList.forEach((doc) => {
-          draft.byId[doc.cardId] = doc;
-          draft.allIds.push(doc.cardId);
+          draft.backCard[doc.cardId] = doc;
+          draft.backCardIdx.push(doc.cardId);
         });
       }),
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         const { cardId } = action.payload.card;
         console.log(cardId);
-        draft.byId[cardId] = action.payload.card;
-        draft.allIds.unshift(cardId);
+        draft.backCard[cardId] = action.payload.card;
+        draft.backCardIdx.unshift(cardId);
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         // draft.current = action.payload;
         console.log(action.payload);
-        draft.byId[action.payload.card.cardId] = action.payload.card;
+        draft.backCard[action.payload.card.cardId] = action.payload.card;
         console.log(action.payload.card.cardId);
       }),
     [DELETE_CARD]: (state, action) =>
       produce(state, (draft) => {
-        delete draft.byId[action.payload.cardId];
+        delete draft.backCard[action.payload.cardId];
         console.log(action.payload.cardId);
-        draft.allIds = draft.allIds.filter(
+        draft.backCardIdx = draft.backCardIdx.filter(
           (id) => id !== Number(action.payload.cardId),
         );
-        console.log(draft.allIds);
+        console.log(draft.cardBackIdx);
       }),
-      [DELETE_MY_CARD]: (state, action) =>
+    [DELETE_MY_CARD]: (state, action) =>
       produce(state, (draft) => {
         delete draft.byId[action.payload.userId];
         draft.allIds = draft.allIds.filter(
@@ -242,7 +245,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.hobbyTag = action.payload.tags;
       }),
-      [LOADING]: (state, action) =>
+    [LOADING]: (state, action) =>
       produce(state, (draft) => {
         draft.isLoading = action.payload.isLoading;
       }),

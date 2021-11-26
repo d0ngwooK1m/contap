@@ -83,23 +83,26 @@ const StackSearch2 = () => {
     dispatch(searchTagListDB());
   }, []);
 
-  React.useEffect(debounce(() => {
-    if (data === '') {
-      setClick(false);
-    }
-    searchData.filter((val) => {
-      if (val.toLowerCase().indexOf(data.toLowerCase()) !== -1) {
-        searchArr.push(val);
+  React.useEffect(
+    debounce(() => {
+      if (data === '') {
+        setClick(false);
       }
-      // console.log(val);
-      // console.log(searchArr);
+      searchData.filter((val) => {
+        if (val.toLowerCase().indexOf(data.toLowerCase()) !== -1) {
+          searchArr.push(val);
+        }
+        // console.log(val);
+        // console.log(searchArr);
 
-      return searchArr;
-    });
-    if (searchArr !== []) {
-      dispatch(searchStackList(searchArr));
-    }
-  }, 1000), [data]);
+        return searchArr;
+      });
+      if (searchArr !== []) {
+        dispatch(searchStackList(searchArr));
+      }
+    }, 1000),
+    [data],
+  );
 
   React.useEffect(() => {
     setData('');
@@ -148,8 +151,8 @@ const StackSearch2 = () => {
   });
 
   const FullList = searchData.map((val) => {
-    console.log(stackList, val);
-    console.log(stackList?.includes(val));
+    // console.log(stackList, val);
+    // console.log(stackList?.includes(val));
     const stackFunc = stackList.includes(val)
       ? async () => {
           console.log('test');
