@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { ColorStyle, FontScale, FontFamily, Opacity } from './systemDesign';
 
 const LoginWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
   width: 100%;
   height: 100%;
   display: flex;
