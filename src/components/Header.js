@@ -42,7 +42,11 @@ const Header = () => {
   const location = useLocation();
   const userInfo = useSelector((state) => state.user);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
-  const isContapNoti = useSelector((state) => state.notice.isContapNoti);
+  const isTapReceiveNoti = useSelector(
+    (state) => state.notice.isTapReceiveNoti,
+  );
+  const isTapAcceptNoti = useSelector((state) => state.notice.isTapAcceptNoti);
+  const isContapNoti = !!(isTapReceiveNoti || isTapAcceptNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [myProfile] = React.useState(<HeaderProfileSvg />);
   const isUserLogin = userInfo.email;
@@ -366,18 +370,17 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
   ${({ location }) => (location === '/' || location.includes("/card/")  ? null : 'position : fixed;')}
+  ${({ location }) => (location === '/' || location.includes("/card/")  ? 'margin: auto;' : 'margin: 0px 164px;')}
   top: 0px;
-  width: 1112px;
+  width: 100%;
+  max-width: 1112px;
   height: 88px;
-  padding: 0px 164px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;
   z-index: 1001;
-  overflow: auto;
-  margin: auto;
-
+  
   .my-page {
     padding-right: 0px;
     margin-right: 0px;

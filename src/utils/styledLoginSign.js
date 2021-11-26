@@ -6,8 +6,9 @@ const LoginWrapper = styled.div`
   left: 0;
   right: 0;
   overflow-y: auto;
-  width: 100%;
-  height: 100%;
+  min-width: 1152px;
+  /* width: 100%; */
+  /* height: 100%; */
   display: flex;
 `;
 

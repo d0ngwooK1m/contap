@@ -222,7 +222,7 @@ const Contap = () => {
 
 const Wrap = styled.div`
   width: 100%;
-  min-height: 100%;
+  height: 100vh;
   background-color: #0f0a1a;
 `;
 

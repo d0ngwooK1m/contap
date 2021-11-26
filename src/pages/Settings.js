@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Text } from '../elements';
+import { Text } from '../elements';
 import TabMenu from '../components/TabMenu';
 import PwSettingForm from '../components/PwSettingForm';
 import WithdrawalForm from '../components/WithdrawalForm';
@@ -169,9 +169,9 @@ const content = [
 
 const Settings = () => {
   return (
-    <Grid>
+    <div style={{ height: '100vh' }}>
       <TabMenu content={content} />
-    </Grid>
+    </div>
   );
 };
 

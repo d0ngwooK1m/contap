@@ -9,7 +9,7 @@ import {
   setChatNoti,
   setTapReceiveNoti,
   setTapAcceptNoti,
-  setTapRefuseNoti,
+  // setTapRefuseNoti,
 } from '../features/notice/actions';
 import { loadTalkRoomListToAxios } from '../features/chat/actions';
 import { loadReceiveTapToAxios } from '../features/taps/actions';
@@ -18,8 +18,16 @@ const baseURL = process.env.REACT_APP_SERVER_URI;
 
 export default function useSocketNotiRoom() {
   const dispatch = useDispatch();
+  // 채팅 알람
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
+  // 컨탭 알람
+  const isTapReceiveNoti = useSelector(
+    (state) => state.notice.isTapReceiveNoti,
+  );
+  const isTapAcceptNoti = useSelector((state) => state.notice.isTapAcceptNoti);
+  const isContapNoti = !!(isTapReceiveNoti || isTapAcceptNoti);
 
+  console.log(isContapNoti);
   const sock = new SockJS(`${baseURL}/ws-stomp`);
   const ws = StompJs.over(sock);
   const token = getToken();
@@ -39,8 +47,9 @@ export default function useSocketNotiRoom() {
           `/user/sub/user`,
           async (noti) => {
             console.log('노티 들어올 때 =====> ', isChatNoti);
+            // 채팅 알람이 없을 때
+            const newNoti = JSON.parse(noti.body);
             if (!isChatNoti) {
-              const newNoti = JSON.parse(noti.body);
               console.log('노티 들어옴!!!!!!!!!!!!!!!!!!!!!!!!', newNoti);
               console.log('현재 챗 노티', isChatNoti);
               // chat 보냈을 때 채팅방에 둘다 있을 때 타입 1
@@ -49,28 +58,40 @@ export default function useSocketNotiRoom() {
               // tap 요청 받았을 때 타입 8
               // tap 요청 거절한게 타입 16
               // tap 요청 수락한게 타입 32
+
+              // 채팅방에 혼자 있으면
               if (newNoti.type === 2) {
+                // 그랩톡 페이지에 있을 땐
                 if (history.location.pathname === '/grabtalk') {
                   console.log('디패 로드 톡룸');
+                  // 왼쪽에 있는 채팅방 리스트를 새로 가져오고
                   await dispatch(loadTalkRoomListToAxios());
                 } else {
+                  // 그랩톡 페이지에 없을 땐 채팅 알람을 줘
                   await dispatch(setChatNoti(true));
                 }
               }
+            }
+            // 컨탭 알람이 없으면
+            if (!isContapNoti) {
+              // 탭 요청을 받았으면
               if (newNoti.type === 8) {
-                console.log('tap 요청 받았어!');
+                // 컨탭 페이지에 있을 땐
                 if (history.location.pathname === '/contap') {
-                  console.log('디패 로드 톡룸');
+                  // 받은탭 목록을 새로 가져와줘
                   await dispatch(loadReceiveTapToAxios());
                 }
+                // 받은 탭 알람을 켜줘
                 dispatch(setTapReceiveNoti(true));
               }
-              if (newNoti.type === 16) {
-                console.log('거절 되었어!');
-                dispatch(setTapRefuseNoti(true));
-              }
+              // if (newNoti.type === 16) {
+              //   console.log('거절 되었어!');
+              //   dispatch(setTapRefuseNoti(true));
+              // }
+
+              // 상대방이 탭 요청을 수락 했으면
               if (newNoti.type === 32) {
-                console.log('그랩되었어!');
+                // 탭 수락 알람을 켜줘
                 dispatch(setTapAcceptNoti(true));
               }
             }

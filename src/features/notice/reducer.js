@@ -5,7 +5,7 @@ import {
   BEFORE_CONTAP_NOTI,
   CHAT_NOTI,
   CONTAP_NOTI,
-  TAP_REFUSE_NOTI,
+  // TAP_REFUSE_NOTI,
   TAP_RECEIVE_NOTI,
   TAP_ACCEPT_NOTI,
 } from './types';
@@ -13,11 +13,11 @@ import {
 const initialState = {
   isBeforeChatNoti: false,
   isBeforeContapNoti: false,
-  isContapNoti: false,
-  isChatNoti: false,
   isTapReceiveNoti: false,
   isTapAcceptNoti: false,
-  isTapRefuseNoti: false,
+  // isContapNoti: !!(isTapReceiveNoti || isTapAcceptNoti),
+  isChatNoti: false,
+  // isTapRefuseNoti: false,
 };
 
 export default handleActions(
@@ -53,11 +53,11 @@ export default handleActions(
           draft.isContapNoti = true;
         }
       }),
-    [TAP_REFUSE_NOTI]: (state, action) =>
-      produce(state, (draft) => {
-        draft.isTapRefuseNoti = action.payload.isNoti;
-        draft.isContapNoti = true;
-      }),
+    // [TAP_REFUSE_NOTI]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.isTapRefuseNoti = action.payload.isNoti;
+    //     draft.isContapNoti = true;
+    //   }),
   },
   initialState,
 );

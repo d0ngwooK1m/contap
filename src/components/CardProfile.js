@@ -179,7 +179,8 @@ const Effect = styled.div`
     #9230df 405.42deg
   );
   filter: blur(50px);
-  animation: ${mainBack} 5s infinite linear alternate;
+  background-size: 200%;
+  animation: ${mainBack} 13s infinite linear alternate;
   /* z-index: -10; */
   /* text-align: center; */
 `;
