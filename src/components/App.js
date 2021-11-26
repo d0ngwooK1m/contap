@@ -18,7 +18,9 @@ import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
+
 import SizeCheck from './SizeCheck';
+// import SizeCheck from '../pages/SizeCheck';
 
 function App() {
   return (
