@@ -41,3 +41,4 @@ export const DELETE_HOBBY = 'cards/DELETE_HOBBY';
 export const LOAD_STACK = 'cards/LOAD_STACK';
 export const LOAD_HOBBY = 'cards/LOAD_HOBBY';
 export const DELETE_MY_CARD = 'cards/DELETE_MY_CARD';
+export const LOADING = 'cards/LOADING';

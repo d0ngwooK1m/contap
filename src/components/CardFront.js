@@ -128,8 +128,8 @@ const CardFront = ({ userId, contap, select }) => {
             show={showModal}
             onHide={closeModal}
             userId={currentUserId}
-            userName={front[userId].userName}
-            profile={front[userId].profile}
+            userName={front[currentUserId].userName}
+            profile={front[currentUserId].profile}
             category={cat}
           />
         )}

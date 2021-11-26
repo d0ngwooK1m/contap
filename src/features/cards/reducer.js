@@ -24,7 +24,8 @@ import {
   // IS_SUCCESS,
   LOAD_HOBBY,
   LOAD_STACK,
-  DELETE_MY_CARD
+  DELETE_MY_CARD,
+  LOADING
 } from './types';
 import { DraftsRounded } from '@mui/icons-material';
 
@@ -45,6 +46,7 @@ const initialState = {
   hobby: [],
   stackTag: [],
   hobbyTag: [],
+  isLoading:false,
 };
 
 export default handleActions(
@@ -113,6 +115,7 @@ export default handleActions(
         const { data } = action.payload;
         // console.log(action.payload);
         draft.current = data;
+        draft.isLoading = false
       }),
     [EDIT_CARD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
@@ -238,6 +241,10 @@ export default handleActions(
     [LOAD_HOBBY]: (state, action) =>
       produce(state, (draft) => {
         draft.hobbyTag = action.payload.tags;
+      }),
+      [LOADING]: (state, action) =>
+      produce(state, (draft) => {
+        draft.isLoading = action.payload.isLoading;
       }),
 
     // [IS_SUCCESS]: (state, action) =>

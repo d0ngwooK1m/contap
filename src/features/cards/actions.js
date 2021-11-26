@@ -33,6 +33,7 @@ import {
   LOAD_HOBBY,
   LOAD_STACK,
   DELETE_MY_CARD,
+  LOADING,
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
@@ -102,6 +103,7 @@ export const deleteHobby = createAction(DELETE_HOBBY, (hobby) => ({
 // export const isSuccess = createAction(IS_SUCCESS, (success) => ({ success }));
 export const loadStack = createAction(LOAD_STACK, (tags) => ({ tags }));
 export const loadHobby = createAction(LOAD_HOBBY, (tags) => ({ tags }));
+export const loading = createAction(LOADING, (isLoading) => ({ isLoading }));
 
 // 미들웨어
 
@@ -143,7 +145,7 @@ export const loadCurrentCardDB = (userId) => async (dispatch) => {
     console.log(userId);
     const res = await T.GET(`/main/${userId}`);
 
-    console.log('뒷면카드 조회값 확인===>', res.data.length === 0);
+    console.log('뒷면카드 조회값 확인===>', res.data);
     dispatch(loadCurrentCard(res.data));
   } catch (err) {
     console.log(err);

@@ -7,7 +7,7 @@ import { IconButton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import styled, { keyframes } from 'styled-components';
-import { loadCardFrontDB, loadCurrentCardDB } from '../features/cards/actions';
+import { loadCardFrontDB, loadCurrentCardDB, loading } from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
@@ -20,6 +20,7 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import {LoginAlert }from '../utils/alert';
 import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
+
 const CardList = () => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards);
@@ -40,7 +41,7 @@ const CardList = () => {
   React.useEffect(async () => {
     if (params.userId) {
       if (!token) {
-        const { isConfirmed, isDismissed } = await LoginAlert.fire({
+        const { isConfirmed, isDismissed, dismiss } = await LoginAlert.fire({
           title: (
             <>
               <LoginAlertSvg />
@@ -61,6 +62,7 @@ const CardList = () => {
         }
         return null;
       } else {
+        dispatch(loading(true))
         await dispatch(loadCurrentCardDB(parseInt(params.userId)));
       }
     }
