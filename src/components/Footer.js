@@ -17,7 +17,13 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
-  ${({ location }) => (location === '/' ? 'height: 80px;' : 'height: 41px;')};
+  ${({ location }) =>
+    location === '/' ||
+    location === '/login' ||
+    location === '/signup' ||
+    location === '/withdrawal'
+      ? 'height: 80px;'
+      : 'height: 41px;'};
   bottom: 0px;
   width: 100%;
   padding: 0px 164px;
