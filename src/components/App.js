@@ -51,11 +51,11 @@ function App() {
                 <PrivateRoute path="/edit" component={CardEdit} exact />
                 <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
               </Permit>
-              <Footer />
             </AlarmCheck>
           </WsNotiRoom>
         </Switch>
       </Wrap>
+      <Footer />
     </WrapApp>
   );
 }
@@ -74,10 +74,10 @@ const WrapApp = styled.div`
 `;
 
 const Wrap = styled.div`
-  /* max-width: 1440px;
-  min-width: 1110px; */
-  max-width: 1920px;
-  min-width: 1440px;
+  max-width: 1440px;
+  min-width: 1110px;
+  /* max-width: 1920px;
+  min-width: 1440px; */
   max-height: 100%;
   min-height: 100vh;
   width: 100vw;
