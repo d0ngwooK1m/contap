@@ -186,7 +186,7 @@ const ContapModal = ({
                       onClick={cancelSendTap}
                     >
                       <Text bold20 color={ColorStyle.Gray500}>
-                        요청 취소
+                        탭 취소
                       </Text>
                     </button>
                   </ButtonBox>

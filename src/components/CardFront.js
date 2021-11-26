@@ -3,12 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
 import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
+import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 
 import CardModal from './CardModal';
@@ -22,63 +21,66 @@ import {
   professionHoverColor,
 } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
+import {LoginAlert} from '../utils/alert';
 // import T from '../api/tokenInstance';
 
-const CardFront = ({ propUserId, contap, select }) => {
-  console.log('유저 아이디를 받아 왔어요! ===== > ', propUserId);
+const CardFront = ({ userId, contap, select }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
   const params = useParams();
-  const userId =
-    parseInt(params.userId) === propUserId
-      ? parseInt(params.userId)
-      : propUserId;
-  
-  
-      console.log(location)
-  
-  
-  
-  console.log(
-    parseInt(location),
-    userId,
-    parseInt(params.userId) === propUserId,
-  );
-  console.log(parseInt(params.userId));
-  console.log('주소창에 파람이 있으면 유저아이디로 쓸거야! ===== > ', userId);
+  const currentUserId =
+    parseInt(params.userId) === userId ? parseInt(params.userId) : userId;
+  console.log('파람 유저 아이디 =====>', params.userId);
 
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,
   );
+
   const isLogin = useSelector((state) => state.user.isAuthorized);
   const token = getToken();
+
   const [showModal, setShowMadal] = React.useState(
-    parseInt(params.userId) === userId ? true : false,
+    parseInt(params.userId) === currentUserId ? true : false,
   );
+
   const [sideModal, setSideModal] = React.useState(false);
 
-  const MySwal = withReactContent(Swal);
   // Modal Handler
   const showCardBackModal = async () => {
     if (!isLogin || !token) {
-      await MySwal.fire({
-        title: <strong>로그인을 해주세요!</strong>,
-        icon: 'error',
-        footer: '<a href="/login">로그인 하러 가기!</a>',
+      const {dismiss, isConfirmed,isDismissed } = await LoginAlert.fire({
+        title: (
+          <>
+            <LoginAlertSvg />
+            <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+              <Text bold24>회원이신가요?</Text>
+            </div>
+            <Text regular16>로그인을 먼저 해주세요</Text>
+          </>
+        ),
       });
+      if (dismiss === 'backdrop') {
+        return;
+      }
+      if (isConfirmed) {
+        history.push('/login');
+      } else if (isDismissed) {
+        history.push('/signup');
+      }
       return null;
     }
     if (!showModal) {
-      await dispatch(loadCurrentCardDB(userId));
+      await dispatch(loadCurrentCardDB(currentUserId));
     }
     setShowMadal(true);
-    history.push(`/back/${userId}`);
+    if (location.pathname === '/') {
+      history.push(`/card/${currentUserId}`);
+    }
     // await T.POST('/main/posttap', { userId});
   };
-
   const closeModal = () => {
-    if (params.userId !== null) {
+    if (params.userId !== null && location.pathname !== '/contap') {
       history.push('/');
     }
 
@@ -96,16 +98,16 @@ const CardFront = ({ propUserId, contap, select }) => {
     setShowMadal(true);
   };
 
-  const stackHashTags = front[userId].hashTags
+  const stackHashTags = front[currentUserId].hashTags
     ?.split('_')[0]
     ?.split('@')
     .slice(1, 2);
-  const interestHashTags = front[userId].hashTags
+  const interestHashTags = front[currentUserId].hashTags
     ?.split('_')[1]
     ?.split('@')
     .slice(1, 4);
 
-  const cat = category(front[userId].field);
+  const cat = category(front[currentUserId].field);
   const color = professionColor(cat);
   const hashColor = professionColor(cat, 70);
 
@@ -125,9 +127,9 @@ const CardFront = ({ propUserId, contap, select }) => {
           <CardModal
             show={showModal}
             onHide={closeModal}
-            userId={userId}
-            userName={front[userId].userName}
-            profile={front[userId].profile}
+            userId={currentUserId}
+            userName={front[currentUserId].userName}
+            profile={front[currentUserId].profile}
             category={cat}
           />
         )}
@@ -136,31 +138,31 @@ const CardFront = ({ propUserId, contap, select }) => {
             className="contapModal"
             show={showModal}
             onHide={closeModal}
-            userCradInfo={front[userId]}
+            userCradInfo={front[currentUserId]}
             category={cat}
             select={select}
           >
-            <CardFrontContap onModal={handleSideModal} userId={userId} />
+            <CardFrontContap onModal={handleSideModal} userId={currentUserId} />
           </ContapModal>
         )}
         {sideModal && (
           <CardModal
             show={sideModal}
             onHide={closeSideModal}
-            userId={userId}
-            userName={front[userId].userName}
-            profile={front[userId].profile}
+            userId={currentUserId}
+            userName={front[currentUserId].userName}
+            profile={front[currentUserId].profile}
             category={cat}
             contap
           />
         )}
       </div>
       <div style={{ display: 'flex' }}>
-        {front[userId].newFriend && select !== 'SendTap' && (
+        {front[currentUserId].newFriend && select !== 'SendTap' && (
           <NotiBadge className="NotiBadge" />
         )}
-        {front[userId].profile ? (
-          <ImageBox className="imageBox" src={front[userId].profile} />
+        {front[currentUserId].profile ? (
+          <ImageBox className="imageBox" src={front[currentUserId].profile} />
         ) : (
           <div className="basicProfile">
             <FrontProfileSvg />
@@ -169,7 +171,7 @@ const CardFront = ({ propUserId, contap, select }) => {
         <div className="userInfo">
           <div className="userName">
             <Text color="#F5F3F8" regular20>
-              {front[userId] ? front[userId].userName : null}
+              {front[currentUserId] ? front[currentUserId].userName : null}
             </Text>
           </div>
           <Text color={color} regular20>
@@ -199,7 +201,7 @@ const CardFront = ({ propUserId, contap, select }) => {
 };
 
 CardFront.propTypes = {
-  propUserId: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   select: PropTypes.string,
   contap: PropTypes.bool,
   grab: PropTypes.bool,

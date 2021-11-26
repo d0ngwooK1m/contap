@@ -37,13 +37,13 @@ function App() {
             <WsNotiRoom>
               <AlarmCheck>
                 <Header />
-                <PublicRoute path="/" component={CardList} exact />
                 <PublicRoute
-                  path="/back/:userId/:cardId"
+                  path={['/', '/card/:userId']}
                   component={CardList}
                   exact
                 />
                 <Permit>
+                  {/* <PrivateRoute path="/card/:userId" component={CardList} exact /> */}
                   <PrivateRoute path="/settings" component={Settings} exact />
                   <PrivateRoute path="/contap" component={Contap} exact />
                   <PrivateRoute path="/mypage" component={Mypage} exact />

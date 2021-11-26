@@ -56,8 +56,8 @@ const CardAdd = () => {
         </TextDiv>
         {cardList.allIds.map((cardId) => {
           return (
-            <Grid>
-              <CardPortfolio key={cardId} cardId={cardId} />
+            <Grid key={cardId}>
+              <CardPortfolio cardId={cardId} />
             </Grid>
           );
         })}
@@ -84,8 +84,8 @@ const CardAdd = () => {
       </Grid>
       {cardList.allIds.map((cardId) => {
         return (
-          <Grid>
-            <CardPortfolio key={cardId} cardId={cardId} />
+          <Grid key={cardId}>
+            <CardPortfolio cardId={cardId} />
           </Grid>
         );
       })}

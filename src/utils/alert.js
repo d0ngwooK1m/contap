@@ -59,8 +59,6 @@ export const BasicAlert2 = MySwal.mixin({
   customClass: {
     popup: 'swal-popup',
     title: 'swal-title',
-    cancelButton: 'swal-cancel',
-    confirmButton: 'swal-confirm',
   },
 });
 
@@ -78,5 +76,32 @@ export const Toast = MySwal.mixin({
   customClass: {
     popup: 'swal-toast-popup',
     title: 'swal-toast-title',
+  },
+});
+
+export const LoginAlert = MySwal.mixin({
+  showCancelButton: true,
+  confirmButtonText: (
+    <Text bold20 color={ColorStyle.Gray500}>
+      로그인
+    </Text>
+  ),
+  cancelButtonText: (
+    <Text bold20 color={ColorStyle.Gray500}>
+      회원가입
+    </Text>
+  ),
+  reverseButtons: true,
+  confirmButtonColor: '#8C4DFF',
+  cancelButtonColor: '#1d1d22',
+  background: '#1d1d22',
+  position: 'relative',
+  padding: '40px',
+  customClass: {
+    popup: 'swal-popup',
+    title: 'swal-title',
+    cancelButton: 'login-cancel',
+    confirmButton: 'login-confirm',
+    actions: 'login-action',
   },
 });
