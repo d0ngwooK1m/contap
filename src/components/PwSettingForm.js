@@ -176,6 +176,7 @@ const PwSettingForm = () => {
 
 const Wrapper = styled.div`
   width: 635px;
+  /* height: 800px; */
   margin: 64px 0px 0px 125px;
   position: relative;
 `;

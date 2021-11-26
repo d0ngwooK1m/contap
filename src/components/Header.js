@@ -375,7 +375,8 @@ const HeaderWrapper = styled.div`
   width: 100%;
   max-width: 1112px;
   height: 88px;
-  display: flex;
+  padding: 0px 164px;
+  ${({location}) => (location === '/' || location === '/card/:userId' || location === '/settings' || location === '/mypage' || location === '/edit' || location === '/grabtalk'  ?  'display:flex;': 'display:none;')}
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;

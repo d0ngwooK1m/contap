@@ -25,11 +25,14 @@ const FooterWrapper = styled.div`
   box-sizing: border-box;
   padding: 0px 164px;
   ${({ location }) =>
-    location === '/login' ||
-    location === '/signup' ||
-    location === '/withdrawal'
-      ? 'display: none;'
-      : 'display: flex;'};
+    location === '/' ||
+    location === '/card/:userId' ||
+    location === '/settings' ||
+    location === '/mypage' ||
+    location === '/edit' ||
+    location === '/grabtalk'
+      ? 'display:flex;'
+      : 'display:none;'}
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
