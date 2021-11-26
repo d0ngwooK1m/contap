@@ -6,17 +6,27 @@ export const mainSteps = [
   {
     target: '.my-page',
     content: (
-      <div>
-        <Text color={ColorStyle.BackGround300} bold20>
-          <span
-            style={{
-              color: '#8C4DFF',
-            }}
-          >
-            프로필
-          </span>
-          을 만들어 볼까요?
-        </Text>
+      <div
+        style={{
+          margin: '10px 0px 10px 0px',
+        }}
+      >
+        <div
+          style={{
+            margin: '5px 0px 30px 0px',
+          }}
+        >
+          <Text color={ColorStyle.BackGround300} bold20>
+            <span
+              style={{
+                color: '#8C4DFF',
+              }}
+            >
+              프로필
+            </span>
+            을 만들어 볼까요?
+          </Text>
+        </div>
 
         <div>
           <Text color={ColorStyle.BackGround300} regular16>
@@ -32,6 +42,7 @@ export const mainSteps = [
     hideFooter: true,
     placement: 'bottom',
     spotlightClicks: true,
+    disableScrolling: true,
     styles: {
       options: {
         zIndex: 10000,
@@ -45,18 +56,28 @@ export const settingSteps = [
   {
     target: '.my-setting',
     content: (
-      <div>
-        <Text color={ColorStyle.BackGround300} bold20>
-          이제{' '}
-          <span
+      <div
+        style={{
+          margin: '5px 0px 10px 0px',
+        }}
+      >
+        <div
             style={{
-              color: '#8C4DFF',
-            }}
-          >
-            Tap
-          </span>{' '}
-          할 수 있어요
-        </Text>
+            margin: '5px 0px 20px 0px',
+          }}
+        >
+          <Text color={ColorStyle.BackGround300} bold20>
+            이제{' '}
+            <span
+              style={{
+                color: '#8C4DFF',
+              }}
+            >
+              Tap
+            </span>{' '}
+            할 수 있어요
+          </Text>
+        </div>
 
         <div>
           <Text color={ColorStyle.BackGround300} regular16>
@@ -68,11 +89,12 @@ export const settingSteps = [
       </div>
     ),
     disableBeacon: true,
-    disableOverlayClose: true,
-    hideCloseButton: false,
+    // disableOverlayClose: true,
+    // hideCloseButton: false,
     hideFooter: true,
     placement: 'bottom',
     spotlightClicks: true,
+    disableScrolling: true,
     styles: {
       options: {
         zIndex: 10000,

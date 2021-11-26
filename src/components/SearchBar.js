@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { debounce } from 'lodash';
 import styled from 'styled-components';
 import {
   setLoading,
@@ -57,7 +58,7 @@ const SearchBar = () => {
     }
   }, []);
 
-  React.useEffect(() => {
+  React.useEffect(debounce(() => {
     searchData.filter((val) => {
       const searchIndex = val.toLocaleLowerCase().indexOf(data.toLocaleLowerCase());
       if (data.toLocaleLowerCase() === '') {
@@ -82,7 +83,7 @@ const SearchBar = () => {
     if (searchArr !== []) {
       dispatch(searchArrList(searchArr));
     }
-  }, [data]);
+  }, 1000), [data]);
 
   const page = useSelector((state) => state.cards.searchInfo?.page);
   const field = useSelector((state) => state.cards.searchInfo?.field);
@@ -193,7 +194,7 @@ const SearchBar = () => {
               setData('');
             }}
           >
-            <CloseSvg />
+            <StyledCloseSvg />
           </CloseWrapper>
         ) : null}
         {/* {!tag ? (
@@ -230,6 +231,7 @@ const SearchBar = () => {
             onClick={() => {
               setClick(true);
             }}
+            maxLength='28'
           />
         <StyledBtn
           type="button"
@@ -243,7 +245,7 @@ const SearchBar = () => {
             dispatch(searchInfoDB(searchInfo));
           }}
         >
-          <SearchSvg stroke={ColorStyle.PrimaryPurple} />
+          <StyledSearchSvg />
         </StyledBtn>
       </SearchWrapper>
       <SearchContent>
@@ -437,8 +439,8 @@ const StyledInput = styled.input`
   color: ${ColorStyle.Gray500};
   font-family: 'Pretendard';
   font-style: normal;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 28px;
   font-weight: 400;
   background-color: ${ColorStyle.BackGround300};
   color: white;
@@ -446,8 +448,8 @@ const StyledInput = styled.input`
     color: ${ColorStyle.Gray300};
     font-family: 'Pretendard';
     font-style: normal;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 20px;
+    line-height: 28px;
     font-weight: 400;
     background-color: ${ColorStyle.BackGround300};
   }
@@ -473,6 +475,21 @@ const StyledBtn = styled.button`
   top: 15px;
   right: 26px;
 `;
+
+const StyledCloseSvg = styled(CloseSvg)`
+  width: 28px;
+  height: 28px;
+`;
+
+const StyledSearchSvg = styled(SearchSvg)`
+  width: 30px;
+  height: 30px;
+  stroke: ${ColorStyle.PrimaryPurple};
+  &:hover {
+    stroke: ${ColorStyle.HoverPurple};
+    transition: 0.3s;
+  }
+`
 
 const SearchContent = styled.div`
   width: fit-content;

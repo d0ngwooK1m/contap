@@ -30,8 +30,10 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [certificationNum, setCertificationNum] = React.useState('');
   const [emailDupCheck, setEmailDupCheck] = React.useState(true);
+  const [emailError, setEmailError] = React.useState('');
   const [authNumCheck, setAuthNumCheck] = React.useState(true);
   // const [sendEmail, setSendEmail] = React.useState(false);
+  const [reset, setReset] = React.useState(false);
   const timerReset = useSelector((state) => state.user.timerReset);
   console.log('타이머 체킹===>', timerReset);
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
@@ -48,17 +50,20 @@ const Signup = () => {
       // console.log('이메일 들어가는지 확인===>', sendEmail);
       console.log(emailInfo);
       const res = await axios.post(`${baseURL}/email/send`, emailInfo);
-      const { data } = res;
-      console.log(data);
+      // const { data } = res;
+      console.log(res.data.errorMessage);
 
-      if (data.errorMessage === '이미 사용 중인 이메일 입니다.') {
-        return setEmailDupCheck(false);
+      if (res.data.errorMessage === '존재하는 이메일입니다') {
+        setEmailDupCheck(false);
+        setEmailError('존재하는 이메일입니다');
       }
 
-      setEmailDupCheck(true);
-      dispatch(emailAuth(emailInfo));
+      if (res.data.result === 'success') {
+        setEmailDupCheck(true);
+        dispatch(emailAuth(emailInfo));
+      }
 
-      return data;
+      return res.data;
     } catch (error) {
       console.log(error);
       return error.Message;
@@ -72,7 +77,7 @@ const Signup = () => {
       const { data } = res;
       console.log('====== 안되는곳',data);
 
-      if (data.errorMessage === '인증번호가 일치하지 않습니다.') {
+      if (data.errorMessage === '인증번호가 일치하지 않습니다') {
         return setAuthNumCheck(false);
       }
 
@@ -108,7 +113,9 @@ const Signup = () => {
       if (data.result === 'fail') {
         console.log(data);
         if (data.errorMessage === null) {
-          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
+          setErrorMessage('잘못된 정보가 있습니다');
+        } else if (data.errorMessage === '비밀번호가 맞지 않습니다') {
+          setErrorMessage('비밀번호가 일치하지 않습니다');
         } else {
           setErrorMessage(data.errorMessage);
         }
@@ -217,7 +224,7 @@ const Signup = () => {
                           type="text"
                           // placeholder="중복되지 않는 닉네임을 입력해주세요"
                           {...register('userName', {
-                            required: '닉네임을 입력해주세요',
+                            required: '이름을 입력해주세요',
                           })}
                         />
                         <StyledLabel>
@@ -241,11 +248,11 @@ const Signup = () => {
                             required: '비밀번호를 입력해주세요',
                             maxLength: {
                               value: 20,
-                              message: '비밀번호는 최대 20자입니다',
+                              message: '비밀번호는 6~20자리로 해주세요',
                             },
                             minLength: {
                               value: 6,
-                              message: '비밀번호는 최소 6자 이상입니다',
+                              message: '비밀번호는 6~20자리로 해주세요',
                             },
                           })}
                         />
@@ -272,11 +279,11 @@ const Signup = () => {
                               required: '비밀번호를 입력해주세요',
                               maxLength: {
                                 value: 20,
-                                message: '비밀번호는 최대 20자입니다',
+                                message: '비밀번호는 6~20자리로 해주세요',
                               },
                               minLength: {
                                 value: 6,
-                                message: '비밀번호는 최소 6자 이상입니다',
+                                message: '비밀번호는 6~20자리로 해주세요',
                               },
                             })}
                           />
@@ -357,9 +364,10 @@ const Signup = () => {
                       {errors.email && (
                         <ErrorMessage>{errors.email.message}</ErrorMessage>
                       )}
+                      {/* {console.log('결과===>', emailError, emailDupCheck)}     */}
                       {!errors.email && !emailDupCheck && (
                         <ErrorMessage>
-                          이미 사용 중인 이메일 입니다.
+                           존재하는 이메일입니다
                         </ErrorMessage>
                       )}
                     </MarginWrapper>
@@ -399,7 +407,7 @@ const Signup = () => {
                           <Timer mm={3} ss={0} />        
                         </Text>         */}
                         {/* {timerReset ? <Timer mm={3} ss={0} /> : <Timer mm={10} ss={0} />} */}
-                        <Timer mm={3} ss={0} />
+                        <Timer mm={3} ss={0} reset={reset} />
                       </CounterWrapper>
                       <RelativeInputWrapper>
                         <InputWrapper>
@@ -410,7 +418,7 @@ const Signup = () => {
                               required: '인증번호를 입력해주세요',
                               pattern: {
                                 value: /^([0-9]{6})$/,
-                                message: '인증번호가 올바르지 않습니다.',
+                                message: '인증번호가 올바르지 않습니다',
                               },
                             })}
                             value={certificationNum}
@@ -433,7 +441,7 @@ const Signup = () => {
                       )}
                       {!errors.certificationNumber && !authNumCheck && (
                         <ErrorMessage>
-                          인증번호가 일치하지 않습니다.
+                          인증번호가 일치하지 않습니다
                         </ErrorMessage>
                       )}
                     </MarginWrapper>
@@ -507,7 +515,12 @@ const Signup = () => {
                             email: checkedEmail,
                           };
                         sendEmailAuth(emailInfo);
-                        dispatch(emailTimer(false));
+                        // dispatch(emailTimer(false));
+                        if (reset) {
+                          setReset(false);
+                        } else {
+                          setReset(true);
+                        }
                         }}
                       >
                         이메일 다시 보내기
@@ -531,7 +544,7 @@ const SignupWrapper = styled.div`
 `;
 
 const LeftWrapper = styled.div`
-  width: 735px;
+  width: 50vw;
   height: 1080px;
   background: linear-gradient(153.56deg, #8c4dff 0%, rgba(29, 29, 34, 0) 25%);
   background-color: rgba(0, 0, 0, 0.5);
@@ -557,7 +570,7 @@ const SvgWrapper = styled.div`
 `;
 
 const RightWrapper = styled.div`
-  width: 700px;
+  width: 50vw;
   height: 1080px;
   background-color: ${ColorStyle.BackGround};
   color: ${ColorStyle.Gray500};
@@ -613,7 +626,7 @@ const EmailWrapper = styled.div`
 `;
 
 const GotoLoginWrap = styled.div`
-  width: 510px;
+  width: 530px;
   height: 100vh;
   display: flex;
   margin: auto;
@@ -731,7 +744,7 @@ const MoreWrapper = styled.div`
 `;
 
 const MoreContent = styled.div`
-  width: 100%;
+  width: 90%;
   height: fit-content;
   background-color: ${ColorStyle.BackGround300};
   padding: 30px;

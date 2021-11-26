@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
 import { ReactComponent as WithdrawalSvg } from '../svgs/WithdrawalComplete.svg';
 
 const WithdrawalCompleteForm = () => {
-  const history = useHistory();
+  // const history = useHistory();
 
   return (
     <Outer>
@@ -21,7 +21,7 @@ const WithdrawalCompleteForm = () => {
         <SubmitBtn
           type="button"
           onClick={() => {
-            history.push('/');
+            window.location.href = '/';
           }}
         >
           <Text color="white" regular16>

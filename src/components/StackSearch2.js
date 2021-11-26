@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import React from 'react';
 import styled from 'styled-components';
+import { debounce } from 'lodash';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -82,7 +83,7 @@ const StackSearch2 = () => {
     dispatch(searchTagListDB());
   }, []);
 
-  React.useEffect(() => {
+  React.useEffect(debounce(() => {
     if (data === '') {
       setClick(false);
     }
@@ -98,7 +99,7 @@ const StackSearch2 = () => {
     if (searchArr !== []) {
       dispatch(searchStackList(searchArr));
     }
-  }, [data]);
+  }, 1000), [data]);
 
   React.useEffect(() => {
     setData('');
