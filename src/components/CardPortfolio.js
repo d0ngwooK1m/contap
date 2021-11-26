@@ -155,6 +155,7 @@ const CardPortfolio = ({ cardId }) => {
           <TagBox
             value={tagsStr}
             placeholder="프로젝트에서 담당했던 일을 태그에 적어주세요"
+            maxLength="50"
             onChange={(e) => {
               setTagsStr(e.target.value);
             }}
@@ -347,7 +348,7 @@ const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
   margin-top: 40px;
-  background-color: ${ColorStyle.Gray100 + Opacity[15]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};

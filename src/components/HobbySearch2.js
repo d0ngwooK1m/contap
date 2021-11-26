@@ -203,7 +203,13 @@ const HobbySearch2 = () => {
         <AllBox> {ArrayData}</AllBox>
       ) : (
         <AllBox>
-          <div style={{ position: 'absolute', top: '-7%', left: '2%' }}>
+          <div
+            style={{
+              position: 'absolute',
+              top: '-7%',
+              left: '1%',
+            }}
+          >
             <Text regular16 color={ColorStyle.PrimaryPurple}>
               {maxMessage ? '3개 모두 선택하셨어요!' : ''}
             </Text>
@@ -224,12 +230,14 @@ const Box = styled.div`
 
 const AllBox = styled.div`
   display: flex;
-  margin: 43px 165px 119px 165px;
+  width: 1100px;
+  margin: 63px 165px 119px 154px;
   justify-content: start;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   position: relative;
+  padding-top: 10px;
 `;
 
 const TagDiv = styled.div`

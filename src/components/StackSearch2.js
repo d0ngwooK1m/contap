@@ -17,49 +17,6 @@ import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
 // import { Grid } from '../elements';
 
-// const searchData = [
-//   'Spring',
-//   'Spring Boot',
-//   'Go',
-//   'React',
-//   'React Native',
-//   'Flutter',
-//   'Node.js',
-//   'Python',
-//   'C++',
-//   'C',
-//   'C#',
-//   'Angular',
-//   'Vue.js',
-//   'Express',
-//   'Django',
-//   'Next.js',
-//   'SQL',
-//   'Nest.js',
-//   'Java',
-//   'HTML CSS',
-//   'TypeScript',
-//   'Android Studio',
-//   'Ruby',
-//   'JavaScript',
-//   'Swift',
-//   'Assembly',
-//   'PHP',
-//   'Nuxt.js',
-//   'Flask',
-//   'JQuery',
-//   'Figma',
-//   'After Effects',
-//   'Illustrator',
-//   'Sketch',
-//   'Adobe XD',
-//   'Photoshop',
-//   'Proto.io',
-//   'AutoCAD',
-//   'Premiere Pro',
-//   'Zeplin',
-// ];
-
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
 const StackSearch2 = () => {
@@ -256,7 +213,7 @@ const Box = styled.div`
 const AllBox = styled.div`
   display: flex;
   width: 1200px;
-  margin: 43px 165px 72px 165px;
+  margin: 43px 165px 72px 157px;
   padding-bottom: 72px;
   justify-content: start;
   align-items: center;
