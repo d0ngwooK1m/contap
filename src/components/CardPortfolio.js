@@ -13,7 +13,8 @@ import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
 import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
 import { ReactComponent as TagIcon } from '../svgs/TagIcon.svg';
 import { ReactComponent as Link } from '../svgs/Link.svg';
-import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
+import { ReactComponent as CloseBtn } from '../svgs/CloseBtn.svg';
+// import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import {
   FontFamily,
   FontScale,
@@ -21,7 +22,7 @@ import {
   Opacity,
 } from '../utils/systemDesign';
 
-const CardPortfolio = ({ cardId }) => {
+const CardPortfolio = ({ cardId, onHide }) => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards.backCard);
   console.log(cardList);
@@ -36,6 +37,8 @@ const CardPortfolio = ({ cardId }) => {
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
+
+  const disabled = title !== '' && desc !== '' && tagsStr !== '';
 
   const deleteCardBack = async () => {
     const { isConfirmed } = await DeleteAlert.fire({
@@ -96,6 +99,7 @@ const CardPortfolio = ({ cardId }) => {
     };
 
     dispatch(updateCardDB(cardId, content));
+    onHide();
     setClick(!click);
   };
 
@@ -130,9 +134,23 @@ const CardPortfolio = ({ cardId }) => {
               setTitle(e.target.value);
             }}
           />
-          <Grid width="8%">
-            <AddBtn cursor="pointer" onClick={edit} />
-          </Grid>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <AddBtn onClick={edit} disabled={disabled}>
+              <Text
+                bold20
+                color={disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300}
+              >
+                작성 완료
+              </Text>
+            </AddBtn>
+            <div
+              onClick={() => {
+                onHide();
+              }}
+            >
+              <CloseBtn cursor="pointer" />
+            </div>
+          </div>
         </EditDiv>
         <MainDiv>
           <MainBox
@@ -283,6 +301,38 @@ const ProjectDiv = styled.div`
     }
     .deleteBtn {
       width: 64px;
+    }
+  }
+`;
+
+const AddBtn = styled.div`
+  width: 111px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid
+    ${({ disabled }) =>
+      disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 700;
+  margin-right: 36px;
+  margin-bottom: 40px;
+  background: ${ColorStyle.BackGround300};
+  p {
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+  }
+  &:hover {
+    background-color: ${({ disabled }) =>
+      disabled ? ColorStyle.PrimaryPurple : ColorStyle.BackGround300};
+    border: 1px solid
+      ${({ disabled }) =>
+        disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300};
+    transition: 0.3s;
+    p {
+      color: ${({ disabled }) =>
+        disabled ? ColorStyle.Gray500 : ColorStyle.Gray300};
     }
   }
 `;

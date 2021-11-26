@@ -4,7 +4,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 
-import { history } from '../features/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createCardDB,
@@ -30,7 +29,7 @@ import { Grid, Text } from '../elements';
 
 const CardBackWrite = ({ onHide }) => {
   const dispatch = useDispatch();
-  // const { register } = useForm();
+
   const cardCount = useSelector((state) => state.cards.backCardIdx);
 
   // 입력 값 저장

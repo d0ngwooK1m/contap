@@ -57,7 +57,7 @@ const CardAdd = () => {
         {cardList.backCardIdx.map((cardId) => {
           return (
             <Grid key={cardId}>
-              <CardPortfolio cardId={cardId} />
+              <CardPortfolio cardId={cardId} onHide={closeClick} />
             </Grid>
           );
         })}
@@ -85,7 +85,7 @@ const CardAdd = () => {
       {cardList.backCardIdx.map((cardId) => {
         return (
           <Grid key={cardId}>
-            <CardPortfolio cardId={cardId} />
+            <CardPortfolio cardId={cardId} onHide={closeClick} />
           </Grid>
         );
       })}
