@@ -14,11 +14,8 @@ const AlarmCheck = ({ children }) => {
   const ALARM = 8;
 
   React.useEffect(async () => {
-    console.log('로그인 되어있는지?===>', checkToken);
     if (checkToken !== undefined) {
-      console.log('통과하는지 체크');
       const { data } = await T.GET('/main/info');
-      console.log('alram 결과값===>', data);
       // console.log(data & PHONE_TUTORIAL, data & PROFILE_TUTORIAL, data & CAN_OTHER_READ, data & ALARM);
       const alarmInfo = {
         phoneTutorial: data & PHONE_TUTORIAL,

@@ -61,13 +61,19 @@ function App() {
 }
 
 const WrapApp = styled.div`
-  max-width: 1920px;
-  min-width: 1440px;
-  width: 100vw;
-  max-height: 100%;
-  min-height: 100%;
+  position: fixed;
+  /* max-width: 1920px; */
+  /* min-width: 1440px; */
+  /* width: 100vw; */
+  /* max-height: 100%; */
+  /* min-height: 100%; */
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   margin: auto;
   padding: 0px;
+  overflow: auto;
   background-position: center;
   background-size: cover;
   background-color: #0f0a1a;

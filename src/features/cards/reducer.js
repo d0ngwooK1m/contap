@@ -123,23 +123,19 @@ export default handleActions(
     [EDIT_CARD_PROFILE]: (state, action) =>
       produce(state, (draft) => {
         // const { userId } = action.payload;
-        console.log('카드 프로필 확인===>', action.payload);
         draft.profileCard = action.payload;
         // draft.allIds.unshift(userId);
       }),
     [SET_PREVIEW]: (state, action) =>
       produce(state, (draft) => {
         draft.preview = action.payload.preview;
-        console.log(action.payload.preview);
       }),
     [LOAD_MY_CARD]: (state, action) =>
       produce(state, (draft) => {
         draft.backCard = {};
         draft.backCardIdx = [];
-        console.log(action.payload);
         const { card } = action.payload;
         const cardList = card.cardDtoList;
-        console.log(cardList);
         draft.current = card;
         // draft.cardList = cardList;
         cardList.forEach((doc) => {
@@ -150,21 +146,17 @@ export default handleActions(
     [CREATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         const { cardId } = action.payload.card;
-        console.log(cardId);
         draft.backCard[cardId] = action.payload.card;
         draft.backCardIdx.unshift(cardId);
       }),
     [UPDATE_CARD]: (state, action) =>
       produce(state, (draft) => {
         // draft.current = action.payload;
-        console.log(action.payload);
         draft.backCard[action.payload.card.cardId] = action.payload.card;
-        console.log(action.payload.card.cardId);
       }),
     [DELETE_CARD]: (state, action) =>
       produce(state, (draft) => {
         delete draft.backCard[action.payload.cardId];
-        console.log(action.payload.cardId);
         draft.backCardIdx = draft.backCardIdx.filter(
           (id) => id !== Number(action.payload.cardId),
         );
@@ -179,11 +171,6 @@ export default handleActions(
       }),
     [SET_STACK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(
-          '태그 리듀서 확인====>',
-          Array.isArray(action.payload.stack),
-        );
-        console.log('태그 리듀서 액션 확인====>', action.payload.stack);
         if (
           Array.isArray(action.payload.stack) &&
           action.payload.stack !== ['']
@@ -206,7 +193,6 @@ export default handleActions(
       }),
     [SET_HOBBY]: (state, action) =>
       produce(state, (draft) => {
-        console.log(Array.isArray(action.payload.hobby));
         if (
           Array.isArray(action.payload.hobby) &&
           action.payload.hobby !== ['']

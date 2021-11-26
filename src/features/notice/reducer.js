@@ -36,6 +36,7 @@ export default handleActions(
       }),
     [CHAT_NOTI]: (state, action) =>
       produce(state, (draft) => {
+        console.log('리덕스 노티 ====>', action.payload.isNoti);
         draft.isChatNoti = action.payload.isNoti;
       }),
     [TAP_RECEIVE_NOTI]: (state, action) =>

@@ -14,8 +14,6 @@ import { ColorStyle } from '../utils/systemDesign';
 const Contap = () => {
   const isReceiveTap = useSelector((state) => state.notice.isTapReceiveNoti);
   const isAcceptTap = useSelector((state) => state.notice.isTapAcceptNoti);
-  console.log('받은탭 알람', isReceiveTap);
-  console.log('그랩 알람', isAcceptTap);
   const content = [
     {
       id: 'ReceiveTap',

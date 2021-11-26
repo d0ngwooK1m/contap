@@ -31,7 +31,6 @@ const CardFront = ({ userId, contap, select }) => {
   const params = useParams();
   const currentUserId =
     parseInt(params.userId) === userId ? parseInt(params.userId) : userId;
-  console.log('파람 유저 아이디 =====>', params.userId);
 
   const front = useSelector((state) =>
     contap ? state.taps.byId : state.cards.byId,

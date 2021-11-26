@@ -25,7 +25,6 @@ const useUserAuthCheck = () => {
           removeToken(TOKEN_KEY);
           return null;
         }
-        console.log('어어어스===============', data);
         const { userName, email, profile } = data;
 
         dispatch(authorize(email, userName, profile));

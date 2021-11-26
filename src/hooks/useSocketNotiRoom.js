@@ -23,6 +23,7 @@ export default function useSocketNotiRoom() {
   const sock = new SockJS(`${baseURL}/ws-stomp`);
   const ws = StompJs.over(sock);
   const token = getToken();
+  console.log('알람 받은 후', isChatNoti);
 
   console.log('현재 페이지 =====>', window.location.pathname);
   const history = useHistory();
@@ -37,10 +38,11 @@ export default function useSocketNotiRoom() {
         ws.subscribe(
           `/user/sub/user`,
           async (noti) => {
+            console.log('노티 들어올 때 =====> ', isChatNoti);
             if (!isChatNoti) {
               const newNoti = JSON.parse(noti.body);
               console.log('노티 들어옴!!!!!!!!!!!!!!!!!!!!!!!!', newNoti);
-
+              console.log('현재 챗 노티', isChatNoti);
               // chat 보냈을 때 채팅방에 둘다 있을 때 타입 1
               // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 2
               // chat 보냈을 때 상대방이 로그아웃 타입 4
@@ -51,8 +53,9 @@ export default function useSocketNotiRoom() {
                 if (history.location.pathname === '/grabtalk') {
                   console.log('디패 로드 톡룸');
                   await dispatch(loadTalkRoomListToAxios());
+                } else {
+                  await dispatch(setChatNoti(true));
                 }
-                dispatch(setChatNoti(true));
               }
               if (newNoti.type === 8) {
                 console.log('tap 요청 받았어!');

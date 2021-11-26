@@ -61,10 +61,6 @@ const Header = () => {
   const settingAlarm = useSelector(
     (state) => state.user.tutorial.phoneTutorial,
   );
-  console.log('마이페이지 튜토리얼===>', mypageAlarm);
-  console.log('세팅 튜토리얼===>', settingAlarm);
-  console.log(open);
-  console.log(isSetting, isMyPage);
   // console.log('이전 주소 확인====>', `${history.goBack()}`)
 
   // 로그인 체크
@@ -128,10 +124,8 @@ const Header = () => {
   const handleisSetting = async (event) => {
     setIsSetting(true);
     setAnchorEl(event.currentTarget);
-    console.log('세팅알람체크===>', settingAlarm);
     if (!settingAlarm) {
       const res = await T.POST(`/main/tutorial?tutorialNum=0`);
-      console.log('세팅버튼 클릭===>', res);
       dispatch(phoneTutorialCheck(true));
     }
     // const res = await T.POST(`/main/tutorial?tutorialNum=0`);
@@ -381,6 +375,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   background-color: #0f0a1aff;
   z-index: 1001;
+  overflow: auto;
   margin: auto;
 
   .my-page {

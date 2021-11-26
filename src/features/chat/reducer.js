@@ -30,17 +30,13 @@ export default handleActions(
     [LOAD_MESSAGES]: (state, action) =>
       produce(state, (draft) => {
         draft.messages = [];
-        console.log('LOAD_MESSAGES');
-        console.log(action.payload);
         draft.messages = action.payload.messageList;
         draft.isNext = true;
         draft.isLoading = false;
       }),
     [NEXT_PAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.messageList.length);
         if (action.payload.messageList.length < 15) {
-          console.log('여기 걸렸음');
           draft.isNext = false;
           action.payload.messageList.forEach((doc) => {
             draft.messages.unshift(doc);
@@ -55,18 +51,14 @@ export default handleActions(
       }),
     [GET_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log('GET_MESSAGE');
-        console.log('액션 ======>', action.payload);
-        console.log('스테이트 ======>', state.messages);
-
         draft.messages.push(action.payload.message);
         draft.isLoading = false;
       }),
     [WRITE_MESSAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log('WRITE_MESSAGE');
+        // console.log('WRITE_MESSAGE');
         console.log(action.payload);
-        console.log(draft);
+        // console.log(draft);
         draft.isLoading = false;
       }),
     [LOAD_TALK_ROOM_LIST]: (state, action) =>
@@ -82,9 +74,7 @@ export default handleActions(
       }),
     [LOAD_NONETALK_ROOM_LIST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         draft.noneChatList = action.payload.roomList;
-        console.log(state.noneChatList);
       }),
     [CLOSE_NONETALK_ROOM_LIST]: (state) =>
       produce(state, (draft) => {
@@ -104,7 +94,6 @@ export default handleActions(
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
         console.log('LOADING');
-        console.log(action.payload);
         draft.isLoading = action.payload.isLoading;
       }),
   },

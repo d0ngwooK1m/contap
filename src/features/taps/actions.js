@@ -42,7 +42,6 @@ export const loadSendTapToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/dotap/0');
     // const { data } = await T.GET('/contap/dotap');
-    console.log('보낸탭 데이터 ============> ', data);
 
     dispatch(loadSendTap(data));
   } catch (error) {
@@ -52,9 +51,7 @@ export const loadSendTapToAxios = () => async (dispatch) => {
 
 export const loadReceiveTapToAxios = () => async (dispatch) => {
   try {
-    console.log('받은탭 ============> ', '/contap/gettap/0');
     const { data } = await T.GET('/contap/gettap/0');
-    console.log('받은탭 데이터============> ', data);
     // const { data } = await T.GET('/contap/gettap');
     dispatch(loadReceiveTap(data));
   } catch (error) {
@@ -94,11 +91,10 @@ export const removeReceiveTapToAxios =
   (state, tapId, userId) => async (dispatch) => {
     console.log(tapId);
     try {
-      const { data } = await T.POST(
+      await T.POST(
         `/contap/${state === 'reject' ? 'reject' : 'accept'}`,
         tapId,
       );
-      console.log('이게 된다고?.. =====>', data);
       dispatch(removeReceiveTap(userId));
     } catch (error) {
       console.error(error);
@@ -108,8 +104,7 @@ export const removeReceiveTapToAxios =
 export const removeSendTapToAxios = (tapId, userId) => async (dispatch) => {
   console.log(tapId);
   try {
-    const { data } = await T.POST(`/contap/deltap`, tapId);
-    console.log('샌드 삭제 =====>', data);
+    await T.POST(`/contap/deltap`, tapId);
     dispatch(removeSendTap(userId));
   } catch (error) {
     console.error(error);
