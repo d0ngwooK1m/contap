@@ -13,7 +13,8 @@ import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
 import { ReactComponent as DeleteBtn } from '../svgs/DeleteBtn.svg';
 import { ReactComponent as TagIcon } from '../svgs/TagIcon.svg';
 import { ReactComponent as Link } from '../svgs/Link.svg';
-import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
+import { ReactComponent as CloseBtn } from '../svgs/CloseBtn.svg';
+// import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
 import {
   FontFamily,
   FontScale,
@@ -21,7 +22,7 @@ import {
   Opacity,
 } from '../utils/systemDesign';
 
-const CardPortfolio = ({ cardId }) => {
+const CardPortfolio = ({ cardId, onHide }) => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards.backCard);
   console.log(cardList);
@@ -36,6 +37,8 @@ const CardPortfolio = ({ cardId }) => {
 
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
+
+  const disabled = title !== '' && desc !== '' && tagsStr !== '';
 
   const deleteCardBack = async () => {
     const { isConfirmed } = await DeleteAlert.fire({
@@ -96,6 +99,7 @@ const CardPortfolio = ({ cardId }) => {
     };
 
     dispatch(updateCardDB(cardId, content));
+    onHide();
     setClick(!click);
   };
 
@@ -130,9 +134,23 @@ const CardPortfolio = ({ cardId }) => {
               setTitle(e.target.value);
             }}
           />
-          <Grid width="8%">
-            <AddBtn cursor="pointer" onClick={edit} />
-          </Grid>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <AddBtn onClick={edit} disabled={disabled}>
+              <Text
+                bold20
+                color={disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300}
+              >
+                작성 완료
+              </Text>
+            </AddBtn>
+            <div
+              onClick={() => {
+                onHide();
+              }}
+            >
+              <CloseBtn cursor="pointer" />
+            </div>
+          </div>
         </EditDiv>
         <MainDiv>
           <MainBox
@@ -155,6 +173,7 @@ const CardPortfolio = ({ cardId }) => {
           <TagBox
             value={tagsStr}
             placeholder="프로젝트에서 담당했던 일을 태그에 적어주세요"
+            maxLength="50"
             onChange={(e) => {
               setTagsStr(e.target.value);
             }}
@@ -286,6 +305,38 @@ const ProjectDiv = styled.div`
   }
 `;
 
+const AddBtn = styled.div`
+  width: 111px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid
+    ${({ disabled }) =>
+      disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300};
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 700;
+  margin-right: 36px;
+  margin-bottom: 40px;
+  background: ${ColorStyle.BackGround300};
+  p {
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+  }
+  &:hover {
+    background-color: ${({ disabled }) =>
+      disabled ? ColorStyle.PrimaryPurple : ColorStyle.BackGround300};
+    border: 1px solid
+      ${({ disabled }) =>
+        disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300};
+    transition: 0.3s;
+    p {
+      color: ${({ disabled }) =>
+        disabled ? ColorStyle.Gray500 : ColorStyle.Gray300};
+    }
+  }
+`;
+
 const TitleBox = styled.input`
   width: 587px;
   height: 41px;
@@ -347,7 +398,7 @@ const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
   margin-top: 40px;
-  background-color: ${ColorStyle.Gray100 + Opacity[15]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};

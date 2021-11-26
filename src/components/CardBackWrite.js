@@ -4,7 +4,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 
-import { history } from '../features/configureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createCardDB,
@@ -17,6 +16,7 @@ import { ReactComponent as Link } from '../svgs/Link.svg';
 // import { ReactComponent as DisAddBtn } from '../svgs/DisAddBtn.svg';
 import { ReactComponent as TagIcon } from '../svgs/TagIcon.svg';
 import { ReactComponent as InfoLight } from '../svgs/InfoLight.svg';
+import { ReactComponent as CloseBtn } from '../svgs/CloseBtn.svg';
 
 import {
   FontFamily,
@@ -29,7 +29,7 @@ import { Grid, Text } from '../elements';
 
 const CardBackWrite = ({ onHide }) => {
   const dispatch = useDispatch();
-  // const { register } = useForm();
+
   const cardCount = useSelector((state) => state.cards.backCardIdx);
 
   // 입력 값 저장
@@ -59,7 +59,7 @@ const CardBackWrite = ({ onHide }) => {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
-        text: '카드 10개까지만 작성 가능합니다!',
+        text: '카드는 10개까지만 작성 가능합니다!',
       });
 
       return false;
@@ -86,7 +86,7 @@ const CardBackWrite = ({ onHide }) => {
       Swal.fire({
         icon: 'error',
         title: '작성 실패',
-        text: '카드 내용과 관련된 분야를 작성해주세요',
+        text: '프로젝트에서 담당했던 일을 작성해주세요',
       });
 
       return false;
@@ -131,7 +131,7 @@ const CardBackWrite = ({ onHide }) => {
         borderRadius="16px"
         border="1px solid #8c4dff"
         margin="0px auto"
-        padding="48px 48px 0px 48px"
+        padding="43px 48px 0px 48px"
         bg="#141422"
       >
         <Div>
@@ -153,6 +153,7 @@ const CardBackWrite = ({ onHide }) => {
               // className={disabled ? 'addBtn' : 'disAddBtn'}
               // type="button"
               onClick={addCardBack}
+              disabled={disabled}
             >
               <Text
                 bold20
@@ -161,15 +162,13 @@ const CardBackWrite = ({ onHide }) => {
                 작성 완료
               </Text>
             </AddBtn>
-            <AddBtn
+            <div
               onClick={() => {
                 onHide();
               }}
             >
-              <Text bold20 color={ColorStyle.PrimaryPurple}>
-                작성 취소
-              </Text>
-            </AddBtn>
+              <CloseBtn cursor="pointer" />
+            </div>
           </div>
         </Div>
         <Grid>
@@ -195,6 +194,7 @@ const CardBackWrite = ({ onHide }) => {
               type="text"
               placeholder="프로젝트에서 담당했던 일을 태그에 적어주세요"
               // onKeyUp={checkValid}
+              maxLength="50"
               onChange={(e) => {
                 setTagsStr(e.target.value);
               }}
@@ -240,13 +240,34 @@ const Div = styled.div`
 `;
 
 const AddBtn = styled.div`
-  //width: 8%;
+  width: 111px;
+  height: 50px;
+  border-radius: 30px;
+  border: 1px solid
+    ${({ disabled }) =>
+      disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 700;
-  margin-right: 10px;
+  margin-right: 36px;
+  margin-bottom: 40px;
+  background: ${ColorStyle.BackGround300};
   p {
     cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+  }
+  &:hover {
+    background-color: ${({ disabled }) =>
+      disabled ? ColorStyle.PrimaryPurple : ColorStyle.BackGround300};
+    border: 1px solid
+      ${({ disabled }) =>
+        disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300};
+    transition: 0.3s;
+    p {
+      color: ${({ disabled }) =>
+        disabled ? ColorStyle.Gray500 : ColorStyle.Gray300};
+    }
   }
   /* .disAddBtn {
     color: ${ColorStyle.Gray300};
@@ -322,7 +343,7 @@ const TagDiv = styled.div`
 const TagBox = styled.input`
   padding-left: 60px;
   margin-top: 40px;
-  background-color: ${ColorStyle.Gray100 + Opacity[15]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
