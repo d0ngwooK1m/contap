@@ -105,3 +105,30 @@ export const LoginAlert = MySwal.mixin({
     actions: 'login-action',
   },
 });
+
+export const DeleteAlert = MySwal.mixin({
+  showCancelButton: true,
+  confirmButtonText: (
+    <Text bold24 color={ColorStyle.Gray500}>
+      삭제
+    </Text>
+  ),
+  cancelButtonText: (
+    <Text bold24 color={ColorStyle.PrimaryPurple}>
+      아니요
+    </Text>
+  ),
+  showCloseButton: true,
+  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  confirmButtonColor: '#1d1d22',
+  cancelButtonColor: '#1d1d22',
+  background: '#1d1d22',
+  position: 'relative',
+  padding: '52px',
+  customClass: {
+    popup: 'swal-popup',
+    title: 'swal-title',
+    cancelButton: 'swal-cancel',
+    confirmButton: 'swal-confirm',
+  },
+});

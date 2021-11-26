@@ -63,7 +63,7 @@ function App() {
 }
 
 const WrapApp = styled.div`
-  /* max-width: 1920px; */
+  max-width: 1920px;
   min-width: 1440px;
   width: 100vw;
   max-height: 100%;
@@ -76,8 +76,8 @@ const WrapApp = styled.div`
 `;
 
 const Wrap = styled.div`
-  /* max-width: 1440px;
-  min-width: 1110px; */
+  max-width: 1440px;
+  min-width: 1110px;
   min-width: 1440px;
   max-height: 100%;
   min-height: 100vh;

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import styled from 'styled-components';
 import { debounce } from 'lodash';
@@ -13,51 +14,10 @@ import {
 import { ReactComponent as MypageSearch } from '../svgs/MypageSearch.svg';
 
 import { FontFamily, FontScale, ColorStyle } from '../utils/systemDesign';
+import { Text } from '../elements';
+import { truncate } from 'lodash';
 
 // import { Grid, Text } from '../elements';
-
-// const searchData = [
-//   '영화감상',
-//   '독서',
-//   '헬스',
-//   '인테리어',
-//   '여행',
-//   '스포츠',
-//   '요리',
-//   '카페투어',
-//   '맛집탐방',
-//   '공예',
-//   '드로잉',
-//   '게임',
-//   '피규어',
-//   '자동차',
-//   '산책',
-//   '뷰티',
-//   '디자인',
-//   '아이돌',
-//   '테크',
-//   '반려동물',
-//   '스포츠관람',
-//   '쇼핑',
-//   '사진찍기',
-//   '춤',
-//   '악기연주',
-//   '코딩',
-//   '전시회',
-//   '보컬',
-//   '뮤지컬',
-//   '글쓰기',
-//   '등산',
-//   '레저',
-//   '음악감상',
-//   '콘서트',
-//   '패션',
-//   '재태크',
-//   '파이낸스',
-//   '애니메이션',
-//   '웹툰',
-//   'SNS',
-// ];
 
 // const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -65,6 +25,8 @@ const HobbySearch2 = () => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState('');
   const [click, setClick] = React.useState(false);
+  const [maxMessage, setMaxMessage] = React.useState(false);
+
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.hobbyArr);
   // const hobbyList = useSelector((state) => state.cards.hobby);
@@ -124,6 +86,7 @@ const HobbySearch2 = () => {
           await dispatch(deleteHobby(val));
         }
       : async () => {
+          console.log('hobbyList.length =>', hobbyList.length);
           if (hobbyList.length === 3) {
             return;
           }
@@ -157,10 +120,13 @@ const HobbySearch2 = () => {
           setData(val);
           setClick(true);
           await dispatch(deleteHobby(val));
+          setMaxMessage(false);
         }
       : async () => {
           if (hobbyList.length === 3) {
-            return;
+            //setMaxMessage(true);
+            // window.alert('1');
+            return setMaxMessage(true);
           }
           setData(val);
           setClick(true);
@@ -236,7 +202,14 @@ const HobbySearch2 = () => {
       {data !== '' ? (
         <AllBox> {ArrayData}</AllBox>
       ) : (
-        <AllBox>{FullList}</AllBox>
+        <AllBox>
+          <div style={{ position: 'absolute', top: '-7%', left: '2%' }}>
+            <Text regular16 color={ColorStyle.PrimaryPurple}>
+              {maxMessage ? '3개 모두 선택하셨어요!' : ''}
+            </Text>
+          </div>
+          {FullList}
+        </AllBox>
       )}
       <br />
     </div>
@@ -256,6 +229,7 @@ const AllBox = styled.div`
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  position: relative;
 `;
 
 const TagDiv = styled.div`

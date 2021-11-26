@@ -137,7 +137,7 @@ const Login = () => {
         //   text: `${data.errorMessage}`,
         // });
         if (data.errorMessage === null) {
-          setErrorMessage('잘못된 정보가 있습니다 다시 확인해주세요')
+          setErrorMessage('잘못된 정보가 있습니다 다시 확인해주세요');
         } else if (data.errorMessage === '존재하지 않는 이메일입니다') {
           setEmailError('존재하지 않는 이메일입니다');
         } else {
@@ -194,8 +194,12 @@ const Login = () => {
             })}
           >
             <InputWrapperEmail>
-              {errors.email && <WarningText>{errors.email.message}</WarningText>}
-              {!errors.email && emailError !== ''  && <WarningText> { emailError }</WarningText>}
+              {errors.email && (
+                <WarningText>{errors.email.message}</WarningText>
+              )}
+              {!errors.email && emailError !== '' && (
+                <WarningText> {emailError}</WarningText>
+              )}
               <StyledInput
                 type="text"
                 // placeholder="이메일을 입력해주세요"
@@ -212,7 +216,9 @@ const Login = () => {
             <br />
             <InputWrapperPw>
               {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
-              {!errors.pw && errorMessage !== '' && <WarningText>{errorMessage}</WarningText>}
+              {!errors.pw && errorMessage !== '' && (
+                <WarningText>{errorMessage}</WarningText>
+              )}
               <StyledInput
                 type="password"
                 // placeholder="비밀번호를 입력해주세요"
@@ -272,7 +278,7 @@ const Login = () => {
                 marginTop: '10px',
               }}
             >
-              <StyledKakaoLogoSvg />
+              {/* <StyledKakaoLogoSvg /> */}
             </div>
             <Text color="#181600" regular20>
               카카오로 시작하기
