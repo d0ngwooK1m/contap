@@ -24,6 +24,12 @@ const SizeCheck = ({ children }) => {
   //   };
   // }, []);
 
+  console.log('칠드런 확인 ===>', children);
+
+  // const ChildrenComponent = (content) => {
+  //   return <div>{[content]}</div>;
+  // };
+
   if (window.matchMedia('(max-width: 1440px)').matches) {
     return (
       <Wrapper>
@@ -39,7 +45,12 @@ const SizeCheck = ({ children }) => {
       </Wrapper>
     );
   }
-  return children;
+  return (
+    <div>
+      {/* <ChildrenComponent content={children} /> */}
+      {children}
+    </div>
+  );
 };
 
 SizeCheck.propTypes = {

@@ -67,10 +67,6 @@ export default handleActions(
     [SEARCH_CARD]: (state, action) =>
       produce(state, (draft) => {
         console.log('카드리스트 서치되는지 확인 ===>', action.payload.cardList);
-        if (action.payload.cardList.length < 9) {
-          draft.isSearching = false;
-          return;
-        }
         draft.isSearching = true;
         // console.log(draft.isSearching);
         draft.searchInfo = action.payload.searchInfo;
@@ -88,6 +84,10 @@ export default handleActions(
             draft.byId[doc.userId] = doc;
             draft.allIds.push(doc.userId);
           });
+        }
+        if (action.payload.cardList.length < 9) {
+          draft.isSearching = false;
+          return;
         }
       }),
     [SET_LOADING]: (state, action) =>

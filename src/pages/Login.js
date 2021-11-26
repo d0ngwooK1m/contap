@@ -278,7 +278,7 @@ const Login = () => {
                 marginTop: '10px',
               }}
             >
-              {/* <StyledKakaoLogoSvg /> */}
+              <StyledKakaoLogoSvg />
             </div>
             <Text color="#181600" regular20>
               카카오로 시작하기
