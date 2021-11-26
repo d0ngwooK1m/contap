@@ -20,6 +20,8 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import {LoginAlert }from '../utils/alert';
 import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
+import { ReactComponent as ResizeSvg } from '../svgs/Resize.svg';
+import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -78,6 +80,22 @@ const CardList = () => {
     }
   }, [isSearching]);
 
+  if (window.matchMedia('(max-width: 1440px)').matches) {
+    return (
+      <Wrapper>
+        <ContentWrapper>
+          <LogoSvg />
+          <Text color="white" bold20>
+            모바일을 지원하지 않습니다
+            <br />
+            PC에서 Contap을 접속해 보세요
+          </Text>
+          <ResizeSvg />
+        </ContentWrapper>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrap>
       <div className="SquareShadow">
@@ -128,6 +146,30 @@ const CardList = () => {
     </Wrap>
   );
 };
+
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+  background-color: ${ColorStyle.BackGround};
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+`;
+
+const ContentWrapper = styled.div`
+  width: 360px;
+  height: 564px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+// =========size check 스타일링
 
 const upDown = keyframes`
   0% {

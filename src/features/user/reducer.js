@@ -125,7 +125,7 @@ export default function userReducer(state = initialState, action) {
       }
       case PHONE_TUTORIAL: {
         console.log(action.phoneInfo);
-        draft.tutorial.profileTutorial = action.phoneInfo;
+        draft.tutorial.phoneTutorial = action.phoneInfo;
         break;
       }
       case PROFILE_CHANGE: {

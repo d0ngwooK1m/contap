@@ -538,13 +538,13 @@ const Signup = () => {
 };
 
 const SignupWrapper = styled.div`
-  width: 1435px;
+  width: 100%;
   height: 100%;
   display: flex;
 `;
 
 const LeftWrapper = styled.div`
-  width: 50vw;
+  width: 50%;
   height: 1080px;
   background: linear-gradient(153.56deg, #8c4dff 0%, rgba(29, 29, 34, 0) 25%);
   background-color: rgba(0, 0, 0, 0.5);
@@ -570,7 +570,7 @@ const SvgWrapper = styled.div`
 `;
 
 const RightWrapper = styled.div`
-  width: 50vw;
+  width: 50%;
   height: 1080px;
   background-color: ${ColorStyle.BackGround};
   color: ${ColorStyle.Gray500};

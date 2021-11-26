@@ -82,28 +82,28 @@ const Header = () => {
 
   // }, [location.pathname]);
 
-  const Tutorial = () => {
-    {mypageAlarm === false ? (
-      <TutorialForm
-        run={true}
-        steps={mainSteps}
-        page={1}
-      />
-    ) : null}
-    {history.location.pathname === '/' &&
-    mypageAlarm === true &&
-    settingAlarm === false ? (
-      <TutorialForm
-        run={true}
-        steps={settingSteps}
-        page={0}
-      />
-    ) : null}
-  };
+  // const Tutorial = (mypageAlarm, settingAlarm) => {
+  //   {mypageAlarm === false ? (
+  //     <TutorialForm
+  //       run={true}
+  //       steps={mainSteps}
+  //       page={1}
+  //     />
+  //   ) : null}
+  //   {history.location.pathname === '/' &&
+  //   mypageAlarm === true &&
+  //   settingAlarm === false ? (
+  //     <TutorialForm
+  //       run={true}
+  //       steps={settingSteps}
+  //       page={0}
+  //     />
+  //   ) : null}
+  // };
 
-  React.useEffect(() => {
-    Tutorial;
-  }, [mypageAlarm, settingAlarm])
+  // React.useEffect(() => {
+  //   Tutorial;
+  // }, [mypageAlarm, settingAlarm])
 
   const handleisContap = () => {
     if (location.pathname === '/contap') {
@@ -125,14 +125,18 @@ const Header = () => {
     history.push('/grabtalk');
   };
 
-  const handleisSetting = async(event) => {
+  const handleisSetting = async (event) => {
     setIsSetting(true);
     setAnchorEl(event.currentTarget);
+    console.log('세팅알람체크===>', settingAlarm);
     if (!settingAlarm) {
       const res = await T.POST(`/main/tutorial?tutorialNum=0`);
       console.log('세팅버튼 클릭===>', res);
       dispatch(phoneTutorialCheck(true));
     }
+    // const res = await T.POST(`/main/tutorial?tutorialNum=0`);
+    // console.log('세팅버튼 클릭===>', res);
+    // dispatch(phoneTutorialCheck(true));
   };
 
   const moveToMyPage = async() => {
@@ -197,8 +201,24 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper location={location.pathname}>
+      {mypageAlarm === false ? (
+      <TutorialForm
+        run={true}
+        steps={mainSteps}
+        page={1}
+      />
+    ) : null}
+    {history.location.pathname === '/' &&
+    mypageAlarm === true &&
+    settingAlarm === false ? (
+      <TutorialForm
+        run={true}
+        steps={settingSteps}
+        page={0}
+      />
+    ) : null}
         {/* <TutorialForm run={true} steps={mainSteps} page='main' /> */}
-        {Tutorial}
+        {/* {Tutorial(mypageAlarm, settingAlarm)} */}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
         {/* <Grid
           width="fit-content"
@@ -223,6 +243,14 @@ const Header = () => {
               style={{
                 cursor: 'pointer',
               }}
+              // onChange={async () => {
+              //   console.log('세팅알람체크===>', settingAlarm);
+              //   if (!settingAlarm) {
+              //     const res = await T.POST(`/main/tutorial?tutorialNum=0`);
+              //     console.log('세팅버튼 클릭===>', res);
+              //     dispatch(phoneTutorialCheck(true));
+              //   }
+              // }}
               onClick={handleisContap}
             >
               {ContapButton()}

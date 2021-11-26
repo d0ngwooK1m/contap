@@ -68,7 +68,7 @@ const TutorialForm = ({ run, steps, page }) => {
     <Joyride
       floaterProps={{
         hideArrow: true,
-        placement: 'middle',
+        // placement: 'middle',
       }}
       // continuous
       // locale={locale}
