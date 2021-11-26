@@ -17,6 +17,7 @@ import {
   PROFILE_TUTORIAL,
   PHONE_TUTORIAL,
 } from './types';
+
 // import { setChatNoti, setContapNoti } from '../notice/actions';
 // import { saveToken, removeToken } from '../../utils/auth';
 // import tokenAxios from '../../api/tokenInstance';

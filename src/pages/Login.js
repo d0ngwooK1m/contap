@@ -8,6 +8,7 @@ import axios from 'axios';
 import { ColorStyle, FontScale, Opacity } from '../utils/systemDesign';
 import { Text } from '../elements';
 import { loginToServer, login as loginAction } from '../features/user/actions';
+import { deleteMyCard } from '../features/cards/actions';
 import { saveToken } from '../utils/auth';
 import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import {
@@ -152,7 +153,8 @@ const Login = () => {
         userName: data.userName,
         profile: data.profile,
       };
-
+      console.log(data)
+      dispatch(deleteMyCard(data.userId))
       dispatch(loginAction(userInfo));
       saveToken(data?.token);
       history.push('/');

@@ -161,6 +161,8 @@ const SearchBarFrom = styled.div`
 const NoneValueText = styled.div`
   word-break: break-all;
   text-align: center;
+  width: 617px;
+  box-sizing: border-box;
   border-radius: 16px;
   margin-top: 30px;
   background-color: ${ColorStyle.BackGround100 + Opacity[70]};

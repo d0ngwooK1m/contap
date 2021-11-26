@@ -18,16 +18,14 @@ import { ColorStyle, Opacity, professionColor } from '../utils/systemDesign';
 SwiperCore.use([Pagination, Navigation, Keyboard]);
 
 const Carousel = ({ userId, userName, profile, category, onHide }) => {
-  const currentCard = useSelector((state) => state.cards.current );
+  const currentCard = useSelector((state) => state.cards.current);
+  const isLoading = useSelector((state)=>state.cards.isLoading)
   const [tapFormState, setTapFormState] = React.useState(false);
   console.log('커런트 카드 없져?', currentCard);
   const setting = {
     slidesPerView: 1,
     spaceBetween: 16,
   };
-
-  const SwRef = React.useRef('');
-  console.log(SwRef);
 
   const handleTapForm = () => {
     setTapFormState(!tapFormState);
@@ -47,7 +45,7 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
         allowTouchMove={false}
         keyboard={true}
       >
-        {currentCard && currentCard.map((card) => {
+        {!isLoading && currentCard.map((card) => {
           return (
             <SwiperSlide key={card.cardId}>
               <CardBack

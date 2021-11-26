@@ -8,7 +8,7 @@ const LoginWrapper = styled.div`
 `;
 
 const LeftWrapper = styled.div`
-  width: 735px;
+  width: 1200px;
   height: 1080px;
   background: linear-gradient(153.56deg, #8c4dff 0%, rgba(29, 29, 34, 0) 25%);
   background-color: rgba(0, 0, 0, 0.5);
@@ -34,7 +34,7 @@ const SvgWrapper = styled.div`
 `;
 
 const RightWrapper = styled.div`
-  width: 700px;
+  width: 1200px;
   height: 1080px;
   background-color: ${ColorStyle.BackGround};
   color: ${ColorStyle.Gray500};

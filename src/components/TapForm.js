@@ -24,6 +24,7 @@ const TapForm = ({ userId, category, onHide, userName }) => {
   console.log(userInfo);
 
   const ERROR_BEFORE_SEND = '이미 상대에게 요청을 보낸 상태입니다.';
+  const ERROR_BEFORE_FRIEND = '이미 친구 관계입니다.';
 
   const sendTap = async () => {
     const { data } = await T.POST('/main/posttap', { userId, msg: message });
@@ -32,6 +33,13 @@ const TapForm = ({ userId, category, onHide, userName }) => {
       onHide();
       Toast.fire({
         title: ERROR_BEFORE_SEND,
+      });
+      return;
+    }
+    if (data.msg === ERROR_BEFORE_FRIEND) {
+      onHide();
+      Toast.fire({
+        title: ERROR_BEFORE_FRIEND,
       });
       return;
     }
