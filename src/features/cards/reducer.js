@@ -214,6 +214,11 @@ export default handleActions(
           draft.hobby = action.payload.hobby;
           return;
         }
+        if (action.payload.hobby === undefined) {
+          draft.hobby = [];
+          return;
+        }
+
         if (draft.hobby.length === 3) {
           draft.hobby.shift();
           draft.hobby.push(action.payload.hobby);

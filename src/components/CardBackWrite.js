@@ -114,15 +114,17 @@ const CardBackWrite = ({ onHide }) => {
 
   return (
     <div>
-      <div style={{ display: 'flex', margin: '0px 0px 12px 165px' }}>
-        <div style={{ marginRight: '16px' }}>
-          <InfoLight />
+      {!disabled && (
+        <div style={{ display: 'flex', margin: '0px 0px 12px 165px' }}>
+          <div style={{ marginRight: '16px' }}>
+            <InfoLight />
+          </div>
+          <Text regular20 color={ColorStyle.PrimaryPurple}>
+            다른 사람이 Tap! 할 수 있게 제목, 소개글, 태그를 작성해서 프로젝트를
+            소개 해보세요
+          </Text>
         </div>
-        <Text regular20 color={ColorStyle.PrimaryPurple}>
-          다른 사람이 Tap! 할 수 있게 제목, 소개글, 태그를 작성해서 프로젝트를
-          소개 해보세요
-        </Text>
-      </div>
+      )}
       <Grid
         width="1110px"
         height="509px"
@@ -146,26 +148,29 @@ const CardBackWrite = ({ onHide }) => {
 
           {/* <DisAddBtn className="disAddBtn" />
             <AddBtn className="addBtn" cursor="pointer"/> */}
-          <AddBtn
-            // className={disabled ? 'addBtn' : 'disAddBtn'}
-            type="button"
-            onClick={addCardBack}
-          >
-            <Text
-              bold20
-              color={disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300}
-              cursor="pointer"
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <AddBtn
+              // className={disabled ? 'addBtn' : 'disAddBtn'}
+              // type="button"
+              onClick={addCardBack}
             >
-              작성 완료
-            </Text>
-          </AddBtn>
-          <button
-            onClick={() => {
-              onHide();
-            }}
-          >
-            작성 취소
-          </button>
+              <Text
+                bold20
+                color={disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300}
+              >
+                작성 완료
+              </Text>
+            </AddBtn>
+            <AddBtn
+              onClick={() => {
+                onHide();
+              }}
+            >
+              <Text bold20 color={ColorStyle.PrimaryPurple}>
+                작성 취소
+              </Text>
+            </AddBtn>
+          </div>
         </Div>
         <Grid>
           <MainDiv>
@@ -235,11 +240,14 @@ const Div = styled.div`
 `;
 
 const AddBtn = styled.div`
-  width: '8%';
+  //width: 8%;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 700;
-  cursor: 'pointer';
+  margin-right: 10px;
+  p {
+    cursor: pointer;
+  }
   /* .disAddBtn {
     color: ${ColorStyle.Gray300};
   }

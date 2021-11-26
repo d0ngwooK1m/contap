@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { useSelector } from 'react-redux';
 import { history } from '../features/configureStore';
 
 import { Grid } from '../elements';
 import { ReactComponent as DoodleDots } from '../svgs/DoodleDots.svg';
-import { ReactComponent as CardEffect } from '../svgs/CardEffect.svg';
+// import { ReactComponent as CardEffect } from '../svgs/CardEffect.svg';
 // import { ReactComponent as Effects } from '../svgs/Effects.svg';
 import { ReactComponent as UpdateBtn } from '../svgs/UpdateBtn.svg';
 import BasicProfile from '../assets/image/CardProfile.svg';
@@ -59,9 +59,10 @@ const CardProfile = () => {
       <Box>
         <DotDiv>
           <DoodleDots />
-          <div style={{ position: 'absolute', top: '-70%', left: '3%' }}>
+          <Effect />
+          {/* <div style={{ position: 'absolute', top: '-70%', left: '3%' }}>
             <CardEffect />
-          </div>
+          </div> */}
         </DotDiv>
         <ProfileDiv>
           <Div>
@@ -134,25 +135,54 @@ const Box = styled.div`
   // filter: blur(140px);
 `;
 
-// const Effect = styled.div`
-//   position: relative;
-//   width: 800px;
-//   top: 50%
-//   background: conic-gradient(
-//     from 90deg at 50% 50%,
-//     #e153c2 -15.52deg,
-//     #9230df 45.42deg,
-//     #3f94e2 125.96deg,
-//     #23d28b 230.98deg,
-//     #3bacdb 274.1deg,
-//     #aa63e2 313.48deg,
-//     #e153c2 344.48deg,
-//     #9230df 405.42deg
-//   );
-//   filter: blur(90px);
-//   z-index: -10;
-//   text-align: center;
-// `;
+const mainBack = keyframes`
+ 0% {
+  background-position:0% 50%;
+  filter: blur(140px);
+  }
+  25% {
+    background-position:25% 75%;
+  filter: blur(120px);
+  }
+  50% {
+    background-position:100% 50%;
+  filter: blur(100px);
+    /* right : 600px; */
+  }
+  75% {
+    background-position:25% 75%;
+  filter: blur(120px);
+    /* right : 600px; */
+  }
+  100% {
+    background-position:0% 50%;
+  filter: blur(140px);
+    
+  }
+`;
+
+const Effect = styled.div`
+  position: relative;
+  width: 500px;
+  height: 180px;
+  top: -200px;
+  margin: 0px auto;
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    #e153c2 -15.52deg,
+    #9230df 45.42deg,
+    #3f94e2 125.96deg,
+    #23d28b 230.98deg,
+    #3bacdb 274.1deg,
+    #aa63e2 313.48deg,
+    #e153c2 344.48deg,
+    #9230df 405.42deg
+  );
+  filter: blur(50px);
+  animation: ${mainBack} 5s infinite linear alternate;
+  /* z-index: -10; */
+  /* text-align: center; */
+`;
 
 const DotDiv = styled.div`
   position: absolute;

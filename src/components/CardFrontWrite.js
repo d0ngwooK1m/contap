@@ -110,8 +110,13 @@ const CardFrontWrite = () => {
   }
 
   if (hobby.length === 1) {
-    if (hobby[0] === '') {
+    if (hobby[0] === '' || hobby[0] === undefined) {
       hobby = [];
+    }
+  } else if (hobby.length === 2) {
+    console.log('관심사 확인 길이 ====>', typeof hobby[0]);
+    if (typeof hobby[0] === undefined) {
+      hobby.shift();
     }
   }
   // if (stack === '') {
