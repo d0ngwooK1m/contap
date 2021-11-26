@@ -61,26 +61,34 @@ function App() {
 }
 
 const WrapApp = styled.div`
-  max-width: 1920px;
-  min-width: 1440px;
-  width: 100vw;
-  max-height: 100%;
-  min-height: 100%;
+  position: relative;
+  /* max-width: 1920px; */
+  /* min-width: 1440px; */
+  /* width: 100vw; */
+  /* max-height: 100%; */
+  /* min-height: 100%; */
+  height: 100%;
+  width: 100%;
+  /* top: 0px; */
+  /* bottom: 0px; */
+  /* left: 0px; */
+  /* right: 0px; */
   margin: auto;
   padding: 0px;
+  overflow: auto;
   background-position: center;
   background-size: cover;
   background-color: #0f0a1a;
 `;
 
 const Wrap = styled.div`
+  position: relative;
   max-width: 1440px;
   min-width: 1110px;
   /* max-width: 1920px;
   min-width: 1440px; */
-  max-height: 100%;
-  min-height: 100vh;
-  width: 100vw;
+  /* max-height: 100%; */
+  width: 100%;
   margin: auto;
 `;
 

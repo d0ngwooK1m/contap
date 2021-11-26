@@ -57,7 +57,6 @@ export default handleActions(
         draft.allIds = [];
         draft.isNext = true;
 
-        console.log(action.payload);
         const { cardBundles } = action.payload;
 
         cardBundles.forEach((doc) => {

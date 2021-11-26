@@ -39,7 +39,7 @@ const Grabtalk = () => {
   console.log(currentRoom.login);
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', height: '100vh' }}>
       <Menu>
         <div className="roomListHeader">
           <Text bold32>메세지함</Text>

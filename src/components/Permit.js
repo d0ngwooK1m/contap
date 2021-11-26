@@ -6,7 +6,6 @@ import useUserAuthCheck from '../hooks/useUserAuthCheck';
 
 const Permit = ({ children }) => {
   const [isUserAuthorized, token] = useUserAuthCheck();
-  console.log('외않됨?');
 
   if (!(token || isUserAuthorized)) {
     return <Redirect to="/" />;

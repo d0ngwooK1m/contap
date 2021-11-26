@@ -48,9 +48,7 @@ export default function userReducer(state = initialState, action) {
       }
       case EMAIL_AUTH: {
         draft.isEmailChecked = true;
-        console.log(action.emailInfo.email);
         draft.checkedEmail = action.emailInfo.email;
-        console.log(draft.checkedEmail);
         break;
       }
       case AUTH_CHECK: {
@@ -119,12 +117,10 @@ export default function userReducer(state = initialState, action) {
         break;
       }
       case PROFILE_TUTORIAL: {
-        console.log(action.profileInfo);
         draft.tutorial.profileTutorial = action.profileInfo;
         break;
       }
       case PHONE_TUTORIAL: {
-        console.log(action.phoneInfo);
         draft.tutorial.phoneTutorial = action.phoneInfo;
         break;
       }
@@ -137,5 +133,3 @@ export default function userReducer(state = initialState, action) {
     }
   });
 }
-
-console.log(initialState);

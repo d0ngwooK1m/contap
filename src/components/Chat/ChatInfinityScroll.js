@@ -15,7 +15,6 @@ const ChatInfinityScroll = ({
   const handleScroll = lodash.throttle(() => {
     // 로딩중이면 callNext()를 안부르도록
     if (loading) {
-      console.log('로딩주우우우웅우우우우웅')
       return;
     }
     const {scrollHeight, clientHeight, scrollTop } = scrollTo.current
@@ -46,7 +45,6 @@ const ChatInfinityScroll = ({
     // 자료를 받아오는 loading 중에는 이벤트 발생하지 않도록
     // 꼭 잘 막아주기!
     if (loading) {
-      console.log('로딩중이야')
       return;
     }
 
@@ -54,11 +52,9 @@ const ChatInfinityScroll = ({
       scrollTo.current?.addEventListener('scroll', handleInfinityScroll);
       
     } else {
-      console.log('얘는 펄스라 없어짐')
       scrollTo.current?.removeEventListener('scroll', handleInfinityScroll);
     }
     return () => {
-      console.log('없어졌는데?')
       scrollTo.current?.removeEventListener('scroll', handleInfinityScroll);
     };
   }, [isNext, loading, handleInfinityScroll, scrollTo]);

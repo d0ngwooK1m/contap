@@ -14,8 +14,6 @@ import { ColorStyle } from '../utils/systemDesign';
 const Contap = () => {
   const isReceiveTap = useSelector((state) => state.notice.isTapReceiveNoti);
   const isAcceptTap = useSelector((state) => state.notice.isTapAcceptNoti);
-  console.log('받은탭 알람', isReceiveTap);
-  console.log('그랩 알람', isAcceptTap);
   const content = [
     {
       id: 'ReceiveTap',
@@ -224,7 +222,7 @@ const Contap = () => {
 
 const Wrap = styled.div`
   width: 100%;
-  min-height: 100%;
+  height: 100vh;
   background-color: #0f0a1a;
 `;
 

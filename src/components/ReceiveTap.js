@@ -104,9 +104,9 @@ const ReceiveTap = ({ select }) => {
           </>
         )}
 
-        <IconButton className="floatingBtn" onClick={scrollTop}>
+        {/* <IconButton className="floatingBtn" onClick={scrollTop}>
           <ArrowTopLightSvg />
-        </IconButton>
+        </IconButton> */}
       </Wrap>
     </ChatInfinityScroll>
   );

@@ -7,7 +7,11 @@ import { IconButton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import styled, { keyframes } from 'styled-components';
-import { loadCardFrontDB, loadCurrentCardDB, loading } from '../features/cards/actions';
+import {
+  loadCardFrontDB,
+  loadCurrentCardDB,
+  loading,
+} from '../features/cards/actions';
 import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
@@ -18,7 +22,7 @@ import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
 import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
-import {LoginAlert }from '../utils/alert';
+import { LoginAlert } from '../utils/alert';
 import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
 import { ReactComponent as ResizeSvg } from '../svgs/Resize.svg';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
@@ -64,7 +68,7 @@ const CardList = () => {
         }
         return null;
       } else {
-        dispatch(loading(true))
+        dispatch(loading(true));
         await dispatch(loadCurrentCardDB(parseInt(params.userId)));
       }
     }
@@ -80,7 +84,7 @@ const CardList = () => {
     }
   }, [isSearching]);
 
-  if (window.matchMedia('(max-width: 1440px)').matches) {
+  if (window.matchMedia('(max-width: 768px)').matches) {
     return (
       <Wrapper>
         <ContentWrapper>
@@ -121,23 +125,31 @@ const CardList = () => {
           <Text bold32> Tap! 해보세요</Text>
         </div>
       </TextWrap>
-      <RefreshWrapper>
-        <RefreshSvg />
-        <button
-          type="button"
-          onClick={() => {
-            dispatch(loadCardFrontDB());
-          }}
-        >
-          카드 섞기
-        </button>
-      </RefreshWrapper>
-      <CardListWrap>
-        {cardList.allIds.map((userId) => {
-          console.log('카드 프론트 뿌려줌 =======>', userId);
-          return <MemoizedCardFront key={userId} userId={userId} />;
-        })}
-      </CardListWrap>
+      <div
+        style={{
+          width: '1140px',
+          margin: 'auto',
+          marginTop: '34px',
+        }}
+      >
+        <RefreshWrapper>
+          <RefreshSvg />
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(loadCardFrontDB());
+            }}
+          >
+            카드 섞기
+          </button>
+        </RefreshWrapper>
+        <CardListWrap>
+          {cardList.allIds.map((userId) => {
+            console.log('카드 프론트 뿌려줌 =======>', userId);
+            return <MemoizedCardFront key={userId} userId={userId} />;
+          })}
+        </CardListWrap>
+      </div>
       {cardList.allIds.length > 9 && (
         <IconButton className="floatingBtn" onClick={scrollTop}>
           <ArrowTopLightSvg />
@@ -152,7 +164,7 @@ const Wrapper = styled.div`
   height: 100vh;
   background-color: white;
   z-index: 9999;
-  background-color: ${ColorStyle.BackGround};
+  /* background-color: ${ColorStyle.BackGround}; */
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -323,16 +335,17 @@ const TextWrap = styled.div`
 `;
 
 const RefreshWrapper = styled.div`
+  position: relative;
+  right: 15px;
+  margin-bottom: 18px;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: right;
-  margin-right: 165px;
-  margin-top: 28px;
-  margin-bottom: 18px;
-
+  
   button {
+    background-color: #0F0A1A;
     cursor: pointer;
-    background-color: #0f0a1a;
     color: #a09bac;
     font-family: ${FontFamily};
     font-size: 20px;

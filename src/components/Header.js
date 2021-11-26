@@ -42,7 +42,11 @@ const Header = () => {
   const location = useLocation();
   const userInfo = useSelector((state) => state.user);
   const isChatNoti = useSelector((state) => state.notice.isChatNoti);
-  const isContapNoti = useSelector((state) => state.notice.isContapNoti);
+  const isTapReceiveNoti = useSelector(
+    (state) => state.notice.isTapReceiveNoti,
+  );
+  const isTapAcceptNoti = useSelector((state) => state.notice.isTapAcceptNoti);
+  const isContapNoti = !!(isTapReceiveNoti || isTapAcceptNoti);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [myProfile] = React.useState(<HeaderProfileSvg />);
   const isUserLogin = userInfo.email;
@@ -61,10 +65,6 @@ const Header = () => {
   const settingAlarm = useSelector(
     (state) => state.user.tutorial.phoneTutorial,
   );
-  console.log('마이페이지 튜토리얼===>', mypageAlarm);
-  console.log('세팅 튜토리얼===>', settingAlarm);
-  console.log(open);
-  console.log(isSetting, isMyPage);
   // console.log('이전 주소 확인====>', `${history.goBack()}`)
 
   // 로그인 체크
@@ -128,10 +128,8 @@ const Header = () => {
   const handleisSetting = async (event) => {
     setIsSetting(true);
     setAnchorEl(event.currentTarget);
-    console.log('세팅알람체크===>', settingAlarm);
     if (!settingAlarm) {
       const res = await T.POST(`/main/tutorial?tutorialNum=0`);
-      console.log('세팅버튼 클릭===>', res);
       dispatch(phoneTutorialCheck(true));
     }
     // const res = await T.POST(`/main/tutorial?tutorialNum=0`);
@@ -372,17 +370,17 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
   ${({ location }) => (location === '/' || location.includes("/card/")  ? null : 'position : fixed;')}
+  ${({ location }) => (location === '/' || location.includes("/card/")  ? 'margin: auto;' : 'margin: 0px 164px;')}
   top: 0px;
-  width: 1112px;
+  width: 100%;
+  max-width: 1112px;
   height: 88px;
-  padding: 0px 164px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;
   z-index: 1001;
-  margin: auto;
-
+  
   .my-page {
     padding-right: 0px;
     margin-right: 0px;
