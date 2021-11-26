@@ -14,6 +14,7 @@ import {
   SETTING_PHONENUM,
   PROFILE_TUTORIAL,
   PHONE_TUTORIAL,
+  PROFILE_CHANGE,
 } from './types';
 
 const initialState = {
@@ -125,6 +126,10 @@ export default function userReducer(state = initialState, action) {
       case PHONE_TUTORIAL: {
         console.log(action.phoneInfo);
         draft.tutorial.profileTutorial = action.phoneInfo;
+        break;
+      }
+      case PROFILE_CHANGE: {
+        draft.profile = action.profile;
         break;
       }
       default:

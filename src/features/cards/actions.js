@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { createAction } from 'redux-actions';
-import { authorize } from '../user/actions';
+import { profileChange } from '../user/actions';
 
 import T from '../../api/tokenInstance';
 
@@ -172,7 +172,7 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
         text: `${res.data.errorMessage}`,
       });
     }
-    dispatch(authorize(null, res.data.userName, res.data.profile));
+    dispatch(profileChange(res.data.profile));
     history.push('/mypage');
   } catch (err) {
     console.log(err);

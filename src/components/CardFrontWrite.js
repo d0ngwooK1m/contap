@@ -411,8 +411,8 @@ const CardFrontWrite = () => {
             <Text bold20 color="#f5f3f8">
               관심사
             </Text>
-            <HashTagDiv>
-              {/* {hobby.length !== 0
+
+            {/* {hobby.length !== 0
               ? hobby.map((val) => {
                   {
                     console.log(val);
@@ -445,7 +445,7 @@ const CardFrontWrite = () => {
                     </HashTag>
                   );
                 })} */}
-              {hobby.length === 0 || hobby[0] === undefined ? (
+            {/* {hobby.length === 0 || hobby[0] === undefined ? (
                 <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                   <BasicHashTag type="button">
                     {console.log('stack is no')}
@@ -460,11 +460,20 @@ const CardFrontWrite = () => {
                     {hobbyText3}
                   </BasicHashTag>
                 </div>
-              ) : (
-                hobby.map((val) => {
-                  {
-                    console.log(val);
-                  }
+              ) : ( */}
+            <div style={{ position: 'relative' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <BasicHashTag>{hobbyText1}</BasicHashTag>
+                <BasicHashTag>{hobbyText2}</BasicHashTag>
+                <BasicHashTag> {hobbyText3}</BasicHashTag>
+              </div>
+              <HashTagDiv>
+                {hobby.map((val) => {
                   return (
                     <HashTag
                       type="button"
@@ -476,9 +485,10 @@ const CardFrontWrite = () => {
                       {val}
                     </HashTag>
                   );
-                })
-              )}
-            </HashTagDiv>
+                })}
+                {/* ) */}
+              </HashTagDiv>
+            </div>
           </Grid>
         </TagDiv>
       </Grid>
@@ -629,7 +639,7 @@ const TagDiv = styled.div`
 `;
 
 const BasicHashTag = styled.div`
-  width: 148px;
+  width: 146px;
   height: 48px;
   margin-top: 20px;
   margin-right: 20px;
@@ -691,6 +701,8 @@ const HashTagDiv = styled.div`
   display: flex;
   justify-content: start;
   flex-direction: row;
+  position: absolute;
+  top: 3%;
   // width: 146px;
   // height: 54px;
   // margin: 10px;

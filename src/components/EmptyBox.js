@@ -48,7 +48,7 @@ const EmptyBox = () => {
             setDisplay({ display: 'none' });
           }}
         >
-          <AddRound fill="#8C4DFF" className="addRound" />
+          <StyledAddRound fill="#8C4DFF" className="addRound" />
           {/* <Round className="addRound" /> */}
         </Div>
       </Grid>
@@ -90,9 +90,11 @@ const Div = styled.div`
   background-color: ${ColorStyle.BackGround100};
   text-align: center;
   cursor: pointer;
-  .addRound {
-    &:hover {
-    }
+`;
+
+const StyledAddRound = styled(AddRound)`
+  &:hover {
+    fill: '#6235b5';
   }
 `;
 

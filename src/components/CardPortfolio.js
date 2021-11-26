@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCardDB, deleteCardDB } from '../features/cards/actions';
-import { BasicAlert } from '../utils/alert';
+import { DeleteAlert } from '../utils/alert';
 
 import { Grid, Text } from '../elements';
 import { ReactComponent as EditBtn } from '../svgs/EditBtn.svg';
@@ -38,11 +38,11 @@ const CardPortfolio = ({ cardId }) => {
   const editCardBack = () => setClick(!click);
 
   const deleteCardBack = async () => {
-    const { isConfirmed } = await BasicAlert.fire({
+    const { isConfirmed } = await DeleteAlert.fire({
       title: (
         <div style={{ textAlign: 'left' }}>
-          <div style={{ marginBottom: '108px' }}>
-            <Text bold32 color={ColorStyle.BackGround300}>
+          <div style={{ marginBottom: '74px' }}>
+            <Text bold32 color={ColorStyle.Gray500}>
               카드를 삭제할까요?
             </Text>
           </div>
@@ -82,17 +82,8 @@ const CardPortfolio = ({ cardId }) => {
 
       return false;
     }
-    if (link.match(/\s/g)) {
-      Swal.fire({
-        icon: 'error',
-        title: '작성 실패',
-        text: '링크를 작성하시거나 공백을 지워주세요',
-      });
 
-      return false;
-    }
-
-    let editLink = link;
+    let editLink = link.trim();
     if (editLink !== undefined && editLink.indexOf('//') === -1) {
       editLink = '//' + editLink;
       console.log(editLink);
@@ -134,7 +125,7 @@ const CardPortfolio = ({ cardId }) => {
             type="text"
             value={title}
             maxLength="50"
-            placeholder="카드 제목"
+            placeholder="프로젝트 제목"
             onChange={(e) => {
               setTitle(e.target.value);
             }}
@@ -147,8 +138,7 @@ const CardPortfolio = ({ cardId }) => {
           <MainBox
             type="text"
             value={desc}
-            placeholder="· 좋은 프로젝트는 널리 공유해요! 나의 프로젝트를 소개하고 대화를 나눠보세요 &#13;&#10;· 아직 프로젝트 경험이 없다면 함께 성장할 수 있는 일을 제안해 보세요 &#13;&#10; 
-              프로젝트를 함께 할 팀원을 찾거나 스터디를 같이 할 사람을 찾아볼 수도 있어요!"
+            placeholder="프로젝트를 공유하고 간략하게 기록할 수 있어요 &#13;&#10;프로젝트에서 특별히 공들인 점이나 핵심 내용을 중심으로 작성하면 효과적이에요"
             textarea
             maxLength="200"
             onChange={(e) => {
@@ -164,7 +154,7 @@ const CardPortfolio = ({ cardId }) => {
         <TagDiv>
           <TagBox
             value={tagsStr}
-            placeholder="카드 내용과 관련 된 분야를 태그로 달아주세요"
+            placeholder="프로젝트에서 담당했던 일을 태그에 적어주세요"
             onChange={(e) => {
               setTagsStr(e.target.value);
             }}
@@ -176,7 +166,7 @@ const CardPortfolio = ({ cardId }) => {
         <LinkDiv>
           <LinkBox
             value={link}
-            placeholder="더 자세한 내용을 링크로 공유해보세요! 예시) Github 링크, 블로그 링크, 포트폴리오 링크"
+            placeholder="더 자세한 내용은 링크로 추가해 보세요 예시) Github 링크, 블로그 링크, 포트폴리오 링크"
             onChange={(e) => {
               setLink(e.target.value);
             }}
@@ -325,12 +315,12 @@ const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.Gray100 + Opacity[20]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  border: none;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[60]};
   border-radius: 12px;
   &:focus {
     outline: none;
@@ -356,14 +346,14 @@ const TagBox = styled.input`
   margin-bottom: 24px;
   padding-left: 60px;
   margin-top: 40px;
-  background-color: ${ColorStyle.Gray100 + Opacity[20]};
+  background-color: ${ColorStyle.Gray100 + Opacity[15]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  border: none;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[60]};
   border-radius: 12px;
   &:focus {
     outline: none;
@@ -382,12 +372,12 @@ const LinkBox = styled.input`
   width: 947px;
   height: 50px;
   padding-left: 60px;
-  background-color: ${ColorStyle.Gray100 + Opacity[20]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.PrimaryPurple};
-  border: none;
+  border: 1px solid ${ColorStyle.BackGround100};
   border-radius: 12px;
   &:focus {
     outline: none;

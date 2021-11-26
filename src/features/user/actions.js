@@ -16,6 +16,7 @@ import {
   SETTING_PHONENUM,
   PROFILE_TUTORIAL,
   PHONE_TUTORIAL,
+  PROFILE_CHANGE,
 } from './types';
 
 // import { setChatNoti, setContapNoti } from '../notice/actions';
@@ -94,6 +95,10 @@ const phoneTutorialCheck = (phoneInfo) => ({
   phoneInfo,
 });
 
+const profileChange = (profile) => ({
+  type: PROFILE_CHANGE,
+  profile,
+});
 // const phoneTutorialCheck = (tutorialInfo) => ({
 // });
 
@@ -269,4 +274,5 @@ export {
   // withdrawalToServer,
   authorize,
   emailAuth,
+  profileChange,
 };

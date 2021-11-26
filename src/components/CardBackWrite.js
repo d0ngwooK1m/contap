@@ -12,8 +12,10 @@ import {
 // import { useForm } from 'react-hook-form';
 
 import { ReactComponent as Link } from '../svgs/Link.svg';
-import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
+// import { ReactComponent as AddBtn } from '../svgs/AddBtn.svg';
+// import { ReactComponent as DisAddBtn } from '../svgs/DisAddBtn.svg';
 import { ReactComponent as TagIcon } from '../svgs/TagIcon.svg';
+import { ReactComponent as InfoLight } from '../svgs/InfoLight.svg';
 
 import {
   FontFamily,
@@ -37,7 +39,19 @@ const CardBackWrite = ({ onHide }) => {
   // const handleClick = useSelector((state) => state.cards.isSuccess);
   // console.log(handleClick);
 
-  const addCardBack = (e) => {
+  // const [disabled, setDisabled] = React.useState(false);
+
+  // const checkValid = () => {
+  //   title !== '' && desc !== '' && tagsStr !== ''
+  //     ? setDisabled(true)
+  //     : setDisabled(false);
+  // };
+
+  const disabled = title !== '' && desc !== '' && tagsStr !== '';
+
+  console.log(disabled);
+
+  const addCardBack = () => {
     if (title.trim() === '') {
       Swal.fire({
         icon: 'error',
@@ -66,17 +80,8 @@ const CardBackWrite = ({ onHide }) => {
       return false;
     }
 
-    if (link.match(/\s/g)) {
-      Swal.fire({
-        icon: 'error',
-        title: '작성 실패',
-        text: '링크를 작성하시거나 공백을 지워주세요',
-      });
-
-      return false;
-    }
-
-    let url = link;
+    let url = link.trim();
+    console.log(url);
     if (url !== undefined && url.indexOf('http') === -1) {
       // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
       url = '//' + url;
@@ -88,91 +93,119 @@ const CardBackWrite = ({ onHide }) => {
       tagsStr,
       link: url,
     };
-    dispatch(createCardDB(content));
-    onHide();
+    if (disabled) {
+      dispatch(createCardDB(content));
+      onHide();
+    }
+
     // dispatch(isSuccess(!handleClick));
   };
 
   return (
-    <Grid
-      width="1110px"
-      height="509px"
-      borderRadius="16px"
-      border="1px solid #8c4dff"
-      margin="0px auto"
-      padding="48px 48px 0px 48px"
-      bg="#141422"
-    >
-      <Div>
-        <TitleBox
-          type="text"
-          placeholder="카드 제목"
-          maxLength="50"
-          onChange={(e) => {
-            setTitle(e.target.value);
-            // console.log(e.target.value);
-          }}
-          // {...register('title', {
-          //   requirerd: '제목을 입력해주세요',
-          //   minLength: {
-          //     value: 1,
-          //     message: '제목이 공백입니다.',
-          //   },
-          // })}
-        />
-        <Grid width="8%">
-          <AddBtn cursor="pointer" onClick={addCardBack} />
-        </Grid>
-      </Div>
-      <Grid>
-        <MainDiv>
-          <MainBox
+    <div>
+      <div style={{ display: 'flex', margin: '0px 0px 12px 165px' }}>
+        <div style={{ marginRight: '16px' }}>
+          <InfoLight />
+        </div>
+        <Text regular20 color={ColorStyle.PrimaryPurple}>
+          다른 사람이 Tap! 할 수 있게 제목, 소개글, 태그를 작성해서 프로젝트를
+          소개 해보세요
+        </Text>
+      </div>
+      <Grid
+        width="1110px"
+        height="509px"
+        borderRadius="16px"
+        border="1px solid #8c4dff"
+        margin="0px auto"
+        padding="48px 48px 0px 48px"
+        bg="#141422"
+      >
+        <Div>
+          <TitleBox
             type="text"
-            value={desc}
-            placeholder="· 좋은 프로젝트는 널리 공유해요! 나의 프로젝트를 소개하고 대화를 나눠보세요 &#13;&#10;· 아직 프로젝트 경험이 없다면 함께 성장할 수 있는 일을 제안해 보세요  &#13;&#10;                                                                                  
-                프로젝트를 함께 할 팀원을 찾거나 스터디를 같이 할 사람을 찾아볼 수도 있어요!"
-            //  ('\u00a0')
-            maxLength="200"
+            placeholder="프로젝트 제목"
+            maxLength="50"
             onChange={(e) => {
-              setDesc(e.target.value);
+              setTitle(e.target.value);
+              // console.log(e.target.value);
             }}
-            // {...register('content', { requirerd: true })}
-            // ref={register({ requirerd: true })}
+            // onKeyUp={checkValid}
+            // {...register('title', {
+            //   requirerd: '제목을 입력해주세요',
+            //   minLength: {
+            //     value: 1,
+            //     message: '제목이 공백입니다.',
+            //   },
+            // })}
           />
-          <LengthDiv>
-            <Text regular14 color={ColorStyle.Gray300}>
-              {desc.length} / 200
+
+          {/* <DisAddBtn className="disAddBtn" />
+            <AddBtn className="addBtn" cursor="pointer"/> */}
+          <AddBtn
+            // className={disabled ? 'addBtn' : 'disAddBtn'}
+            onClick={addCardBack}
+          >
+            <Text
+              bold20
+              color={disabled ? ColorStyle.PrimaryPurple : ColorStyle.Gray300}
+              cursor="pointer"
+            >
+              작성 완료
             </Text>
-          </LengthDiv>
-        </MainDiv>
-        <TagDiv>
-          <TagBox
-            type="text"
-            placeholder="카드 내용과 관련 된 분야를 태그로 달아주세요"
-            onChange={(e) => {
-              setTagsStr(e.target.value);
-            }}
-            // {...register('tag', { requirerd: true })}
-          />
-          <div style={{ position: 'absolute', top: '63%', left: '2%' }}>
-            <TagIcon />
-          </div>
-        </TagDiv>
-        <LinkDiv>
-          <LinkBox
-            type="text"
-            placeholder="더 자세한 내용을 링크로 공유해보세요! 예시) Github 링크, 블로그 링크, 포트폴리오 링크"
-            onChange={(e) => {
-              setLink(e.target.value);
-            }}
-          />
-          <div style={{ position: 'absolute', top: '55%', left: '2%' }}>
-            <Link />
-          </div>
-        </LinkDiv>
-        {/* <Btn onClick={addCardBack}>작성완료</Btn> */}
+          </AddBtn>
+        </Div>
+        <Grid>
+          <MainDiv>
+            <MainBox
+              type="text"
+              value={desc}
+              placeholder="프로젝트를 공유하고 간략하게 기록할 수 있어요 &#13;&#10;프로젝트에서 특별히 공들인 점이나 핵심 내용을 중심으로 작성하면 효과적이에요"
+              maxLength="200"
+              // onKeyUp={checkValid}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+              // {...register('content', { requirerd: true })}
+              // ref={register({ requirerd: true })}
+            />
+            <LengthDiv>
+              <Text regular14 color={ColorStyle.Gray300}>
+                {desc.length} / 200
+              </Text>
+            </LengthDiv>
+          </MainDiv>
+          <TagDiv>
+            <TagBox
+              type="text"
+              placeholder="프로젝트에서 담당했던 일을 태그에 적어주세요"
+              // onKeyUp={checkValid}
+              onChange={(e) => {
+                setTagsStr(e.target.value);
+              }}
+              // {...register('tag', { requirerd: true })}
+            />
+            <div style={{ position: 'absolute', top: '63%', left: '2%' }}>
+              <TagIcon />
+            </div>
+          </TagDiv>
+          <LinkDiv>
+            <LinkBox
+              type="text"
+              placeholder="더 자세한 내용은 링크로 추가해 보세요 예시) Github 링크, 블로그 링크, 포트폴리오 링크"
+              // onKeyUp={checkValid}
+              onChange={(e) => {
+                setLink(e.target.value);
+              }}
+            />
+            <div style={{ position: 'absolute', top: '55%', left: '2%' }}>
+              <Link />
+            </div>
+          </LinkDiv>
+          {/* <Btn onClick={addCardBack}>작성완료</Btn> */}
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 
@@ -192,6 +225,26 @@ const Div = styled.div`
   width: 1007px;
   margin: 0px auto;
 `;
+
+const AddBtn = styled.div`
+  width: '8%';
+  font-size: ${FontScale.Body1_20};
+  font-family: ${FontFamily};
+  font-weight: 700;
+  cursor: 'pointer';
+  /* .disAddBtn {
+    color: ${ColorStyle.Gray300};
+  }
+  .addBtn {
+    color: ${ColorStyle.PrimaryPurple};
+  } */
+`;
+
+// const WriteBtn = styled.div`
+//   width: '8%';
+//   opacity: ${disabled} ? 0.25 : 1;
+//   pointer-events: ${disabled}? none : initial;
+// `;
 
 const TitleBox = styled.input`
   width: 587px;
@@ -223,12 +276,12 @@ const MainBox = styled.textarea`
   width: 960px;
   height: 100px;
   padding: 24px;
-  background-color: ${ColorStyle.Gray100 + Opacity[20]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  border: none;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[60]};
   border-radius: 12px;
   &:focus {
     outline: none;
@@ -253,14 +306,14 @@ const TagDiv = styled.div`
 const TagBox = styled.input`
   padding-left: 60px;
   margin-top: 40px;
-  background-color: ${ColorStyle.Gray100 + Opacity[20]};
+  background-color: ${ColorStyle.Gray100 + Opacity[15]};
   width: 947px;
   height: 50px;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};
-  border: none;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[60]};
   border-radius: 12px;
   &:focus {
     outline: none;
@@ -280,12 +333,12 @@ const LinkBox = styled.input`
   height: 50px;
   padding-left: 60px;
   margin-top: 24px;
-  background-color: ${ColorStyle.Gray100 + Opacity[20]};
+  background-color: ${ColorStyle.Gray100 + Opacity[10]};
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.PrimaryPurple};
-  border: none;
+  border: 1px solid ${ColorStyle.BackGround100};
   border-radius: 12px;
   &:focus {
     outline: none;
