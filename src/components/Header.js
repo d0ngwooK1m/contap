@@ -380,7 +380,7 @@ const HeaderWrapper = styled.div`
   box-sizing: border-box;
   height: 88px;
   padding: 0px 164px;
-  ${({location}) => (location === '/' || location === '/card/:userId' || location === '/settings' || location === '/mypage' || location === '/edit' || location === '/grabtalk'  ?  'display:flex;': 'display:none;')}
+  ${({location}) => (location === '/' || location === '/card/:userId' || location === '/settings' ||location === '/contap' || location === '/mypage' || location === '/edit' || location === '/grabtalk'  ?  'display:flex;': 'display:none;')}
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;

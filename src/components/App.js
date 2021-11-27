@@ -18,12 +18,15 @@ import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
+import MobileBlock from '../pages/MobileBlock';
 // import NotFound from './NotFound';
 
 // import SizeCheck from './SizeCheck';
 // import SizeCheck from '../pages/SizeCheck';
 
 function App() {
+  const isWebView = window.matchMedia('(max-width: 768px)').matches;
+
   return (
     <WrapApp>
       <Wrap>
@@ -39,10 +42,10 @@ function App() {
 
           <WsNotiRoom>
             <AlarmCheck>
-              <Header />
+              {!isWebView && <Header />}
               <PublicRoute
                 path={['/', '/card/:userId']}
-                component={CardList}
+                component={isWebView ? MobileBlock : CardList}
                 exact
               />
               <Permit>
@@ -63,7 +66,7 @@ function App() {
           </WsNotiRoom>
         </Switch>
       </Wrap>
-      <Footer />
+      {!isWebView && <Footer />}
     </WrapApp>
   );
 }
