@@ -1,7 +1,7 @@
 import React from 'react';
 import { Reset } from 'styled-reset';
 import styled from 'styled-components';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import CardList from '../pages/CardList';
@@ -18,12 +18,15 @@ import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
-// import NotFound from './NotFound';
+import MobileBlock from '../pages/MobileBlock';
+import NotFound from './NotFound';
 
 // import SizeCheck from './SizeCheck';
 // import SizeCheck from '../pages/SizeCheck';
 
 function App() {
+  const isWebView = window.matchMedia('(max-width: 768px)').matches;
+
   return (
     <WrapApp>
       <Wrap>
@@ -39,10 +42,10 @@ function App() {
 
           <WsNotiRoom>
             <AlarmCheck>
-              <Header />
+              {!isWebView && <Header />}
               <PublicRoute
                 path={['/', '/card/:userId']}
-                component={CardList}
+                component={isWebView ? MobileBlock : CardList}
                 exact
               />
               <Permit>
@@ -57,13 +60,14 @@ function App() {
                   exact
                 />
                 <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
-                {/* <PrivateRoute path="*" component={NotFound} /> */}
               </Permit>
             </AlarmCheck>
           </WsNotiRoom>
+          {console.log('스위치 여까지 옴')}
+          <Route path="*" component={NotFound} />
         </Switch>
       </Wrap>
-      <Footer />
+      {!isWebView && <Footer />}
     </WrapApp>
   );
 }
