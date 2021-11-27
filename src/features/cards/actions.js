@@ -124,7 +124,7 @@ export const loadCardFrontDB = () => async (dispatch) => {
 export const searchInfoDB = (searchInfo) => async (dispatch) => {
   console.log('requset ======>', searchInfo);
   try {
-    const res = await axios.post(`${baseURL}/main/search`, searchInfo);
+    const res = await T.POST(`/main/search`, searchInfo);
     // const { resultData } = res;
     // console.log(resultData);
     console.log('response ======>', res.data);
