@@ -40,7 +40,7 @@ export const BasicAlert2 = MySwal.mixin({
   showCancelButton: true,
   confirmButtonText: (
     <Text bold24 color={ColorStyle.Gray500}>
-      예
+      탈퇴하기
     </Text>
   ),
   cancelButtonText: (
@@ -102,6 +102,25 @@ export const LoginAlert = MySwal.mixin({
     title: 'swal-title',
     cancelButton: 'login-cancel',
     confirmButton: 'login-confirm',
+    actions: 'login-action',
+  },
+});
+
+export const CardAlert = MySwal.mixin({
+  confirmButtonText: (
+    <Text bold20 color={ColorStyle.Gray500}>
+      작성하기
+    </Text>
+  ),
+  reverseButtons: true,
+  confirmButtonColor: '#8C4DFF',
+  background: '#1d1d22',
+  position: 'relative',
+  // padding: '40px',
+  customClass: {
+    popup: 'check-popup',
+    title: 'swal-title',
+    confirmButton: 'write-confirm',
     actions: 'login-action',
   },
 });

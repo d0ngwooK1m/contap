@@ -19,7 +19,7 @@ SwiperCore.use([Pagination, Navigation, Keyboard]);
 
 const Carousel = ({ userId, userName, profile, category, onHide }) => {
   const currentCard = useSelector((state) => state.cards.current);
-  const isLoading = useSelector((state)=>state.cards.isLoading)
+  const isLoading = useSelector((state) => state.cards.isLoading);
   const [tapFormState, setTapFormState] = React.useState(false);
   console.log('커런트 카드 없져?', currentCard);
   const setting = {
@@ -40,35 +40,39 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
         pagination={{
           type: 'progressbar',
         }}
-        onSlideChange={() => {setTapFormState(false)}}
+        onSlideChange={() => {
+          setTapFormState(false);
+        }}
         navigation={true}
         className="mySwiper"
         allowTouchMove={false}
         keyboard={true}
       >
-        {!isLoading && currentCard.map((card) => {
-          return (
-            <SwiperSlide key={card.cardId}>
-              <CardBack
-                card={card}
-                userId={userId}
-                userName={userName}
-                profile={profile}
-                show={tapFormState}
-                onTapForm={handleTapForm}
-              ></CardBack>
-            </SwiperSlide>
-          );
-        })}
+        {!isLoading &&
+          currentCard.map((card) => {
+            return (
+              <SwiperSlide key={card.cardId}>
+                <CardBack
+                  card={card}
+                  userId={userId}
+                  userName={userName}
+                  profile={profile}
+                  show={tapFormState}
+                  onClose={onHide}
+                  onTapForm={handleTapForm}
+                ></CardBack>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
-        {tapFormState && (
-          <TapForm
-            userId={userId}
-            category={category}
-            onHide={onHide}
-            userName={userName}
-          />
-        )}
+      {tapFormState && (
+        <TapForm
+          userId={userId}
+          category={category}
+          onHide={onHide}
+          userName={userName}
+        />
+      )}
     </SwiperWrap>
   );
 };

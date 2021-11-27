@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useSelector } from 'react-redux';
+import { history } from '../features/configureStore';
+
 import { Text } from '../elements';
 import {
   ColorStyle,
@@ -14,6 +16,8 @@ import {
   professionHoverColor,
 } from '../utils/systemDesign';
 import BasicProfile from '../svgs/BasicProfile.svg';
+import cardAlertPng from '../assets/image/cardAlertPng.png';
+import { CardAlert } from '../utils/alert';
 
 const CardBack = ({
   card,
@@ -23,6 +27,7 @@ const CardBack = ({
   children,
   onTapForm,
   show,
+  onClose,
 }) => {
   console.log('=====> 카드!', card);
   console.log('=====> 유저!', userId);
@@ -37,6 +42,39 @@ const CardBack = ({
   const OpacityColor = professionColor(cat, 70);
   const hoverColor = professionHoverColor(cat);
 
+  const link = '//www.naver.com';
+  const cardCheck = useSelector((state) => state.user.canOtherRead);
+  console.log(cardCheck);
+
+  const linkClick = async (e) => {
+    if (cardCheck === 0) {
+      e.preventDefault();
+      onClose();
+      const { isConfirmed, dismiss } = await CardAlert.fire({
+        title: (
+          <>
+            <img src={cardAlertPng} width="203px" height="109px" />
+            <div style={{ marginTop: '40px', marginBottom: '24px' }}>
+              <Text bold24>아직 카드를 작성하지 않았어요</Text>
+            </div>
+            <Text regular16>
+              나의 카드를 하나만 공유해도
+              <br />
+              다른 사람의 프로젝트를 자세히 볼 수 있어요!
+            </Text>
+          </>
+        ),
+      });
+      if (dismiss === 'backdrop') {
+        return;
+      }
+      if (isConfirmed) {
+        history.push('/mypage');
+
+        return null;
+      }
+    }
+  };
   // const stopPropagation = (e) => {
   //   e.stopPropagation();
   // };
@@ -63,12 +101,24 @@ const CardBack = ({
             {card?.title}
           </Text>
           {card.link && (
-            <a className="link" href={card.link} target="_blank">
+            <a
+              onClick={linkClick}
+              className="link"
+              href={card.link}
+              target="_blank"
+            >
               <Text bold20 color={color}>
                 본문 보러가기
               </Text>
             </a>
           )}
+          {/* <div>
+            <a onClick={linkClick} className="link" href={''} target="_blank">
+              <Text bold20 color={color}>
+                본문 보러가기
+              </Text>
+            </a>
+          </div> */}
         </div>
         <div style={{ whiteSpace: 'pre-line' }}>
           <Text regular20 color={ColorStyle.Gray500}>

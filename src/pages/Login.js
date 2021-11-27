@@ -30,7 +30,8 @@ import {
   GithubButton,
   WarningText,
 } from '../utils/styledLoginSign';
-import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
+// import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
+import Onboarding1Png from '../assets/image/onboarding1.png';
 // import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
 import KakaoLogo from '../svgs/KakaoLogo.png';
 import GithubLogoSvg from '../svgs/GithubLogo.svg';
@@ -154,8 +155,8 @@ const Login = () => {
         userName: data.userName,
         profile: data.profile,
       };
-      console.log(data)
-      dispatch(deleteMyCard(data.userId))
+      console.log(data);
+      dispatch(deleteMyCard(data.userId));
       dispatch(loginAction(userInfo));
       saveToken(data?.token);
       history.push('/');
@@ -169,145 +170,145 @@ const Login = () => {
   return (
     <LoginWrapper>
       {/* <OverflowWrapper> */}
-        <LeftWrapper>
-          <Link
-            onClick={() => {
-              history.push('/');
-            }}
-          ></Link>
-          <SvgWrapper>
-            <Onboard1Svg />
-          </SvgWrapper>
-        </LeftWrapper>
-        <RightWrapper>
-          <div>
-            <Title>
-              <Text color={ColorStyle.Gray500} bold32>
-                로그인
-              </Text>
-            </Title>
-            <form
-              autoComplete="off"
-              onSubmit={handleSubmit(async (loginInfo) => {
-                await setErrorMessage('');
-                console.log(loginInfo);
-                // dispatch(loginToServer(loginInfo));
-                loginToServer(loginInfo);
-              })}
+      <LeftWrapper>
+        <Link
+          onClick={() => {
+            history.push('/');
+          }}
+        ></Link>
+        <SvgWrapper>
+          <img src={Onboarding1Png} width="540px" height="759px" />
+        </SvgWrapper>
+      </LeftWrapper>
+      <RightWrapper>
+        <div>
+          <Title>
+            <Text color={ColorStyle.Gray500} bold32>
+              로그인
+            </Text>
+          </Title>
+          <form
+            autoComplete="off"
+            onSubmit={handleSubmit(async (loginInfo) => {
+              await setErrorMessage('');
+              console.log(loginInfo);
+              // dispatch(loginToServer(loginInfo));
+              loginToServer(loginInfo);
+            })}
+          >
+            <InputWrapperEmail>
+              {errors.email && (
+                <WarningText>{errors.email.message}</WarningText>
+              )}
+              {!errors.email && emailError !== '' && (
+                <WarningText> {emailError}</WarningText>
+              )}
+              <StyledInput
+                type="text"
+                // placeholder="이메일을 입력해주세요"
+                {...register('email', {
+                  required: '이메일을 입력해주세요',
+                  pattern: {
+                    value: /^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)*@(?:\w+\.)+\w+$/,
+                    message: '이메일 양식에 맞지 않습니다',
+                  },
+                })}
+              />
+              <StyledLabel>이메일</StyledLabel>
+            </InputWrapperEmail>
+            <br />
+            <InputWrapperPw>
+              {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
+              {!errors.pw && errorMessage !== '' && (
+                <WarningText>{errorMessage}</WarningText>
+              )}
+              <StyledInput
+                type="password"
+                // placeholder="비밀번호를 입력해주세요"
+                {...register('pw', {
+                  required: '비밀번호를 입력해주세요',
+                  maxLength: {
+                    value: 20,
+                    message: '비밀번호는 최대 20자입니다',
+                  },
+                  minLength: {
+                    value: 6,
+                    message: '비밀번호는 최소 6자 이상입니다',
+                  },
+                })}
+              />
+              <StyledLabel>비밀번호</StyledLabel>
+            </InputWrapperPw>
+            <br />
+            <div
+              style={{
+                textAlign: 'center',
+              }}
             >
-              <InputWrapperEmail>
-                {errors.email && (
-                  <WarningText>{errors.email.message}</WarningText>
-                )}
-                {!errors.email && emailError !== '' && (
-                  <WarningText> {emailError}</WarningText>
-                )}
-                <StyledInput
-                  type="text"
-                  // placeholder="이메일을 입력해주세요"
-                  {...register('email', {
-                    required: '이메일을 입력해주세요',
-                    pattern: {
-                      value: /^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)*@(?:\w+\.)+\w+$/,
-                      message: '이메일 양식에 맞지 않습니다',
-                    },
-                  })}
-                />
-                <StyledLabel>이메일</StyledLabel>
-              </InputWrapperEmail>
-              <br />
-              <InputWrapperPw>
-                {errors.pw && <WarningText>{errors.pw.message}</WarningText>}
-                {!errors.pw && errorMessage !== '' && (
-                  <WarningText>{errorMessage}</WarningText>
-                )}
-                <StyledInput
-                  type="password"
-                  // placeholder="비밀번호를 입력해주세요"
-                  {...register('pw', {
-                    required: '비밀번호를 입력해주세요',
-                    maxLength: {
-                      value: 20,
-                      message: '비밀번호는 최대 20자입니다',
-                    },
-                    minLength: {
-                      value: 6,
-                      message: '비밀번호는 최소 6자 이상입니다',
-                    },
-                  })}
-                />
-                <StyledLabel>비밀번호</StyledLabel>
-              </InputWrapperPw>
-              <br />
-              <div
+              혹시 회원이 아니신가요?{'   '}
+              <span
+                onClick={() => {
+                  history.push('/signup');
+                }}
                 style={{
-                  textAlign: 'center',
+                  cursor: 'pointer',
+                  color: '#8C4DFF',
                 }}
               >
-                혹시 회원이 아니신가요?{'   '}
-                <span
-                  onClick={() => {
-                    history.push('/signup');
-                  }}
-                  style={{
-                    cursor: 'pointer',
-                    color: '#8C4DFF',
-                  }}
-                >
-                  회원가입하기
-                </span>
-              </div>
-              <SubmitInput type="submit" value="로그인" />
-              {/* <SubmitInput type="submit" >
+                회원가입하기
+              </span>
+            </div>
+            <SubmitInput type="submit" value="로그인" />
+            {/* <SubmitInput type="submit" >
                 <Text color='white' regular20>로그인</Text>
               </SubmitInput> */}
-            </form>
-            <DivideWrapper>
-              <DivideLine />
-              <DivideContent>또는</DivideContent>
-              <DivideLine />
-            </DivideWrapper>
-            <KakaoButton
-              onClick={() => {
-                console.log(process.env.REACT_APP_KAKAO_PATH);
-                setLogin('kakao');
-                window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
+          </form>
+          <DivideWrapper>
+            <DivideLine />
+            <DivideContent>또는</DivideContent>
+            <DivideLine />
+          </DivideWrapper>
+          <KakaoButton
+            onClick={() => {
+              console.log(process.env.REACT_APP_KAKAO_PATH);
+              setLogin('kakao');
+              window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
+            }}
+          >
+            <div
+              style={{
+                marginRight: '16px',
+                marginTop: '10px',
               }}
             >
-              <div
-                style={{
-                  marginRight: '16px',
-                  marginTop: '10px',
-                }}
-              >
-                {/* <StyledKakaoLogoSvg /> */}
-                <img src={KakaoLogo} width='23px' height='21px' />
-              </div>
-              <Text color="#181600" regular20>
-                카카오로 시작하기
-              </Text>
-            </KakaoButton>
-            <GithubButton
-              onClick={() => {
-                console.log(process.env.REACT_APP_GITHUB_PATH);
-                setLogin('github');
-                window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
+              {/* <StyledKakaoLogoSvg /> */}
+              <img src={KakaoLogo} width="23px" height="21px" />
+            </div>
+            <Text color="#181600" regular20>
+              카카오로 시작하기
+            </Text>
+          </KakaoButton>
+          <GithubButton
+            onClick={() => {
+              console.log(process.env.REACT_APP_GITHUB_PATH);
+              setLogin('github');
+              window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
+            }}
+          >
+            <div
+              style={{
+                marginRight: '16px',
+                marginTop: '5px',
               }}
             >
-              <div
-                style={{
-                  marginRight: '16px',
-                  marginTop: '5px',
-                }}
-              >
-                <img src={GithubLogoSvg} />
-              </div>
-              <Text color={ColorStyle.BackGround100} regular20>
-                Github으로 시작하기
-              </Text>
-            </GithubButton>
-          </div>
-        </RightWrapper>
+              <img src={GithubLogoSvg} />
+            </div>
+            <Text color={ColorStyle.BackGround100} regular20>
+              Github으로 시작하기
+            </Text>
+          </GithubButton>
+        </div>
+      </RightWrapper>
       {/* </OverflowWrapper> */}
     </LoginWrapper>
   );

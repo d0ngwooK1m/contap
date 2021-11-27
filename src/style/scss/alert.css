@@ -21,6 +21,7 @@
   margin-left: 31px !important;
   border-radius: 60px !important;
 }
+
 .login-action {
   margin: auto !important;
   justify-content: space-between !important;
@@ -45,4 +46,22 @@
   height: 80px;
   border-radius: 8px;
   background-color: '#1d1d22';
+}
+
+.write-confirm {
+  width: 350px !important;
+  height: 60px !important;
+  margin: auto !important;
+  border-radius: 60px !important;
+  border: 1px solid #8c4dff !important;
+}
+
+.check-popup {
+  border-radius: 30px;
+  width: 773px;
+  min-width: 500px;
+  height: 445px;
+  padding: 50px;
+  border: 3px solid #4d4759;
+  box-sizing: border-box;
 }

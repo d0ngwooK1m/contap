@@ -7,8 +7,10 @@ import { IconButton } from '@mui/material';
 import { Text } from '../elements';
 import { ReactComponent as Close } from '../svgs/CloseRound.svg';
 import { ReactComponent as Search } from '../svgs/SearchSvg.svg';
-import { ReactComponent as SearchFail } from '../svgs/searchFail.svg';
-import { ReactComponent as NoneGrab } from '../svgs/noneGrab.svg';
+//import { ReactComponent as SearchFail } from '../svgs/searchFail.svg';
+import SearchFail from '../assets/image/searchFail.png';
+//import { ReactComponent as NoneGrab } from '../svgs/noneGrab.svg';
+import NoneGrab from '../assets/image/noneGrab.png';
 import { closeNoneTalkRoomList } from '../features/chat/actions';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import { wrap } from 'lodash';
@@ -66,7 +68,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
         {noneTalkList.length === 0 && (
           <NoneValueText>
             <div className="svg">
-              <NoneGrab />
+              <img src={NoneGrab} width="140px" height="140px" />
             </div>
             <Text regular20 color={ColorStyle.Gray300}>
               아직 그랩 된 친구가 없어요
@@ -90,7 +92,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
             {/* <div style={{width:'fit-content', paddingLeft:'81px'}}> */}
             <NoneValueText>
               <div className="svg">
-                <SearchFail />
+                <img src={SearchFail} width="120px" height="120px" />
               </div>
               <Text regular20 color={ColorStyle.Gray300}>
                 나의 그랩에서 ‘{searchValue}’님을 찾을 수 없습니다

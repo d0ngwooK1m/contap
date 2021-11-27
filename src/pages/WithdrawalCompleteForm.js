@@ -1,9 +1,11 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 // import { useHistory } from 'react-router';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
-import { ReactComponent as WithdrawalSvg } from '../svgs/WithdrawalComplete.svg';
+// import { ReactComponent as WithdrawalSvg } from '../svgs/WithdrawalComplete.svg';
+import WithdrawalPng from '../assets/image/WithdrawalComplete.png';
 
 const WithdrawalCompleteForm = () => {
   // const history = useHistory();
@@ -17,7 +19,7 @@ const WithdrawalCompleteForm = () => {
         <Text color="white" bold24>
           Contap을 이용해 주셔서 감사합니다
         </Text>
-        <WithdrawalSvg />
+        <img src={WithdrawalPng} width="354px" height="354px" />
         <SubmitBtn
           type="button"
           onClick={() => {
