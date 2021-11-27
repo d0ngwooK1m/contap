@@ -18,7 +18,7 @@ import WsNotiRoom from './WsNotiRoom';
 import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
-import NotFound from './NotFound';
+// import NotFound from './NotFound';
 
 // import SizeCheck from './SizeCheck';
 // import SizeCheck from '../pages/SizeCheck';
@@ -57,7 +57,7 @@ function App() {
                   exact
                 />
                 <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
-                <PrivateRoute path="*" component={NotFound} />
+                {/* <PrivateRoute path="*" component={NotFound} /> */}
               </Permit>
             </AlarmCheck>
           </WsNotiRoom>

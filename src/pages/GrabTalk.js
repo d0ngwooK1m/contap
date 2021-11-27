@@ -16,6 +16,7 @@ import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
 import { ReactComponent as ChatAddSvg } from '../svgs/ChatAdd.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../svgs/BasicProfile.svg';
+import { size } from '../utils/sizeCheck';
 
 const Grabtalk = () => {
   const dispatch = useDispatch();
@@ -35,8 +36,11 @@ const Grabtalk = () => {
   const closeList = () => {
     setIsAddRoom(false);
   };
-
-  console.log(currentRoom.login);
+  const is730px = !!window.matchMedia('(max-height: 730px)').matches;
+  const is616px = !!window.matchMedia('(max-height: 616px)').matches;
+  console.log(is730px);
+  console.log(is616px);
+  console.log(size);
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
@@ -99,10 +103,12 @@ const Menu = styled.div`
   padding-top: 100px;
   width: 445px;
   max-width: 445px;
-  min-height: 80vh;
-  height: 84vh;
   margin: 0px 0px 0px 165px;
+  box-sizing: border-box;
   border-right: solid 1px #a09bac4d;
+  /* padding-bottom: 31px; */
+  /* 616 픽셀일 때 */
+  padding-bottom: 60px;
 
   .addBtn {
     position: relative;
@@ -122,16 +128,15 @@ const Wrapper = styled.div`
   top: 0px;
   padding-top: 100px;
   display: flex;
+  box-sizing: border-box;
   width: 665px;
+  padding-bottom: 31px;
 `;
 
 const Room = styled.div`
   position: relative;
   width: 100%;
-
-  .mseeageRoom {
-    background-color: red;
-  }
+  padding-bottom: 31px;
 `;
 
 const BasicImageWrap = styled.div`

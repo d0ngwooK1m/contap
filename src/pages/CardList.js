@@ -16,9 +16,11 @@ import { MemoizedCardFront } from '../components/CardFront';
 import SearchBar from '../components/SearchBar';
 import { Text } from '../elements';
 import { ReactComponent as TitleBgSvg } from '../svgs/TitleBG.svg';
-import { ReactComponent as SquareShadow } from '../svgs/Reflex.svg';
+// import { ReactComponent as SquareShadow } from '../svgs/Reflex.svg';
+import Reflex from '../svgs/Reflex.png';
 import { ReactComponent as SquareLeft } from '../svgs/ShapeLeft.svg';
-import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
+// import { ReactComponent as SquareRight } from '../svgs/ShapeRight.svg';
+import SquareRight from '../svgs/ShapeRight.png';
 import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
@@ -103,15 +105,18 @@ const CardList = () => {
   return (
     <Wrap>
       <div className="SquareShadow">
-        <SquareShadow />
+        {/* <SquareShadow /> */}
+        <img src={Reflex} width="168px" height="169px" />
       </div>
       <div className="SquareLeft">
         <SquareLeft />
       </div>
       <div className="SquareRight">
-        <SquareRight />
+        <img src={SquareRight} width="168px" height="169px" />
+        {/* <SquareRight /> */}
       </div>
-      <TitleWrap />
+      <BackGroundTop />
+      <BackGroundLow />
       <div className="title">
         <Text bold48> Just Tap!</Text>
         <Text regular20> Contap에서는 함께 성장할 수 있어요</Text>
@@ -274,50 +279,93 @@ const Wrap = styled.div`
   }
 `;
 
-const mainBack = keyframes`
+const mainBackTop = keyframes`
  0% {
   background-position:0% 50%;
-  filter: blur(140px);
   }
   25% {
     background-position:25% 75%;
-  filter: blur(120px);
   }
   50% {
     background-position:100% 50%;
-  filter: blur(100px);
     /* right : 600px; */
   }
   75% {
     background-position:25% 75%;
-  filter: blur(120px);
     /* right : 600px; */
   }
   100% {
     background-position:0% 50%;
-  filter: blur(140px);
     
   }
 `;
 
-const TitleWrap = styled.div`
-  position: relative;
-  text-align: center;
+const mainBackLow = keyframes`
+  0% {
+  background-position:0% 50%;
+  }
+  25% {
+    background-position:25% 75%;
+  }
+  50% {
+    background-position:100% 50%;
+    /* right : 600px; */
+  }
+  75% {
+    background-position:25% 75%;
+    /* right : 600px; */
+  }
+  100% {
+    background-position:0% 50%;
+    
+  }
+`;
+
+const BackGroundTop = styled.div`
+  position: absolute;
+  width: 1260.73px;
+  height: 310.66px;
+  left: 320.88px;
+  top: -330.96px;
 
   background: conic-gradient(
     from 88.92deg at 47.81% 59.2%,
-    #db83e9 -16.52deg,
-    #844aef 62.85deg,
+    #db83e9 -7.16deg,
+    #b64aef 62.85deg,
     #1fb8cd 95.04deg,
     #1edbd7 115.28deg,
-    #4ceeb6 132.84deg,
-    #db83e9 343.48deg,
-    #844aef 422.85deg
+    #4ceeb6 139.09deg,
+    #9bb3d2 257.22deg,
+    #db83e9 352.84deg,
+    #b64aef 422.85deg
   );
   background-size: 200%;
-  filter: blur(140px);
-  height: 100px;
-  animation: ${mainBack} 17s infinite linear alternate;
+  filter: blur(100px);
+  transform: matrix(0.98, 0.19, -0.19, 0.98, 0, 0);
+  animation: ${mainBackTop} 17s infinite linear alternate;
+`;
+
+const BackGroundLow = styled.div`
+  position: absolute;
+  top: 260px;
+  left: 0px;
+  width: 50%;
+  height: 45px;
+  background: conic-gradient(
+    from 88.92deg at 47.81% 59.2%,
+    #4ceeb6 -7.19deg,
+    #db83e9 88.69deg,
+    #b64aef 122.16deg,
+    #1fb8cd 258.1deg,
+    #9bb3d2 294.72deg,
+    #1edbd7 352.77deg,
+    #4ceeb6 352.81deg,
+    #db83e9 448.69deg
+  );
+  background-size: 200%;
+  filter: blur(90px);
+  transform: matrix(-1, 0, 0, -1, 0, 0);
+  animation: ${mainBackLow} 20s infinite linear alternate-reverse;
 `;
 
 const SearchBarWrap = styled.div`
@@ -342,9 +390,9 @@ const RefreshWrapper = styled.div`
   width: 100%;
   align-items: center;
   justify-content: right;
-  
+
   button {
-    background-color: #0F0A1A;
+    background-color: #0f0a1a;
     cursor: pointer;
     color: #a09bac;
     font-family: ${FontFamily};

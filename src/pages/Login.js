@@ -31,7 +31,8 @@ import {
   WarningText,
 } from '../utils/styledLoginSign';
 import { ReactComponent as Onboard1Svg } from '../svgs/onboarding1.svg';
-import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
+// import { ReactComponent as KakaoLogoSvg } from '../svgs/KakaoLogo.svg';
+import KakaoLogo from '../svgs/KakaoLogo.png';
 import GithubLogoSvg from '../svgs/GithubLogo.svg';
 // import KakaoLogoSvg from '../svgs/KakaoLogo.svg';
 
@@ -278,7 +279,8 @@ const Login = () => {
                 marginTop: '10px',
               }}
             >
-              <StyledKakaoLogoSvg />
+              {/* <StyledKakaoLogoSvg /> */}
+              <img src={KakaoLogo} width='23px' height='21px' />
             </div>
             <Text color="#181600" regular20>
               카카오로 시작하기
@@ -309,9 +311,9 @@ const Login = () => {
   );
 };
 
-const StyledKakaoLogoSvg = styled(KakaoLogoSvg)`
-  width: 26px;
-  height: 24px;
-`;
+// const StyledKakaoLogoSvg = styled(KakaoLogoSvg)`
+//   width: 26px;
+//   height: 24px;
+// `;
 
 export default Login;

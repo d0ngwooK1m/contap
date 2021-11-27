@@ -7,6 +7,7 @@ const LoginWrapper = styled.div`
   right: 0;
   overflow-y: auto;
   min-width: 1152px;
+  background-color: ${ColorStyle.BackGround};
   /* width: 100%; */
   /* height: 100%; */
   display: flex;

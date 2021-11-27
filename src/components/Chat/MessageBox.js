@@ -6,10 +6,11 @@ import { ColorStyle } from '../../utils/systemDesign';
 import { Text } from '../../elements';
 import ChatInfinityScroll from './ChatInfinityScroll';
 import { nextPageToAxios, loading } from '../../features/chat/actions';
+import { size } from '../../utils/sizeCheck';
 
 const MessageBox = ({ roomId }) => {
   const dispatch = useDispatch();
-  const {messages,isNext, isLoading } = useSelector((state) => state.chat);
+  const { messages, isNext, isLoading } = useSelector((state) => state.chat);
   const userInfo = useSelector((state) => state.user.email);
   const scrollRef = React.useRef();
   const page = messages.length !== 0 ? messages[0].id : null;
@@ -22,6 +23,10 @@ const MessageBox = ({ roomId }) => {
   // const scrollToBottom = () => {
   //   scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   // };
+  const is730px = !!window.matchMedia('(max-height: 730px)').matches;
+  const is616px = !!window.matchMedia('(max-height: 616px)').matches;
+  console.log(is730px);
+  console.log(is616px);
 
   React.useEffect(() => {
     if (prevHeight) {
@@ -52,7 +57,7 @@ const MessageBox = ({ roomId }) => {
       setPrevHeight={setPrevHeight}
       type="top"
     >
-      <ChatMessageBox ref={scrollRef}>
+      <ChatMessageBox ref={scrollRef} size={size }>
         {messages?.map((msg, i, arr) => {
           const isMe = msg.writer === userInfo;
 
@@ -107,9 +112,11 @@ const ChatMessageBox = styled.div`
   background-color: ${ColorStyle.BackGround};
   position: absolute;
   bottom: 0px;
-  /* padding-bottom: 80px; */
   width: 665px;
-  max-height: 86%;
+  max-height: 82%;
+  /* padding-bottom: 31px; */
+  /* 616일때 */
+  padding-bottom: ${({ size }) => (size === '616' ? '60px' : '31px')};
   overflow-y: scroll;
   ::-webkit-scrollbar {
     margin-left: 30px;

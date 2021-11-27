@@ -14,6 +14,7 @@ import {
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 // import { Switch } from '@mui/material';
 import T from '../api/tokenInstance';
+import { size } from '../utils/sizeCheck';
 
 const AlarmForm = () => {
   const dispatch = useDispatch();
@@ -88,7 +89,7 @@ const AlarmForm = () => {
       const { data } = res;
       console.log(data);
       if (data.errorMessage) {
-        setErrorMessage('잘못된 번호입니다. 다시 확인해주세요.')
+        setErrorMessage('잘못된 번호입니다. 다시 확인해주세요.');
       }
       dispatch(settingPhoneNum(phoneNumber));
       return data;
@@ -113,7 +114,7 @@ const AlarmForm = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper size={size}>
       <ThemeWrapper>
         <Text color={ColorStyle.Gray500} bold32>
           알림 설정
@@ -133,19 +134,19 @@ const AlarmForm = () => {
         </Text>
       </MarginWrapper11>
       <MarginWrapper2>
-        {
-          switchChange === 1 ?
+        {switchChange === 1 ? (
           <Text color={ColorStyle.Gray500} regular20>
             이제 문자로 알림을 받아 보실 수 있습니다!
             <br />
             여기서 잠시 알람을 끌 수도 있어요
-          </Text> :
+          </Text>
+        ) : (
           <Text color={ColorStyle.Gray300} regular20>
             알림 기능이 꺼져있어요
             <br />
             문자로 알림을 받아보세요!
           </Text>
-        }
+        )}
         {/* {
           switchInfo === 0 ?
             <Switch color="secondary" onChange={() => {
@@ -164,7 +165,7 @@ const AlarmForm = () => {
                   setSwitchChange(0);
                 } else {
                   setSwitchChange(1);
-                } 
+                }
               }}
             />
             <Slider />
@@ -179,7 +180,7 @@ const AlarmForm = () => {
                   setSwitchChange(0);
                 } else {
                   setSwitchChange(1);
-                } 
+                }
               }}
             />
             <Slider />
@@ -188,7 +189,7 @@ const AlarmForm = () => {
       </MarginWrapper2>
 
       <form
-        autoComplete='off'
+        autoComplete="off"
         onSubmit={handleSubmit((phoneInfo) => {
           const alarmInfo = {
             alarmState: switchChange,
@@ -212,7 +213,7 @@ const AlarmForm = () => {
           <StyledInput
             type="text"
             // placeholder="비밀번호를 입력해주세요"
-            {...register('phoneNumber', {maxLength: 13})}
+            {...register('phoneNumber', { maxLength: 13 })}
             onChange={handleChange}
             value={phoneNumber}
           />
@@ -230,6 +231,9 @@ const Wrapper = styled.div`
   /* height: 800px; */
   margin: 64px 0px 0px 126px;
   position: relative;
+  ${({ size }) => size === '616' && 'overflow: auto;'};
+  ${({ size }) => size === '768' && 'overflow: auto;'};
+  ${({ size }) => (size === '616' && 'height: 67vh;')};
 `;
 
 // const RadioWrapper = styled.div`

@@ -5,15 +5,20 @@ import { useDispatch } from 'react-redux';
 // import { Grid, Input, Button } from '../elements';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-import {BasicAlert2 }from '../utils/alert';
+import { BasicAlert2 } from '../utils/alert';
 import { useForm } from 'react-hook-form';
 import T from '../api/tokenInstance';
 import { removeToken } from '../utils/auth';
 import Swal from 'sweetalert2';
 import { Grid, Text } from '../elements';
 // import { withdrawalToServer } from '../features/user/actions';
-import { ColorStyle, FontScale, FontFamily, Opacity } from '../utils/systemDesign';
-
+import {
+  ColorStyle,
+  FontScale,
+  FontFamily,
+  Opacity,
+} from '../utils/systemDesign';
+import { size } from '../utils/sizeCheck';
 
 const WithdrawalForm = () => {
   // const dispatch = useDispatch();
@@ -45,13 +50,13 @@ const WithdrawalForm = () => {
     }
   };
 
-  const withdrawalToServer = async(passwordInfo) => {
+  const withdrawalToServer = async (passwordInfo) => {
     try {
       const res = await T.POST('/setting/withdrawal', passwordInfo);
-  
+
       const { data } = res;
       console.log(data);
-  
+
       // if (data.result === 'fail') {
       //   console.log(data);
       //   Swal.fire({
@@ -59,14 +64,14 @@ const WithdrawalForm = () => {
       //     title: '탈퇴 실패',
       //     text: `${data.errorMessage}`,
       //   });
-  
+
       //   return data;
       // }
 
       if (data.result === 'fail') {
         console.log(data);
         if (data.errorMessage === null) {
-          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
         } else {
           setErrorMessage(data.errorMessage);
         }
@@ -89,7 +94,7 @@ const WithdrawalForm = () => {
   } = useForm();
 
   return (
-    <Wrapper>
+    <Wrapper size={size}>
       <ThemeWrapper>
         <Text color={ColorStyle.Gray500} bold32>
           회원탈퇴
@@ -97,7 +102,9 @@ const WithdrawalForm = () => {
       </ThemeWrapper>
       <MarginWrapper>
         <Text color={ColorStyle.Gray500} regular20>
-          {userName !== '' ? userName : 회원}님 <span style={{ color: `${ColorStyle.Error}` }} >탈퇴</span>하시면 모든 기록이 사라져요
+          {userName !== '' ? userName : 회원}님{' '}
+          <span style={{ color: `${ColorStyle.Error}` }}>탈퇴</span>하시면 모든
+          기록이 사라져요
           <br />
           재가입해도 복구할 수 없답니다😥
         </Text>
@@ -170,53 +177,50 @@ const WithdrawalForm = () => {
         </MarginLabelWrapper>
       </RadioWrapper>
       <form
-        onSubmit={
-          handleSubmit((passwordInfo) => {
-        //   const swalWithBootstrapButtons = Swal.mixin({
-        //     customClass: {
-        //       popup: 'swal-popup',
-        //       confirmButton: 'btn btn-success',
-        //       cancelButton: 'btn btn-danger',
-        //     },
-        //     buttonsStyling: false,
-        //   });
+        onSubmit={handleSubmit((passwordInfo) => {
+          //   const swalWithBootstrapButtons = Swal.mixin({
+          //     customClass: {
+          //       popup: 'swal-popup',
+          //       confirmButton: 'btn btn-success',
+          //       cancelButton: 'btn btn-danger',
+          //     },
+          //     buttonsStyling: false,
+          //   });
 
-        //   swalWithBootstrapButtons
-        //     .fire({
-        //       title: 'Are you sure?',
-        //       text: "You won't be able to revert this!",
-        //       icon: 'warning',
-        //       showCancelButton: true,
-        //       confirmButtonText: 'Yes, delete it!',
-        //       cancelButtonText: 'No, cancel!',
-        //       reverseButtons: true,
-        //     })
-        //     .then(async(result) => {
-        //       if (result.isConfirmed) {
-        //         // swalWithBootstrapButtons.fire(
-        //         //   'Deleted!',
-        //         //   'Your file has been deleted.',
-        //         //   'success'
-        //         // )
-        //         await dispatch(withdrawalToServer(passwordInfo));
-        //       } else if (
-        //         /* Read more about handling dismissals below */
-        //         result.dismiss === Swal.DismissReason.cancel
-        //       ) {
-        //         swalWithBootstrapButtons.fire(
-        //           'Cancelled',
-        //           'Your imaginary file is safe :)',
-        //           'error',
-        //         );
-        //       }
-        //     });
-        //   // console.log(passwordInfo);
-        //   // dispatch(withdrawalToServer(passwordInfo));
-        
-            withdrawalModal(passwordInfo);
-          })
-        
-        }
+          //   swalWithBootstrapButtons
+          //     .fire({
+          //       title: 'Are you sure?',
+          //       text: "You won't be able to revert this!",
+          //       icon: 'warning',
+          //       showCancelButton: true,
+          //       confirmButtonText: 'Yes, delete it!',
+          //       cancelButtonText: 'No, cancel!',
+          //       reverseButtons: true,
+          //     })
+          //     .then(async(result) => {
+          //       if (result.isConfirmed) {
+          //         // swalWithBootstrapButtons.fire(
+          //         //   'Deleted!',
+          //         //   'Your file has been deleted.',
+          //         //   'success'
+          //         // )
+          //         await dispatch(withdrawalToServer(passwordInfo));
+          //       } else if (
+          //         /* Read more about handling dismissals below */
+          //         result.dismiss === Swal.DismissReason.cancel
+          //       ) {
+          //         swalWithBootstrapButtons.fire(
+          //           'Cancelled',
+          //           'Your imaginary file is safe :)',
+          //           'error',
+          //         );
+          //       }
+          //     });
+          //   // console.log(passwordInfo);
+          //   // dispatch(withdrawalToServer(passwordInfo));
+
+          withdrawalModal(passwordInfo);
+        })}
       >
         <label>
           <MarginWrapper11>
@@ -241,9 +245,13 @@ const WithdrawalForm = () => {
           />
         </label>
         {errors.pw && <ErrorMessage>{errors.pw.message}</ErrorMessage>}
-        {!errors.pw && errorMessage !== '' && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        {!errors.pw && errorMessage !== '' && (
+          <ErrorMessage>{errorMessage}</ErrorMessage>
+        )}
         <br />
-        <SubmitInput type="submit" value="계정 삭제" />
+        <SubmitWrapper>
+          <SubmitInput type="submit" value="계정 삭제" />
+        </SubmitWrapper>
       </form>
     </Wrapper>
   );
@@ -254,6 +262,10 @@ const Wrapper = styled.div`
   /* height: 800px; */
   margin: 64px 0px 0px 126px;
   position: relative;
+  ${({ size }) => size === '616' && 'overflow: auto;'};
+  ${({ size }) => size === '768' && 'overflow: auto;'};
+  ${({ size }) =>
+    size === '616' ? 'height: 67vh;' : size === '768' && 'height:73vh;'};
 `;
 
 const RadioWrapper = styled.div`
@@ -282,10 +294,15 @@ const StyledInput = styled.input`
   }
 `;
 
+const SubmitWrapper = styled.div`
+  margin-top: 136px;
+  text-align: right;
+`;
+
 const SubmitInput = styled.input`
   width: 253px;
   height: 60px;
-  margin: 60px 0px 0px 0px;
+  /* margin-right: -91px; */
   color: white;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
@@ -293,7 +310,6 @@ const SubmitInput = styled.input`
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
-  position: absolute;
   right: 0px;
   top: 100%;
 `;
@@ -320,15 +336,15 @@ const ErrorMessage = styled.p`
 `;
 
 const RadioInput = styled.input`
-    cursor: pointer;
-    appearance: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 100%;
-    margin-right: 16px;
-    background-color: ${ColorStyle.Gray300 + Opacity[30]};
-    // background: ${ColorStyle.PrimaryPurple};
-  
+  cursor: pointer;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+  margin-right: 16px;
+  background-color: ${ColorStyle.Gray300 + Opacity[30]};
+  // background: ${ColorStyle.PrimaryPurple};
+
   &:checked {
     // width: 11.85px;
     // height: 11.85px;
