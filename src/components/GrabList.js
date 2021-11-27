@@ -75,14 +75,14 @@ const GrabList = ({ select }) => {
             </Text>
             <CardBox>
               <div className="none">
-                <NoneReceiveTap>
+                <NoneReceiveTapWrap>
                   <div className="svg">
                     <img src={NoneReceiveTapPng} width="150px" height="150px" />
                   </div>
                   <Text regular20 color={ColorStyle.Gray500}>
                     그랩이 되면 자유롭게 채팅으로 대화할 수 있어요
                   </Text>
-                </NoneReceiveTap>
+                </NoneReceiveTapWrap>
               </div>
             </CardBox>
           </>
@@ -162,7 +162,7 @@ const CardBox = styled.div`
   }
 `;
 
-const NoneReceiveTap = styled.div`
+const NoneReceiveTapWrap = styled.div`
   word-break: break-all;
   text-align: center;
   border-radius: 16px;

@@ -86,24 +86,23 @@ const CardList = () => {
 
   return (
     <Wrap>
-      <div className="SquareShadow">
-        {/* <SquareShadow /> */}
-        <img src={Reflex} width="168px" height="169px" />
-      </div>
-      <div className="SquareLeft">
-        <SquareLeft />
-      </div>
-      <div className="SquareRight">
-        <img src={SquareRight} width="168px" height="169px" />
-        {/* <SquareRight /> */}
-      </div>
       <BackGroundTop />
       <BackGroundLow />
+      <BackGroundCover />
       <div className="title">
         <Text bold48> Just Tap!</Text>
         <Text regular20> Contap에서는 함께 성장할 수 있어요</Text>
       </div>
       <SearchBarWrap>
+        <div className="SquareShadow">
+          <img src={Reflex} width="168px" height="169px" />
+        </div>
+        <div className="SquareLeft">
+          <SquareLeft />
+        </div>
+        <div className="SquareRight">
+          <img src={SquareRight} width="168px" height="169px" />
+        </div>
         <SearchBar />
       </SearchBarWrap>
       <TextWrap>
@@ -148,78 +147,16 @@ const CardList = () => {
 
 // =========size check 스타일링
 
-const upDown = keyframes`
-  0% {
-    top: 45px;
-  }
-  25% {
-    top: 35px;
-  }
-  50% {
-    top: 20px;
-    /* right : 600px; */
-  }
-  75% {
-    top: 35px;
-    /* right : 600px; */
-  }
-  100% {
-    top: 45px;
-    
-  }
-`;
-
-const downUp = keyframes`
- 0% {
-    top: 245px;
-  }
-  25% {
-    top: 255px;
-  }
-  50% {
-    top: 270px;
-    /* right : 600px; */
-  }
-  75% {
-    top: 255px;
-    /* right : 600px; */
-  }
-  100% {
-    top: 245px;
-    
-  }
-`;
-
 const Wrap = styled.div`
   width: 100%;
   padding-top: 76px;
   padding-bottom: 112px;
-  position: relative;
+  /* position: relative; */
 
-  .SquareLeft {
-    position: absolute;
-    top: 80px;
-    left: 130px;
-    z-index: 1;
-    animation: ${upDown} 5s infinite linear alternate;
-  }
-  .SquareShadow {
-    position: absolute;
-    top: 268px;
-    left: 130px;
-    z-index: 1;
-    animation: ${downUp} 5s infinite linear alternate;
-  }
-  .SquareRight {
-    position: absolute;
-    top: 32px;
-    right: 130px;
-    z-index: 1;
-    animation: ${upDown} 7s infinite linear alternate;
-  }
   .title {
     position: relative;
     top: -100px;
+    margin-top: 78px;
     text-align: center;
     p {
       margin-bottom: 24px;
@@ -286,7 +223,7 @@ const BackGroundTop = styled.div`
   width: 1260.73px;
   height: 310.66px;
   left: 320.88px;
-  top: -330.96px;
+  top: -242.96px;
 
   background: conic-gradient(
     from 88.92deg at 47.81% 59.2%,
@@ -299,18 +236,20 @@ const BackGroundTop = styled.div`
     #db83e9 352.84deg,
     #b64aef 422.85deg
   );
+  opacity: 0.7;
   background-size: 200%;
-  filter: blur(100px);
+  /* opacity: 0.6; */
+  filter: blur(80px);
   transform: matrix(0.98, 0.19, -0.19, 0.98, 0, 0);
   animation: ${mainBackTop} 17s infinite linear alternate;
 `;
 
 const BackGroundLow = styled.div`
   position: absolute;
-  top: 260px;
+  top: 258px;
   left: 0px;
   width: 50%;
-  height: 45px;
+  height: 35px;
   background: conic-gradient(
     from 88.92deg at 47.81% 59.2%,
     #4ceeb6 -7.19deg,
@@ -323,14 +262,113 @@ const BackGroundLow = styled.div`
     #db83e9 448.69deg
   );
   background-size: 200%;
+  /* opacity: 0.8; */
   filter: blur(90px);
   transform: matrix(-1, 0, 0, -1, 0, 0);
   animation: ${mainBackLow} 20s infinite linear alternate-reverse;
 `;
 
+const BackGroundCover = styled.div`
+  position: absolute;
+  /* top: -88px; */
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100vw;
+  max-width: 1920px;
+  height: 410px;
+  /* background-color: papayawhip; */
+  background: rgba(15, 10, 26, 0.4);
+`;
+
+const upDownRight = keyframes`
+  0% {
+    top: -175px;
+  }
+  25% {
+    top: -185px;
+  }
+  50% {
+    top: -200px;
+    /* right : 600px; */
+  }
+  75% {
+    top: -185px;
+    /* right : 600px; */
+  }
+  100% {
+    top: -175px;
+    
+  }
+`;
+
+const upDownLeft = keyframes`
+  0% {
+    top: -28px;
+  }
+  25% {
+    top: -38px;
+  }
+  50% {
+    top: -52px;
+    /* right : 600px; */
+  }
+  75% {
+    top: -38px;
+    /* right : 600px; */
+  }
+  100% {
+    top: -28px;
+    
+  }
+`;
+
+const downUp = keyframes`
+ 0% {
+    top: 108px;
+  }
+  25% {
+    top: 118px;
+  }
+  50% {
+    top: 133px;
+    /* right : 600px; */
+  }
+  75% {
+    top: 118px;
+    /* right : 600px; */
+  }
+  100% {
+    top: 108px;
+    
+  }
+`;
+
 const SearchBarWrap = styled.div`
+  position: relative;
   text-align: center;
   margin: -70px 0px 90px 0px;
+  .SquareLeft {
+    position: absolute;
+    top: -28px;
+    left: 130px;
+    z-index: 1;
+    animation: ${upDownLeft} 4s infinite linear alternate;
+  }
+  .SquareShadow {
+    position: absolute;
+    top: 108px;
+    left: 130px;
+    z-index: 1;
+    animation: ${downUp} 4s infinite linear alternate;
+  }
+  .SquareRight {
+    position: absolute;
+    top: -185px;
+    right: 140px;
+    z-index: 1;
+    animation: ${upDownRight} 4s infinite linear alternate;
+  }
 `;
 
 const TextWrap = styled.div`
@@ -372,6 +410,7 @@ const CardListWrap = styled.div`
   width: 1140px;
   justify-items: center;
   margin: auto;
+  min-height: 232px;
 `;
 export default CardList;
 

@@ -72,14 +72,14 @@ const SendTap = ({ select }) => {
             </Text>
             <CardBox>
               <div className="none">
-                <NoneReceiveTap>
+                <NoneReceiveTapWrap>
                   <div className="svg">
                     <img src={NoneReceiveTapPng} width="150px" height="150px" />
                   </div>
                   <Text regular20 color={ColorStyle.Gray500}>
                     Tap! 해서 함께 성장해 보세요
                   </Text>
-                </NoneReceiveTap>
+                </NoneReceiveTapWrap>
               </div>
             </CardBox>
           </>
@@ -158,7 +158,7 @@ const CardBox = styled.div`
   }
 `;
 
-const NoneReceiveTap = styled.div`
+const NoneReceiveTapWrap = styled.div`
   word-break: break-all;
   text-align: center;
   border-radius: 16px;

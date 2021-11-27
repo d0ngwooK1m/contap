@@ -35,10 +35,10 @@ const FooterWrapper = styled.div`
   padding: 0px 164px;
   ${({ location }) =>
     location === '/' ||
-    location === '/card/:userId' ||
+    location.includes('/card/') ||
     location === '/settings' ||
-    location === '/mypage' ||
-    location === '/edit' ||
+    location === '/contap' ||
+    location.includes('/mypage') ||
     location === '/grabtalk'
       ? 'display:flex;'
       : 'display:none;'}

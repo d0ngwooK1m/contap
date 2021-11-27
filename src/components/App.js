@@ -97,7 +97,6 @@ const WrapApp = styled.div`
 `;
 
 const Wrap = styled.div`
-  position: relative;
   max-width: 1440px;
   min-width: 1110px;
   /* max-width: 1920px;

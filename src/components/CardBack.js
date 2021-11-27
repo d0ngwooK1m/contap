@@ -42,7 +42,6 @@ const CardBack = ({
   const OpacityColor = professionColor(cat, 70);
   const hoverColor = professionHoverColor(cat);
 
-  const link = '//www.naver.com';
   const cardCheck = useSelector((state) => state.user.canOtherRead);
   console.log(cardCheck);
 
