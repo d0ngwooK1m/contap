@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 const MetaTag = () => {
   return (
     <Helmet>
-      <title>page one</title>
       <meta property="og:title" content="Contap" />
       <meta
         property="og:description"

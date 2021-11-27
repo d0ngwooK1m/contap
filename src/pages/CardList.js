@@ -26,6 +26,7 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import { LoginAlert } from '../utils/alert';
 import LoginAlertPng from '../assets/image/LoginAlertPng.png';
+import MetaTag from '../components/MetaTag';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const CardList = () => {
 
   return (
     <Wrap>
+      <MetaTag />
       <div className="SquareShadow">
         {/* <SquareShadow /> */}
         <img src={Reflex} width="168px" height="169px" />
