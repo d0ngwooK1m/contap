@@ -254,8 +254,16 @@ const CardFrontWrite = ({ setMaxMessage }) => {
               }}
               placeholder="닉네임을 입력해 주세요"
             />
-            <Grid width="501px" margin="46px 0px 0px 0px">
+            <CategoryWrap>
               <RadioWrap>
+                <RadioInput
+                  type="radio"
+                  id="categoryId"
+                  name="field"
+                  value="0"
+                  checked={category === 0 ? true : false}
+                  onChange={() => setCategory(0)}
+                />
                 <InputLabel
                   htmlFor="category"
                   // style={{
@@ -266,18 +274,21 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   //   marginRight: '32px',
                   // }}
                 >
-                  <RadioInput
-                    type="radio"
-                    id="categoryId"
-                    name="field"
-                    value="0"
-                    checked={category === 0 ? true : false}
-                    onChange={() => setCategory(0)}
-                  />
-                  백엔드
+                  백엔드 개발자
                 </InputLabel>
               </RadioWrap>
               <RadioWrap>
+                <RadioInput
+                  type="radio"
+                  id="categoryId"
+                  name="field"
+                  value="1"
+                  checked={category === 1 ? true : false}
+                  onChange={() => setCategory(1)}
+                  // style={{
+                  //   marginRight: '16px',
+                  // }}
+                />
                 <InputLabel
                   htmlFor="category"
                   // style={{
@@ -288,21 +299,19 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   //   marginRight: '32px',
                   // }}
                 >
-                  <RadioInput
-                    type="radio"
-                    id="categoryId"
-                    name="field"
-                    value="1"
-                    checked={category === 1 ? true : false}
-                    onChange={() => setCategory(1)}
-                    // style={{
-                    //   marginRight: '16px',
-                    // }}
-                  />
-                  프론트엔드
+                  프론트엔드 개발자
                 </InputLabel>
               </RadioWrap>
               <RadioWrap>
+                <RadioInput
+                  type="radio"
+                  id="categoryId"
+                  name="field"
+                  value="2"
+                  checked={category === 2 ? true : false}
+                  onChange={() => setCategory(2)}
+                  // style={{ marginRight: '16px' }}
+                />
                 <InputLabel
                   htmlFor="category"
                   // style={{
@@ -312,19 +321,10 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   //   fontWeight: 400,
                   // }}
                 >
-                  <RadioInput
-                    type="radio"
-                    id="categoryId"
-                    name="field"
-                    value="2"
-                    checked={category === 2 ? true : false}
-                    onChange={() => setCategory(2)}
-                    // style={{ marginRight: '16px' }}
-                  />
-                  디자인
+                  디자이너
                 </InputLabel>
               </RadioWrap>
-            </Grid>
+            </CategoryWrap>
           </Grid>
         </Div>
         <TagDiv>
@@ -586,8 +586,16 @@ const TitleBox = styled.input`
 //   // }
 // `;
 
+const CategoryWrap = styled.div`
+  display: flex;
+  width: 575px;
+  margin: 46px 0px 0px 0px;
+`;
+
 const RadioWrap = styled.div`
-  display: inline-flex;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   align-items: center;
 `;
 
@@ -604,6 +612,7 @@ const RadioInput = styled.input`
   appearance: none;
   width: 22px;
   height: 22px;
+  //vertical-align: middle;
   border-radius: 100%;
   margin-right: 16px;
   background-color: ${ColorStyle.Gray300 + Opacity[30]};
