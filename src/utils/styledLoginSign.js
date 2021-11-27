@@ -5,7 +5,9 @@ const LoginWrapper = styled.div`
   position: fixed;
   left: 0;
   right: 0;
-  overflow-y: auto;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
   min-width: 1152px;
   background-color: ${ColorStyle.BackGround};
   /* width: 100%; */
@@ -26,7 +28,7 @@ const Link = styled.div`
   height: 36px;
   position: absolute;
   top: 160px;
-  left: 165px;
+  left: 33%;
   cursor: pointer;
   z-index: 1000;
 `;

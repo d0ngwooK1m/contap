@@ -541,8 +541,11 @@ const SignupWrapper = styled.div`
   position: fixed;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
   overflow-y: auto;
   min-width: 1152px;
+  background-color: ${ColorStyle.BackGround};
   /* width: 100%; */
   /* height: 100%; */
   display: flex;
@@ -561,7 +564,7 @@ const Link = styled.div`
   height: 36px;
   position: absolute;
   top: 160px;
-  left: 165px;
+  left: 33%;
   cursor: pointer;
   z-index: 1000;
 `;
