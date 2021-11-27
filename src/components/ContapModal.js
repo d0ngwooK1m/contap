@@ -23,6 +23,7 @@ import {
   loadCurrentRoom,
 } from '../features/chat/actions';
 import { setTapAcceptNoti } from '../features/notice/actions';
+import { size } from '../utils/sizeCheck';
 
 const ContapModal = ({
   show,
@@ -115,7 +116,7 @@ const ContapModal = ({
           },
         }}
       >
-        <Wrap>
+        <Wrap nowSize={size}>
           <Content select={select}>
             {select !== 'GrabList' && (
               <Text className="desc" color={ColorStyle.Gray500} bold32>
@@ -254,6 +255,10 @@ const Wrap = styled.div`
   display: block;
   float: right;
   height: 100vh;
+  /* 768일때 */
+  ${({ nowSize }) => nowSize === '768' && 'overflow: auto;'}
+  overflow : auto;
+
   background-color: ${ColorStyle.BackGround100};
   animation: ${sideModalOn} 0.3s linear alternate;
 `;
@@ -265,7 +270,6 @@ const Content = styled.div`
   max-width: 350px;
   margin: ${({ select }) =>
     select === 'GrabList' ? '158px 0px 0px 65px' : '62px 0px 0px 65px'};
-
   hr {
     margin: 30px 0px;
     border: 1px solid ${ColorStyle.Gray100};

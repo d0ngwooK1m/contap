@@ -1,7 +1,7 @@
 import React from 'react';
 import { Reset } from 'styled-reset';
 import styled from 'styled-components';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import CardList from '../pages/CardList';
@@ -19,7 +19,7 @@ import Grabtalk from '../pages/GrabTalk';
 import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
 import MobileBlock from '../pages/MobileBlock';
-// import NotFound from './NotFound';
+import NotFound from './NotFound';
 
 // import SizeCheck from './SizeCheck';
 // import SizeCheck from '../pages/SizeCheck';
@@ -60,10 +60,11 @@ function App() {
                   exact
                 />
                 <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
-                {/* <PrivateRoute path="*" component={NotFound} /> */}
               </Permit>
             </AlarmCheck>
           </WsNotiRoom>
+          {console.log('스위치 여까지 옴')}
+          <Route path="*" component={NotFound} />
         </Switch>
       </Wrap>
       {!isWebView && <Footer />}
