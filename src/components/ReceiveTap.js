@@ -13,7 +13,8 @@ import { MemoizedCardFront } from './CardFront';
 import Text from '../elements/Text';
 import ChatInfinityScroll from './Chat/ChatInfinityScroll';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
-import { ReactComponent as NoneReceiveTapSvg } from '../svgs/NoneReceiveTap.svg';
+//import { ReactComponent as NoneReceiveTapSvg } from '../svgs/NoneReceiveTap.svg';
+import NoneReceiveTapPng from '../assets/image/noneReceiveTap.png';
 import { IconButton } from '@mui/material';
 import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
 import { size } from '../utils/sizeCheck';
@@ -74,7 +75,7 @@ const ReceiveTap = ({ select }) => {
               <div className="none">
                 <NoneReceiveTap>
                   <div className="svg">
-                    <NoneReceiveTapSvg />
+                    <img src={NoneReceiveTapPng} width="150px" height="150px" />
                   </div>
                   <Text regular20 color={ColorStyle.Gray500}>
                     다른 사람이 Tap! 할 수 있게 카드로 나를 표현 해주세요!
@@ -123,7 +124,7 @@ const Wrap = styled.div`
   padding-top: 72px;
   min-height: 70vh;
   max-height: ${({ size }) => (size === '616' ? '71vh' : '85vh')};
-  ${({ size }) => (size === '616' && 'padding-bottom: 31px;')}
+  ${({ size }) => size === '616' && 'padding-bottom: 31px;'}
   box-sizing: border-box;
   left: 125px;
   width: 100%;

@@ -7,7 +7,7 @@ import { loadCurrentCardDB } from '../features/cards/actions';
 import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
 import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
-import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
+import LoginAlertPng from '../assets/image/LoginAlertPng.png';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 
 import CardModal from './CardModal';
@@ -36,6 +36,8 @@ const CardFront = ({ userId, contap, select }) => {
     contap ? state.taps.byId : state.cards.byId,
   );
 
+  console.log('카드 내용 확인===>', front);
+
   const isLogin = useSelector((state) => state.user.isAuthorized);
   const token = getToken();
 
@@ -51,7 +53,7 @@ const CardFront = ({ userId, contap, select }) => {
       const { dismiss, isConfirmed, isDismissed } = await LoginAlert.fire({
         title: (
           <>
-            <LoginAlertSvg />
+            <img src={LoginAlertPng} width="249px" height="171px" />
             <div style={{ marginTop: '32px', marginBottom: '16px' }}>
               <Text bold24>회원이신가요?</Text>
             </div>
@@ -59,6 +61,7 @@ const CardFront = ({ userId, contap, select }) => {
           </>
         ),
       });
+
       if (dismiss === 'backdrop') {
         return;
       }

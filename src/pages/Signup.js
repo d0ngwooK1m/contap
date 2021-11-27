@@ -6,7 +6,12 @@ import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 // import { stepContentClasses } from '@mui/material';
 import axios from 'axios';
-import { ColorStyle, FontScale, Opacity, FontFamily } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  FontScale,
+  Opacity,
+  FontFamily,
+} from '../utils/systemDesign';
 import {
   backToPrev,
   emailAuth,
@@ -16,8 +21,10 @@ import {
 } from '../features/user/actions';
 import { Grid, Input, Button, Text } from '../elements';
 import Timer from '../components/Timer';
-import { ReactComponent as Onboard2Svg } from '../svgs/onboarding2.svg';
-import { ReactComponent as SignImgSvg } from '../svgs/SignupImg.svg';
+//import { ReactComponent as Onboard2Svg } from '../svgs/onboarding2.svg';
+import Onboarding2Png from '../assets/image/onboarding2.png';
+//import { ReactComponent as SignImgSvg } from '../svgs/SignupImg.svg';
+import SignImgPng from '../assets/image/signupimg.png';
 import { ReactComponent as ExpandDownSvg } from '../svgs/ExpandDown.svg';
 import { ReactComponent as ExpandOpenSvg } from '../svgs/ExpandOpen.svg';
 
@@ -75,7 +82,7 @@ const Signup = () => {
       console.log(authInfo);
       const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
       const { data } = res;
-      console.log('====== 안되는곳',data);
+      console.log('====== 안되는곳', data);
 
       if (data.errorMessage === '인증번호가 일치하지 않습니다') {
         return setAuthNumCheck(false);
@@ -156,7 +163,7 @@ const Signup = () => {
       {isSignupDone ? (
         <div>
           <GotoLoginWrap>
-            <SignImgSvg />
+            <img src={SignImgPng} width="380px" height="380px" />
             <MarginWrapper7>
               <Text color="white" bold48>
                 회원가입 완료!
@@ -185,7 +192,7 @@ const Signup = () => {
               }}
             />
             <SvgWrapper>
-              <Onboard2Svg />
+              <img src={Onboarding2Png} width="531px" height="754px" />
             </SvgWrapper>
             {/* <Onboard2Svg /> */}
           </LeftWrapper>
@@ -328,7 +335,7 @@ const Signup = () => {
                     </Text>
                   </Title>
                   <Text color={ColorStyle.Gray500} regular20>
-                    반갑습니다! 
+                    반갑습니다!
                     <br />
                     Contap 가입 전에 이메일을 먼저 인증해 주세요
                   </Text>
@@ -366,9 +373,7 @@ const Signup = () => {
                       )}
                       {/* {console.log('결과===>', emailError, emailDupCheck)}     */}
                       {!errors.email && !emailDupCheck && (
-                        <ErrorMessage>
-                           존재하는 이메일입니다
-                        </ErrorMessage>
+                        <ErrorMessage>존재하는 이메일입니다</ErrorMessage>
                       )}
                     </MarginWrapper>
                     <br />
@@ -383,7 +388,7 @@ const Signup = () => {
                     </Text>
                   </Title>
                   <Text color={ColorStyle.Gray500} regular20>
-                          <span>{checkedEmail}</span>&nbsp;으로
+                    <span>{checkedEmail}</span>&nbsp;으로
                     <br />
                     메일 발송 후 도착까지 시간이 걸릴 수 있어요
                   </Text>
@@ -432,7 +437,7 @@ const Signup = () => {
                           </Text> */}
                             인증번호
                           </StyledLabel>
-                        </InputWrapper>        
+                        </InputWrapper>
                       </RelativeInputWrapper>
                       {errors.certificationNumber && (
                         <ErrorMessage>
@@ -514,13 +519,13 @@ const Signup = () => {
                           const emailInfo = {
                             email: checkedEmail,
                           };
-                        sendEmailAuth(emailInfo);
-                        // dispatch(emailTimer(false));
-                        if (reset) {
-                          setReset(false);
-                        } else {
-                          setReset(true);
-                        }
+                          sendEmailAuth(emailInfo);
+                          // dispatch(emailTimer(false));
+                          if (reset) {
+                            setReset(false);
+                          } else {
+                            setReset(true);
+                          }
                         }}
                       >
                         이메일 다시 보내기
@@ -604,9 +609,7 @@ const CounterWrapper = styled.div`
   top: 200px;
 `;
 
-const RelativeInputWrapper = styled.div`
-
-`;
+const RelativeInputWrapper = styled.div``;
 
 const StyledInput = styled.input`
   width: 100%;
@@ -716,7 +719,6 @@ const BackToPrevBtn = styled.button`
 
 const MarginWrapper = styled.div`
   margin: 44px 0px 54px 0px;
-  
 `;
 
 const MarginWrapper2 = styled.div`

@@ -1,6 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ResizeSvg } from '../svgs/Resize.svg';
+// import { ReactComponent as ResizeSvg } from '../svgs/Resize.svg';
+import ResizePng from '../assets/image/resize.png';
 import { ReactComponent as LogoSvg } from '../svgs/Logo.svg';
 import { Text } from '../elements';
 import { ColorStyle } from '../utils/systemDesign';
@@ -15,7 +17,7 @@ const MobileBlock = () => {
           <br />
           PC에서 Contap을 접속해 보세요
         </Text>
-        <ResizeSvg />
+        <img src={ResizePng} width="359px" height="359px" />
       </ContentWrapper>
     </Wrapper>
   );

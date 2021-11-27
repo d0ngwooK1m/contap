@@ -15,7 +15,8 @@ import { setContapNoti, setTapAcceptNoti } from '../features/notice/actions';
 import ChatInfinityScroll from './Chat/ChatInfinityScroll';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
-import { ReactComponent as NoneReceiveTapSvg } from '../svgs/NoneReceiveTap.svg';
+//import { ReactComponent as NoneReceiveTapSvg } from '../svgs/NoneReceiveTap.svg';
+import NoneReceiveTapPng from '../assets/image/noneReceiveTap.png';
 import { size } from '../utils/sizeCheck';
 
 const GrabList = ({ select }) => {
@@ -76,7 +77,7 @@ const GrabList = ({ select }) => {
               <div className="none">
                 <NoneReceiveTap>
                   <div className="svg">
-                    <NoneReceiveTapSvg />
+                    <img src={NoneReceiveTapPng} width="150px" height="150px" />
                   </div>
                   <Text regular20 color={ColorStyle.Gray500}>
                     그랩이 되면 자유롭게 채팅으로 대화할 수 있어요
@@ -126,7 +127,7 @@ const Wrap = styled.div`
   padding-top: 72px;
   min-height: 70vh;
   max-height: ${({ size }) => (size === '616' ? '71vh' : '85vh')};
-  ${({ size }) => (size === '616' && 'padding-bottom: 31px;')}
+  ${({ size }) => size === '616' && 'padding-bottom: 31px;'}
   box-sizing: border-box;
   left: 125px;
   width: 100%;

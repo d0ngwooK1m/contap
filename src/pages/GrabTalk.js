@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 import { IconButton } from '@mui/material';
@@ -12,7 +13,8 @@ import Chat from '../components/Chat/Chat';
 import ChatRoomList from '../components/ChatRoomList';
 import GrabTalkAdd from '../components/GrabTalkAdd';
 import { ReactComponent as Close } from '../svgs/CloseRound.svg';
-import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
+// import { ReactComponent as GrabTalkBasicSvg } from '../svgs/GrabTalkBasic.svg';
+import GrabTalkBasicPng from '../assets/image/noneGrab.png';
 import { ReactComponent as ChatAddSvg } from '../svgs/ChatAdd.svg';
 import { ColorStyle, Opacity } from '../utils/systemDesign';
 import BasicProfile from '../svgs/BasicProfile.svg';
@@ -63,7 +65,7 @@ const Grabtalk = () => {
           {!currentRoom.userId && !isAddRoom && (
             <BasicImageWrap>
               <div className="svg">
-                <GrabTalkBasicSvg />
+                <img src={GrabTalkBasicPng} width="140px" height="140px" />
               </div>
               <Text regular20>그랩이 되면 대화할 수 있어요</Text>
             </BasicImageWrap>

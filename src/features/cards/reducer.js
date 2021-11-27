@@ -26,6 +26,7 @@ import {
   LOAD_STACK,
   DELETE_MY_CARD,
   LOADING,
+  CARD_CHECK,
 } from './types';
 import { DraftsRounded } from '@mui/icons-material';
 
@@ -50,6 +51,7 @@ const initialState = {
   stackTag: [],
   hobbyTag: [],
   isLoading: false,
+  cardCheck: {},
 };
 
 export default handleActions(
@@ -240,7 +242,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.isLoading = action.payload.isLoading;
       }),
-
+    [CARD_CHECK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.cardCheck = action.payload.check;
+      }),
     // [IS_SUCCESS]: (state, action) =>
     //   produce(state, (draft) => {
     //     draft.isSuccess = action.payload.success;

@@ -25,8 +25,7 @@ import { ReactComponent as RefreshSvg } from '../svgs/Refresh.svg';
 import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import { LoginAlert } from '../utils/alert';
-import { ReactComponent as LoginAlertSvg } from '../svgs/LoginAlert.svg';
-
+import LoginAlertPng from '../assets/image/LoginAlertPng.png';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const CardList = () => {
         const { isConfirmed, isDismissed, dismiss } = await LoginAlert.fire({
           title: (
             <>
-              <LoginAlertSvg />
+              <img src={LoginAlertPng} width="249px" height="171px" />
               <div style={{ marginTop: '32px', marginBottom: '16px' }}>
                 <Text bold24>회원이신가요?</Text>
               </div>
@@ -146,8 +145,6 @@ const CardList = () => {
     </Wrap>
   );
 };
-
-
 
 // =========size check 스타일링
 
