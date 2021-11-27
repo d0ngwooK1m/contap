@@ -50,7 +50,12 @@ function App() {
                 <PrivateRoute path="/settings" component={Settings} exact />
                 <PrivateRoute path="/contap" component={Contap} exact />
                 <PrivateRoute path="/mypage" component={Mypage} exact />
-                <PrivateRoute path="/edit" component={CardEdit} exact />
+                <PrivateRoute
+                  // path={['/mypage/:userId/edit']}
+                  path="/mypage/:userId/edit"
+                  component={CardEdit}
+                  exact
+                />
                 <PrivateRoute path="/grabtalk" component={Grabtalk} exact />
                 <PrivateRoute path="*" component={NotFound} />
               </Permit>

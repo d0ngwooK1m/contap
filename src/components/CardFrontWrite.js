@@ -26,7 +26,7 @@ import {
 } from '../utils/systemDesign';
 import { Grid, Text } from '../elements';
 
-const CardFrontWrite = () => {
+const CardFrontWrite = ({ setMaxMessage }) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.cards.preview);
   const front = useSelector((state) => state.cards.byId);
@@ -475,7 +475,7 @@ const CardFrontWrite = () => {
               >
                 <BasicHashTag>{hobbyText1}</BasicHashTag>
                 <BasicHashTag>{hobbyText2}</BasicHashTag>
-                <BasicHashTag> {hobbyText3}</BasicHashTag>
+                <BasicHashTag>{hobbyText3}</BasicHashTag>
               </div>
               <HashTagDiv>
                 {hobby.map((val) => {
@@ -484,6 +484,7 @@ const CardFrontWrite = () => {
                       type="button"
                       onClick={() => {
                         dispatch(deleteHobby(val));
+                        setMaxMessage(false);
                       }}
                       key={val}
                     >

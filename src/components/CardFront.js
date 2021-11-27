@@ -21,7 +21,7 @@ import {
   professionHoverColor,
 } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
-import {LoginAlert} from '../utils/alert';
+import { LoginAlert } from '../utils/alert';
 // import T from '../api/tokenInstance';
 
 const CardFront = ({ userId, contap, select }) => {
@@ -48,7 +48,7 @@ const CardFront = ({ userId, contap, select }) => {
   // Modal Handler
   const showCardBackModal = async () => {
     if (!isLogin || !token) {
-      const {dismiss, isConfirmed,isDismissed } = await LoginAlert.fire({
+      const { dismiss, isConfirmed, isDismissed } = await LoginAlert.fire({
         title: (
           <>
             <LoginAlertSvg />
