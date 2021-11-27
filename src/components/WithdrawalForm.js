@@ -18,6 +18,7 @@ import {
   FontFamily,
   Opacity,
 } from '../utils/systemDesign';
+
 import { size } from '../utils/sizeCheck';
 
 const WithdrawalForm = () => {
@@ -40,6 +41,12 @@ const WithdrawalForm = () => {
           <div style={{ marginBottom: '40px' }}>
             <Text bold32 color={ColorStyle.Gray500}>
               정말 떠나시는 건가요?
+            </Text>
+          </div>
+          <div style={{ marginTop: '44px' }}>
+            <Text regular16 color={ColorStyle.Gray300}>
+              같은 하늘 다른 곳에 있어도 <br />
+              부디 나를 잊지 말아요
             </Text>
           </div>
         </div>

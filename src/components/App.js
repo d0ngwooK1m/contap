@@ -63,6 +63,7 @@ function App() {
               </Permit>
             </AlarmCheck>
           </WsNotiRoom>
+
           {console.log('스위치 여까지 옴')}
           <Route path="*" component={NotFound} />
         </Switch>
