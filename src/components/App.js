@@ -20,6 +20,7 @@ import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
 import MobileBlock from '../pages/MobileBlock';
 import NotFound from './NotFound';
+import MetaTag from './MetaTag';
 
 // import SizeCheck from './SizeCheck';
 // import SizeCheck from '../pages/SizeCheck';
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <WrapApp>
+      <MetaTag />
       <Wrap>
         <Reset />
         <Switch>
