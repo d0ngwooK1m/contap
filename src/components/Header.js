@@ -370,10 +370,14 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
   ${({ location }) => (location === '/' || location.includes("/card/")  ? null : 'position : fixed;')}
-  ${({ location }) => (location === '/' || location.includes("/card/")  ? 'margin: auto;' : 'margin: 0px 164px;')}
+  /* ${({ location }) => (location === '/' || location.includes("/card/") ? 'margin: auto;' : 'margin: 0px 164px;')} */
+
+  margin: auto;
   top: 0px;
   width: 100%;
-  max-width: 1112px;
+  max-width: 1440px;
+  padding:0px 164px;
+  box-sizing: border-box;
   height: 88px;
   padding: 0px 164px;
   ${({location}) => (location === '/' || location === '/card/:userId' || location === '/settings' || location === '/mypage' || location === '/edit' || location === '/grabtalk'  ?  'display:flex;': 'display:none;')}
@@ -392,6 +396,7 @@ const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  z-index: 99999;
 `;
 
 const StyledMenu = styled(Menu)`

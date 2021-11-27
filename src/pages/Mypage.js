@@ -34,7 +34,7 @@ const Mypage = () => {
 
   if (cardCount?.length === 0) {
     return (
-      <div style={{ paddingTop: '88px', height: '100vh', minWidth: '1200px' }}>
+      <div style={{ paddingTop: '88px', minWidth: '1200px' }}>
         <Grid>
           <CardProfile />
         </Grid>
@@ -48,7 +48,7 @@ const Mypage = () => {
   }
 
   return (
-    <div style={{ paddingTop: '88px', height: '100vh', minWidth: '1200px' }}>
+    <div style={{ paddingTop: '88px', minWidth: '1200px' }}>
       <Grid>
         <CardProfile />
       </Grid>

@@ -17,9 +17,18 @@ const Footer = () => {
 };
 
 const FooterWrapper = styled.div`
-  ${({ location }) => (location === '/' ? 'height: 80px;' : 'height: 41px;')};
   ${({ location }) =>
-    location === '/' ? 'position:absolute' : 'position:fixed'};
+    location === '/' ||
+    location.includes('/card/') ||
+    location.includes('/mypage')
+      ? 'height: 80px;'
+      : 'height: 41px;'};
+  ${({ location }) =>
+    location === '/' ||
+    location.includes('/card/') ||
+    location.includes('/mypage')
+      ? 'position:absolute'
+      : 'position:fixed'};
   bottom: 0px;
   width: 100%;
   box-sizing: border-box;

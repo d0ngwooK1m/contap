@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { size } from '../../utils/sizeCheck';
 
 // 소켓
 import StompJs from 'stompjs';
@@ -23,6 +24,17 @@ const Chat = ({ current, children }) => {
   const baseURL = process.env.REACT_APP_SERVER_URI;
   const userInfo = useSelector((state) => state.user);
   console.log('유저정보 확인 =======>', current);
+
+  // const size = () => {
+  //   if (is616px) {
+  //     return '616'
+  //   } else if (is768px) {
+  //     return '768'
+  //   } else {
+  //     'nomal'
+  //   }
+  // }
+  // console.log(size);
 
   const { roomId, userId, email } = current;
 
@@ -113,7 +125,7 @@ const Chat = ({ current, children }) => {
   };
 
   return (
-    <MessageWrap>
+    <MessageWrap size={size}>
       {children}
       <MessageBox className="messageBox" roomId={roomId} />
       <MessageWrite sendMessage={sendMessage} />
@@ -124,7 +136,10 @@ const Chat = ({ current, children }) => {
 const MessageWrap = styled.div`
   position: relative;
   width: 665px;
-  height: 75vh;
+  height: ${({ size }) => (size === '616' ? '71vh' : '75vh')};
+  /* height: 75vh; */
+  /* 616픽셀일떄 */
+  /* height: 71vh; */
 
   .messageBox {
   }

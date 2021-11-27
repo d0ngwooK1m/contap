@@ -31,18 +31,13 @@
 .swal2-title {
   padding: 0px;
 }
+
 .swal2-actions {
   margin: auto;
   margin-right: 0px;
   margin-top: 54px;
   width: 265px;
   justify-content: space-between;
-}
-
-.swal2-styled.swal2-cancel {
-}
-
-.swal2-styled.swal2-confirm {
 }
 
 .swal-toast-popup {

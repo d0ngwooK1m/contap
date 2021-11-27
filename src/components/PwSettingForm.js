@@ -11,6 +11,7 @@ import T from '../api/tokenInstance';
 import Swal from 'sweetalert2';
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 import { Text } from '../elements';
+import { size } from '../utils/sizeCheck';
 
 const PwSettingForm = () => {
   // useEffect = (() => {
@@ -25,13 +26,14 @@ const PwSettingForm = () => {
   const [errorMessage, setErrorMessage] = React.useState('');
   const userName = useSelector((state) => state.user.userName);
 
-  const passwordChangeToServer = async(passwordInfo)  => {
+  console.log(size);
+  const passwordChangeToServer = async (passwordInfo) => {
     try {
       const res = await T.POST('/setting/password', passwordInfo);
-  
+
       const { data } = res;
       console.log(data);
-  
+
       // if (data.result === 'fail') {
       //   console.log(data);
       //   Swal.fire({
@@ -44,15 +46,15 @@ const PwSettingForm = () => {
       if (data.result === 'fail') {
         console.log(data);
         if (data.errorMessage === null) {
-          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.')
+          setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
         } else if (data.errorMessage === '비밀번호가 맞지 않습니다') {
-          setPwError('비밀번호가 일치하지 않습니다')
+          setPwError('비밀번호가 일치하지 않습니다');
         } else {
           setErrorMessage(data.errorMessage);
         }
         return data;
       }
-  
+
       if (data.result === 'success') {
         console.log(data);
         Swal.fire({
@@ -75,7 +77,7 @@ const PwSettingForm = () => {
   } = useForm();
 
   return (
-    <Wrapper>
+    <Wrapper size={size}>
       <ThemeWrapper>
         <Text color={ColorStyle.Gray500} bold32>
           비밀번호 변경
@@ -87,7 +89,7 @@ const PwSettingForm = () => {
         </Text>
       </MarginWrapper>
       <form
-        autoComplete='off'
+        autoComplete="off"
         onSubmit={handleSubmit(async (passwordInfo) => {
           await setErrorMessage('');
           console.log(passwordInfo);
@@ -115,8 +117,12 @@ const PwSettingForm = () => {
               })}
             />
           </label>
-          {errors.currentPw && <ErrorMessage>{errors.currentPw.message}</ErrorMessage>}
-          {!errors.currentPw && pwError !== '' && <ErrorMessage>{pwError}</ErrorMessage>}
+          {errors.currentPw && (
+            <ErrorMessage>{errors.currentPw.message}</ErrorMessage>
+          )}
+          {!errors.currentPw && pwError !== '' && (
+            <ErrorMessage>{pwError}</ErrorMessage>
+          )}
         </MarginWrapper>
         <br />
         <MarginWrapper>
@@ -144,27 +150,32 @@ const PwSettingForm = () => {
         </MarginWrapper>
         <br />
         <label>
-            <Text color={ColorStyle.Gray300} regular20>
-              한번 더 입력해주세요
-            </Text>
-            <br />
-            <StyledInput
-              type="password"
-              {...register('newPwCheck', {
-                required: '비밀번호를 입력해주세요',
-                maxLength: {
-                  value: 20,
-                  message: '비밀번호는 6~20자리로 해주세요',
-                },
-                minLength: {
-                  value: 6,
-                  message: '비밀번호는 6~20자리로 해주세요',
-                },
-              })}
-            />
-          </label>
-        {errors.newPwCheck && <ErrorMessage>{errors.newPwCheck.message}</ErrorMessage>}
-        {!errors.currentPw && !errors.newPw && !errors.newPwCheck && errorMessage !== '' && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          <Text color={ColorStyle.Gray300} regular20>
+            한번 더 입력해주세요
+          </Text>
+          <br />
+          <StyledInput
+            type="password"
+            {...register('newPwCheck', {
+              required: '비밀번호를 입력해주세요',
+              maxLength: {
+                value: 20,
+                message: '비밀번호는 6~20자리로 해주세요',
+              },
+              minLength: {
+                value: 6,
+                message: '비밀번호는 6~20자리로 해주세요',
+              },
+            })}
+          />
+        </label>
+        {errors.newPwCheck && (
+          <ErrorMessage>{errors.newPwCheck.message}</ErrorMessage>
+        )}
+        {!errors.currentPw &&
+          !errors.newPw &&
+          !errors.newPwCheck &&
+          errorMessage !== '' && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <br />
         <SubmitWrapper>
           <SubmitInput type="submit" value="변경 완료" />
@@ -179,6 +190,10 @@ const Wrapper = styled.div`
   /* height: 800px; */
   margin: 64px 0px 0px 125px;
   position: relative;
+  ${({ size }) => size === '616' && 'overflow: auto;'};
+  ${({ size }) => size === '768' && 'overflow: auto;'};
+  ${({ size }) =>
+  size === '616' ? 'height: 67vh;' : size === '768' && 'height:73vh;'};
 `;
 
 const ThemeWrapper = styled.div`
@@ -214,13 +229,14 @@ const StyledInput = styled.input`
 `;
 
 const SubmitWrapper = styled.div`
-  margin: 144px 0px 0px 0px;
+  margin-top: 136px;
+  text-align: right;
 `;
 
 const SubmitInput = styled.input`
   width: 253px;
   height: 60px;
-  margin: 60px 0px 0px 0px;
+  /* margin-right: -91px; */
   color: white;
   font-size: ${FontScale.Body1_20};
   font-family: ${FontFamily};
@@ -228,8 +244,6 @@ const SubmitInput = styled.input`
   background-color: ${ColorStyle.PrimaryPurple};
   border: none;
   cursor: pointer;
-  position: absolute;
-  right: 0px;
   top: 100%;
 `;
 

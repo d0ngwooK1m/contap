@@ -16,6 +16,7 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { ReactComponent as NoneReceiveTapSvg } from '../svgs/NoneReceiveTap.svg';
 import { IconButton } from '@mui/material';
 import { ColorStyle, FontFamily, Opacity } from '../utils/systemDesign';
+import { size } from '../utils/sizeCheck';
 
 const ReceiveTap = ({ select }) => {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const ReceiveTap = ({ select }) => {
       setPrevHeight={setPrevHeight}
       type="bottom"
     >
-      <Wrap ref={scrollRef}>
+      <Wrap ref={scrollRef} size={size}>
         {conTap.allIds.length === 0 ? (
           <>
             <Text color={ColorStyle.Gray500} bold32>
@@ -121,7 +122,9 @@ const Wrap = styled.div`
   top: 0px;
   padding-top: 72px;
   min-height: 70vh;
-  max-height: 77vh;
+  max-height: ${({ size }) => (size === '616' ? '71vh' : '85vh')};
+  ${({ size }) => (size === '616' && 'padding-bottom: 31px;')}
+  box-sizing: border-box;
   left: 125px;
   width: 100%;
   overflow-y: scroll;
@@ -161,7 +164,7 @@ const NoneReceiveTap = styled.div`
   border-radius: 16px;
   height: 342px;
   margin: 0px;
-  padding:64px;
+  padding: 64px;
   width: 730px;
   background-color: ${ColorStyle.BackGround100 + Opacity[70]};
   box-sizing: border-box;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { ColorStyle, Opacity } from '../../utils/systemDesign';
 import { ReactComponent as SendHorSvg } from '../../svgs/SendHor.svg';
 import { BLANCK_CHECK } from '../../utils/validation';
+import { size } from '../../utils/sizeCheck';
 
 const MessageWrite = ({ sendMessage }) => {
   const [message, setMessage] = useState('');
@@ -29,7 +30,7 @@ const MessageWrite = ({ sendMessage }) => {
   }, []);
 
   return (
-    <InputField>
+    <InputField nowSize={size}>
       <input
         type="text"
         value={message}
@@ -68,6 +69,10 @@ export default MessageWrite;
 
 const InputField = styled.div`
   position: absolute;
+  /* padding-bottom: 31px; */
+  /* 616일때 */
+  padding-bottom: ${({ nowSize }) => (nowSize === '616' ? '60px' : '31px')};
+
   bottom: -73px;
   max-width: 665px;
   width: 665px;
