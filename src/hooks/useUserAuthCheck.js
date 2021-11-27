@@ -29,8 +29,8 @@ const useUserAuthCheck = () => {
 
         dispatch(authorize(email, userName, profile));
       } catch (error) {
-        console.log(error);
-        console.log(error.message);
+        console.error(error);
+        console.error(error.message);
       }
       return null;
     }

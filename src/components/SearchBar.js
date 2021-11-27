@@ -37,7 +37,6 @@ const SearchBar = () => {
   // const [searchFin, setSearchFin] = React.useState(false);
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.searchArr);
-  console.log(searchList);
   const searchData = useSelector((state) => state.cards.searchData);
 
   React.useEffect(async () => {
@@ -46,15 +45,13 @@ const SearchBar = () => {
 
       const { data } = res;
 
-      console.log(data);
       const searchDataArr = [];
       data.forEach((val) => {
         searchDataArr.push(val.name);
       });
-      console.log(searchDataArr);
       dispatch(searchDataList(searchDataArr));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -65,7 +62,6 @@ const SearchBar = () => {
         return null;
       }
       if (searchIndex !== -1) {
-        console.log(searchIndex);
         searchArr.splice(searchIndex, 0, val);
         // if (before >= searchIndex) {
         //   searchArr.unshift(val);
@@ -76,7 +72,6 @@ const SearchBar = () => {
         // }
       }
       // console.log(val);
-      console.log(searchArr);
 
       return searchArr;
     });
@@ -92,7 +87,6 @@ const SearchBar = () => {
   const isLoading = useSelector((state) => state.cards.isLoading);
 
   const fetchMoreData = async () => {
-    console.log('카드 로딩 안되는지 확인===>', isSearching);
     if (isSearching === false) {
       return;
     }
@@ -225,7 +219,6 @@ const SearchBar = () => {
             placeholder="어떤 분야에서 찾아볼까요?"
             value={data}
             onChange={(e) => {
-              console.log(e.target.value);
               setData(e.target.value);
             }}
             onClick={() => {

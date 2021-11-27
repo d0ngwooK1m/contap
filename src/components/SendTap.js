@@ -31,15 +31,11 @@ const SendTap = ({ select }) => {
     scrollRef.current.scrollTop = 0;
   };
 
-  console.log('여기 샌드 탭', isNext);
-  console.log('여기 샌드 탭', select);
   React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
-      console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
-    console.log('로딩 시작');
     dispatch(loading(true));
     dispatch(loadSendTapToAxios());
     return null;
@@ -53,7 +49,6 @@ const SendTap = ({ select }) => {
     dispatch(nextPageToAxios(select, page));
     setPage(page + 1);
   };
-  console.log(select);
 
   return (
     <ChatInfinityScroll

@@ -47,12 +47,10 @@ const Chat = ({ current, children }) => {
     try {
       ws.connect({}, async () => {
         // dispatch(loading(true));
-        console.log('커넥트 시작');
         ws.subscribe(
           `/sub/chat/room/${roomId}`,
           (data) => {
             const newMessage = JSON.parse(data.body);
-            console.log(userInfo);
             dispatch(getMessage(newMessage));
             dispatch(loadTalkRoomListToAxios());
           },
@@ -61,7 +59,7 @@ const Chat = ({ current, children }) => {
       });
       dispatch(loadMessagesToAxios(roomId, 0));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [dispatch, userId, ws]);
 
@@ -75,7 +73,7 @@ const Chat = ({ current, children }) => {
         // { token }
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [ws]);
 
@@ -120,7 +118,7 @@ const Chat = ({ current, children }) => {
         // dispatch(writeMessage(''));
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

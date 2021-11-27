@@ -16,7 +16,6 @@ const AlarmCheck = ({ children }) => {
   React.useEffect(async () => {
     if (checkToken !== undefined) {
       const { data } = await T.GET('/main/info');
-      // console.log(data & PHONE_TUTORIAL, data & PROFILE_TUTORIAL, data & CAN_OTHER_READ, data & ALARM);
       const alarmInfo = {
         phoneTutorial: data & PHONE_TUTORIAL,
         profileTutorial: data & PROFILE_TUTORIAL,

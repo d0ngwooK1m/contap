@@ -61,9 +61,7 @@ export const loading = createAction(LOADING, (isLoading) => ({ isLoading }));
 
 export const loadMessagesToAxios = (roomId, page) => async (dispatch) => {
   try {
-    console.log('/chat/getmsg', `${roomId}/${page}`);
     const { data } = await T.GET('/chat/getmsg', `${roomId}/${page}`);
-    console.log('리스폰스 ============> ', data);
     dispatch(loadMessages(data));
   } catch (error) {
     console.error(error);
@@ -72,11 +70,8 @@ export const loadMessagesToAxios = (roomId, page) => async (dispatch) => {
 
 export const nextPageToAxios = (roomId, page) => async (dispatch) => {
   try {
-    console.log(roomId, page);
     const { data } = await T.GET('/chat/getmsg', `${roomId}/${page}`);
     // const { data } = await T.GET('/contap/getothers');
-    console.log('리스폰스 ============> ', data);
-    console.log(data);
     dispatch(nextPage(data));
   } catch (error) {
     console.error(error);
@@ -87,7 +82,6 @@ export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/1/0');
     // const { data } = await T.GET('/contap/getothers');
-    console.log('로드톡룸====>', data);
     dispatch(loadTalkRoomList(data));
   } catch (error) {
     console.error(error);
@@ -98,7 +92,6 @@ export const loadNoneTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/2/0');
     // const { data } = await T.GET('/contap/getothers');
-    console.log('로드톡룸====>', data);
     dispatch(loadNoneTalkRoomList(data));
   } catch (error) {
     console.error(error);

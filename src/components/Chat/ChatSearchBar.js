@@ -24,7 +24,6 @@ const ChatSearchBar = ({ list, children }) => {
     ) {
       return null;
     }
-    console.log(items);
   });
 
   const handleSearchValue = (e) => {

@@ -12,7 +12,6 @@ import {
 // import { Grid } from '../elements';
 
 const TagList = ({ tag }) => {
-  console.log('태그확인===>', tag);
   return <HashTagWrap>{tag}</HashTagWrap>;
 };
 

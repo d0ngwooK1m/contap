@@ -26,13 +26,11 @@ const PwSettingForm = () => {
   const [errorMessage, setErrorMessage] = React.useState('');
   const userName = useSelector((state) => state.user.userName);
 
-  console.log(size);
   const passwordChangeToServer = async (passwordInfo) => {
     try {
       const res = await T.POST('/setting/password', passwordInfo);
 
       const { data } = res;
-      console.log(data);
 
       // if (data.result === 'fail') {
       //   console.log(data);
@@ -44,7 +42,6 @@ const PwSettingForm = () => {
       //   return data;
       // }
       if (data.result === 'fail') {
-        console.log(data);
         if (data.errorMessage === null) {
           setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
         } else if (data.errorMessage === '비밀번호가 맞지 않습니다') {
@@ -56,7 +53,6 @@ const PwSettingForm = () => {
       }
 
       if (data.result === 'success') {
-        console.log(data);
         Swal.fire({
           icon: 'success',
           title: '비밀번호 변경 성공!',
@@ -92,7 +88,6 @@ const PwSettingForm = () => {
         autoComplete="off"
         onSubmit={handleSubmit(async (passwordInfo) => {
           await setErrorMessage('');
-          console.log(passwordInfo);
           passwordChangeToServer(passwordInfo);
         })}
       >

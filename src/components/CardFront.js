@@ -36,8 +36,6 @@ const CardFront = ({ userId, contap, select }) => {
     contap ? state.taps.byId : state.cards.byId,
   );
 
-  console.log('카드 내용 확인===>', front);
-
   const isLogin = useSelector((state) => state.user.isAuthorized);
   const token = getToken();
 

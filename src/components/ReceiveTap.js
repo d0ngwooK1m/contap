@@ -35,7 +35,6 @@ const ReceiveTap = ({ select }) => {
   React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
-      console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
     dispatch(loading(true));

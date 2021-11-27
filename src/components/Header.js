@@ -150,8 +150,7 @@ const Header = () => {
       return;
     }
     if (!mypageAlarm) {
-      const res = await T.POST(`/main/tutorial?tutorialNum=1`);
-      console.log('마이페이지 버튼 클릭===>', res);
+      await T.POST(`/main/tutorial?tutorialNum=1`);
       dispatch(profileTutorialCheck(true));
     }
     // setIsMyPage(true);
@@ -208,12 +207,12 @@ const Header = () => {
     <>
       <HeaderWrapper location={location.pathname}>
         {mypageAlarm === false ? (
-          <TutorialForm run={true} steps={mainSteps} page={1} />
+          <TutorialForm  steps={mainSteps} page={1} />
         ) : null}
         {history.location.pathname === '/' &&
         mypageAlarm === true &&
         settingAlarm === false ? (
-          <TutorialForm run={true} steps={settingSteps} page={0} />
+          <TutorialForm steps={settingSteps} page={0} />
         ) : null}
         {/* <TutorialForm run={true} steps={mainSteps} page='main' /> */}
         {/* {Tutorial(mypageAlarm, settingAlarm)} */}

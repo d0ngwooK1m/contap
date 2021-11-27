@@ -31,12 +31,9 @@ const GrabList = ({ select }) => {
     scrollRef.current.scrollTop = 0;
   };
 
-  console.log(conTap);
-
   React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
-      console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
     dispatch(loading(true));
@@ -44,7 +41,6 @@ const GrabList = ({ select }) => {
     dispatch(setContapNoti(false));
 
     return () => {
-      console.log('사라져야지');
       dispatch(setTapAcceptNoti(false));
     };
   }, []);

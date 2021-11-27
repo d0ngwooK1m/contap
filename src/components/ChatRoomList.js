@@ -9,10 +9,8 @@ const ChatList = ({ closeList }) => {
   const dispatch = useDispatch();
 
   const allChatList = useSelector((state) => state.chat.allIds);
-  console.log(allChatList);
 
   React.useEffect(() => {
-    console.log('디스패치');
     dispatch(loadTalkRoomListToAxios());
   }, []);
 

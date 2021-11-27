@@ -26,6 +26,7 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import { LoginAlert } from '../utils/alert';
 import LoginAlertPng from '../assets/image/LoginAlertPng.png';
+import MetaTag from '../components/MetaTag';
 
 const CardList = () => {
   const dispatch = useDispatch();
@@ -34,10 +35,8 @@ const CardList = () => {
   const isLoading = useSelector((state) => state.cards.isLoading);
   const token = getToken();
   const params = useParams();
-  console.log('렌더링 몇번 되는거니?');
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
-  console.log(params);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -79,7 +78,6 @@ const CardList = () => {
     }
 
     if (!isSearching) {
-      console.log('이게 문제야?');
       dispatch(loadCardFrontDB());
     }
   }, [isSearching]);
@@ -131,7 +129,6 @@ const CardList = () => {
         </RefreshWrapper>
         <CardListWrap>
           {cardList.allIds.map((userId) => {
-            console.log('카드 프론트 뿌려줌 =======>', userId);
             return <MemoizedCardFront key={userId} userId={userId} />;
           })}
         </CardListWrap>

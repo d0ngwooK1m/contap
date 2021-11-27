@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import { useSelector } from 'react-redux';
 import T from '../api/tokenInstance';
 import {
   ColorStyle,
@@ -15,13 +14,10 @@ import { Toast } from '../utils/alert';
 // import { ReactComponent as HandFingerThumb } from '../svgs/HandFingerThumb.svg';
 
 const TapForm = ({ userId, category, onHide, userName }) => {
-  const userInfo = useSelector((state) => state.user.userName);
   const [message, setMessage] = React.useState('');
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
-  console.log(userName);
-  console.log(userInfo);
 
   const ERROR_BEFORE_SEND = '이미 상대에게 요청을 보낸 상태입니다.';
   const ERROR_BEFORE_FRIEND = '이미 친구 관계입니다.';
@@ -32,18 +28,17 @@ const TapForm = ({ userId, category, onHide, userName }) => {
     if (data.msg === ERROR_BEFORE_SEND) {
       onHide();
       Toast.fire({
-        title: ERROR_BEFORE_SEND,
+        title: '이미 상대에게 요청을 보냈어요!',
       });
       return;
     }
     if (data.msg === ERROR_BEFORE_FRIEND) {
       onHide();
       Toast.fire({
-        title: ERROR_BEFORE_FRIEND,
+        title: '이미 그랩 되었어요!',
       });
       return;
     }
-    console.log(data);
     onHide();
     Toast.fire({
       title: (

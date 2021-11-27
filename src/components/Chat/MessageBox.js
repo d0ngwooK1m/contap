@@ -18,20 +18,15 @@ const MessageBox = ({ roomId }) => {
 
   const [prevHeight, setPrevHeight] = React.useState(null);
 
-  console.log('리스트 =========>', messages);
-  console.log('page =========>', page);
   // const scrollToBottom = () => {
   //   scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   // };
   const is730px = !!window.matchMedia('(max-height: 730px)').matches;
   const is616px = !!window.matchMedia('(max-height: 616px)').matches;
-  console.log(is730px);
-  console.log(is616px);
 
   React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
-      console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     } else {
       scrollRef.current.scrollTop =

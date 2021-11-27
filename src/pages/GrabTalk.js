@@ -40,9 +40,6 @@ const Grabtalk = () => {
   };
   const is730px = !!window.matchMedia('(max-height: 730px)').matches;
   const is616px = !!window.matchMedia('(max-height: 616px)').matches;
-  console.log(is730px);
-  console.log(is616px);
-  console.log(size);
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>

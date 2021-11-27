@@ -115,21 +115,17 @@ export const loadCardFrontDB = () => async (dispatch) => {
   try {
     const res = await T.GET(`${baseURL}/main`);
 
-    console.log('앞면카드 조회값 확인===>', res.data);
-
     dispatch(loadCard(res.data.users));
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const searchInfoDB = (searchInfo) => async (dispatch) => {
-  console.log('requset ======>', searchInfo);
   try {
     const res = await T.POST(`/main/search`, searchInfo);
     // const { resultData } = res;
     // console.log(resultData);
-    console.log('response ======>', res.data);
     if (res.data === []) {
       return null;
     }
@@ -137,20 +133,18 @@ export const searchInfoDB = (searchInfo) => async (dispatch) => {
       return dispatch(searchCard(searchInfo, res.data));
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   return null;
 };
 
 export const loadCurrentCardDB = (userId) => async (dispatch) => {
   try {
-    console.log(userId);
     const res = await T.GET(`/main/${userId}`);
 
-    console.log('뒷면카드 조회값 확인===>', res.data);
     dispatch(loadCurrentCard(res.data));
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -163,11 +157,9 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
         'X-AUTH-TOKEN': `${getToken()}`,
       },
     });
-    console.log('앞면카드 response 확인===>', res);
     // dispatch(setPreview(null));
     dispatch(editCardProfile(res.data));
     if (res.data.result === 'fail') {
-      console.log(res.data.result);
       Swal.fire({
         icon: 'error',
         title: '수정 실패',
@@ -177,7 +169,7 @@ export const editCardProfileDB = (formData) => async (dispatch) => {
     dispatch(profileChange(res.data.profile));
     history.push('/mypage');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -185,23 +177,19 @@ export const searchTagListDB = () => async (dispatch) => {
   try {
     const res = await axios.get(`${baseURL}/main/hashtag`);
 
-    console.log('검색 태그 목록 response 확인 ====>', res);
-
     const stackTagData = [];
     const hobbyTagData = [];
     res.data.forEach((val, idx) => {
-      console.log(idx);
       if (idx <= 39) {
         stackTagData.push(val.name);
       } else {
         hobbyTagData.push(val.name);
       }
     });
-    console.log('태그 데이터들 ===>', stackTagData, hobbyTagData);
     dispatch(loadStack(stackTagData));
     dispatch(loadHobby(hobbyTagData));
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -209,55 +197,46 @@ export const loadMyCardDB = () => async (dispatch) => {
   try {
     const res = await T.GET('/mypage/myinfo');
 
-    console.log('내카드조회 response 확인===>', res.data);
-
     dispatch(loadMyCard(res.data));
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const createCardDB = (content) => async (dispatch) => {
   try {
     const res = await T.POST('/mypage/backCard', content);
-    console.log('뒷면카드추가 response 확인===>', res);
-
     dispatch(createCard(res.data));
     history.push('/mypage');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
   try {
     const res = await T.POST(`/mypage/backCard/${cardId}`, updateContent);
-    console.log('뒷면카드수정 response 확인===>', res);
-
     dispatch(updateCard(res.data));
     history.push('/mypage');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const deleteCardDB = (cardId) => async (dispatch) => {
   try {
     const res = await T.DELETE('/mypage/backCard', cardId);
-    console.log('뒷면카드삭제 response 확인===>', res);
-
     dispatch(deleteCard(res.data.cardId));
     history.push('/mypage');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const cardCheckDB = () => async () => {
   try {
-    const res = await T.GET('/main/info');
-    console.log('사용자 권한 response====>', res);
+    await T.GET('/main/info');
   } catch (err) {
-    console.log(err);
+    console.errorlog(err);
   }
 };

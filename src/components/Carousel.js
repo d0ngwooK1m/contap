@@ -21,7 +21,6 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
   const currentCard = useSelector((state) => state.cards.current);
   const isLoading = useSelector((state) => state.cards.isLoading);
   const [tapFormState, setTapFormState] = React.useState(false);
-  console.log('커런트 카드 없져?', currentCard);
   const setting = {
     slidesPerView: 1,
     spaceBetween: 16,

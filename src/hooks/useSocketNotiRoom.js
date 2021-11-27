@@ -27,13 +27,9 @@ export default function useSocketNotiRoom() {
   const isTapAcceptNoti = useSelector((state) => state.notice.isTapAcceptNoti);
   const isContapNoti = !!(isTapReceiveNoti || isTapAcceptNoti);
 
-  console.log(isContapNoti);
   const sock = new SockJS(`${baseURL}/ws-stomp`);
   const ws = StompJs.over(sock);
   const token = getToken();
-  console.log('알람 받은 후', isChatNoti);
-
-  console.log('현재 페이지 =====>', window.location.pathname);
   const history = useHistory();
 
   const wsConnectSubscribe = React.useCallback(async () => {
@@ -46,12 +42,9 @@ export default function useSocketNotiRoom() {
         ws.subscribe(
           `/user/sub/user`,
           async (noti) => {
-            console.log('노티 들어올 때 =====> ', isChatNoti);
             // 채팅 알람이 없을 때
             const newNoti = JSON.parse(noti.body);
             if (!isChatNoti) {
-              console.log('노티 들어옴!!!!!!!!!!!!!!!!!!!!!!!!', newNoti);
-              console.log('현재 챗 노티', isChatNoti);
               // chat 보냈을 때 채팅방에 둘다 있을 때 타입 1
               // chat 보냈을 때 채팅방에 한명만 있고 상대방은 로그인 했을 때 타입 2
               // chat 보냈을 때 상대방이 로그아웃 타입 4
@@ -63,7 +56,6 @@ export default function useSocketNotiRoom() {
               if (newNoti.type === 2) {
                 // 그랩톡 페이지에 있을 땐
                 if (history.location.pathname === '/grabtalk') {
-                  console.log('디패 로드 톡룸');
                   // 왼쪽에 있는 채팅방 리스트를 새로 가져오고
                   await dispatch(loadTalkRoomListToAxios());
                 } else {
@@ -100,7 +92,7 @@ export default function useSocketNotiRoom() {
         );
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     return null;
   }, []);
@@ -111,7 +103,7 @@ export default function useSocketNotiRoom() {
         ws.unsubscribe('sub-0');
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

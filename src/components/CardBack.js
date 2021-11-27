@@ -29,13 +29,8 @@ const CardBack = ({
   show,
   onClose,
 }) => {
-  console.log('=====> 카드!', card);
-  console.log('=====> 유저!', userId);
-  console.log('링크 확인 ===>', card.link);
 
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
-
-  console.log('필드', card);
 
   const cat = category(card.field);
   const color = professionColor(cat);
@@ -43,7 +38,6 @@ const CardBack = ({
   const hoverColor = professionHoverColor(cat);
 
   const cardCheck = useSelector((state) => state.user.canOtherRead);
-  console.log(cardCheck);
 
   const linkClick = async (e) => {
     if (cardCheck === 0) {

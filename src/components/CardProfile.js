@@ -28,9 +28,6 @@ const CardProfile = () => {
   // .slice(1, 2);
   // const tag = concat('#').stackTag;
   // const stackTag = '#' + tag;
-  console.log('카드리스트====>', cardList);
-  console.log('앞면 태그1 확인====>', stackTag);
-  console.log('앞면 태그확인====>', typeof stackTag);
   // if (stackTag.length === 1) {
   //   if (stackTag[0] === '') {
   //     stackTag = [];
@@ -41,12 +38,6 @@ const CardProfile = () => {
     ?.split('_')[1]
     ?.split('@')
     ?.slice(1, 4);
-  console.log('앞면 관심사 태그확인====>', hobbyTag);
-  console.log('앞면 관심사1 태그확인====>', hobbyTag === '');
-  console.log(
-    '앞면 관심사 길이 확인====>',
-    hobbyTag ? hobbyTag.length === 0 : null,
-  );
 
   // if (hobbyTag.length === 1 && hobbyTag === '') {
   //   hobbyTag = [];

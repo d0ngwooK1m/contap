@@ -42,12 +42,10 @@ const Signup = () => {
   // const [sendEmail, setSendEmail] = React.useState(false);
   const [reset, setReset] = React.useState(false);
   const timerReset = useSelector((state) => state.user.timerReset);
-  console.log('타이머 체킹===>', timerReset);
   const isEmailChecked = useSelector((state) => state.user.isEmailChecked);
   const isAuthNumChecked = useSelector((state) => state.user.isAuthNumChecked);
   const checkedEmail = useSelector((state) => state.user.checkedEmail);
   const isSignupDone = useSelector((state) => state.user.isSignupDone);
-  console.log(isEmailChecked, isAuthNumChecked);
 
   const baseURL = process.env.REACT_APP_SERVER_URI;
 
@@ -55,10 +53,8 @@ const Signup = () => {
     try {
       // setSendEmail(true);
       // console.log('이메일 들어가는지 확인===>', sendEmail);
-      console.log(emailInfo);
       const res = await axios.post(`${baseURL}/email/send`, emailInfo);
       // const { data } = res;
-      console.log(res.data.errorMessage);
 
       if (res.data.errorMessage === '존재하는 이메일입니다') {
         setEmailDupCheck(false);
@@ -72,14 +68,13 @@ const Signup = () => {
 
       return res.data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return error.Message;
     }
   };
 
   const sendAuthInfo = async (authInfo) => {
     try {
-      console.log(authInfo);
       const res = await axios.post(`${baseURL}/email/confirm`, authInfo);
       const { data } = res;
       console.log('====== 안되는곳', data);
@@ -92,18 +87,15 @@ const Signup = () => {
       dispatch(authCheck());
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error.message);
     }
   };
 
   const signupToServer = async (signupInfo) => {
     try {
-      console.log(baseURL);
-      console.log(signupInfo);
       const res = await axios.post(`${baseURL}/user/signup`, signupInfo);
       const { data } = res;
-      console.log(data);
 
       // if (data.result === 'fail') {
       //   console.log(data);
@@ -118,7 +110,6 @@ const Signup = () => {
       // }
 
       if (data.result === 'fail') {
-        console.log(data);
         if (data.errorMessage === null) {
           setErrorMessage('잘못된 정보가 있습니다');
         } else if (data.errorMessage === '비밀번호가 맞지 않습니다') {
@@ -133,7 +124,7 @@ const Signup = () => {
 
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new Error(error.message);
     }
   };
@@ -213,7 +204,6 @@ const Signup = () => {
                     autoComplete="off"
                     onSubmit={handleSubmit(async (info) => {
                       await setErrorMessage('');
-                      console.log(info);
                       const signupInfo = {
                         email: checkedEmail,
                         pw: info.pw,
@@ -342,7 +332,6 @@ const Signup = () => {
                   <form
                     autoComplete="off"
                     onSubmit={handleSubmit((emailInfo) => {
-                      console.log(emailInfo);
                       // await dispatch(sendEmailAuth(emailInfo));
                       sendEmailAuth(emailInfo);
                     })}
@@ -401,7 +390,6 @@ const Signup = () => {
                         email: checkedEmail,
                         certificationNumber: certificationNum,
                       };
-                      console.log(authInfo);
                       // await dispatch(sendAuthInfo(authInfo));
                       sendAuthInfo(authInfo);
                     })}
