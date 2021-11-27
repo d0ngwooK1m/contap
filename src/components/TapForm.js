@@ -174,6 +174,7 @@ const TapButton = styled.div`
     border: 2px solid ${({ color }) => color};
     box-sizing: border-box;
     border-radius: 40px;
+    cursor: pointer;
 
     &:hover {
       background-color: ${({ hoverColor }) => hoverColor};
