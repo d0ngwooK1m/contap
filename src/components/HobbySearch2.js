@@ -74,7 +74,6 @@ const HobbySearch2 = ({ setMaxMessage, maxMessage }) => {
   const searchList = useSelector((state) => state.cards.hobbyArr);
   // const hobbyList = useSelector((state) => state.cards.hobby);
   let hobbyList = useSelector((state) => state.cards.hobby);
-  console.log('하비리스트===>', hobbyList);
   const searchData = useSelector((state) => state.cards.hobbyTag);
 
   if (hobbyList[0] === '') {
@@ -95,7 +94,6 @@ const HobbySearch2 = ({ setMaxMessage, maxMessage }) => {
   React.useEffect(
     debounce(() => {
       if (data === '') {
-        console.log('data');
         setClick(false);
       }
       searchData.filter((val) => {
@@ -129,7 +127,6 @@ const HobbySearch2 = ({ setMaxMessage, maxMessage }) => {
           await dispatch(deleteHobby(val));
         }
       : async () => {
-          console.log('hobbyList.length =>', hobbyList.length);
           if (hobbyList.length === 3) {
             return;
           }
@@ -230,7 +227,6 @@ const HobbySearch2 = ({ setMaxMessage, maxMessage }) => {
         <SearchBox
           value={inputValue}
           onChange={(e) => {
-            console.log(e.target.value);
             setData(e.target.value);
           }}
           placeholder="요즘 관심사는 뭐예요?"

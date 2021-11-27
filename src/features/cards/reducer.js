@@ -71,7 +71,6 @@ export default handleActions(
       }),
     [SEARCH_CARD]: (state, action) =>
       produce(state, (draft) => {
-        console.log('카드리스트 서치되는지 확인 ===>', action.payload.cardList);
         draft.isSearching = true;
         // console.log(draft.isSearching);
         draft.searchInfo = action.payload.searchInfo;
@@ -162,7 +161,6 @@ export default handleActions(
         draft.backCardIdx = draft.backCardIdx.filter(
           (id) => id !== Number(action.payload.cardId),
         );
-        console.log(draft.cardBackIdx);
       }),
     [DELETE_MY_CARD]: (state, action) =>
       produce(state, (draft) => {

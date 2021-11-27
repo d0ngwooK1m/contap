@@ -8,20 +8,13 @@ import {
 } from '../features/user/actions';
 import T from '../api/tokenInstance';
 
-const TutorialForm = ({ run, steps, page }) => {
+const TutorialForm = ({ steps, page }) => {
   const dispatch = useDispatch();
 
   const handleJoyRideCallback = React.useCallback(
     async (data) => {
-      console.log(data);
       const { status } = data;
-      console.log('튜토리얼 단계통과 체크', status);
       if (status === 'finished') {
-        const tutorialInfo = {
-          tutorialNum: page,
-        };
-        console.log(tutorialInfo);
-        console.log('넘어가는 페이지===>', page);
         const res = await T.POST(`/main/tutorial?tutorialNum=${page}`);
         console.log(res);
         if (page === 1) {
@@ -30,7 +23,6 @@ const TutorialForm = ({ run, steps, page }) => {
         if (page === 0) {
           dispatch(phoneTutorialCheck(true));
         }
-        console.log('확인완료!', run, status, page);
       }
     },
     [page],
@@ -92,7 +84,6 @@ const TutorialForm = ({ run, steps, page }) => {
 };
 
 TutorialForm.propTypes = {
-  run: PropTypes.bool,
   steps: PropTypes.any,
   page: PropTypes.any,
   // mypage: PropTypes.bool,
@@ -110,7 +101,6 @@ TutorialForm.defaultProps = {
   // run: false,
   // locale: '',
   // stepIndex: 0,
-  run: true,
 };
 
 export default TutorialForm;

@@ -25,7 +25,6 @@ const StackSearch2 = () => {
   const [click, setClick] = React.useState(false);
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.stackArr);
-  console.log('서치리스트===>', searchList);
   const stackList = useSelector((state) => state.cards.stack);
   const searchData = useSelector((state) => state.cards.stackTag);
   // const [button, setButton] = React.useState({});
@@ -71,7 +70,6 @@ const StackSearch2 = () => {
   const ArrayData = searchList.map((val) => {
     const stackSearchFunc = stackList.includes(val)
       ? async () => {
-          console.log('test');
           setData(val);
           setClick(true);
           // toggleButton(val);
@@ -79,7 +77,6 @@ const StackSearch2 = () => {
           await dispatch(deleteStack(val));
         }
       : async () => {
-          console.log('test');
           setData(val);
           setClick(true);
           // toggleButton(val);
@@ -112,7 +109,6 @@ const StackSearch2 = () => {
     // console.log(stackList?.includes(val));
     const stackFunc = stackList.includes(val)
       ? async () => {
-          console.log('test');
           setData(val);
           setClick(true);
           // toggleButton(val);
@@ -120,7 +116,6 @@ const StackSearch2 = () => {
           await dispatch(deleteStack(val));
         }
       : async () => {
-          console.log('test');
           setData(val);
           setClick(true);
           // toggleButton(val);
@@ -185,7 +180,6 @@ const StackSearch2 = () => {
           placeholder="주로 사용하시는 기술이 있나요?"
           value={inputValue}
           onChange={(e) => {
-            console.log(e.target.value);
             setData(e.target.value);
           }}
         />

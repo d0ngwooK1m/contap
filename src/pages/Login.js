@@ -52,7 +52,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  console.log('로케이션 ====> ', location);
   React.useEffect(() => {
     if (!location.search) {
       return null;
@@ -63,7 +62,6 @@ const Login = () => {
     const code = firstCode.split('=')[1];
     // console.log(code);
     // let code = new URL(window.location.href).searchParams.get("code");
-    console.log(firstCode, site, code);
     // console.log(secondCode);
 
     if (site === 'kakao') {
@@ -73,7 +71,6 @@ const Login = () => {
             method: 'GET',
             url: `${baseURL}/user/kakao?code=${code}`,
           });
-          console.log('kakaologin');
           saveToken(data.token);
           await dispatch(
             loginAction({
@@ -97,8 +94,6 @@ const Login = () => {
             method: 'GET',
             url: `${baseURL}/user/github?code=${code}`,
           });
-          console.log('githublogin');
-          console.log(data);
           saveToken(data.token);
           await dispatch(
             loginAction({
@@ -123,8 +118,6 @@ const Login = () => {
     try {
       const res = await axios.post(`${baseURL}/user/login`, loginInfo);
       const { data } = res;
-      console.log('로그인 res =====>', res);
-      console.log('로그인 data =====>', data.CHAT);
       if (data.CHAT !== '0') {
         dispatch(setChatNoti(true));
       }
@@ -132,7 +125,6 @@ const Login = () => {
         dispatch(setContapNoti(true));
       }
       if (data.result === 'fail') {
-        console.log(data);
         // Swal.fire({
         //   icon: 'error',
         //   title: '로그인 실패',
@@ -155,14 +147,12 @@ const Login = () => {
         userName: data.userName,
         profile: data.profile,
       };
-      console.log(data);
       dispatch(deleteMyCard(data.userId));
       dispatch(loginAction(userInfo));
       saveToken(data?.token);
       history.push('/');
       return data;
     } catch (error) {
-      console.log(error);
       throw new Error(error.message);
     }
   };
@@ -191,7 +181,6 @@ const Login = () => {
             autoComplete="off"
             onSubmit={handleSubmit(async (loginInfo) => {
               await setErrorMessage('');
-              console.log(loginInfo);
               // dispatch(loginToServer(loginInfo));
               loginToServer(loginInfo);
             })}
@@ -270,7 +259,6 @@ const Login = () => {
           </DivideWrapper>
           <KakaoButton
             onClick={() => {
-              console.log(process.env.REACT_APP_KAKAO_PATH);
               setLogin('kakao');
               window.location.href = `${process.env.REACT_APP_KAKAO_PATH}`;
             }}
@@ -290,7 +278,6 @@ const Login = () => {
           </KakaoButton>
           <GithubButton
             onClick={() => {
-              console.log(process.env.REACT_APP_GITHUB_PATH);
               setLogin('github');
               window.location.href = `${process.env.REACT_APP_GITHUB_PATH}`;
             }}

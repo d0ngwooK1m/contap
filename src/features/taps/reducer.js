@@ -27,8 +27,6 @@ export default handleActions(
         draft.allIds = [];
         draft.isNext = true;
 
-        console.log(action.payload);
-
         const { cardBundles } = action.payload;
 
         cardBundles.forEach((doc) => {
@@ -49,7 +47,6 @@ export default handleActions(
           draft.allIds.push(doc.userId);
         });
         draft.isLoading = false;
-        console.log('로딩 로딩 끝');
       }),
     [LOAD_RECEIVE_TAP]: (state, action) =>
       produce(state, (draft) => {
@@ -68,15 +65,12 @@ export default handleActions(
       }),
     [NEXT_PAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
         const { cardBundles } = action.payload;
         if (cardBundles.length < 12) {
-          console.log('여기 걸렸음');
           draft.isNext = false;
           cardBundles.forEach((doc) => {
             draft.byId[doc.userId] = doc;
             draft.allIds.push(doc.userId);
-            console.log('마지막 페이지', doc);
           });
           // draft.allIds.push(doc);
           draft.isLoading = false;

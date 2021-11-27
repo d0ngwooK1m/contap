@@ -6,7 +6,6 @@ import { ColorStyle } from '../utils/systemDesign';
 const Timer = ({ mm, ss, reset }) => {
   const [minutes, setMinutes] = React.useState(parseInt(mm, 10));
   const [seconds, setSeconds] = React.useState(parseInt(ss, 10));
-  console.log(reset);
 
   React.useEffect(() => {
     setMinutes(parseInt(3, 10));

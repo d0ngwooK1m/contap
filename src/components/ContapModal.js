@@ -36,8 +36,6 @@ const ContapModal = ({
   const dispatch = useDispatch();
   const history = useHistory();
   const myName = useSelector((state) => state.user.userName);
-  console.log(userCradInfo);
-  console.log(select);
   // tap 수락 거절
   const rejectTap = async () => {
     dispatch(
@@ -47,7 +45,6 @@ const ContapModal = ({
         userCradInfo.userId,
       ),
     );
-    console.log('거절');
     onHide();
   };
 
@@ -60,7 +57,6 @@ const ContapModal = ({
       ),
     );
     dispatch(setTapAcceptNoti(true));
-    console.log('수락');
     onHide();
   };
 
@@ -68,7 +64,6 @@ const ContapModal = ({
     dispatch(
       removeSendTapToAxios({ tagId: userCradInfo.tapId }, userCradInfo.userId),
     );
-    console.log('거절');
     onHide();
   };
 

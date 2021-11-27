@@ -25,7 +25,6 @@ import {
 const CardPortfolio = ({ cardId, onHide }) => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards.backCard);
-  console.log(cardList);
 
   const [title, setTitle] = React.useState(cardList[cardId].title);
   const [desc, setDesc] = React.useState(cardList[cardId].content);
@@ -89,7 +88,6 @@ const CardPortfolio = ({ cardId, onHide }) => {
     let editLink = link.trim();
     if (editLink !== undefined && editLink.indexOf('//') === -1) {
       editLink = '//' + editLink;
-      console.log(editLink);
     }
     const content = {
       title,
@@ -104,7 +102,6 @@ const CardPortfolio = ({ cardId, onHide }) => {
   };
 
   const url = cardList[cardId].link?.split('//')[1];
-  console.log('앞면 링크 확인====>', url);
   // let url = cardList[cardId].link;
   // if (url !== undefined && url?.indexOf('http') === -1) {
   //   // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌

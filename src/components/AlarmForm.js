@@ -22,7 +22,6 @@ const AlarmForm = () => {
   const switchInfo = useSelector((state) => state.user.alarm);
   const phoneNumberInfo = useSelector((state) => state.user.phoneNumber);
   const [switchChange, setSwitchChange] = React.useState(switchInfo);
-  console.log('리덕스 알람 정보 ===>', switchInfo);
   const [phoneNumber, setPhoneNumber] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -36,7 +35,6 @@ const AlarmForm = () => {
   React.useEffect(async () => {
     const res = await T.GET('/setting/getPhoneNumber');
     const { data } = res;
-    console.log(data);
     if (data.errorMessage === null) {
       setPhoneNumber('');
     } else {
@@ -46,7 +44,6 @@ const AlarmForm = () => {
 
   const handleChange = (e) => {
     const regex = /^[0-9\b -]{0,13}$/;
-    console.log(e.target.value, regex.test(e.target.value));
     if (regex.test(e.target.value)) {
       setPhoneNumber(e.target.value);
     }
@@ -66,7 +63,6 @@ const AlarmForm = () => {
     if (phoneNumber.length === 13) {
       if (phoneNumber.replace(/-/g, '').length === 12) {
         const editPhoneNumber = phoneNumber.replace(/-/, '').slice(0, 11);
-        console.log(editPhoneNumber);
         setPhoneNumber(
           editPhoneNumber
             .replace(/-/g, '')
@@ -84,32 +80,28 @@ const AlarmForm = () => {
 
   const sendPhoneNumber = async (phoneNumber) => {
     try {
-      console.log('phoneNum 확인===>', phoneNumber);
       const res = await T.POST(`/setting/modifyPhoneNumber`, phoneNumber);
       const { data } = res;
-      console.log(data);
       if (data.errorMessage) {
         setErrorMessage('잘못된 번호입니다. 다시 확인해주세요.');
       }
       dispatch(settingPhoneNum(phoneNumber));
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   const sendAlarm = async (alarmInfo) => {
     try {
-      console.log('alarmInfo 확인===>', alarmInfo);
       const res = await T.POST(
         `/setting/alarm?alarmState=${alarmInfo.alarmState}`,
       );
       const { data } = res;
-      console.log(data);
       dispatch(settingAlarm(alarmInfo));
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -194,7 +186,6 @@ const AlarmForm = () => {
           const alarmInfo = {
             alarmState: switchChange,
           };
-          console.log(phoneInfo, alarmInfo);
           sendPhoneNumber(phoneInfo);
           sendAlarm(alarmInfo);
         })}

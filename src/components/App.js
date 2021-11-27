@@ -64,8 +64,6 @@ function App() {
               </Permit>
             </AlarmCheck>
           </WsNotiRoom>
-
-          {console.log('스위치 여까지 옴')}
           <Route path="*" component={NotFound} />
         </Switch>
       </Wrap>
@@ -96,7 +94,6 @@ const WrapApp = styled.div`
 `;
 
 const Wrap = styled.div`
-  position: relative;
   max-width: 1440px;
   min-width: 1110px;
   /* max-width: 1920px;

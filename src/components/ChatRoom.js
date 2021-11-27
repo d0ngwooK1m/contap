@@ -22,11 +22,9 @@ const ChatRoom = ({ userId, closeList }) => {
   const userInfo = useSelector((state) => state.user);
   const lastMessage = roomInfo.roomStatus?.split('/')[2];
   const openCheck = currentRoom.userId === roomInfo.userId;
-  console.log(roomInfo);
 
   React.useEffect(() => {
     if (roomInfo.roomStatus === null) {
-      console.log('룸 안들어올떄');
       dispatch(loadCurrentRoom(roomInfo));
     }
   }, []);
@@ -42,9 +40,6 @@ const ChatRoom = ({ userId, closeList }) => {
   };
   const readCheck = roomInfo.roomStatus?.split('/')[0];
 
-  console.log('리드체크======>', readCheck);
-
-  console.log('룸 인포======>', roomInfo);
   const isRead = () => {
     if (openCheck) {
       return true;

@@ -62,7 +62,6 @@ const WithdrawalForm = () => {
       const res = await T.POST('/setting/withdrawal', passwordInfo);
 
       const { data } = res;
-      console.log(data);
 
       // if (data.result === 'fail') {
       //   console.log(data);
@@ -76,7 +75,6 @@ const WithdrawalForm = () => {
       // }
 
       if (data.result === 'fail') {
-        console.log(data);
         if (data.errorMessage === null) {
           setErrorMessage('잘못된 정보가 있습니다. 다시 확인해주세요.');
         } else {

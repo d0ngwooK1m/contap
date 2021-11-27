@@ -21,7 +21,6 @@ const GrapTalkAddProfile = ({ roomInfo, closeList }) => {
   const dispatch = useDispatch();
   // const roomInfo = useSelector((state) => state.chat.noneChatList[userId]);
   const roomList = useSelector((state) => state.chat.allIds);
-  console.log(roomInfo);
   const stackHashTags = roomInfo.hashTags
     ?.split('_')[0]
     ?.split('@')
@@ -34,8 +33,6 @@ const GrapTalkAddProfile = ({ roomInfo, closeList }) => {
   const cat = category(roomInfo.field);
   const color = professionColor(cat);
   const hashColor = professionColor(cat, 15);
-
-  console.log(category);
 
   const addTalkRoom = () => {
     // 유저아이디가 왼쪽 룸 리스트에 있으면

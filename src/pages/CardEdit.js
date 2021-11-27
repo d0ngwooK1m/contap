@@ -21,7 +21,6 @@ const CardEdit = (props) => {
   //   return 0;
   // };
   const params = useParams();
-  console.log('url확인====>', params);
   const userId = params.userId;
   const [maxMessage, setMaxMessage] = React.useState(false);
 

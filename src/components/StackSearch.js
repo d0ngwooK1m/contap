@@ -99,7 +99,6 @@ const StackSearch = () => {
   }, [data]);
 
   const ArrayData = searchList.map((val) => {
-    console.log(stackList.length);
     if (stackList.length === 1) {
       return (
         <Box key={val.toString()}>
@@ -107,13 +106,10 @@ const StackSearch = () => {
             <TagDiv
               type="button"
               onClick={async () => {
-                console.log('test');
                 setData(val);
                 setClick(true);
                 toggleButton(val);
-                console.log(button[val]);
                 await dispatch(deleteStack(val));
-                console.log('1', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -125,10 +121,8 @@ const StackSearch = () => {
             <TagDiv
               type="button"
               onClick={() => {
-                console.log('test');
                 setData(val);
                 setClick(true);
-                console.log('2', button);
               }}
             >
               <span>{val}</span>
@@ -142,11 +136,9 @@ const StackSearch = () => {
         <TagDiv
           type="button"
           onClick={async () => {
-            console.log('wowow');
             setData(val);
             setClick(true);
             toggleButton(val);
-            console.log('3', button);
             await dispatch(updateStack(val));
           }}
         >
@@ -157,7 +149,6 @@ const StackSearch = () => {
   });
 
   const FullList = searchData.map((val) => {
-    console.log(stackList.length);
     if (stackList.length === 1) {
       return (
         <Box key={val.toString()}>
@@ -165,13 +156,10 @@ const StackSearch = () => {
             <TagDiv
               type="button"
               onClick={async () => {
-                console.log('test');
                 setData(val);
                 setClick(true);
                 toggleButton(val);
-                console.log(button[val]);
                 await dispatch(deleteStack(val));
-                console.log('4', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -183,10 +171,8 @@ const StackSearch = () => {
             <TagDiv
               type="button"
               onClick={() => {
-                console.log('test');
                 setData(val);
                 setClick(true);
-                console.log('5', button);
               }}
             >
               <span>{val}</span>
@@ -201,11 +187,9 @@ const StackSearch = () => {
           <TagDiv
             type="button"
             onClick={async () => {
-              console.log('test');
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log('6', button);
               await dispatch(deleteStack(val));
             }}
             style={{
@@ -218,11 +202,9 @@ const StackSearch = () => {
           <TagDiv
             type="button"
             onClick={async () => {
-              console.log('test');
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log('7', button);
               await dispatch(updateStack(val));
             }}
           >
@@ -239,7 +221,6 @@ const StackSearch = () => {
         <SearchBoxDiv>
           <SearchBox
             onChange={(e) => {
-              console.log(e.target.value);
               setData(e.target.value);
             }}
             placeholder="주로 사용하시는 기술이 있나요?"
@@ -252,7 +233,6 @@ const StackSearch = () => {
         <SearchBoxDiv>
           <SearchBox
             onChange={(e) => {
-              console.log(e.target.value);
               setData(e.target.value);
             }}
             value={data}

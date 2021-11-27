@@ -19,7 +19,6 @@ const EmptyBox = () => {
   const cardCount = useSelector((state) => state.cards.backCardIdx);
   const [click, setClick] = React.useState(false);
   const [display, setDisplay] = React.useState({ display: 'flex' });
-  console.log(display);
 
   const closeClick = () => {
     setClick(false);

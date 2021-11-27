@@ -35,7 +35,6 @@ const ReceiveTap = ({ select }) => {
   React.useEffect(() => {
     if (prevHeight) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight;
-      console.log(prevHeight, scrollRef.current.scrollHeight);
       return setPrevHeight(null);
     }
     dispatch(loading(true));
@@ -73,14 +72,14 @@ const ReceiveTap = ({ select }) => {
             </Text>
             <CardBox>
               <div className="none">
-                <NoneReceiveTap>
+                <NoneReceiveTapWrap>
                   <div className="svg">
                     <img src={NoneReceiveTapPng} width="150px" height="150px" />
                   </div>
                   <Text regular20 color={ColorStyle.Gray500}>
                     다른 사람이 Tap! 할 수 있게 카드로 나를 표현 해주세요!
                   </Text>
-                </NoneReceiveTap>
+                </NoneReceiveTapWrap>
               </div>
             </CardBox>
           </>
@@ -159,7 +158,7 @@ const CardBox = styled.div`
   }
 `;
 
-const NoneReceiveTap = styled.div`
+const NoneReceiveTapWrap = styled.div`
   word-break: break-all;
   text-align: center;
   border-radius: 16px;

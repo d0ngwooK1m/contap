@@ -12,7 +12,10 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { setChatNoti, setContapNoti } from '../features/notice/actions';
 import { useHistory, useLocation } from 'react-router';
 import { setChatNoti, setContapNoti } from '../features/notice/actions';
-import { phoneTutorialCheck, profileTutorialCheck } from '../features/user/actions';
+import {
+  phoneTutorialCheck,
+  profileTutorialCheck,
+} from '../features/user/actions';
 // import Swal from 'sweetalert2';
 import { logout } from '../features/user/actions';
 import { getToken, removeToken } from '../utils/auth';
@@ -30,7 +33,12 @@ import T from '../api/tokenInstance';
 
 import TutorialForm from './TutorialForm';
 import { mainSteps, settingSteps } from '../utils/tutorialSteps';
-import { ColorStyle, FontFamily, Opacity, FontScale } from '../utils/systemDesign';
+import {
+  ColorStyle,
+  FontFamily,
+  Opacity,
+  FontScale,
+} from '../utils/systemDesign';
 import axios from 'axios';
 // import { mainSteps } from '../utils/tutorialSteps';
 
@@ -70,11 +78,11 @@ const Header = () => {
   // 로그인 체크
   // useUserAuthCheck();
   // React.useEffect(async () => {
-    // setPathName(history.location.pathname)
-    // if (isUserLogin) {
-    //   const { data } = await T.GET('/mypage/myinfo');
-    // }
-    // console.log(data.profile);
+  // setPathName(history.location.pathname)
+  // if (isUserLogin) {
+  //   const { data } = await T.GET('/mypage/myinfo');
+  // }
+  // console.log(data.profile);
   //   if (location.pathname === '/mypage') {
   //     setIsMyPage(true);
   //     console.log('프로필 클릭시 통과하는지 체크', isMyPage);
@@ -137,13 +145,12 @@ const Header = () => {
     // dispatch(phoneTutorialCheck(true));
   };
 
-  const moveToMyPage = async() => {
+  const moveToMyPage = async () => {
     if (location.pathname === '/mypage') {
       return;
     }
     if (!mypageAlarm) {
-      const res = await T.POST(`/main/tutorial?tutorialNum=1`);
-      console.log('마이페이지 버튼 클릭===>', res);
+      await T.POST(`/main/tutorial?tutorialNum=1`);
       dispatch(profileTutorialCheck(true));
     }
     // setIsMyPage(true);
@@ -199,22 +206,14 @@ const Header = () => {
   return (
     <>
       <HeaderWrapper location={location.pathname}>
-      {mypageAlarm === false ? (
-      <TutorialForm
-        run={true}
-        steps={mainSteps}
-        page={1}
-      />
-    ) : null}
-    {history.location.pathname === '/' &&
-    mypageAlarm === true &&
-    settingAlarm === false ? (
-      <TutorialForm
-        run={true}
-        steps={settingSteps}
-        page={0}
-      />
-    ) : null}
+        {mypageAlarm === false ? (
+          <TutorialForm  steps={mainSteps} page={1} />
+        ) : null}
+        {history.location.pathname === '/' &&
+        mypageAlarm === true &&
+        settingAlarm === false ? (
+          <TutorialForm steps={settingSteps} page={0} />
+        ) : null}
         {/* <TutorialForm run={true} steps={mainSteps} page='main' /> */}
         {/* {Tutorial(mypageAlarm, settingAlarm)} */}
         {/* {settingAlarm === false ? <TutorialForm steps={settingSteps} /> : null} */}
@@ -294,22 +293,22 @@ const Header = () => {
                   boxShadow: 'none',
                 },
                 sx: {
-                  "& .MuiList-padding": {
+                  '& .MuiList-padding': {
                     paddingTop: '0px',
                     paddingBottom: '0px',
                   },
                   // "& .MuiMenuItem-root.Mui-selected": {
                   //   backgroundColor: "yellow"
                   // },
-                  "& .MuiMenuItem-root:hover": {
+                  '& .MuiMenuItem-root:hover': {
                     backgroundColor: `#F5F3F8${Opacity[10]}`,
                     transition: '0.3s',
                   },
                   // "& .MuiMenuItem-root.Mui-selected:hover": {
                   //   backgroundColor: "red"
                   // }
-                }
-            }}
+                },
+              }}
             >
               <MenuItem
                 onClick={() => {
@@ -319,8 +318,7 @@ const Header = () => {
                 sx={{
                   padding: '18px 70px 18px 28px',
                   fontFamily: `${FontFamily}`,
-                  fontSize: `${FontScale.Body1_16}`
-                  
+                  fontSize: `${FontScale.Body1_16}`,
                 }}
               >
                 설정
@@ -337,7 +335,7 @@ const Header = () => {
                 sx={{
                   padding: '18px 70px 18px 28px',
                   fontFamily: `${FontFamily}`,
-                  fontSize: `${FontScale.Body1_16}`
+                  fontSize: `${FontScale.Body1_16}`,
                 }}
               >
                 로그아웃
@@ -345,10 +343,11 @@ const Header = () => {
             </Menu>
             <div>
               <IconButton className="my-page" onClick={moveToMyPage}>
-              {userProfile ? <ImageBox
-                  className="imageBox"
-                  src={userProfile}
-                />: <HeaderProfileSvg/> }
+                {userProfile ? (
+                  <ImageBox className="imageBox" src={userProfile} />
+                ) : (
+                  <HeaderProfileSvg />
+                )}
               </IconButton>
             </div>
           </MenuWrapper>
@@ -369,23 +368,37 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
-  ${({ location }) => (location === '/' || location.includes("/card/")  ? null : 'position : fixed;')}
-  /* ${({ location }) => (location === '/' || location.includes("/card/") ? 'margin: auto;' : 'margin: 0px 164px;')} */
+  ${({ location }) =>
+    location === '/' || location.includes('/card/')
+      ? null
+      : 'position : fixed;'}
+  /* ${({ location }) =>
+    location === '/' || location.includes('/card/')
+      ? 'margin: auto;'
+      : 'margin: 0px 164px;'} */
 
   margin: auto;
   top: 0px;
   width: 100%;
   max-width: 1440px;
-  padding:0px 164px;
+  padding: 0px 164px;
   box-sizing: border-box;
   height: 88px;
   padding: 0px 164px;
-  ${({location}) => (location === '/' || location === '/card/:userId' || location === '/settings' ||location === '/contap' || location === '/mypage' || location === '/edit' || location === '/grabtalk'  ?  'display:flex;': 'display:none;')}
+  ${({ location }) =>
+    location === '/' ||
+    location.includes('/card/') ||
+    location === '/settings' ||
+    location === '/contap' ||
+    location.includes('/mypage') ||
+    location === '/grabtalk'
+      ? 'display:flex;'
+      : 'display:none;'}
   justify-content: space-between;
   align-items: center;
   background-color: #0f0a1aff;
   z-index: 1001;
-  
+
   .my-page {
     padding-right: 0px;
     margin-right: 0px;

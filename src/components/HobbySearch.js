@@ -56,11 +56,8 @@ const HobbySearch = () => {
     }));
   };
 
-  console.log(button);
-
   React.useEffect(() => {
     if (data === '') {
-      console.log('data');
       setClick(false);
     }
     searchData.filter((val) => {
@@ -78,7 +75,6 @@ const HobbySearch = () => {
   }, [data]);
 
   const ArrayData = searchList.map((val) => {
-    console.log(searchList.length);
     if (hobbyList.length === 3) {
       return (
         <Box key={val.toString()}>
@@ -86,13 +82,10 @@ const HobbySearch = () => {
             <TagDiv
               type="button"
               onClick={async () => {
-                console.log('test');
                 setData(val);
                 setClick(true);
                 toggleButton(val);
-                console.log(button[val]);
                 await dispatch(deleteHobby(val));
-                console.log('h1', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -104,10 +97,8 @@ const HobbySearch = () => {
             <TagDiv
               type="button"
               onClick={() => {
-                console.log('test');
                 setData(val);
                 setClick(true);
-                console.log('h2', button);
               }}
             >
               <span>{val}</span>
@@ -121,11 +112,9 @@ const HobbySearch = () => {
         <TagDiv
           type="button"
           onClick={async () => {
-            console.log('wowow');
             setData(val);
             setClick(true);
             toggleButton(val);
-            console.log('h3', button);
             await dispatch(updateHobby(val));
           }}
         >
@@ -143,13 +132,10 @@ const HobbySearch = () => {
             <TagDiv
               type="button"
               onClick={async () => {
-                console.log('test');
                 setData(val);
                 setClick(true);
                 toggleButton(val);
-                console.log(button[val]);
                 await dispatch(deleteHobby(val));
-                console.log('h4', button);
               }}
               style={{
                 backgroundColor: '#8c4dff',
@@ -161,10 +147,8 @@ const HobbySearch = () => {
             <TagDiv
               type="button"
               onClick={() => {
-                console.log('test');
                 setData(val);
                 setClick(true);
-                console.log('h5', button);
               }}
             >
               <span>{val}</span>
@@ -175,34 +159,28 @@ const HobbySearch = () => {
     }
     return (
       <Box key={val.toString()}>
-        {console.log(button[val], val)}
         {button[val] ? (
           <PurpleButton
             type="button"
             onClick={async () => {
-              console.log('test');
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log('h6', button);
               await dispatch(deleteHobby(val));
             }}
             // style={{
             //   backgroundColor: 'purple',
             // }}
           >
-            {console.log('purple')}
             <span>{val}</span>
           </PurpleButton>
         ) : (
           <TagDiv
             type="button"
             onClick={async () => {
-              console.log('test');
               setData(val);
               setClick(true);
               toggleButton(val);
-              console.log('h7', button);
               await dispatch(updateHobby(val));
             }}
           >
@@ -219,7 +197,6 @@ const HobbySearch = () => {
         <SearchBoxDiv>
           <SearchBox
             onChange={(e) => {
-              console.log(e.target.value);
               setData(e.target.value);
             }}
             placeholder="요즘 관심사는 뭐예요?"
@@ -233,7 +210,6 @@ const HobbySearch = () => {
           <SearchBox
             value={data}
             onChange={(e) => {
-              console.log(e.target.value);
               setData(e.target.value);
             }}
           />
@@ -243,7 +219,6 @@ const HobbySearch = () => {
         </SearchBoxDiv>
       )}
 
-      {console.log(FullList)}
       {!click ? <AllBox> {ArrayData}</AllBox> : <AllBox>{FullList}</AllBox>}
       <br />
     </div>

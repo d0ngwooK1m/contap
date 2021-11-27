@@ -54,10 +54,9 @@ export default handleActions(
         draft.messages.push(action.payload.message);
         draft.isLoading = false;
       }),
-    [WRITE_MESSAGE]: (state, action) =>
+    [WRITE_MESSAGE]: (state) =>
       produce(state, (draft) => {
         // console.log('WRITE_MESSAGE');
-        console.log(action.payload);
         // console.log(draft);
         draft.isLoading = false;
       }),
@@ -93,7 +92,6 @@ export default handleActions(
       }),
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
-        console.log('LOADING');
         draft.isLoading = action.payload.isLoading;
       }),
   },

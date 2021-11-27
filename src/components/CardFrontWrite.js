@@ -30,10 +30,7 @@ const CardFrontWrite = ({ setMaxMessage }) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.cards.preview);
   const front = useSelector((state) => state.cards.byId);
-  console.log(front);
   const userInfo = useSelector((state) => state.cards.current);
-  console.log('카테고리 확인===>', userInfo.field);
-  console.log('유저정보 확인===>', userInfo);
 
   const [userName, setUserName] = React.useState(
     // () => JSON.parse(localStorage.getItem('nick')) ||
@@ -52,8 +49,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
 
   const stackTag = userInfo.hashTagsString?.split('_')[0]?.split('@')[1];
   // .slice(1, 2);
-  console.log('앞면 태그확인====>', userInfo.hashTagsString?.split('_')[0]);
-  console.log('앞면 태그확인====>', stackTag);
 
   const hobbyTag = userInfo.hashTagsString
     ?.split('_')[1]
@@ -65,7 +60,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     }
   }
 
-  console.log('hobbyTag', hobbyTag);
   const stackText = '나의 스택';
   const hobbyText1 = '관심사1';
   const hobbyText2 = '관심사2';
@@ -98,10 +92,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
 
   let stack = useSelector((state) => state.cards.stack);
   let hobby = useSelector((state) => state.cards.hobby);
-  console.log('태그 길이 확인====>', stack.length);
-  console.log('태그값 확인====>', stack);
-  console.log('관심사 태그값 확인====>', hobby);
-  console.log('해쉬태그 리퀘스트 값====>', stack + ',' + hobby);
 
   if (stack.length === 1) {
     if (stack[0] === '') {
@@ -114,7 +104,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
       hobby = [];
     }
   } else if (hobby.length === 2) {
-    console.log('관심사 확인 길이 ====>', typeof hobby[0]);
     if (typeof hobby[0] === undefined) {
       hobby.shift();
     }
@@ -140,7 +129,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
   const fileInput = React.useRef();
 
   const [fileData, setFileData] = React.useState(null);
-  console.log(fileData);
 
   // 파일 미리보기 (오류 해결 코드)
   const filePreview = (e) => {
@@ -185,7 +173,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     }
 
     const file = fileInput.current.files[0];
-    console.log(file);
     const formData = new FormData();
     formData.append('userName', userName);
     // console.log('입력 전 확인', stack, hobby);
@@ -203,14 +190,12 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     if (fileData) {
       formData.append('profile', fileData);
     }
-    console.log('formData', formData);
 
     dispatch(editCardProfileDB(formData));
     // localStorage.removeItem('nick');
     // localStorage.removeItem('category');
     localStorage.removeItem('tag');
   };
-  console.log(category);
 
   // const cancel = () => {
   //   setFileData(null);
@@ -229,8 +214,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     // localStorage.setItem('category', JSON.stringify(category));
     // localStorage.setItem('tag', JSON.stringify(hobbyTag));
   }, []);
-
-  console.log('프리뷰 확인===>', preview);
 
   return (
     <Grid>

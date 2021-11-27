@@ -89,7 +89,6 @@ export const nextPageToAxios = (callPage, page) => async (dispatch) => {
 
 export const removeReceiveTapToAxios =
   (state, tapId, userId) => async (dispatch) => {
-    console.log(tapId);
     try {
       await T.POST(
         `/contap/${state === 'reject' ? 'reject' : 'accept'}`,
@@ -102,7 +101,6 @@ export const removeReceiveTapToAxios =
   };
 
 export const removeSendTapToAxios = (tapId, userId) => async (dispatch) => {
-  console.log(tapId);
   try {
     await T.POST(`/contap/deltap`, tapId);
     dispatch(removeSendTap(userId));

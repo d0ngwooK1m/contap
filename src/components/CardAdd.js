@@ -20,7 +20,6 @@ const CardAdd = () => {
   const cardCount = useSelector((state) => state.cards.backCardIdx);
   // const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
-  console.log(cardList);
 
   const [click, setClick] = React.useState(false);
 
