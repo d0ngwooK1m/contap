@@ -22,7 +22,7 @@ import {
   Opacity,
 } from '../utils/systemDesign';
 
-const CardPortfolio = ({ cardId, onHide }) => {
+const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards.backCard);
 
@@ -97,7 +97,6 @@ const CardPortfolio = ({ cardId, onHide }) => {
     };
 
     dispatch(updateCardDB(cardId, content));
-    onHide();
     setClick(!click);
   };
 
@@ -142,7 +141,7 @@ const CardPortfolio = ({ cardId, onHide }) => {
             </AddBtn>
             <div
               onClick={() => {
-                onHide();
+                setClick(!click);
               }}
             >
               <CloseBtn cursor="pointer" />
