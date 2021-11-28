@@ -28,14 +28,22 @@ const TapForm = ({ userId, category, onHide, userName }) => {
     if (data.msg === ERROR_BEFORE_SEND) {
       onHide();
       Toast.fire({
-        title: '이미 상대에게 요청을 보냈어요!',
+        title: (
+          <Text regular20 color={ColorStyle.Gray500}>
+            ❌ 이미 요청을 보냈어요!
+          </Text>
+        ),
       });
       return;
     }
     if (data.msg === ERROR_BEFORE_FRIEND) {
       onHide();
       Toast.fire({
-        title: '이미 그랩 되었어요!',
+        title: (
+          <Text regular20 color={ColorStyle.Gray500}>
+            🤝 이미 그랩 되었어요!
+          </Text>
+        ),
       });
       return;
     }

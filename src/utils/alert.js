@@ -29,10 +29,11 @@ export const BasicAlert = MySwal.mixin({
   position: 'relative',
   padding: '52px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
-    cancelButton: 'swal-cancel',
-    confirmButton: 'swal-confirm',
+    popup: 'basic-popup',
+    title: 'basic-title',
+    actions: 'basic-action',
+    // cancelButton: 'swal-cancel',
+    // confirmButton: 'swal-confirm',
   },
 });
 
@@ -57,8 +58,8 @@ export const BasicAlert2 = MySwal.mixin({
   position: 'relative',
   padding: '52px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
+    popup: 'basic-popup',
+    title: 'basic-title',
   },
 });
 
@@ -74,7 +75,7 @@ export const Toast = MySwal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer);
   },
   customClass: {
-    popup: 'swal-toast-popup',
+    popup: 'coustom-toast-popup',
     title: 'swal-toast-title',
   },
 });
@@ -98,8 +99,8 @@ export const LoginAlert = MySwal.mixin({
   position: 'relative',
   padding: '40px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
+    popup: 'login-popup',
+    title: 'login-title',
     cancelButton: 'login-cancel',
     confirmButton: 'login-confirm',
     actions: 'login-action',
@@ -145,7 +146,7 @@ export const DeleteAlert = MySwal.mixin({
   position: 'relative',
   padding: '52px',
   customClass: {
-    popup: 'swal-popup',
+    popup: 'basic-popup',
     title: 'swal-title',
     cancelButton: 'swal-cancel',
     confirmButton: 'swal-confirm',

@@ -38,8 +38,6 @@ const Grabtalk = () => {
   const closeList = () => {
     setIsAddRoom(false);
   };
-  const is730px = !!window.matchMedia('(max-height: 730px)').matches;
-  const is616px = !!window.matchMedia('(max-height: 616px)').matches;
 
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
