@@ -89,7 +89,7 @@ const StyledInput = styled.input`
       color: ${ColorStyle.PrimaryPurple};
     }
   }
-  &:-webkit-autofill:active {
+  &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px ${ColorStyle.BackGround} inset !important;
     -webkit-text-fill-color: ${ColorStyle.Gray500} !important;
     /* background-color: ${ColorStyle.BackGround};

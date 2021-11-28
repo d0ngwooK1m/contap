@@ -222,10 +222,10 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
-  &:-webkit-autofill:active {
+  &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px ${ColorStyle.BackGround} inset !important;
     -webkit-text-fill-color: ${ColorStyle.Gray500} !important;
-   /* background-color: ${ColorStyle.BackGround};
+    /* background-color: ${ColorStyle.BackGround};
    color: ${ColorStyle.Gray500}; */
   }
 `;
