@@ -9,6 +9,7 @@ import {
   searchInfoDB,
   searchArrList,
   searchDataList,
+  loadCardFrontDB,
 } from '../features/cards/actions';
 import { Text } from '../elements';
 
@@ -228,14 +229,20 @@ const SearchBar = () => {
           />
         <StyledBtn
           type="button"
-          onClick={() => {
+          onClick={async () => {
             const searchInfo = {
               searchTags: [data],
               type: 0,
               page: 0,
               field: 3,
             };
-            dispatch(searchInfoDB(searchInfo));
+            if (data === '') {
+              console.log('검색어 아무것도 없을 때');
+              await dispatch(loadCardFrontDB());
+            } else {
+              dispatch(searchInfoDB(searchInfo));
+            }
+            
           }}
         >
           <StyledSearchSvg />
