@@ -444,6 +444,7 @@ const StyledInput = styled.input`
   font-weight: 400;
   background-color: ${ColorStyle.BackGround300};
   color: white;
+  /* box-shadow: none; */
   &::placeholder {
     color: ${ColorStyle.Gray300};
     font-family: 'Pretendard';
@@ -456,10 +457,11 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
-  &:-webkit-autofill {
-   /* -webkit-box-shadow: 0 0 0 1000px white inset; */
-   background-color: ${ColorStyle.BackGround};
-   color: ${ColorStyle.Gray500};
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px ${ColorStyle.BackGround} inset !important;
+    -webkit-text-fill-color: ${ColorStyle.Gray500} !important;
+   /* background-color: ${ColorStyle.BackGround};
+   color: ${ColorStyle.Gray500}; */
   }
 `;
 

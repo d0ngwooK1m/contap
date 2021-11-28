@@ -617,10 +617,11 @@ const StyledInput = styled.input`
       color: ${ColorStyle.PrimaryPurple};
     }
   }
-  &:-webkit-autofill {
-   /* -webkit-box-shadow: 0 0 0 1000px white inset; */
-   background-color: ${ColorStyle.BackGround};
-   color: ${ColorStyle.Gray500};
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px ${ColorStyle.BackGround} inset !important;
+    -webkit-text-fill-color: ${ColorStyle.Gray500} !important;
+   /* background-color: ${ColorStyle.BackGround};
+   color: ${ColorStyle.Gray500}; */
   }
 `;
 
