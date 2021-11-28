@@ -29,7 +29,6 @@ const CardBack = ({
   show,
   onClose,
 }) => {
-
   // 0 = 백엔드, 1 = 프론트엔드, 2 = 디자이너
 
   const cat = category(card.field);
@@ -93,7 +92,7 @@ const CardBack = ({
           <Text bold24 color={ColorStyle.Gray500}>
             {card?.title}
           </Text>
-          {card.link && (
+          {card.link && card.link !== '//' && (
             <a
               onClick={linkClick}
               className="link"
