@@ -11,33 +11,47 @@ const WithdrawalCompleteForm = () => {
   // const history = useHistory();
 
   return (
-    <Outer>
-      <Wrapper>
-        <Text color="white" bold32>
-          회원탈퇴가 완료되었습니다
-        </Text>
-        <Text color="white" bold24>
-          Contap을 이용해 주셔서 감사합니다
-        </Text>
-        <img src={WithdrawalPng} width="354px" height="354px" />
-        <SubmitBtn
-          type="button"
-          onClick={() => {
-            window.location.href = '/';
-          }}
-        >
-          <Text color="white" regular16>
-            메인으로 돌아가기
+    <Color>
+      <Outer>
+        <Wrapper>
+          <Text color="white" bold32>
+            회원탈퇴가 완료되었습니다
           </Text>
-        </SubmitBtn>
-      </Wrapper>
-    </Outer>
+          <Text color="white" bold24>
+            Contap을 이용해 주셔서 감사합니다
+          </Text>
+          <img src={WithdrawalPng} width="354px" height="354px" />
+          <SubmitBtn
+            type="button"
+            onClick={() => {
+              window.location.href = '/';
+            }}
+          >
+            <Text color="white" regular16>
+              메인으로 돌아가기
+            </Text>
+          </SubmitBtn>
+        </Wrapper>
+      </Outer>
+    </Color>
   );
 };
 
+const Color = styled.div`
+  background-color: ${ColorStyle.BackGround};
+  width: 100vw;
+  height: 100vh;
+`;
+
 const Outer = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
+  background-color: ${ColorStyle.PrimaryPurple};
   background: linear-gradient(
     153.56deg,
     #8c4dff 0%,
