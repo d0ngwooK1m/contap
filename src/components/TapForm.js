@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
@@ -11,6 +12,7 @@ import {
 import { Text } from '../elements';
 // import { ColorStyle } from '../utils/systemDesign';
 import { Toast } from '../utils/alert';
+import { size} from '../utils/sizeCheck'
 // import { ReactComponent as HandFingerThumb } from '../svgs/HandFingerThumb.svg';
 
 const TapForm = ({ userId, category, onHide, userName }) => {
@@ -64,7 +66,7 @@ const TapForm = ({ userId, category, onHide, userName }) => {
   const hoverColor = professionHoverColor(category);
 
   return (
-    <Wrap>
+    <Wrap size={ size}>
       <TextAreaWrap>
         <MessageTextarea
           type="text"
@@ -100,25 +102,25 @@ const sideModalOn = keyframes`
     top: -300px;
   }
   25% {
-    right: -230px;
+    top: -230px;
   }
   50% {
-    right: -180px;
+    top: -180px;
     /* right : 600px; */
   }
   75% {
-    right: -130px;
+    top: -130px;
     /* right : 600px; */
   }
   100% {
-    right: -80px;
+    top: -80px;
     
   }
 `;
 
 const Wrap = styled.div`
   position: relative;
-  top: -80px;
+  top: ${({size}) => size === '616' ? '-110px' : '-80px'};
   left: -2px;
   background-color: ${ColorStyle.BackGround300};
   box-sizing: border-box;

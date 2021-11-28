@@ -71,6 +71,7 @@ const PwSettingForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  console.log('비번 변경 페이지 화면 사이즈====', size)
 
   return (
     <Wrapper size={size}>

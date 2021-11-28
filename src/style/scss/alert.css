@@ -1,10 +1,10 @@
 .login-popup {
-  border-radius: 30px;
-  width: 700px;
-  min-width: 500px;
-  padding: 52px;
-  border: 3px solid #4d4759;
-  box-sizing: border-box;
+  border-radius: 30px !important;
+  width: 700px !important;
+  min-width: 500px !important;
+  padding: 52px !important;
+  border: 3px solid #4d4759 !important;
+  box-sizing: border-box !important;
 }
 
 .login-cancel {
@@ -30,31 +30,31 @@
 }
 
 .basic-popup {
-  border-radius: 30px;
-  width: 700px;
-  min-width: 500px;
-  padding: 52px;
-  border: 3px solid #4d4759;
-  box-sizing: border-box;
+  border-radius: 30px !important;
+  width: 700px !important;
+  min-width: 500px !important;
+  padding: 52px !important;
+  border: 3px solid #4d4759 !important;
+  box-sizing: border-box !important;
 }
 
 .basic-title {
-  padding: 0px;
+  padding: 0px !important;
 }
 
 .basic-action {
-  margin: auto;
-  margin-right: 0px;
-  margin-top: 54px;
-  width: 265px;
-  justify-content: space-between;
+  margin: auto !important;
+  margin-right: 0px !important;
+  margin-top: 54px !important;
+  width: 265px !important;
+  justify-content: space-between !important;
 }
 
 .coustom-toast-popup {
-  width: 300px;
-  height: 80px;
-  border-radius: 8px;
-  background-color: '#1d1d22';
+  width: 300px !important;
+  height: 80px !important;
+  border-radius: 8px !important;
+  background-color: '#1d1d22' !important;
 }
 
 .write-confirm {
@@ -66,11 +66,11 @@
 }
 
 .check-popup {
-  border-radius: 30px;
-  width: 773px;
-  min-width: 500px;
-  height: 445px;
-  padding: 50px;
-  border: 3px solid #4d4759;
-  box-sizing: border-box;
+  border-radius: 30px !important;
+  width: 773px !important;
+  min-width: 500px !important;
+  height: 445px !important;
+  padding: 50px !important;
+  border: 3px solid #4d4759 !important;
+  box-sizing: border-box !important;
 }

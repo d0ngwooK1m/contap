@@ -25,11 +25,12 @@ import {
 const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards.backCard);
+  const cardLink = cardList[cardId].link?.split('//')[1]
 
   const [title, setTitle] = React.useState(cardList[cardId].title);
   const [desc, setDesc] = React.useState(cardList[cardId].content);
   const [tagsStr, setTagsStr] = React.useState(cardList[cardId].tagsStr);
-  const [link, setLink] = React.useState(cardList[cardId].link);
+  const [link, setLink] = React.useState(cardLink);
 
   // onMouse
   // const [display, setDisplay] = React.useState({ display: 'none' });

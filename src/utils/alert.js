@@ -22,7 +22,7 @@ export const BasicAlert = MySwal.mixin({
   ),
 
   showCloseButton: true,
-  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  closeButtonHtml: <Close stroke={ColorStyle.Gray500} />,
   confirmButtonColor: '#1d1d22',
   cancelButtonColor: '#1d1d22',
   background: '#1d1d22',
@@ -51,7 +51,7 @@ export const BasicAlert2 = MySwal.mixin({
   ),
 
   showCloseButton: true,
-  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  closeButtonHtml: <Close stroke={ColorStyle.Gray500} />,
   confirmButtonColor: '#1d1d22',
   cancelButtonColor: '#1d1d22',
   background: '#1d1d22',
@@ -60,6 +60,7 @@ export const BasicAlert2 = MySwal.mixin({
   customClass: {
     popup: 'basic-popup',
     title: 'basic-title',
+    actions: 'basic-action',
   },
 });
 
@@ -120,7 +121,7 @@ export const CardAlert = MySwal.mixin({
   // padding: '40px',
   customClass: {
     popup: 'check-popup',
-    title: 'swal-title',
+    title: 'basic-title',
     confirmButton: 'write-confirm',
     actions: 'login-action',
   },
@@ -139,7 +140,7 @@ export const DeleteAlert = MySwal.mixin({
     </Text>
   ),
   showCloseButton: true,
-  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  closeButtonHtml: <Close stroke={ColorStyle.Gray500} />,
   confirmButtonColor: '#1d1d22',
   cancelButtonColor: '#1d1d22',
   background: '#1d1d22',
@@ -147,7 +148,8 @@ export const DeleteAlert = MySwal.mixin({
   padding: '52px',
   customClass: {
     popup: 'basic-popup',
-    title: 'swal-title',
+    title: 'basic-title',
+    actions: 'basic-action',
     cancelButton: 'swal-cancel',
     confirmButton: 'swal-confirm',
   },

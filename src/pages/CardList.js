@@ -88,7 +88,7 @@ const CardList = () => {
       <BackGroundLow />
       <BackGroundCover />
       <div className="title">
-        <Text bold48> Just Tap!!!</Text>
+        <Text bold48> Just Tap!</Text>
         <Text regular20> Contap에서는 함께 성장할 수 있어요</Text>
       </div>
       <SearchBarWrap>

@@ -30,8 +30,10 @@ export default handleActions(
         const { cardBundles } = action.payload;
 
         cardBundles.forEach((doc) => {
-          draft.byId[doc.userId] = doc;
-          draft.allIds.push(doc.userId);
+          if (doc.userId !== null) {
+            draft.byId[doc.userId] = doc;
+            draft.allIds.push(doc.userId);
+          }
         });
         draft.isLoading = false;
       }),
@@ -43,8 +45,10 @@ export default handleActions(
         const { cardBundles } = action.payload;
 
         cardBundles.forEach((doc) => {
-          draft.byId[doc.userId] = doc;
-          draft.allIds.push(doc.userId);
+          if (doc.userId !== null) {
+            draft.byId[doc.userId] = doc;
+            draft.allIds.push(doc.userId);
+          }
         });
         draft.isLoading = false;
       }),
@@ -57,8 +61,10 @@ export default handleActions(
         const { cardBundles } = action.payload;
 
         cardBundles.forEach((doc) => {
-          draft.byId[doc.userId] = doc;
-          draft.allIds.push(doc.userId);
+          if (doc.userId !== null) {
+            draft.byId[doc.userId] = doc;
+            draft.allIds.push(doc.userId);
+          }
         });
 
         draft.isLoading = false;
