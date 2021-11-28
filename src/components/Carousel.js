@@ -5,6 +5,7 @@ import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import SwiperCore, { Pagination, Navigation, Keyboard } from 'swiper';
 import TapForm from './TapForm';
+import { size } from '../utils/sizeCheck';
 
 import Slider from 'react-slick';
 import styled from 'styled-components';
@@ -31,9 +32,10 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
   };
 
   const color = professionColor(category);
+  console.log('카드 모달 사이즈',size)
 
   return (
-    <SwiperWrap color={color}>
+    <SwiperWrap color={color} size={size}>
       <Swiper
         {...setting}
         pagination={{
@@ -90,6 +92,8 @@ Carousel.defaultProps = {
 const SwiperWrap = styled.div`
   width: 900px;
   margin: 7% auto;
+  ${({ size }) => size === '768' && 'margin-top: 0px;'}
+  ${({ size }) => size === '616' && 'margin-top: -20px;'}
 
   .mySwiper {
     .swiper-button-next::after {

@@ -105,6 +105,9 @@ const AlarmForm = () => {
     }
   };
 
+  console.log('알림 설정 페이지 화면 사이즈====', size)
+
+
   return (
     <Wrapper size={size}>
       <ThemeWrapper>

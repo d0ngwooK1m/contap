@@ -35,7 +35,7 @@ const MessageWrite = ({ sendMessage }) => {
         type="text"
         value={message}
         ref={autoFocus}
-        maxLength="1000"
+        maxLength="200"
         placeholder="  여기에 입력해 주세요"
         onChange={handleMessage}
         onKeyPress={(e) => {

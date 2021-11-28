@@ -22,17 +22,18 @@ export const BasicAlert = MySwal.mixin({
   ),
 
   showCloseButton: true,
-  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  closeButtonHtml: <Close stroke={ColorStyle.Gray500} />,
   confirmButtonColor: '#1d1d22',
   cancelButtonColor: '#1d1d22',
   background: '#1d1d22',
   position: 'relative',
   padding: '52px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
-    cancelButton: 'swal-cancel',
-    confirmButton: 'swal-confirm',
+    popup: 'basic-popup',
+    title: 'basic-title',
+    actions: 'basic-action',
+    // cancelButton: 'swal-cancel',
+    // confirmButton: 'swal-confirm',
   },
 });
 
@@ -50,15 +51,16 @@ export const BasicAlert2 = MySwal.mixin({
   ),
 
   showCloseButton: true,
-  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  closeButtonHtml: <Close stroke={ColorStyle.Gray500} />,
   confirmButtonColor: '#1d1d22',
   cancelButtonColor: '#1d1d22',
   background: '#1d1d22',
   position: 'relative',
   padding: '52px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
+    popup: 'basic-popup',
+    title: 'basic-title',
+    actions: 'basic-action',
   },
 });
 
@@ -74,7 +76,7 @@ export const Toast = MySwal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer);
   },
   customClass: {
-    popup: 'swal-toast-popup',
+    popup: 'coustom-toast-popup',
     title: 'swal-toast-title',
   },
 });
@@ -98,8 +100,8 @@ export const LoginAlert = MySwal.mixin({
   position: 'relative',
   padding: '40px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
+    popup: 'login-popup',
+    title: 'login-title',
     cancelButton: 'login-cancel',
     confirmButton: 'login-confirm',
     actions: 'login-action',
@@ -119,7 +121,7 @@ export const CardAlert = MySwal.mixin({
   // padding: '40px',
   customClass: {
     popup: 'check-popup',
-    title: 'swal-title',
+    title: 'basic-title',
     confirmButton: 'write-confirm',
     actions: 'login-action',
   },
@@ -138,15 +140,16 @@ export const DeleteAlert = MySwal.mixin({
     </Text>
   ),
   showCloseButton: true,
-  closeButtonHtml: <Close stroke={ColorStyle.BackGround300} />,
+  closeButtonHtml: <Close stroke={ColorStyle.Gray500} />,
   confirmButtonColor: '#1d1d22',
   cancelButtonColor: '#1d1d22',
   background: '#1d1d22',
   position: 'relative',
   padding: '52px',
   customClass: {
-    popup: 'swal-popup',
-    title: 'swal-title',
+    popup: 'basic-popup',
+    title: 'basic-title',
+    actions: 'basic-action',
     cancelButton: 'swal-cancel',
     confirmButton: 'swal-confirm',
   },

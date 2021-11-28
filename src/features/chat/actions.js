@@ -81,8 +81,16 @@ export const nextPageToAxios = (roomId, page) => async (dispatch) => {
 export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/1/0');
+    console.log(data);
+    const cleanData = [];
+    data.forEach((doc) => {
+      if (doc.userId !== null) {
+        cleanData.push(doc);
+      }
+    });
+
     // const { data } = await T.GET('/contap/getothers');
-    dispatch(loadTalkRoomList(data));
+    dispatch(loadTalkRoomList(cleanData));
   } catch (error) {
     console.error(error);
   }
@@ -91,8 +99,14 @@ export const loadTalkRoomListToAxios = () => async (dispatch) => {
 export const loadNoneTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/2/0');
+    const cleanData = [];
+    data.forEach((doc) => {
+      if (doc.userId !== null) {
+        cleanData.push(doc);
+      }
+    });
     // const { data } = await T.GET('/contap/getothers');
-    dispatch(loadNoneTalkRoomList(data));
+    dispatch(loadNoneTalkRoomList(cleanData));
   } catch (error) {
     console.error(error);
   }

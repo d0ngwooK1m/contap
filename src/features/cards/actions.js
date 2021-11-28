@@ -225,7 +225,9 @@ export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
 
 export const deleteCardDB = (cardId) => async (dispatch) => {
   try {
+    console.log('카드 삭제 시 cardId ====', cardId);
     const res = await T.DELETE('/mypage/backCard', cardId);
+    console.log('카드 삭제 시 res ====', res);
     dispatch(deleteCard(res.data.cardId));
     history.push('/mypage');
   } catch (err) {
