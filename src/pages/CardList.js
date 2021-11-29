@@ -133,11 +133,13 @@ const CardList = () => {
           })}
         </CardListWrap>
       </div>
-      {cardList.allIds.length > 9 && (
-        <IconButton className="floatingBtn" onClick={scrollTop}>
-          <ArrowTopLightSvg />
+      
+      <IconButton className="floatingBtn" onClick={() => {
+        window.open('https://forms.gle/UjFii44xz7J62rNLA')
+        }}>
+          <Text bold32>🤔</Text>
         </IconButton>
-      )}
+      
     </Wrap>
   );
 };
@@ -163,10 +165,11 @@ const Wrap = styled.div`
   .floatingBtn {
     width: 64px;
     height: 64px;
-    background-color: ${ColorStyle.Gray100 + Opacity[25]};
-    position: sticky;
-    bottom: 80px;
+    background-color: ${ColorStyle.Gray300 + Opacity[25]};
+    position: fixed;
+    bottom: 60px;
     margin-left: 1300px;
+    z-index: 9999999 ;
     &:hover {
       background-color: ${ColorStyle.Gray500 + Opacity[25]};
     }

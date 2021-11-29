@@ -35,7 +35,7 @@ const Footer = () => {
           }}
         >
           <Text color={ColorStyle.Gray500} regular16>
-            멤버정보
+            팀원소개
           </Text>
         </RedirectNotion>
       </div>
