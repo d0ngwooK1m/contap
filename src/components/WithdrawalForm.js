@@ -272,7 +272,7 @@ const Wrapper = styled.div`
   ${({ size }) => size === '616' && 'overflow: auto;'};
   ${({ size }) => size === '768' && 'overflow: auto;'};
   ${({ size }) =>
-    size === '616' ? 'height: 67vh;' : size === '768' && 'height:73vh;'};
+    size === '616' ? 'height: 67vh;' : size === '768' ? 'height:73vh;' : size==='nomal' && 'height:85vh'};
 `;
 
 const RadioWrapper = styled.div`

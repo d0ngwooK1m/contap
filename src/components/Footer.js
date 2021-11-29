@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import { ColorStyle } from '../utils/systemDesign';
 import { Text } from '../elements';
-import { ReactComponent as InstagramSvg } from '../svgs/Instagram.svg';
 
 const Footer = () => {
   const location = useLocation();
@@ -12,21 +11,34 @@ const Footer = () => {
     <FooterWrapper location={location.pathname}>
       <div>
         <Text color={ColorStyle.Gray300} regular16>
-          ©Contap
+          © 2021. Contap all rights reserved.
         </Text>
       </div>
-      <RightWrapper
-        onClick={() => {
-          window.open(
-            'https://www.instagram.com/contap_official/?utm_medium=copy_link',
-          );
-        }}
-      >
-        <StyledInstagramSvg />
-        <Text color={ColorStyle.PrimaryPurple} regular16>
-          contap_official
-        </Text>
-      </RightWrapper>
+      <div style={{ display: 'flex' }}>
+        <RedirectInsta
+          onClick={() => {
+            window.open(
+              'https://www.instagram.com/contap_official/?utm_medium=copy_link',
+            );
+          }}
+        >
+          <Text color={ColorStyle.Gray500} regular16>
+            인스타그램
+          </Text>
+        </RedirectInsta>
+        <Text regular16>&nbsp; | &nbsp; </Text>
+        <RedirectNotion
+          onClick={() => {
+            window.open(
+              'https://frequent-packet-5ba.notion.site/Contap-dda2c10905b7488fa31e7b0e5f3ee8e6',
+            );
+          }}
+        >
+          <Text color={ColorStyle.Gray500} regular16>
+            멤버정보
+          </Text>
+        </RedirectNotion>
+      </div>
     </FooterWrapper>
   );
 };
@@ -66,13 +78,12 @@ const FooterWrapper = styled.div`
   background-color: ${ColorStyle.BackGround300};
 `;
 
-const RightWrapper = styled.div`
-  display: flex;
+const RedirectInsta = styled.div`
   cursor: pointer;
 `;
 
-const StyledInstagramSvg = styled(InstagramSvg)`
-  margin-right: 15px;
+const RedirectNotion = styled.div`
+  cursor: pointer;
 `;
 
 export default Footer;
