@@ -112,7 +112,7 @@ const CardBack = ({
             </a>
           </div> */}
         </div>
-        <div style={{ whiteSpace: 'pre-line' }}>
+        <div style={{ whiteSpace: 'pre-line' }} className="content">
           <Text regular20 color={ColorStyle.Gray500}>
             {card?.content}
           </Text>
@@ -187,7 +187,7 @@ const Card = styled.div`
 
   .title {
     margin: 0px 0px 28px 0px;
-    display: flex;
+    display: flex;  
 
     .link {
       :link {
@@ -199,6 +199,11 @@ const Card = styled.div`
       position: absolute;
       right: 56px;
     }
+  }
+
+  .content {
+    overflow: auto;
+    height: 100px;
   }
 `;
 
