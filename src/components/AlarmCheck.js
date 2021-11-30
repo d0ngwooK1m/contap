@@ -14,7 +14,8 @@ const AlarmCheck = ({ children }) => {
   const ALARM = 8;
 
   React.useEffect(async () => {
-    if (checkToken !== undefined) {
+    // console.log('testToken===>', checkToken)
+    if (checkToken !== null || checkToken !== undefined) {
       const { data } = await T.GET('/main/info');
       const alarmInfo = {
         phoneTutorial: data & PHONE_TUTORIAL,
