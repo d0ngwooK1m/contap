@@ -53,11 +53,12 @@ const PwSettingForm = () => {
       }
 
       if (data.result === 'success') {
-        Swal.fire({
-          icon: 'success',
-          title: '비밀번호 변경 성공!',
-        });
-        history.push('/');
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: '비밀번호 변경 성공!',
+        // });
+        window.alert('비밀번호가 변경되었어요');
+        // history.push('/');
         return data;
       }
       return data;

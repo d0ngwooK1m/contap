@@ -35,11 +35,13 @@ const AlarmForm = () => {
   React.useEffect(async () => {
     const res = await T.GET('/setting/getPhoneNumber');
     const { data } = res;
+    // console.log('test2===>', data);
     if (data.errorMessage === null) {
       setPhoneNumber('');
     } else {
       setPhoneNumber(data);
     }
+    // console.log('test4==>', phoneNumber);
   }, [phoneNumberInfo]);
 
   const handleChange = (e) => {
@@ -82,10 +84,16 @@ const AlarmForm = () => {
     try {
       const res = await T.POST(`/setting/modifyPhoneNumber`, phoneNumber);
       const { data } = res;
+      // console.log(phoneNumberInfo);
+      // console.log(phoneNumber);
+      // console.log(data);
       if (data.errorMessage) {
         setErrorMessage('잘못된 번호입니다. 다시 확인해주세요.');
+        return data;
       }
+      setErrorMessage('');
       dispatch(settingPhoneNum(phoneNumber));
+      window.alert('전화번호를 저장했어요');
       return data;
     } catch (error) {
       console.error(error);
@@ -98,6 +106,7 @@ const AlarmForm = () => {
         `/setting/alarm?alarmState=${alarmInfo.alarmState}`,
       );
       const { data } = res;
+      // console.log(data);
       dispatch(settingAlarm(alarmInfo));
       return data;
     } catch (error) {
@@ -105,7 +114,7 @@ const AlarmForm = () => {
     }
   };
 
-  console.log('알림 설정 페이지 화면 사이즈====', size)
+  // console.log('알림 설정 페이지 화면 사이즈====', size)
 
 
   return (
@@ -185,11 +194,17 @@ const AlarmForm = () => {
 
       <form
         autoComplete="off"
-        onSubmit={handleSubmit((phoneInfo) => {
+        onSubmit={handleSubmit(() => {
           const alarmInfo = {
             alarmState: switchChange,
           };
-          sendPhoneNumber(phoneInfo);
+          const phoneNumberInfo = {
+            phoneNumber: phoneNumber,
+          };
+          // console.log('test3==>', phoneNumber);
+          // console.log('test==>', phoneInfo);
+          // sendPhoneNumber(phoneInfo);
+          sendPhoneNumber(phoneNumberInfo);
           sendAlarm(alarmInfo);
         })}
       >
