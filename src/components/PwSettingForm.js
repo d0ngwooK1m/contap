@@ -11,6 +11,7 @@ import T from '../api/tokenInstance';
 import Swal from 'sweetalert2';
 import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 import { Text } from '../elements';
+import { Toast } from '../utils/alert';
 import { size } from '../utils/sizeCheck';
 
 const PwSettingForm = () => {
@@ -57,7 +58,13 @@ const PwSettingForm = () => {
         //   icon: 'success',
         //   title: '비밀번호 변경 성공!',
         // });
-        window.alert('비밀번호가 변경되었어요');
+        Toast.fire({
+          title: (
+            <Text regular20 color={ColorStyle.Gray500}>
+              비밀번호가 변경 되었습니다
+            </Text>
+          ),
+        })
         // history.push('/');
         return data;
       }
