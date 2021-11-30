@@ -107,7 +107,7 @@ const TextDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0px auto;
+  margin: 0px 165px;
 `;
 
 const TitleText = styled.p`

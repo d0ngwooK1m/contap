@@ -102,6 +102,7 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const url = cardList[cardId].link?.split('//')[1];
+  console.log(url);
   // let url = cardList[cardId].link;
   // if (url !== undefined && url?.indexOf('http') === -1) {
   //   // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌
@@ -117,7 +118,7 @@ const CardPortfolio = ({ cardId }) => {
         height="509px"
         borderRadius="16px"
         border="1px solid #8c4dff"
-        margin="48px auto"
+        margin="48px 165px"
         padding="48px 48px 0px 48px"
         bg="#141422"
       >
@@ -234,17 +235,19 @@ const CardPortfolio = ({ cardId }) => {
             <TagIcon />
             <TagText>{cardList[cardId].tagsStr}</TagText>
           </div>
-          <LinkText href={cardList[cardId].link} target="_blank">
-            <div
-              style={{
-                marginRight: '20px',
-                position: 'relative',
-              }}
-            >
-              <Link />
-            </div>
-            {url}
-          </LinkText>
+          {url !== '' && (
+            <LinkText href={cardList[cardId].link} target="_blank">
+              <div
+                style={{
+                  marginRight: '20px',
+                  position: 'relative',
+                }}
+              >
+                <Link />
+              </div>
+              {url}
+            </LinkText>
+          )}
           {/* <a href={cardList[cardId].link} target="_blank">
             <span style={{ marginRight: '24px', verticalAlign: 'middle' }}>
               <Link />
@@ -274,7 +277,7 @@ const EditDiv = styled.div`
 const Div = styled.div`
   width: 1110px;
   height: 370px;
-  margin: 0px auto 48px auto;
+  margin: 0px 165px 48px 165px;
 `;
 
 const ProjectDiv = styled.div`
@@ -283,7 +286,7 @@ const ProjectDiv = styled.div`
   border-radius: 16px;
   border: 1px solid ${'#4d4759' + Opacity[50]};
   background-color: ${ColorStyle.BackGround100};
-  margin: 0px auto 48px auto;
+  //margin: 0px 165px 48px 165px;
   &:hover {
     border: 1px solid ${ColorStyle.PrimaryPurple};
     background: ${'#a09bac' + Opacity[15]};

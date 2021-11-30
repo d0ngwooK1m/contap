@@ -109,9 +109,9 @@ const CardBackWrite = ({ onHide }) => {
   };
 
   return (
-    <div>
+    <div style={{ margin: '0px 165px' }}>
       {!disabled && (
-        <div style={{ display: 'flex', margin: '0px 0px 12px 165px' }}>
+        <div style={{ display: 'flex', marginBottom: '12px' }}>
           <div style={{ marginRight: '16px' }}>
             <InfoLight />
           </div>
@@ -126,7 +126,6 @@ const CardBackWrite = ({ onHide }) => {
         height="509px"
         borderRadius="16px"
         border="1px solid #8c4dff"
-        margin="0px auto"
         padding="43px 48px 0px 48px"
         bg="#141422"
       >
