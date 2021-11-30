@@ -137,7 +137,7 @@ const CardList = () => {
       <IconButton className="floatingBtn" onClick={() => {
         window.open('https://forms.gle/UjFii44xz7J62rNLA')
         }}>
-          <Text bold32>🤔</Text>
+          <Text bold32>🖐</Text>
         </IconButton>
       
     </Wrap>

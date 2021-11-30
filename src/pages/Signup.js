@@ -643,7 +643,7 @@ const GotoLoginWrap = styled.div`
 
 const GotoLoginBtn = styled.button`
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   flex-shrink: 0;
   color: white;
   font-size: ${FontScale.Body1_20};
