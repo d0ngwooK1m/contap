@@ -15,6 +15,7 @@ import { ColorStyle, FontScale, FontFamily } from '../utils/systemDesign';
 // import { Switch } from '@mui/material';
 import T from '../api/tokenInstance';
 import { size } from '../utils/sizeCheck';
+import { Toast } from '../utils/alert';
 
 const AlarmForm = () => {
   const dispatch = useDispatch();
@@ -93,7 +94,13 @@ const AlarmForm = () => {
       }
       setErrorMessage('');
       dispatch(settingPhoneNum(phoneNumber));
-      window.alert('전화번호를 저장했어요');
+      Toast.fire({
+        title: (
+          <Text regular20 color={ColorStyle.Gray500}>
+            번호가 저장 되었어요!
+          </Text>
+        ),
+      })
       return data;
     } catch (error) {
       console.error(error);
