@@ -424,7 +424,8 @@ const LogoDiv = styled.div`
   height: fit-content;
   cursor: pointer;
   z-index: 1000;
-  margin-right: 400px;
+  /* margin-right: 400px; */
+  margin-right: 780px;
 `;
 
 const Icon = styled.div`
