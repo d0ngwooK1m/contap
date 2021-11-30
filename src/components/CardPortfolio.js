@@ -25,7 +25,7 @@ import {
 const CardPortfolio = ({ cardId }) => {
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.cards.backCard);
-  const cardLink = cardList[cardId].link?.split('//')[1]
+  const cardLink = cardList[cardId].link?.split('//')[1];
 
   const [title, setTitle] = React.useState(cardList[cardId].title);
   const [desc, setDesc] = React.useState(cardList[cardId].content);
@@ -450,6 +450,8 @@ const TitleText = styled.p`
 
 const MainText = styled.p`
   font-size: ${FontScale.Body1_20};
+  overflow: auto;
+  height: 72px;
   font-family: ${FontFamily};
   font-weight: 400;
   color: ${ColorStyle.Gray500};

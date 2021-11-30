@@ -433,7 +433,7 @@ const Icon = styled.div`
 `;
 
 const LoginButton = styled.button`
-  width: 114px;
+  min-width: 114px;
   height: 44px;
   background-color: ${ColorStyle.PrimaryPurple};
   border-radius: 30px;
