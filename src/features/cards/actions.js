@@ -135,7 +135,7 @@ export const searchInfoDB =
         return null;
       }
       if (res.data !== []) {
-        return dispatch(searchCard(searchInfo, res.data, selectCategory));
+        return dispatch(searchCard(searchInfo, res.data, selectCategory || ''));
       }
     } catch (error) {
       console.error(error);
