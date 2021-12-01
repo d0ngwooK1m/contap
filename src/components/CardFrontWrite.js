@@ -517,7 +517,7 @@ const TitleBox = styled.input`
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround100 + Opacity[50]};
+  background-color: ${ColorStyle.BackGround100 + Opacity[40]};
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
   border-left: none;

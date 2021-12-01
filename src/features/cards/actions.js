@@ -46,10 +46,14 @@ export const deleteMyCard = createAction(DELETE_MY_CARD, (userId) => ({
   userId,
 }));
 
-export const searchCard = createAction(SEARCH_CARD, (searchInfo, cardList) => ({
-  searchInfo,
-  cardList,
-}));
+export const searchCard = createAction(
+  SEARCH_CARD,
+  (searchInfo, cardList, selectCategory) => ({
+    searchInfo,
+    cardList,
+    selectCategory,
+  }),
+);
 
 export const setLoading = createAction(SET_LOADING, (loadingInfo) => ({
   loadingInfo,
@@ -121,22 +125,23 @@ export const loadCardFrontDB = () => async (dispatch) => {
   }
 };
 
-export const searchInfoDB = (searchInfo) => async (dispatch) => {
-  try {
-    const res = await T.POST(`/main/search`, searchInfo);
-    // const { resultData } = res;
-    // console.log(resultData);
-    if (res.data === []) {
-      return null;
+export const searchInfoDB =
+  (searchInfo, selectCategory) => async (dispatch) => {
+    try {
+      const res = await T.POST(`/main/search`, searchInfo);
+      // const { resultData } = res;
+      console.log(res);
+      if (res.data === []) {
+        return null;
+      }
+      if (res.data !== []) {
+        return dispatch(searchCard(searchInfo, res.data, selectCategory));
+      }
+    } catch (error) {
+      console.error(error);
     }
-    if (res.data !== []) {
-      return dispatch(searchCard(searchInfo, res.data));
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
-};
+    return null;
+  };
 
 export const loadCurrentCardDB = (userId) => async (dispatch) => {
   try {

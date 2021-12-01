@@ -26,6 +26,7 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import { LoginAlert } from '../utils/alert';
 import LoginAlertPng from '../assets/image/LoginAlertPng.png';
+import Close from '../svgs/Close.svg';
 import MetaTag from '../components/MetaTag';
 
 const CardList = () => {
@@ -33,10 +34,12 @@ const CardList = () => {
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
+  const selectCategory = useSelector((state) => state.cards.selectCategory);
   const token = getToken();
   const params = useParams();
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
+  console.log(selectCategory);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -82,6 +85,10 @@ const CardList = () => {
     }
   }, [isSearching]);
 
+  const clearCategory = () => {
+    dispatch(loadCardFrontDB());
+  };
+
   return (
     <Wrap>
       <BackGroundTop />
@@ -116,30 +123,35 @@ const CardList = () => {
           marginTop: '34px',
         }}
       >
-        <RefreshWrapper>
-          <RefreshSvg />
-          <button
-            type="button"
-            onClick={() => {
-              dispatch(loadCardFrontDB());
-            }}
-          >
-            카드 섞기
-          </button>
-        </RefreshWrapper>
+        {selectCategory !== '' && (
+          <div>
+            <RefreshWrapper>
+              <div className="selectCategory">
+                <button type="button" onClick={clearCategory}>
+                  <div style={{ display: 'flex' }}>
+                    <Text regular16>{selectCategory} &nbsp;</Text>
+                    <img src={Close} width="17px" height="17px" />
+                  </div>
+                </button>
+              </div>
+            </RefreshWrapper>
+          </div>
+        )}
         <CardListWrap>
           {cardList.allIds.map((userId) => {
             return <MemoizedCardFront key={userId} userId={userId} />;
           })}
         </CardListWrap>
       </div>
-      
-      <IconButton className="floatingBtn" onClick={() => {
-        window.open('https://forms.gle/UjFii44xz7J62rNLA')
-        }}>
-          <Text bold32>🖐</Text>
-        </IconButton>
-      
+
+      <IconButton
+        className="floatingBtn"
+        onClick={() => {
+          window.open('https://forms.gle/UjFii44xz7J62rNLA');
+        }}
+      >
+        <Text bold32>🖐</Text>
+      </IconButton>
     </Wrap>
   );
 };
@@ -169,7 +181,7 @@ const Wrap = styled.div`
     position: fixed;
     bottom: 60px;
     margin-left: 1300px;
-    z-index: 9999999 ;
+    z-index: 9999999;
     &:hover {
       background-color: ${ColorStyle.Gray500 + Opacity[25]};
     }
@@ -382,12 +394,30 @@ const TextWrap = styled.div`
 
 const RefreshWrapper = styled.div`
   position: relative;
-  right: 15px;
   margin-bottom: 18px;
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: right;
+  justify-content: space-between;
+  .selectCategory {
+    padding-left: 15px;
+    button {
+      width: max-content;
+      padding: 6px 12px;
+      text-align: center;
+      border-radius: 8px;
+      P {
+        padding-top: 3px;
+      }
+      img {
+        padding-top: 4px;
+      }
+      background-color: ${ColorStyle.PrimaryPurple};
+      &:hover {
+        background-color: ${ColorStyle.HoverPurple};
+      }
+    }
+  }
 
   button {
     background-color: #0f0a1a;

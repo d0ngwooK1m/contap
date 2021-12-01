@@ -260,7 +260,7 @@ const SearchBar = () => {
             </CloseBtn> */}
             <CategoryWrapper>
               <Text color={ColorStyle.Gray300} regular16>
-                카테고리
+                카테고리로 검색
               </Text>
             </CategoryWrapper>
             <ContentWrapper>
@@ -273,7 +273,7 @@ const SearchBar = () => {
                     page: 0,
                     field: 0,
                   };
-                  await dispatch(searchInfoDB(searchInfo));
+                  await dispatch(searchInfoDB(searchInfo, '백엔드 개발자'));
                   // setSearchFin(true);
                   setClick(false);
                 }}
@@ -292,7 +292,7 @@ const SearchBar = () => {
                     page: 0,
                     field: 1,
                   };
-                  await dispatch(searchInfoDB(searchInfo));
+                  await dispatch(searchInfoDB(searchInfo, '프론트엔드 개발자'));
                   // setSearchFin(true);
                   setClick(false);
                 }}
@@ -311,7 +311,7 @@ const SearchBar = () => {
                     page: 0,
                     field: 2,
                   };
-                  await dispatch(searchInfoDB(searchInfo));
+                  await dispatch(searchInfoDB(searchInfo, '디자이너'));
                   // setSearchFin(true);
                   setClick(false);
                 }}
