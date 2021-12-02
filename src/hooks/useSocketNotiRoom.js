@@ -42,7 +42,6 @@ export default function useSocketNotiRoom() {
         ws.subscribe(
           `/user/sub/user`,
           async (noti) => {
-            console.log('알림 ===', noti);
             // 채팅 알람이 없을 때
             const newNoti = JSON.parse(noti.body);
             if (!isChatNoti) {

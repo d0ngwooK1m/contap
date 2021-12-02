@@ -63,7 +63,6 @@ export default handleActions(
         draft.isSearching = true;
         draft.searchInfo.page = 0;
         draft.searchInfo.field = 3;
-        console.log('값 바뀌는지 확인', draft.isSearching, draft.searchInfo.field);
         draft.byId = {};
         draft.allIds = [];
         draft.selectCategory = action.payload.selectCategory;

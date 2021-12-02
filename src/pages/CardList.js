@@ -40,7 +40,6 @@ const CardList = () => {
   const params = useParams();
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
-  console.log(selectCategory);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -90,7 +89,6 @@ const CardList = () => {
     await dispatch(loadCardFrontDB());
   };
 
-  console.log(isSearching);
   return (
     <Wrap>
       <BackGroundTop />
