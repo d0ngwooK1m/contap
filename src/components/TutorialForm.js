@@ -15,8 +15,8 @@ const TutorialForm = ({ steps, page }) => {
     async (data) => {
       const { status } = data;
       if (status === 'finished') {
-        const res = await T.POST(`/main/tutorial?tutorialNum=${page}`);
-        console.log(res);
+        await T.POST(`/main/tutorial?tutorialNum=${page}`);
+        // console.log(res);
         if (page === 1) {
           dispatch(profileTutorialCheck(true));
         }

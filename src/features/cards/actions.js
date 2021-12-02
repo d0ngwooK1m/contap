@@ -116,13 +116,32 @@ export const cardCheck = createAction(CARD_CHECK, (check) => ({ check }));
 const baseURL = process.env.REACT_APP_SERVER_URI;
 
 export const loadCardFrontDB = () => async (dispatch) => {
-  try {
-    const res = await T.GET(`${baseURL}/main`);
+  // try {
+  //   const res = await T.GET(`${baseURL}/main`);
 
-    dispatch(loadCard(res.data.users));
+  //   dispatch(loadCard(res.data.users));
+  // } catch (err) {
+  //   console.error(err);
+  // }
+  try {
+    const searchInfo = {
+      searchTags: [],
+      type: 0,
+      page: 0,
+      field: 3,
+    };
+    const res = await T.POST(`/main/search`, searchInfo);
+    // console.log(res);
+    if (res.data === []) {
+      return null;
+    }
+    if (res.data !== []) {
+      return dispatch(searchCard(searchInfo, res.data, ''));
+    }
   } catch (err) {
     console.error(err);
   }
+  return null;
 };
 
 export const searchInfoDB =
@@ -130,7 +149,7 @@ export const searchInfoDB =
     try {
       const res = await T.POST(`/main/search`, searchInfo);
       // const { resultData } = res;
-      console.log(res);
+      // console.log(res);
       if (res.data === []) {
         return null;
       }
@@ -230,9 +249,9 @@ export const updateCardDB = (cardId, updateContent) => async (dispatch) => {
 
 export const deleteCardDB = (cardId) => async (dispatch) => {
   try {
-    console.log('카드 삭제 시 cardId ====', cardId);
+    // console.log('카드 삭제 시 cardId ====', cardId);
     const res = await T.DELETE('/mypage/backCard', cardId);
-    console.log('카드 삭제 시 res ====', res);
+    // console.log('카드 삭제 시 res ====', res);
     dispatch(deleteCard(res.data.cardId));
     history.push('/mypage');
   } catch (err) {

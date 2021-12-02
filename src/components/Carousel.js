@@ -32,7 +32,7 @@ const Carousel = ({ userId, userName, profile, category, onHide }) => {
   };
 
   const color = professionColor(category);
-  console.log('카드 모달 사이즈',size)
+  // console.log('카드 모달 사이즈',size)
 
   return (
     <SwiperWrap color={color} size={size}>
