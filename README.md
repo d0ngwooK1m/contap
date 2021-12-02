@@ -1,8 +1,8 @@
 # 컨탭 Contap! 
 
-## 팀원 소개
+## :star: 팀원 소개
 
-## Contap! 서비스 소개
+## :star: Contap! 서비스 소개
 
 ## 주요 기능
 
