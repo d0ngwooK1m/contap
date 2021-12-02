@@ -38,8 +38,9 @@ import {
 } from './types';
 
 // Eslint는 카멜케이스로 쓰기!! _ 사용하면 오류남
-export const loadCard = createAction(LOAD_CARD, (cardList) => ({
+export const loadCard = createAction(LOAD_CARD, (cardList, selectCategory) => ({
   cardList,
+  selectCategory,
 }));
 
 export const deleteMyCard = createAction(DELETE_MY_CARD, (userId) => ({
@@ -115,7 +116,7 @@ export const cardCheck = createAction(CARD_CHECK, (check) => ({ check }));
 
 const baseURL = process.env.REACT_APP_SERVER_URI;
 
-export const loadCardFrontDB = () => async (dispatch) => {
+export const loadCardFrontDB = (selectCategory) => async (dispatch) => {
   // try {
   //   const res = await T.GET(`${baseURL}/main`);
 
@@ -136,7 +137,9 @@ export const loadCardFrontDB = () => async (dispatch) => {
       return null;
     }
     if (res.data !== []) {
-      return dispatch(searchCard(searchInfo, res.data, ''));
+      console.log(res);
+      // return dispatch(searchCard(searchInfo, res.data, ''));
+      return dispatch(loadCard(res.data, selectCategory || ''));
     }
   } catch (err) {
     console.error(err);

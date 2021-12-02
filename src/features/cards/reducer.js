@@ -63,7 +63,7 @@ export default handleActions(
         draft.isSearching = true;
         draft.byId = {};
         draft.allIds = [];
-        draft.selectCategory = '';
+        draft.selectCategory = action.payload.selectCategory;
         //console.log(action.payload);
         action.payload.cardList.forEach((doc) => {
           draft.byId[doc.userId] = doc;
