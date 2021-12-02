@@ -2,14 +2,14 @@
 
 ## :star: 팀원 소개
 
-## :star: Contap! 서비스 소개
+## :star2: Contap! 서비스 소개
 
-## 주요 기능
+## :star: 주요 기능
 
-## 프로젝트 구조
+## :star: 프로젝트 구조
 
-## Front-End 기술스택
+## :star: Front-End 기술스택
 
-## 트러블 슈팅
+## :star: 트러블 슈팅
 
 
