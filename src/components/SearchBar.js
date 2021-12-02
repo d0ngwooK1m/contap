@@ -156,7 +156,9 @@ const SearchBar = () => {
 
   const searchEnter = async (e) => {
     if (e.key === 'Enter') {
-        searchClick()
+      searchClick()
+      setClick(false);
+      
       }
     }
   // const [tag, setTag] = React.useState(false);
