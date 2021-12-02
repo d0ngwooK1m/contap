@@ -83,7 +83,7 @@ const SearchBar = () => {
   }, 1000), [data]);
 
   let page = useSelector((state) => state.cards.searchInfo?.page);
-  const field = useSelector((state) => state.cards.searchInfo?.field);
+  let field = useSelector((state) => state.cards.searchInfo?.field);
   // const [fetching, setFetching] = React.useState(false);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
@@ -101,9 +101,9 @@ const SearchBar = () => {
       page = 0;
     }
     // console.log('페이지 변경 확인', page);
-    // if (field === undefined) {
-    //   field = 3;
-    // }
+    if (field === undefined) {
+      field = 3;
+    }
 
     if (data === '') {
       searchInfo = {

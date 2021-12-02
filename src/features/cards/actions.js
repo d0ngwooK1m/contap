@@ -132,12 +132,12 @@ export const loadCardFrontDB = (selectCategory) => async (dispatch) => {
       field: 3,
     };
     const res = await T.POST(`/main/search`, searchInfo);
+    // const res = await T.GET(`${baseURL}/main`);
     // console.log(res);
     if (res.data === []) {
       return null;
     }
     if (res.data !== []) {
-      console.log(res);
       // return dispatch(searchCard(searchInfo, res.data, ''));
       return dispatch(loadCard(res.data, selectCategory || ''));
     }
