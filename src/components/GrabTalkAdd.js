@@ -25,7 +25,7 @@ const GrabTalkAdd = ({ noneTalkList, closeList }) => {
   };
 
   const searchList = noneTalkList.filter((data) => {
-    console.log('검색 할 리스트 ===', data)
+    // console.log('검색 할 리스트 ===', data)
     if (noneTalkList.length === 0) {
       return;
     } else if (searchValue === null) {

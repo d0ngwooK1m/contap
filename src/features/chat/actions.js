@@ -81,7 +81,7 @@ export const nextPageToAxios = (roomId, page) => async (dispatch) => {
 export const loadTalkRoomListToAxios = () => async (dispatch) => {
   try {
     const { data } = await T.GET('/contap/getothers/1/0');
-    console.log(data);
+    // console.log(data);
     const cleanData = [];
     data.forEach((doc) => {
       if (doc.userId !== null) {

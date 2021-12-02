@@ -102,7 +102,7 @@ const CardPortfolio = ({ cardId }) => {
   };
 
   const url = cardList[cardId].link?.split('//')[1];
-  console.log(url);
+  // console.log(url);
   // let url = cardList[cardId].link;
   // if (url !== undefined && url?.indexOf('http') === -1) {
   //   // 링크가 만약 http를 포함하지 않는다면(-1은 문자열이 없을때 리턴되는 값이다) 링크앞에 //붙여줌

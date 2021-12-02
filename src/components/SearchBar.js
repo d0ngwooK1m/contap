@@ -81,13 +81,14 @@ const SearchBar = () => {
     }
   }, 1000), [data]);
 
-  const page = useSelector((state) => state.cards.searchInfo?.page);
-  const field = useSelector((state) => state.cards.searchInfo?.field);
+  let page = useSelector((state) => state.cards.searchInfo?.page);
+  // const field = useSelector((state) => state.cards.searchInfo?.field);
   // const [fetching, setFetching] = React.useState(false);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
 
   const fetchMoreData = async () => {
+    // console.log('페이지 확인', page);
     if (isSearching === false) {
       return;
     }
@@ -95,12 +96,20 @@ const SearchBar = () => {
     await dispatch(setLoading(true));
     let searchInfo;
 
+    if (page === undefined) {
+      page = 0;
+    }
+    // console.log('페이지 변경 확인', page);
+    // if (field === undefined) {
+    //   field = 3;
+    // }
+
     if (data === '') {
       searchInfo = {
         searchTags: [],
         type: 0,
         page: page + 1,
-        field,
+        field: 3,
       };
     } else {
       searchInfo = {
@@ -146,7 +155,7 @@ const SearchBar = () => {
       field: 3,
     };
     if (data === '') {
-      console.log('검색어 아무것도 없을 때');
+      // console.log('검색어 아무것도 없을 때');
       await dispatch(loadCardFrontDB());
     } else {
       dispatch(searchInfoDB(searchInfo, data));
@@ -165,7 +174,7 @@ const SearchBar = () => {
 
   const ArrayData = searchList.map((val) => {
     return (
-      <ContentWrapper>
+      <ContentWrapper key={val.toString()}>
         <li>
           <ContentBtn
             type="button"
