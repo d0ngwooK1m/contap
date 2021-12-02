@@ -160,7 +160,106 @@ const CardBackWrite = ({ onHide }) => {
 <details>
 <summary>연관검색어, 무한스크롤 기능 작성 및 문제점 파악(김동우)</summary>
 <div markdown="1">
-내용
+
+### 연관 검색어
+
+1. 스택 및 관심사 데이터를 한꺼번에 배열로 가져온다.
+2. input에 글자를 검색할 때마다 배열에 있는 글자와 일치하는지 비교 후 같다면 연관 검색어 배열에 넣는다.
+3. 연관 검색어 배열에 넣을 때 일치하는 문자의 순서를 비교하여 넣는다.
+4. 완료된 배열은 리덕스에 저장한다(렌더링이 발생하기 때문에)
+5. map을 이용하여 연관검색어 목록이 나오도록 한다.
+6. 연관 검색어를 클릭했을 때 검색 API를 전송한다.
+
+```jsx
+// 0. 검색어 목록을 만든다
+React.useEffect(async () => {
+  try {
+    const res = await axios.get(`${baseURL}/main/hashtag`);
+
+    const { data } = res;
+
+    const searchDataArr = [];
+    data.forEach((val) => {
+      searchDataArr.push(val.name);
+    });
+    dispatch(searchDataList(searchDataArr));
+  } catch (error) {
+    console.error(error);
+  }
+}, []);
+
+//1. setState로 input에 들어가는 정보를 받아온다.
+const [data, setData] = React.useState('');
+
+//2. 연관검색어를 담는 searchArr과 이것을 렌더링 이후에도
+// 가지고 있을 수 있게하는 searchList 설정
+const searchArr = [];
+const searchList = useSelector((state) => state.cards.searchArr);
+
+//3. data가 바뀔 때마다 searchList가 갱신될 수 있도록 useEffect 사용
+// data와 searchData를 filter로 비교 후 일치하는 value를 searchList로 채운다.
+
+React.useEffect(() => {
+  searchData.filter((val) => {
+    if (data.toLocaleLowerCase() === '') {
+      return null;
+    }
+    if (val.toLocaleLowerCase().indexOf(data.toLocaleLowerCase()) !== -1) {
+      searchArr.push(val);
+    }
+    // console.log(val);
+    console.log(searchArr);
+
+    return searchArr;
+  });
+  if (searchArr !== []) {
+    dispatch(searchArrList(searchArr));
+  }
+}, [data]);
+
+//4. searchList를 해당 value로 검색할 수 있는 함수를 넣어 버튼으로 만든다.
+const ArrayData = searchList.map((val) => {
+  return (
+    <ContentWrapper>
+      <li>
+        <ContentBtn
+          type="button"
+          onClick={async () => {
+            setData(val);
+            const searchInfo = {
+              searchTags: [val],
+              type: 0,
+              page: 0,
+              field: 3,
+            };
+            await dispatch(searchInfoDB(searchInfo));
+            setTag(true);
+            setClick(false);
+          }}
+        >
+          <Text color="black" regular16>
+            {val}
+          </Text>
+        </ContentBtn>
+      </li>
+    </ContentWrapper>
+  );
+});
+```
+
+### 무한스크롤
+
+1. 검색 시 API에서, 현재 페이지를 함께 전송한다. 처음 보낼 때는 0페이지 이다.
+2. scroll event로 스크롤 시 페이지가 마지막 페이지인지 확인한다.
+3. 스크롤이 끝에 닿았다면, 현재 검색어에서 페이지가 1 증가한 API를 보낸다.
+4. 다음 페이지에 해당하는 정보를 백엔드에서 전송한다.
+5. 현재 카드들 아래에 붙혀준다.
+6. 불려저오는 카드의 개수가 9개 이하라면 더 이상 무한 스크롤이 작동하지 않도록 한다.
+
+현재 이 기능의 가장 큰 문제는 API와 컴포넌트가 얽혀있는 것이라고 생각한다.  
+이렇게 얽힌 컴포넌트나 API는 다른 곳에 활용하기가 아주 힘들다는 것을 알 수 있었다.
+앞으로는 기능 작성 시 각 기능을 분리해서 독립적으로 활용이 가능하게 해야겠다는 생각이 들었다.
+
 </div>
 </details>
 
