@@ -86,8 +86,8 @@ const CardList = () => {
     }
   }, [isSearching]);
 
-  const clearCategory = () => {
-    dispatch(loadCardFrontDB());
+  const clearCategory = async () => {
+    await dispatch(loadCardFrontDB());
   };
 
   console.log(isSearching);
@@ -138,7 +138,7 @@ const CardList = () => {
               </div>
             )}
           </RefreshWrapper>
-          <div className='refreshBtn' >
+          {/* <div className='refreshBtn' >
             <RefreshSvg />
             <button
               type="button"
@@ -148,7 +148,7 @@ const CardList = () => {
             >
               카드 섞기
             </button>
-          </div>
+          </div> */}
         </div>
         <CardListWrap>
           {selectCategory !== '' && cardList.allIds.length === 0 && (
@@ -443,8 +443,8 @@ const RefreshWrapper = styled.div`
   .selectCategory {
     z-index: 1;
 
-    position: relative;
-    bottom: -48px;
+    /* position: relative;
+    bottom: -48px; */
     padding-left: 15px;
     button {
       width: max-content;

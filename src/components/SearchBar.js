@@ -39,6 +39,7 @@ const SearchBar = () => {
   const searchArr = [];
   const searchList = useSelector((state) => state.cards.searchArr);
   const searchData = useSelector((state) => state.cards.searchData);
+  const selectCategory = useSelector((state) => state.cards.selectCategory);
 
   React.useEffect(async () => {
     try {
@@ -82,7 +83,7 @@ const SearchBar = () => {
   }, 1000), [data]);
 
   let page = useSelector((state) => state.cards.searchInfo?.page);
-  // const field = useSelector((state) => state.cards.searchInfo?.field);
+  const field = useSelector((state) => state.cards.searchInfo?.field);
   // const [fetching, setFetching] = React.useState(false);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
@@ -109,7 +110,7 @@ const SearchBar = () => {
         searchTags: [],
         type: 0,
         page: page + 1,
-        field: 3,
+        field: field,
       };
     } else {
       searchInfo = {
@@ -120,7 +121,7 @@ const SearchBar = () => {
       };
     }
 
-    await dispatch(searchInfoDB(searchInfo));
+    await dispatch(searchInfoDB(searchInfo, selectCategory));
 
     // setFetching(false);
     await dispatch(setLoading(false));
@@ -172,6 +173,7 @@ const SearchBar = () => {
     }
   // const [tag, setTag] = React.useState(false);
 
+  console.log(field)
   const ArrayData = searchList.map((val) => {
     return (
       <ContentWrapper key={val.toString()}>
