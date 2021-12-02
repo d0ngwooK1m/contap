@@ -173,7 +173,6 @@ const SearchBar = () => {
     }
   // const [tag, setTag] = React.useState(false);
 
-  console.log(field)
   const ArrayData = searchList.map((val) => {
     return (
       <ContentWrapper key={val.toString()}>

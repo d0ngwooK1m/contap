@@ -134,7 +134,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
   const filePreview = (e) => {
     const reader = new FileReader();
     const file = fileInput.current.files[0];
-    console.log(file);
     if (file === undefined) {
       dispatch(setPreview(reader.result));
       setFileData(file);

@@ -118,7 +118,6 @@ const Login = () => {
     try {
       const res = await axios.post(`${baseURL}/user/login`, loginInfo);
       const { data } = res;
-      console.log(data)
       if (data.CHAT !== '0') {
         dispatch(setChatNoti(true));
       }
