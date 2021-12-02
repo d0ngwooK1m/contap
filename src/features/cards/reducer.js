@@ -52,6 +52,7 @@ const initialState = {
   hobbyTag: [],
   isLoading: false,
   cardCheck: {},
+  selectCategory : '',
 };
 
 export default handleActions(
@@ -62,6 +63,7 @@ export default handleActions(
         draft.isSearching = true;
         draft.byId = {};
         draft.allIds = [];
+        draft.selectCategory = '';
         //console.log(action.payload);
         action.payload.cardList.forEach((doc) => {
           draft.byId[doc.userId] = doc;
@@ -74,6 +76,7 @@ export default handleActions(
         draft.isSearching = true;
         // console.log(draft.isSearching);
         draft.searchInfo = action.payload.searchInfo;
+        draft.selectCategory = action.payload.selectCategory
         // console.log(draft.searchInfo);
         if (action.payload.searchInfo.page === 0) {
           draft.byId = {};

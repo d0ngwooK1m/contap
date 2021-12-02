@@ -445,7 +445,6 @@ const LoginButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   z-index: 1;
-  margin-left: 400px;
   &:hover {
     background-color: ${ColorStyle.HoverPurple};
     transition: 0.3s;

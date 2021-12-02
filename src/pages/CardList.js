@@ -26,6 +26,8 @@ import { ReactComponent as ArrowTopLightSvg } from '../svgs/ArrowTopLight.svg';
 import { getToken } from '../utils/auth';
 import { LoginAlert } from '../utils/alert';
 import LoginAlertPng from '../assets/image/LoginAlertPng.png';
+import Close from '../svgs/Close.svg';
+import searchFailMain from '../assets/image/searchFailMain.png';
 import MetaTag from '../components/MetaTag';
 
 const CardList = () => {
@@ -33,10 +35,12 @@ const CardList = () => {
   const cardList = useSelector((state) => state.cards);
   const isSearching = useSelector((state) => state.cards.isSearching);
   const isLoading = useSelector((state) => state.cards.isLoading);
+  const selectCategory = useSelector((state) => state.cards.selectCategory);
   const token = getToken();
   const params = useParams();
   // const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
+  console.log(selectCategory);
   const scrollTop = () => {
     window.scrollTo({
       top: 0,
@@ -82,6 +86,11 @@ const CardList = () => {
     }
   }, [isSearching]);
 
+  const clearCategory = () => {
+    dispatch(loadCardFrontDB());
+  };
+
+  console.log(isSearching);
   return (
     <Wrap>
       <BackGroundTop />
@@ -116,30 +125,56 @@ const CardList = () => {
           marginTop: '34px',
         }}
       >
-        <RefreshWrapper>
-          <RefreshSvg />
-          <button
-            type="button"
-            onClick={() => {
-              dispatch(loadCardFrontDB());
-            }}
-          >
-            카드 섞기
-          </button>
-        </RefreshWrapper>
+        <div>
+          <RefreshWrapper selectCategory={selectCategory}>
+            {selectCategory !== '' && (
+              <div className="selectCategory">
+                <button type="button" onClick={clearCategory}>
+                  <div style={{ display: 'flex' }}>
+                    <Text regular16>{selectCategory} &nbsp;</Text>
+                    <img src={Close} width="17px" height="17px" />
+                  </div>
+                </button>
+              </div>
+            )}
+          </RefreshWrapper>
+          <div className='refreshBtn' >
+            <RefreshSvg />
+            <button
+              type="button"
+              onClick={() => {
+                dispatch(loadCardFrontDB());
+              }}
+            >
+              카드 섞기
+            </button>
+          </div>
+        </div>
         <CardListWrap>
+          {selectCategory !== '' && cardList.allIds.length === 0 && (
+            <CardForm>
+              <img src={searchFailMain} width="74px" height="74px" />
+              <Text regular16>
+                검색된 카드가 없어요 😢 <br />
+                다른 스택이나 관심사로 검색해 보세요!
+              </Text>
+            </CardForm>
+          )}
+
           {cardList.allIds.map((userId) => {
             return <MemoizedCardFront key={userId} userId={userId} />;
           })}
         </CardListWrap>
       </div>
-      
-      <IconButton className="floatingBtn" onClick={() => {
-        window.open('https://forms.gle/UjFii44xz7J62rNLA')
-        }}>
-          <Text bold32>🖐</Text>
-        </IconButton>
-      
+
+      <IconButton
+        className="floatingBtn"
+        onClick={() => {
+          window.open('https://forms.gle/UjFii44xz7J62rNLA');
+        }}
+      >
+        <Text bold32>🖐</Text>
+      </IconButton>
     </Wrap>
   );
 };
@@ -169,10 +204,28 @@ const Wrap = styled.div`
     position: fixed;
     bottom: 60px;
     margin-left: 1300px;
-    z-index: 9999999 ;
+    z-index: 9999999;
     &:hover {
       background-color: ${ColorStyle.Gray500 + Opacity[25]};
     }
+  }
+
+  .refreshBtn{
+    position: relative;
+  margin-bottom: 18px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: right;
+  button {
+    background-color: #0f0a1a;
+    cursor: pointer;
+    color: #a09bac;
+    font-family: ${FontFamily};
+    font-size: 20px;
+    border: none;
+    z-index: 9999999;
+  }
   }
 `;
 
@@ -382,12 +435,44 @@ const TextWrap = styled.div`
 
 const RefreshWrapper = styled.div`
   position: relative;
-  right: 15px;
   margin-bottom: 18px;
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: right;
+  justify-content: space-between;
+  .selectCategory {
+    z-index: 1;
+
+    position: relative;
+    bottom: -48px;
+    padding-left: 15px;
+    button {
+      width: max-content;
+      padding: 6px 12px;
+      text-align: center;
+      border-radius: 8px;
+      P {
+        padding-top: 3px;
+      }
+      img {
+        padding-top: 4px;
+      }
+      background-color: ${({ selectCategory }) =>
+        selectCategory === '백엔드 개발자' ||
+        selectCategory === '프론트엔드 개발자' ||
+        selectCategory === '디자이너'
+          ? ColorStyle.PrimaryPurple
+          : ColorStyle.BackGround300};
+      &:hover {
+        background-color: ${({ selectCategory }) =>
+          selectCategory === '백엔드 개발자' ||
+          selectCategory === '프론트엔드 개발자' ||
+          selectCategory === '디자이너'
+            ? ColorStyle.HoverPurple
+            : ColorStyle.Gray300 + Opacity[25]};
+      }
+    }
+  }
 
   button {
     background-color: #0f0a1a;
@@ -412,6 +497,24 @@ const CardListWrap = styled.div`
   margin: auto;
   min-height: 232px;
 `;
+
+const CardForm = styled.div`
+  margin-left: 400px;
+  text-align: center;
+  padding: 32px 52px;
+  position: relative;
+  width: 350px;
+  height: 200px;
+  border-radius: 16px;
+  box-sizing: border-box;
+  margin-bottom: 32px;
+  border: 1px solid ${ColorStyle.Gray100 + Opacity[50]};
+  background-color: ${ColorStyle.BackGround100};
+  p {
+    margin-top: 20px;
+  }
+`;
+
 export default CardList;
 
 // const Div = styled.div`

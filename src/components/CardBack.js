@@ -100,7 +100,7 @@ const CardBack = ({
               target="_blank"
             >
               <Text bold20 color={color}>
-                본문 보러가기
+                프로젝트 자세히보기
               </Text>
             </a>
           )}
@@ -191,10 +191,13 @@ const Card = styled.div`
 
     .link {
       :link {
-        text-decoration: none;
+        color: ${({ color }) => color};
+        text-decoration: solid underline ${({ color }) => color} 2px;
+        /* text-decoration: none; */
       }
       :visited {
-        text-decoration: none;
+        color: ${({ color }) => color};
+        /* text-decoration: none; */
       }
       position: absolute;
       right: 56px;

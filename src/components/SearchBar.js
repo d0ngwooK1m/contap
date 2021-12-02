@@ -138,6 +138,29 @@ const SearchBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
+  const searchClick = async () => {
+    const searchInfo = {
+      searchTags: [data],
+      type: 0,
+      page: 0,
+      field: 3,
+    };
+    if (data === '') {
+      console.log('검색어 아무것도 없을 때');
+      await dispatch(loadCardFrontDB());
+    } else {
+      dispatch(searchInfoDB(searchInfo, data));
+    }
+    
+  }
+
+  const searchEnter = async (e) => {
+    if (e.key === 'Enter') {
+      searchClick()
+      setClick(false);
+      
+      }
+    }
   // const [tag, setTag] = React.useState(false);
 
   const ArrayData = searchList.map((val) => {
@@ -154,7 +177,7 @@ const SearchBar = () => {
                 page: 0,
                 field: 3,
               };
-              await dispatch(searchInfoDB(searchInfo));
+              await dispatch(searchInfoDB(searchInfo, val));
               // setTag(true);
               setClick(false);
             }}
@@ -222,6 +245,8 @@ const SearchBar = () => {
             onChange={(e) => {
               setData(e.target.value);
             }}
+            onKeyPress={ searchEnter}
+          
             onClick={() => {
               setClick(true);
             }}
@@ -229,21 +254,7 @@ const SearchBar = () => {
           />
         <StyledBtn
           type="button"
-          onClick={async () => {
-            const searchInfo = {
-              searchTags: [data],
-              type: 0,
-              page: 0,
-              field: 3,
-            };
-            if (data === '') {
-              console.log('검색어 아무것도 없을 때');
-              await dispatch(loadCardFrontDB());
-            } else {
-              dispatch(searchInfoDB(searchInfo));
-            }
-            
-          }}
+          onClick={searchClick}
         >
           <StyledSearchSvg />
         </StyledBtn>
@@ -260,7 +271,7 @@ const SearchBar = () => {
             </CloseBtn> */}
             <CategoryWrapper>
               <Text color={ColorStyle.Gray300} regular16>
-                카테고리
+                카테고리로 검색
               </Text>
             </CategoryWrapper>
             <ContentWrapper>
@@ -273,7 +284,7 @@ const SearchBar = () => {
                     page: 0,
                     field: 0,
                   };
-                  await dispatch(searchInfoDB(searchInfo));
+                  await dispatch(searchInfoDB(searchInfo, '백엔드 개발자'));
                   // setSearchFin(true);
                   setClick(false);
                 }}
@@ -292,7 +303,7 @@ const SearchBar = () => {
                     page: 0,
                     field: 1,
                   };
-                  await dispatch(searchInfoDB(searchInfo));
+                  await dispatch(searchInfoDB(searchInfo, '프론트엔드 개발자'));
                   // setSearchFin(true);
                   setClick(false);
                 }}
@@ -311,7 +322,7 @@ const SearchBar = () => {
                     page: 0,
                     field: 2,
                   };
-                  await dispatch(searchInfoDB(searchInfo));
+                  await dispatch(searchInfoDB(searchInfo, '디자이너'));
                   // setSearchFin(true);
                   setClick(false);
                 }}
