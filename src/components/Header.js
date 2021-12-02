@@ -425,7 +425,7 @@ const LogoDiv = styled.div`
   cursor: pointer;
   z-index: 1000;
   /* margin-right: 400px; */
-  margin-right: 780px;
+  /* margin-right: 780px; */
 `;
 
 const Icon = styled.div`
@@ -456,7 +456,7 @@ const ImageBox = styled.div`
   width: 48px;
   border: 1px solid ${ColorStyle.Gray100 + Opacity[25]};
   box-sizing: border-box;
-
+  /* padding: 8px; */
   background-image: url('${(props) => props.src}');
   background-position: center;
   background-size: cover;

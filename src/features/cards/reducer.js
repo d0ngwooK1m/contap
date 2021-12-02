@@ -60,7 +60,7 @@ export default handleActions(
     // immer를 이용한 불변성 유지! - produce 사용
     [LOAD_CARD]: (state, action) =>
       produce(state, (draft) => {
-        draft.isSearching = false;
+        draft.isSearching = true;
         draft.byId = {};
         draft.allIds = [];
         draft.selectCategory = '';

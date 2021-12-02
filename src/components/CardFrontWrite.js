@@ -219,7 +219,8 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     <Grid>
       <Grid
         height="540px"
-        bg={ColorStyle.BackGround100 + Opacity[50]}
+        bg={ColorStyle.BackGround100 + Opacity[40]}
+        // bg="#120f1e00"
         margin="0px auto"
         padding="72px 0px 0px 0px"
       >
@@ -354,10 +355,7 @@ const CardFrontWrite = ({ setMaxMessage }) => {
             </HashStackTag>
           )} */}
             {stack.length === 0 || stack[0] === undefined ? (
-              <BasicHashTag type="button">
-                {console.log('stack is no')}
-                {stackText}
-              </BasicHashTag>
+              <BasicHashTag type="button">{stackText}</BasicHashTag>
             ) : (
               <HashStackTag
                 type="button"
@@ -365,7 +363,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   dispatch(deleteStack(stack));
                 }}
               >
-                {console.log('stack is exist')}
                 {stack}
               </HashStackTag>
             )}
@@ -517,7 +514,8 @@ const TitleBox = styled.input`
   font-family: ${FontFamily};
   font-weight: 700;
   color: ${ColorStyle.Gray500};
-  background-color: ${ColorStyle.BackGround100 + Opacity[40]};
+  //background-color: ${ColorStyle.BackGround100 + Opacity[40]};
+  background-color: #120f1e00;
   border-bottom: 1px solid ${ColorStyle.Gray300};
   border-right: none;
   border-left: none;
@@ -655,8 +653,8 @@ const BasicHashTag = styled.div`
 const HashStackTag = styled.div`
   width: 148px;
   height: 48px;
-  margin-top: 20px;
-  margin-right: 16px;
+  margin-top: 21px;
+  // margin-right: 16px;
   border-radius: 50px;
   background: #723cd4;
   font-size: ${FontScale.Body1_20};
