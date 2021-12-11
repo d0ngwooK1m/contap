@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
+
 import { useSelector, useDispatch } from 'react-redux';
-// import { isSuccess } from '../features/cards/actions';
 
 import CardPortfolio from './CardPortfolio';
 import CardBackWrite from './CardBackWrite';
@@ -18,6 +19,7 @@ import { Grid } from '../elements';
 const CardAdd = () => {
   const dispatch = useDispatch();
   const cardCount = useSelector((state) => state.cards.backCardIdx);
+  console.log('카드 갯수 확인===>', cardCount);
   // const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
 
@@ -26,8 +28,6 @@ const CardAdd = () => {
   const closeClick = () => {
     setClick(false);
   };
-
-  // const handleClick = useSelector((state) => state.cards.isSuccess);
 
   // if (cardListCheck.length === 0) {
   //   return (
@@ -46,7 +46,15 @@ const CardAdd = () => {
           </TitleText>
           <TextBtn
             onClick={() => {
-              // dispatch(isSuccess(!handleClick));
+              if (cardCount.length === 10) {
+                Swal.fire({
+                  icon: 'error',
+                  title: '작성 실패',
+                  text: '카드는 10개까지만 작성 가능합니다!',
+                });
+
+                return false;
+              }
               setClick(true);
             }}
           >
@@ -71,7 +79,15 @@ const CardAdd = () => {
         </TitleText>
         <TextBtn
           onClick={() => {
-            // dispatch(isSuccess(!handleClick));
+            if (cardCount.length === 10) {
+              Swal.fire({
+                icon: 'error',
+                title: '작성 실패',
+                text: '카드는 10개까지만 작성 가능합니다!',
+              });
+
+              return false;
+            }
             setClick(true);
           }}
         >
@@ -132,26 +148,3 @@ const TextBtn = styled.div`
   // top: 16vh;
   // left: 47vw;
 `;
-
-// const Div = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 1110px;
-//   height: 136px;
-//   border-radius: 16px;
-//   border: 1px solid ${'#4d4759' + Opacity[50]};
-//   margin: auto;
-//   background-color: ${ColorStyle.BackGround100};
-//   text-align: center;
-//   cursor: pointer;
-// `;
-
-// const PDiv = styled.div`
-//   width: 1110px;
-//   height: 450px;
-//   border-radius: 16px;
-//   border: 1px solid #dcdcdc;
-//   margin: auto;
-//   background-color: ${ColorStyle.BackGround100};
-// `;

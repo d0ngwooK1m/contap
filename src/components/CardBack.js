@@ -67,9 +67,6 @@ const CardBack = ({
       }
     }
   };
-  // const stopPropagation = (e) => {
-  //   e.stopPropagation();
-  // };
   return (
     <Wrap>
       <Card
@@ -187,7 +184,7 @@ const Card = styled.div`
 
   .title {
     margin: 0px 0px 28px 0px;
-    display: flex;  
+    display: flex;
 
     .link {
       :link {
