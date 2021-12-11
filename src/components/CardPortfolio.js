@@ -32,9 +32,6 @@ const CardPortfolio = ({ cardId }) => {
   const [tagsStr, setTagsStr] = React.useState(cardList[cardId].tagsStr);
   const [link, setLink] = React.useState(cardLink);
 
-  // onMouse
-  // const [display, setDisplay] = React.useState({ display: 'none' });
-
   const [click, setClick] = React.useState(false);
   const editCardBack = () => setClick(!click);
 
@@ -198,15 +195,7 @@ const CardPortfolio = ({ cardId }) => {
 
   return (
     <Grid>
-      <Div
-      // // onMouse
-      // onMouseEnter={() => {
-      //   setDisplay({ display: 'block' });
-      // }}
-      // onMouseLeave={() => {
-      //   setDisplay({ display: 'none' });
-      // }}
-      >
+      <Div>
         <ProjectDiv>
           <Grid is_flex>
             <TitleText>{cardList[cardId].title}</TitleText>

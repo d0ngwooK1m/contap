@@ -8,6 +8,7 @@ import CardFrontContap from './CardFrontContap';
 import HashTag from './HashTag';
 import { ReactComponent as FrontProfileSvg } from '../svgs/FrontProfile.svg';
 import LoginAlertPng from '../assets/image/LoginAlertPng.png';
+import cardAlertPng from '../assets/image/cardAlertPng.png';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 
 import CardModal from './CardModal';
@@ -21,7 +22,7 @@ import {
   professionHoverColor,
 } from '../utils/systemDesign';
 import { getToken } from '../utils/auth';
-import { LoginAlert } from '../utils/alert';
+import { LoginAlert, CardAlert } from '../utils/alert';
 // import T from '../api/tokenInstance';
 
 const CardFront = ({ userId, contap, select }) => {
@@ -44,6 +45,8 @@ const CardFront = ({ userId, contap, select }) => {
   );
 
   const [sideModal, setSideModal] = React.useState(false);
+
+  // const cardCheck = useSelector((state) => state.user.canOtherRead);
 
   // pr test
   // Modal Handler
@@ -71,6 +74,36 @@ const CardFront = ({ userId, contap, select }) => {
       }
       return null;
     }
+
+    // 사용하게 되면 주석 풀기
+    // if (cardCheck === 0) {
+    //   //e.preventDefault();
+    //   // onClose();
+    //   const { isConfirmed, dismiss } = await CardAlert.fire({
+    //     title: (
+    //       <>
+    //         <img src={cardAlertPng} width="203px" height="109px" />
+    //         <div style={{ marginTop: '40px', marginBottom: '24px' }}>
+    //           <Text bold24>아직 카드를 작성하지 않았어요</Text>
+    //         </div>
+    //         <Text regular16>
+    //           나의 카드를 하나만 공유해도
+    //           <br />
+    //           다른 사람의 프로젝트를 자세히 볼 수 있어요!
+    //         </Text>
+    //       </>
+    //     ),
+    //   });
+    //   if (dismiss === 'backdrop') {
+    //     return;
+    //   }
+    //   if (isConfirmed) {
+    //     history.push('/mypage');
+
+    //     return null;
+    //   }
+    // }
+
     if (!showModal) {
       await dispatch(loadCurrentCardDB(currentUserId));
     }

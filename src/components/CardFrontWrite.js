@@ -174,16 +174,8 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     const file = fileInput.current.files[0];
     const formData = new FormData();
     formData.append('userName', userName);
-    // console.log('입력 전 확인', stack, hobby);
-    // if (stack.length !== 0 && hobby.length !== 0) {
+
     formData.append('hashTagsStr', stack + ',' + hobby);
-    // } else if (stack.length === 0 && hobby.length !== 0) {
-    //   formData.append('hashTagsStr', stack + ',' + hobby);
-    // } else if (stack.length !== 0 && hobby.length === 0) {
-    //   formData.append('hashTagsStr', stack + ',' + hobby);
-    // } else {
-    //   formData.append('hashTagsStr', stack + ',' + hobby);
-    // }
 
     formData.append('field', category);
     if (fileData) {
@@ -196,12 +188,7 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     localStorage.removeItem('tag');
   };
 
-  // const cancel = () => {
-  //   setFileData(null);
-  // };
-
   React.useEffect(() => {
-    // e.preventDefault();
     if (!userInfo.userName) {
       window.location.href = '/mypage';
 
@@ -219,7 +206,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
       <Grid
         height="540px"
         bg={ColorStyle.BackGround100 + Opacity[40]}
-        // bg="#120f1e00"
         margin="0px auto"
         padding="72px 0px 0px 0px"
       >
@@ -244,7 +230,6 @@ const CardFrontWrite = ({ setMaxMessage }) => {
               hidden
             />
           </Grid>
-          {/* <Grid _onClick={cancel}>취소</Grid> */}
           <Grid width="345px">
             <TitleBox
               type="text"
@@ -264,18 +249,7 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   checked={category === 0 ? true : false}
                   onChange={() => setCategory(0)}
                 />
-                <InputLabel
-                  htmlFor="category"
-                  // style={{
-                  //   color: ColorStyle.Gray500,
-                  //   fontSize: FontScale.Body1_20,
-                  //   fontFamily: FontFamily,
-                  //   fontWeight: 400,
-                  //   marginRight: '32px',
-                  // }}
-                >
-                  백엔드 개발자
-                </InputLabel>
+                <InputLabel htmlFor="category">백엔드 개발자</InputLabel>
               </RadioWrap>
               <RadioWrap>
                 <RadioInput
@@ -285,22 +259,8 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   value="1"
                   checked={category === 1 ? true : false}
                   onChange={() => setCategory(1)}
-                  // style={{
-                  //   marginRight: '16px',
-                  // }}
                 />
-                <InputLabel
-                  htmlFor="category"
-                  // style={{
-                  //   color: ColorStyle.Gray500,
-                  //   fontSize: FontScale.Body1_20,
-                  //   fontFamily: FontFamily,
-                  //   fontWeight: 400,
-                  //   marginRight: '32px',
-                  // }}
-                >
-                  프론트엔드 개발자
-                </InputLabel>
+                <InputLabel htmlFor="category">프론트엔드 개발자</InputLabel>
               </RadioWrap>
               <RadioWrap>
                 <RadioInput
@@ -310,19 +270,8 @@ const CardFrontWrite = ({ setMaxMessage }) => {
                   value="2"
                   checked={category === 2 ? true : false}
                   onChange={() => setCategory(2)}
-                  // style={{ marginRight: '16px' }}
                 />
-                <InputLabel
-                  htmlFor="category"
-                  // style={{
-                  //   color: ColorStyle.Gray500,
-                  //   fontSize: FontScale.Body1_20,
-                  //   fontFamily: FontFamily,
-                  //   fontWeight: 400,
-                  // }}
-                >
-                  디자이너
-                </InputLabel>
+                <InputLabel htmlFor="category">디자이너</InputLabel>
               </RadioWrap>
             </CategoryWrap>
           </Grid>
@@ -527,62 +476,6 @@ const TitleBox = styled.input`
   }
 `;
 
-// const RadioWrap = styled.div`
-//   display: inline-block;
-//   position: relative;
-//   padding: 0 6px;
-//   margin: 10px 0;
-// `;
-
-// const InputLabel = styled.label`
-//   color: ${ColorStyle.Gray500};
-//   font-size: ${FontScale.Body1_20};
-//   font-family: ${FontFamily};
-//   font-weight: 400;
-//   margin-right: 32px;
-//   &:before {
-//     content: ' ';
-//     display: inline-block;
-//     position: relative;
-//     top: 5px;
-//     margin: 0 5px 0 0;
-//     width: 22px;
-//     height: 22px;
-//     border-radius: 100%;
-//     background-color: ${ColorStyle.Gray300 + Opacity[30]};
-//   }
-// `;
-
-// const RadioInput = styled.input`
-//   display: none;
-//   // position: absolute;
-//   // appearance: none;
-//   // width: 22px;
-//   // height: 22px;
-//   // border-radius: 100%;
-//   // margin-right: 16px;
-//   // background-color: ${ColorStyle.Gray300 + Opacity[30]};
-//   // background: ${ColorStyle.PrimaryPurple};
-
-//   &:checked + ${InputLabel}:after {
-//     display: block;
-//     content: '';
-//     position: absolute;
-//     top: 1px;
-//     left: 5px;
-//     width: 11.85px;
-//     height: 11.85px;
-//     background: ${ColorStyle.PrimaryPurple};
-//     border-radius: 100%;
-//     // box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
-//   }
-//   // &:checked {
-//   //   // width: 11.85px;
-//   //   // height: 11.85px;
-//   //   background: ${ColorStyle.PrimaryPurple};
-//   // }
-// `;
-
 const CategoryWrap = styled.div`
   display: flex;
   width: 575px;
@@ -593,7 +486,6 @@ const RadioWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  align-items: center;
 `;
 
 const InputLabel = styled.label`
@@ -609,11 +501,9 @@ const RadioInput = styled.input`
   appearance: none;
   width: 22px;
   height: 22px;
-  //vertical-align: middle;
   border-radius: 100%;
   margin-right: 16px;
   background-color: ${ColorStyle.Gray300 + Opacity[30]};
-  // background: ${ColorStyle.PrimaryPurple};
 
   &:checked {
     // width: 11.85px;
@@ -653,7 +543,6 @@ const HashStackTag = styled.div`
   width: 148px;
   height: 48px;
   margin-top: 21px;
-  // margin-right: 16px;
   border-radius: 50px;
   background: #723cd4;
   font-size: ${FontScale.Body1_20};
@@ -670,9 +559,6 @@ const HashStackTag = styled.div`
 `;
 
 const HashTag = styled.div`
-  // display: flex;
-  // justify-content: start;
-  // flex-direction: row;
   width: 148px;
   height: 48px;
   margin-top: 20px;
@@ -710,37 +596,3 @@ const HashTagDiv = styled.div`
   // text-align: center;
   // line-height: 54px;
 `;
-
-// const TextDiv = styled.div`
-//   position: absolute;
-//   top: 30vh;
-//   left: 43vw;
-// `;
-
-// const Category = styled.div`
-//   position: absolute;
-//   top: 37vh;
-//   left: 43vw;
-// `;
-
-// const AddBtn = styled.button`
-//   width: 80px;
-//   // position: absolute;
-//   // top: 16vh;
-//   // left: 70vw;
-// `;
-
-// const FieldInput = styled.input`
-//   font-size: ${FontScale.Body1_20};
-//   font-family: ${FontFamily};
-//   font-weight: 400;
-//   color: ${ColorStyle.Gray500};
-//   // margin: 0px 0px 61px 48px;
-// `;
-
-// const Btn = styled.button`
-//   width: 80px;
-//   position: absolute;
-//   top: 16vh;
-//   left: 58vw;
-// `;

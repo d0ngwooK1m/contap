@@ -52,15 +52,15 @@ const CardBackWrite = ({ onHide }) => {
   const disabled = title !== '' && desc !== '' && tagsStr !== '';
 
   const addCardBack = () => {
-    if (cardCount.length === 10) {
-      Swal.fire({
-        icon: 'error',
-        title: '작성 실패',
-        text: '카드는 10개까지만 작성 가능합니다!',
-      });
+    // if (cardCount.length === 10) {
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: '작성 실패',
+    //     text: '카드는 10개까지만 작성 가능합니다!',
+    //   });
 
-      return false;
-    }
+    //   return false;
+    // }
     if (title.trim() === '') {
       Swal.fire({
         icon: 'error',

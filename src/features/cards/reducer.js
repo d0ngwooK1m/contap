@@ -21,7 +21,6 @@ import {
   SET_HOBBY,
   // SET_ALL_HOBBY,
   DELETE_HOBBY,
-  // IS_SUCCESS,
   LOAD_HOBBY,
   LOAD_STACK,
   DELETE_MY_CARD,
@@ -52,7 +51,7 @@ const initialState = {
   hobbyTag: [],
   isLoading: false,
   cardCheck: {},
-  selectCategory : '',
+  selectCategory: '',
 };
 
 export default handleActions(
@@ -78,7 +77,7 @@ export default handleActions(
         draft.isSearching = true;
         // console.log(draft.isSearching);
         draft.searchInfo = action.payload.searchInfo;
-        draft.selectCategory = action.payload.selectCategory
+        draft.selectCategory = action.payload.selectCategory;
         // console.log(draft.searchInfo);
         if (action.payload.searchInfo.page === 0) {
           draft.byId = {};
@@ -249,11 +248,6 @@ export default handleActions(
       produce(state, (draft) => {
         draft.cardCheck = action.payload.check;
       }),
-    // [IS_SUCCESS]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.isSuccess = action.payload.success;
-    //     console.log(action.payload);
-    //   }),
   },
   initialState,
 );
