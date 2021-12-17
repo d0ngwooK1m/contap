@@ -17,6 +17,7 @@ import {
   PROFILE_TUTORIAL,
   PHONE_TUTORIAL,
   PROFILE_CHANGE,
+  PASSWORD_CHECK,
 } from './types';
 
 // import { setChatNoti, setContapNoti } from '../notice/actions';
@@ -97,6 +98,10 @@ const phoneTutorialCheck = (phoneInfo) => ({
 const profileChange = (profile) => ({
   type: PROFILE_CHANGE,
   profile,
+});
+
+const passwordCheck = () => ({
+  type: PASSWORD_CHECK,
 });
 // const phoneTutorialCheck = (tutorialInfo) => ({
 // });
@@ -274,4 +279,5 @@ export {
   authorize,
   emailAuth,
   profileChange,
+  passwordCheck,
 };

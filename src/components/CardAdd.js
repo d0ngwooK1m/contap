@@ -19,7 +19,6 @@ import { Grid } from '../elements';
 const CardAdd = () => {
   const dispatch = useDispatch();
   const cardCount = useSelector((state) => state.cards.backCardIdx);
-  console.log('카드 갯수 확인===>', cardCount);
   // const cardListCheck = useSelector((state) => state.cards.allIds);
   const cardList = useSelector((state) => state.cards);
 

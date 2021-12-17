@@ -20,6 +20,7 @@ import AlarmCheck from './AlarmCheck';
 import WithdrawalCompleteForm from '../pages/WithdrawalCompleteForm';
 import MobileBlock from '../pages/MobileBlock';
 import NotFound from './NotFound';
+import PasswordFind from '../pages/PasswordFind';
 // import MetaTag from './MetaTag';
 
 // import SizeCheck from './SizeCheck';
@@ -35,6 +36,12 @@ function App() {
         <Switch>
           <PublicRoute restricted path="/signup" component={Signup} exact />
           <PublicRoute restricted path="/login" component={Login} exact />
+          <PublicRoute
+            restricted
+            path="/pwfind"
+            component={PasswordFind}
+            exact
+          />
           <PublicRoute
             path="/withdrawal"
             component={WithdrawalCompleteForm}

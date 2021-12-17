@@ -30,7 +30,7 @@ import { Grid, Text } from '../elements';
 const CardBackWrite = ({ onHide }) => {
   const dispatch = useDispatch();
 
-  const cardCount = useSelector((state) => state.cards.backCardIdx);
+  // const cardCount = useSelector((state) => state.cards.backCardIdx);
 
   // 입력 값 저장
   const [title, setTitle] = React.useState('');
