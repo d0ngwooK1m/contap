@@ -15,6 +15,7 @@ import {
   PROFILE_TUTORIAL,
   PHONE_TUTORIAL,
   PROFILE_CHANGE,
+  PASSWORD_CHECK,
 } from './types';
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   isEmailChecked: false,
   isAuthNumChecked: false,
   isSignupDone: false,
+  isPwcheckDone: false,
   checkedEmail: '',
   phoneNumber: '',
   timerReset: false,
@@ -65,6 +67,10 @@ export default function userReducer(state = initialState, action) {
       }
       case SIGNUP_DONE: {
         draft.isSignupDone = true;
+        break;
+      }
+      case PASSWORD_CHECK: {
+        draft.isPwcheckDone = true;
         break;
       }
       case AUTHORIZED: {

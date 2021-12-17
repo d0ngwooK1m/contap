@@ -29,7 +29,7 @@ import { Grid, Text } from '../elements';
 const CardFrontWrite = ({ setMaxMessage }) => {
   const dispatch = useDispatch();
   const preview = useSelector((state) => state.cards.preview);
-  const front = useSelector((state) => state.cards.byId);
+  // const front = useSelector((state) => state.cards.byId);
   const userInfo = useSelector((state) => state.cards.current);
 
   const [userName, setUserName] = React.useState(
@@ -185,7 +185,7 @@ const CardFrontWrite = ({ setMaxMessage }) => {
     dispatch(editCardProfileDB(formData));
     // localStorage.removeItem('nick');
     // localStorage.removeItem('category');
-    localStorage.removeItem('tag');
+    // localStorage.removeItem('tag');
   };
 
   React.useEffect(() => {

@@ -17,3 +17,4 @@ export const SETTING_PHONENUM = 'user/SETTING_PHONENUM';
 export const PROFILE_TUTORIAL = 'user/PROFILE_TUTORIAL';
 export const PHONE_TUTORIAL = 'user/PHONE_TUTORIAL';
 export const PROFILE_CHANGE = 'user/PROFILE_CHANGE';
+export const PASSWORD_CHECK = 'user/PASSWORD_CHECK';
