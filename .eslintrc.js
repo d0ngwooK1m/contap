@@ -33,5 +33,6 @@ module.exports = {
     'no-console': 'off',
     'no-param-reassign': 'off',
     'react/forbid-prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };
